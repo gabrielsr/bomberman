@@ -36,7 +36,10 @@ Importanto o projeto no Eclipse
 Go to File -> Import -> Gradle -> Gradle Project, click Browse and navigate to the root folder of your project, then click Build Model
 
 
---
-	Padrão Arquitetural: Entity Component System
-	*Leitura Posterior: http://gamadu.com/artemis/	
-	Dedign Patterns: Singleton: *System
+= Referencias 
+== Padrões Utilizados
+*Padrão Arquitetural: Entity Component System
+**Leitura Posterior: http://gamadu.com/artemis/	
+
+*Dedign Patterns: 
+**Singleton: *System
