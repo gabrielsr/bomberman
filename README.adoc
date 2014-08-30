@@ -1,4 +1,8 @@
-= Instruções
+= Introdução
+Bomberman clone utilizando programação modular.
+
+
+= Instruções para Montagem de Ambiente de Desenvolvimento
 
 == JDK8 o compilador e máquina virtual
 
@@ -31,16 +35,17 @@ Escolha  Gradle Integration for Eclipse (4.4) 3.6.0.RELEASE
 Confirme. Ao final da instalação reinicie o Eclipse.
 
 
-Importanto o projeto no Eclipse
+== Importanto o projeto no Eclipse
 
-Go to File -> Import -> Gradle -> Gradle Project, click Browse and navigate to the root folder of your project, then click Build Model
+Go to File -> Import -> Gradle -> Gradle Project, navega até a pasta root deste projeto. Selecione [Build Model]
 
+OBS: a importação pode demorar vários minutos na primeira vez que for realiza pois serão baixadas dependências do Gradle.
 
 
 = Referencias 
 == Padrões Utilizados
-*Padrão Arquitetural: Entity Component System
-**Leitura Posterior: http://gamadu.com/artemis/	
+* Padrão Arquitetural: Entity Component System
+** Leitura Posterior: http://gamadu.com/artemis/	
 
-*Dedign Patterns: 
-**Singleton: *System
+* Dedign Patterns: 
+** Singleton: *System
