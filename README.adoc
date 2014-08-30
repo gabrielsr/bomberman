@@ -36,6 +36,7 @@ Importanto o projeto no Eclipse
 Go to File -> Import -> Gradle -> Gradle Project, click Browse and navigate to the root folder of your project, then click Build Model
 
 
+
 = Referencias 
 == Padrões Utilizados
 *Padrão Arquitetural: Entity Component System
