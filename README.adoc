@@ -37,6 +37,10 @@ Go to File -> Import -> Gradle -> Gradle Project, click Browse and navigate to t
 
 
 --
-	Padrão Arquitetural: Entity Component System
-	*Leitura Posterior: http://gamadu.com/artemis/	
-	Dedign Patterns: Singleton: *System
+= Referencias 
+== Padrões Utilizados
+*Padrão Arquitetural: Entity Component System
+**Leitura Posterior: http://gamadu.com/artemis/	
+
+*Dedign Patterns: 
+**Singleton: *System
