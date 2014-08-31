@@ -1,3 +1,19 @@
 Bomberman project/sound/
 Bomberman project/bin/
 Bomberman\ project/images/
+
+/build/
+/bin/
+
+# Eclipse preferences / project
+.settings/
+.project
+.classpath
+
+# Mac OSX
+.DS_Store
+.Trashes
+
+# Windows
+Thumbs.ini
+Desktop.ini
