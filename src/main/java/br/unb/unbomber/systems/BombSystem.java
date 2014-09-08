@@ -23,25 +23,13 @@ public class BombSystem implements System {
 		instance.bombDroppers = new ArrayList<BombDropper>();
 		instance.bombs = new ArrayList<Bomb>();
 	}
-	
-
-	public void dummy(){
 		
-	}
-	
-	
 	/**
 	 * Explode bombs after their wait time
 	 */
 	public void explodeTimeBombs(){
 		//TODO not implemented
-		
-		Bomb bomb = new Bomb(0, 0, 0, null);
-		
-		if(bomb.getType()==Bomb.Type.TIME){
 			
-		}
-		
 	}
 	
 	/**
@@ -58,14 +46,11 @@ public class BombSystem implements System {
 	public void dropBomb(BombDropper dropper){
 		//TODO verify if the character has not dropped too much bombs
 		
-		//TODO create a bomb
-		
+		//create a bomb
 		Bomb bomb = new Bomb(dropper.getX(), dropper.getY(), dropper.getBombRange(), dropper);
 		bombs.add(bomb);
-		
-		//TODO posit it
-		
-		//TODO set the right power and time
+	
+		//TODO set the right power
 		
 		//TODO if it is a romete controlled bomb, 
 		//make the link so the user can remote explod it

@@ -6,7 +6,7 @@ public class Bomb extends Entity implements Ticks {
 	
 	public int bombRange;
 	
-	private long countdownTimer=5;
+	private long countdownTimer=300;
 	
 	public enum Type{
 		REMOTE,
