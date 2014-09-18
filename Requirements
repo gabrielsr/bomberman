@@ -1,0 +1,260 @@
+
+
+
+== Detalhamento dos Módulos
+
+GameSetup
+GridStarup
+*Characters são iniciados com bombLimit de 1
+*GameStarup pode ser iniciado com especificação do cenário fixa (presente em arquivo)
+*GameStarup pode ser iniciado para geração de cenário aleatória.
+*Posiciona os Monsters e Characters.
+*Inicia a contagem do tempo.
+
+Game Framework
+	
+Single Player:
+Quando o Character "colide" com a saída:
+Verifica se os objetivos foram cumpridos como:
+*Todos os Monsters foram destruídos
+*Condições específicas do cenário.
+
+*CollisionEvent
+Character - Saída: GameFramework verifica os objetivos.
+
+Multiplayer:
+*Determina fim da partida
+*Vitória
+*Empate
+*Derrota
+*Passou de fase
+
+*Trata o Evento fim do tempo de jogo
+*Quando explode a saída é criado um Monster.
+
+TimeSystem
+	São executados 30 turnos por segundo.
+	Contar o tempo do jogo, gerar evento caso o tempo acabe
+
+
+
+ControlController
+	
+	Abstação de controle
+		8 direções
+		Bomb
+		action
+	Controle local
+		Mapear teclas do teclado em ações
+		Mapear teclas joystick em ações
+	Controle remoto
+		Estabelecer conexão
+		Mapear mensagem em controles
+
+
+
+Resultado das Colisões:
+	
+
+	-Character com Kick - bomb: a bomb entra em movimento a 1/8 c/t (um dezesseis avos células por turno) no sentido da colisão.
+	
+
+
+
+== Módulos
+
+GameSetup
+*Constantes
+
+
+
+Bomb Module
+*Bomb (TAD)
+*BombController
+*TriggeredBombEvent
+BombController
+	-Responsável pela criação das Bombs no Grid.
+	-O personagem é limitado quando ao número de Bombs ativas que pode deixar no Grid, segundo seu limite bombLimit.
+	-Bombas explodem após 90 turnos (tipicamente 3s).
+	-Bombs explodem ao sobrer dano.
+	-O firepower de uma Bomb é o firePower do BombDropper no momento do lançamento.
+	-O firepower default é 2.
+
+Disparar Bomb
+Cria um evento TriggeredBomb
+
+
+CollisionEvent:
+
+-Explosion - Bomb: Dispara a Bomb
+
+
+
+Explosion Module
+*Explosion (TAD)
+*ExplosionController
+ExplosionController
+	-Explosões iniciam em uma célula de origem
+	-Explosão na célula de origem se propagam nas 4 direções (esquerda, direita, cima e baixo)
+	-Explosões que não são origem se propagam na mesa direção de sua propagação original (vertical ou horizontal)
+	-Explosões demoram 3 (EXPLOSION_PROPAGATION) turnos para se propagar de uma célula a outra adjacente.
+	-Explosões iniciam com firepower que diminui a cada propagação
+	-Explosões com firepower 1 não se propagam.
+	-Explosion Blockers - Explosões não se program até:
+		-Hard blocks
+		-Fora do limite do cenário
+		-Passagens (pontes e escadas)
+
+	-Explosion Stopers - Explosões não continuam após:
+		-Soft blocks
+		-Powerups
+		-Bombs (no entando é iniciada uma nova propagação)
+
+	-Explosion Throuth - Não afetam explosões:
+		-Characters
+		-Monsters
+
+	
+	-Explosoes produzem dando (Evento) em:
+		-Soft blocks
+		-Powerups
+		-monsters
+		-characters
+		-Bombs
+
+	-Uma explosão dura 16 turnos e é removidas da célula.
+
+CollisionEvent
+
+Life Module
+*Life (TAD)
+*LifeController
+-Dano de um Character 
+	-Conta vidas
+	-Cria um novo Character se for Single Mode e possui vidas
+	-Cria Evento
+-Dano em Monster
+	-Cria Evento
+CollisionEvent
+*Bomb - Monster:
+
+
+CollisionEvent
+*Monster - Character: Dano no character, se tiver vida character fica inatingível pro alguns  segundos e acontece sobreposição (podem ocupar a mesma célula).
+*Bomb - Monster: gera dano no Monster
+
+
+*Invencible
+Em determinadas situações um Character ou Monster pode ficar invencível.
+Esta característica evita dados.
+Esta característica dura um tempo limitado.
+Character é invencível ao ser criado. Invencibilidade dura 270 turnos
+
+CollisionEvent
+-Character, Monster - Explosion: gera dano
+-Explosão - character, Monters, Powerup, Soft Block: gera dano
+
+
+Movement Module
+*Placement (TAD)
+*MovimentController
+MovimentController
+	-Um character ou monster se movimentam por default a 1/8 c/t (um dezesseis avos células por turno)
+	-A distância percorrida aumenta em 1/8 por turno com a aquisição do PowerUp SpeedUp. 
+
+
+Collision Module
+*Placement (TAD)
+*CollisionController
+	-Uma entidade colide com outra quando ela tenta se mover para a célula onde uma outra se encontra. 
+	-Quando uma colisão ocorre é gerado um evento de colisão
+	-Quando um Character estiver na mesma célula que uma Bomb, um monster colide com a bomb e não com o Character
+	-Quando um Character estiver na mesma célula que um Soft Block, um Monster ou Explosion colidem com o Soft Block não com o Character.
+
+Score Module
+*Score (TAD)
+*ScoreController
+*MonsterDestructionEvent
+
+
+Powerup
+*Powerup
+*PowerUpController
+	Characters adiquirem powerups
+
+ScoreController
+	A partir de eventos de destruição de Monstros calcula pontos.
+
+
+Ai Module
+*Placement
+*Bomb
+*Explosion
+*Powerup
+AiController
+	Monster  
+	SimpleMoster
+		Andam com velocidade de 1/16 c/t
+		Continua o movimento na mesma direção sempre que possível
+		Ao colidir com algo sorteia a próxima posição
+
+	BombMosnter
+		Anda 128 turnos. Para 32. Gera uma explosão e fica invencível por 16 turnos. Para 32 turnos. Anda mais 128.
+
+CollisionEvent:
+-Monster - Soft Block, Hard Block, Bomb: Monster calcula nova direção.
+
+
+Graphics
+
+
+GraphicController
+	Entidades estão associados a Sprites
+		Face Direction - Characters e Monstes tem sprites segundo a direção de seu último movimento.
+
+	Animations
+		Animações são sequências de sprites que são exibidas.
+
+	Eventos podem disparar animações
+		
+	Walk animation - Sprites são alternadas para dar impressão de caminhar. Aplicáveis a Character e Moster
+
+	Explosão
+		Meio e fronteria de explosão - Uma explosão com força 1 (a última da propagação) tem sprite diferente. A sprite é rotacionada segundo a direção da propagação
+
+	Win - comemoração. 
+
+	Destructin Animation 
+	Entidades seguintes entidades possuem animação quando são destruidas:
+			Characters, Monsters, Soft Blocks e Power Ups.
+	
+	Invencible Filter - Charactes e Monsters aparecem claros enquanto invencíveis. Alterna entre claro e normal a cada 3 turnos.
+	Bomb Pulse - Time Bombs alternam entre 3 sprites (de tamanhos um pouco diferentes) enquanto estão contando o tempo antes de disparar explosão.
+
+
+
+ActionController
+	Take a bomb (Glove PowerUp)
+	Gatilha uma RemoteBomb (Remote Powerup)
+
+HiThrownBombController
+	Bomba quica até cair em um local vazio.
+	Uma Bomb jogada para fora dos limites do Grid aparece do outro lado.
+
+
+Sequencia da Execução dos sistemas no Game Loop:
+	ControlController
+	TimeController
+	BombController
+	ExplosionController
+	MovimentController
+	CollisionController
+	PowerUpController
+	GraphicController
+	AiController   
+
+
+Ref
+
+http://en.wikipedia.org/wiki/Entity_component_system
+Game Writing: Narrative Skills for Videogames,

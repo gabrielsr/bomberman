@@ -1,0 +1,102 @@
+Neste documento iremos utilizar os termos em inglês para as palavras chaves presentes no gameplay. 
+
+
+== Game mechanics
+
+=== Game Loop
+
+O componente central da mecânica do jogo do ponto de vista da programação é o Game Loop, neste loop são processadas as entradas dos jogadores, as decisões dos componentes de AI e os sistemas do jogo (com as regras que compões a mecânica do jogo).
+
+=== Turnos
+
+Apesar de o jogo parecer contínuo iremos falar neste documento em turnos. Cada turno é uma passagem pelo game loop.
+	
+=== Bomberman Mechanics
+* Game World
+
+O mundo em que acontece o jogo no bomberman é um grid de dimensões arbitrárias. Iremos adotar o tamanho padrão como 13 (horizontal) por 11 (vertical) que são as dimensões do grid nos jogos multplayers nos títulos Bomberman de 1 a 5, as versões desenvolvidas para o Super Nintendo. 
+
+*O Grid
+ 	Representa o campo do jogo. Suas subdivisões são as células. Uma célula pode conter  Hard blocks, Soft blocks, Bombs, Powerup, Monsters ou Characters.
+
+Existem dois tipos de posicionamento:
+. Em células exatas no Grid
+São posicionados em células exatas (seus centros coincidem com o centro da célula):
+-Hard Blocks, Soft Blocks, Powerup, Bombs (quando paradas)
+
+. Em subdivisões de uma célula
+Para dar uma impressão fluída de movimento alguns elementos podem ter posições não exatas no Grid. Estes podem ter posições em múltiplos de 1/16 células.
+
+São posicionados em subdivisões de célula:
+Characters, Monsters, Bombs em movimento.
+
+Os elementos que se movem no jogo, se movem em subdivisões de células e podem gastar mais de um turno para atravessar de uma célula a outra. Subdivisões de células são consideradas apenas pelo sistema de movimento, as outras regras do jogo são aplicada dependendo da célula que a entidade se encontra. 
+
+OBS: Todas as regras do jogo exceto o movimento são especificadas em relação as células em que estão as entidades do jogo.
+
+Medidas
+Iremos utilizar neste projeto as seguintes unidades de medida:
+*Distancia: células
+*Tempo: Turnos
+*Velocidade: c/t (células por turno)
+
+
+== Modelo conceitual
+
+Descrição dos elementos. 
+
+* Characters
+São os avatares controlados pelos jogadores. Criam bombas e adquirem mais poder por meio dos Powerups explicados em seguida. Também podem ser controlados por AI em modo combate ou como Boss (oponente que oferece maior dificuldade ao final de uma fase).
+
+* Monsters
+Se movimentam e não lançam bombas. Alguns possuem habilidades como atravessar Soft Blocks e causar explosões. 
+
+* Powerup
+São ítens que modificam as características de um Character (como velocidade, máximo de Bombs, força da Bomb, capacidade de atravessar Soft Blocks). Aparecem no Grid de forma aparentemente aleatória quando um Monster ou Soft Block é destruído. 
+
+* Blocks
+** Soft Blocks
+São blocos no Grid que não são destrutíveis por explosões. Não podem ser atravessados.
+
+** Hard Blocks
+Os blocos que podem ser destrutíveis com explosões. Normalmente Monsters ou Characters não podem ocupar a mesma posição no Grid que um Soft Block, no entanto, Characters podem adquirir um Powerup que o permitem ocupar a mesma célula que um Soft Block e utilizar esta célula como caminho. Alguns Monsters podem atravessar Soft Blocks. 
+
+* Bombs
+Geram Explosões. Podem se movimentar no grid quando sofrerem um Kick (chute) por um Character que possui esse Powerup.
+
+* Explosion
+Se propagam, duram um tempo limitado e se extinguem. Causam danos em Characters, Monster. Destroem Soft Blocks. 
+
+== Arquitetura
+Utilizaremos o padrão de arquitetura Entity-component-system (ECS). 
+
+*Entites: representam um elemento do jogo. São containers de componentes.
+
+Iremos utilizar Entities para representar:
+**Character
+**Bomb
+**Hard/Soft Blocks
+**Monster
+**Powerup
+
+*Components (TADs): os dados de um aspecto de um elemento que interage com o mundo do jogo.  
+
+**Placement (posição e orientação)
+**ExplosionBarrier (como interfere no caminho de uma explosão )
+**Explosion
+**BombDropper
+**Health (quantas vidas)
+**Physical (posição, velocidade)
+**PowerupType
+
+
+== Systems (Controllers):
+Iteram sobre os TADs de determinados tipos aplicando regras. Como resultado das regras podem ocorrer mudanças dos dados dos TADs ou criação de Events.
+
+== Events:
+Objetos criados para representar a ocorrência de uma situação. São uma forma de comunicação entre os sistemas.
+
+Exemplo de Eventos são:
+*CollisionEvent (Uma entidade tenta ocupar uma celula já ocupada por outra entidade)
+*TriggeredBombEvent (Uma Bomb foi ativa e está pronta para iniciar uma explosão)
+	
