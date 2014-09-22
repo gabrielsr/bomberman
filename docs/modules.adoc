@@ -1,0 +1,222 @@
+Módulos Simuladores
+====================
+== Comunicação entre os módulos
+=== Acesso a Components
+
+=== Criação e consumo de Eventos
+
+
+Objects Destruction Module
+---------------------------
+Módulo responsável pela destruição de Soft Blocks, Powerups
+
+=== Components 
+* ExplosionResilence
+** Soft
+** Hard
+
+=== CollisionEvent
+Explosion - Soft Block:: remove Soft Block e lança evento Destroied(Softblock, Position)
+
+
+Life Module
+------------
+
+O módulo life do jogo tem o intuito de contabilizar a quantidade de vida dos characters e monsters. O módulo recebe uma lista de eventos que são gerados por outros sistemas, e analisa-os buscando aqueles eventos que devem ser tratados por ele. Como saída, o módulo gera o evento de retirada de character ou de monster, quando a pontuação de vida atinge o valor zero.
+
+=== Responsabilidades
+
+* Tratar events que levem a danos em characters ou monsters
+* Gerar events de retirada de character e monsters qquando suas vidas atingirem o valor zero
+* Tratar events de adição de vida (gerado na aquisição de um Powerup 1-Up)
+
+=== Components 
+* Life
+** health (número de dados que a entity pode receber sem que seja iniciada uma nova tentativa)
+** availableTries (número de tentativas)
+
+=== 
+* LifeController
+
+Dano de um Character 
+* Conta vidas
+* Cria um novo Character se for Single Mode e possui vidas
+* Cria Evento
+
+Dano em Monster
+* Quando destruido cria um evento ~Destroyed~
+
+=== Events
+
+~Tratados~
+
+* CollisionEvent 
+Monster - Character:: Dano no character, se tiver vida character fica invencível pro alguns segundos.
+Explosion - Character, Monters: gera dano
+Character, Monster - Explosion: gera dano
+Bomb - Monster:: gera dano no Monster
+Bomb - Character:: 
+
+~Gerados~
+
+* DestructedEvent
+
+
+~Invencible~
+
+Em determinadas situações um Character ou Monster pode ficar invencível.
+Esta característica evita dados.
+Esta característica dura um tempo limitado (270 turnos)
+Character é invencível ao ser criado.
+
+
+== Collision Module
+* Placement (TAD)
+* CollisionController
+
+. Uma entidade colide com outra quando ela tenta se mover para a célula onde uma outra se encontra. 
+. Quando uma colisão ocorre é gerado um evento de colisão
+. Quando um Character estiver na mesma célula que uma Bomb, um monster colide com a Bomb e não com o Character
+. Quando um Character estiver na mesma célula que um Soft Block, um Monster ou Explosion colidem com o Soft Block não com o Character.
+
+== Bomb Module
+
+=== Responsabilidades
+
+* Responsável pela criação das Bombs no Grid.
+* Limita o número de Bombs ativas (não disparadas) que podem ser deixadas por um mesmo Character no Grid, segundo o limite do Character
+* Trata eventos TimeOutEvent de Bombs, dispando-as.
+* Bombs são criadas com o mesmo bombRange do seu criador (BombDropper). TriggeredBombEvents são criados 
+
+=== Components 
+Components que interagem com este módulo:
+
+* Placement
+* Bomb
+** BombRange
+** BombType
+
+=== System 
+
+* BombController
+
+=== Events
+
+~Tratados~
+
+* TimeOutEvent 
+
+~Gerados~
+
+* TriggeredBombEvent
+
+
+
+=== BombController
+
+* Bombs são disparadas após 90 turnos.
+* Bombs são disparadas ao sofrer dano.
+* O firepower de uma Bomb é o firePower do BombDropper no momento do lançamento.
+* O firepower default é 2.
+
+Disparar Bomb :: Cria um evento TriggeredBombEvent, remove a Bomb
+
+CollisionEvent:
+Explosion - Bomb:: Dispara a Bomb
+Bomb - Monster:: Dispara a Bomb
+
+
+=== Testes
+timeToExplodeTest:: testa se um TriggeredBombEvent é criado após 90 turnos.
+waitToExplodeTest:: testa se nos primeiros 89 turnos não foi criado triggeredBombEvent
+
+== Explosion Module
+Responsabilidades:
+
+. Explosões iniciam em uma célula de origem
+. Explosão na célula de origem se propagam nas 4 direções (esquerda, direita, cima e baixo)
+. Explosões que não são origem se propagam na mesa direção de sua propagação original (vertical ou horizontal)
+. Explosões demoram 3 (EXPLOSION_PROPAGATION) turnos para se propagar de uma célula a outra adjacente.
+. Explosões iniciam com firepower que diminui a cada propagação
+. Explosões com firepower 1 não se propagam.
+. Uma explosão dura 16 turnos e é removidas da célula.
+. Explosion Blockers - Explosões não se program até:
+* Hard blocks
+* Fora do limite do cenário
+* Passagens (pontes e escadas)
+
+* Explosion Stopers - Explosões não continuam após:
+** Soft blocks
+** Powerups
+** Bombs (no entando é iniciada uma nova propagação)
+
+==== Partes do Módulo
+* Explosion (TAD)
+* ExplosionController
+
+
+Explosion Throuth - Não afetam explosões:
+** Characters
+** Monsters
+
+	
+
+CollisionEvent
+
+
+== Movement Module
+
+*Placement (TAD)
+*MovimentController
+MovimentController
+Um character ou monster se movimentam por default a 1/8 c/t (um dezesseis avos células por turno)
+A distância percorrida aumenta em 1/8 por turno com a aquisição do PowerUp SpeedUp. 
+
+
+== Score Module
+* Score (TAD)
+* ScoreController
+* MonsterDestructionEvent
+
+
+== Powerup
+*Powerup
+*PowerUpController
+Characters adiquirem powerups
+
+ScoreController
+
+A partir de eventos de destruição de Monstros calcula pontos
+
+== ActionController
+Glove PowerUp ::
+Remote Powerup ::
+
+HiThrownBombController ::
+Bomba quica até cair em um local vazio. Uma Bomb jogada para fora dos limites do Grid aparece do outro lado.
+
+Kick ::
+CollisionEvent
+-Character com Kick - Bomb: a bomb entra em movimento a 1/8 c/t no sentido da colisão.
+
+
+=== Ai Module
+* Placement
+* Bomb
+* Explosion
+* Powerup
+
+AiController
+
+Monster  
+
+==== SimpleMoster
+Andam com velocidade de 1/16 c/t
+Continua o movimento na mesma direção sempre que possível
+Ao colidir com algo sorteia a próxima posição
+
+==== BombMosnter
+Anda 128 turnos. Para 32. Gera uma explosão e fica invencível por 16 turnos. Para 32 turnos. Anda mais 128.
+
+CollisionEvent:
+-Monster - Soft Block, Hard Block, Bomb: Monster calcula nova direção.

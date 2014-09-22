@@ -1,0 +1,97 @@
+== Arquitetura
+Utilizaremos o padrão de arquitetura Entity-component-system (ECS). 
+
+=== Entites
+
+Representam um elemento do jogo. São containers de componentes.
+
+Iremos utilizar Entities para representar:
+
+** Character
+** Bomb
+** Hard/Soft Blocks
+** Monster
+** Powerup
+
+=== Components
+Os dados de um aspecto de um elemento que interage com o mundo do jogo.  São os TAD (tipos abstratos de dados dos Systems)
+Os components são apenas dados, eles não contém a lógica do jogo. Components são tão pequenos quanto possível, representando apenas um aspecto específico.
+
+Exemplos Components possíveis no Bomberman :
+
+** CellPosition (para regras do jogo, posição no Grid)
+** ScreenPosition (para renderização, posição e orientação)
+** ExplosionBarrier (como interfere no caminho de uma explosão )
+** Explosion
+** Score
+** BombDropper
+** Health (quantas vidas)
+** Physical (posição, velocidade)
+** PowerupType
+** TimedEffect
+
+
+=== Systems (ou Controllers):
+Iteram sobre os TADs de determinados tipos aplicando regras. Como resultado das regras podem ocorrer mudanças dos dados dos TADs ou criação de Events.
+
+=== Events:
+Objetos criados para representar a ocorrência de uma situação. São uma forma de comunicação entre os sistemas.
+
+Exemplo de Eventos são:
+
+CollisionEvent :: Uma entidade tenta ocupar uma celula já ocupada por outra entidade
+TriggeredBombEvent :: Uma Bomb foi disparada e está pronta para iniciar uma explosão
+
+NOTA: Events são implementados como classes Java.
+
+////
+
+*TODO*
+=== Exemplo de Integração entre Componentes
+
+Character chuta uma Bomb, a Bomb se desloca por 3 celulas e colide com um Monster. O Monster é destruído. A Bomb para o movimento. 
+A Bomb dispara. A explosão se propaga.
+
+
+== Comunicação entre os módulos
+
+=== Acesso a Components
+
+
+=== Criação e consumo de Eventos
+
+////
+=== Engine
+
+O Objeto Engine une todo o resto. Possui duas responsabilidades principais:
+
+* Gerenciar o conjunto de Systems
+* Gerenciar o conjunto de Entities
+
+
+=== Diretivas da Arquitetura
+
+* Systems não chamam uns aos outros
+* Systems se comunicacam criando e consumindo Events e modificando Components.
+
+
+=== Diretivas para Escrever Testes
+
+O que testar
+
+* Os testes devem verificar se os Systems cumprem suas responsabilidades. 
+* Quando estiver pensando em que testes criar, pense em que situações o sistema poderia falhar? Que tipo de cenários poderiam apresentar bugs?
+
+==== Testes típicos
+
+* testar o tratamento dos eventos que o System deve tratar
+* testar a criação dos eventos que o System deve criar
+* testar as modificações que o System deve fazer em componentes
+
+////
+Como escolher os testes
+
+* testar situações de fronteira:
+Ex:
+////
+

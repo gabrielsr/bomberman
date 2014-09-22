@@ -1,0 +1,452 @@
+
+Módulos Simuladores
+====================
+
+
+Life Module
+------------
+
+O módulo life do jogo tem o intuito de contabilizar a quantidade de vida dos characters e monsters. O módulo recebe uma lista de eventos que são gerados por outros sistemas, e analisa-os buscando aqueles eventos que devem ser tratados por ele. Como saída, o módulo gera o evento de retirada de character ou de monster, quando a pontuação de vida atinge o valor zero.
+
+
+ 
+=== Responsabilidades
+
+. Tratar events que levem a danos em characters ou monsters
+. Gerar events de retirada de character e monsters quando suas vidas atingirem o valor zero
+. Tratar events de adição de vida (gerado na aquisição de um Powerup 1-Up)
+. Trata situação em que um Character ou Monster pode ficar Invencible.
+
+*Invencible*
+
+. Esta característica evita dados.
+. Esta característica dura um tempo limitado (270 turnos)
+. Character é Invencible ao ser criado.
+
+=== Components 
+
+* Life
+** health (número de dados que a entity pode receber sem que seja iniciada uma nova tentativa)
+** availableTries (número de tentativas)
+
+=== System
+
+==== Events Tratados
+
+* CollisionEvent 
+Monster - Character:: Dano no character
+Explosion - Character, Monters: gera dano
+Character, Monster - Explosion: gera dano
+Bomb - Monster:: gera dano no Monster
+Bomb - Character:: gera dano no Character
+
+
+==== Events Gerados
+
+DestroyedEvent:: Quando uma entidade for destruída.
+GameOverEvent:: Quando uma entidade não possuir mais health ou availableTries.
+
+=== Testes
+
+
+decrementHealthTest:: Testa contagem de vidas: decremento
+
+increaseHealthTest:: Testa contagem de vidas: incremento
+
+destroyifHealthZeroTest:: Destroy se as vidas da Entidade chegaram a zero. 
+
+recreateIfHasMoreTriesTest:: Se um character possui mais tentativas, recria o personagem na casa inicial e com invencibilidade.
+
+gameOverIfHasNoMoreTriesTest:: Se um character não possui mais health ou availableTries cria um GameOverEvent para este character.
+
+
+Bomb Module
+------------
+
+=== Responsabilidades
+
+* Responsável pela criação das bombs no Grid.
+* Limita o número de bombs ativas (não disparadas) que podem ser deixadas por um mesmo Character no Grid, segundo o limite do Character
+* Registra um timer para a Bomb quando esta for inserida no Grid.
+* Trata eventos TimeOutEvent de bombs, dispando-as.
+** Bombs são disparadas após 90 turnos.
+* Trata a criação de bombs:
+** são criadas com o mesmo bombRange do seu criador (BombDropper). 
+** ExplosionStartedEvents são criados criados com bombRange da Bomb que originou o evento.
+* Dispara bombs que estiverem no range de uma explosão (tratando o InAnExplosionEvent)
+
+Disparar Bomb :: Cria um evento ExplosionStartedEvent, remove a Bomb do Grid.
+
+=== Components 
+Components que interagem com este módulo:
+
+* Placement
+* Bomb
+** BombRange
+** BombType
+
+=== System 
+
+* BombController
+
+==== Events Tratados
+
+TimeOutEvent:: Dispara a Bomb
+
+InAnExplosionEvent:: Dispara a Bomb
+
+Collision Event::
+*Bomb - Monster*: Dispara a Bomb
+
+==== Events Gerados
+
+* ExplosionStartedEvent:: Bomb foi disparada
+
+
+
+=== Testes
+triggeredAfterTimeToExplodeTest:: testa se um ExplosionStartedEvent é criado após 90 turnos.
+waitTimeToExplodeTest:: testa se nos primeiros 89 turnos não foi criado ExplosionStartedEvent.
+ 
+
+
+Explosion Module
+----------------
+
+Este módulo cria explosões, as propaga no tabuleiro e remove explosões extintas (depois de um determinado número de turnos que foram criadas). A criação de explosão a partir do evento apropriado (ExplosionStartedEvent) e sua propagação no Grid.
+
+Este System cria Event quando uma Entidade é 'atingida' por uma explosão.
+
+=== Responsabilidades
+
+. Criar Explosões em uma célula de origem a partir de ExplosionStartedEvent
+. Propagar explosões:
+** Explosão na célula de origem se propagam nas 4 direções (esquerda, direita, cima e baixo)
+** Explosões que não são origem se propagam na mesa direção de sua propagação original (vertical ou horizontal)
+** Explosões demoram 3 (EXPLOSION_PROPAGATION) turnos para se propagar de uma célula a outra adjacente.
+** Explosões iniciam com firepower que diminui a cada propagação
+** Explosões com firepower 1 não se propagam.
+** Tratar *Explosion Blockers* - Explosões não se program até:
+*** Hard blocks
+*** Fora do limite do cenário
+*** Passagens (pontes e escadas)
+** Tratar *Explosion Stopers* - Explosões não continuam após:
+*** Soft blocks
+*** Powerups
+*** Bombs (no entando a Bomb é disparada e é iniciada uma nova explosão)
+
+. Remover explosão 
+** Explosões duram 16 turnos e são removidas do Grid.
+. Detectar entidades no range de uma explosão: É criado um evento quando uma entidade está em uma célula em que uma explosão está presente.
+
+
+=== Components 
+Components que interagem com este módulo:
+
+* Explosion
+** CreatorId
+** Power
+
+* ExplosionBarrier
+** Type{BLOCKER, STOPPER, PASS_THROUGH}
+
+
+=== System
+
+==== Events Tratados
+ExplosionStartedEvent:: evento que uma Bomb foi disparada. 
+
+==== Events Gerados
+InAnExplosionEvent:: Criado para ExplosionBarrier do tipo STOPPER e PASS_THROUGH quando a explosão se propagar até suas células.
+
+=== Testes
+
+explosionCreationTest:: Testa se Explosion é criada a partir de um ExplosionStartedEvent
+explosionInitialPropagationTest:: Testa se Explosion inicial é propagada nas 4 direções (esquerda, direita, cima e baixo)
+explosionVerticalPropagationTest:: Testa se Explosion não inicial é propagada na direção vertical ( cima ou baixo)
+explosionHorizontalPropagationTest:: Testa se Explosion não inicial é propagada na direção vertical (esquerda ou direita)
+explosionDurationTest:: Testa se uma Explosion é mantida em até 16 turnos.
+explosionRemoveTest:: Testa se uma Explosion foi removida apóes 17 turnos de sua criação.
+explosionExtendedTest:: Testa se uma Explosion iniciada com um range de 5 celulas atinge esse range.
+explosionBlockTest:: Testa se um Hard Block *bloqueia* a propagação de uma explosão.
+explosionStopTest:: Testa se um Soft Block *para* a propagação de uma explosão.
+softBlockInAnExplosionEventTest:: Testa se é criado um evento InAnExplosionEvent para um um Soft Block no range de uma explosão.
+
+
+Score Module
+------------
+
+Receber as ações e seu agente e alterar a pontuação dele.
+
+
+=== Responsabilidades 
+
+* Contrabiliza ação, interpreta a ação realizada para poder adicionar os
+pontos.
+
+=== Components 
+* Score
+** total;
+
+
+=== System
+
+==== Events Tratados
+DestroyedEvent:: identifica quando um Moster foi destruído. Contabiliza o Score de que provocou a destruição.
+
+==== Events Gerados
+
+
+=== Testes
+
+addScoreDestroyedMonsterTest:: Testa se quando um Monster é destruído os pontos são adicionados corretamente ao Score de um determinado character.
+
+
+
+
+PowerUp Module
+--------------
+No jogo Bomberman characters podem adquirir itens que modificam suas habilidades. É responsabilidade deste módulo gerenciar a criação de powerups no grid e a aquisição destes por Characters. A aquisição de um PowerUp é realizada quando um Character ser move para uma célula onde um PowerUp se encontra. Quando um Character adquire um PowerUp este é removido do Grid.
+
+=== Responsabilidades
+
+* Criação de Powerups no tabuleiro
+* Aquisição de Powerups por Characters
+* Os PowerUps a serem implementados são: SPEED_UP, BOMB_UP, BOMB_RANGE_UP, LIFE_UP, REMOTE_CONTROL.
+
+
+=== Components
+* Placement
+* PowerupType
+** TypeId 
+
+* Velocity
+* BombDropper
+* Life
+* Action
+
+=== System
+Ao iniciar identifica quais os PowerUps disponíveis. 
+
+
+==== Eventos Tratados
+
+* DestructionEvent
+
+Para SoftBlocks e Monsters, sorteia a criação de PowerUp.
+
+* CollisionEvent
+
+character - powerup:: Procede a aquisição
+
+==== Eventos Gerados
+
+powerUpAquiredEvent
+
+=== Testes
+createPowerUpTest:: Testa se estão sendo criados PowerUps no Grid.
+aquirePowerUpTest:: Testa se a aquisição de um PowerUp está sendo identificada e realizada
+aquiredPowerUpIsRemovedTest:: Testa se após aquisição PowerUp é removido
+speedUpAquireTest:: Testa se a velocidade é aumentada após a aquisição do Speed Up.
+bomberUpAquireTest:: Testa se o BombLimit é aumentada após a aquisição do Bomb Up.
+bombRangeUpAquireTest:: Testa se o bombRange é aumentada após a aquisição do Bomb Range Up.
+lifeUpAquireTest:: Testa se o número de Lifes é aumentada após a aquisição do Life Up.
+RemoteControlAquireTest:: Testa se o character é munido de RemoteControl após a aquisição do RemoteControl.
+
+
+
+
+Collision Module
+-----------------
+
+Uma entidade colide com outra quando ela tenta se mover para a célula onde uma outra se encontra. Uma Colisão possui uma orientação, ou seja A - Colide - B não é o mesmo que B - Colide - A.
+
+
+=== Responsabilidades
+
+. Quando uma colisão ocorre é gerado um evento de colisão
+. Quando um Character estiver na mesma célula que uma Bomb, um monster colide com a Bomb e não com o Character
+. Quando um Character estiver na mesma célula que um Soft Block, um Monster ou Explosion colidem com o Soft Block não com o Character.
+
+
+=== Components 
+
+* Placement
+
+
+* CollisionController
+ 
+=== System
+
+Para a implementação do Módulo de Colisão, será criada uma classe chamada CollisionController. Essa classe
+receberá a informação do grid da posição dos elementos em um determinado turno e
+retornará uma lista com eventos de colisão.
+
+* BombController
+
+==== Events Tratados
+
+* TimeOutEvent
+
+* CollisionEvent
+Explosion - Bomb:: Dispara a Bomb
+Bomb - Monster:: Dispara a Bomb
+
+==== Events Gerados
+
+CollisionEvent:: Gerado quando ocorrer colisão. Possui referência as entidades que colidiram.
+
+
+=== Tests
+
+horizontalCollisionDetectionTest:: Testa determinação se ocorreu colisão na horizontal.
+verticalCollisionDetectionTest:: Testa determinação se ocorreu colisão na vertical.
+ACollisionBTest:: Testa se a colisão foi realizada por A e B 
+BCollisionATest:: Testa se a colisão foi realizada por B e A
+
+
+
+Movement Module
+----------------
+
+* Placement (TAD)
+* MovementController
+
+MovementController
+Um character ou monster se movimentam por default a 1/8 c/t (um dezesseis avos células por turno)
+A distância percorrida aumenta em 1/8 por turno com a aquisição do PowerUp SpeedUp. 
+	
+
+
+==== Events Tratados
+
+* CollisionEvent 
+Explosion - Bomb:: Dispara a Bomb
+Bomb - Monster:: Para a Bomb
+
+==== Events Gerados
+
+=== Testes
+
+
+
+Action Module
+-------------
+Glove PowerUp ::
+Remote Powerup ::
+
+HiThrownBombController ::
+Bomba quica até cair em um local vazio. Uma Bomb jogada para fora dos limites do Grid aparece do outro lado.
+
+Kick ::
+CollisionEvent
+
+
+==== Events Tratados
+
+* CollisionEvent
+-Character com Kick - Bomb: a bomb entra em movimento a 1/8 c/t no sentido da colisão.
+
+==== Events Gerados
+
+=== Testes
+
+
+
+
+Block Module
+------------
+Remove Soft Blocks destruídos por uma explosão e criam o evento DestroyedEvent.
+
+
+=== Responsabilidades
+
+* Remove Soft Blocks destruídos.
+* Cria evento quando um Soft Block for destruído.
+
+=== Components
+Block
+
+
+==== Events Tratados
+
+InAnExplosionEvent:: remove Soft Block e lança evento DestroiedEvent.
+
+==== Events Gerados
+
+DestroyedEvent:: gerado quando um Soft Block é destruído.
+
+
+PlayerControl Module
+--------------------
+Este Módulo é responsável pelo controle de jogadores a Characters.
+
+
+
+=== Responsabilidades
+
+* Mapear Character e Player
+* Mapear Player e um InputProvider. InputProvider's podem ser:
+** KeyboardInput
+** JoystickInput
+** NetworkInput
+* Mapear teclas e ações
+* Para cada turno ler as teclas precionadas e gerar Command*Event. Os Command*Event podem ser:
+** ActionCommandEvent
+** MovementCommandEvent
+
+=== Componentes
+ Player
+
+=== System
+
+==== Events Tratados
+
+==== Events Gerados
+
+MovementCommandEvent:: Comandos de movimento da entidade. 
+ActionCommandEvent:: Comandos de ações da entidade, como DROP_BOMB e EXPLODE_REMOTE_BOMB
+
+
+BotControl Module
+------------------
+
+=== Responsabilidades
+
+Gera Commands seguindo o algoritmo de cada Bot. Um bot pode ser um Monster ou um Character.
+
+=== Components
+* BotType
+* Placement
+* Bomb
+* Explosion
+* Powerup
+
+
+==== SimpleMoster
+Andam com velocidade de 1/16 c/t
+Continua o movimento na mesma direção sempre que possível
+Ao colidir com algo sorteia a próxima posição
+
+==== BombMosnter
+. Anda 128 turnos. 
+. Para 32. 
+. fica invencível por 16 turnos.
+. Gera uma explosão  
+. Para 32 turnos. 
+. Anda mais 128.
+
+=== Componentes
+
+*Bot
+
+=== System
+==== Events Tratados
+CollisionEvent::
+*Monster - Soft Block, Hard Block, Bomb*: Monster calcula nova direção.
+
+==== Events Gerados
+
+MovementCommandEvent:: Comandos de movimento da entidade. 
+
+=== Testes

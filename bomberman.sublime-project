@@ -1,0 +1,14 @@
+{
+	"folders":
+	[
+		{
+			"path": "/D/bomber/git/bomberman"
+		}
+	],
+    "settings":
+    {
+        "tab_size": 8,
+        "spell_check": true,
+	"dictionary": "Packages/pt_BR.dic"
+    }
+}

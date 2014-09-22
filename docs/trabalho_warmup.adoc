@@ -1,0 +1,50 @@
+Departamento de Ciência da Computação
+Programação Sistemática 2/2014
+
+Bomberman
+
+Prazo de entrega: 0
+
+O objetivo do trabalho é implementar uma parte do jogo Bomberman. Ao final desta estapa o aluno deverá estar familiarizado com  o ambiente de desenvolvimento constituído de:
+	Compilador e Máquina Virtual Java
+	IDE Eclipse
+	Biblioteca de Testes JUnit
+
+Nessa etapa ainda não iremos desenvolver a parte visual do Jogo e sim uma parte da lógica do jogo:
+
+Suas tarefas são as seguintes:
+
+#1 Montar o ambiente
+
+Você deverá seguir o roteiro disponível em http://github.com/gabrielsr/bomberman
+
+
+#2 Testar se bombRange das bombas criadas é correto.
+
+Ao explodir as bombas tem um alcance que depende do personagem que as inseriu (e quantos powerups Fire o personagem adquiriu antes) implemente um teste unitário que verifica se a bomba criada pelo BombSystem possui o bombRange correto. Implemente o teste na classe BombSystemTestCase. Use os testes dropBombTest e dropBombAtSamePlaceTest como base.
+
+
+#3 Personagens possuem limite de bombas ativas que podem inserir no Stage.
+
+ No bomberman um personagem só pode ter um número limitado de bombas no stage. Implemente a verificação de que o personagem não atingiu seu limite no método dropBomb(BombDropper dropper) presente na Classe BombSystem. 
+
+
+ A verificação deve utilizar o limite máximo de bombas definido em getPermittedSimultaneousBombs() presente no atributo 'dropper'.
+
+#4 Testando o limite. 
+ a) Implemente um teste unitário que verifique o implementado na tarefa #3 para o caso em que o personagem está dentro do seu limite.
+ b) Implemente um teste unitário que verifique o implementado na tarefa #3 para o caso em que o personagem excedeu seu limite.
+
+
+Desafio:
+
+#1 - Implemente uma bomba controlada remotamente. 
+
+#2 - Faça push do seu exercío para o GitHub.
+
+
+Referências
+
+http://www.gamedev.net/page/resources/_/technical/game-programming/case-study-bomberman-mechanics-in-an-entity-component-system-r3159
+
+http://bomberman.wikia.com/wiki/Fire

@@ -1,0 +1,10 @@
+Controle de qualidade das funcionalidades
+-------------------------------------------
+
+O teste disciplinado deve seguir os seguintes passos:
+
+. Antes de testar: produzir um roteiro de teste definir o contexto (cenário) necessário e selecionar a massa de teste contendo a seqüência de ações e valores de teste com os respectivos resultados esperados e que foi criada segundo um critério de teste.
+. Antes de iniciar o teste: estabelecer o cenário do teste
+. Criar um módulo controlador de teste, usando a ferramenta CUnit para testar as principais funcionalidades de cada módulo. 
+. Ao testar: produzir um laudo em que todas as discrepâncias encontradas são registradas. Esse laudo pode ser uma saída da execução do CUnit. Somente termine o teste antes de completar o roteiro, caso observe que não vale mais a pena continuar executando o roteiro, uma vez que o contexto para o resto está danificado
+. Após a correção: repetir o teste a partir de 2 até o roteiro passar sem encontrar falhas.

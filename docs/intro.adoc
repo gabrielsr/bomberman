@@ -34,11 +34,11 @@ Os elementos que se movem no jogo, se movem em subdivisões de células e podem 
 
 OBS: Todas as regras do jogo exceto o movimento são especificadas em relação as células em que estão as entidades do jogo.
 
-Medidas
+* Medidas
 Iremos utilizar neste projeto as seguintes unidades de medida:
-*Distancia: células
-*Tempo: Turnos
-*Velocidade: c/t (células por turno)
+** Distancia: células
+** Tempo: Turnos
+** Velocidade: c/t (células por turno)
 
 
 == Modelo conceitual
@@ -66,6 +66,9 @@ Geram Explosões. Podem se movimentar no grid quando sofrerem um Kick (chute) po
 
 * Explosion
 Se propagam, duram um tempo limitado e se extinguem. Causam danos em Characters, Monster. Destroem Soft Blocks. 
+
+* Exit
+Saída da fase.
 
 == Arquitetura
 Utilizaremos o padrão de arquitetura Entity-component-system (ECS). 
