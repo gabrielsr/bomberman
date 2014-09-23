@@ -3,6 +3,7 @@ package br.unb.unbomber.systems;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.unb.unbomber.core.System;
 import br.unb.unbomber.entity.Bomb;
 import br.unb.unbomber.entity.BombDropper;
 

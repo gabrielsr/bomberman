@@ -80,7 +80,7 @@ Disparar Bomb :: Cria um evento ExplosionStartedEvent, remove a Bomb do Grid.
 === Components 
 Components que interagem com este módulo:
 
-* Placement
+* CellPosition
 * Bomb
 ** BombRange
 ** BombType
@@ -113,9 +113,9 @@ waitTimeToExplodeTest:: testa se nos primeiros 89 turnos não foi criado Explosi
 Explosion Module
 ----------------
 
-Este módulo cria explosões, as propaga no tabuleiro e remove explosões extintas (depois de um determinado número de turnos que foram criadas). A criação de explosão a partir do evento apropriado (ExplosionStartedEvent) e sua propagação no Grid.
+Este módulo cria explosões, as propaga no grid e remove explosões extintas (depois de um determinado número de turnos que foram criadas).
 
-Este System cria Event quando uma Entidade é 'atingida' por uma explosão.
+Um Event é criado quando uma Entity é 'atingida' por uma explosão.
 
 === Responsabilidades
 
@@ -176,47 +176,47 @@ softBlockInAnExplosionEventTest:: Testa se é criado um evento InAnExplosionEven
 Score Module
 ------------
 
-Receber as ações e seu agente e alterar a pontuação dele.
+Este módulo contabiliza os pontos de um character a partir dos eventos gerados pelas ações deste.
 
 
 === Responsabilidades 
 
-* Contrabiliza ação, interpreta a ação realizada para poder adicionar os
-pontos.
+* Contrabiliza ação: interpreta a ação realizada para poder adicionar os
+pontos 
 
 === Components 
 * Score
-** total;
+** total
 
 
 === System
 
 ==== Events Tratados
-DestroyedEvent:: identifica quando um Moster foi destruído. Contabiliza o Score de que provocou a destruição.
+DestroyedEvent:: identifica quando um Moster foi destruído. Contabiliza o Score de quem provocou a destruição.
 
 ==== Events Gerados
 
 
 === Testes
 
-addScoreDestroyedMonsterTest:: Testa se quando um Monster é destruído os pontos são adicionados corretamente ao Score de um determinado character.
+addScoreDestroyedMonsterTest:: Testa se quando um monster é destruído os pontos são adicionados corretamente ao Score de um determinado character.
 
 
 
 
 PowerUp Module
 --------------
-No jogo Bomberman characters podem adquirir itens que modificam suas habilidades. É responsabilidade deste módulo gerenciar a criação de powerups no grid e a aquisição destes por Characters. A aquisição de um PowerUp é realizada quando um Character ser move para uma célula onde um PowerUp se encontra. Quando um Character adquire um PowerUp este é removido do Grid.
+No jogo Bomberman characters podem adquirir itens que modificam suas habilidades. É responsabilidade deste módulo gerenciar a criação de powerups no grid e a aquisição destes por characters. A aquisição de um PowerUp é realizada quando um character se move para uma célula onde um PowerUp se encontra. Quando um character adquire o powerup este é removido do grid.
 
 === Responsabilidades
 
-* Criação de Powerups no tabuleiro
-* Aquisição de Powerups por Characters
-* Os PowerUps a serem implementados são: SPEED_UP, BOMB_UP, BOMB_RANGE_UP, LIFE_UP, REMOTE_CONTROL.
+* Criação de powerups no grid
+* Aquisição de powerups por characters
+* Os powerups a serem implementados são: SPEED_UP, BOMB_UP, BOMB_RANGE_UP, LIFE_UP, REMOTE_CONTROL.
 
 
 === Components
-* Placement
+* CellPosition
 * PowerupType
 ** TypeId 
 
@@ -226,7 +226,7 @@ No jogo Bomberman characters podem adquirir itens que modificam suas habilidades
 * Action
 
 === System
-Ao iniciar identifica quais os PowerUps disponíveis. 
+Ao iniciar identifica quais os powerups disponíveis. 
 
 
 ==== Eventos Tratados
@@ -244,7 +244,7 @@ character - powerup:: Procede a aquisição
 powerUpAquiredEvent
 
 === Testes
-createPowerUpTest:: Testa se estão sendo criados PowerUps no Grid.
+createPowerUpTest:: Testa se estão sendo criados powerups no Grid.
 aquirePowerUpTest:: Testa se a aquisição de um PowerUp está sendo identificada e realizada
 aquiredPowerUpIsRemovedTest:: Testa se após aquisição PowerUp é removido
 speedUpAquireTest:: Testa se a velocidade é aumentada após a aquisição do Speed Up.
@@ -271,7 +271,7 @@ Uma entidade colide com outra quando ela tenta se mover para a célula onde uma 
 
 === Components 
 
-* Placement
+* CellPosition
 
 
 * CollisionController
@@ -309,7 +309,7 @@ BCollisionATest:: Testa se a colisão foi realizada por B e A
 Movement Module
 ----------------
 
-* Placement (TAD)
+* CellPosition (TAD)
 * MovementController
 
 MovementController
@@ -417,7 +417,7 @@ Gera Commands seguindo o algoritmo de cada Bot. Um bot pode ser um Monster ou um
 
 === Components
 * BotType
-* Placement
+* CellPosition
 * Bomb
 * Explosion
 * Powerup

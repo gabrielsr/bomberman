@@ -1,0 +1,16 @@
+package br.unb.unbomber.systems;
+
+public interface System {
+
+	public void start();
+	
+	public void stop();
+	
+	public void update();
+	
+	public List<Event> getEvents(Type type);
+		
+	public List<Component> getComponents(Type type);	
+	
+	public void addEvent(Event);
+}
