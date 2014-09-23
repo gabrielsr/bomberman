@@ -22,7 +22,14 @@ public interface GameModel {
 	* Get a Component of 'componentType' associated with 'component' (both from the same Entity)
 	* if any. Return null if there is no such a component associated
 	*/
-	//public Component getAssociatedComponent(Component component, String entityId);
+	//public Component getAssociatedComponent(Component component, int entityId);
+
+	/**
+	* Get a Component of 'componentType' associated with 'entityId' if any. 
+	* Return null if there is no such a component associated
+	*/
+	public Component getComponent(Class<?> componentType, int entityId);
+
 	
 	/**
 	* Add a new event to the Game Model 
@@ -30,11 +37,16 @@ public interface GameModel {
 	public void addEvent(Event event);
 	
 	/**
-	* Add a new Component
+	* Add a new Component to the Model and set in it a uniqueId
 	*/
-	public void addComponents(Component newComponent);
-	
-	
+	public void addComponent(Component newComponent);
+
+
+	/**
+	* Add a new Entity to the Model
+	*/
+	void addEntity(Entity entity);
+
 	/**
 	* Add a new Component associated with the provided entity id
 	*/

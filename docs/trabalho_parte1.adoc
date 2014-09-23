@@ -1,194 +1,65 @@
+Departamento de Ciência da Computação – Universidade de Brasília
 
-Departamento de Ciência da Computação
-Programação Sistemática 2/2012
-
-Bomberman
-
-Prazo de entrega: 08 de Fevereiro
-
-O objetivo do trabalho é implementar uma parte dos sistemas do Bomberman. Ao final desta estapa o aluno deverá estar familiarizado com  o ambiente de desenvolvimento constituído de:
-	Compilar e Executar programa Java
-	IDE Eclipse
-	Biblioteca de Testes JUnit
-
-Nessa etapa ainda não iremos desenvolver a parte visual do Jogo e sim a parte fundamental da lógica do jogo.
-
-Iremos nos focar na simulação do jogo, em como implementar as regras do gameplay. 
-
-
-A rough summary of the PvP Bomberman gameplay is as follows. Players plant bombs that destroy other players and disintegrate blocks. Disintegrated blocks leave behind various powerups that augment the destructive power of your bombs, or affect player speed. Players complete to see who is the last to survive as a clock counts down to total destruction.
-
-
-Sistemas a serem implementados
-
- 	GenerateGameMap
- 		Cria o cenário. Coloca soft blocks de forma aleatória respeitando o L de início de cada personagem.
-
-
-	BombSystem
-		Verifica quais bombas devem explodir (baseada no tempo e estado)
-		Incrementam o contador das bombas
-		Recebe solicitações de personagem e registra o comando de inserir bombas ou retorna exception se muitas bombas já foram inseridas por este personagem.
+Programação Sistemática – 2º/2014
 
 
 
-The BombSystem handles two messages: one sent by the ExplosionSystem to entities underneath an explosion (which will trigger the bomb so we can have chain reactions), and one sent by the player's input handler which is used for remotely triggering bombs (for remote control bombs).
+Trabalho Prático – Bomberman - Iteração 1
+=========================================
+
+Prazo de entrega:: 07/10/2014
+
+Iteração 1 - Descrição
+-----------------------
+
+Nesta iteração iremos desenvolver os módulos simuladores como descrito em link:modules_simulation.adoc
+Cada grupo irá desenvolver um módulo como definido na aula do dia 18/09/2014.
 
 
+Modularização
+--------------
 
-	MovementSystem
-		Verifica se o personagem pode se mover de uma casa a outra. Controla com que velocidade o personagme se movimenta. Torna o movimento mais suave utilizando uma tolerância na borda.
-		Entidades que se movimentam se movimentam em frações de celulas do cenário. No entando todo o resto da lógica do jogo considera apenas em que célula o personagem se encontra.
+Nessa etapa será desenvolvido módulos simuladores. Estes módulos serão consituidos de:
 
+* Components (dados das entidades do jogo)
+* Systems (lógica e regras do jogo)
+* Events (dados de eventos do jogo)
+* Testes (testes unitários)
 
-		Move bombas que foram chutadas e ainda não se chocaram com nada.
-
-
-	HitSystem
-		Quando um personagem foi atingido por uma explosão
-
-	ExplosionSystem
-		Propagação de Explosoes
-		Remove blocos soft
-		Notifica PowerUpSystem que blocos foram destruídos
+Seguindo a descrição do documento link:arquitetura.adoc
 
 
-	PowerUpSystem
-		PowerUps são ítens que modificam caracaterísticas dos personagens. Estas características podem ser relacionadas as bombas que ele é capaz de soltar, seu movimento (velocidade) ou o jogo (quantidade de vidas)
+Observação:
 
-		Exibe cria novos powerups quando recebem notificação de que um bloco foi destruído.
+Seja C ou Java, utilize os princípios de modularidade na criação dos módulos ou classes, definindos seus módulos de definição (interfaces), módulos de implementação (classe) e organizando suas compilações e lincagens de forma adequada via um único makefile. 
 
-		Realiza aquisição de powerup
-
-
-	GameStateSystem
-		Conta as vidas dos personagens
-		GameStateSystem is responsible for displaying the time remaining, and determining who won the game. It seems a bit awkward to cram it into the ECS framework - it only ever makes sense for there to be one GameState object. 
-
-		Pausa o Jogo
-		Salva o Jogo em um Slot
-		Carrega o Jogo de um Slot
-		Continua
-
-	ActionSystem
-		Glove
-			Permite o personagem carregar uma bomba.
-
-	ControlSystem
-
-	MonsterSystem
-
-			Inimigos que se movem em padrões pré estabelecidos, não fogem de bombas, não lançam bombas nem consomem powerups. Inflingem dano ao tocarem um personagem.
-
-	AISystem
-		AI Adapter
-			Cria uma thread para para personagem.
-			Cria eventos a serem processados pela AI.
-			Ativa a thread da AI limitando a extensão do turno.
-			Recebe comandos e transfere para o controlSystem bloqueando a thread do personagem.
+Na criação dos módulos, lembre-se de usar as diretivas de controle para evitar inclusões múltiplas e identificando também o servidor.
 
 
-		AI Util
-			Funções úteis para um programador de AI. Coisas como casas vazias próximas. Regiões não ameaçadas.
+Parte Escrita
+-------------
 
+Deverão ser entregues em conjunto com os códigos fonte: 
+um arquivo LEIAME.TXT contendo a explicação de como utilizar o(s) programa(s). 
+Tantos arquivos RELATORIO-nome.TXT quantos forem os membros do grupo. O tema nome deve identificar o membro do grupo ao qual se refere o relatório. Estes arquivos devem conter uma tabela de registro de trabalho organizada como a seguir:
 
-		Personagens
-			Tem as mesmas possibilidades que o bomberman.
-
-	PlayerControlSystem
-
-	RenderSystem
-
-	MenuSystem
-
-Distância
-	Em frações de celulas.
-
-Tempo do Jogo. 
-	As ações temporais são definidas por ticks. Normalmente deverá ser realizadas 60 ticks por segundo mas isso pode variar de acordo com o cliente.
-
-
-
-
-Primeiro o grupo deve descrever quais os testes deverão ser implementados. 
-
-Faça uma descrição do Sistema
-
-Em seguida deverá ser implementado o código que faz passar o teste.
-
-
-
-Seguindo o objetivo da matéria que é aprender programação modular:
-
-
-
-
-
-1.
-Existem diferentes formas de se implementar um resolvedor de Sudoku. Todas elas
-estão explicadas em
-http://en.wikipedia.org/wiki/Sudoku_solving_algorithms
-. Para
-esse trabalho, poderá ser usado o algoritmo de
-backtracking
-e
-exact cover
-apenas.
-Para implementação do
-exact cover,
-recomendamos a implementação segundo o
-algoritmo de Knuth em
-http://en.wikipedia.org/wiki/Knuth%27s_Algorithm_X
-.
-2.
-Atualize os requisitos do Sudoku explicando qual algoritmo foi usado e como foi
-implementado. E elabore um documento “.doc” ou “.pdf” que contenha a especificação
-de requisitos completa do Sudoku.
-3.
-Realize os casos de teste utilizando o CUnit como no trabalho prático 1.
-3.
-Reorganize o seu programa adotando padrões conforme capítulo 4 e apêndice 5 do
-material bibliográfico da disciplina. Ao final da tarefa, garanta que seu programa esteja
-executando corretamente conforme testes realizados no trabalho prático 1.
-4.
-Elabore um documento “.doc” ou “.pdf” que contenha os padrões de documentação
-que seu grupo adotou.
-5.
-Faça a análise estática do programa utilizando o
-Splint -weak +infloops +sysdirerrors
-+compdef
-, corrigindo todos os warrings apontados pela ferramenta.
-6.
-Produza um relatório de atividades como feito no trabalho anterior contendo os
-seguintes arquivos:
-1.
-Um arquivo
-LEIAME.TXT
-contendo a explicação de como utilizar o(s) programa(s).
-2.
-Tantos arquivos
-RELATORIO-nome.TXT
-quantos forem os membros do grupo. O
-tema
-nome
-deve identificar o membro do grupo ao qual se refere o relatório. Estes
-arquivos devem conter uma tabela de registro de trabalho organizada como a
-seguir:
 Data | Horas Trabalhadas | Tipo Tarefa | Descrição da Tarefa Realizada
-Observações importantes
-:
--
-Confiamos que serão éticos e autênticos! Vale lembrar que, como nos demais
-trabalhos, ferramentas de detecção de plágio serão utilizadas. Se for detectado
-plágio das implementações para resolvedor Sudoku (
-backtracking
-e
-exact cover
-)
-disponíveis na Internet, a nota do grupo será 0 (conforme laudo da ferramenta) e
-sem direito à revisão.
--
-Dica: Preencha esta tabela de atividades ao longo do processo. NÃO DEIXE PARA
-ÚLTIMA HORA, POIS VOCÊ NÃO SE LEMBRARÁ DO QUE FEZ TAL DIA, TAL
-HORA. Com relatórios similares a esse você aprende a planejar o seu trabalho.
-Excelente trabalho!
+
+Na descrição da tarefa redija uma explicação breve sobre o que o componente do grupo fez. Esta descrição deve estar de acordo com o Tipo Tarefa. Cada Tipo Tarefa identifica uma natureza de atividade que deverá ser discriminada explicitamente, mesmo que, durante uma mesma sessão de trabalho tenham sido realizadas diversas tarefas. Os tipos de tarefa são:
+
+* Estudar
+* Especificar os módulos
+* Especificar as funções
+* Revisar especificações
+* Projetar
+* Revisar projetos
+* Codificar módulo
+* Revisar código do módulo
+* Redigir casos de teste
+* Revisar casos de teste
+* Realizar os testes
+* Diagnosticar e corrigir os problemas encontrados
+
+TIP: Preencha esta tabela de atividades ao longo do processo. *NÃO DEIXE PARA ÚLTIMA HORA, POIS VOCÊ NÃO SE LEMBRARÁ DO QUE FEZ TAL DIA, TAL HORA*. Com relatórios similares a esse você aprende a planejar o seu trabalho.
+
+EXCELENTE TRABALHO! 

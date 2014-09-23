@@ -31,18 +31,29 @@ Exemplos Components possíveis no Bomberman :
 ** TimedEffect
 
 
-=== Systems (ou Controllers):
-Iteram sobre os TADs de determinados tipos aplicando regras. Como resultado das regras podem ocorrer mudanças dos dados dos TADs ou criação de Events.
-
 === Events:
-Objetos criados para representar a ocorrência de uma situação. São uma forma de comunicação entre os sistemas.
+Objetos criados para representar a ocorrência de uma situação. São uma forma de comunicação entre os systems.
 
 Exemplo de Eventos são:
 
 CollisionEvent :: Uma entidade tenta ocupar uma celula já ocupada por outra entidade
 TriggeredBombEvent :: Uma Bomb foi disparada e está pronta para iniciar uma explosão
 
-NOTA: Events são implementados como classes Java.
+NOTE: Events são implementados como classes Java.
+
+=== Systems (ou Controllers):
+
+Os systems implementas as regras do jogo. São nos systems que o código (algorítmos) são implementados. Enquanto Components e Events são os dados que constituem o modelo do jogo. Os systems são a implementação das regras.
+
+Os systems são chamados a cada turno.
+
+Cada component e event reune _dados_ de um aspecto do jogo. Um system reune as _regras_ de um aspecto do jogo.
+
+Os systems cumprem suas responsabilidades criando novos components, atualizando dados nos components já existentes, consumindo events e criando novos events.
+
+
+Existem systems que são responsáveis pela entrada de dados (Ex: PlayerControl), systems responsáveis pela Simulação do jogo, ou seja, onde são implementadas as lógicas de movimento, colisão e vida dos personagens (Ex: CollisionSystem, MovementSystem, LifeSystem) e systems responsáveis por apresentar os dados ao jogador (SoundSystem, RenderSystem).
+
 
 ////
 
@@ -61,12 +72,14 @@ A Bomb dispara. A explosão se propaga.
 === Criação e consumo de Eventos
 
 ////
+
 === Engine
 
 O Objeto Engine une todo o resto. Possui duas responsabilidades principais:
 
+* Criar o GameModel
 * Gerenciar o conjunto de Systems
-* Gerenciar o conjunto de Entities
+
 
 
 === Diretivas da Arquitetura

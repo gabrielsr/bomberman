@@ -2,6 +2,10 @@
 Módulos Simuladores
 ====================
 
+Introdução
+----------
+Especificaremos nesta seção os módulos simuladores do jogo. Cada módulo é constituido de um system e alguns components e events que o system interage (cria/atualiza).
+
 
 Life Module
 ------------
@@ -9,7 +13,6 @@ Life Module
 O módulo life do jogo tem o intuito de contabilizar a quantidade de vida dos characters e monsters. O módulo recebe uma lista de eventos que são gerados por outros sistemas, e analisa-os buscando aqueles eventos que devem ser tratados por ele. Como saída, o módulo gera o evento de retirada de character ou de monster, quando a pontuação de vida atinge o valor zero.
 
 
- 
 === Responsabilidades
 
 . Tratar events que levem a danos em characters ou monsters
@@ -24,6 +27,7 @@ O módulo life do jogo tem o intuito de contabilizar a quantidade de vida dos ch
 . Character é Invencible ao ser criado.
 
 === Components 
+Components que interagem com este módulo:
 
 * Life
 ** health (número de dados que a entity pode receber sem que seja iniciada uma nova tentativa)
@@ -47,7 +51,6 @@ DestroyedEvent:: Quando uma entidade for destruída.
 GameOverEvent:: Quando uma entidade não possuir mais health ou availableTries.
 
 === Testes
-
 
 decrementHealthTest:: Testa contagem de vidas: decremento
 
@@ -75,7 +78,7 @@ Bomb Module
 ** ExplosionStartedEvents são criados criados com bombRange da Bomb que originou o evento.
 * Dispara bombs que estiverem no range de uma explosão (tratando o InAnExplosionEvent)
 
-Disparar Bomb :: Cria um evento ExplosionStartedEvent, remove a Bomb do Grid.
+Disparar Bomb :: Cria um evento ExplosionStartedEvent e remove a Bomb do Grid.
 
 === Components 
 Components que interagem com este módulo:
@@ -91,24 +94,26 @@ Components que interagem com este módulo:
 
 ==== Events Tratados
 
-TimeOutEvent:: Dispara a Bomb
+ActionCommandEvent:: *DROP_BOMB*, character insere bomb (se não ultrapassou limite ainda)
 
-InAnExplosionEvent:: Dispara a Bomb
+TimeOutEvent:: Dispara a Bomb por tempo
+
+InAnExplosionEvent:: Dispara a Bomb, a bomb está no range de outra bomb e devem ser disparadas por efeito cascata
 
 Collision Event::
 *Bomb - Monster*: Dispara a Bomb
 
+
 ==== Events Gerados
 
-* ExplosionStartedEvent:: Bomb foi disparada
-
-
+ExplosionStartedEvent:: Bomb foi disparada
 
 === Testes
+
 triggeredAfterTimeToExplodeTest:: testa se um ExplosionStartedEvent é criado após 90 turnos.
+
 waitTimeToExplodeTest:: testa se nos primeiros 89 turnos não foi criado ExplosionStartedEvent.
  
-
 
 Explosion Module
 ----------------
@@ -162,14 +167,23 @@ InAnExplosionEvent:: Criado para ExplosionBarrier do tipo STOPPER e PASS_THROUGH
 === Testes
 
 explosionCreationTest:: Testa se Explosion é criada a partir de um ExplosionStartedEvent
+
 explosionInitialPropagationTest:: Testa se Explosion inicial é propagada nas 4 direções (esquerda, direita, cima e baixo)
+
 explosionVerticalPropagationTest:: Testa se Explosion não inicial é propagada na direção vertical ( cima ou baixo)
+
 explosionHorizontalPropagationTest:: Testa se Explosion não inicial é propagada na direção vertical (esquerda ou direita)
+
 explosionDurationTest:: Testa se uma Explosion é mantida em até 16 turnos.
+
 explosionRemoveTest:: Testa se uma Explosion foi removida apóes 17 turnos de sua criação.
+
 explosionExtendedTest:: Testa se uma Explosion iniciada com um range de 5 celulas atinge esse range.
+
 explosionBlockTest:: Testa se um Hard Block *bloqueia* a propagação de uma explosão.
+
 explosionStopTest:: Testa se um Soft Block *para* a propagação de uma explosão.
+
 softBlockInAnExplosionEventTest:: Testa se é criado um evento InAnExplosionEvent para um um Soft Block no range de uma explosão.
 
 
@@ -178,13 +192,14 @@ Score Module
 
 Este módulo contabiliza os pontos de um character a partir dos eventos gerados pelas ações deste.
 
-
 === Responsabilidades 
 
 * Contrabiliza ação: interpreta a ação realizada para poder adicionar os
 pontos 
 
 === Components 
+Components que interagem com este módulo:
+
 * Score
 ** total
 
@@ -213,54 +228,55 @@ No jogo Bomberman characters podem adquirir itens que modificam suas habilidades
 * Criação de powerups no grid
 * Aquisição de powerups por characters
 * Os powerups a serem implementados são: SPEED_UP, BOMB_UP, BOMB_RANGE_UP, LIFE_UP, REMOTE_CONTROL.
-
+** SPEED_UP: aumenta a velocidade em 1/8 por turno com a aquisição deste powerup.
 
 === Components
+Components que interagem com este módulo:
+
 * CellPosition
 * PowerupType
 ** TypeId 
-
-* Velocity
 * BombDropper
 * Life
 * Action
 
 === System
-Ao iniciar identifica quais os powerups disponíveis. 
-
 
 ==== Eventos Tratados
 
-* DestructionEvent
+DestructionEvent:: Para SoftBlocks e Monsters, sorteia a criação de PowerUp.
 
-Para SoftBlocks e Monsters, sorteia a criação de PowerUp.
+CollisionEvent::
 
-* CollisionEvent
-
-character - powerup:: Procede a aquisição
+*character - powerup*: Procede a aquisição
 
 ==== Eventos Gerados
 
-powerUpAquiredEvent
+PowerUpAquiredEvent:: Evento criado quando um PowerUp é adquirido.
 
 === Testes
-createPowerUpTest:: Testa se estão sendo criados powerups no Grid.
+
+createPowerUpTest:: Testa criação de powerups no Grid.
+
 aquirePowerUpTest:: Testa se a aquisição de um PowerUp está sendo identificada e realizada
+
 aquiredPowerUpIsRemovedTest:: Testa se após aquisição PowerUp é removido
+
 speedUpAquireTest:: Testa se a velocidade é aumentada após a aquisição do Speed Up.
+
 bomberUpAquireTest:: Testa se o BombLimit é aumentada após a aquisição do Bomb Up.
+
 bombRangeUpAquireTest:: Testa se o bombRange é aumentada após a aquisição do Bomb Range Up.
+
 lifeUpAquireTest:: Testa se o número de Lifes é aumentada após a aquisição do Life Up.
+
 RemoteControlAquireTest:: Testa se o character é munido de RemoteControl após a aquisição do RemoteControl.
-
-
 
 
 Collision Module
 -----------------
 
 Uma entidade colide com outra quando ela tenta se mover para a célula onde uma outra se encontra. Uma Colisão possui uma orientação, ou seja A - Colide - B não é o mesmo que B - Colide - A.
-
 
 === Responsabilidades
 
@@ -270,11 +286,9 @@ Uma entidade colide com outra quando ela tenta se mover para a célula onde uma 
 
 
 === Components 
+Components que interagem com este módulo:
 
 * CellPosition
-
-
-* CollisionController
  
 === System
 
@@ -286,72 +300,71 @@ retornará uma lista com eventos de colisão.
 
 ==== Events Tratados
 
-* TimeOutEvent
-
-* CollisionEvent
-Explosion - Bomb:: Dispara a Bomb
-Bomb - Monster:: Dispara a Bomb
+(vazio)
 
 ==== Events Gerados
 
 CollisionEvent:: Gerado quando ocorrer colisão. Possui referência as entidades que colidiram.
 
-
 === Tests
 
 horizontalCollisionDetectionTest:: Testa determinação se ocorreu colisão na horizontal.
-verticalCollisionDetectionTest:: Testa determinação se ocorreu colisão na vertical.
-ACollisionBTest:: Testa se a colisão foi realizada por A e B 
-BCollisionATest:: Testa se a colisão foi realizada por B e A
 
+verticalCollisionDetectionTest:: Testa determinação se ocorreu colisão na vertical.
+
+ACollisionBTest:: Testa se a colisão foi realizada por A e B 
+
+BCollisionATest:: Testa se a colisão foi realizada por B e A
 
 
 Movement Module
 ----------------
 
-* CellPosition (TAD)
-* MovementController
+Este módulo trata do movimento das entidades no grid.
 
-MovementController
-Um character ou monster se movimentam por default a 1/8 c/t (um dezesseis avos células por turno)
-A distância percorrida aumenta em 1/8 por turno com a aquisição do PowerUp SpeedUp. 
+=== Responsabilidades
+
+* Mover entidades atualizando o ScreenPosition e o CellPosition 
+** characters se movimentam por default a 1/8 c/t (células por turno)
+** monsters movimentam por default a 1/16 c/t (células por turno)
+
 	
+=== Components 
+Components que interagem com este módulo:
 
+* CellPosition
+* ScreenPosition
 
 ==== Events Tratados
 
-* CollisionEvent 
-Explosion - Bomb:: Dispara a Bomb
-Bomb - Monster:: Para a Bomb
+MovementCommandEvent:: Comando de movimento de um character ou monster.
 
 ==== Events Gerados
 
 === Testes
 
+walkVerticalLineTest:: Testa se a posição da celula do character é atualizada em um movimento por toda a vertical
+
+walkHorizontalLineTest:: Testa se a posição da celula do character é atualizada em um movimento por toda a horizontal
 
 
 Action Module
 -------------
-Glove PowerUp ::
-Remote Powerup ::
+Este módulo trata as ações do usuário como segurar uma bomb e disparar uma _remote bomb_. 
 
-HiThrownBombController ::
-Bomba quica até cair em um local vazio. Uma Bomb jogada para fora dos limites do Grid aparece do outro lado.
+=== Responsabilidades
 
-Kick ::
-CollisionEvent
-
+* Disparar remote bomb: dispara a remote bomb mais antiga que um character possuir no grid.
+* Segura bomb: character segura uma bomb que para de contar o tempo até ser lançada
+* Lança bomb segurada: character lança uma bomb que está segurando. Esta bomb começa um movimento característico.
 
 ==== Events Tratados
 
-* CollisionEvent
--Character com Kick - Bomb: a bomb entra em movimento a 1/8 c/t no sentido da colisão.
+ActionCommandEvent:: Comandos de ações da entidade, como DROP_BOMB e EXPLODE_REMOTE_BOMB
 
 ==== Events Gerados
 
 === Testes
-
-
 
 
 Block Module
@@ -381,8 +394,6 @@ PlayerControl Module
 --------------------
 Este Módulo é responsável pelo controle de jogadores a Characters.
 
-
-
 === Responsabilidades
 
 * Mapear Character e Player
@@ -396,7 +407,7 @@ Este Módulo é responsável pelo controle de jogadores a Characters.
 ** MovementCommandEvent
 
 === Componentes
- Player
+ * Player
 
 === System
 
@@ -404,7 +415,8 @@ Este Módulo é responsável pelo controle de jogadores a Characters.
 
 ==== Events Gerados
 
-MovementCommandEvent:: Comandos de movimento da entidade. 
+MovementCommandEvent:: Comandos de movimento da entidade.
+
 ActionCommandEvent:: Comandos de ações da entidade, como DROP_BOMB e EXPLODE_REMOTE_BOMB
 
 
@@ -414,13 +426,6 @@ BotControl Module
 === Responsabilidades
 
 Gera Commands seguindo o algoritmo de cada Bot. Um bot pode ser um Monster ou um Character.
-
-=== Components
-* BotType
-* CellPosition
-* Bomb
-* Explosion
-* Powerup
 
 
 ==== SimpleMoster
@@ -436,9 +441,13 @@ Ao colidir com algo sorteia a próxima posição
 . Para 32 turnos. 
 . Anda mais 128.
 
-=== Componentes
 
-*Bot
+=== Components
+* BotType
+* CellPosition
+* Bomb
+* Explosion
+* Powerup
 
 === System
 ==== Events Tratados

@@ -1,57 +1,68 @@
 package br.unb.unbomber.systems;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import br.unb.unbomber.core.System;
-import br.unb.unbomber.entity.Bomb;
-import br.unb.unbomber.entity.BombDropper;
+import br.unb.unbomber.component.BombDropper;
+import br.unb.unbomber.component.CellPlacement;
+import br.unb.unbomber.component.Explosive;
+import br.unb.unbomber.component.Timer;
+import br.unb.unbomber.core.BaseSystem;
+import br.unb.unbomber.core.Entity;
+import br.unb.unbomber.core.Event;
+import br.unb.unbomber.core.GameModel;
+import br.unb.unbomber.event.ActionCommandEvent;
+import br.unb.unbomber.event.ActionCommandEvent.ActionType;
+import br.unb.unbomber.event.TimeOverEvent;
 
-public class BombSystem implements System {
+public class BombSystem extends BaseSystem {
 
-	static BombSystem instance;
+	private final String TRIGGERED_BOMB_ACTION = "BOMB_TRIGGERED";
 	
-	private List<BombDropper> bombDroppers = new ArrayList<BombDropper>();
-	
-	private List<Bomb> bombs = new ArrayList<Bomb>();
-	
-	public static BombSystem getInstance() {
-		return instance;
+
+	public BombSystem() {
+		super();
 	}
 	
-	public static void createInstance(){
-		instance = new BombSystem();
-		instance.bombDroppers = new ArrayList<BombDropper>();
-		instance.bombs = new ArrayList<Bomb>();
-	}
+	public BombSystem(GameModel model) {
+		super(model);
 		
-	/**
-	 * Explode bombs after their wait time
-	 */
-	public void explodeTimeBombs(){
-		//TODO not implemented
+	}
+	
+	@Override
+	public void update() {
+		
+		//Get ActionCommandEvent events
+		List<Event> actionEvents = getModel().getEvents(ActionCommandEvent.class);
+		
+		for(Event event:actionEvents){
+			ActionCommandEvent actionCommand = (ActionCommandEvent) event;
+			//verify if is it a DROP_BOMB command
+			if(actionCommand.getType()== ActionType.DROP_BOMB){
+
+				BombDropper dropper = (BombDropper) getModel().getComponent(BombDropper.class, 
+						actionCommand.getEntityId());
+				verifyAndDropBomb(dropper);				
+			}
 			
-	}
-	
-	/**
-	 * Explode remote controlled bombs
-	 */
-	public void explodeRemoteBombs(){
-		//TODO not implemented
+		}
+		
+		//TODO verificar TimeOutEvent de bombas que devem ser disparadas neste turno
+		
+		//TODO verificar InAnExplosionEvent de bombas que extão no range de outras bombas
+		// e devem ser disparadas por efeito cascata
 		
 	}
 	
 	/**
-	 * Drop a bomb. Called by a character
+	 * Drop a bomb
 	 */
-	public void dropBomb(BombDropper dropper){
+	public void verifyAndDropBomb(BombDropper dropper){
+		
 		//TODO verify if the character has not dropped too much bombs
 		
-		//create a bomb
-		Bomb bomb = new Bomb(dropper.getX(), dropper.getY(), dropper.getBombRange(), dropper);
-		bombs.add(bomb);
+		Entity bomb = createTimeBomb(dropper);
+		getModel().addEntity(bomb);
 	
-		//TODO set the right power
 		
 		//TODO if it is a romete controlled bomb, 
 		//make the link so the user can remote explod it
@@ -59,11 +70,51 @@ public class BombSystem implements System {
 	}
 	
 	/**
-	 * Get the list of bombs
+	 * Make a Bomb
+	 * 
+	 * @param dropper
 	 */
-	public List<Bomb> getBombs(){
-		return bombs;
+	private Entity createTimeBomb(BombDropper dropper){
+
+		// find dropper placement
+		CellPlacement dropperPlacement = (CellPlacement) getModel().getComponent(CellPlacement.class,
+				dropper.getEntityId());
+		
+		Entity bomb = new Entity();
+		//Dropper Owns the Bomb
+		bomb.setOnwnerId(dropper.getEntityId());
+
+		 /*  The Bomb Entity is made of this components
+		  * 	Explosive 
+		  * 	Placement 
+		  * 	Timer
+		  * components */
+
+		//create placement component
+		CellPlacement bombPlacement = new CellPlacement();	
+		bombPlacement.setCellX(dropperPlacement.getCellX());
+		bombPlacement.setCellY(dropperPlacement.getCellY());
+		
+		//create explosive component
+		Explosive bombExplosive = new Explosive();
+		//set the right power
+		bombExplosive.setPower(dropper.getBombRange());
+
+		//create Event for time over
+		TimeOverEvent triggeredBombEvent = new TimeOverEvent(); 
+		triggeredBombEvent.setAction(TRIGGERED_BOMB_ACTION);
+		
+		//create timer component
+		Timer bombTimer = new Timer(90, triggeredBombEvent);			
+		
+		bomb.addComponent(bombExplosive);
+		bomb.addComponent(bombPlacement);
+		bomb.addComponent(bombTimer);
+		
+		return bomb;
+		
 	}
+
 
 
 }

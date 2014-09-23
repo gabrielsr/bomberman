@@ -5,11 +5,10 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import br.unb.unbomber.component.Timer;
 import br.unb.unbomber.core.GameModel;
 import br.unb.unbomber.core.GameModelImpl;
-import br.unb.unbomber.core.TimeEffect;
-import br.unb.unbomber.core.TimeOverEvent;
-import br.unb.unbomber.core.TimeSystem;
+import br.unb.unbomber.event.TimeOverEvent;
 
 public class TimeSystemTestCase {
 	
@@ -27,8 +26,8 @@ public class TimeSystemTestCase {
 	public void countDownToThreeTest() {
 		
 		TimeOverEvent eventToBe = new TimeOverEvent();
-		TimeEffect timer = new TimeEffect(3, eventToBe);
-		model.addComponents(timer);
+		Timer timer = new Timer(3, eventToBe);
+		model.addComponent(timer);
 
 		system.update();
 		system.update();

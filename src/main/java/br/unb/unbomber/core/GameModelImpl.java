@@ -14,6 +14,8 @@ public class GameModelImpl implements GameModel {
 	
 	private static GameModel instance;
 	
+	private int uniqueIdSequence;
+	
 	public static void init(){
 		instance = new GameModelImpl(
 				new HashMap<Class<?>, List<Event>>(),
@@ -44,15 +46,20 @@ public class GameModelImpl implements GameModel {
 		return this.components.get(componentType);
 	}
 
-//	@Override
-//	public Component getAssociatedComponent(Component component,
-//			Class<Component> componentType) {
-//		List<Component> componentsOfType = this.components.get(componentType);
-//		
-//		for(Component component: componentsOfType){
-//			//TODO test if is associated and return it
-//		}
-//	}
+	@Override
+	public Component getComponent(Class<?> componentType,
+			int entityId) {
+		List<Component> componentsOfType = this.components.get(componentType);
+		
+		for(Component component: componentsOfType){
+			//return the first with the required id
+			if(component.getEntityId() == entityId){
+				return component;
+			}
+		}
+		//if none return null
+		return null;
+	}
 
 	@Override
 	public void addEvent(Event event) {
@@ -65,13 +72,30 @@ public class GameModelImpl implements GameModel {
 	}
 
 	@Override
-	public void addComponents(Component component) {
+	public void addComponent(Component component) {
 		List<Component> componentList = this.components.get(component.getClass());
 		if(componentList == null){
 			componentList = new ArrayList<Component>();
 			this.components.put(component.getClass(), componentList);
 		}
 		this.components.put(component.getClass(), componentList);
+	}
+
+	@Override
+	public void addEntity(Entity entity) {
+		entity.setEntityId(getUniqueId());
+		for(Component component:entity.getComponents()){
+			addComponent(component);
+		}
+	}
+
+	/**
+	 * Return a Unique Id each time it's called
+	 * 
+	 * @return uniqueId
+	 */
+	public int getUniqueId(){
+		return this.uniqueIdSequence++;
 	}
 
 }
