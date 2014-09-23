@@ -320,7 +320,9 @@ BCollisionATest:: Testa se a colisão foi realizada por B e A
 Movement Module
 ----------------
 
-Este módulo trata do movimento das entidades no grid.
+Este módulo trata do movimento das entidades no grid. 
+
+
 
 === Responsabilidades
 
@@ -343,9 +345,11 @@ MovementCommandEvent:: Comando de movimento de um character ou monster.
 
 === Testes
 
-walkVerticalLineTest:: Testa se a posição da celula do character é atualizada em um movimento por toda a vertical
+walkVerticalLineTest:: Testa se a posição da célula dda entidade é atualizada em um movimento por toda a vertical
 
-walkHorizontalLineTest:: Testa se a posição da celula do character é atualizada em um movimento por toda a horizontal
+walkHorizontalLineTest:: Testa se a posição da célula da entidade é atualizada em um movimento por toda a horizontal
+
+speedTest:: Testa se demora o número correto de turnos para percorrer uma célula.
 
 
 Action Module

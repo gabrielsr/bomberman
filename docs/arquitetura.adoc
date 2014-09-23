@@ -1,17 +1,17 @@
 == Arquitetura
 Utilizaremos o padrão de arquitetura Entity-component-system (ECS). 
 
-=== Entites
+=== Entities
 
 Representam um elemento do jogo. São containers de componentes.
 
 Iremos utilizar Entities para representar:
 
-** Character
-** Bomb
-** Hard/Soft Blocks
-** Monster
-** Powerup
+* Character
+* Bomb
+* Hard/Soft Blocks
+* Monster
+* Powerup
 
 === Components
 Os dados de um aspecto de um elemento que interage com o mundo do jogo.  São os TAD (tipos abstratos de dados dos Systems)
@@ -19,16 +19,16 @@ Os components são apenas dados, eles não contém a lógica do jogo. Components
 
 Exemplos Components possíveis no Bomberman :
 
-** CellPosition (para regras do jogo, posição no Grid)
-** ScreenPosition (para renderização, posição e orientação)
-** ExplosionBarrier (como interfere no caminho de uma explosão )
-** Explosion
-** Score
-** BombDropper
-** Health (quantas vidas)
-** Physical (posição, velocidade)
-** PowerupType
-** TimedEffect
+* CellPosition (para regras do jogo, posição no Grid)
+* ScreenPosition (para renderização, posição e orientação)
+* ExplosionBarrier (como interfere no caminho de uma explosão )
+* Explosion
+* Score
+* BombDropper
+* Health (quantas vidas)
+* Physical (posição, velocidade)
+* PowerupType
+* TimedEffect
 
 
 === Events:
@@ -79,7 +79,6 @@ O Objeto Engine une todo o resto. Possui duas responsabilidades principais:
 
 * Criar o GameModel
 * Gerenciar o conjunto de Systems
-
 
 
 === Diretivas da Arquitetura
