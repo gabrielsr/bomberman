@@ -20,7 +20,7 @@ public class TimeSystem extends BaseSystem {
 	
 	@Override
 	public void update() {
-		List<Component> timedEffects = getModel().getComponents(Timer.class);
+		List<Component> timedEffects = getEntityManager().getComponents(Timer.class);
 		
 		for (Component component : timedEffects) {
 			Timer timeEffect = (Timer) component;
@@ -29,7 +29,7 @@ public class TimeSystem extends BaseSystem {
 			 * Add a Event when the the time is up
 			 */
 			if(timeEffect.isOver()){
-				getModel().addEvent(timeEffect.getEvent());
+				getEntityManager().addEvent(timeEffect.getEvent());
 			}
 		}
 

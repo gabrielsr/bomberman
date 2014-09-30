@@ -32,14 +32,14 @@ public class BombSystem extends BaseSystem {
 	public void update() {
 		
 		//Get ActionCommandEvent events
-		List<Event> actionEvents = getModel().getEvents(ActionCommandEvent.class);
+		List<Event> actionEvents = getEntityManager().getEvents(ActionCommandEvent.class);
 		
 		for(Event event:actionEvents){
 			ActionCommandEvent actionCommand = (ActionCommandEvent) event;
 			//verify if is it a DROP_BOMB command
 			if(actionCommand.getType()== ActionType.DROP_BOMB){
 
-				BombDropper dropper = (BombDropper) getModel().getComponent(BombDropper.class, 
+				BombDropper dropper = (BombDropper) getEntityManager().getComponent(BombDropper.class, 
 						actionCommand.getEntityId());
 				verifyAndDropBomb(dropper);				
 			}
@@ -61,7 +61,7 @@ public class BombSystem extends BaseSystem {
 		//TODO verify if the character has not dropped too much bombs
 		
 		Entity bomb = createTimeBomb(dropper);
-		getModel().addEntity(bomb);
+		getEntityManager().addEntity(bomb);
 	
 		
 		//TODO if it is a romete controlled bomb, 
@@ -82,7 +82,7 @@ public class BombSystem extends BaseSystem {
 		  * components */
 		
 		// find dropper placement
-		CellPlacement dropperPlacement = (CellPlacement) getModel().getComponent(CellPlacement.class,
+		CellPlacement dropperPlacement = (CellPlacement) getEntityManager().getComponent(CellPlacement.class,
 				dropper.getEntityId());
 		
 		Entity bomb = new Entity();
