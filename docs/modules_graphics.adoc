@@ -1,6 +1,25 @@
 
 Módulo Gráfico
 ===============
+== GraphicController
+
+Entidades estão associados a Sprites
+Face Direction:: characters e monstes tem sprites segundo a direção de seu último movimento.
+
+Animations:: Animações são sequências de sprites que são exibidas.Eventos podem disparar animações
+		
+Walk animation:: Sprites são alternadas para dar impressão de caminhar. Aplicáveis a Character e Moster
+
+Explosion:: Meio e fronteria de explosão - Uma explosão com força 1 (a última da propagação) tem sprite diferente. A sprite é rotacionada segundo a direção da propagação
+
+Win:: comemoração. 
+
+Destructin Animation:: Entidades seguintes entidades possuem animação quando são destruidas:
+Characters, Monsters, Soft Blocks e Power Ups.
+	
+Invencible Filter :: Charactes e Monsters aparecem claros enquanto invencíveis. Alterna entre claro e normal a cada 3 turnos.
+Bomb Pulse :: Time Bombs alternam entre 3 sprites (de tamanhos um pouco diferentes) enquanto estão contando o tempo antes de disparar explosão.
+
 
 ==Renderizando
 
@@ -33,21 +52,4 @@ float opacity = layer.getOpacity();
 boolean isVisible = layer.isVisible();
 
 
-== GraphicController
-Entidades estão associados a Sprites
-Face Direction - Characters e Monstes tem sprites segundo a direção de seu último movimento.
-
-Animations:: Animações são sequências de sprites que são exibidas.Eventos podem disparar animações
-		
-Walk animation:: Sprites são alternadas para dar impressão de caminhar. Aplicáveis a Character e Moster
-
-Explosion:: Meio e fronteria de explosão - Uma explosão com força 1 (a última da propagação) tem sprite diferente. A sprite é rotacionada segundo a direção da propagação
-
-Win:: comemoração. 
-
-Destructin Animation:: Entidades seguintes entidades possuem animação quando são destruidas:
-Characters, Monsters, Soft Blocks e Power Ups.
-	
-Invencible Filter :: Charactes e Monsters aparecem claros enquanto invencíveis. Alterna entre claro e normal a cada 3 turnos.
-Bomb Pulse :: Time Bombs alternam entre 3 sprites (de tamanhos um pouco diferentes) enquanto estão contando o tempo antes de disparar explosão.
 
