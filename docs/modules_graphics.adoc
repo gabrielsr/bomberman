@@ -1,6 +1,38 @@
 
 Módulo Gráfico
 ===============
+
+==Renderizando
+
+== Maps
+	Usaremos Maps para renderizar nosso cenários.
+
+Properties::
+Properties of maps, layers or objects are represented by MapProperties (source).
+
+
+== Layers
+Constituimos o nosso mapa de camadas. A primeira contem o fundo. A segunda contem os blocos. A terceira os personagens. 
+A quarta podem ter elementos do cenário que são superiores, como cobertura. 
+
+Layers within a map are ordered and indexed, starting by index 0. You can access the layers of a map like this:
+
+MapLayer layer = map.getLayers().get(0);
+
+You can also search a layer by name
+
+MapLayer layer = map.getLayers().get("my-layer");
+
+These getter methods will always return a MapLayer. Some layers may be specialized and offer more functionality, in which case you can simply cast:
+
+TiledMapTileLayer tiledLayer = (TiledMapTileLayer)map.getLayers().get(0);
+
+Layer attributes
+String name = layer.getName();
+float opacity = layer.getOpacity();
+boolean isVisible = layer.isVisible();
+
+
 == GraphicController
 Entidades estão associados a Sprites
 Face Direction - Characters e Monstes tem sprites segundo a direção de seu último movimento.
