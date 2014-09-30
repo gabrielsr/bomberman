@@ -2,20 +2,26 @@
 
 = Orientação a Objetos
 
-A orientação a objetos é um paradígma de programação. Um paradígma de programação é um estilo fundamental de estruturar um programa. Na Orientação a Objetos tentamos traduzir em código os objetos do mundo real e suas interações diretamente em código. Também criamos entidades abstratas, como "MovetSystem", uma entidade que controla os movimentos dos personagens em um jogo.
+A orientação a objetos é um paradígma de programação. Um paradígma de programação 
+é um estilo fundamental de estruturar um programa. Na Orientação a Objetos tentamos 
+traduzir em código os objetos do mundo real e suas interações diretamente em código.
+Também criamos entidades abstratas, como "MovementSystem", uma entidade que controla 
+os movimentos dos personagens em um jogo.
 
-Orientação a Objetos é útil porque ajuda a criar código que é manutenível, código que é
+Orientação a Objetos é útil porque ajuda a criar código que é manutenível,
 compreensível, adaptável e extensível. 
 
-Orientação a Objetos ajuda ainda a criar código reutilizável seguinto o princípio DRY (Don't Repeat Yourself):escreva o código uma vez e então reutilize ele ao invés de copiar e colar me diferentes pontos.
+Orientação a Objetos ajuda ainda a criar código reutilizável seguinto o princípio DRY 
+(Don't Repeat Yourself): escreva o código uma vez e então reutilize ele ao invés de copiar 
+e colar em diferentes pontos.
 
 == Como Aplicar
 
 Para aplicar a orientação a objetos em uma problema, primeiro tente descrevê-lo
 
-// descrição do bomberman
 
-Identifique na descrição as partes independêntes, que tem estado e comportamento. Estas partes são os primeiros candidatos a virarem objetos no jogo.
+Identifique na descrição as partes independêntes, que tem estado e comportamento.
+ Estas partes são os primeiros candidatos a virarem objetos no jogo.
 
 
 Podemos identificar no bomberman por exemplo o objeto Personagem (Em inglês Character):
@@ -42,15 +48,22 @@ BombSystem
 Uma classe é o tipo de um objeto. Uma classe é constituída de atributos e métodos.
 
 == Objetos
-Um objeto é uma instancia de uma classe. Os objetos são criados enquanto executamos um pograma, através do operador new. Podemos ter diversas instâncias de uma mesma classe em memória, cada uma contendo valores diferentes em seus atributos. Por exemplo, no bomberman, diferentes persongens poderiam ter diferentes posições na tela. O comportamento do objeto também pode variar de intância para instância de uma mesma classe se o estes dependerem do estado da classe. Por exemplo o método caminhar() poderia modificar mais ou menos a posição de um personagem dependendo do seu atributo velocidade.
+Um objeto é uma instancia de uma classe. Os objetos são criados enquanto executamos um pograma, através do operador new. 
+Podemos ter diversas instâncias de uma mesma classe em memória, cada uma contendo valores diferentes em seus atributos. 
+Por exemplo, no bomberman, diferentes persongens poderiam ter diferentes posições na tela.
+O comportamento do objeto também pode variar de intância para instância de uma mesma classe se o estes
+ dependerem do estado da classe. Por exemplo o método caminhar() poderia modificar mais ou menos a posição de um personagem
+ dependendo do seu atributo velocidade.
 
 
 == Atributos
-Representam carterísticas ou o estados do objeto. São ou dados que um objeto armazena em memória em suas variáveis para acessos futuros.
+Representam carterísticas ou o estados do objeto. São ou dados que um objeto armazena em memória em suas variáveis para acessos
+futuros.
 
 
 == Métodos
-São comportamentos ou ações que um objeto pode desempenhar em um sistema. Frequentemento os métodos alteram o estado do objeto, ou seja, seus atributos.
+São comportamentos ou ações que um objeto pode desempenhar em um sistema. Frequentemento os métodos alteram o estado do objeto, 
+ou seja, seus atributos.
 
 
 
@@ -66,9 +79,12 @@ Um objeto pode criar outros objetos. Ou receber a referência do objeto como par
 
 == Interface
 
-Interfaces são declarações do que uma classe pode fazer. Mas a interface não diz nada de 'como' ela irá fazer. Uma interface pode ser implementada por qualquer classe, não pependendo de qual hierarquia esta herda.
+Interfaces são declarações do que uma classe pode fazer. Mas a interface não diz nada de 'como' ela irá fazer.
+Uma interface pode ser implementada por qualquer classe, não pependendo de qual hierarquia esta herda.
 
-Duas classes com comportamentos diferentes podem possuir interfaces Iguais e uma terceira classe pode utilizar as duas sem conhecer as Implementações da classe, apenas suas interfaces:
+Duas classes com comportamentos diferentes podem possuir interfaces iguais e uma terceira classe pode utilizar as duas 
+sem conhecer as Implementações da classe, apenas suas interfaces:
+
 Interface  MapElement {
   draw()
 }
@@ -82,42 +98,36 @@ MapDrawer{
 }
 
 Outra forma de se pensar em interface é como um contrato entre quem utiliza uma classe e quem a implementa. 
-
-//Ex: Utilizando uma classe
-
-//Ex: Implementando uma classe
-
-Em um programa orientado a objetos devemos favorecer a utilização de interfaces pois assim poderemos trocar a implementação mantendo o serviço.
+Em um programa orientado a objetos devemos favorecer a utilização de interfaces pois assim poderemos trocar 
+a implementação mantendo o serviço.
 
 
 == Encapsulamento
 
-
-Uma classe possui uma interface
-
-
-
 == Polimorfismo
 
-Com polimorfismo um código cliente pode utilizar uma interface sem conhecer sua implementação. O sistema do bomberman que trata das bombas poderia tratar da explosão de diversos elementos do jogo sem conhecer cada um deles. O polimorfismo é a principal razão para a existência de interfaces em línguagens orientadas a objetos.
+Com polimorfismo um código cliente pode utilizar uma interface sem conhecer sua implementação. 
+O sistema do bomberman que trata de vida de colisão poderia tratar a colisão de diversos elementos do jogo
+sem conhecer cada um deles, porque cada elemento possui um *placement* que é o que importa para o sistema de colisão.
+O polimorfismo é a principal razão para a existência de interfaces em línguagens orientadas a objetos.
 
 ExplodeSystem
 
-	Wall.explode()
-	Enemy.explode()
+	bombEndity.getPlacement()
+	monsterEndity.getPlacement()
 
+
+O polimorfismo permite o desenvolvedor criar componentes “plugáveis”. Por exemplo se todos os sistemas do jogo
+implementam uma mesma interface e o game loop chama cada sistema uma vez por turno através desta interface, 
+ao criar um novo sistema não precisamos modificar o game loop, apenas adicionar o no sistema a coleção de 
+sistemas que são executados.
 
 == Boas práticas de programação Orientada a Objetos
 
 Programar para interface, não implementações
 
 
-
-
-
 == Associação
-
-
 
 
 == Método Main
@@ -150,19 +160,21 @@ include::src\impl\java\br\unb\unbomber\entity\Blocks.java[]
 
 Classes são escritas em arquivos texto nomeados com o mesmo nome da classe e terminados em .java.
 
-Classes abstratas são classes que não podem ser instanciadas diretamente e devem ser extendidas por outras classes. Classes concretas em oposição são classes que podem ser extendidas.
-
+Classes abstratas são classes que não podem ser instanciadas diretamente e devem ser extendidas por outras classes. 
+Classes concretas em oposição são classes que podem ser instanciadas.
 
 == Pacotes
-As classes residem em pacotes. Os pacotes são um recurso da linguagem Java para organizar programas. Pacotes são declarados convencionalmente em uma notação de domínio reverso e na primeira línha de código do programa.
+As classes residem em pacotes. Os pacotes são um recurso da linguagem Java para organizar programas. 
+Pacotes são declarados convencionalmente em uma notação de domínio reverso e na primeira línha de código do programa.
 
 == Import
-Para compor um programa com diversas classes, umas devem referenciar as outras. Para utilizarmos classes que estão fora do pacote precisamos primeiro importar estas classes.
-
+Para compor um programa com diversas classes, umas devem referenciar as outras. 
+Para utilizarmos classes que estão fora do pacote precisamos primeiro importar estas classes.
 
 
 == Variáveis e Tipos
-Variáveis são regiões na memória que se pode armazenar dados para utilização futura. Cada variável possui um identificador e um tipo e devem ser inicializados antes de ser utilizados.
+Variáveis são regiões na memória que se pode armazenar dados para utilização futura.
+Cada variável possui um identificador e um tipo e devem ser inicializados antes de ser utilizados.
 
 Os tipos em Java são divididos em primitivos e de referência.
 Os tipos primitivos são:
@@ -170,7 +182,6 @@ boolean, byte, char, short, int, long, float and double.
 
 
 Todos os outros tipos são tipos de referência.
-
 Tipos primitivos armazenam seus dados de forma independente
 
 [source,java,numbered]
@@ -189,7 +200,11 @@ System.out.println(b);
 Em oposição, tipos de referência tem um comportamento diferente. 
 Programadores C irão achar o comportamento familiar ao comportamento de ponteiros em C.
 
-Classes em Java são tipos de referência. Podemos utilizar o operador new para criar novos Objetos a partir de uma classe. Dizemos que cada Objeto é uma instancia de uma classe pois possui seus próprios valores de atribuitos. Em uma determinada partida de bomberman cada personagem seria representado por uma instancia da classe personagem, pois cada um poderia ter diferentes características, como posição e número de pontos ganhos. A classe é uma forma a partir da qual se criam objetos.
+Classes em Java são tipos de referência. Podemos utilizar o operador new para criar novos Objetos a partir de uma classe.
+Dizemos que cada Objeto é uma instancia de uma classe pois possui seus próprios valores de atribuitos. 
+Em uma determinada partida de bomberman cada personagem seria representado por uma instancia da classe personagem, 
+pois cada um poderia ter diferentes características, como posição e número de pontos ganhos.
+ A classe é uma forma a partir da qual se criam objetos.
 
 
 [source,java,numbered]
@@ -205,7 +220,8 @@ System.out.println(b);
 ----
 
 == Métodos
-Semelhante a funções em C, descrevem o comportamento de um Objeto. Um método é constituído de uma assinatura e de um corpo. Na assinatura  temos o identificador do método, os seus parâmetros e seu tipo de retorno.
+Semelhante a funções em C, descrevem o comportamento de um Objeto. Um método é constituído de uma assinatura e de um corpo.
+Na assinatura  temos o identificador do método, os seus parâmetros e seu tipo de retorno.
 
 O Corpo é um bloco de código delimitado por {} que contém o cõdigo a ser executado com o método for chamado.
 
@@ -213,8 +229,9 @@ Um método pode ter ou não retorno. Quando o método não tem retorno ele seu t
 
 
 == Atributos
-Atributos são as variáveis que são declaradas fora de métodos, seu escopo é toda a classe e podem ser referenciadas em qualquer método. Muitas vezes atributos armazenam dados referentes a características da classe a que se refere. Por exemplo, uma classe personagem poderia ter um atributo velocidade que armazena a velocidade máxima que um personagem pode ter.
-
+Atributos são as variáveis que são declaradas fora de métodos, seu escopo é toda a classe e podem ser referenciadas
+em qualquer método. Muitas vezes atributos armazenam dados referentes a características da classe a que se refere. 
+Por exemplo, uma classe personagem poderia ter um atributo velocidade que armazena a velocidade máxima que um personagem pode ter.
 Os atributos muitas vezes modificam o comportamento de um objeto. 
 
 [source,java,numbered]
@@ -225,7 +242,8 @@ include::src\impl\java\br\unb\unbomber\entity\Blocks.java[]
 == Controle
 
 === Tipo e Operações Booleanas
-Java possui um tipo boleano que pode ser true ou false. As seguintes operações são operações boleanas o que quer dizer que elas retornam um valor booleano true ou false.
+Java possui um tipo boleano que pode ser true ou false. As seguintes operações são operações boleanas o que quer dizer 
+que elas retornam um valor booleano true ou false.
 
 Operadores Bin
 
@@ -265,7 +283,8 @@ Relational operators
 
 === Controle
 
-Java possui decisões de controle semelhantes a C. Mas diferente de C java possui tipos boleanos{true, false} e não aceita inteiros em decisões de controle.
+Java possui decisões de controle semelhantes a C. Mas diferente de C java possui tipos boleanos{true, false} e não aceita 
+inteiros em decisões de controle.
 
 
 if/else
@@ -282,15 +301,15 @@ if(a){} //isto é possível em Java
 ----
 
 
+=== while
 
-while
-
-for
+=== for
 
 
 
 == Herança
-O objetivo da herança é favorecer o reúso de código. Com herança podemos extender o comportamento de determinadas classes sem ter que escrever uma nova.
+O objetivo da herança é favorecer o reúso de código. Com herança podemos extender o comportamento de determinadas 
+classes sem ter que escrever uma nova.
 
 
 // Exemplo de 
@@ -299,6 +318,7 @@ O objetivo da herança é favorecer o reúso de código. Com herança podemos ex
 Bomb{
   explode(){ ...}
 }
+
 RemoteExplodedBomb extends Bomb{
   remoteExplode(){}
 
@@ -319,270 +339,19 @@ Como aplicar no bomberman:
 
 == Encapsulamento
 
-Encapsulamento é o princípio de esconder os detalhes, isto é, a implementação (o funcionamento interno) de um objeto ou módulo é escondido do resto do programa. Encapsulamento ajuda a criar código com baixo acoplamento (desta forma, mais fácil de ser reutilizado). Quando você favorece a utilização de interfaces ao invés de implo
+Encapsulamento é o princípio de esconder os detalhes, isto é, a implementação (o funcionamento interno) de um objeto ou módulo 
+é escondido do resto do programa. Encapsulamento ajuda a criar código com baixo acoplamento (desta forma, mais fácil de ser reutilizado). 
+Quando você favorece a utilização de interfaces ao invés de implementação.
 
-É favorecido quando utilizamos métodos getters e setters para acessar atributos de uma classe
+É favorecido quando utilizamos métodos getters e setters para acessar atributos de uma classe.
+
+
+
 
 = Patterns
 
 = Frameworks
 
-
-
-
-
 == Padrôes de Programação
-
-
-
-== Polimorfismo
-Permite o desenvolvedor criar componentes “plugáveis”. Ex:
-Um novo inimígo no bomberman, que se move mais lentamente, por exemplo, mas que nunca morre.
-Se as diferentes características dessa classe não estaria na classe em si, para se criar um novo personagem seria necessário criar if's e switch/cases ao longo do código.
-
-
-= Ambiente de Desenvolvimento
-	== SCM 
-	SCM (Sistema de Controle de Versão) ou (VCS) Version control systems são ferramentas utilizadas para compartilhamento e versionamento de artefatos entre equipes. Estes artefatos são código fonte, documentação, diagramas UML, scripts de banco de dados, etc.
-
-	A utilização de tais ferramentas é  uma prática muito comum nos ambiente de desenvolvimento coorporativo e opensource. Está é muito possivelmente depois de compiladores e editores de texto a ferramenta mais utilizada por programadores. 
-
-	O SCM registra as mudanças realizadas em um conjunto de arquivo e permite recuperar versões anteriores do arquivo e acompanhar as modificações em cada um dos arquivos.
-
-== GIT
-
-	git init
-
-	git clone
-
-
-
-	git commit 
-		cada commit representa um estado do projeto. Como salvar uma fase em um jogo.
-
-	git add
-		Marca os arquivos para serem adicionados no próximo commit
-
-	git log
-		Visualiza os commits mais recentes
-
-	git pull
-		Atualiza o repositório local
-
-	git push
-		Atualiza o repositório remoto
-
-
-		git remote add origin <servidor>
-
-
-== Workflow no nosso projeto:
-
-	Crie uma pasta para conter seus repositórios git
-	c:\dev\git
-
-	Clonando o repositório para a sua máquina
-	$cd c:\dev\git
-	$git clone http
-
-	Agora você pode importar no eclipse.
-
-	
-	Crie uma branch para você trabalhar.
-	$git branch
-
-
-
-	
-
-	Comite uma pequena modificação, por exemplo, um teste que você implementou e passou.
-	
-	Primeiro vemos o que foi modificado
-	$git status
-
-
-	Selecionar arquivos (adicionando snapshots deles na sua área de seleção.)
-	$git add 
-
-	Vamos commitar o que é relevantev 
-	
-	$git commit -m "Implementando Teste X"
-
-
-	Obtenha do servidor as mudanças mais recentes.
-	$git pull
-
-
-	Você terminou de implementar uma funcionalidade
-	$git merge
-	$git push
-
-	Sua feature passará pelo processo de aprovação e hopefully está presente no master e será publicada no próximo nighty
-
-	Git Hell
-	I see git conflits
-	merge
-
-
-
-
-Os três estados
-
-	Modificado (modified)
-	Preparado (staged)
-	Consolidado (commited)
-
-== Github
-
-
-== IDE
-	IDE ( Integrated Development Environment) é um ambiente de desenvolvimento integrado utilzado por equipes de desenvolvimento para desenvolver um determinado projeto de sofware. Esses ambientes oferecem normalmente Editor de Texto com funcionalidades úteis para digitar código fonte, como Highlight, autocompletar sensível ao contexto, integração com compiladores, debuggers, configurações de projetos e etc.
-
-	IDEs muito utilizadas para desenvolvimento Java são: Eclipse, Netbens, IntelliJ IDEA.
-
-
-== Eclipse
-
-	É uma IDE opensource, uma das mais avançadas e populares do mundo, que se popularizou no ambiente de desenvolvimento Java mas que hoje conta com versões para diversas 0linguanges/plataformas. O Eclipse facilitar a atividade de codificação - oferecendo funcionalidade de auto-complete, busca de referências à métodos, classes e variáveis, auxílio para renomear classes e métodos.
-
-	É uma ferramenta muito extensível, possuindo integrado um ambiente de download de plugins que podem extender suas funcionalidades. Algumas empresas oferecem IDEs baseadas no Eclipse para desenvolvimento em plataformas proprietárias ou patrocinadas. O Google disponibiliza um pacote com Eclipse para desenvolvimento para Android, por exemplo. 
-
-
-== Plataforma
-
-	Muito dificilmente hoje um programador inicia um projeto apenas com um editor de texto e um compilador. Normalmente se utiliza muita coisa de suporte que aumentam a produtividade a médio prazo mas são muitas vezes mais difíceis de se dominar do que uma linguagem de programação em si. 
-	
-	Quando falamos em desenvolvimento de software que tem por objetivo ser utilizado por uma grande massa de usuários,  em meio governamental, privado e/ou livre, normalmetne pensamos em que "plataforma" seria melhor desenvolver este projeto. Plataforma nesse caso se refere ao conjunto de tecnologias utilizadas para desenvolver, testar e distibuir a aplicação e que dão suporte a estas. A linguagem de programação utilizada é um componente importante e normalmente é o "carro chefe" da plataforma, mas não é o único componente. Por exemplo: quando alguém diz que irá desenvolver um sistema web, digamos,  de matrícula de uma universidade, "em Java" normalmente esta pessoa se refere a plataforma Java ao invés de apenas a línguagem Java. Isto porque além de escrever código fonte em Java ele irá escrever inúmeros arquivos em xml e outras linguagens e utilizar uma determinado conjunto de ferramentas do "mundo Java". Se por outro lado ele decidisse utilizar a plataforma .net ele não seria apenas a línguagem de programação que iria variar mas também componentes reutilizaveis, servidor de aplicação, etc.  Se por outro lado resolvesse desenvolver a mesma aplicação, mas para "plataforma Android" a línguagem de programação utilizada poderia ser a mesma, Java, mas se utilizaria outras ferramentas de suporte.
-
-
-== Gerencia de Dependências em Java
-	Uma das grandes vantagens atuais da plataforma Java nos dias de hoje é a disponibilidade de uma extensa quantidade de bibliotecas de software disponíveis gratuitamente, em projetos open source ou por forcededores que licenciam bibliotecas. A utilização de tais bibliotecas podem diminuir o tempo e baratear em muito o desenvolvimento de novos projetos. Algumas bibliotecas são distribuidas junto com o JRE (Java Runtime Edition) e estão disponíveis para qualquer pessoa que possua Java instalado em seu dispositivo. Algumas outras bibliotecas caso utilizadas precisam ser distribuidas junto com a aplicação (tipo runtime). Algumas são necessárias em tempo de compilação (considera-se que o usuário terá as dependências em sua plataforma no momento da execução. Ex: dependências nativas Android). Algumas outras serão necessárias apenas quando se executar os testes da aplicação (tipo test).
-	As bibliotecas Java normalmente são distribuidas em arquivos compactados com a extensão ".jar".
-
-
-
-
-== Gradle / Repo Maven
-
-	Para projetos complexos em Java, normalmente se utilzia dezenas de bibliotecas forncedidas por terceiros. Cada biblioteca por sua vez costuma depender de outras bibliotecas. Nesse cenário é fácil chegar a uma situação em que é muito complexo gerenciar todas as dependências de um programa. Por isso é muito comum utilizar sistemas gerenciadores de build e dependências. Esses sistemas são capazes de baixar as bibliotecas das quais um sistema depende antes de compilar e empacotar uma aplicação. Isso facilita em muito o processo de build de um sistema.
-	Uma outras grande vantagem de tais sistema é que normalmente utilizam arquivos texto de configurações que especificam as dependências de tais sistemas. Estes arquivos são versionados juntamente com o restante do código da aplicação permitindo controle e rastreabilidade. 
-
-
-
-	Plugin Java
-
-	Gradle expects to find your production source code under src/main/java and your test source code under src/test/java. In addition, any files under src/main/resources will be included in the JAR file as resources, and any files under src/test/resources will be included in the classpath used to run the tests. All output files are created under the build directory, with the JAR file ending up in the build/libs directory.
- 	
- 	The Java plugin adds quite a few tasks to your project. The most commonly used task is the build task, which does a full build of the project. When you run gradle build, Gradle will compile and test your code, and create a JAR file containing your main classes and resources:
-
-
-clean
-
-    Deletes the build directory, removing all built files.
-assemble
-
-    Compiles and jars your code, but does not run the unit tests. Other plugins add more artifacts to this task. For example, if you use the War plugin, this task will also build the WAR file for your project. 
-check
-
-    Compiles and tests your code. Other plugins add more checks to this task. For example, if you use the checkstyle plugin, this task will also run Checkstyle against your source code. 
-
-
-External dependencies
-
-Usually, a Java project will have some dependencies on external JAR files. To reference these JAR files in the project, you need to tell Gradle where to find them. In Gradle, artifacts such as JAR files, are located in a repository. A repository can be used for fetching the dependencies of a project, or for publishing the artifacts of a project, or both. For this example, we will use the public Maven repository:
-
-Example 7.3. Adding Maven repository
-
-build.gradle
-
-repositories {
-    mavenCentral()
-}
-
-
-
-Get's add some dependencies. Here, we will declare that our production classes have a compile-time dependency on commons collections, and that our test classes have a compile-time dependency on junit:
-
-Example 7.4. Adding dependencies
-
-build.gradle
-
-dependencies {
-    compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
-    testCompile group: 'junit', name: 'junit', version: '4.+'
-}
-
-
-== Publishing the JAR file
-
-Usually the JAR file needs to be published somewhere. To do this, you need to tell Gradle where to publish the JAR file. In Gradle, artifacts such as JAR files are published to repositories. In our sample, we will publish to a local directory. You can also publish to a remote location, or multiple locations.
-
-Example 7.7. Publishing the JAR file
-
-build.gradle
-
-uploadArchives {
-    repositories {
-       flatDir {
-           dirs 'repos'
-       }
-    }
-}
-
-To publish the JAR file, run gradle uploadArchives.
-
-// TODO  repo jars do projeto
-
-
- == Multi-project Java build
-
-Now let's look at a typical multi-project build. Below is the layout for the project:
-
-Example 7.10. Multi-project build - hierarchical layout
-
-Build layout
-
-multiproject/
-  api/
-  services/webservice/
-  shared/
-
-== Compilador / Interpretador / JIT
-	Até as primeira metade dos anos 2000 se falava muito em linguagens interprestada e linguagens compiladas. E que linguagens interprestada eram executadas em um interpretador equanto as compiladas eram processadas pelo compilador que gerava código nativo que era diretamente executado na máquina. Nos últimos anos esta visão ficou mais complicada:
-		Muitas linguagens possuem compiladores e interprestadores para elas e podem ser interpretadas ou compiladas.
-		Existem máquinas virtuais que executam código compilado para máquinas abstratas (bytecodes) (JVM, .Net, Flashplayer)
-		Existem compiladores JIT (Just in time) que compilam código ou bytecodes em tempo de execução do programa para otimizar sua execução. Ex: JVM (bytecodes Java), Chrome V8 (Javascript)
-
-
-== Bug Tacker
-
-= JIRA
-
-
-== Base de Conhecimento
-
-= WIKI
-
-
-== Integração Contínua
-= Jenkins
-
-== Análise Estática de Código
-
-= Sonar
-
-
-== Processos
-
-= Deploy 
-
-== Deploy Automatizado
-
-
-= Suporte ao Usuário / Rastreamento de Bugs
-
-= Controle de Versões
-
-
 
 
