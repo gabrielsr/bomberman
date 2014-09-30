@@ -21,7 +21,8 @@ Invencible Filter :: Charactes e Monsters aparecem claros enquanto invencíveis.
 Bomb Pulse :: Time Bombs alternam entre 3 sprites (de tamanhos um pouco diferentes) enquanto estão contando o tempo antes de disparar explosão.
 
 
-==Renderizando
+Renderizando
+------------
 
 == Maps
 	Usaremos Maps para renderizar nosso cenários.
