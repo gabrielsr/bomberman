@@ -5,7 +5,7 @@ import java.util.List;
 import br.unb.unbomber.component.Timer;
 import br.unb.unbomber.core.BaseSystem;
 import br.unb.unbomber.core.Component;
-import br.unb.unbomber.core.GameModel;
+import br.unb.unbomber.core.EntityManager;
 
 public class TimeSystem extends BaseSystem {
 
@@ -13,7 +13,7 @@ public class TimeSystem extends BaseSystem {
 		super();
 	}
 	
-	public TimeSystem(GameModel model) {
+	public TimeSystem(EntityManager model) {
 		super(model);
 		
 	}

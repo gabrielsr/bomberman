@@ -3,7 +3,7 @@ package br.unb.unbomber.core;
 
 abstract public class BaseSystem implements System{
 
-	private GameModel model;
+	private EntityManager model;
 	
 	
 	/*
@@ -14,17 +14,17 @@ abstract public class BaseSystem implements System{
 	 * Constructor that gets the default Game Model
 	 */
 	public BaseSystem(){
-		model = GameModelImpl.getInstance();
+		model = EntitySystemImpl.getInstance();
 	}
 
 	/**
 	* Constructor that gets a custom Game Model
 	*/
-	public BaseSystem(GameModel model){
+	public BaseSystem(EntityManager model){
 		this.model = model;
 	}
 	
-	protected GameModel getModel(){
+	protected EntityManager getModel(){
 		return model;
 	}
 

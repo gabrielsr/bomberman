@@ -6,29 +6,28 @@ import java.util.List;
 import java.util.Map;
 
 
-public class GameModelImpl implements GameModel {
+public class EntitySystemImpl implements EntityManager {
 
 	private Map<Class<?>, List<Event>> events;
 	
 	private Map<Class<?>, List<Component>> components;
 	
-	private static GameModel instance;
+	private static EntityManager instance;
 	
 	private int uniqueIdSequence;
 	
 	public static void init(){
-		instance = new GameModelImpl(
+		instance = new EntitySystemImpl(
 				new HashMap<Class<?>, List<Event>>(),
 				new HashMap<Class<?>, List<Component>>());
-		
 	}
 	
-	private GameModelImpl(Map<Class<?>, List<Event>> events, Map<Class<?>,List<Component>> components){
+	private EntitySystemImpl(Map<Class<?>, List<Event>> events, Map<Class<?>,List<Component>> components){
 		this.events = events;
 		this.components = components;
 	}
 	
-	public static GameModel getInstance(){
+	public static EntityManager getInstance(){
 		if(instance==null){
 			init();
 		}
@@ -50,6 +49,11 @@ public class GameModelImpl implements GameModel {
 	public Component getComponent(Class<?> componentType,
 			int entityId) {
 		List<Component> componentsOfType = this.components.get(componentType);
+		
+		//Should it throw an Exception??
+		if(componentsOfType==null){
+			return null;
+		}
 		
 		for(Component component: componentsOfType){
 			//return the first with the required id
@@ -78,7 +82,7 @@ public class GameModelImpl implements GameModel {
 			componentList = new ArrayList<Component>();
 			this.components.put(component.getClass(), componentList);
 		}
-		this.components.put(component.getClass(), componentList);
+		componentList.add(component);
 	}
 
 	@Override

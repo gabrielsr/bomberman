@@ -8,26 +8,55 @@
 	"buffers":
 	[
 		{
-			"file": "Requirements",
+			"file": "docs/modules_simulation.adoc",
 			"settings":
 			{
-				"buffer_size": 9513,
+				"buffer_size": 13399,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "docs/img/snes-mult-layer.png",
+			"contents": "Notas para Os grupos\n\n\nExplosão (Grupo 3 e 8)\n------------------------\n\n\n\n\n",
 			"settings":
 			{
-				"buffer_size": 386047,
-				"line_ending": "Unix"
+				"buffer_size": 75,
+				"line_ending": "Windows",
+				"name": "Notas para Os grupos"
 			}
 		},
 		{
-			"file": "trabalho_parte1.adoc",
+			"file": "docs/arquitetura.adoc",
 			"settings":
 			{
-				"buffer_size": 6442,
+				"buffer_size": 3356,
+				"line_ending": "Windows",
+				"name": "== Arquitetura"
+			}
+		},
+		{
+			"file": "docs/trabalho_parte1.adoc",
+			"settings":
+			{
+				"buffer_size": 2537,
+				"line_ending": "Windows",
+				"name": "Departamento de Ciência da Computação – Universida"
+			}
+		},
+		{
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "",
+			"file": "docs/modules.adoc",
+			"file_size": 6079,
+			"file_write_time": 130558029620634067,
+			"settings":
+			{
+				"buffer_size": 0,
 				"line_ending": "Windows"
 			}
 		}
@@ -56,6 +85,16 @@
 	},
 	"file_history":
 	[
+		"/D/bomber/git/bomberman/docs/controle_qualidade.adoc",
+		"/D/bomber/git/bomberman/O Jogo",
+		"/D/bomber/git/bomberman/modules.adoc",
+		"/D/bomber/git/bomberman/docs/modules.adoc",
+		"/D/bomber/git/bomberman/trabalho_parte1.adoc",
+		"/D/bomber/git/bomberman/docs/module_graphics.adoc",
+		"/D/bomber/git/bomberman/modules_simulation.adoc",
+		"/D/bomber/git/bomberman/Requirements",
+		"/D/bomber/git/bomberman/docs/img/snes-mult-layer.png",
+		"/D/bomber/git/bomberman/bomberman.sublime-project"
 	],
 	"find":
 	{
@@ -73,6 +112,45 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"BOMB MO",
+			"PowerUp ",
+			"CellPosition CellPosition ",
+			"CellPosition ",
+			"ExplosionStartedEvent",
+			"Bomb Mod",
+			"position",
+			"screen",
+			"PowerUps ",
+			"Placement",
+			"Characters ",
+			"Bombs",
+			"input",
+			"InputCommandActionEvent",
+			"InputCommandMovementEvent",
+			"Movi",
+			"InputCommandMovimentEvent",
+			"InputCommand",
+			"time",
+			"DestructedEvent",
+			"ExplosionStartedEvent",
+			"triggeredBombEvent",
+			"Collision",
+			"colis",
+			"collis",
+			"Colis",
+			"score",
+			"==== Gerados",
+			"==== Tratados",
+			"= Tratados",
+			"=== Events",
+			"==== Tratados",
+			"~Gerados~",
+			"~Tratados~",
+			"System",
+			"lig",
+			"celula",
+			"entit",
+			"entity"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -80,6 +158,26 @@
 		"regex": false,
 		"replace_history":
 		[
+			"powerups ",
+			"CellPosition",
+			"characters ",
+			"bombs",
+			"ActionCommandEvent",
+			"bombs",
+			"ActionCommandEvent",
+			"MovementCommandEvent",
+			"InputCommandMovementEvent",
+			"DestroyedEvent",
+			"ExplosionStartedEvent",
+			"==== Events Gerados",
+			"==== Events Tratados",
+			"==== Tratados",
+			"",
+			"==== Events Tratados",
+			"==== Gerados",
+			"==== Tratados",
+			"Controller",
+			"célula"
 		],
 		"reverse": false,
 		"show_context": true,
@@ -90,41 +188,147 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "Requirements",
+					"file": "docs/modules_simulation.adoc",
 					"settings":
 					{
-						"buffer_size": 9513,
+						"buffer_size": 13399,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4108,
-								4108
+								11047,
+								11047
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 3510.0,
+						"translation.y": 6711.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "docs/img/snes-mult-layer.png",
 					"settings":
 					{
-						"buffer_size": 386047,
+						"buffer_size": 75,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								75,
+								75
+							]
+						],
+						"settings":
+						{
+							"auto_name": "Notas para Os grupos",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "docs/arquitetura.adoc",
+					"settings":
+					{
+						"buffer_size": 3356,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								3356
+							]
+						],
+						"settings":
+						{
+							"auto_name": "== Arquitetura",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 57.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "docs/trabalho_parte1.adoc",
+					"settings":
+					{
+						"buffer_size": 2537,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								478,
+								478
+							]
+						],
+						"settings":
+						{
+							"auto_name": "Departamento de Ciência da Computação – Universida",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"default_dir": "D:\\bomber\\git\\bomberman\\docs\\img",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "docs/modules.adoc",
+					"settings":
+					{
+						"buffer_size": 0,
 						"regions":
 						{
 						},
@@ -144,33 +348,6 @@
 						"zoom_level": 1.0
 					},
 					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "trabalho_parte1.adoc",
-					"settings":
-					{
-						"buffer_size": 6442,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1639,
-								1653
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 567.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
 				}
 			]
 		}
@@ -181,7 +358,7 @@
 	},
 	"input":
 	{
-		"height": 0.0
+		"height": 35.0
 	},
 	"layout":
 	{
@@ -208,7 +385,7 @@
 	"menu_visible": true,
 	"replace":
 	{
-		"height": 0.0
+		"height": 80.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -231,6 +408,6 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 471.0,
+	"side_bar_width": 150.0,
 	"status_bar_visible": true
 }

@@ -2,7 +2,7 @@ package br.unb.unbomber.core;
 
 import java.util.List;
 
-public interface GameModel {
+public interface EntityManager {
 
 
 	/**

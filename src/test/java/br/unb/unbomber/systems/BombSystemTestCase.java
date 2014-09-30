@@ -1,7 +1,6 @@
 package br.unb.unbomber.systems;
 
-import static junit.framework.Assert.assertTrue;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 import java.util.List;
 
@@ -9,50 +8,108 @@ import org.junit.Before;
 import org.junit.Test;
 
 import br.unb.unbomber.component.BombDropper;
+import br.unb.unbomber.component.CellPlacement;
 import br.unb.unbomber.component.Explosive;
 import br.unb.unbomber.core.Component;
-import br.unb.unbomber.core.GameModel;
-import br.unb.unbomber.core.GameModelImpl;
+import br.unb.unbomber.core.Entity;
+import br.unb.unbomber.core.EntityManager;
+import br.unb.unbomber.core.EntitySystemImpl;
 import br.unb.unbomber.event.ActionCommandEvent;
 import br.unb.unbomber.event.ActionCommandEvent.ActionType;
 
 public class BombSystemTestCase {
 	
-	GameModel model;
+	EntityManager entityManager;
 	BombSystem system;
 	
 	@Before
 	public void setUp() throws Exception {
 		
-		model = GameModelImpl.getInstance();
-		system = new BombSystem(model);
+		//init a new system for each test case
+		EntitySystemImpl.init();
+		entityManager = EntitySystemImpl.getInstance();
+		system = new BombSystem(entityManager);
 	}
 	
 
 	@Test
 	public void dropBombTest() {
-		//Create a Dropper
-		BombDropper dropper = new BombDropper();
-		model.addComponent(dropper);
+		// create a entity with components:
+		// * bombDropper
+		// * placement
+		Entity anEntity = new Entity();
 		
-		ActionCommandEvent event = new ActionCommandEvent(ActionType.DROP_BOMB, dropper.getEntityId());
-		model.addEvent(event);
+		//Create the placement component
+		CellPlacement dropperPlacement = new CellPlacement();
+	
+			
+		// add the dropper to the model
+		// SO it get an entityId (needed as the new bomb dropped will need it as its ownerId)
+		BombDropper bombDropper = new BombDropper();
 		
-		List<Component> explosives = (List<Component>) model.getComponents(Explosive.class);
+		anEntity.addComponent(bombDropper);
+		anEntity.addComponent(dropperPlacement);
+		
+		entityManager.addEntity(anEntity);
+		
+		//create an DROP_BOMB Command Event
+		ActionCommandEvent event = new ActionCommandEvent(ActionType.DROP_BOMB, bombDropper.getEntityId());
+		entityManager.addEvent(event);
+		
+		//run the system
+		system.update();
+		
+		//verify if a new explosive (a bomb component) was created
+		List<Component> explosives = (List<Component>) entityManager.getComponents(Explosive.class);
 		assertNotNull(explosives);
+		assertFalse(explosives.isEmpty());
 	}
 	
+	/**
+	 * A dropped bomb should be created into the same place of its dropper
+	 */
 	@Test
 	public void dropBombAtSamePlaceTest() {
-		//character should drop bomb into their own place
-//		Character c = new Character();
-//		c.setX(3.0d);
-//		c.setY(3.0d);
-//		
-//		c.dropBomb();
-//		List<Explosive> bombs = BombSystem.getInstance().getBombs();
-//		Explosive bomb = bombs.get(0);
-//		assertTrue(bomb.getX() == 3.0d);
+		
+		// create a entity
+		Entity anEntity = new Entity();
+		
+		//Create the placement component
+		CellPlacement dropperPlacement = new CellPlacement();
+		
+		int CELL_X = 10;
+		int CELL_Y = 15;
+		
+		//set the dropper position
+		dropperPlacement.setCellX(CELL_X);
+		dropperPlacement.setCellY(CELL_Y);
+		
+		BombDropper bombDropper = new BombDropper();
+		
+		// add the components
+		anEntity.addComponent(bombDropper);
+		anEntity.addComponent(dropperPlacement);
+		
+		// add the dropper to the model
+		// SO it get an entityId (needed as the new bomb dropped will need it as its ownerId)
+		entityManager.addEntity(anEntity);
+		
+		//create an DROP_BOMB Command Event
+		ActionCommandEvent event = new ActionCommandEvent(ActionType.DROP_BOMB, bombDropper.getEntityId());
+		entityManager.addEvent(event);
+		
+		//run the system
+		system.update();
+		
+		//get the position of the first explosive created: first get the explosive than get the associated position
+		List<Component> explosives = (List<Component>) entityManager.getComponents(Explosive.class);
+		Component explosive = explosives.get(0);
+		CellPlacement createBombPlacement = (CellPlacement) entityManager.getComponent(CellPlacement.class, explosive.getEntityId());
+		
+		//verify if its the correct value
+		assertEquals(CELL_X, createBombPlacement.getCellX());
+		assertEquals(CELL_Y, createBombPlacement.getCellY());
+		
 	}
 	
 

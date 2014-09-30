@@ -9,7 +9,7 @@ import br.unb.unbomber.component.Timer;
 import br.unb.unbomber.core.BaseSystem;
 import br.unb.unbomber.core.Entity;
 import br.unb.unbomber.core.Event;
-import br.unb.unbomber.core.GameModel;
+import br.unb.unbomber.core.EntityManager;
 import br.unb.unbomber.event.ActionCommandEvent;
 import br.unb.unbomber.event.ActionCommandEvent.ActionType;
 import br.unb.unbomber.event.TimeOverEvent;
@@ -23,7 +23,7 @@ public class BombSystem extends BaseSystem {
 		super();
 	}
 	
-	public BombSystem(GameModel model) {
+	public BombSystem(EntityManager model) {
 		super(model);
 		
 	}
@@ -75,29 +75,31 @@ public class BombSystem extends BaseSystem {
 	 * @param dropper
 	 */
 	private Entity createTimeBomb(BombDropper dropper){
-
-		// find dropper placement
-		CellPlacement dropperPlacement = (CellPlacement) getModel().getComponent(CellPlacement.class,
-				dropper.getEntityId());
-		
-		Entity bomb = new Entity();
-		//Dropper Owns the Bomb
-		bomb.setOnwnerId(dropper.getEntityId());
-
 		 /*  The Bomb Entity is made of this components
 		  * 	Explosive 
 		  * 	Placement 
 		  * 	Timer
 		  * components */
+		
+		// find dropper placement
+		CellPlacement dropperPlacement = (CellPlacement) getModel().getComponent(CellPlacement.class,
+				dropper.getEntityId());
+		
+		Entity bomb = new Entity();
+		
+		//The bomb is owned by its dropper
+		bomb.setOnwnerId(dropper.getEntityId());
 
-		//create placement component
-		CellPlacement bombPlacement = new CellPlacement();	
+		//Create the placement component
+		CellPlacement bombPlacement = new CellPlacement();
+		
+		//the Bomb should have the same placement of its dropper
 		bombPlacement.setCellX(dropperPlacement.getCellX());
 		bombPlacement.setCellY(dropperPlacement.getCellY());
 		
 		//create explosive component
 		Explosive bombExplosive = new Explosive();
-		//set the right power
+		//the Bomb should have the same power of its dropper
 		bombExplosive.setPower(dropper.getBombRange());
 
 		//create Event for time over
