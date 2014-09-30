@@ -2,6 +2,13 @@ package br.unb.unbomber.core;
 
 import java.util.List;
 
+/**
+ * Entity Manager keep the Entities, Components and Events of a 
+ * running game
+ * 
+ * @author grodrigues
+ *
+ */
 public interface EntityManager {
 
 
@@ -32,18 +39,18 @@ public interface EntityManager {
 
 	
 	/**
-	* Add a new event to the Game Model 
+	* Add a new event to the model 
 	*/
 	public void addEvent(Event event);
 	
 	/**
-	* Add a new Component to the Model and set in it a uniqueId
+	* Add a new Component to the model and set in it a uniqueId
 	*/
 	public void addComponent(Component newComponent);
 
 
 	/**
-	* Add a new Entity to the Model
+	* Add a new Entity to the model
 	*/
 	void addEntity(Entity entity);
 

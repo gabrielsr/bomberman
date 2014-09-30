@@ -3,6 +3,13 @@ package br.unb.unbomber.core;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * An Entity in the Entity Component System (ECS)
+ * 
+ * @author grodrigues
+ *
+ */
 public class Entity {
 
 	private int entityId;

@@ -1,5 +1,11 @@
 package br.unb.unbomber.core;
 
+/**
+ * A Component in the Entity Component System (ECS)
+ * 
+ * @author grodrigues
+ *
+ */
 public class Component {
 	
 	private int entityId;
@@ -12,5 +18,4 @@ public class Component {
 		this.entityId = entityId;
 	}
 
-	
 }

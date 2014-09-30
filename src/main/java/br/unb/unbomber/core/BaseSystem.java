@@ -1,6 +1,14 @@
 package br.unb.unbomber.core;
 
 
+/**
+ * A Base System for the Entity Component System (ECS)
+ * It init the Entity Manager so Systems that extends this
+ * base class don't have to.
+ * 
+ * @author grodrigues
+ *
+ */
 abstract public class BaseSystem implements System{
 
 	private EntityManager entityManager;

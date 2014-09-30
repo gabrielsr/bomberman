@@ -5,7 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
+/**
+ * A Simple implementation of a Entity Managar. 
+ * 
+ * @author grodrigues
+ *
+ */
 public class EntitySystemImpl implements EntityManager {
 
 	private Map<Class<?>, List<Event>> events;
