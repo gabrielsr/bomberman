@@ -1,10 +1,9 @@
-
 Módulos Simuladores
 ====================
 
 Introdução
 ----------
-Especificaremos nesta seção os módulos simuladores do jogo. Cada módulo é constituido de um system e alguns components e events que o system interage (cria/atualiza).
+Especificaremos nesta seção os módulos simuladores do jogo. Cada módulo é constituído de um system e alguns components e events que o system interage (cria/atualiza).
 
 
 Life Module
@@ -18,7 +17,7 @@ O módulo life do jogo tem o intuito de contabilizar a quantidade de vida dos ch
 . Tratar events que levem a danos em characters ou monsters
 . Gerar events de retirada de character e monsters quando suas vidas atingirem o valor zero
 . Tratar events de adição de vida (gerado na aquisição de um Powerup 1-Up)
-. Trata situação em que um Character ou Monster pode ficar Invencible.
+. Trata situação em que um character ou monster pode ficar *Invencible*.
 
 *Invencible*
 
@@ -131,7 +130,7 @@ Um Event é criado quando uma Entity é 'atingida' por uma explosão.
 ** Explosões demoram 3 (EXPLOSION_PROPAGATION) turnos para se propagar de uma célula a outra adjacente.
 ** Explosões iniciam com firepower que diminui a cada propagação
 ** Explosões com firepower 1 não se propagam.
-** Tratar *Explosion Blockers* - Explosões não se program até:
+** Tratar *Explosion Blockers* - Explosões não se propagam até:
 *** Hard blocks
 *** Fora do limite do cenário
 *** Passagens (pontes e escadas)
@@ -194,7 +193,7 @@ Este módulo contabiliza os pontos de um character a partir dos eventos gerados 
 
 === Responsabilidades 
 
-* Contrabiliza ação: interpreta a ação realizada para poder adicionar os
+* Contabiliza ação: interpreta a ação realizada para poder adicionar os
 pontos 
 
 === Components 
@@ -207,7 +206,7 @@ Components que interagem com este módulo:
 === System
 
 ==== Events Tratados
-DestroyedEvent:: identifica quando um Moster foi destruído. Contabiliza o Score de quem provocou a destruição.
+DestroyedEvent:: identifica quando um moster foi destruído. Contabiliza o Score de quem provocou a destruição.
 
 ==== Events Gerados
 
@@ -215,8 +214,6 @@ DestroyedEvent:: identifica quando um Moster foi destruído. Contabiliza o Score
 === Testes
 
 addScoreDestroyedMonsterTest:: Testa se quando um monster é destruído os pontos são adicionados corretamente ao Score de um determinado character.
-
-
 
 
 PowerUp Module
@@ -258,9 +255,9 @@ PowerUpAquiredEvent:: Evento criado quando um PowerUp é adquirido.
 
 createPowerUpTest:: Testa criação de powerups no Grid.
 
-aquirePowerUpTest:: Testa se a aquisição de um PowerUp está sendo identificada e realizada
+aquirePowerUpTest:: Testa se a aquisição de um powerups está sendo identificada e realizada
 
-aquiredPowerUpIsRemovedTest:: Testa se após aquisição PowerUp é removido
+aquiredPowerUpIsRemovedTest:: Testa se após aquisição powerups é removido
 
 speedUpAquireTest:: Testa se a velocidade é aumentada após a aquisição do Speed Up.
 
@@ -281,8 +278,8 @@ Uma entidade colide com outra quando ela tenta se mover para a célula onde uma 
 === Responsabilidades
 
 . Quando uma colisão ocorre é gerado um evento de colisão
-. Quando um Character estiver na mesma célula que uma Bomb, um monster colide com a Bomb e não com o Character
-. Quando um Character estiver na mesma célula que um Soft Block, um Monster ou Explosion colidem com o Soft Block não com o Character.
+. Quando um character estiver na mesma célula que uma bomb, um monster colide com a Bomb e não com o character 
+. Quando um character estiver na mesma célula que um soft block, um monster ou explosion colidem com osoft block não com o character .
 
 
 === Components 
@@ -352,6 +349,36 @@ walkHorizontalLineTest:: Testa se a posição da célula da entidade é atualiza
 speedTest:: Testa se demora o número correto de turnos para percorrer uma célula.
 
 
+PlayerControl Module
+--------------------
+Este Módulo é responsável pelo controle de jogadores a Characters.
+
+=== Responsabilidades
+
+* Mapear character e player
+* Mapear player e um InputProvider. InputProvider's podem ser:
+** KeyboardInput
+** JoystickInput
+** NetworkInput
+* Mapear teclas e ações
+* Para cada turno ler as teclas precionadas e gerar Command*Event. Os Command*Event podem ser:
+** ActionCommandEvent
+** MovementCommandEvent
+
+=== Componentes
+ * Player
+
+=== System
+
+==== Events Tratados
+
+==== Events Gerados
+
+MovementCommandEvent:: Comandos de movimento da entidade.
+
+ActionCommandEvent:: Comandos de ações da entidade, como DROP_BOMB e EXPLODE_REMOTE_BOMB
+
+
 Action Module
 -------------
 Este módulo trata as ações do usuário como segurar uma bomb e disparar uma _remote bomb_. 
@@ -393,35 +420,6 @@ InAnExplosionEvent:: remove Soft Block e lança evento DestroiedEvent.
 
 DestroyedEvent:: gerado quando um Soft Block é destruído.
 
-
-PlayerControl Module
---------------------
-Este Módulo é responsável pelo controle de jogadores a Characters.
-
-=== Responsabilidades
-
-* Mapear Character e Player
-* Mapear Player e um InputProvider. InputProvider's podem ser:
-** KeyboardInput
-** JoystickInput
-** NetworkInput
-* Mapear teclas e ações
-* Para cada turno ler as teclas precionadas e gerar Command*Event. Os Command*Event podem ser:
-** ActionCommandEvent
-** MovementCommandEvent
-
-=== Componentes
- * Player
-
-=== System
-
-==== Events Tratados
-
-==== Events Gerados
-
-MovementCommandEvent:: Comandos de movimento da entidade.
-
-ActionCommandEvent:: Comandos de ações da entidade, como DROP_BOMB e EXPLODE_REMOTE_BOMB
 
 
 BotControl Module
