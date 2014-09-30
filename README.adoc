@@ -1,11 +1,12 @@
-= IntroduÁ„o
+ÔªøIntrodu√ß√£o
+==========
 
-Bomberman clone utilizando programaÁ„o modular.
+Bomberman clone utilizando programa√ß√£o modular.
 
 
-= InstruÁıes para Montagem de Ambiente de Desenvolvimento
+= Instru√ß√µes para Montagem de Ambiente de Desenvolvimento
 
-== JDK8 o compilador e m·quina virtual
+== JDK8 o compilador e m√°quina virtual
 
 Instale o JDK8: 
 	http://www.oracle.com/technetwork/java/javase/downloads/index.html
@@ -15,9 +16,9 @@ Instale o JDK8:
 	http://eclipse.org/downloads/packages/eclipse-standard-44/lunar
 
 	
-== Gradle a Ferramenta de Gerencia de DependÍncias e Build	
+== Gradle a Ferramenta de Gerencia de Depend√™ncias e Build	
 
-Gradle È um sitema de gerencia de dependÍncia. Iremos utiliza-lo para obter a o JUnit 
+Gradle √© um sitema de gerencia de depend√™ncia. Iremos utiliza-lo para obter a o JUnit 
 inicialmente depois iremos incrementar com outras bibliotecas.
 
 
@@ -25,7 +26,7 @@ inicialmente depois iremos incrementar com outras bibliotecas.
 
 O plugin gradle do eclipse facilitar a montarmos o projeto, pois inclui as dependencias configurados no gradle diretamente na interface
 
-No Eclipse v· em  
+No Eclipse v√° em  
 > Help>Marketplace 
 
 Digite no campo search:
@@ -33,19 +34,19 @@ Digite no campo search:
 
 Escolha  Gradle Integration for Eclipse (4.4) 3.6.0.RELEASE
 
-Confirme. Ao final da instalaÁ„o reinicie o Eclipse.
+Confirme. Ao final da instala√ß√£o reinicie o Eclipse.
 
 
 == Importanto o projeto no Eclipse
 
-Go to File -> Import -> Gradle -> Gradle Project, navega atÈ a pasta root deste projeto. Selecione [Build Model]
+Go to File -> Import -> Gradle -> Gradle Project, navega at√© a pasta root deste projeto. Selecione [Build Model]
 
-OBS: a importaÁ„o pode demorar v·rios minutos na primeira vez que for realiza pois ser„o baixadas dependÍncias do Gradle.
+OBS: a importa√ß√£o pode demorar v√°rios minutos na primeira vez que for realiza pois ser√£o baixadas depend√™ncias do Gradle.
 
 
 = Referencias 
-== Padrıes Utilizados
-* Padr„o Arquitetural: Entity Component System
+== Padr√µes Utilizados
+* Padr√£o Arquitetural: Entity Component System
 ** Leitura Posterior: http://gamadu.com/artemis/	
 
 * Dedign Patterns: 
