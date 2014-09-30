@@ -49,5 +49,3 @@ OBS: a importação pode demorar vários minutos na primeira vez que for realiza
 * Padrão Arquitetural: Entity Component System
 ** Leitura Posterior: http://gamadu.com/artemis/	
 
-* Dedign Patterns: 
-** Singleton: *System
