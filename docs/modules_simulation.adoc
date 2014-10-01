@@ -82,14 +82,14 @@ Disparar Bomb :: Cria um evento ExplosionStartedEvent e remove a Bomb do Grid.
 === Components 
 Components que interagem com este módulo:
 
-* CellPosition
-* Bomb
+* CellPlacement
+* Explosive
 ** BombRange
 ** BombType
 
 === System 
 
-* BombController
+* BombSystem
 
 ==== Events Tratados
 
@@ -230,7 +230,7 @@ No jogo Bomberman characters podem adquirir itens que modificam suas habilidades
 === Components
 Components que interagem com este módulo:
 
-* CellPosition
+* CellPlacement
 * PowerupType
 ** TypeId 
 * BombDropper
@@ -285,15 +285,14 @@ Uma entidade colide com outra quando ela tenta se mover para a célula onde uma 
 === Components 
 Components que interagem com este módulo:
 
-* CellPosition
+* CellPlacement
  
 === System
 
-Para a implementação do Módulo de Colisão, será criada uma classe chamada CollisionController. Essa classe
+Para a implementação do Módulo de Colisão, será criada uma classe chamada CollisionSystem. Essa classe
 receberá a informação do grid da posição dos elementos em um determinado turno e
 retornará uma lista com eventos de colisão.
 
-* BombController
 
 ==== Events Tratados
 
@@ -323,7 +322,7 @@ Este módulo trata do movimento das entidades no grid.
 
 === Responsabilidades
 
-* Mover entidades atualizando o ScreenPosition e o CellPosition 
+* Mover entidades atualizando o ScreenPlacement e o CellPlacement
 ** characters se movimentam por default a 1/8 c/t (células por turno)
 ** monsters movimentam por default a 1/16 c/t (células por turno)
 
@@ -331,8 +330,8 @@ Este módulo trata do movimento das entidades no grid.
 === Components 
 Components que interagem com este módulo:
 
-* CellPosition
-* ScreenPosition
+* CellPlacement
+* ScreenPlacement
 
 ==== Events Tratados
 
@@ -446,7 +445,7 @@ Ao colidir com algo sorteia a próxima posição
 
 === Components
 * BotType
-* CellPosition
+* CellPlacement
 * Bomb
 * Explosion
 * Powerup
