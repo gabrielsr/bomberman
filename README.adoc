@@ -41,10 +41,17 @@ Confirme. Ao final da instalação reinicie o Eclipse.
 
 Go to File -> Import -> Gradle -> Gradle Project, navega até a pasta root deste projeto. Selecione [Build Model]
 
-OBS: a importação pode demorar vários minutos na primeira vez que for realiza pois serão baixadas dependências do Gradle.
+OBS: a importação pode demorar vários minutos na primeira vez que for realiza pois será realizado download 
+das dependências do Gradle.
 
-image::/docs/eclipse_pacotes.png[]
+Após a conclusão da importação você deverá visualizar o projeto assim: 
 
+[[img-eclipse_pacotes]]
+.Visualização de Pacotes após importação bem sucedida no Eclipse
+image::/docs/img/eclipse_pacotes.png[]
+
+TIP: Caso o eclipse esteja exibindo o projeto diferente disso provavelmente aconteceu um erro na importação. 
+Tente novamente.
 
 === Compilando no Eclipse
 
