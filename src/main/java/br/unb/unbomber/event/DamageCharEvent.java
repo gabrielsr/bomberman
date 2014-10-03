@@ -3,12 +3,12 @@ package br.unb.unbomber.event;
 
 import br.unb.unbomber.core.Event;
 
-public class DamageCharEvent; extends Event {
+public class DamageCharEvent extends Event {
 	int sourceId;
 	int targetId;
 	int health;
 	
-	public DamageCharEvent;(int sourceId, int targetId, int setHealth){
+	public DamageCharEvent(int sourceId, int targetId, int health){
 		this.sourceId = sourceId;
 		this.targetId = targetId;
 		this.health = health;
@@ -33,8 +33,6 @@ public class DamageCharEvent; extends Event {
 
 	//decrement life of monsters
 	public void setHealth(int health){
-		return health;
+		this.health = health;
 	}
-
-	public 
 }

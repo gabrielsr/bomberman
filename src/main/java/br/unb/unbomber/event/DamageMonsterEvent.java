@@ -8,7 +8,7 @@ public class DamageMonsterEvent extends Event {
 	int targetId;
 	int health;
 	
-	public DamageMonsterEvent(int sourceId, int targetId, int setHealth){
+	public DamageMonsterEvent(int sourceId, int targetId, int health){
 		this.sourceId = sourceId;
 		this.targetId = targetId;
 		this.health = health;
@@ -33,8 +33,6 @@ public class DamageMonsterEvent extends Event {
 
 	//decrement life of monsters
 	public void setHealth(int health){
-		return health;
+		this.health = health;
 	}
-
-	public 
 }
