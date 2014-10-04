@@ -1,20 +1,20 @@
-package events;
+package br.unb.unbomber.event;
 
-import components.CellPosition;
+import br.unb.unbomber.component.CellPlacement;
 
 public class ExplosionStartedEvent {
 
 	/* Initial position in the grid of the explosion */
-	private CellPosition initialPosition;
+	private CellPlacement initialPosition;
 
 	/* Power of the explosion */
 	private int power;
 
-	public CellPosition getInitialPosition() {
+	public CellPlacement getInitialPosition() {
 		return initialPosition;
 	}
 
-	public void setInitialPosition(CellPosition initialPosition) {
+	public void setInitialPosition(CellPlacement initialPosition) {
 		this.initialPosition = initialPosition;
 	}
 

@@ -1,4 +1,5 @@
-package events;
+package br.unb.unbomber.event;
+
 
 public class InAnExplosionEvent {
 
