@@ -1,8 +1,9 @@
 package br.unb.unbomber.event;
 
 import br.unb.unbomber.component.CellPlacement;
+import br.unb.unbomber.core.Event;
 
-public class ExplosionStartedEvent {
+public class ExplosionStartedEvent extends Event{
 
 	/* Initial position in the grid of the explosion */
 	private CellPlacement initialPosition;
