@@ -41,8 +41,26 @@ Confirme. Ao final da instalação reinicie o Eclipse.
 
 Go to File -> Import -> Gradle -> Gradle Project, navega até a pasta root deste projeto. Selecione [Build Model]
 
-OBS: a importação pode demorar vários minutos na primeira vez que for realiza pois serão baixadas dependências do Gradle.
+OBS: a importação pode demorar vários minutos na primeira vez que for realiza pois será realizado download 
+das dependências do Gradle.
 
+Após a conclusão da importação você deverá visualizar o projeto assim: 
+
+[[img-eclipse_pacotes]]
+.Visualização de Pacotes após importação bem sucedida no Eclipse
+image::/docs/img/eclipse_pacotes.png[]
+
+TIP: Caso o eclipse esteja exibindo o projeto diferente disso provavelmente aconteceu um erro na importação. 
+Tente novamente.
+
+=== Compilando no Eclipse
+
+O mais comum é trabalhar no Eclipse com compilação automática de código, o que quer dizer que a medida que você digita 
+novas linhas em classes já existentes ou cria novas classes o Eclipse automaticamente compila para você exibe os erros
+próximos as linhas em que ocorreram como sinais vermelhos. Ao posicionar o cursor próximo aos erros é exibido um
+detalhamento do problema.
+
+Para verificar se o Eclipse está configurado para realizar build automático vá ao menu _Project_ -> _Build Automatically_.
 
 = Referencias 
 == Padrões Utilizados
