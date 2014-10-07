@@ -1,7 +1,12 @@
-﻿Introdução
+Introdução
 ==========
 
-Bomberman clone utilizando programação modular.
+Projeto em Desenvolvimento de um Bomberman clone utilizando programação modular, 
+desenvolvido como projeto da disciplina:
+
+Programação Sistemática
+Universidade de Brasília - UnB
+2/2014
 
 
 = Instruções para Montagem de Ambiente de Desenvolvimento
