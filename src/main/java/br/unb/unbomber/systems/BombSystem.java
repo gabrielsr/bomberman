@@ -8,10 +8,11 @@ import br.unb.unbomber.component.Explosive;
 import br.unb.unbomber.component.Timer;
 import br.unb.unbomber.core.BaseSystem;
 import br.unb.unbomber.core.Entity;
-import br.unb.unbomber.core.Event;
 import br.unb.unbomber.core.EntityManager;
+import br.unb.unbomber.core.Event;
 import br.unb.unbomber.event.ActionCommandEvent;
 import br.unb.unbomber.event.ActionCommandEvent.ActionType;
+import br.unb.unbomber.event.InAnExplosionEvent;
 import br.unb.unbomber.event.TimeOverEvent;
 
 public class BombSystem extends BaseSystem {
@@ -48,8 +49,18 @@ public class BombSystem extends BaseSystem {
 		
 		//TODO verificar TimeOutEvent de bombas que devem ser disparadas neste turno
 		
-		//TODO verificar InAnExplosionEvent de bombas que extão no range de outras bombas
+		//verificar InAnExplosionEvent de bombas que extï¿½o no range de outras bombas
 		// e devem ser disparadas por efeito cascata
+		List<Event> inExplosionEvents = getEntityManager().getEvents(InAnExplosionEvent.class);
+		
+		for(Event event:inExplosionEvents){
+			InAnExplosionEvent explosionEvent = (InAnExplosionEvent) event;
+			
+			Timer timer = (Timer) getEntityManager().getComponent(Timer.class, explosionEvent.getIdHit()); 
+			while(!timer.isOver()){
+				timer.tick();
+			}
+		}
 		
 	}
 	
