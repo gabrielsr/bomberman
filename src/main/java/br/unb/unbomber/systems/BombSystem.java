@@ -1,18 +1,20 @@
 package br.unb.unbomber.systems;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import br.unb.unbomber.component.BombDropper;
 import br.unb.unbomber.component.CellPlacement;
 import br.unb.unbomber.component.Explosive;
 import br.unb.unbomber.component.Timer;
 import br.unb.unbomber.core.BaseSystem;
-import br.unb.unbomber.core.Component;
 import br.unb.unbomber.core.Entity;
 import br.unb.unbomber.core.EntityManager;
 import br.unb.unbomber.core.Event;
 import br.unb.unbomber.event.ActionCommandEvent;
 import br.unb.unbomber.event.ActionCommandEvent.ActionType;
+import br.unb.unbomber.event.ExplosionStartedEvent;
 import br.unb.unbomber.event.InAnExplosionEvent;
 import br.unb.unbomber.event.TimeOverEvent;
 
@@ -20,7 +22,8 @@ public class BombSystem extends BaseSystem {
 
 	private final String TRIGGERED_BOMB_ACTION = "BOMB_TRIGGERED";
 	
-
+	Set<Event> processedEvents = new HashSet<Event>(500);   
+	
 	public BombSystem() {
 		super();
 	}
@@ -33,8 +36,9 @@ public class BombSystem extends BaseSystem {
 	@Override
 	public void update() {
 		
+		EntityManager entityManager = getEntityManager();
 		//Get ActionCommandEvent events
-		List<Event> actionEvents = getEntityManager().getEvents(ActionCommandEvent.class);
+		List<Event> actionEvents = entityManager.getEvents(ActionCommandEvent.class);
 		
 		if (actionEvents != null) {
 			for(Event event:actionEvents){
@@ -42,27 +46,47 @@ public class BombSystem extends BaseSystem {
 				//verify if is it a DROP_BOMB command
 				if(actionCommand.getType()== ActionType.DROP_BOMB){
 	
-					BombDropper dropper = (BombDropper) getEntityManager().getComponent(BombDropper.class, 
+					BombDropper dropper = (BombDropper) entityManager.getComponent(BombDropper.class, 
 							actionCommand.getEntityId());
-					verifyAndDropBomb(dropper);				
+					verifyAndDropBomb(dropper);
+					processedEvents.add(actionCommand);
 				}
 			}
 		}
 		
-		//TODO verificar TimeOutEvent de bombas que devem ser disparadas neste turno
+		//Triggers active bombs whose timer expired
+		List<Event> timerOvers = entityManager.getEvents(TimeOverEvent.class);
+		if (timerOvers != null) {
+			for (Event event: timerOvers) {
+				TimeOverEvent timeOver = (TimeOverEvent) event;
+				if ((timeOver.getAction().equals(TRIGGERED_BOMB_ACTION)) && (!processedEvents.contains(timeOver))) {
+					int entityId = timeOver.getOwnerId();
+					CellPlacement bombPlacement = (CellPlacement) entityManager.getComponent(CellPlacement.class, entityId);
+					Explosive bombExplosive = (Explosive) entityManager.getComponent(Explosive.class, entityId);
+					ExplosionStartedEvent explosion = new ExplosionStartedEvent();
+					explosion.setEventId(entityManager.getUniqueId());
+					explosion.setOwnerId(entityId);
+					explosion.setInitialPosition(bombPlacement);
+					explosion.setExplosionRange(bombExplosive.getExplosionRange());
+					entityManager.addEvent(explosion);
+					processedEvents.add(timeOver);
+				}
+			}
+		}
 		
-		//verificar InAnExplosionEvent de bombas que ext�o no range de outras bombas
+		// verificar InAnExplosionEvent de bombas que estao no range de outras bombas
 		// e devem ser disparadas por efeito cascata
-		List<Event> inExplosionEvents = getEntityManager().getEvents(InAnExplosionEvent.class);
+		List<Event> inExplosionEvents = entityManager.getEvents(InAnExplosionEvent.class);
 		
 		if (inExplosionEvents != null) {
 			for(Event event:inExplosionEvents){
 				InAnExplosionEvent explosionEvent = (InAnExplosionEvent) event;
-				
-				Timer timer = (Timer) getEntityManager().getComponent(Timer.class, explosionEvent.getIdHit()); 
-				while(!timer.isOver()){
-					timer.tick();
-				}
+				processedEvents.add(explosionEvent);
+// TODO re-code
+//				Timer timer = (Timer) entityManager.getComponent(Timer.class, explosionEvent.getIdHit()); 
+//				while(!timer.isOver()){
+//					timer.tick();
+//				}
 			}	
 		}
 	}
