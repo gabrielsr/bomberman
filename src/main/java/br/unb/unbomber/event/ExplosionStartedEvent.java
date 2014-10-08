@@ -19,11 +19,11 @@ public class ExplosionStartedEvent extends Event{
 		this.initialPosition = initialPosition;
 	}
 
-	public int getPower() {
+	public int getExplosionRange() {
 		return explosionRange;
 	}
 
-	public void setPower(int explosionRange) {
+	public void setExplosionRange(int explosionRange) {
 		this.explosionRange = explosionRange;
 	}
 
