@@ -7,6 +7,7 @@ import br.unb.unbomber.component.CellPlacement;
 import br.unb.unbomber.component.Explosive;
 import br.unb.unbomber.component.Timer;
 import br.unb.unbomber.core.BaseSystem;
+import br.unb.unbomber.core.Component;
 import br.unb.unbomber.core.Entity;
 import br.unb.unbomber.core.EntityManager;
 import br.unb.unbomber.core.Event;
@@ -35,16 +36,17 @@ public class BombSystem extends BaseSystem {
 		//Get ActionCommandEvent events
 		List<Event> actionEvents = getEntityManager().getEvents(ActionCommandEvent.class);
 		
-		for(Event event:actionEvents){
-			ActionCommandEvent actionCommand = (ActionCommandEvent) event;
-			//verify if is it a DROP_BOMB command
-			if(actionCommand.getType()== ActionType.DROP_BOMB){
-
-				BombDropper dropper = (BombDropper) getEntityManager().getComponent(BombDropper.class, 
-						actionCommand.getEntityId());
-				verifyAndDropBomb(dropper);				
+		if (actionEvents != null) {
+			for(Event event:actionEvents){
+				ActionCommandEvent actionCommand = (ActionCommandEvent) event;
+				//verify if is it a DROP_BOMB command
+				if(actionCommand.getType()== ActionType.DROP_BOMB){
+	
+					BombDropper dropper = (BombDropper) getEntityManager().getComponent(BombDropper.class, 
+							actionCommand.getEntityId());
+					verifyAndDropBomb(dropper);				
+				}
 			}
-			
 		}
 		
 		//TODO verificar TimeOutEvent de bombas que devem ser disparadas neste turno
@@ -53,15 +55,16 @@ public class BombSystem extends BaseSystem {
 		// e devem ser disparadas por efeito cascata
 		List<Event> inExplosionEvents = getEntityManager().getEvents(InAnExplosionEvent.class);
 		
-		for(Event event:inExplosionEvents){
-			InAnExplosionEvent explosionEvent = (InAnExplosionEvent) event;
-			
-			Timer timer = (Timer) getEntityManager().getComponent(Timer.class, explosionEvent.getIdHit()); 
-			while(!timer.isOver()){
-				timer.tick();
-			}
+		if (inExplosionEvents != null) {
+			for(Event event:inExplosionEvents){
+				InAnExplosionEvent explosionEvent = (InAnExplosionEvent) event;
+				
+				Timer timer = (Timer) getEntityManager().getComponent(Timer.class, explosionEvent.getIdHit()); 
+				while(!timer.isOver()){
+					timer.tick();
+				}
+			}	
 		}
-		
 	}
 	
 	/**
@@ -73,7 +76,6 @@ public class BombSystem extends BaseSystem {
 		
 		Entity bomb = createTimeBomb(dropper);
 		getEntityManager().addEntity(bomb);
-	
 		
 		//TODO if it is a romete controlled bomb, 
 		//make the link so the user can remote explod it
