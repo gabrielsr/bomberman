@@ -167,11 +167,18 @@ public class BombSystemTestCase {
 		// TODO find why the test bellow is failing
 		
 		////one more time (91 times total)
-		//timeSystem.update();
-		//bombSystem.update();
+		timeSystem.update();
+		bombSystem.update();
 		////second BOOM!!!
-		//assertEquals(entityManager.getEvents(ExplosionStartedEvent.class).size(), 2);
+		assertEquals(entityManager.getEvents(ExplosionStartedEvent.class).size(), 2);
 		
+		//runs more 30 iterations
+		for (int i=1; i<=30; i++) {
+			timeSystem.update();
+			bombSystem.update();
+		}
+		//no more explosions
+		assertEquals(entityManager.getEvents(ExplosionStartedEvent.class).size(), 2);
 	}
 
 }

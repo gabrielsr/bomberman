@@ -44,7 +44,7 @@ public class BombSystem extends BaseSystem {
 			for(Event event:actionEvents){
 				ActionCommandEvent actionCommand = (ActionCommandEvent) event;
 				//verify if is it a DROP_BOMB command
-				if(actionCommand.getType()== ActionType.DROP_BOMB){
+				if ((actionCommand.getType()== ActionType.DROP_BOMB) && (!processedEvents.contains(actionCommand))){
 	
 					BombDropper dropper = (BombDropper) entityManager.getComponent(BombDropper.class, 
 							actionCommand.getEntityId());
