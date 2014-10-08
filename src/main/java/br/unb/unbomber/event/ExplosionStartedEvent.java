@@ -9,7 +9,7 @@ public class ExplosionStartedEvent extends Event{
 	private CellPlacement initialPosition;
 
 	/* Power of the explosion */
-	private int power;
+	private int explosionRange;
 
 	public CellPlacement getInitialPosition() {
 		return initialPosition;
@@ -20,11 +20,11 @@ public class ExplosionStartedEvent extends Event{
 	}
 
 	public int getPower() {
-		return power;
+		return explosionRange;
 	}
 
-	public void setPower(int power) {
-		this.power = power;
+	public void setPower(int explosionRange) {
+		this.explosionRange = explosionRange;
 	}
 
 }

@@ -111,7 +111,7 @@ public class BombSystem extends BaseSystem {
 		//create explosive component
 		Explosive bombExplosive = new Explosive();
 		//the Bomb should have the same power of its dropper
-		bombExplosive.setPower(dropper.getBombRange());
+		bombExplosive.setExplosionRange(dropper.getExplosionRange());
 
 		//create Event for time over
 		TimeOverEvent triggeredBombEvent = new TimeOverEvent(); 
