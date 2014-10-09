@@ -39,7 +39,12 @@ public class BombSystemTestCase {
 	public void dropBombTest() {
 		
 
-		pubBombOnGrid(0,0);
+		//Create Dropper
+		BombDropper bombDropper = new BombDropper();
+		bombDropper.setPermittedSimultaneousBombs(5);
+				
+		//put one bomb on grid
+		pubBombOnGrid(0,0, bombDropper);
 		
 		
 		//verify if a new explosive (a bomb component) was created
@@ -57,7 +62,11 @@ public class BombSystemTestCase {
 		int CELL_X = 10;
 		int CELL_Y = 15;
 		
-		pubBombOnGrid(CELL_X,CELL_Y);
+		//Create Dropper
+		BombDropper bombDropper = new BombDropper();
+		bombDropper.setPermittedSimultaneousBombs(5);
+		//Put bomb on grid
+		pubBombOnGrid(CELL_X,CELL_Y,bombDropper);
 		
 		//get the position of the first explosive created: first get the explosive than get the associated position
 		List<Component> explosives = (List<Component>) entityManager.getComponents(Explosive.class);
@@ -74,8 +83,12 @@ public class BombSystemTestCase {
 	@Test
 	public void triggeredAfterTimeToExplodeTest() {
 		
+		//Create Dropper
+		BombDropper bombDropper = new BombDropper();
+		bombDropper.setPermittedSimultaneousBombs(5);
+		
 		//put one bomb on grid
-		pubBombOnGrid(0,0);
+		pubBombOnGrid(0,0, bombDropper);
 		
 		//initialize time system
 		timeSystem = new TimeSystem(entityManager);
@@ -83,7 +96,7 @@ public class BombSystemTestCase {
 		updateSystems(1);
 		
 		//put another bomb on grid
-		pubBombOnGrid(0,0);
+		pubBombOnGrid(0,0,bombDropper);
 		
 		//runs 88 game iterations
 		updateSystems(88);
@@ -115,7 +128,7 @@ public class BombSystemTestCase {
 		}
 	}
 	
-	private void pubBombOnGrid(int x, int y){
+	private void pubBombOnGrid(int x, int y, BombDropper bombDropper){
 		// create a entity
 		Entity anEntity = new Entity();
 		
@@ -125,9 +138,6 @@ public class BombSystemTestCase {
 		//set the dropper position
 		dropperPlacement.setCellX(x);
 		dropperPlacement.setCellY(y);
-		
-		BombDropper bombDropper = new BombDropper();
-		bombDropper.setPermittedSimultaneousBombs(5);
 		
 		// add the components
 		anEntity.addComponent(bombDropper);
