@@ -61,15 +61,8 @@ public class BombSystem extends BaseSystem {
 			for (Event event: timerOvers) {
 				TimeOverEvent timeOver = (TimeOverEvent) event;
 				if ((timeOver.getAction().equals(TRIGGERED_BOMB_ACTION)) && (!processedEvents.contains(timeOver))) {
-					int entityId = timeOver.getOwnerId();
-					CellPlacement bombPlacement = (CellPlacement) entityManager.getComponent(CellPlacement.class, entityId);
-					Explosive bombExplosive = (Explosive) entityManager.getComponent(Explosive.class, entityId);
-					ExplosionStartedEvent explosion = new ExplosionStartedEvent();
-					explosion.setEventId(entityManager.getUniqueId());
-					explosion.setOwnerId(entityId);
-					explosion.setInitialPosition(bombPlacement);
-					explosion.setExplosionRange(bombExplosive.getExplosionRange());
-					entityManager.addEvent(explosion);
+
+					createExplosionEvent(timeOver.getOwnerId());
 					processedEvents.add(timeOver);
 				}
 			}
@@ -83,13 +76,24 @@ public class BombSystem extends BaseSystem {
 			for(Event event:inExplosionEvents){
 				InAnExplosionEvent explosionEvent = (InAnExplosionEvent) event;
 				processedEvents.add(explosionEvent);
-// TODO re-code
-//				Timer timer = (Timer) entityManager.getComponent(Timer.class, explosionEvent.getIdHit()); 
-//				while(!timer.isOver()){
-//					timer.tick();
-//				}
+				
+				createExplosionEvent(explosionEvent.getOwnerId());
 			}	
 		}
+	}
+	
+	private void createExplosionEvent(int bombID){
+		
+		EntityManager entityManager = getEntityManager();
+		
+		CellPlacement bombPlacement = (CellPlacement) entityManager.getComponent(CellPlacement.class, bombID);
+		Explosive bombExplosive = (Explosive) entityManager.getComponent(Explosive.class, bombID);
+		ExplosionStartedEvent explosion = new ExplosionStartedEvent();
+		explosion.setEventId(entityManager.getUniqueId());
+		explosion.setOwnerId(bombID);
+		explosion.setInitialPosition(bombPlacement);
+		explosion.setExplosionRange(bombExplosive.getExplosionRange());
+		entityManager.addEvent(explosion);
 	}
 	
 	/**
