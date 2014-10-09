@@ -8,6 +8,7 @@ import br.unb.unbomber.component.BombDropper;
 import br.unb.unbomber.component.CellPlacement;
 import br.unb.unbomber.component.Explosive;
 import br.unb.unbomber.component.Timer;
+import br.unb.unbomber.core.Component;
 import br.unb.unbomber.core.BaseSystem;
 import br.unb.unbomber.core.Entity;
 import br.unb.unbomber.core.EntityManager;
@@ -96,15 +97,42 @@ public class BombSystem extends BaseSystem {
 	 */
 	public void verifyAndDropBomb(BombDropper dropper){
 		
-		//TODO verify if the character has not dropped too much bombs
-		
-		Entity bomb = createTimeBomb(dropper);
-		getEntityManager().addEntity(bomb);
-		
+		// Counting the number of active bombs owner by the same dropper entity.
+		List<Component> explosives = getEntityManager().getComponents(Explosive.class);
+		int bombCounter = 0;
+		if (explosives != null) {
+			for (Component component: explosives) {
+				Explosive explosive = (Explosive) component;
+				if (explosive.getOnwnerId() == dropper.getOnwnerId()) {
+					Timer timer = (Timer) getEntityManager().getComponent(Timer.class, explosive.getEntityId());
+					// Should count only the active bombs
+					if (!timer.isOver()) {
+						bombCounter++;
+					}
+				}
+			}
+		}
+		if (bombCounter < dropper.getPermittedSimultaneousBombs()) {
+			Entity bomb = createTimeBomb(dropper);
+			getEntityManager().addEntity(bomb);
+		}
+				
 		//TODO if it is a romete controlled bomb, 
 		//make the link so the user can remote explod it
 		
 	}
+
+//	public void verifyAndDropBomb(BombDropper dropper){
+//		
+//		//TODO verify if the character has not dropped too much bombs
+//		
+//		Entity bomb = createTimeBomb(dropper);
+//		getEntityManager().addEntity(bomb);
+//		
+//		//TODO if it is a romete controlled bomb, 
+//		//make the link so the user can remote explod it
+//		
+//	}
 	
 	/**
 	 * Make a Bomb

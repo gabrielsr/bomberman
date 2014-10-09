@@ -127,6 +127,7 @@ public class BombSystemTestCase {
 		dropperPlacement.setCellY(y);
 		
 		BombDropper bombDropper = new BombDropper();
+		bombDropper.setPermittedSimultaneousBombs(5);
 		
 		// add the components
 		anEntity.addComponent(bombDropper);
