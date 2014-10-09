@@ -79,6 +79,40 @@ public class BombSystemTestCase {
 		
 	}
 	
+	@Test
+	public void maxNumberOfBombsTests(){
+		
+		int max_number_of_bombs = 2;
+		
+		//Create Dropper
+		BombDropper bombDropper = new BombDropper();
+		bombDropper.setPermittedSimultaneousBombs(max_number_of_bombs);
+		
+		//put 2 bombs on grid
+		pubBombOnGrid(0,0, bombDropper);
+		pubBombOnGrid(0,0, bombDropper);
+		
+		assertEquals(entityManager.getComponents(Explosive.class).size() , max_number_of_bombs);
+		
+		//extra bomb will be ignored
+		pubBombOnGrid(0,0, bombDropper);
+		
+		assertEquals(entityManager.getComponents(Explosive.class).size() , max_number_of_bombs);
+		
+		//pseudo power-up
+		max_number_of_bombs = 5;
+		bombDropper.setPermittedSimultaneousBombs(max_number_of_bombs);
+		
+		//add more 4 bombs (6total)
+		pubBombOnGrid(0,0, bombDropper);
+		pubBombOnGrid(0,0, bombDropper);
+		pubBombOnGrid(0,0, bombDropper);
+		pubBombOnGrid(0,0, bombDropper);
+
+		assertEquals(entityManager.getComponents(Explosive.class).size() , max_number_of_bombs);
+		
+	}
+	
 	// testa se um ExplosionStartedEvent é criado após 90 turnos
 	@Test
 	public void triggeredAfterTimeToExplodeTest() {
