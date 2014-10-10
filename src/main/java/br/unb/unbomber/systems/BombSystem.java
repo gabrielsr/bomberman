@@ -31,22 +31,20 @@ public class BombSystem extends BaseSystem {
 	
 	public BombSystem(EntityManager model) {
 		super(model);
-		
 	}
 	
 	@Override
 	public void update() {
 		
 		EntityManager entityManager = getEntityManager();
+		
 		//Get ActionCommandEvent events
 		List<Event> actionEvents = entityManager.getEvents(ActionCommandEvent.class);
-		
 		if (actionEvents != null) {
 			for(Event event:actionEvents){
 				ActionCommandEvent actionCommand = (ActionCommandEvent) event;
 				//verify if is it a DROP_BOMB command
 				if ((actionCommand.getType()== ActionType.DROP_BOMB) && (!processedEvents.contains(actionCommand))){
-	
 					BombDropper dropper = (BombDropper) entityManager.getComponent(BombDropper.class, 
 							actionCommand.getEntityId());
 					verifyAndDropBomb(dropper);
@@ -61,38 +59,41 @@ public class BombSystem extends BaseSystem {
 			for (Event event: timerOvers) {
 				TimeOverEvent timeOver = (TimeOverEvent) event;
 				if ((timeOver.getAction().equals(TRIGGERED_BOMB_ACTION)) && (!processedEvents.contains(timeOver))) {
-
 					createExplosionEvent(timeOver.getOwnerId());
 					processedEvents.add(timeOver);
 				}
 			}
 		}
 		
-		// verificar InAnExplosionEvent de bombas que estao no range de outras bombas
-		// e devem ser disparadas por efeito cascata
+		// InAnExplosionEvent de bombas que estao no range de outras bombas
+		// Bombas devem ser disparadas por efeito cascata
 		List<Event> inExplosionEvents = entityManager.getEvents(InAnExplosionEvent.class);
-		
 		if (inExplosionEvents != null) {
 			for(Event event:inExplosionEvents){
-				InAnExplosionEvent explosionEvent = (InAnExplosionEvent) event;
-				processedEvents.add(explosionEvent);
-				
-				createExplosionEvent(explosionEvent.getOwnerId());
+				InAnExplosionEvent inAnExplosion = (InAnExplosionEvent) event;
+				int entityInExplosionId = inAnExplosion.getIdHit();
+				Explosive bombExplosive = (Explosive) entityManager.getComponent(Explosive.class, entityInExplosionId);
+				Timer bombTimer = (Timer) entityManager.getComponent(Timer.class, entityInExplosionId);
+				if ((bombExplosive != null) && (!bombTimer.isOver() && bombTimer.isActive())) {
+					createExplosionEvent(entityInExplosionId);
+				}
+				processedEvents.add(inAnExplosion);
 			}	
 		}
 	}
 	
-	private void createExplosionEvent(int bombID){
-		
+	private void createExplosionEvent(int bombID) {
+
 		EntityManager entityManager = getEntityManager();
-		
 		CellPlacement bombPlacement = (CellPlacement) entityManager.getComponent(CellPlacement.class, bombID);
 		Explosive bombExplosive = (Explosive) entityManager.getComponent(Explosive.class, bombID);
+		Timer bombTimer = (Timer) entityManager.getComponent(Timer.class, bombID);
 		ExplosionStartedEvent explosion = new ExplosionStartedEvent();
 		explosion.setEventId(entityManager.getUniqueId());
 		explosion.setOwnerId(bombID);
 		explosion.setInitialPosition(bombPlacement);
 		explosion.setExplosionRange(bombExplosive.getExplosionRange());
+		bombTimer.setActive(false);
 		entityManager.addEvent(explosion);
 	}
 	
@@ -126,21 +127,8 @@ public class BombSystem extends BaseSystem {
 		
 	}
 
-//	public void verifyAndDropBomb(BombDropper dropper){
-//		
-//		//TODO verify if the character has not dropped too much bombs
-//		
-//		Entity bomb = createTimeBomb(dropper);
-//		getEntityManager().addEntity(bomb);
-//		
-//		//TODO if it is a romete controlled bomb, 
-//		//make the link so the user can remote explod it
-//		
-//	}
-	
 	/**
 	 * Make a Bomb
-	 * 
 	 * @param dropper
 	 */
 	private Entity createTimeBomb(BombDropper dropper){
