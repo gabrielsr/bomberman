@@ -1,6 +1,6 @@
 package br.unb.unbomber.component;
 
-import br.unb.unbomber.core.Entity;
+import br.unb.unbomber.core.Component;
 
 
 /**
@@ -11,11 +11,11 @@ import br.unb.unbomber.core.Entity;
  * @author gabrielsr@gmail.com
  *
  */
-public class Explosion extends Entity{
+public class Explosion extends Component{
 
 	boolean isPassThrough; // Does it pass through soft blocks?
 	boolean isHardPassThrough; // Does it pass through hard blocks?
-	int range;				 // How much further will it propagate?
+	int explosionRange;				 // How much further will it propagate?
 	Direction propagationDirection;
 	float countdown; 			// How long does it last?
 	float propagationCountdown; // How long does it take to propagate to the

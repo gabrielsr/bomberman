@@ -59,4 +59,10 @@ public interface EntityManager {
 	*/
 	//public void addComponents(Component newComponent, String entityId);
 
+	/**
+	 * Return a Unique Id each time it's called
+	 * 
+	 * @return uniqueId
+	 */
+	public int getUniqueId();
 }
