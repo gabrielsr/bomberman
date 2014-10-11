@@ -59,4 +59,29 @@ public interface EntityManager {
 	*/
 	//public void addComponents(Component newComponent, String entityId);
 
+	/**
+	* Remove a component from model
+	*/
+	void remove(Component component);
+
+	/**
+	* Remove a entity from model
+	*/
+	void remove(Entity entity);
+
+	/**
+	* Remove a event from model
+	*/
+	void remove(Event event);
+
+	/**
+	* Remove a entity by its Id
+	*/
+	public void removeEntityById(int entityId);
+	
+	/**
+	* Remove a component by its Entity Id
+	*/	
+	public void removeComponentByEntityId(Class<?> componentType, int entityId);
+
 }
