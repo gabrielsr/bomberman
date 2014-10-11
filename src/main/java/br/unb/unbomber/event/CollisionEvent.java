@@ -16,15 +16,17 @@ public class CollisionEvent extends Event {
 	}
 	
 	//set the id of an entity which collided
-	public void  setSourceId(int id){
+	public void setSourceId(int id){
 		sourceId = id;
 	}
 	
-	public int  getTargetId(){
+	public int getTargetId(){
 		return targetId;
 	}
 	
-	public void  setTarget(int id){
+	public void setTarget(int id){
 		targetId = id;
 	}
+	
+
 }

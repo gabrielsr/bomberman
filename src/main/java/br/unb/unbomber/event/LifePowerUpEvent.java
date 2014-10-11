@@ -8,7 +8,7 @@ public class LifePowerUpEvent extends Event {
 	int targetId;
 	int health;
 	
-	public LifePowerUpEvent(int sourceId, int targetId, int setHealth){
+	public LifePowerUpEvent(int sourceId, int targetId, int health){
 		this.sourceId = sourceId;
 		this.targetId = targetId;
 		this.health = health;
@@ -33,8 +33,6 @@ public class LifePowerUpEvent extends Event {
 
 	//increase life
 	public void setHealth(int health){
-		return health;
+		this.health=health;
 	}
-
-	public 
 }
