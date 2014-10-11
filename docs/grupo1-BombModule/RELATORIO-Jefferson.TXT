@@ -1,0 +1,26 @@
+RELATORIO-Jefferson.TXT
+
+# Grupo 1: Bomb Módule
+
+	Breno
+	Denis
+	Diego
+	Jefferson
+
+# Github: https://github.com/DRA2840/bomberman
+
+# Planejamento
+
+Data | Horas Trabalhadas	| Tipo Tarefa 				| Descrição da Tarefa
+---------------+------------+---------------------------+-------------------...
+03/10 (sexta)  | 2 horas 	| Estudar					| Est. conceitos da arquitetura ECS [1][2]
+04/10 (sábado) | 1 hora  	| Configurar ambiente		| Conf. eclipse com repositório github comum ao grupo
+04/10 (sábado) | 2 horas  	| Revisar especificações	| Documentação do projeto (wiki) e seu código fonte
+05/10 (domingo)| 1 hora  	| Revisar código do módulos	| Revisar código do BombSystem já implementado, identificando as funcinalidades já implementadas e outras necessárias ao módulo
+06/10 (segunda)| 3 horas  	| Codificar módulo 			| Codificar tratamento do evento: CollisionEvent 
+07/10 (terça)  | 2 horas  	| Revisar código do módulo  | Tratar em grupo (durante o horário da aula) os problemas encontrados na codificação do módulo
+08/10 (quarta) | 2 horas  	| Codificar teste unitário 	| Codificar teste: triggeredAfterTimeToExplodeTest
+09/10 (quinta) | 2 horas  	| Planejar próxima sprint	| Revisão em grupo (durante o horário da aula) do ocorrido na sprint, divisão de tarefas e planejamento da proxima sprint. 
+
+[1] http://www.gamedev.net/page/resources/_/technical/game-programming/case-study-bomberman-mechanics-in-an-entity-component-system-r3159
+[2] http://www.gamedev.net/page/resources/_/technical/game-programming/understanding-component-entity-systems-r3013
