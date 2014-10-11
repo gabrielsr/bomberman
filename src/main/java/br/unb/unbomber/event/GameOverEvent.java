@@ -28,7 +28,7 @@ public class GameOverEvent extends Event {
 	
 	//analizes if has available tries
 	public int availableTries(){
-		return availableTries
+		return availableTries;
 	}
 	
 	
