@@ -13,7 +13,7 @@ public class BombDropper extends Component {
 	private boolean canRemoteTrigger;
 	private boolean areBombsPassThrough;
 	private boolean areBombsHardPassThrough;
-	private int bombRange;
+	private int explosionRange;
 	
 	public int getOnwnerId() {
 		return onwnerId;
@@ -70,12 +70,12 @@ public class BombDropper extends Component {
 		this.areBombsHardPassThrough = areBombsHardPassThrough;
 	}
 
-	public int getBombRange() {
-		return bombRange;
+	public int getExplosionRange() {
+		return explosionRange;
 	}
 
-	public void setBombRange(int bombRange) {
-		this.bombRange = bombRange;
+	public void setExplosionRange(int explosionRange) {
+		this.explosionRange = explosionRange;
 	}
 
 }

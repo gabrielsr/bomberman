@@ -9,6 +9,7 @@ Bomberman\ project/images/
 .settings/
 .project
 .classpath
+.metadata/
 
 # Mac OSX
 .DS_Store

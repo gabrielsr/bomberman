@@ -11,9 +11,8 @@ package br.unb.unbomber.core;
  */
 public class Event {
 
-
 	private int ownerId;
-	
+	private int eventId;
 
 	public int getOwnerId() {
 		return ownerId;
@@ -21,5 +20,13 @@ public class Event {
 
 	public void setOwnerId(int ownerId) {
 		this.ownerId = ownerId;
+	}
+	
+	public int getEventId() {
+		return eventId;
+	}
+	
+	public void setEventId(int eventId) {
+		this.eventId = eventId;
 	}
 }

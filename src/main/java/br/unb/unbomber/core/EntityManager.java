@@ -112,4 +112,10 @@ public interface EntityManager {
 	 */
 	public void removeComponentByEntityId(Class<?> componentType, int entityId);
 
+	/**
+	 * Return a Unique Id each time it's called
+	 * 
+	 * @return uniqueId
+	 */
+	public int getUniqueId();
 }
