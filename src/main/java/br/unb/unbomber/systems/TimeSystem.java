@@ -1,5 +1,6 @@
 package br.unb.unbomber.systems;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.unb.unbomber.component.Timer;
@@ -22,6 +23,8 @@ public class TimeSystem extends BaseSystem {
 	public void update() {
 		List<Component> timedEffects = getEntityManager().getComponents(Timer.class);
 		
+		//list of 
+		List<Timer> toRemoveList = new ArrayList<Timer>();
 		for (Component component : timedEffects) {
 			Timer timeEffect = (Timer) component;
 			timeEffect.tick();
@@ -30,7 +33,15 @@ public class TimeSystem extends BaseSystem {
 			 */
 			if(timeEffect.isOver()){
 				getEntityManager().addEvent(timeEffect.getEvent());
+				
+				// add to a list of components to remove, as we can't remove
+				// because we can't change a list when we are iterating in it.
+				toRemoveList.add(timeEffect);			
 			}
+		}
+		
+		for(Component component : toRemoveList) {
+			getEntityManager().remove(component);
 		}
 
 	}

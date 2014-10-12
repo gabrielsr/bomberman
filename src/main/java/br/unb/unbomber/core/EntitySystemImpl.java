@@ -19,7 +19,12 @@ public class EntitySystemImpl implements EntityManager {
 	
 	private static EntityManager instance;
 	
-	private int uniqueIdSequence;
+	/**
+	 * First id number. 
+	 */
+	private final int ID_START = 1;
+	
+	private int uniqueIdSequence = ID_START;
 	
 	public static void init(){
 		instance = new EntitySystemImpl(
@@ -37,6 +42,25 @@ public class EntitySystemImpl implements EntityManager {
 			init();
 		}
 		return instance;
+	}
+	
+
+	@Override
+	public Entity createEntity() {
+		Entity entity = new Entity(getUniqueId());
+		return entity;
+	}
+	
+
+	@Override
+	public void update(Entity entity) {
+		//add the components to the model 
+		for(Component component:entity.getComponents()){
+			if(component.getEntityId()==0){
+				throw new IllegalArgumentException("Entity not properly initialize. A Component without EntityId");
+			}
+			addComponent(component);
+		}
 	}
 	
 	@Override
@@ -90,10 +114,23 @@ public class EntitySystemImpl implements EntityManager {
 		componentList.add(component);
 	}
 
+	/**
+	 *  This method is deprecated and should be removed in next versions.
+	 *  
+	 *  Use createEntity() / update() instead
+	 */
 	@Override
+	@Deprecated
 	public void addEntity(Entity entity) {
-		entity.setEntityId(getUniqueId());
+		// create a entity using the right 
+		Entity newEntity = createEntity();
+		
+		// set the generated key in the old entity
+		entity.setEntityId(newEntity.getEntityId());
+		
+		//add the components to the model 
 		for(Component component:entity.getComponents()){
+			component.setEntityId(newEntity.getEntityId());
 			addComponent(component);
 		}
 	}
@@ -106,5 +143,55 @@ public class EntitySystemImpl implements EntityManager {
 	public int getUniqueId(){
 		return this.uniqueIdSequence++;
 	}
+
+	@Override
+	public void remove(Component component) {
+		List<Component> componentList = this.components.get(component.getClass());
+		if(componentList == null){
+			throw new IllegalArgumentException("Type not in entity manager. It was not added so it can't be removed");
+		}
+		componentList.remove(component);
+	}
+
+	@Override
+	public void remove(Entity entity) {
+		for(Component component:entity.getComponents()){
+			remove(component);
+		}
+	}
+	
+	@Override
+	public void removeEntityById(int entityId) {
+		for(Class<?> type:components.keySet()){
+			removeComponentByEntityId(type, entityId);
+		}
+	}
+	
+	@Override
+	public void removeComponentByEntityId(Class<?> componentType, int entityId) {
+		List<Component> componentsOfType = this.components.get(componentType);
+		
+		//Should it throw an Exception??
+		if(componentsOfType==null){
+			return;
+		}
+		
+		for(Component component: componentsOfType){
+			//remove if it has the expected entityId
+			if(component.getEntityId() == entityId){
+				componentsOfType.remove(component);
+			}
+		}
+	}
+
+	@Override
+	public void remove(Event event) {
+		List<Event> eventList = this.events.get(event.getClass());
+		if(eventList == null){
+			throw new IllegalArgumentException("Type not in entity manager. It was not added so it can't be removed");
+		}
+		eventList.remove(event);		
+	}
+
 
 }

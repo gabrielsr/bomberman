@@ -155,7 +155,7 @@ public class BombSystem extends BaseSystem {
 		}
 		if (bombCounter < dropper.getPermittedSimultaneousBombs()) {
 			Entity bomb = createTimeBomb(dropper);
-			getEntityManager().addEntity(bomb);
+			getEntityManager().update(bomb);
 		}
 				
 		//TODO if it is a romete controlled bomb, 
@@ -178,7 +178,8 @@ public class BombSystem extends BaseSystem {
 		CellPlacement dropperPlacement = (CellPlacement) getEntityManager().getComponent(CellPlacement.class,
 				dropper.getEntityId());
 		
-		Entity bomb = new Entity();
+		Entity bomb = getEntityManager().createEntity();
+		
 		
 		//The bomb is owned by its dropper
 		bomb.setOnwnerId(dropper.getEntityId());
@@ -205,6 +206,7 @@ public class BombSystem extends BaseSystem {
 		bomb.addComponent(bombExplosive);
 		bomb.addComponent(bombPlacement);
 		bomb.addComponent(bombTimer);
+		
 		
 		return bomb;
 		
