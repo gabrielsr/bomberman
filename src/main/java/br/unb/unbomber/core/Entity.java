@@ -18,7 +18,20 @@ public class Entity {
 	
 	private List<Component> components;
 
+	/**
+	 * This method is deprecated. You should use EntityManager.createEntity()
+	 */
+	@Deprecated
+	public Entity() {
+	}
+	
+	
+	public Entity(int uniqueId) {
+		this.entityId = uniqueId;
+	}
+
 	public void addComponent(Component component){
+		component.setEntityId(entityId);
 		getComponents().add(component);
 	}
 	
@@ -32,15 +45,20 @@ public class Entity {
 	public int getEntityId(){
 		return this.entityId;
 	}
-	
+
+	/**
+	 * ID should be setted in the constructor
+	 * 
+	 * @see EntityManager#createEntity()
+	 * @param entityId
+	 */
+	@Deprecated
 	public void setEntityId(int entityId){
 		// update components entityId
-		for(Component component: this.components){
-			component.setEntityId(entityId);
-		}
 		this.entityId = entityId;
 	}
 
+	
 	public int getOnwnerId() {
 		return onwnerId;
 	}

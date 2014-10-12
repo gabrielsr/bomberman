@@ -37,7 +37,7 @@ public class BombSystemTestCase {
 		// create a entity with components:
 		// * bombDropper
 		// * placement
-		Entity anEntity = new Entity();
+		Entity anEntity = entityManager.createEntity();
 		
 		//Create the placement component
 		CellPlacement dropperPlacement = new CellPlacement();
@@ -50,7 +50,7 @@ public class BombSystemTestCase {
 		anEntity.addComponent(bombDropper);
 		anEntity.addComponent(dropperPlacement);
 		
-		entityManager.addEntity(anEntity);
+		entityManager.update(anEntity);
 		
 		//create an DROP_BOMB Command Event
 		ActionCommandEvent event = new ActionCommandEvent(ActionType.DROP_BOMB, bombDropper.getEntityId());
@@ -72,7 +72,8 @@ public class BombSystemTestCase {
 	public void dropBombAtSamePlaceTest() {
 		
 		// create a entity
-		Entity anEntity = new Entity();
+		// SO it get an entityId (needed as the new bomb dropped will need it as its ownerId)
+		Entity anEntity = entityManager.createEntity();
 		
 		//Create the placement component
 		CellPlacement dropperPlacement = new CellPlacement();
@@ -91,8 +92,7 @@ public class BombSystemTestCase {
 		anEntity.addComponent(dropperPlacement);
 		
 		// add the dropper to the model
-		// SO it get an entityId (needed as the new bomb dropped will need it as its ownerId)
-		entityManager.addEntity(anEntity);
+		entityManager.update(anEntity);
 		
 		//create an DROP_BOMB Command Event
 		ActionCommandEvent event = new ActionCommandEvent(ActionType.DROP_BOMB, bombDropper.getEntityId());

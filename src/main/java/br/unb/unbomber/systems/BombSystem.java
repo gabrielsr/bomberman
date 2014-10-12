@@ -48,7 +48,7 @@ public class BombSystem extends BaseSystem {
 		
 		//TODO verificar TimeOutEvent de bombas que devem ser disparadas neste turno
 		
-		//TODO verificar InAnExplosionEvent de bombas que extão no range de outras bombas
+		//TODO verificar InAnExplosionEvent de bombas que extï¿½o no range de outras bombas
 		// e devem ser disparadas por efeito cascata
 		
 	}
@@ -60,10 +60,9 @@ public class BombSystem extends BaseSystem {
 		
 		//TODO verify if the character has not dropped too much bombs
 		
-		Entity bomb = createTimeBomb(dropper);
-		getEntityManager().addEntity(bomb);
-	
-		
+		Entity bomb = createTimeBomb(dropper);	
+		getEntityManager().update(bomb);
+
 		//TODO if it is a romete controlled bomb, 
 		//make the link so the user can remote explod it
 		
@@ -85,7 +84,8 @@ public class BombSystem extends BaseSystem {
 		CellPlacement dropperPlacement = (CellPlacement) getEntityManager().getComponent(CellPlacement.class,
 				dropper.getEntityId());
 		
-		Entity bomb = new Entity();
+		Entity bomb = getEntityManager().createEntity();
+		
 		
 		//The bomb is owned by its dropper
 		bomb.setOnwnerId(dropper.getEntityId());
@@ -112,6 +112,7 @@ public class BombSystem extends BaseSystem {
 		bomb.addComponent(bombExplosive);
 		bomb.addComponent(bombPlacement);
 		bomb.addComponent(bombTimer);
+		
 		
 		return bomb;
 		
