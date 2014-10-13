@@ -43,6 +43,7 @@ public class InAnExplosionEventTestCase {
 	public void testIfBombExplode(){
 		//Create bombDropper
 		BombDropper bombDropper = new BombDropper();
+		entityManager.addComponent(bombDropper);
 		
 		//put this bomb on grid
 		pubBombOnGrid(0,0, bombDropper);

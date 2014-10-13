@@ -43,8 +43,8 @@ public class BombSystem extends BaseSystem {
 		super(model);
 	}
 	
-	@Override 
 	
+	@Override 
 	//Method for the updating of all bombs
 	public void update() {
 		//one instance of the EntityManage
@@ -144,7 +144,7 @@ public class BombSystem extends BaseSystem {
 		if (explosives != null) {
 			for (Component component: explosives) {
 				Explosive explosive = (Explosive) component;
-				if (explosive.getOnwnerId() == dropper.getOnwnerId()) {
+				if (explosive.getOnwnerId() == dropper.getEntityId()) {
 					Timer timer = (Timer) getEntityManager().getComponent(Timer.class, explosive.getEntityId());
 					// Should count only the active bombs
 					if (!timer.isOver()) {
@@ -195,18 +195,18 @@ public class BombSystem extends BaseSystem {
 		Explosive bombExplosive = new Explosive();
 		//the Bomb should have the same power of its dropper
 		bombExplosive.setExplosionRange(dropper.getExplosionRange());
+		bombExplosive.setOnwnerId(dropper.getEntityId());
 
 		//create Event for time over
 		TimeOverEvent triggeredBombEvent = new TimeOverEvent(); 
 		triggeredBombEvent.setAction(TRIGGERED_BOMB_ACTION);
-		
 		//create timer component
 		Timer bombTimer = new Timer(90, triggeredBombEvent);			
 		
+		//Add components
 		bomb.addComponent(bombExplosive);
 		bomb.addComponent(bombPlacement);
 		bomb.addComponent(bombTimer);
-		
 		
 		return bomb;
 		

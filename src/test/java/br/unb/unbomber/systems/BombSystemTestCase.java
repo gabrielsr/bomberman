@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
+import javafx.scene.control.Cell;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -43,13 +45,9 @@ public class BombSystemTestCase {
 		// create a entity with components:
 		// * bombDropper
 		// * placement
-		Entity anEntity = entityManager.createEntity();
+		Entity anEntity = createDropperEntity();
 		
-
-		//Create Dropper
-		BombDropper bombDropper = new BombDropper();
-		bombDropper.setPermittedSimultaneousBombs(5);
-				
+		BombDropper bombDropper = (BombDropper) entityManager.getComponent(BombDropper.class, anEntity.getEntityId());
 		//put one bomb on grid
 		pubBombOnGrid(0,0, bombDropper);
 		
@@ -78,9 +76,13 @@ public class BombSystemTestCase {
 		int CELL_X = 10;
 		int CELL_Y = 15;
 		
-		//Create Dropper
-		BombDropper bombDropper = new BombDropper();
-		bombDropper.setPermittedSimultaneousBombs(5);
+		// create a entity with components:
+		// * bombDropper
+		// * placement
+		Entity anEntity = createDropperEntity();
+		
+		BombDropper bombDropper = (BombDropper) entityManager.getComponent(BombDropper.class, anEntity.getEntityId());
+		
 		//Put bomb on grid
 		pubBombOnGrid(CELL_X,CELL_Y,bombDropper);
 		
@@ -100,8 +102,12 @@ public class BombSystemTestCase {
 		
 		int max_number_of_bombs = 2;
 		
-		//Create Dropper
-		BombDropper bombDropper = new BombDropper();
+		// create a entity with components:
+		// * bombDropper
+		// * placement
+		Entity anEntity = createDropperEntity();
+		
+		BombDropper bombDropper = (BombDropper) entityManager.getComponent(BombDropper.class, anEntity.getEntityId());
 		bombDropper.setPermittedSimultaneousBombs(max_number_of_bombs);
 		
 		//put 2 bombs on grid
@@ -113,6 +119,7 @@ public class BombSystemTestCase {
 		//extra bomb will be ignored
 		pubBombOnGrid(0,0, bombDropper);
 		
+
 		assertEquals(entityManager.getComponents(Explosive.class).size() , max_number_of_bombs);
 		
 		//pseudo power-up
@@ -125,6 +132,7 @@ public class BombSystemTestCase {
 		pubBombOnGrid(0,0, bombDropper);
 		pubBombOnGrid(0,0, bombDropper);
 
+
 		assertEquals(entityManager.getComponents(Explosive.class).size() , max_number_of_bombs);
 		
 	}
@@ -133,9 +141,12 @@ public class BombSystemTestCase {
 	@Test
 	public void triggeredAfterTimeToExplodeTest() {
 		
-		//Create Dropper
-		BombDropper bombDropper = new BombDropper();
-		bombDropper.setPermittedSimultaneousBombs(5);
+		// create a entity with components:
+		// * bombDropper
+		// * placement
+		Entity anEntity = createDropperEntity();
+		
+		BombDropper bombDropper = (BombDropper) entityManager.getComponent(BombDropper.class, anEntity.getEntityId());
 		
 		//put one bomb on grid
 		pubBombOnGrid(0,0, bombDropper);
@@ -179,42 +190,40 @@ public class BombSystemTestCase {
 	}
 	
 	private void pubBombOnGrid(int x, int y, BombDropper bombDropper){
-		// create a entity
-		// SO it get an entityId (needed as the new bomb dropped will need it as its ownerId)
-		Entity anEntity = entityManager.createEntity();
 		
-		//Create the placement component
-		CellPlacement dropperPlacement = new CellPlacement();
+		CellPlacement placement = (CellPlacement) entityManager.getComponent(CellPlacement.class, bombDropper.getEntityId());
 		
-		//set the dropper position
-		dropperPlacement.setCellX(x);
-		dropperPlacement.setCellY(y);
-		
-		//Create the Timer Component
-		TimeOverEvent triggeredBombEvent = new TimeOverEvent(); 
-		triggeredBombEvent.setAction(TRIGGERED_BOMB_ACTION);
-		Timer timer = new Timer(90, triggeredBombEvent );
-		
-		//Create the Explosive Component
-		Explosive explosive = new Explosive();
-		explosive.setExplosionRange(bombDropper.getExplosionRange());
-		
-		// add the components
-		anEntity.addComponent(dropperPlacement);
-		anEntity.addComponent(timer);
-		anEntity.addComponent(explosive);
-		
-		// add the dropper to the model
-		entityManager.update(anEntity);
+		placement.setCellX(x);
+		placement.setCellY(y);
 		
 		//create an DROP_BOMB Command Event
 		ActionCommandEvent event = new ActionCommandEvent(ActionType.DROP_BOMB, bombDropper.getEntityId());
 		entityManager.addEvent(event);
 		
-
-		entityManager.update(anEntity);
 		//run the system
 		bombSystem.update();
+	}
+	
+	private Entity createDropperEntity(){
+		
+		Entity anEntity = entityManager.createEntity();
+		
+		//Create Dropper
+		BombDropper bombDropper = new BombDropper();
+		bombDropper.setPermittedSimultaneousBombs(5);
+		
+		//Create Placement
+		CellPlacement placement = new CellPlacement();
+		placement.setCellX(0);
+		placement.setCellY(0);
+		
+		//Add components
+		anEntity.addComponent(bombDropper);
+		anEntity.addComponent(placement);
+		
+		entityManager.update(anEntity);
+		
+		return anEntity;
 	}
 
 }
