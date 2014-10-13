@@ -122,14 +122,12 @@ public class BombSystem extends BaseSystem {
 		CellPlacement bombPlacement = (CellPlacement)
 			entityManager.getComponent(CellPlacement.class, bombID); //get the bomb placement from the entityManager
 		Explosive bombExplosive = (Explosive) entityManager.
-			getComponent(Explosive.class, bombID); //get the bomb explosive from the entityManager
-		Timer bombTimer = (Timer) entityManager.getComponent(Timer.class, bombID); // get the bomb timer from the entityManager 
+			getComponent(Explosive.class, bombID); //get the bomb explosive from the entityManager 
 		ExplosionStartedEvent explosion = new ExplosionStartedEvent(); //starts a new explosion
 		explosion.setEventId(entityManager.getUniqueId()); //set the event ID on the entityManager
 		explosion.setOwnerId(bombID); //set the ownerID to the bobID value
 		explosion.setInitialPosition(bombPlacement); //set the initial position to the position got from the entityManager
 		explosion.setExplosionRange(bombExplosive.getExplosionRange());//set bomb range to the range got from the explosive
-		bombTimer.setActive(false); //desactivate the bomb - when it's active it explode!-
 		entityManager.addEvent(explosion); //add this event to the entityManager
 	}
 	
