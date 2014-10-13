@@ -5,7 +5,7 @@ import br.unb.unbomber.core.Component;
 public class BombDropper extends Component {
 	
 
-	private int onwnerId;
+	private int ownerId;
 	
 	private int permittedSimultaneousBombs;
 	private boolean firstBombInfinite;
@@ -15,12 +15,12 @@ public class BombDropper extends Component {
 	private boolean areBombsHardPassThrough;
 	private int explosionRange;
 	
-	public int getOnwnerId() {
-		return onwnerId;
+	public int getOwnerId() {
+		return ownerId;
 	}
 
-	public void setOnwnerId(int onwnerId) {
-		this.onwnerId = onwnerId;
+	public void setOwnerId(int ownerId) {
+		this.ownerId = ownerId;
 	}
 
 	public int getPermittedSimultaneousBombs() {

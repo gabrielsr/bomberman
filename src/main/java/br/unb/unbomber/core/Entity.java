@@ -14,7 +14,7 @@ public class Entity {
 
 	private int entityId;
 	
-	private int onwnerId;
+	private int ownerId;
 	
 	private List<Component> components;
 
@@ -59,12 +59,12 @@ public class Entity {
 	}
 
 	
-	public int getOnwnerId() {
-		return onwnerId;
+	public int getOwnerId() {
+		return ownerId;
 	}
 
-	public void setOnwnerId(int onwnerId) {
-		this.onwnerId = onwnerId;
+	public void setOwnerId(int ownerId) {
+		this.ownerId = ownerId;
 	}
 
 
