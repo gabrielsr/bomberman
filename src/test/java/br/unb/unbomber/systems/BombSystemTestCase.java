@@ -32,7 +32,7 @@ public class BombSystemTestCase {
 	public void setUp() throws Exception {
 		
 		//init a new system for each test case
-		//EntitySystemImpl.init();
+		EntitySystemImpl.init();
 		entityManager = EntitySystemImpl.getInstance();
 		bombSystem = new BombSystem(entityManager);
 	}
