@@ -10,6 +10,15 @@ Universidade de Brasília - UnB
 
 2/2014
 
+== Integração Contínua
+
+A cada push para o repositório, é feito um build completo do projeto, executando os testes e verificando se as 
+modificações inseriram alguma falta ou quebraram algum teste.
+
+Para verificar o status das últimas construções, entre no link: 
+	https://travis-ci.org/DRA2840/bomberman/builds
+
+
 
 = Instruções para Montagem de Ambiente de Desenvolvimento
 
