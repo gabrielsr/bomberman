@@ -10,15 +10,19 @@ import org.junit.Test;
 import br.unb.unbomber.component.BombDropper;
 import br.unb.unbomber.component.CellPlacement;
 import br.unb.unbomber.component.Explosive;
+import br.unb.unbomber.component.Timer;
 import br.unb.unbomber.core.Component;
 import br.unb.unbomber.core.Entity;
 import br.unb.unbomber.core.EntityManager;
 import br.unb.unbomber.core.EntitySystemImpl;
 import br.unb.unbomber.event.ActionCommandEvent;
 import br.unb.unbomber.event.ExplosionStartedEvent;
+import br.unb.unbomber.event.TimeOverEvent;
 import br.unb.unbomber.event.ActionCommandEvent.ActionType;
 
 public class BombSystemTestCase {
+	
+	private final String TRIGGERED_BOMB_ACTION = "BOMB_TRIGGERED";
 	
 	EntityManager entityManager;
 	BombSystem bombSystem;
@@ -186,9 +190,19 @@ public class BombSystemTestCase {
 		dropperPlacement.setCellX(x);
 		dropperPlacement.setCellY(y);
 		
+		//Create the Timer Component
+		TimeOverEvent triggeredBombEvent = new TimeOverEvent(); 
+		triggeredBombEvent.setAction(TRIGGERED_BOMB_ACTION);
+		Timer timer = new Timer(90, triggeredBombEvent );
+		
+		//Create the Explosive Component
+		Explosive explosive = new Explosive();
+		explosive.setExplosionRange(bombDropper.getExplosionRange());
+		
 		// add the components
-		anEntity.addComponent(bombDropper);
 		anEntity.addComponent(dropperPlacement);
+		anEntity.addComponent(timer);
+		anEntity.addComponent(explosive);
 		
 		// add the dropper to the model
 		entityManager.update(anEntity);
@@ -197,6 +211,8 @@ public class BombSystemTestCase {
 		ActionCommandEvent event = new ActionCommandEvent(ActionType.DROP_BOMB, bombDropper.getEntityId());
 		entityManager.addEvent(event);
 		
+
+		entityManager.update(anEntity);
 		//run the system
 		bombSystem.update();
 	}
