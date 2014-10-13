@@ -1,7 +1,5 @@
 package br.unb.unbomber.systems;
 
-import static org.junit.Assert.assertEquals;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,9 +11,9 @@ import br.unb.unbomber.core.Entity;
 import br.unb.unbomber.core.EntityManager;
 import br.unb.unbomber.core.EntitySystemImpl;
 import br.unb.unbomber.event.ActionCommandEvent;
-import br.unb.unbomber.event.TimeOverEvent;
 import br.unb.unbomber.event.ActionCommandEvent.ActionType;
 import br.unb.unbomber.event.InAnExplosionEvent;
+import br.unb.unbomber.event.TimeOverEvent;
 
 
 
