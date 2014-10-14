@@ -18,6 +18,7 @@ import br.unb.unbomber.core.Entity;
 import br.unb.unbomber.core.EntityManager;
 import br.unb.unbomber.core.EntityManagerImpl;
 import br.unb.unbomber.event.ActionCommandEvent;
+import br.unb.unbomber.event.InAnExplosionEvent;
 import br.unb.unbomber.event.ActionCommandEvent.ActionType;
 import br.unb.unbomber.event.ExplosionStartedEvent;
 
@@ -178,6 +179,32 @@ public class BombSystemTestCase {
 		//no more explosions
 		assertEquals(entityManager.getEvents(ExplosionStartedEvent.class).size(), 2);
 	}
+	
+	@Test
+	public void testIfAnExplosionEventTriggersAnotherBomb(){
+		//Create bombDropper
+		Entity anEntity = createDropperEntity();
+		
+		BombDropper bombDropper = (BombDropper) entityManager.getComponent(BombDropper.class, anEntity.getEntityId());
+		//put one bomb on grid
+		pubBombOnGrid(0,0, bombDropper);
+		entityManager.update(anEntity);
+		
+		List<Component> explosives = entityManager.getComponents(Explosive.class);
+		
+		//send a event telling that this bomb have to explode 
+		InAnExplosionEvent inAnExplosionEvent = new InAnExplosionEvent();
+		inAnExplosionEvent.setIdHit(explosives.get(0).getEntityId());
+		entityManager.addEvent(inAnExplosionEvent);
+		
+		//update bombSystem to check the events. After that, the BombSystem have  
+		//to create an event of the explosion of the early created bomb
+		this.bombSystem.update();
+		
+		assertEquals( entityManager.getEvents(ExplosionStartedEvent.class).size() , 1);
+	}
+	
+	//Methods used by other tests
 	
 	private void updateSystems(int numberOfInteractions){
 		for (int i=0; i<numberOfInteractions; i++) {
