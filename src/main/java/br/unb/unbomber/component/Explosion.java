@@ -12,7 +12,7 @@ import br.unb.unbomber.core.Component;
  *
  */
 
-/* Explosion não deveria extender de Component? */
+/* Explosion nao deveria extender de Component? */
 public class Explosion extends Component{
 
 	boolean isPassThrough; // Does it pass through soft blocks?

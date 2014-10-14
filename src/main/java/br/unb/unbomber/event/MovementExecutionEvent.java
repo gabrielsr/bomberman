@@ -7,8 +7,12 @@ public class MovementExecutionEvent extends Event {
 	private final CellPlacement finalCell;
 	private final int entityId;
 
-	public MovementExecutionEvent(CellPlacement initialCell, CellPlacement finalCell, int entityId) { 
-		super(); this.initialCell = initialCell; this.finalCell = finalCell; this.entityId = entityId; 
+	public MovementExecutionEvent(CellPlacement initialCell, 
+								CellPlacement finalCell, int entityId) { 
+		super(); 
+		this.initialCell = initialCell; 
+		this.finalCell = finalCell; 
+		this.entityId = entityId; 
 	}
 
 	public CellPlacement getInitialCell() { 

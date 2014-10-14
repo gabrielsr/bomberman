@@ -1,38 +1,31 @@
-//Testa contagem de vidas: incremento
+///LifePowerUpEvent
+// Evento que aumenta health de alguma entidade.
+// Coleta Id de uma entidade que tenha coletado este Power Up.
+
+/* Indica de qual pacote o arquivo pertence */
+/* No caso ele pertence ao Event */
 package br.unb.unbomber.event;
 
+/* Interface para dados de Event */
 import br.unb.unbomber.core.Event;
 
+/* Heranca unica do evento LifePowerUpEvent */
 public class LifePowerUpEvent extends Event {
 	int sourceId;
-	int targetId;
-	int health;
 	
-	public LifePowerUpEvent(int sourceId, int targetId, int health){
+	/* Construtor do Evento */
+	public LifePowerUpEvent(int sourceId){
 		this.sourceId = sourceId;
-		this.targetId = targetId;
-		this.health = health;
 	}
-	//get the id of an entity which cause the damage
+	
+	//get the id of an entity which has collected the power up
 	public int getSourceId(){
 		return sourceId;
 	}
 	
-	//set the id of an entity which cause the damage
-	public void  setSourceId(int id){
-		sourceId = id;
-	}
-	
-	public int  getTargetId(){
-		return targetId;
-	}
-	
-	public void  setTarget(int id){
-		targetId = id;
+	//set the id of an entity which has collected the power up
+	public void  setSourceId(int sourceId){
+		this.sourceId = sourceId;
 	}
 
-	//increase life
-	public void setHealth(int health){
-		this.health=health;
-	}
 }

@@ -1,32 +1,20 @@
-/* Indica de qual pacote o componente pertence */
+/* Indica de qual pacote o arquivo pertence */
+/* No caso ele pertence ao Components */
 package br.unb.unbomber.component;
 
 /* Interface para dados de componente */
 import br.unb.unbomber.core.Component;
 
-/* Herança única do componente Health */
+/* Heranca unica do componente Health */
 public class Health extends Component {
-	
-	/* onwnerId -> Id da entidade associada a este componente */
-	private int onwnerId;
-	
-	/* lifeChar -> Health de uma entidade Character ou Monster  */
+		
+	/* Health de uma entidade Character ou Monster  */
 	private int lifeEntity;
-	/* canTakeDamaged -> Coleta True ou False caso seja permitido retirar 
-	 *	dano de uma entidade monster ou character.
+	/* Coleta True ou False caso seja permitido retirar dano de uma entidade
+	 * monster ou character.
 	 */
 	private boolean canTakeDamaged;
 
-	
-	/* Método para coletar o Id deste component */
-	public int getOnwnerId() {
-		return onwnerId;
-	}
-
-	/* Método para atribuir algum Id a este component */
-	public void setOnwnerId(int onwnerId) {
-		this.onwnerId = onwnerId;
-	}
 
 	/* Inicializa vida completa a uma entidade Monster ou Entity */
 	/* *
@@ -37,24 +25,24 @@ public class Health extends Component {
 	}
 	
 	/* Coleta a quantidade de vida que uma entidade possui */
-	private int isLifeEntity(){
+	private int getLifeEntity(){
 		return lifeEntity;
 	}
 	
 	/* Atribui a possibilidade de causar dano a uma entidade */
-	/* Lógica: Após a retirada de algum dano ao health da entity, System 
-	 * confere se lifeEntity é diferente de zero, caso ainda seja então é
-	 * atribuído ao setTakeDamaged True para que ainda ocorra a oportunidade
+	/* Logica: Apos a retirada de algum dano ao health da entity, System 
+	 * confere se lifeEntity e diferente de zero, caso ainda seja entao e
+	 * atribuido ao setTakeDamaged True para que ainda ocorra a oportunidade
 	 * de causar dano a esta entidade.
-	 * Caso contrário é atribuído False.
+	 * Caso contrario e atribuido False.
 	 */
 	private void setCanTakeDamaged(boolean canTakeDamaged){
 		this.canTakeDamaged = canTakeDamaged;
 	}
 
 	/* Coleta a possibilidade de causar dano a uma entidade */
-	/* Lógica: System confere a possibilidade de retirar danos, caso seja 
-	 * possível ela chama getLifeEntity, retira alguma quantia de vida e atribui
+	/* Logica: System confere a possibilidade de retirar danos, caso seja 
+	 * possivel ela chama getLifeEntity, retira alguma quantia de vida e atribui
 	 * novamente ao setLifeEntity este novo "Health".
 	 */
 	private boolean isCanTakeDamaged(){

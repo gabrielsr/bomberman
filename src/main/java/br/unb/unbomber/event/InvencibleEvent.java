@@ -1,6 +1,6 @@
-//DestroyedEvent
-// Quando uma entidade nao conter mais health.
-// Coleta a Id da entidade que sera destruida do grid.
+//InvencibleEvent
+// Quando uma entidade coletar o Power Up Invencible.
+// Coleta a Id da entidade que coletou este power up.
 
 /* Indica de qual pacote o arquivo pertence */
 /* No caso ele pertence ao Event */
@@ -9,21 +9,21 @@ package br.unb.unbomber.event;
 /* Interface para dados de Event */
 import br.unb.unbomber.core.Event;
 
-/* Heranca unica do evento DestroyedEvent */
-public class DestroyedEvent extends Event {
+/* Heranca unica do evento InvencibleEvent */
+public class InvencibleEvent extends Event {
 	int sourceId;
 	
 	/* Construtor do Evento */
-	public DestroyedEvent(int sourceId){
+	public InvencibleEvent(int sourceId){
 		this.sourceId = sourceId;
 	}
 
-	//get the id of an entity which will be destroyed
+	//get the id of an entity which has collected the power up
 	public int getSourceId(){
 		return sourceId;
 	}
 	
-	//set the id of an entity which will be destroyed
+	//set the id of an entity which has collected the power up
 	public void  setSourceId(int sourceId){
 		this.sourceId = sourceId;
 	}
