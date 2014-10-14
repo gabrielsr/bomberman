@@ -1,9 +1,6 @@
 package br.unb.unbomber.systems;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static junit.framework.Assert.*;
 
 import java.util.List;
 
@@ -38,6 +35,16 @@ public class BombSystemTestCase {
 		bombSystem = new BombSystem(entityManager);
 	}
 	
+	@Test
+	public void testConstructor(){
+		bombSystem = new BombSystem();
+		
+		//If EntityManager was not set internally, will create NullPointerException
+		bombSystem.update();
+		
+		//Won't get here if NPE was created
+		assertTrue(true);
+	}
 
 	@Test
 	public void dropBombTest() {

@@ -28,14 +28,14 @@ public class BombSystem extends BaseSystem {
 	// Define a set of processed events
 	Set<Event> processedEvents = new HashSet<Event>(500);
 
-	/*
+	/**
 	 * bomb constructor
 	 */
 	public BombSystem() {
 		super();
 	}
 
-	/*
+	/**
 	 * bomb constructor
 	 * 
 	 * @param model one instance of the EntityManager
@@ -45,7 +45,10 @@ public class BombSystem extends BaseSystem {
 	}
 
 	
-	// Method for the updating of all bombs
+	/**
+	 * This method is called every turn. It checks if there is any 
+	 * {@link Event} related to this module and process them.
+	 */
 	public void update() {
 		// one instance of the EntityManage
 		EntityManager entityManager = getEntityManager();
@@ -112,7 +115,8 @@ public class BombSystem extends BaseSystem {
 				// if the explosive exists and its time isn't over and it is
 				// active
 				if ((bombExplosive != null)
-						&& (!bombTimer.isOver() && bombTimer.isActive())) {
+						&& (!bombTimer.isOver() && bombTimer.isActive()) && 
+						(!processedEvents.contains(bombExplosive))) {
 					// call the method createExplosionEvent to start a new
 					// explosion
 					createExplosionEvent(entityInExplosionId);
@@ -123,7 +127,7 @@ public class BombSystem extends BaseSystem {
 		}
 	}
 
-	/*
+	/**
 	 * creates a createExplosionEvent event
 	 * 
 	 * @param bombID id of the event
@@ -144,7 +148,8 @@ public class BombSystem extends BaseSystem {
 	}
 
 	/**
-	 * Drop a bomb.
+	 * Drop a bomb if dropper didn't reach the limit
+	 * @param dropper {@link BombDropper} that wants to drop a bomb
 	 */
 	public final void verifyAndDropBomb(BombDropper dropper) {
 
@@ -176,9 +181,9 @@ public class BombSystem extends BaseSystem {
 	}
 
 	/**
-	 * Make a Bomb.
+	 * Create a timed bomb
 	 * 
-	 * @param dropper
+	 * @param dropper {@link BombDropper} that will drop a bomb
 	 * @return new Bomb
 	 */
 	private Entity createTimeBomb(final BombDropper dropper) {
