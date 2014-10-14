@@ -1,3 +1,13 @@
+/*
+ * BombSystemTestCase
+ * 
+ * Version information
+ *
+ * Date
+ * 
+ * Copyright notice
+ */
+
 package br.unb.unbomber.systems;
 
 import static junit.framework.Assert.*;

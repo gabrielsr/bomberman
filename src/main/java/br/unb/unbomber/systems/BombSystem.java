@@ -1,3 +1,13 @@
+/*
+ * BombSystem
+ * 
+ * Version information
+ *
+ * Date
+ * 
+ * Copyright notice
+ */
+
 package br.unb.unbomber.systems;
 
 import java.util.HashSet;
@@ -44,8 +54,10 @@ public class BombSystem extends BaseSystem {
 		super(model);
 	}
 
+
 	
 	/**
+	 * Method for the updating of all bombs.
 	 * This method is called every turn. It checks if there is any 
 	 * {@link Event} related to this module and process them.
 	 */
@@ -134,17 +146,38 @@ public class BombSystem extends BaseSystem {
 	 */
 	private void createExplosionEvent(int bombID) {
 
-		EntityManager entityManager = getEntityManager(); // get the entityManager
-		CellPlacement bombPlacement = (CellPlacement)
-			entityManager.getComponent(CellPlacement.class, bombID); //get the bomb placement from the entityManager
-		Explosive bombExplosive = (Explosive) entityManager.
-			getComponent(Explosive.class, bombID); //get the bomb explosive from the entityManager 
-		ExplosionStartedEvent explosion = new ExplosionStartedEvent(); //starts a new explosion
-		explosion.setEventId(entityManager.getUniqueId()); //set the event ID on the entityManager
-		explosion.setOwnerId(bombID); //set the ownerID to the bobID value
-		explosion.setInitialPosition(bombPlacement); //set the initial position to the position got from the entityManager
-		explosion.setExplosionRange(bombExplosive.getExplosionRange());//set bomb range to the range got from the explosive
-		entityManager.addEvent(explosion); //add this event to the entityManager
+		EntityManager entityManager = getEntityManager(); // get the
+															// entityManager
+		CellPlacement bombPlacement = (CellPlacement) entityManager
+				.getComponent(CellPlacement.class, bombID); // get the bomb
+															// placement from
+															// the entityManager
+		Explosive bombExplosive = (Explosive) entityManager.getComponent(
+				Explosive.class, bombID); // get the bomb explosive from the
+											// entityManager
+		ExplosionStartedEvent explosion = new ExplosionStartedEvent(); // starts
+																		// a new
+																		// explosion
+		explosion.setEventId(entityManager.getUniqueId()); // set the event ID
+															// on the
+															// entityManager
+		explosion.setOwnerId(bombID); // set the ownerID to the bobID value
+		explosion.setInitialPosition(bombPlacement); // set the initial position
+														// to the position got
+														// from the
+														// entityManager
+		explosion.setExplosionRange(bombExplosive.getExplosionRange());// set
+																		// bomb
+																		// range
+																		// to
+																		// the
+																		// range
+																		// got
+																		// from
+																		// the
+																		// explosive
+		entityManager.addEvent(explosion); // add this event to the
+											// entityManager
 	}
 
 	/**
@@ -161,7 +194,8 @@ public class BombSystem extends BaseSystem {
 			for (Component component : explosives) {
 				Explosive explosive = (Explosive) component;
 				if (explosive.getOwnerId() == dropper.getEntityId()) {
-					Timer timer = (Timer) getEntityManager().getComponent(Timer.class, explosive.getEntityId());
+					Timer timer = (Timer) getEntityManager().getComponent(
+							Timer.class, explosive.getEntityId());
 
 					// Should count only the active bombs
 					if (!timer.isOver()) {
@@ -197,8 +231,8 @@ public class BombSystem extends BaseSystem {
 				.getComponent(CellPlacement.class, dropper.getEntityId());
 
 		Entity bomb = getEntityManager().createEntity();
-		
-		//The bomb is owned by its dropper
+
+		// The bomb is owned by its dropper
 		bomb.setOwnerId(dropper.getEntityId());
 
 		// Create the placement component
@@ -218,16 +252,16 @@ public class BombSystem extends BaseSystem {
 		TimeOverEvent triggeredBombEvent = new TimeOverEvent();
 		triggeredBombEvent.setAction(TRIGGERED_BOMB_ACTION);
 
-		//create timer component
-		Timer bombTimer = new Timer(90, triggeredBombEvent);			
-		
-		//Add components
+		// create timer component
+		Timer bombTimer = new Timer(90, triggeredBombEvent);
+
+		// Add components
 		bomb.addComponent(bombExplosive);
 		bomb.addComponent(bombPlacement);
 		bomb.addComponent(bombTimer);
-		
+
 		return bomb;
-		
+
 	}
 
 }

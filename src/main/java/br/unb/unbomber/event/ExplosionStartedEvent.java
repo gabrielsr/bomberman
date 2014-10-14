@@ -1,3 +1,13 @@
+/*
+ * ExplosionStartedEvent
+ * 
+ * Version information
+ *
+ * Date
+ * 
+ * Copyright notice
+ */
+
 package br.unb.unbomber.event;
 
 import br.unb.unbomber.component.CellPlacement;
