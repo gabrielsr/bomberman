@@ -9,18 +9,48 @@ RELATORIO-Diego.TXT
 
 # Github: https://github.com/DRA2840/bomberman
 
-# Planejamento
 
-Data | Horas Trabalhadas	| Tipo Tarefa 				| Descrição da Tarefa
----------------+------------+---------------------------+-------------------...
-03/10 (sexta)  | 2 horas 	| Estudar					| Est. conceitos da arquitetura ECS [1][2]
-04/10 (sábado) | 2 horas  	| Revisar especificações	| Est. documentação do projeto (wiki) e seu código fonte. 
-05/10 (domingo)| 2 horas  	| Revisar código do módulos	| Revisar código do BombSystem já implementado, identificando as funcinalidades já implementadas e outras necessárias ao módulo
-06/10 (segunda)| 3 horas  	| Codificar módulo 			| Codificar tratamento do evento: InAnExplosionEvent 
-07/10 (terça)  | 2 horas  	| Revisar código do módulo  | Tratar em grupo (durante o horário da aula) os problemas encontrados na codificação do módulo
-08/10 (quarta) | 1 hora  	| Diag./corrigir problemas	| Manutenção do repositório GIT. 
-08/10 (quarta) | 2 horas  	| Redigir casos de testes 	| Especificar novos testes para o módulo.
-09/10 (quinta) | 2 horas  	| Planejar próxima sprint	| Revisão em grupo (durante o horário da aula) do ocorrido na sprint, divisão de tarefas e planejamento da proxima sprint. 
+## Sprint 1 (de 03 a 14/10)
+# Planejado
+
+Num Tarefa   | Tipo Tarefa               | Descrição da Tarefa
+-------------+---------------------------+------------------------------------------------------------------------------------------------------------------------------
+ 01          | Estudar                   | Est. conceitos da arquitetura ECS [1][2]
+ 02          | Revisar especificações    | Est. documentação do projeto (wiki) e seu código fonte. 
+ 03          | Revisar código do módulos | Revisar código do BombSystem já implementado, identificando as funcinalidades já implementadas e outras necessárias ao módulo
+ 04          | Codificar módulo          | Codificar tratamento do evento: InAnExplosionEvent 
+ 05          | Revisar código do módulo  | Tratar em grupo (durante o horário da aula) os problemas encontrados na codificação do módulo
+ 06          | Diag./corrigir problemas  | Manutenção do repositório GIT. 
+ 07          | Redigir casos de testes   | Especificar novos testes para o módulo.
+ 08          | Planejar próxima sprint   | Revisão em grupo (durante o horário da aula) do ocorrido na sprint, divisão de tarefas e planejamento da proxima sprint. 
+
+# Executado
+
+Data | Horas Trabalhadas    | Num Tarefa   | Comentários
+---------------+------------+--------------+-------------------------------------------------------------------------------------------------------------------------------------
+03/10 (sexta)  | 1 hora     | 01           | A arquitetura é complexa, e apesar de compreender o conceito geral, surgiram algumas dúvidas ao longo do desenvolvimento
+04/10 (sábado) | 2 horas    | 02           | Tranquilo. Ajudou muito a compreender a arquitetura
+06/10 (segunda)| 2 horas    | 03           | Nada a declarar. Tranquilo.
+07/10 (terça)  | 1 hora     | 04           | Primeiro commit da sprint (Commit 1d6dc17)
+08/10 (quarta) | 2 horas    | 05           | Entendendo melhor os Events
+09/10 (quinta) | 1 hora     | 06           | Limpando repositório (removendo .metadata e afins)
+09/10 (quinta) | 2 horas    | 06           | refactorings (limpando código fonte)
+13/10 (segunda)| 2 horas    | 07           | Ao criar novos testes, encontrei um bug, que demorou algum tempo até ser corrigido. Tanto código fonte quanto testes foram alterados
+13/10 (segunda)| 5 horas    | N/A          | Adicionando Integração Contínua, Cobertura de testes, pequenos refactorings.
+14/10 (terça)  | 2 horas    | 08           | Além de explicar o Bug, os refactorings, a Integração Contínua e Code Coverage, dei algumas dicas de documentação
+
+## Sprint 2 (de 15 a 21/10)
+# Planejado
+
+Num Tarefa   | Tipo Tarefa                     | Descrição da Tarefa
+-------------+---------------------------------+--------------------------------------------------------------------------
+ 01          | Estudar                         | Est. convenções de código Java da Sun [3]
+ 02          | Revisar documentação do módulos | Adequar documentação do código quanto a Naming Conventions (chapter X)
+ 03          | Revisar código do módulo        | Executar ferramentas de análise estática para revisão do código do módulo 
+
+
+## Referências
 
 [1] http://www.gamedev.net/page/resources/_/technical/game-programming/case-study-bomberman-mechanics-in-an-entity-component-system-r3159
 [2] http://www.gamedev.net/page/resources/_/technical/game-programming/understanding-component-entity-systems-r3013
+[3] http://www.oracle.com/technetwork/java/codeconvtoc-136057.html
