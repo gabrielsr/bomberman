@@ -78,7 +78,7 @@ public class BombSystem extends BaseSystem {
 		 * 
 		 */
 		
-		// Events of the type Action Command (drops bomb & TODO triggers remote bomb)
+		// Events of the type Action Command (drops bomb & triggers remote bomb)
 		// 1)
 		List<Event> actionEvents = entityManager
 				.getEvents(ActionCommandEvent.class);
@@ -86,7 +86,7 @@ public class BombSystem extends BaseSystem {
 			for (Event event : actionEvents) {
 				ActionCommandEvent actionCommand = (ActionCommandEvent) event;
 				
-				// 2)
+				// 2) 
 				if ((actionCommand.getType() == ActionType.DROP_BOMB)
 						&& (!processedEvents.contains(actionCommand))) {
 					
@@ -97,6 +97,21 @@ public class BombSystem extends BaseSystem {
 					// 4)
 					processedEvents.add(actionCommand);
 					
+				// 2) 
+				}else if ((actionCommand.getType() == ActionType.TRIGGERS_REMOTE_BOMB)
+						&& (!processedEvents.contains(actionCommand))) {
+					
+					// 3)
+					List<Component> components =  entityManager.getComponents(Explosive.class);
+					for(Component component: components){
+						Explosive explosive = (Explosive) component;
+						if(explosive.getOwnerId() == actionCommand.getEntityId()){
+							createExplosionEvent(explosive.getEntityId());
+						}
+					}
+					
+					// 4)
+					processedEvents.add(actionCommand);
 				}
 			}
 		}
@@ -195,24 +210,41 @@ public class BombSystem extends BaseSystem {
 			for (Component component : explosives) {
 				Explosive explosive = (Explosive) component;
 				if (explosive.getOwnerId() == dropper.getEntityId()) {
-					Timer timer = (Timer) getEntityManager().getComponent(
-							Timer.class, explosive.getEntityId());
 
-					// Should count only the active bombs
-					if (!timer.isOver()) {
 						bombCounter++;
-					}
+
 				}
 			}
 		}
 		if (bombCounter < dropper.getPermittedSimultaneousBombs()) {
-			Entity bomb = createTimeBomb(dropper);
+			
+			Entity bomb = null;
+			
+			if (dropper.isCanRemoteTrigger()){
+				
+				bomb = createRemoteBomb(dropper);
+				
+			}else{
+
+				bomb = createTimeBomb(dropper);
+				
+			}
 			getEntityManager().update(bomb);
 		}
 
-		// TODO if it is a remotely controlled bomb,
-		// make the link so the user can remotely explode it
+	}
 
+	private Entity createRemoteBomb(BombDropper dropper) {
+		/*
+		 * The Bomb Entity is made of this components Explosive Placement Timer
+		 * components
+		 */
+
+		Entity bomb = createGenericBomb(dropper);
+
+		//TODO What else does a Remotely controled bomb needs?
+
+		return bomb;
 	}
 
 	/**
@@ -222,6 +254,29 @@ public class BombSystem extends BaseSystem {
 	 * @return new Bomb
 	 */
 	private Entity createTimeBomb(final BombDropper dropper) {
+		/*
+		 * The Bomb Entity is made of this components Explosive Placement Timer
+		 * components
+		 */
+
+		Entity bomb = createGenericBomb(dropper);
+
+		// create Event for time over
+		TimeOverEvent triggeredBombEvent = new TimeOverEvent();
+		triggeredBombEvent.setAction(TRIGGERED_BOMB_ACTION);
+
+		// create timer component
+		Timer bombTimer = new Timer(90, triggeredBombEvent);
+
+		// Add component
+		bomb.addComponent(bombTimer);
+
+		return bomb;
+
+	}
+	
+	//Method created to avoid code duplication
+	private Entity createGenericBomb(BombDropper dropper){
 		/*
 		 * The Bomb Entity is made of this components Explosive Placement Timer
 		 * components
@@ -249,20 +304,11 @@ public class BombSystem extends BaseSystem {
 		bombExplosive.setExplosionRange(dropper.getExplosionRange());
 		bombExplosive.setOwnerId(dropper.getEntityId());
 
-		// create Event for time over
-		TimeOverEvent triggeredBombEvent = new TimeOverEvent();
-		triggeredBombEvent.setAction(TRIGGERED_BOMB_ACTION);
-
-		// create timer component
-		Timer bombTimer = new Timer(90, triggeredBombEvent);
-
 		// Add components
 		bomb.addComponent(bombExplosive);
 		bomb.addComponent(bombPlacement);
-		bomb.addComponent(bombTimer);
 
 		return bomb;
-
 	}
 
 }

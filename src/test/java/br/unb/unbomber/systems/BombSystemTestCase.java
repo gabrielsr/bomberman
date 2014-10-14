@@ -43,6 +43,7 @@ public class BombSystemTestCase {
 		EntityManagerImpl.init();
 		entityManager = EntityManagerImpl.getInstance();
 		bombSystem = new BombSystem(entityManager);
+		timeSystem = new TimeSystem(entityManager);
 	}
 	
 	@Test
@@ -68,10 +69,6 @@ public class BombSystemTestCase {
 		entityManager.update(anEntity);
 		//put one bomb on grid
 		pubBombOnGrid(0,0, bombDropper);
-		
-		//create an DROP_BOMB Command Event
-		ActionCommandEvent event = new ActionCommandEvent(ActionType.DROP_BOMB, bombDropper.getEntityId());
-		entityManager.addEvent(event);
 		
 		//run the system
 		bombSystem.update();
@@ -184,8 +181,6 @@ public class BombSystemTestCase {
 		//first BOOM!!!
 		assertEquals(entityManager.getEvents(ExplosionStartedEvent.class).size(), 1);
 		
-		// TODO find why the test bellow is failing
-		
 		////one more time (91 times total)
 		updateSystems(1);
 		////second BOOM!!!
@@ -220,6 +215,65 @@ public class BombSystemTestCase {
 		
 		assertEquals( entityManager.getEvents(ExplosionStartedEvent.class).size() , 1);
 	}
+	
+	@Test
+	public void createRemotelyControledBombTest(){
+		// create a entity with components:
+		// * bombDropper
+		// * placement
+		Entity anEntity = createDropperEntity();
+		
+		BombDropper bombDropper = (BombDropper) entityManager.getComponent(BombDropper.class, anEntity.getEntityId());
+		
+		//Now the dropper can create remote bombs
+		bombDropper.setCanRemoteTrigger(true);
+		
+		entityManager.update(anEntity);
+		//put one bomb on grid
+		pubBombOnGrid(0,0, bombDropper);
+		
+		//run the system
+		bombSystem.update();
+		
+		//verify if a new explosive (a bomb component) was created
+		List<Component> explosives = (List<Component>) entityManager.getComponents(Explosive.class);
+		assertNotNull(explosives);
+		assertFalse(explosives.isEmpty());
+	}
+	
+	@Test
+	public void triggersARemotelyControledBombTest(){
+		// create a entity with components:
+		// * bombDropper
+		// * placement
+		Entity anEntity = createDropperEntity();
+		
+		BombDropper bombDropper = (BombDropper) entityManager.getComponent(BombDropper.class, anEntity.getEntityId());
+		
+		//Now the dropper can create remote bombs
+		bombDropper.setCanRemoteTrigger(true);
+		
+		entityManager.update(anEntity);
+		//put one bomb on grid
+		pubBombOnGrid(0,0, bombDropper);
+		
+		//run the system
+		bombSystem.update();
+		
+		assertNull(entityManager.getEvents(ExplosionStartedEvent.class));
+
+		//create an TRIGGERS_REMOTE_BOMB Command Event
+		ActionCommandEvent event = new ActionCommandEvent(ActionType.TRIGGERS_REMOTE_BOMB, bombDropper.getEntityId());
+		entityManager.addEvent(event);
+		
+		updateSystems(1);
+		//BOOM!!!
+		assertEquals(entityManager.getEvents(ExplosionStartedEvent.class).size(), 1);
+	}
+	
+	
+	
+	
 	
 	//Methods used by other tests
 	
