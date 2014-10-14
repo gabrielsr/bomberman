@@ -6,5 +6,5 @@ jdk:
   - openjdk6
 
 after_success:
-- ./gradlew jacocoTestReport coveralls
-- ./gradlew cobertura coveralls
+- gradlew jacocoTestReport coveralls
+- gradlew cobertura coveralls
