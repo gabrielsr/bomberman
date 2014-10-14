@@ -48,6 +48,12 @@ Num Tarefa   | Tipo Tarefa                     | Descrição da Tarefa
  02          | Revisar documentação do módulos | Adequar documentação do código quanto a Naming Conventions (chapter X)
  03          | Revisar código do módulo        | Executar ferramentas de análise estática para revisão do código do módulo 
 
+# Executado
+
+Data | Horas Trabalhadas    | Num Tarefa   | Comentários
+---------------+------------+--------------+-------------------------------------------------------------------------------------------------------------------------------------
+14/10 (terça)  | 2 hora     | N/A          | Criei a bomba controlada remotamente, após conversar rapidamente com o grupo responsável por ler os comandos do teclado
+
 
 ## Referências
 
