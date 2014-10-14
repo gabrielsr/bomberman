@@ -9,5 +9,5 @@ env:
 - TERM=dumb
 
 after_success:
-- ./gradlew jacocoTestReport coveralls
-- ./gradlew cobertura coveralls
+- jacocoTestReport coveralls
+- cobertura coveralls
