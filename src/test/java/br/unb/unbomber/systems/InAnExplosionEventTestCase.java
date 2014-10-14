@@ -1,7 +1,5 @@
 package br.unb.unbomber.systems;
 
-import static org.junit.Assert.assertEquals;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -9,7 +7,7 @@ import br.unb.unbomber.component.BombDropper;
 import br.unb.unbomber.component.CellPlacement;
 import br.unb.unbomber.core.Entity;
 import br.unb.unbomber.core.EntityManager;
-import br.unb.unbomber.core.EntitySystemImpl;
+import br.unb.unbomber.core.EntityManagerImpl;
 import br.unb.unbomber.event.ActionCommandEvent;
 import br.unb.unbomber.event.ActionCommandEvent.ActionType;
 import br.unb.unbomber.event.InAnExplosionEvent;
@@ -27,9 +25,9 @@ public class InAnExplosionEventTestCase {
 	public void setUp() throws Exception {
 		
 		//init a new system for each test case
-		EntitySystemImpl.init();
+		EntityManagerImpl.init();
 		
-		entityManager = EntitySystemImpl.getInstance();
+		entityManager = EntityManagerImpl.getInstance();
 		
 		this.inAnExplosionEvent = new InAnExplosionEvent();
 		this.bombSystem = new BombSystem(entityManager);

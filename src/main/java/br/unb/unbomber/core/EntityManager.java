@@ -3,10 +3,9 @@ package br.unb.unbomber.core;
 import java.util.List;
 
 /**
- * Entity Manager keep the Entities, Components and Events of a running game
- * 
- * @author grodrigues
+ * Entity Manager keep the Entities, Components and Events of a running game.
  *
+ * @author grodrigues
  */
 public interface EntityManager {
 
@@ -27,31 +26,41 @@ public interface EntityManager {
 	 * 
 	 * @return a new Entity
 	 */
-	public Entity createEntity();
+	Entity createEntity();
 
 	/**
-	 * Include added components
-	 * 
-	 * @param entity
+	 * Include added components.
+	 *
+	 * @param entity the entity
 	 */
-	public void update(Entity entity);
+	void update(Entity entity);
 
 	/**
 	 * Get all Event's of type 'eventType' Return null if there is no such a
-	 * event
+	 * event.
+	 *
+	 * @param type the type
+	 * @return the events
 	 */
-	public List<Event> getEvents(Class<?> type);
+	List<Event> getEvents(Class<?> type);
 
 	/**
 	 * Get all Component's of type 'componentType'. Return null if there is no
 	 * such a component.
+	 *
+	 * @param componentType the component type
+	 * @return the components
 	 */
-	public List<Component> getComponents(Class<?> componentType);
+	List<Component> getComponents(Class<?> componentType);
 
 	/**
 	 * Get a Component of 'componentType' associated with 'component' (both from
 	 * the same Entity) if any. Return null if there is no such a component
 	 * associated
+	 *
+	 * @param componentType the component type
+	 * @param entityId the entity id
+	 * @return the component
 	 */
 	// public Component getAssociatedComponent(Component component, int
 	// entityId);
@@ -60,62 +69,78 @@ public interface EntityManager {
 	 * Get a Component of 'componentType' associated with 'entityId' if any.
 	 * Return null if there is no such a component associated
 	 */
-	public Component getComponent(Class<?> componentType, int entityId);
+	Component getComponent(Class<?> componentType, int entityId);
 
 	/**
-	 * Add a new event to the model
+	 * Add a new event to the model.
+	 *
+	 * @param event the event
 	 */
-	public void addEvent(Event event);
+	void addEvent(Event event);
 
 	/**
-	 * Add a new Component to the model and set in it a uniqueId
+	 * Add a new Component to the model and set in it a uniqueId.
+	 *
+	 * @param newComponent the new component
 	 */
-	public void addComponent(Component newComponent);
+	void addComponent(Component newComponent);
 
 	/**
 	 * Add a new Entity to the model
 	 * 
 	 * 
-	 * This method is deprecated, use createEntity() and update() instead
+	 * This method is deprecated, use createEntity() and update() instead.
+	 *
+	 * @param entity the entity
 	 * @see #createEntity
 	 */
-	@Deprecated
-	public void addEntity(Entity entity);
+	@Deprecated void addEntity(Entity entity);
 
 	/**
-	 * Add a new Component associated with the provided entity id
+	 * Add a new Component associated with the provided entity id.
+	 *
+	 * @param component the component
 	 */
 	// public void addComponents(Component newComponent, String entityId);
 
 	/**
 	 * Remove a component from model
 	 */
-	public void remove(Component component);
+	void remove(Component component);
 
 	/**
-	 * Remove a entity from model
+	 * Remove a entity from model.
+	 *
+	 * @param entity the entity
 	 */
-	public void remove(Entity entity);
+	void remove(Entity entity);
 
 	/**
-	 * Remove a event from model
+	 * Remove a event from model.
+	 *
+	 * @param event the event
 	 */
-	public void remove(Event event);
+	void remove(Event event);
 
 	/**
-	 * Remove a entity by its Id
+	 * Remove a entity by its Id.
+	 *
+	 * @param entityId the entity id
 	 */
-	public void removeEntityById(int entityId);
+	void removeEntityById(int entityId);
 
 	/**
-	 * Remove a component by its Entity Id
+	 * Remove a component by its Entity Id.
+	 *
+	 * @param componentType the component type
+	 * @param entityId the entity id
 	 */
-	public void removeComponentByEntityId(Class<?> componentType, int entityId);
+	void removeComponentByEntityId(Class<?> componentType, int entityId);
 
 	/**
-	 * Return a Unique Id each time it's called
-	 * 
+	 * Return a Unique Id each time it's called.
+	 *
 	 * @return uniqueId
 	 */
-	public int getUniqueId();
+	int getUniqueId();
 }

@@ -1,6 +1,9 @@
 package br.unb.unbomber.systems;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import java.util.List;
 
@@ -13,10 +16,10 @@ import br.unb.unbomber.component.Explosive;
 import br.unb.unbomber.core.Component;
 import br.unb.unbomber.core.Entity;
 import br.unb.unbomber.core.EntityManager;
-import br.unb.unbomber.core.EntitySystemImpl;
+import br.unb.unbomber.core.EntityManagerImpl;
 import br.unb.unbomber.event.ActionCommandEvent;
-import br.unb.unbomber.event.ExplosionStartedEvent;
 import br.unb.unbomber.event.ActionCommandEvent.ActionType;
+import br.unb.unbomber.event.ExplosionStartedEvent;
 
 public class BombSystemTestCase {
 	
@@ -28,8 +31,8 @@ public class BombSystemTestCase {
 	public void setUp() throws Exception {
 		
 		//init a new system for each test case
-		EntitySystemImpl.init();
-		entityManager = EntitySystemImpl.getInstance();
+		EntityManagerImpl.init();
+		entityManager = EntityManagerImpl.getInstance();
 		bombSystem = new BombSystem(entityManager);
 	}
 	

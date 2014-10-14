@@ -5,17 +5,19 @@ import java.util.List;
 
 
 /**
- * An Entity in the Entity Component System (ECS)
- * 
- * @author grodrigues
+ * An Entity in the Entity Component System (ECS).
  *
+ * @author grodrigues
  */
-public class Entity {
+public final class Entity {
 
+	/** The entity id. */
 	private int entityId;
 	
+	/** The onwner id. */
 	private int onwnerId;
 	
+	/** The components. */
 	private List<Component> components;
 
 	/**
@@ -26,15 +28,30 @@ public class Entity {
 	}
 	
 	
+	/**
+	 * Instantiates a new entity.
+	 *
+	 * @param uniqueId the unique id
+	 */
 	public Entity(int uniqueId) {
 		this.entityId = uniqueId;
 	}
 
+	/**
+	 * Adds the component.
+	 *
+	 * @param component the component
+	 */
 	public void addComponent(Component component){
 		component.setEntityId(entityId);
 		getComponents().add(component);
 	}
 	
+	/**
+	 * Gets the components.
+	 *
+	 * @return the components
+	 */
 	public List<Component> getComponents(){
 		if(this.components==null){
 			this.components = new ArrayList<Component>();
@@ -42,15 +59,20 @@ public class Entity {
 		return this.components;
 	}
 	
+	/**
+	 * Gets the entity id.
+	 *
+	 * @return the entity id
+	 */
 	public int getEntityId(){
 		return this.entityId;
 	}
 
 	/**
-	 * ID should be setted in the constructor
-	 * 
+	 * ID should be setted in the constructor.
+	 *
+	 * @param entityId the new entity id
 	 * @see EntityManager#createEntity()
-	 * @param entityId
 	 */
 	@Deprecated
 	public void setEntityId(int entityId){
@@ -59,10 +81,20 @@ public class Entity {
 	}
 
 	
+	/**
+	 * Gets the onwner id.
+	 *
+	 * @return the onwner id
+	 */
 	public int getOnwnerId() {
 		return onwnerId;
 	}
 
+	/**
+	 * Sets the onwner id.
+	 *
+	 * @param onwnerId the new onwner id
+	 */
 	public void setOnwnerId(int onwnerId) {
 		this.onwnerId = onwnerId;
 	}
