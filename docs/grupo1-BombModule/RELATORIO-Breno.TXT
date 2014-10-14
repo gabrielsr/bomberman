@@ -11,16 +11,36 @@ RELATORIO-Breno.TXT
 
 # Planejamento
 
-Data | Horas Trabalhadas	| Tipo Tarefa 				| Descrição da Tarefa
+Data | Horas Trabalhadas	| Tipo Tarefa 			| Descrição da Tarefa
 ---------------+------------+---------------------------+-------------------...
-03/10 (sexta)  | 2 horas 	| Estudar					| Est. conceitos da arquitetura ECS [1][2]
+03/10 (sexta)  | 2 horas 	| Estudar			| Est. conceitos da arquitetura ECS [1][2]
 04/10 (sábado) | 1 hora  	| Configurar ambiente		| Conf. eclipse com repositório github comum ao grupo
 04/10 (sábado) | 2 horas 	| Revisar especificações	| Est. documentação do projeto (wiki) e seu código fonte. 
 05/10 (domingo)| 2 horas  	| Revisar código do módulo	| Revisar código do BombSystem já implementado, identificando as funcinalidades já implementadas e outras necessárias ao módulo
-06/10 (segunda)| 3 horas  	| Codificar módulo 			| Codificar tratamento do evento: ActionCommandEvent 
-07/10 (terça)  | 2 horas  	| Revisar código do módulo  | Tratar em grupo (durante o horário da aula) os problemas encontrados na codificação do módulo
-08/10 (quarta) | 2 horas  	| Codificar teste unitário 	| Codificar teste: waitTimeToExplodeTest
+08/10 (quarta) | 2 horas  	| Codificar teste unitário 	| Codificar teste verificando se as bombas explodem após o evento InAnExplosionEvent atingir-las
 09/10 (quinta) | 2 horas  	| Planejar próxima sprint	| Revisão em grupo (durante o horário da aula) do ocorrido na sprint, divisão de tarefas e planejamento da proxima sprint. 
+
+# Executado
+
+Data | Horas Trabalhadas	| Tipo Tarefa 			| Descrição da Tarefa
+---------------+------------+---------------------------+-------------------...
+12/10 (sabado) | 3 horas 	| Estudar			| Est. conceitos da arquitetura ECS [1][2]
+12/10 (sábado) | 2 horas  	| Revisar especificações	| Est. documentação do projeto (wiki) e seu código fonte. 
+12/10 (sábado) | 1 horas  	| Revisar código do módulos	| Revisar código do BombSystem já implementado, identificando as funcinalidades já implementadas e outras necessárias ao módulo
+12/10 (sábado) | 1 horas  	| Codificar teste 		| Codificar teste do tratamento de InAnExplosionEvent feito pelo BombSystem
+
+## Sprint 2 (de 15 a 21/10)
+
+# Planejado
+
+Tipo Tarefa 				| Descrição da Tarefa
+----------------------------+----------------------------------.....
+Estudar					| Estudar convenções de código Java da Sun [3]
+Revisar documentação do Mod		| Adequar documentação do código quanto a Programming Practices (Chapter 10)
+Revisar código do módulos		| Executar ferramenta de análise estática para revisão do código do módulo. 
+
+## Referências
 
 [1] http://www.gamedev.net/page/resources/_/technical/game-programming/case-study-bomberman-mechanics-in-an-entity-component-system-r3159
 [2] http://www.gamedev.net/page/resources/_/technical/game-programming/understanding-component-entity-systems-r3013
+[3] http://www.oracle.com/technetwork/java/javase/documentation/codeconvtoc-136057.html
