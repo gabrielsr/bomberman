@@ -16,7 +16,7 @@ import br.unb.unbomber.component.Explosive;
 import br.unb.unbomber.core.Component;
 import br.unb.unbomber.core.Entity;
 import br.unb.unbomber.core.EntityManager;
-import br.unb.unbomber.core.EntitySystemImpl;
+import br.unb.unbomber.core.EntityManagerImpl;
 import br.unb.unbomber.event.ActionCommandEvent;
 import br.unb.unbomber.event.ActionCommandEvent.ActionType;
 import br.unb.unbomber.event.ExplosionStartedEvent;
@@ -32,8 +32,8 @@ public class BombSystemTestCase {
 	public void setUp() throws Exception {
 		
 		//init a new system for each test case
-		EntitySystemImpl.init();
-		entityManager = EntitySystemImpl.getInstance();
+		EntityManagerImpl.init();
+		entityManager = EntityManagerImpl.getInstance();
 		bombSystem = new BombSystem(entityManager);
 	}
 	
@@ -46,11 +46,10 @@ public class BombSystemTestCase {
 		Entity anEntity = createDropperEntity();
 		
 		BombDropper bombDropper = (BombDropper) entityManager.getComponent(BombDropper.class, anEntity.getEntityId());
+
+		entityManager.update(anEntity);
 		//put one bomb on grid
 		pubBombOnGrid(0,0, bombDropper);
-		
-		
-		entityManager.update(anEntity);
 		
 		//create an DROP_BOMB Command Event
 		ActionCommandEvent event = new ActionCommandEvent(ActionType.DROP_BOMB, bombDropper.getEntityId());
