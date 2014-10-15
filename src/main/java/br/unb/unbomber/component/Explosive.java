@@ -5,24 +5,24 @@ import br.unb.unbomber.core.Component;
 
 public class Explosive extends Component {
 
-	private int ownerId;
+	private int onwnerId;
 	
-	private int explosionRange;
+	private int range;
 
-	public int getOwnerId() {
-		return ownerId;
+	public int getOnwnerId() {
+		return onwnerId;
 	}
 
-	public void setOwnerId(int ownerId) {
-		this.ownerId = ownerId;
+	public void setOnwnerId(int onwnerId) {
+		this.onwnerId = onwnerId;
 	}
 
-	public int getExplosionRange() {
-		return explosionRange;
+	public int getPower() {
+		return range;
 	}
 
-	public void setExplosionRange(int explosionRange) {
-		this.explosionRange = explosionRange;
+	public void setPower(int bombRange) {
+		this.range = bombRange;
 	}
 	
 	

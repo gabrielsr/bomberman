@@ -2,11 +2,10 @@ package br.unb.unbomber.component;
 
 import br.unb.unbomber.core.Component;
 
-/**
- * Classe que representa um componente de uma entidade que pode Dropar uma bomba
- *
- */
 public class BombDropper extends Component {
+	
+
+	private int onwnerId;
 	
 	private int permittedSimultaneousBombs;
 	private boolean firstBombInfinite;
@@ -14,7 +13,15 @@ public class BombDropper extends Component {
 	private boolean canRemoteTrigger;
 	private boolean areBombsPassThrough;
 	private boolean areBombsHardPassThrough;
-	private int explosionRange;
+	private int bombRange;
+	
+	public int getOnwnerId() {
+		return onwnerId;
+	}
+
+	public void setOnwnerId(int onwnerId) {
+		this.onwnerId = onwnerId;
+	}
 
 	public int getPermittedSimultaneousBombs() {
 		return permittedSimultaneousBombs;
@@ -63,12 +70,12 @@ public class BombDropper extends Component {
 		this.areBombsHardPassThrough = areBombsHardPassThrough;
 	}
 
-	public int getExplosionRange() {
-		return explosionRange;
+	public int getBombRange() {
+		return bombRange;
 	}
 
-	public void setExplosionRange(int explosionRange) {
-		this.explosionRange = explosionRange;
+	public void setBombRange(int bombRange) {
+		this.bombRange = bombRange;
 	}
 
 }

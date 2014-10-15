@@ -1,13 +1,3 @@
-/*
- * ExplosionStartedEvent
- * 
- * Version information
- *
- * Date
- * 
- * Copyright notice
- */
-
 package br.unb.unbomber.event;
 
 import br.unb.unbomber.component.CellPlacement;
@@ -19,7 +9,7 @@ public class ExplosionStartedEvent extends Event{
 	private CellPlacement initialPosition;
 
 	/* Power of the explosion */
-	private int explosionRange;
+	private int power;
 
 	public CellPlacement getInitialPosition() {
 		return initialPosition;
@@ -29,12 +19,12 @@ public class ExplosionStartedEvent extends Event{
 		this.initialPosition = initialPosition;
 	}
 
-	public int getExplosionRange() {
-		return explosionRange;
+	public int getPower() {
+		return power;
 	}
 
-	public void setExplosionRange(int explosionRange) {
-		this.explosionRange = explosionRange;
+	public void setPower(int power) {
+		this.power = power;
 	}
 
 }
