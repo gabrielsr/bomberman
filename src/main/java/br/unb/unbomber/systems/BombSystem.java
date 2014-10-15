@@ -1,5 +1,11 @@
 /*
- * descrição do módulo:
+ * BombSystem
+ *
+ * Version 1
+ *
+ * UnB
+ *
+ * Handles the way bombs are treated in the Bomberman game.
  */
 
 package br.unb.unbomber.systems;
