@@ -21,5 +21,41 @@ public class Explosion extends Component{
 	float propagationCountdown; // How long does it take to propagate to the
 								// next square?
 
+	public boolean isPassThrough() {
+		return isPassThrough;
+	}
+	public void setPassThrough(boolean isPassThrough) {
+		this.isPassThrough = isPassThrough;
+	}
+	public boolean isHardPassThrough() {
+		return isHardPassThrough;
+	}
+	public void setHardPassThrough(boolean isHardPassThrough) {
+		this.isHardPassThrough = isHardPassThrough;
+	}
+	public int getExplosionRange() {
+		return explosionRange;
+	}
+	public void setExplosionRange(int explosionRange) {
+		this.explosionRange = explosionRange;
+	}
+	public Direction getPropagationDirection() {
+		return propagationDirection;
+	}
+	public void setPropagationDirection(Direction propagationDirection) {
+		this.propagationDirection = propagationDirection;
+	}
+	public float getCountdown() {
+		return countdown;
+	}
+	public void setCountdown(float countdown) {
+		this.countdown = countdown;
+	}
+	public float getPropagationCountdown() {
+		return propagationCountdown;
+	}
+	public void setPropagationCountdown(float propagationCountdown) {
+		this.propagationCountdown = propagationCountdown;
+	}
 
 }
