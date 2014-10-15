@@ -5,7 +5,9 @@ import br.unb.unbomber.core.Event;
 public class ActionCommandEvent extends Event {
 
 	public enum ActionType{
-		DROP_BOMB;
+		DROP_BOMB,
+		EXPLODE_REMOTE_BOMB,
+		TRIGGERS_REMOTE_BOMB; //TODO duplicated
 	}
 	
 	private final ActionType type;

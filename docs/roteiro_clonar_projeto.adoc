@@ -1,0 +1,57 @@
+. Cadastre-se no Github
+
+. Va até a home do projeto
+
+https://github.com/gabrielsr/bomberman/
+
+. FORK (canto superior direito)
+
+. Agora você tem o seu próprio repositório do projeto no Github
+
+.Instale um Cliente GIT
+
+ http://git-scm.com/book/en/Getting-Started-Installing-Git
+
+. Clone o projeto em uma pasta local
+
+$git clone https://github.com/<seu_usuario>/bomberman
+
+. Clonar o Projeto em Uma nova pasta
+
+$ git clone 
+
+. Edite o arquivo contributors.txt
+
+
+. Selecione o Arquivo para o próximo Commit
+
+ git add contributors.txt
+
+. Commit os arquivos selecionados.
+ $git commit -m "Adicionando meu nome aos contributors"
+
+. Enviando para o seu repositório remoto
+ $git push
+
+--
+
+Volte a interface web do github, na página do seu repositório
+ 
+ $git clone https://github.com/<seu_usuario>/bomberman
+ 
+. Faça um pull request
+
+> This branch is 1 commit ahead of gabrielsr:master    [Pull Request]
+
+	O Git Hub te apresenta um relatório das mudanças que você está submetendo. 
+
+. Continue com o pull request.
+
+
+
+. Parabéns!! Você realizou sua primeira contribuição em um projeto OpenSource através do GitHub!
+
+
+
+
+

@@ -1,8 +1,12 @@
 apply plugin: "java"
 apply plugin: "maven"
+apply plugin: 'jacoco'
+apply plugin: 'cobertura'
+apply plugin: 'com.github.kt3k.coveralls'
+
 
 group = "br.unb.cic"
-version = 0.01
+version = 0.02
 
 repositories {
     mavenCentral()
@@ -14,3 +18,23 @@ dependencies {
     testCompile 'junit:junit:4.9'
 }
 
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'net.saliman:gradle-cobertura-plugin:2.0.0' // cobertura plugin
+        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.0.1'
+    }
+}
+
+cobertura.coverageFormats = ['html', 'xml'] // coveralls plugin depends on xml format report
+
+jacocoTestReport {
+    reports {
+        xml.enabled = true // coveralls plugin depends on xml format report
+        html.enabled = true
+    }
+}

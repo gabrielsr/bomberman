@@ -5,10 +5,14 @@ Bomberman\ project/images/
 /build/
 /bin/
 
+#Gradle stuff
+.gradle
+
 # Eclipse preferences / project
 .settings/
 .project
 .classpath
+.metadata/
 
 # Mac OSX
 .DS_Store
