@@ -158,7 +158,7 @@ public class BombSystemTestCase2 {
 				Explosive bombInGame = (Explosive) component;
 				
 				// check if the current bomb was dropped by the current dropper
-				if(bombInGame.getOnwnerId() == dropper.getOnwnerId()){
+				if(bombInGame.getOwnerId() == dropper.getEntityId()){
 					
 					// we have to consider only the bombs that are still ticking
 					Timer bombTimer = (Timer) entityManager.getComponent(Timer.class, bombInGame.getEntityId()); 
