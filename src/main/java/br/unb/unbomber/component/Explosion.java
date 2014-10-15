@@ -13,13 +13,47 @@ import br.unb.unbomber.core.Component;
  */
 public class Explosion extends Component{
 
-	boolean isPassThrough; // Does it pass through soft blocks?
-	boolean isHardPassThrough; // Does it pass through hard blocks?
-	int explosionRange;				 // How much further will it propagate?
-	Direction propagationDirection;
-	float countdown; 			// How long does it last?
-	float propagationCountdown; // How long does it take to propagate to the
+	private boolean isPassThrough; // Does it pass through soft blocks?
+	private boolean isHardPassThrough; // Does it pass through hard blocks?
+	private int explosionRange;				 // How much further will it propagate?
+	private Direction propagationDirection;
+	private float countdown; 			// How long does it last?
+	private float propagationCountdown; // How long does it take to propagate to the
 								// next square?
-
-
+	public boolean isPassThrough() {
+		return isPassThrough;
+	}
+	public void setPassThrough(boolean isPassThrough) {
+		this.isPassThrough = isPassThrough;
+	}
+	public boolean isHardPassThrough() {
+		return isHardPassThrough;
+	}
+	public void setHardPassThrough(boolean isHardPassThrough) {
+		this.isHardPassThrough = isHardPassThrough;
+	}
+	public int getExplosionRange() {
+		return explosionRange;
+	}
+	public void setExplosionRange(int explosionRange) {
+		this.explosionRange = explosionRange;
+	}
+	public Direction getPropagationDirection() {
+		return propagationDirection;
+	}
+	public void setPropagationDirection(Direction propagationDirection) {
+		this.propagationDirection = propagationDirection;
+	}
+	public float getCountdown() {
+		return countdown;
+	}
+	public void setCountdown(float countdown) {
+		this.countdown = countdown;
+	}
+	public float getPropagationCountdown() {
+		return propagationCountdown;
+	}
+	public void setPropagationCountdown(float propagationCountdown) {
+		this.propagationCountdown = propagationCountdown;
+	}
 }
