@@ -7,7 +7,7 @@ package br.unb.unbomber.core;
  * @author grodrigues
  *
  */
-abstract public class BaseSystem implements System {
+public abstract class BaseSystem implements System {
 
 	/** The entity manager. */
 	private EntityManager entityManager;
@@ -29,7 +29,7 @@ abstract public class BaseSystem implements System {
 	 * @param entityManager
 	 *            the entity manager
 	 */
-	public BaseSystem(EntityManager entityManager) {
+	public BaseSystem(final EntityManager entityManager) {
 		this.entityManager = entityManager;
 	}
 
@@ -50,6 +50,7 @@ abstract public class BaseSystem implements System {
 	 * Called when the system is started. If a system want to have a custom
 	 * behavior it needs to override this method.
 	 */
+	@Override
 	public void start() {
 	}
 
@@ -57,12 +58,14 @@ abstract public class BaseSystem implements System {
 	 * Called when the system is finished. If a system want to have a custom
 	 * behavior it needs to override this method.
 	 */
+	@Override
 	public void stop() {
 	}
 
 	/**
 	 * Called every turn. Every System has to implements this method.
 	 */
+	@Override
 	public abstract void update();
 
 }
