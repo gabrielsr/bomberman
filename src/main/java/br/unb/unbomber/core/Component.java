@@ -1,24 +1,35 @@
 package br.unb.unbomber.core;
 
 /**
- * A Component in the Entity Component System (ECS)
- * 
- * @author grodrigues
+ * A Component in the Entity Component System (ECS).
  *
+ * @author grodrigues
  */
-
 public class Component {
 	
-	/* Id da entidade associada a algum Component. */
-	private int entityId;
+	/** The entity id. */
+	private int entityId = 0;
 
-	/* Metodo para coletar o Id de algum Component associado. */
-	public int getEntityId() {
+	/**
+	 * Get the id of the Entity that this component is part of. 
+	 * 
+	 * @return id
+	 */
+	public final int getEntityId() {
 		return entityId;
 	}
 
-	/* Metodo para atribuir algum Id a algum Component associado. */
-	public void setEntityId(int entityId) {
+	/**
+	 * Set the id of the Entity that this component is part of.
+	 * 
+	 * The Id is setted when you add the component to a entity. 
+	 * 
+	 * TODO change visibility to protect
+	 * 
+	 * @param entityId the new entity id
+	 * @see Entity#addComponent(Component)
+	 */
+	public final void setEntityId(int entityId) {
 		this.entityId = entityId;
 	}
 

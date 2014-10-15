@@ -12,20 +12,20 @@ import br.unb.unbomber.core.Event;
 /* Heranca unica do evento DestroyedEvent */
 public class DestroyedEvent extends Event {
 	int sourceId;
-	
+
 	/* Construtor do Evento */
-	public DestroyedEvent(int sourceId){
+	public DestroyedEvent(int sourceId) {
 		this.sourceId = sourceId;
 	}
 
-	//get the id of an entity which will be destroyed
-	public int getSourceId(){
+	// get the id of an entity which will be destroyed
+	public int getSourceId() {
 		return sourceId;
 	}
-	
-	//set the id of an entity which will be destroyed
-	public void  setSourceId(int sourceId){
+
+	// set the id of an entity which will be destroyed
+	public void setSourceId(int sourceId) {
 		this.sourceId = sourceId;
 	}
-	
+
 }

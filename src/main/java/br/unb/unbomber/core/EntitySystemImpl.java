@@ -107,4 +107,53 @@ public class EntitySystemImpl implements EntityManager {
 		return this.uniqueIdSequence++;
 	}
 
+	@Override
+	public void remove(Component component) {
+		List<Component> componentList = this.components.get(component.getClass());
+		if(componentList == null){
+			throw new IllegalArgumentException("Type not in entity manager. It was not added so it can't be removed");
+		}
+		componentList.remove(component);
+	}
+
+	@Override
+	public void remove(Entity entity) {
+		for(Component component:entity.getComponents()){
+			remove(component);
+		}
+	}
+	
+	@Override
+	public void removeEntityById(int entityId) {
+		for(Class<?> type:components.keySet()){
+			removeComponentByEntityId(type, entityId);
+		}
+	}
+	
+	@Override
+	public void removeComponentByEntityId(Class<?> componentType, int entityId) {
+		List<Component> componentsOfType = this.components.get(componentType);
+		
+		//Should it throw an Exception??
+		if(componentsOfType==null){
+			return;
+		}
+		
+		for(Component component: componentsOfType){
+			//remove if it has the expected entityId
+			if(component.getEntityId() == entityId){
+				componentsOfType.remove(component);
+			}
+		}		
+	}
+
+	@Override
+	public void remove(Event event) {
+		List<Event> eventList = this.events.get(event.getClass());
+		if(eventList == null){
+			throw new IllegalArgumentException("Type not in entity manager. It was not added so it can't be removed");
+		}
+		eventList.remove(event);		
+	}
+
 }
