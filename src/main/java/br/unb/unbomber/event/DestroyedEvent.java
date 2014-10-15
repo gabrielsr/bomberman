@@ -1,6 +1,6 @@
-///LifePowerUpEvent
-// Evento que aumenta health de alguma entidade.
-// Coleta Id de uma entidade que tenha coletado este Power Up.
+//DestroyedEvent
+// Quando uma entidade nao conter mais health.
+// Coleta a Id da entidade que sera destruida do grid.
 
 /* Indica de qual pacote o arquivo pertence */
 /* No caso ele pertence ao Event */
@@ -9,23 +9,23 @@ package br.unb.unbomber.event;
 /* Interface para dados de Event */
 import br.unb.unbomber.core.Event;
 
-/* Heranca unica do evento LifePowerUpEvent */
-public class LifePowerUpEvent extends Event {
+/* Heranca unica do evento DestroyedEvent */
+public class DestroyedEvent extends Event {
 	int sourceId;
 	
 	/* Construtor do Evento */
-	public LifePowerUpEvent(int sourceId){
+	public DestroyedEvent(int sourceId){
 		this.sourceId = sourceId;
 	}
-	
-	//get the id of an entity which has collected the power up
+
+	//get the id of an entity which will be destroyed
 	public int getSourceId(){
 		return sourceId;
 	}
 	
-	//set the id of an entity which has collected the power up
+	//set the id of an entity which will be destroyed
 	public void  setSourceId(int sourceId){
 		this.sourceId = sourceId;
 	}
-
+	
 }

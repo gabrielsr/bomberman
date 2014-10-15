@@ -1,6 +1,6 @@
-///LifePowerUpEvent
-// Evento que aumenta health de alguma entidade.
-// Coleta Id de uma entidade que tenha coletado este Power Up.
+//InvencibleEvent
+// Quando uma entidade coletar o Power Up Invencible.
+// Coleta a Id da entidade que coletou este power up.
 
 /* Indica de qual pacote o arquivo pertence */
 /* No caso ele pertence ao Event */
@@ -9,15 +9,15 @@ package br.unb.unbomber.event;
 /* Interface para dados de Event */
 import br.unb.unbomber.core.Event;
 
-/* Heranca unica do evento LifePowerUpEvent */
-public class LifePowerUpEvent extends Event {
+/* Heranca unica do evento InvencibleEvent */
+public class InvencibleEvent extends Event {
 	int sourceId;
 	
 	/* Construtor do Evento */
-	public LifePowerUpEvent(int sourceId){
+	public InvencibleEvent(int sourceId){
 		this.sourceId = sourceId;
 	}
-	
+
 	//get the id of an entity which has collected the power up
 	public int getSourceId(){
 		return sourceId;
@@ -27,5 +27,5 @@ public class LifePowerUpEvent extends Event {
 	public void  setSourceId(int sourceId){
 		this.sourceId = sourceId;
 	}
-
+	
 }
