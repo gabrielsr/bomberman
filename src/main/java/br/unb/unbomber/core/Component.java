@@ -29,7 +29,7 @@ public class Component {
 	 * @param entityId the new entity id
 	 * @see Entity#addComponent(Component)
 	 */
-	public void setEntityId(int entityId) {
+	public final void setEntityId(int entityId) {
 		this.entityId = entityId;
 	}
 
