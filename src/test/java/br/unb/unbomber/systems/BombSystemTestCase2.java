@@ -23,7 +23,7 @@ import br.unb.unbomber.event.TimeOverEvent;
 public class BombSystemTestCase2 {
 	
 	EntityManager entityManager;
-	BombSystem system;
+	BombSystem2 system;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -31,7 +31,7 @@ public class BombSystemTestCase2 {
 		//init a new system for each test case
 		EntitySystemImpl.init();
 		entityManager = EntitySystemImpl.getInstance();
-		system = new BombSystem(entityManager);
+		system = new BombSystem2(entityManager);
 	}
 	
 
