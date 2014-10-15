@@ -98,6 +98,7 @@ a legibilidade e manutenção do código fonte.
 === Checkstyle
 
 A ferramenta Checkstyle verifica, dentre outras coisas:
+
 * Comentários Javadoc para classes, atributos e métodos
 * Convenções para nomenclatura de atributos e métodos
 * Número de parâmetros em funções e comprimento de linhas
