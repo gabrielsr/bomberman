@@ -1,3 +1,4 @@
+
 package br.unb.unbomber.systems;
 
 import static org.junit.Assert.*;
@@ -35,7 +36,7 @@ public class BombSystemTestCase2 {
 	}
 	
 
-	@Test
+	//@Test
 	public void dropBombTest() {
 		// create a entity with components:
 		// * bombDropper
@@ -71,7 +72,7 @@ public class BombSystemTestCase2 {
 	/**
 	 * A dropped bomb should be created into the same place of its dropper
 	 */
-	@Test
+	//@Test
 	public void dropBombAtSamePlaceTest() {
 		
 		// create a entity
@@ -122,7 +123,7 @@ public class BombSystemTestCase2 {
 	 * 
 	 */
 	
-	@Test
+	//@Test
 	public void dropBombTooManySimultaneousBombsTest(){
 		
 		//adding a bombDropper entity 
@@ -179,7 +180,7 @@ public class BombSystemTestCase2 {
 	/*
 	 * testa se nos primeiros 89 turnos n�o foi criado um ExplosionStartedEvent
 	 */
-	@Test
+	//@Test
 	public void waitTimeExplodeTest(){
 		
 		Entity dropperEntity = new Entity();
@@ -222,7 +223,7 @@ public class BombSystemTestCase2 {
 	/*
 	 * testa se um ExplosionStartedEvent � criado ap�s 90 turnos.
 	 */
-	@Test
+	//@Test
 	public void triggeredAfterTimeToExplodeTest(){
 		
 		Entity dropperEntity = new Entity();
