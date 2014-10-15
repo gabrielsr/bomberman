@@ -1,9 +1,16 @@
+/*
+ * BombSystemTestCase
+ * 
+ * Version information
+ *
+ * Date
+ * 
+ * Copyright notice
+ */
+
 package br.unb.unbomber.systems;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static junit.framework.Assert.*;
 
 import java.util.List;
 
@@ -18,10 +25,12 @@ import br.unb.unbomber.core.Entity;
 import br.unb.unbomber.core.EntityManager;
 import br.unb.unbomber.core.EntityManagerImpl;
 import br.unb.unbomber.event.ActionCommandEvent;
+import br.unb.unbomber.event.InAnExplosionEvent;
 import br.unb.unbomber.event.ActionCommandEvent.ActionType;
 import br.unb.unbomber.event.ExplosionStartedEvent;
 
 public class BombSystemTestCase {
+	
 	
 	EntityManager entityManager;
 	BombSystem bombSystem;
@@ -34,30 +43,32 @@ public class BombSystemTestCase {
 		EntityManagerImpl.init();
 		entityManager = EntityManagerImpl.getInstance();
 		bombSystem = new BombSystem(entityManager);
+		timeSystem = new TimeSystem(entityManager);
 	}
 	
+	@Test
+	public void testConstructor(){
+		bombSystem = new BombSystem();
+		
+		//If EntityManager was not set internally, will create NullPointerException
+		bombSystem.update();
+		
+		//Won't get here if NPE was created
+		assertTrue(true);
+	}
 
 	@Test
 	public void dropBombTest() {
 		// create a entity with components:
 		// * bombDropper
 		// * placement
-		Entity anEntity = entityManager.createEntity();
+		Entity anEntity = createDropperEntity();
 		
+		BombDropper bombDropper = (BombDropper) entityManager.getComponent(BombDropper.class, anEntity.getEntityId());
 
-		//Create Dropper
-		BombDropper bombDropper = new BombDropper();
-		bombDropper.setPermittedSimultaneousBombs(5);
-				
+		entityManager.update(anEntity);
 		//put one bomb on grid
 		pubBombOnGrid(0,0, bombDropper);
-		
-		
-		entityManager.update(anEntity);
-		
-		//create an DROP_BOMB Command Event
-		ActionCommandEvent event = new ActionCommandEvent(ActionType.DROP_BOMB, bombDropper.getEntityId());
-		entityManager.addEvent(event);
 		
 		//run the system
 		bombSystem.update();
@@ -77,9 +88,13 @@ public class BombSystemTestCase {
 		int CELL_X = 10;
 		int CELL_Y = 15;
 		
-		//Create Dropper
-		BombDropper bombDropper = new BombDropper();
-		bombDropper.setPermittedSimultaneousBombs(5);
+		// create a entity with components:
+		// * bombDropper
+		// * placement
+		Entity anEntity = createDropperEntity();
+		
+		BombDropper bombDropper = (BombDropper) entityManager.getComponent(BombDropper.class, anEntity.getEntityId());
+		
 		//Put bomb on grid
 		pubBombOnGrid(CELL_X,CELL_Y,bombDropper);
 		
@@ -99,8 +114,12 @@ public class BombSystemTestCase {
 		
 		int max_number_of_bombs = 2;
 		
-		//Create Dropper
-		BombDropper bombDropper = new BombDropper();
+		// create a entity with components:
+		// * bombDropper
+		// * placement
+		Entity anEntity = createDropperEntity();
+		
+		BombDropper bombDropper = (BombDropper) entityManager.getComponent(BombDropper.class, anEntity.getEntityId());
 		bombDropper.setPermittedSimultaneousBombs(max_number_of_bombs);
 		
 		//put 2 bombs on grid
@@ -112,6 +131,7 @@ public class BombSystemTestCase {
 		//extra bomb will be ignored
 		pubBombOnGrid(0,0, bombDropper);
 		
+
 		assertEquals(entityManager.getComponents(Explosive.class).size() , max_number_of_bombs);
 		
 		//pseudo power-up
@@ -124,6 +144,7 @@ public class BombSystemTestCase {
 		pubBombOnGrid(0,0, bombDropper);
 		pubBombOnGrid(0,0, bombDropper);
 
+
 		assertEquals(entityManager.getComponents(Explosive.class).size() , max_number_of_bombs);
 		
 	}
@@ -132,9 +153,12 @@ public class BombSystemTestCase {
 	@Test
 	public void triggeredAfterTimeToExplodeTest() {
 		
-		//Create Dropper
-		BombDropper bombDropper = new BombDropper();
-		bombDropper.setPermittedSimultaneousBombs(5);
+		// create a entity with components:
+		// * bombDropper
+		// * placement
+		Entity anEntity = createDropperEntity();
+		
+		BombDropper bombDropper = (BombDropper) entityManager.getComponent(BombDropper.class, anEntity.getEntityId());
 		
 		//put one bomb on grid
 		pubBombOnGrid(0,0, bombDropper);
@@ -157,8 +181,6 @@ public class BombSystemTestCase {
 		//first BOOM!!!
 		assertEquals(entityManager.getEvents(ExplosionStartedEvent.class).size(), 1);
 		
-		// TODO find why the test bellow is failing
-		
 		////one more time (91 times total)
 		updateSystems(1);
 		////second BOOM!!!
@@ -170,6 +192,91 @@ public class BombSystemTestCase {
 		assertEquals(entityManager.getEvents(ExplosionStartedEvent.class).size(), 2);
 	}
 	
+	@Test
+	public void testIfAnExplosionEventTriggersAnotherBomb(){
+		//Create bombDropper
+		Entity anEntity = createDropperEntity();
+		
+		BombDropper bombDropper = (BombDropper) entityManager.getComponent(BombDropper.class, anEntity.getEntityId());
+		//put one bomb on grid
+		pubBombOnGrid(0,0, bombDropper);
+		entityManager.update(anEntity);
+		
+		List<Component> explosives = entityManager.getComponents(Explosive.class);
+		
+		//send a event telling that this bomb have to explode 
+		InAnExplosionEvent inAnExplosionEvent = new InAnExplosionEvent();
+		inAnExplosionEvent.setIdHit(explosives.get(0).getEntityId());
+		entityManager.addEvent(inAnExplosionEvent);
+		
+		//update bombSystem to check the events. After that, the BombSystem have  
+		//to create an event of the explosion of the early created bomb
+		this.bombSystem.update();
+		
+		assertEquals( entityManager.getEvents(ExplosionStartedEvent.class).size() , 1);
+	}
+	
+	@Test
+	public void createRemotelyControledBombTest(){
+		// create a entity with components:
+		// * bombDropper
+		// * placement
+		Entity anEntity = createDropperEntity();
+		
+		BombDropper bombDropper = (BombDropper) entityManager.getComponent(BombDropper.class, anEntity.getEntityId());
+		
+		//Now the dropper can create remote bombs
+		bombDropper.setCanRemoteTrigger(true);
+		
+		entityManager.update(anEntity);
+		//put one bomb on grid
+		pubBombOnGrid(0,0, bombDropper);
+		
+		//run the system
+		bombSystem.update();
+		
+		//verify if a new explosive (a bomb component) was created
+		List<Component> explosives = (List<Component>) entityManager.getComponents(Explosive.class);
+		assertNotNull(explosives);
+		assertFalse(explosives.isEmpty());
+	}
+	
+	@Test
+	public void triggersARemotelyControledBombTest(){
+		// create a entity with components:
+		// * bombDropper
+		// * placement
+		Entity anEntity = createDropperEntity();
+		
+		BombDropper bombDropper = (BombDropper) entityManager.getComponent(BombDropper.class, anEntity.getEntityId());
+		
+		//Now the dropper can create remote bombs
+		bombDropper.setCanRemoteTrigger(true);
+		
+		entityManager.update(anEntity);
+		//put one bomb on grid
+		pubBombOnGrid(0,0, bombDropper);
+		
+		//run the system
+		bombSystem.update();
+		
+		assertNull(entityManager.getEvents(ExplosionStartedEvent.class));
+
+		//create an TRIGGERS_REMOTE_BOMB Command Event
+		ActionCommandEvent event = new ActionCommandEvent(ActionType.TRIGGERS_REMOTE_BOMB, bombDropper.getEntityId());
+		entityManager.addEvent(event);
+		
+		updateSystems(1);
+		//BOOM!!!
+		assertEquals(entityManager.getEvents(ExplosionStartedEvent.class).size(), 1);
+	}
+	
+	
+	
+	
+	
+	//Methods used by other tests
+	
 	private void updateSystems(int numberOfInteractions){
 		for (int i=0; i<numberOfInteractions; i++) {
 			timeSystem.update();
@@ -178,23 +285,11 @@ public class BombSystemTestCase {
 	}
 	
 	private void pubBombOnGrid(int x, int y, BombDropper bombDropper){
-		// create a entity
-		// SO it get an entityId (needed as the new bomb dropped will need it as its ownerId)
-		Entity anEntity = entityManager.createEntity();
 		
-		//Create the placement component
-		CellPlacement dropperPlacement = new CellPlacement();
+		CellPlacement placement = (CellPlacement) entityManager.getComponent(CellPlacement.class, bombDropper.getEntityId());
 		
-		//set the dropper position
-		dropperPlacement.setCellX(x);
-		dropperPlacement.setCellY(y);
-		
-		// add the components
-		anEntity.addComponent(bombDropper);
-		anEntity.addComponent(dropperPlacement);
-		
-		// add the dropper to the model
-		entityManager.update(anEntity);
+		placement.setCellX(x);
+		placement.setCellY(y);
 		
 		//create an DROP_BOMB Command Event
 		ActionCommandEvent event = new ActionCommandEvent(ActionType.DROP_BOMB, bombDropper.getEntityId());
@@ -202,6 +297,28 @@ public class BombSystemTestCase {
 		
 		//run the system
 		bombSystem.update();
+	}
+	
+	private Entity createDropperEntity(){
+		
+		Entity anEntity = entityManager.createEntity();
+		
+		//Create Dropper
+		BombDropper bombDropper = new BombDropper();
+		bombDropper.setPermittedSimultaneousBombs(5);
+		
+		//Create Placement
+		CellPlacement placement = new CellPlacement();
+		placement.setCellX(0);
+		placement.setCellY(0);
+		
+		//Add components
+		anEntity.addComponent(bombDropper);
+		anEntity.addComponent(placement);
+		
+		entityManager.update(anEntity);
+		
+		return anEntity;
 	}
 
 }

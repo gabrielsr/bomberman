@@ -1,3 +1,13 @@
+/*
+ * BombSystem
+ * 
+ * Version information
+ *
+ * Date
+ * 
+ * Copyright notice
+ */
+
 package br.unb.unbomber.systems;
 
 import java.util.HashSet;
@@ -19,6 +29,10 @@ import br.unb.unbomber.event.ExplosionStartedEvent;
 import br.unb.unbomber.event.InAnExplosionEvent;
 import br.unb.unbomber.event.TimeOverEvent;
 
+/**
+ * 
+ *
+ */
 public class BombSystem extends BaseSystem {
 	/*
 	 * documented by @author JeffVFA //Define default Value of a bomb
@@ -28,14 +42,14 @@ public class BombSystem extends BaseSystem {
 	// Define a set of processed events
 	Set<Event> processedEvents = new HashSet<Event>(500);
 
-	/*
+	/**
 	 * bomb constructor
 	 */
 	public BombSystem() {
 		super();
 	}
 
-	/*
+	/**
 	 * bomb constructor
 	 * 
 	 * @param model one instance of the EntityManager
@@ -44,132 +58,147 @@ public class BombSystem extends BaseSystem {
 		super(model);
 	}
 
-	@Override
-	// Method for the updating of all bombs
+
+	
+	/**
+	 * Method for the updating of all bombs.
+	 * This method is called every turn. It checks if there is any 
+	 * {@link Event} related to this module and process them.
+	 */
 	public void update() {
 		// one instance of the EntityManage
 		EntityManager entityManager = getEntityManager();
 
-		// Get ActionCommandEvent events from the entityManager
+		/*
+		 * For each different type of Event, do:
+		 * 1) iterate over all events of that type
+		 * 2) Verify if this event interests me and if it wasn't already processed
+		 * 3) process the event
+		 * 4) add event to processed list
+		 * 
+		 */
+		
+		// Events of the type Action Command (drops bomb & triggers remote bomb)
+		// 1)
 		List<Event> actionEvents = entityManager
 				.getEvents(ActionCommandEvent.class);
-		// if exist any event :.
 		if (actionEvents != null) {
-			// for each event do:.
 			for (Event event : actionEvents) {
 				ActionCommandEvent actionCommand = (ActionCommandEvent) event;
-				// verify if is it a DROP_BOMB command
+				
+				// 2) 
 				if ((actionCommand.getType() == ActionType.DROP_BOMB)
 						&& (!processedEvents.contains(actionCommand))) {
-					BombDropper dropper = (BombDropper) entityManager
-							.getComponent(BombDropper.class,
-									actionCommand.getEntityId());
-					// if is it drop the bomb
+					
+					// 3)
+					BombDropper dropper = (BombDropper) entityManager.getComponent(BombDropper.class, actionCommand.getEntityId());
 					verifyAndDropBomb(dropper);
-					// and add the event bomb drop to processedEvents set
+					
+					// 4)
+					processedEvents.add(actionCommand);
+					
+				// 2) 
+				}else if ((actionCommand.getType() == ActionType.TRIGGERS_REMOTE_BOMB)
+						&& (!processedEvents.contains(actionCommand))) {
+					
+					// 3)
+					List<Component> components =  entityManager.getComponents(Explosive.class);
+					for(Component component: components){
+						Explosive explosive = (Explosive) component;
+						if(explosive.getOwnerId() == actionCommand.getEntityId()){
+							createExplosionEvent(explosive.getEntityId());
+						}
+					}
+					
+					// 4)
 					processedEvents.add(actionCommand);
 				}
 			}
 		}
 
-		// Triggers active bombs whose timer expired
+		// Events of the type Time Out (Triggers bomb)
+		// 1)
 		List<Event> timerOvers = entityManager.getEvents(TimeOverEvent.class);
-		// Get TimeOverEvent events from the entityManager
-		// if exist any event :.
 		if (timerOvers != null) {
-			// for each event do:.
 			for (Event event : timerOvers) {
 				TimeOverEvent timeOver = (TimeOverEvent) event;
-				// verify if is it a TRIGGERED_BOMB_ACTION command
+
+				// 2)
 				if ((timeOver.getAction().equals(TRIGGERED_BOMB_ACTION))
 						&& (!processedEvents.contains(timeOver))) {
-					// if is it the explosion event starts
+
+					// 3)
 					createExplosionEvent(timeOver.getOwnerId());
-					// and add the event time over to processedEvents set
+					
+					// 4)
 					processedEvents.add(timeOver);
 				}
 			}
 		}
 
-		// InAnExplosionEvent de bombas que estao no range de outras bombas
-		// Bombas devem ser disparadas por efeito cascata
-		// Get InAnExplosionEvent events from the entityManager
+		// Event of the type InAnExplosionEvent (Bombs in the range of exploding bombs 
+		// should explode as well)
+		// 1)
 		List<Event> inExplosionEvents = entityManager
 				.getEvents(InAnExplosionEvent.class);
-		// if exist any event :.
 		if (inExplosionEvents != null) {
-			// for each event do:.
 			for (Event event : inExplosionEvents) {
 				InAnExplosionEvent inAnExplosion = (InAnExplosionEvent) event;
-				// get the Id of the InAnExplosionEvent event
-				int entityInExplosionId = inAnExplosion.getIdHit();
-				// create a new explosive component and set it for any explosive
-				// component from the entityManager
-				Explosive bombExplosive = (Explosive) entityManager
-						.getComponent(Explosive.class, entityInExplosionId);
-				Timer bombTimer = (Timer) entityManager.getComponent(
-						Timer.class, entityInExplosionId);
-				// if the explosive exists and its time isn't over and it is
-				// active
-				if ((bombExplosive != null)
-						&& (!bombTimer.isOver() && bombTimer.isActive())) {
-					// call the method createExplosionEvent to start a new
-					// explosion
-					createExplosionEvent(entityInExplosionId);
+				
+				// 2)
+				if(!processedEvents.contains(inAnExplosion)){
+					
+					// 3)
+					int entityInExplosionId = inAnExplosion.getIdHit();
+					Explosive bombExplosive = (Explosive) entityManager.getComponent(Explosive.class, entityInExplosionId);
+
+					if (bombExplosive != null) {
+						createExplosionEvent(entityInExplosionId);
+					}
+					// 4)
+					processedEvents.add(inAnExplosion);
 				}
-				// and add the event in an explosion to processedEvents set
-				processedEvents.add(inAnExplosion);
 			}
 		}
 	}
 
-	/*
+	/**
 	 * creates a createExplosionEvent event
 	 * 
 	 * @param bombID id of the event
 	 */
 	private void createExplosionEvent(int bombID) {
 
-		EntityManager entityManager = getEntityManager(); // get the
-															// entityManager
+		/*
+		 * 1) Gets the  placement and the explosive from Entity Manager
+		 * 2) Starts a new explosion
+		 * 3) Set explosion atributes
+		 * 4) Adds explosion event to Entity Manager
+		 */
+		
+		// 1)
+		EntityManager entityManager = getEntityManager(); 
 		CellPlacement bombPlacement = (CellPlacement) entityManager
-				.getComponent(CellPlacement.class, bombID); // get the bomb
-															// placement from
-															// the entityManager
+				.getComponent(CellPlacement.class, bombID);
 		Explosive bombExplosive = (Explosive) entityManager.getComponent(
-				Explosive.class, bombID); // get the bomb explosive from the
-											// entityManager
-		Timer bombTimer = (Timer) entityManager.getComponent(Timer.class,
-				bombID); // get the bomb timer from the entityManager
-		ExplosionStartedEvent explosion = new ExplosionStartedEvent(); // starts
-																		// a new
-																		// explosion
-		explosion.setEventId(entityManager.getUniqueId()); // set the event ID
-															// on the
-															// entityManager
-		explosion.setOwnerId(bombID); // set the ownerID to the bobID value
-		explosion.setInitialPosition(bombPlacement); // set the initial position
-														// to the position got
-														// from the
-														// entityManager
-		explosion.setExplosionRange(bombExplosive.getExplosionRange());// set
-																		// bomb
-																		// range
-																		// to
-																		// the
-																		// range
-																		// got
-																		// from
-																		// the
-																		// explosive
-		bombTimer.setActive(false); // desactivate the bomb - when it's active
-									// it explode!-
-		entityManager.addEvent(explosion); // add this event to the
-											// entityManager
+				Explosive.class, bombID); 
+		
+		// 2)
+		ExplosionStartedEvent explosion = new ExplosionStartedEvent(); 
+		
+		// 3)
+		explosion.setEventId(entityManager.getUniqueId());
+		explosion.setOwnerId(bombID); 
+		explosion.setInitialPosition(bombPlacement); 
+		explosion.setExplosionRange(bombExplosive.getExplosionRange());
+		
+		// 4)
+		entityManager.addEvent(explosion);
 	}
 
 	/**
-	 * Drop a bomb.
+	 * Drop a bomb if dropper didn't reach the limit
+	 * @param dropper {@link BombDropper} that wants to drop a bomb
 	 */
 	public final void verifyAndDropBomb(BombDropper dropper) {
 
@@ -180,33 +209,74 @@ public class BombSystem extends BaseSystem {
 		if (explosives != null) {
 			for (Component component : explosives) {
 				Explosive explosive = (Explosive) component;
-				if (explosive.getOnwnerId() == dropper.getOnwnerId()) {
-					Timer timer = (Timer) getEntityManager().getComponent(
-							Timer.class, explosive.getEntityId());
-					// Should count only the active bombs
-					if (!timer.isOver()) {
+				if (explosive.getOwnerId() == dropper.getEntityId()) {
+
 						bombCounter++;
-					}
+
 				}
 			}
 		}
 		if (bombCounter < dropper.getPermittedSimultaneousBombs()) {
-			Entity bomb = createTimeBomb(dropper);
+			
+			Entity bomb = null;
+			
+			if (dropper.isCanRemoteTrigger()){
+				
+				bomb = createRemoteBomb(dropper);
+				
+			}else{
+
+				bomb = createTimeBomb(dropper);
+				
+			}
 			getEntityManager().update(bomb);
 		}
 
-		// TODO if it is a romete controlled bomb,
-		// make the link so the user can remote explod it
+	}
 
+	private Entity createRemoteBomb(BombDropper dropper) {
+		/*
+		 * The Bomb Entity is made of this components Explosive Placement Timer
+		 * components
+		 */
+
+		Entity bomb = createGenericBomb(dropper);
+
+		//TODO What else does a Remotely controled bomb needs?
+
+		return bomb;
 	}
 
 	/**
-	 * Make a Bomb.
+	 * Create a timed bomb
 	 * 
-	 * @param dropper
+	 * @param dropper {@link BombDropper} that will drop a bomb
 	 * @return new Bomb
 	 */
 	private Entity createTimeBomb(final BombDropper dropper) {
+		/*
+		 * The Bomb Entity is made of this components Explosive Placement Timer
+		 * components
+		 */
+
+		Entity bomb = createGenericBomb(dropper);
+
+		// create Event for time over
+		TimeOverEvent triggeredBombEvent = new TimeOverEvent();
+		triggeredBombEvent.setAction(TRIGGERED_BOMB_ACTION);
+
+		// create timer component
+		Timer bombTimer = new Timer(90, triggeredBombEvent);
+
+		// Add component
+		bomb.addComponent(bombTimer);
+
+		return bomb;
+
+	}
+	
+	//Method created to avoid code duplication
+	private Entity createGenericBomb(BombDropper dropper){
 		/*
 		 * The Bomb Entity is made of this components Explosive Placement Timer
 		 * components
@@ -219,7 +289,7 @@ public class BombSystem extends BaseSystem {
 		Entity bomb = getEntityManager().createEntity();
 
 		// The bomb is owned by its dropper
-		bomb.setOnwnerId(dropper.getEntityId());
+		bomb.setOwnerId(dropper.getEntityId());
 
 		// Create the placement component
 		CellPlacement bombPlacement = new CellPlacement();
@@ -232,20 +302,13 @@ public class BombSystem extends BaseSystem {
 		Explosive bombExplosive = new Explosive();
 		// the Bomb should have the same power of its dropper
 		bombExplosive.setExplosionRange(dropper.getExplosionRange());
+		bombExplosive.setOwnerId(dropper.getEntityId());
 
-		// create Event for time over
-		TimeOverEvent triggeredBombEvent = new TimeOverEvent();
-		triggeredBombEvent.setAction(TRIGGERED_BOMB_ACTION);
-
-		// create timer component
-		Timer bombTimer = new Timer(90, triggeredBombEvent);
-
+		// Add components
 		bomb.addComponent(bombExplosive);
 		bomb.addComponent(bombPlacement);
-		bomb.addComponent(bombTimer);
 
 		return bomb;
-
 	}
 
 }

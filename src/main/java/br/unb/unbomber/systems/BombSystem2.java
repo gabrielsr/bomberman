@@ -170,7 +170,7 @@ public class BombSystem2 extends BaseSystem {
 				Explosive bombInGame = (Explosive) component;
 				
 				/* check if the current bomb was dropped by the current dropper */
-				if (bombInGame.getOnwnerId() == dropper.getOnwnerId()) {
+				if (bombInGame.getOwnerId() == dropper.getEntityId()) {
 					
 					/* consider only the bombs that are still ticking */
 					Timer bombTimer = (Timer) getEntityManager().getComponent(Timer.class, bombInGame.getEntityId()); 
@@ -214,7 +214,7 @@ public class BombSystem2 extends BaseSystem {
 				Explosive bombInGame = (Explosive) component;
 				
 				/* check if the current bomb was dropped by the current dropper */
-				if (bombInGame.getOnwnerId() == dropper.getOnwnerId()) {
+				if (bombInGame.getOwnerId() == dropper.getEntityId()) {
 					
 					/* a new event (ExplosionStartedEvent) is created for the time to explode */				
 					ExplosionStartedEvent explodeRemoteBombNow = new ExplosionStartedEvent();
@@ -258,7 +258,7 @@ public class BombSystem2 extends BaseSystem {
 		Entity bomb = new Entity();
 		
 		/* the bomb is owned by its dropper */
-		bomb.setOnwnerId(dropper.getEntityId());
+		bomb.setOwnerId(dropper.getEntityId());
 
 		/* create the placement component */
 		CellPlacement bombPlacement = new CellPlacement();
@@ -273,7 +273,7 @@ public class BombSystem2 extends BaseSystem {
 		
 		/*the bomb should have the same power of its dropper */
 		bombExplosive.setExplosionRange(dropper.getExplosionRange());
-		bombExplosive.setOnwnerId(bomb.getEntityId());		//add the bomb id to the component bombExplosive
+		bombExplosive.setOwnerId(bomb.getEntityId());		//add the bomb id to the component bombExplosive
 
 		/* create an event for time over */
 		TimeOverEvent triggeredBombEvent = new TimeOverEvent(); 

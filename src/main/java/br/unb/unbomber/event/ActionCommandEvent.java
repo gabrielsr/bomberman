@@ -6,7 +6,8 @@ public class ActionCommandEvent extends Event {
 
 	public enum ActionType{
 		DROP_BOMB,
-		EXPLODE_REMOTE_BOMB;
+		EXPLODE_REMOTE_BOMB,
+		TRIGGERS_REMOTE_BOMB; //TODO duplicated
 	}
 	
 	private final ActionType type;

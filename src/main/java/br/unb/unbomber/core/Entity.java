@@ -14,8 +14,9 @@ public final class Entity {
 	/** The entity id. */
 	private int entityId;
 	
+	
 	/** The onwner id. */
-	private int onwnerId;
+	private int ownerId;
 	
 	/** The components. */
 	private List<Component> components;
@@ -80,23 +81,22 @@ public final class Entity {
 		this.entityId = entityId;
 	}
 
-	
 	/**
-	 * Gets the onwner id.
+	 * Gets the owner id.
 	 *
-	 * @return the onwner id
+	 * @return the owner id
 	 */
-	public int getOnwnerId() {
-		return onwnerId;
+	public int getOwnerId() {
+		return ownerId;
 	}
 
 	/**
-	 * Sets the onwner id.
+	 * Sets the owner id.
 	 *
-	 * @param onwnerId the new onwner id
+	 * @param ownerId the new owner id
 	 */
-	public void setOnwnerId(int onwnerId) {
-		this.onwnerId = onwnerId;
+	public void setOwnerId(int ownerId) {
+		this.ownerId = ownerId;
 	}
 
 

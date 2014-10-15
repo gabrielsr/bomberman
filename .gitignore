@@ -5,6 +5,9 @@ Bomberman\ project/images/
 /build/
 /bin/
 
+#Gradle stuff
+.gradle
+
 # Eclipse preferences / project
 .settings/
 .project
