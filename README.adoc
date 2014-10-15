@@ -1,6 +1,10 @@
 Introdução
 ==========
 
+image:https://travis-ci.org/DRA2840/bomberman.svg?branch=master["Build Status", link="https://travis-ci.org/DRA2840/bomberman"]
+image:http://img.shields.io/coveralls/DRA2840/bomberman/master.svg["Coverage Status", link="https://coveralls.io/r/DRA2840/bomberman?branch=master"]
+
+
 Projeto em Desenvolvimento de um Bomberman clone utilizando programação modular, 
 desenvolvido como projeto da disciplina:
 
@@ -9,6 +13,20 @@ Programação Sistemática
 Universidade de Brasília - UnB
 
 2/2014
+
+== Integração Contínua & Cobertura dos testes
+
+A cada push para o repositório, é feito um build completo do projeto, executando os testes e verificando se as 
+modificações inseriram alguma falta ou quebraram algum teste.
+
+Para verificar o status das últimas construções, entre no link: 
+	https://travis-ci.org/DRA2840/bomberman/builds
+	
+Além disso, após o build é feita uma análise da cobertura dos testes, usando as ferramentas 
+http://cobertura.github.io/cobertura/[Cobertura] e http://www.eclemma.org/jacoco/[Jacoco]. 
+Para ver os resultados dos últimos testes, entre no link:
+	https://coveralls.io/r/DRA2840/bomberman
+
 
 
 = Instruções para Montagem de Ambiente de Desenvolvimento
