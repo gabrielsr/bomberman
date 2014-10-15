@@ -1,0 +1,27 @@
+>>>> Relatório de atividades esperadas do membro Yuri.
+
+Data 		| Horas Trabalhadas 	| Tipo Tarefa 				| Descrição da Tarefa Realizada
+----------------------------------------------------------------------------------------------------------------------------------
+
+02/10/2014	| 2 horas				| Projetar e especificar	| Nesta tarefa será realizado um estudo sobre 
+											funções	 			  o módulo buscando a melhor forma de projetá-lo
+																  e será de interesse especificar as funções usadadas.
+																 
+
+05/10/2014	| 2 horas				| Codificar o módulo		| Será codificado o módulo Bomb. Seguindo as especificações.
+																  Será implementada a parte da bomba explodir em cascata.
+																  Tratamento do InAnExplosionEvent.
+
+06/10/2014	| 0,5 hora				| Revisar casos de testes	| Nesta tarefa serão revisados os casos de testes
+										  					  	  para garantir que estão corretos e conforme o
+										  					  	  que foi esperado destes.
+
+
+06/10/2014	| 1 horas 	 			| Terminar o que estiver	| Caso algum dos membros não tenha conseguido terminar sua
+										faltando				  parte ou tenha tido dificuldade. 
+											 
+
+ - Total de horas de trabalho estimada: 5,5 Horas.
+ - Total de horas efetivamente gastas: 6 Horas. 
+ 		(3) nas tarefas de projetar e especificar funções, revisar casos de testes
+ 		(3) nas tarefas de coficar o módulo e terminar o que estiver faltando
