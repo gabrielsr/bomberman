@@ -223,7 +223,7 @@ public class BombSystemTestCase2 {
 	/*
 	 * testa se um ExplosionStartedEvent � criado ap�s 90 turnos.
 	 */
-	//@Test
+	//TODO Reactivate test after corrections @Test
 	public void triggeredAfterTimeToExplodeTest(){
 		
 		Entity dropperEntity = new Entity();

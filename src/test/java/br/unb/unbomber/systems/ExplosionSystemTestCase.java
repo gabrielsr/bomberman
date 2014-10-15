@@ -27,7 +27,7 @@ public class ExplosionSystemTestCase {
 	
     }
 
-    //TODO Reactivate test after corrections @Test
+    //@Test
     public boolean detectExplosionCollisionTest() {
 
 	/* create an explosion entity with components: explosion placement */
