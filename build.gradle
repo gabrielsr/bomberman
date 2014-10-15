@@ -2,8 +2,9 @@ apply plugin: "java"
 apply plugin: "maven"
 apply plugin: 'checkstyle'
 
+
 group = "br.unb.cic"
-version = 0.01
+version = 0.02
 
 repositories {
     mavenCentral()
