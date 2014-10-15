@@ -15,7 +15,7 @@ public class Component {
 	 * 
 	 * @return id
 	 */
-	public int getEntityId() {
+	public final int getEntityId() {
 		return entityId;
 	}
 

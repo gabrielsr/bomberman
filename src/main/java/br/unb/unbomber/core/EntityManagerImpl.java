@@ -181,6 +181,7 @@ public class EntityManagerImpl implements EntityManager {
 	 *
 	 * @return uniqueId
 	 */
+	@Override
 	public int getUniqueId(){
 		return this.uniqueIdSequence++;
 	}

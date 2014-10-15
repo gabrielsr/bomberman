@@ -68,6 +68,8 @@ public interface EntityManager {
 	/**
 	 * Get a Component of 'componentType' associated with 'entityId' if any.
 	 * Return null if there is no such a component associated
+	 * 
+	 * @return the component
 	 */
 	Component getComponent(Class<?> componentType, int entityId);
 
