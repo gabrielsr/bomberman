@@ -13,12 +13,12 @@ import br.unb.unbomber.core.Component;
  */
 public class Explosion extends Component{
 
-	boolean isPassThrough; // Does it pass through soft blocks?
-	boolean isHardPassThrough; // Does it pass through hard blocks?
-	int explosionRange;				 // How much further will it propagate?
-	Direction propagationDirection;
-	float countdown; 			// How long does it last?
-	float propagationCountdown; // How long does it take to propagate to the
+	private boolean isPassThrough; // Does it pass through soft blocks?
+	private boolean isHardPassThrough; // Does it pass through hard blocks?
+	private int explosionRange;				 // How much further will it propagate?
+	private Direction propagationDirection;
+	private float countdown; 			// How long does it last?
+	private float propagationCountdown; // How long does it take to propagate to the
 								// next square?
 
 	public boolean isPassThrough() {
@@ -57,5 +57,4 @@ public class Explosion extends Component{
 	public void setPropagationCountdown(float propagationCountdown) {
 		this.propagationCountdown = propagationCountdown;
 	}
-
 }

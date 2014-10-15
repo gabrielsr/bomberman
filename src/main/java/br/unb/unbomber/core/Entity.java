@@ -53,19 +53,19 @@ public final class Entity {
 	 *
 	 * @return the components
 	 */
-	public List<Component> getComponents(){
-		if(this.components==null){
+	public List<Component> getComponents() {
+		if (this.components == null) {
 			this.components = new ArrayList<Component>();
 		}
 		return this.components;
 	}
-	
+
 	/**
 	 * Gets the entity id.
 	 *
 	 * @return the entity id
 	 */
-	public int getEntityId(){
+	public int getEntityId() {
 		return this.entityId;
 	}
 
