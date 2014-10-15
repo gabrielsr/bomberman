@@ -25,7 +25,6 @@ public class BombSystem extends BaseSystem {
 	
 	public BombSystem(EntityManager model) {
 		super(model);
-		
 	}
 	
 	@Override
