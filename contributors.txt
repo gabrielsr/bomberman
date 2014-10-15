@@ -36,7 +36,8 @@ Repositório:
 Repositório:
 
 == Grupo 9
-Repositório:
+Repositório: http://github.com/paulovgf/bomberman
+* Paulo Victor G. Farias - paulovgf
 
 == Grupo 10
 Repositório:
