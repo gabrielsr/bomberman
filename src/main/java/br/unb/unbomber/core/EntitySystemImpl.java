@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * A Simple implementation of a Entity Managar. 
+ * A Simple implementation of a Entity Manager. 
  * 
  * @author grodrigues
  *
