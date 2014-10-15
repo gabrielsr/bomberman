@@ -3,7 +3,7 @@ package br.unb.unbomber.component;
 import br.unb.unbomber.core.Component;
 
 /**
- * Classe que representa um componente de uma entidade que pode Dropar uma bomba
+ * Classe que representa um componente de uma entidade que pode Dropar uma bomba.
  *
  */
 public class BombDropper extends Component {

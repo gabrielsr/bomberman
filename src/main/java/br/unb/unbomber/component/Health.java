@@ -49,4 +49,3 @@ public class Health extends Component {
 		return canTakeDamaged;
 	}
 }
-	

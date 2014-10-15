@@ -3,7 +3,7 @@ package br.unb.unbomber.component;
 import br.unb.unbomber.core.Component;
 
 
-public class ExplosionBarrier extends Component{
+public class ExplosionBarrier extends Component {
 	
 	public enum ExplosionBarrierType {
 
