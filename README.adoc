@@ -14,19 +14,6 @@ Universidade de Brasília - UnB
 
 2/2014
 
-== Integração Contínua & Cobertura dos testes
-
-A cada push para o repositório, é feito um build completo do projeto, executando os testes e verificando se as 
-modificações inseriram alguma falta ou quebraram algum teste.
-
-Para verificar o status das últimas construções, entre no link: 
-	https://travis-ci.org/DRA2840/bomberman/builds
-	
-Além disso, após o build é feita uma análise da cobertura dos testes, usando as ferramentas 
-http://cobertura.github.io/cobertura/[Cobertura] e http://www.eclemma.org/jacoco/[Jacoco]. 
-Para ver os resultados dos últimos testes, entre no link:
-	https://coveralls.io/r/DRA2840/bomberman
-
 
 
 = Instruções para Montagem de Ambiente de Desenvolvimento
@@ -86,6 +73,53 @@ próximos as linhas em que ocorreram como sinais vermelhos. Ao posicionar o curs
 detalhamento do problema.
 
 Para verificar se o Eclipse está configurado para realizar build automático vá ao menu _Project_ -> _Build Automatically_.
+
+
+= Ferramentas de Desenvolvimento
+
+== Integração Contínua & Cobertura dos testes
+
+A cada push para o repositório, é feito um build completo do projeto, executando os testes e verificando se as 
+modificações inseriram alguma falta ou quebraram algum teste.
+
+Para verificar o status das últimas construções, entre no link: 
+	https://travis-ci.org/DRA2840/bomberman/builds
+	
+Além disso, após o build é feita uma análise da cobertura dos testes, usando as ferramentas 
+http://cobertura.github.io/cobertura/[Cobertura] e http://www.eclemma.org/jacoco/[Jacoco]. 
+Para ver os resultados dos últimos testes, entre no link:
+	https://coveralls.io/r/DRA2840/bomberman
+
+== Análise estática
+
+Ferramentas de análise estática ajudam a encontrar possíveis falhas no código e na documentação, facilitando 
+a legibilidade e manutenção do código fonte. 
+
+=== Checkstyle
+
+A ferramenta Checkstyle verifica, dentre outras coisas:
+* Comentários Javadoc para classes, atributos e métodos
+* Convenções para nomenclatura de atributos e métodos
+* Número de parâmetros em funções e comprimento de linhas
+* Espaçamento entre caracteres
+* Boas práticas para construtores
+* Duplicação de código
+
+Foi criado um uma regra customizada para atender nossas demandas atuais de limpeza de código,
+custom_checks_bomberman.xml, que se encontra no diretório raiz do projeto.
+
+Para usá-la no Eclipse, deve-se baixar o plugin do checkstyle (disponível na marketplace),
+ir em Eclipse >> Preferências >> Checkstyle >> New
+
+Na Tela que vai aparecer, dê um nome qualquer para esse conjunto de regras (sugiro o nome abaixo), 
+clique em import e selecione o arquivo custom_checks_bomberman.xml
+ 
+[[img-checkstyle_import]]
+.Tela de importação das regras customizadas
+image::/docs/img/checkstyle_import.png[]
+
+Ao voltar para a página de configuração do checkstyle, clique na regra customiada e em seguida em "Set as Default"
+
 
 = Referencias 
 == Padrões Utilizados
