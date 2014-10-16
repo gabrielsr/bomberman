@@ -38,6 +38,8 @@ Repositório:
 == Grupo 9
 Repositório: http://github.com/paulovgf/bomberman
 * Paulo Victor G. Farias - paulovgf
+* William Simião - williamsimiao
+* Yuri Alexsander - yurialeksndr
 
 == Grupo 10
 Repositório:
