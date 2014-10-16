@@ -47,7 +47,7 @@ public class BombSystemTestCase {
 	}
 	
 	@Test
-	public void testConstructor(){
+	public void testConstructor() {
 		bombSystem = new BombSystem();
 		
 		//If EntityManager was not set internally, will create NullPointerException
@@ -110,7 +110,7 @@ public class BombSystemTestCase {
 	}
 	
 	@Test
-	public void maxNumberOfBombsTests(){
+	public void maxNumberOfBombsTests() {
 		
 		int max_number_of_bombs = 2;
 		
@@ -193,7 +193,7 @@ public class BombSystemTestCase {
 	}
 	
 	@Test
-	public void testIfAnExplosionEventTriggersAnotherBomb(){
+	public void testIfAnExplosionEventTriggersAnotherBomb() {
 		//Create bombDropper
 		Entity anEntity = createDropperEntity();
 		
@@ -217,7 +217,7 @@ public class BombSystemTestCase {
 	}
 	
 	@Test
-	public void createRemotelyControledBombTest(){
+	public void createRemotelyControledBombTest() {
 		// create a entity with components:
 		// * bombDropper
 		// * placement
@@ -242,7 +242,7 @@ public class BombSystemTestCase {
 	}
 	
 	@Test
-	public void triggersARemotelyControledBombTest(){
+	public void triggersARemotelyControledBombTest() {
 		// create a entity with components:
 		// * bombDropper
 		// * placement
@@ -277,14 +277,14 @@ public class BombSystemTestCase {
 	
 	//Methods used by other tests
 	
-	private void updateSystems(int numberOfInteractions){
+	private void updateSystems(int numberOfInteractions) {
 		for (int i=0; i<numberOfInteractions; i++) {
 			timeSystem.update();
 			bombSystem.update();
 		}
 	}
 	
-	private void pubBombOnGrid(int x, int y, BombDropper bombDropper){
+	private void pubBombOnGrid(int x, int y, BombDropper bombDropper) {
 		
 		CellPlacement placement = (CellPlacement) entityManager.getComponent(CellPlacement.class, bombDropper.getEntityId());
 		
@@ -299,7 +299,7 @@ public class BombSystemTestCase {
 		bombSystem.update();
 	}
 	
-	private Entity createDropperEntity(){
+	private Entity createDropperEntity() {
 		
 		Entity anEntity = entityManager.createEntity();
 		
