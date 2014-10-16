@@ -27,7 +27,8 @@ Repositório:
 Repositório:
 
 == Grupo 6
-Repositório:
+Igor Sodre - igorsodre
+Repositório: http://github.com/igorsodre/bomberman
 
 == Grupo 7
 Repositório:
