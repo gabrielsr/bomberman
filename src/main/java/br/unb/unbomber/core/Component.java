@@ -24,12 +24,13 @@ public class Component {
 	 * 
 	 * The Id is setted when you add the component to a entity. 
 	 * 
-	 * TODO change visibility to protect
+	 * TODO remove calls to setEntityID outside this package
+	 *  and change visibility to protect
 	 * 
 	 * @param entityId the new entity id
 	 * @see Entity#addComponent(Component)
 	 */
-	public final void setEntityId(int entityId) {
+	public void setEntityId(int entityId) {
 		this.entityId = entityId;
 	}
 
