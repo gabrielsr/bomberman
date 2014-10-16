@@ -87,8 +87,35 @@ detalhamento do problema.
 
 Para verificar se o Eclipse está configurado para realizar build automático vá ao menu _Project_ -> _Build Automatically_.
 
+=== Outros plugins
+
+=== Checkstyle Eclipse plugin
+
+
+No Eclipse vá em  
+> Help>Marketplace 
+
+Digite no campo search:
+ Checkstyle
+ 
+Escolha  Checkstyle Plug-in 5.7.0
+Confirme. Ao final da instalação reinicie o Eclipse.
+
+
+=== Findbugs plugin
+
+No Eclipse vá em  
+> Help>Marketplace 
+
+Digite no campo search:
+ Findbugs
+ 
+Escolha  Findbugs Eclipse Plugin 3.0.0
+Confirme. Ao final da instalação reinicie o Eclipse.
+
+
 = Referencias 
 == Padrões Utilizados
 * Padrão Arquitetural: Entity Component System
-** Leitura Posterior: http://gamadu.com/artemis/	
+
 
