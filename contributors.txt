@@ -1,5 +1,3 @@
-
-
 Grupos
 ------
 
@@ -35,7 +33,11 @@ Repositório:
 Repositório:
 
 == Grupo 8
-Repositório:
+Repositório:http://github.com/Giulialeixo/bomberman
+
+* Giulia Aleixo - Giulialeixo
+* Hichemm Khalyd - 
+* Guilherme Pedrinha
 
 == Grupo 9
 Repositório:
