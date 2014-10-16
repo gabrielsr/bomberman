@@ -18,7 +18,7 @@ import br.unb.unbomber.event.GameOverEvent;
 import br.unb.unbomber.event.InvencibleEvent;
 
 /**
- * Classe reponsável pelas regras e lógicas do Módulo Life.
+ * Classe reponsï¿½vel pelas regras e lï¿½gicas do Mï¿½dulo Life.
  * 
  * @version 0.1 14 Out 2014
  * @author Grupo 5
@@ -44,7 +44,7 @@ public class LifeSystem extends BaseSystem {
 	@Override
 	public void update() {
 		
-		/** Coleta Eventos de Colisão */
+		/** Coleta Eventos de Colisï¿½o */
 		List<Event> collisionEvents = getEntityManager().getEvents(
 												CollisionEvent.class);
 		
@@ -54,7 +54,7 @@ public class LifeSystem extends BaseSystem {
 			//TODO Criar Components capaz de diferenciar Entities.
 			
 			/** 
-			 * @if Confere se há colisão.
+			 * @if Confere se hï¿½ colisï¿½o.
 			 * 
 			 * Monster - Character
 			 * 	Gera dano no Character caso colidam.
@@ -72,13 +72,12 @@ public class LifeSystem extends BaseSystem {
 			 *	Gera dano no Character.
 			 * 
 			 */
-			if(collisions.getIsTargetId()){
-				Health life = (Health) getEntityManager().getComponent(
-									Health.class, collisions.getOwnerId());
-				
-				takeDamaged(life);
-			
-			}
+
+			Health life = (Health) getEntityManager().getComponent(
+							Health.class, collisions.getOwnerId());
+
+			takeDamaged(life);
+
 		}
 				
 	}	
@@ -86,7 +85,7 @@ public class LifeSystem extends BaseSystem {
 	public void takeDamaged(Health life){
 		
 		//TODO Implementar a retirada de Health a uma entidade.
-		//ISSUE Component life já está contido com a TargetId da colisão?
+		//ISSUE Component life jï¿½ estï¿½ contido com a TargetId da colisï¿½o?
 		
 	}
 	
