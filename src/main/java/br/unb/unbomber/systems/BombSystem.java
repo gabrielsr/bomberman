@@ -103,9 +103,9 @@ public class BombSystem extends BaseSystem {
 					
 					// 3)
 					List<Component> components =  entityManager.getComponents(Explosive.class);
-					for(Component component: components){
+					for (Component component: components) {
 						Explosive explosive = (Explosive) component;
-						if(explosive.getOwnerId() == actionCommand.getEntityId()){
+						if (explosive.getOwnerId() == actionCommand.getEntityId()) {
 							createExplosionEvent(explosive.getEntityId());
 						}
 					}
@@ -146,7 +146,7 @@ public class BombSystem extends BaseSystem {
 				InAnExplosionEvent inAnExplosion = (InAnExplosionEvent) event;
 				
 				// 2)
-				if(!processedEvents.contains(inAnExplosion)){
+				if (!processedEvents.contains(inAnExplosion)) {
 					
 					// 3)
 					int entityInExplosionId = inAnExplosion.getIdHit();
@@ -220,11 +220,11 @@ public class BombSystem extends BaseSystem {
 			
 			Entity bomb = null;
 			
-			if (dropper.isCanRemoteTrigger()){
+			if (dropper.isCanRemoteTrigger()) {
 				
 				bomb = createRemoteBomb(dropper);
 				
-			}else{
+			} else {
 
 				bomb = createTimeBomb(dropper);
 				
