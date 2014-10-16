@@ -1,8 +1,8 @@
 Introdução
 ==========
 
-image:https://travis-ci.org/DRA2840/bomberman.svg?branch=master["Build Status", link="https://travis-ci.org/DRA2840/bomberman"]
-image:http://img.shields.io/coveralls/DRA2840/bomberman/master.svg["Coverage Status", link="https://coveralls.io/r/DRA2840/bomberman?branch=master"]
+image:https://travis-ci.org/gabrielsr/bomberman.svg?branch=master["Build Status", link="https://travis-ci.org/gabrielsr/bomberman"]
+image:http://img.shields.io/coveralls/gabrielsr/bomberman/master.svg["Coverage Status", link="https://coveralls.io/r/gabrielsr/bomberman?branch=master"]
 
 
 Projeto em Desenvolvimento de um Bomberman clone utilizando programação modular, 
@@ -13,6 +13,20 @@ Programação Sistemática
 Universidade de Brasília - UnB
 
 2/2014
+
+
+== Integração Contínua & Cobertura dos testes
+
+A cada push para o repositório, é feito um build completo do projeto, executando os testes e verificando se as 
+modificações inseriram alguma falta ou quebraram algum teste.
+
+Para verificar o status das últimas construções, entre no link: 
+	https://travis-ci.org/DRA2840/bomberman/builds
+	
+Além disso, após o build é feita uma análise da cobertura dos testes, usando as ferramentas 
+http://cobertura.github.io/cobertura/[Cobertura] e http://www.eclemma.org/jacoco/[Jacoco]. 
+Para ver os resultados dos últimos testes, entre no link:
+	https://coveralls.io/r/DRA2840/bomberman
 
 
 
@@ -75,36 +89,19 @@ detalhamento do problema.
 Para verificar se o Eclipse está configurado para realizar build automático vá ao menu _Project_ -> _Build Automatically_.
 
 
-= Ferramentas de Desenvolvimento
+=== Outros plugins
 
-== Integração Contínua & Cobertura dos testes
+=== Checkstyle Eclipse plugin
 
-A cada push para o repositório, é feito um build completo do projeto, executando os testes e verificando se as 
-modificações inseriram alguma falta ou quebraram algum teste.
 
-Para verificar o status das últimas construções, entre no link: 
-	https://travis-ci.org/DRA2840/bomberman/builds
-	
-Além disso, após o build é feita uma análise da cobertura dos testes, usando as ferramentas 
-http://cobertura.github.io/cobertura/[Cobertura] e http://www.eclemma.org/jacoco/[Jacoco]. 
-Para ver os resultados dos últimos testes, entre no link:
-	https://coveralls.io/r/DRA2840/bomberman
+No Eclipse vá em  
+> Help>Marketplace 
 
-== Análise estática
-
-Ferramentas de análise estática ajudam a encontrar possíveis falhas no código e na documentação, facilitando 
-a legibilidade e manutenção do código fonte. 
-
-=== Checkstyle
-
-A ferramenta Checkstyle verifica, dentre outras coisas:
-
-* Comentários Javadoc para classes, atributos e métodos
-* Convenções para nomenclatura de atributos e métodos
-* Número de parâmetros em funções e comprimento de linhas
-* Espaçamento entre caracteres
-* Boas práticas para construtores
-* Duplicação de código
+Digite no campo search:
+ Checkstyle
+ 
+Escolha  Checkstyle Plug-in 5.7.0
+Confirme. Ao final da instalação reinicie o Eclipse.
 
 Foi criado um uma regra customizada para atender nossas demandas atuais de limpeza de código,
 custom_checks_bomberman.xml, que se encontra no diretório raiz do projeto.
@@ -122,8 +119,20 @@ image::/docs/img/checkstyle_import.png[]
 Ao voltar para a página de configuração do checkstyle, clique na regra customiada e em seguida em "Set as Default"
 
 
+=== Findbugs plugin
+
+No Eclipse vá em  
+> Help>Marketplace 
+
+Digite no campo search:
+ Findbugs
+ 
+Escolha  Findbugs Eclipse Plugin 3.0.0
+Confirme. Ao final da instalação reinicie o Eclipse.
+
+
 = Referencias 
 == Padrões Utilizados
 * Padrão Arquitetural: Entity Component System
-** Leitura Posterior: http://gamadu.com/artemis/	
+
 
