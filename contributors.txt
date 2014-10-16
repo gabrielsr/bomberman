@@ -18,6 +18,8 @@ Repositório: http://github.com/DRA2840/bomberman
 
 == Grupo 2
 Repositório:
+Repositório: https://github.com/MaxFernandes/bomberman
+* Maxwell Fernandes
 
 == Grupo 3
 Repositório:
