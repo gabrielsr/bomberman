@@ -29,7 +29,8 @@ Repositório:
 Repositório:
 
 == Grupo 6
-Repositório:
+Repositório:http://github.com/igorsodre/bomberman
+Pedro Borges Pio - pedrobpio
 
 == Grupo 7
 Repositório:
