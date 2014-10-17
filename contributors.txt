@@ -4,7 +4,7 @@ Grupos
 ------
 
 == Grupo 0
-Resposit贸rio: http://github.com/gabrielsr/bomberman
+Resposit髍io: http://github.com/gabrielsr/bomberman
 
 * Gabriel Rodrigues - gabrielsr
 Huguinho -  huginho_donalts
@@ -12,36 +12,37 @@ Zezinho  -  zezinho_donalts
 Luisinho -  huginho_donalts
 
 == Grupo 1
-Reposit贸rio: http://github.com/DRA2840/bomberman
+Reposit髍io: http://github.com/DRA2840/bomberman
 
 * Denis Albuquerque - zidenis
 
 == Grupo 2
-Reposit贸rio:
+Reposit髍io:
 
 == Grupo 3
-Reposit贸rio:
+Reposit髍io:
 
 == Grupo 4
-Reposit贸rio:
+Reposit髍io:
 
 == Grupo 5
-Reposit贸rio:
+Reposit髍io:
 
 == Grupo 6
-Reposit贸rio:
+Igor Sodre - igorsodre
+Reposit髍io: http://github.com/igorsodre/bomberman
 
 == Grupo 7
-Reposit贸rio:
+Reposit髍io:
 
 == Grupo 8
-Reposit贸rio:
+Reposit髍io:
 
 == Grupo 9
-Reposit贸rio:
+Reposit髍io:
 
 == Grupo 10
-Reposit贸rio:
+Reposit髍io:
 
 
 
