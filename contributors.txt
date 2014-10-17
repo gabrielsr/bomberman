@@ -42,7 +42,9 @@ Repositório:
 
 
 == Grupo 9
-Repositório:
+Repositório: https://github.com/paulovgf/bomberman
+
+* Yuri Alexsander - yurialeksndr
 
 == Grupo 10
 Repositório:
