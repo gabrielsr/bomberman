@@ -48,7 +48,9 @@ Repo: https://github.com/paulovgf/bomberman
 * Yuri Alexsander - yurialeksndr
 
 == Grupo 10
-Repo:
+Repo: https://github.com/cic943003/bomberman
+
+* Camila Imbuzeiro Camargo - cic943003
 
 
 
