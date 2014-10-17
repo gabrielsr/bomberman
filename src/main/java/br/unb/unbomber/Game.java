@@ -7,9 +7,9 @@ public class Game {
 
 	}
 	
-	public void run(){
+	public void run() {
 		
-		boolean finished = false;
+		final boolean finished = false;
 
 		showPresentation();
 		showMenu();
@@ -46,15 +46,15 @@ public class Game {
 
 	}
 	
-	public void pause(){
+	public void pause() {
 		
 	}
 	
-	public void save(int slot){
+	public void save(int slot) {
 		
 	}
 	
-	public void load(int slot){
+	public void load(int slot) {
 		
 	}
 

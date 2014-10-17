@@ -76,7 +76,7 @@ public final class Entity {
 	 * @see EntityManager#createEntity()
 	 */
 	@Deprecated
-	public void setEntityId(int entityId){
+	public void setEntityId(int entityId) {
 		// update components entityId
 		this.entityId = entityId;
 	}

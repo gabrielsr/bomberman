@@ -3,6 +3,7 @@ apply plugin: "maven"
 apply plugin: 'jacoco'
 apply plugin: 'cobertura'
 apply plugin: 'com.github.kt3k.coveralls'
+apply plugin: 'checkstyle'
 
 
 group = "br.unb.cic"
