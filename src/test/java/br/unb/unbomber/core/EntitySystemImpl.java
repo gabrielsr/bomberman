@@ -10,7 +10,7 @@ import br.unb.unbomber.core.EntityManagerImpl;
  * EntityManagerImpl, please, update your code. This class 
  * will be removed in a future update.
  * 
- * @author grodrigues
+ * @author Gabriel Rodrigues <gabrielsr@gmail.com>
  *
  */
 @Deprecated

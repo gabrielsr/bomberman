@@ -8,7 +8,7 @@ import java.util.Map;
 /**
  * A Simple implementation of a Entity Managar. 
  * 
- * @author grodrigues
+ * @author Gabriel Rodrigues <gabrielsr@gmail.com>
  *
  */
 public class EntityManagerImpl implements EntityManager {

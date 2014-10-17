@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * An Entity in the Entity Component System (ECS).
  *
- * @author grodrigues
+ * @author Gabriel Rodrigues <gabrielsr@gmail.com>
  */
 public final class Entity {
 

@@ -2,7 +2,7 @@ Grupos
 ------
 
 == Grupo 0
-Respositório: http://github.com/gabrielsr/bomberman
+Repo: http://github.com/gabrielsr/bomberman
 
 * Gabriel Rodrigues - gabrielsr
 Huguinho -  huginho_donalts
@@ -10,47 +10,45 @@ Zezinho  -  zezinho_donalts
 Luisinho -  huginho_donalts
 
 == Grupo 1
-Repositório: http://github.com/DRA2840/bomberman
+Repo: http://github.com/DRA2840/bomberman
 
 * Denis Albuquerque - zidenis
 
 == Grupo 2
-Repositório:
+Repo:
 
 == Grupo 3
-Repositório:http://github.com/Giulialeixo/bomberman
+Repo:http://github.com/Giulialeixo/bomberman
 
 * Giulia Aleixo - Giulialeixo
 * Hichemm Khalyd - 
 * Guilherme Pedrinha
 
 == Grupo 4
-Repositório:
+Repo:
 
 == Grupo 5
-Repositório:
+Repo:
 
 == Grupo 6
-Repositório:http://github.com/igorsodre/bomberman
+Repo:http://github.com/igorsodre/bomberman
 Pedro Borges Pio - pedrobpio
 Igor Sodre - igorsodre
 
 == Grupo 7
-Repositório:
+Repo:
 
 == Grupo 8
 
 
 == Grupo 9
-Repositório: https://github.com/paulovgf/bomberman
+Repo: https://github.com/paulovgf/bomberman
 * Paulo Victor G. Farias - paulovgf
-* William Simião - williamsimiao
-* Yuri Alexsander - yurialeksndr
-
+* William SimiÃ£o - williamsimiao
 * Yuri Alexsander - yurialeksndr
 
 == Grupo 10
-Repositório:
+Repo:
 
 
 
