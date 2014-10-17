@@ -12,43 +12,45 @@ RELATORIO-Denis.TXT
 ## Sprint 1 (de 03 a 14/10) 
 # Planejado
 
-Tipo Tarefa 				| Descrição da Tarefa
-----------------------------+----------------------------------.....
-Estudar						| Est. conceitos da arquitetura ECS [1][2]
-Revisar especificações		| Est. documentação do projeto (wiki) e seu código fonte. 
-Revisar código do módulos	| Revisar código do BombSystem já implementado, identificando as funcinalidades já implementadas e outras necessárias ao módulo
-Codificar módulo 			| Codificar tratamento do evento: TimeOutEvent 
-Revisar código do módulo  	| Tratar em grupo (durante o horário da aula) os problemas encontrados na codificação do módulo
-Revisar código do módulo 	| Revisar código do módulo desenvolvido distribuidamente, de forma a organizá-lo e preparando-o para a próxima sprint.
-Planejar próxima sprint		| Revisão em grupo (durante o horário da aula) do ocorrido na sprint, divisão de tarefas e planejamento da proxima sprint. 
+Num Tarefa   | Tipo Tarefa 			| Descrição da Tarefa
+-------------+----------------------------------+-------------------------------+----------------------------------...
+ 01          | Estudar				| Est. conceitos da arquitetura ECS [1][2]
+ 02          | Revisar especificações		| Est. documentação do projeto (wiki) e seu código fonte. 
+ 03          | Revisar código do módulos	| Revisar código do BombSystem já implementado, identificando as funcinalidades já implementadas e outras necessárias ao módulo
+ 04          | Codificar módulo 		| Codificar tratamento do evento: TimeOutEvent 
+ 05          | Revisar código do módulo  	| Tratar em grupo (durante o horário da aula) os problemas encontrados na codificação do módulo
+ 06          | Revisar código do módulo 	| Revisar código do módulo desenvolvido distribuidamente, de forma a organizá-lo e preparando-o para a próxima sprint.
+ 07          | Planejar próxima sprint		| Revisão em grupo (durante o horário da aula) do ocorrido na sprint, divisão de tarefas e planejamento da proxima sprint. 
 
 # Executado
 
-Data | Horas Trabalhadas	| Tipo Tarefa 				| Descrição da Tarefa
----------------+------------+---------------------------+-------------------...
-03/10 (sexta)  | 2 horas 	| Estudar					| Est. conceitos da arquitetura ECS [1][2]
-04/10 (sábado) | 2 horas  	| Revisar especificações	| Est. documentação do projeto (wiki) e seu código fonte. 
-04/10 (sábado) | 2 horas  	| Revisar código do módulos	| Revisar código do BombSystem já implementado, identificando as funcinalidades já implementadas e outras necessárias ao módulo
-05/10 (domingo)| - hora  	| * Indisponível			| Indisponível por convocação para trabalho nas eleições gerais 2014.
-06/10 (segunda)| 3 horas  	| Codificar módulo 			| Codificar tratamento do evento: TimeOutEvent 
-07/10 (terça)  | 2 horas  	| Revisar código do módulo  | Tratar em grupo (durante o horário da aula) os problemas encontrados na codificação do módulo
-08/10 (quarta) | 3 horas  	| Revisar código do módulo 	| Revisar código do módulo desenvolvido distribuidamente, de forma a organizá-lo e preparando-o para a próxima sprint.
-09/10 (quinta) | 2 horas  	| Planejar próxima sprint	| Revisão em grupo (durante o horário da aula) do ocorrido na sprint, divisão de tarefas e planejamento da proxima sprint. 
+Data | Horas Trabalhadas	| Num Tarefa	| Descrição da Tarefa
+---------------+----------------+---------------+--------------------------------------------------------------------------...
+03/10 (sexta)  | 2 horas 	| 01		| leituras sobre arquitetura ECS http://entity-systems.wikidot.com/
+04/10 (sábado) | 1 horas  	| 02		| Estudo das especificações do projeto (wiki)
+06/10 (segunda)| 3 horas  	| 03		| Revisar código do projeto como um todo, identificando as funcinalidades já implementadas e outras necessárias ao módulo
+07/10 (terça)  | 2 horas  	| 04  		| Tratamento de entity e events IDs, correção de bug no supertipo da classe explosion, etc
+08/10 (quarta) | 3 horas	| 04		| Tratamento para TimeOutEvent e identificação de eventos já tratados
+09/10 (quinta) | 2 horas	| 04		| Codificação do tratamento do número máximo de bombas
+10/10 (quinta) | 1 hora		| 04		| Modificando implementação do tratamento do InAnExplosionEvent para considerar apenas bombas não explodidas
+Vários dias    | 4 horas	| 02, 03	| Discussões no aprender.unb e whatsapp sobre o projeto
+14/10 (terça)  | 1 hora		| 07		| Planejamento da próxima sprint do grupo
+
 
 ## Sprint 2 (de 15 a 21/10)
 
 # Planejado
 
-Tipo Tarefa 				| Descrição da Tarefa
-----------------------------+----------------------------------.....
-Estudar						| Estudar convenções de código Java da Sun [3]
-Revisar documentação do Mod	| Adequar documentação do código quanto a Programming Practices (Chapter 10)
-Revisar código do módulos	| Executar ferramenta de análise estática para revisão do código do módulo. 
+Num Tarefa   | Tipo Tarefa 			| Descrição da Tarefa
+-------------+----------------------------------+-------------------------------+----------------------------------...
+ 01	     | Estudar				| Estudar convenções de código Java da Sun [3]
+ 02 	     | Revisar documentação do Mod	| Adequar documentação do código quanto a Programming Practices (Chapter 10)
+ 03 	     | Revisar código do módulos	| Executar ferramenta de análise estática para revisão do código do módulo. 
 
 # Executado
 
-Data | Horas Trabalhadas	| Tipo Tarefa 				| Descrição da Tarefa
----------------+------------+---------------------------+-------------------...
+Data | Horas Trabalhadas	| Num Tarefa	| Descrição da Tarefa
+---------------+----------------+---------------+--------------------------------------------------------------------------...
 
 
 ## Referências

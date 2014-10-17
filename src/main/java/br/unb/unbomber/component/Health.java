@@ -30,6 +30,7 @@ public class Health extends Component {
 		this.lifeEntity = lifeEntity;
 	}
 	
+
 	/** 
 	 * Coleta a quantidade de vida que uma entidade possui 
 	 * 
@@ -39,6 +40,7 @@ public class Health extends Component {
 		return lifeEntity;
 	}
 	
+
 	/**
 	 * Atribui a possibilidade de causar dano a uma entidade.
 	 * Logica: Apos a retirada de algum dano ao health da entity, System 
@@ -53,6 +55,7 @@ public class Health extends Component {
 		this.canTakeDamaged = canTakeDamaged;
 	}
 
+
 	/**
 	 * Coleta a possibilidade de causar dano a uma entidade.
 	 * Logica: System confere a possibilidade de retirar danos, caso seja 
@@ -65,4 +68,3 @@ public class Health extends Component {
 		return canTakeDamaged;
 	}
 }
-	

@@ -4,15 +4,21 @@ Grupos
 == Grupo 0
 Repo: http://github.com/gabrielsr/bomberman
 
+Repositório: http://github.com/gabrielsr/bomberman
+
 * Gabriel Rodrigues - gabrielsr
 Huguinho -  huginho_donalts
 Zezinho  -  zezinho_donalts	
 Luisinho -  huginho_donalts
 
-== Grupo 1
+== Grupo 1 (Bomb Module)
+
 Repo: http://github.com/DRA2840/bomberman
 
-* Denis Albuquerque - zidenis
+Diego Azevedo - DRA2840
+Denis Albuquerque -  zidenis
+Breno Xavier -  brenoxp2008	
+Jefferson -  jeffvfa
 
 == Grupo 2
 Repo:

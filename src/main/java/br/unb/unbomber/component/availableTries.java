@@ -12,7 +12,7 @@ public class availableTries extends Component {
 	private int lifeTries;
 	/* Coleta True ou False caso seja permitido retirar dano de uma entidade
 	 * monster ou character.
-	 */
+//	 */
 	private boolean canTakeLife;
 
 
@@ -48,4 +48,3 @@ public class availableTries extends Component {
 		return canTakeLife;
 	}
 }
-	

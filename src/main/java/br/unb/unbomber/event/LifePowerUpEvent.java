@@ -6,6 +6,7 @@ package br.unb.unbomber.event;
 
 import br.unb.unbomber.core.Event;
 
+
 /**
  * Classe para verificar a ocorrencia powerUp na entidade
  * 

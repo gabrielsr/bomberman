@@ -14,6 +14,7 @@ Universidade de Brasília - UnB
 
 2/2014
 
+
 == Integração Contínua & Cobertura dos testes
 
 A cada push para o repositório, é feito um build completo do projeto, executando os testes e verificando se as 
@@ -87,6 +88,7 @@ detalhamento do problema.
 
 Para verificar se o Eclipse está configurado para realizar build automático vá ao menu _Project_ -> _Build Automatically_.
 
+
 === Outros plugins
 
 === Checkstyle Eclipse plugin
@@ -100,6 +102,21 @@ Digite no campo search:
  
 Escolha  Checkstyle Plug-in 5.7.0
 Confirme. Ao final da instalação reinicie o Eclipse.
+
+Foi criado um uma regra customizada para atender nossas demandas atuais de limpeza de código,
+custom_checks_bomberman.xml, que se encontra no diretório raiz do projeto.
+
+Para usá-la no Eclipse, deve-se baixar o plugin do checkstyle (disponível na marketplace),
+ir em Eclipse >> Preferências >> Checkstyle >> New
+
+Na Tela que vai aparecer, dê um nome qualquer para esse conjunto de regras (sugiro o nome abaixo), 
+clique em import e selecione o arquivo custom_checks_bomberman.xml
+ 
+[[img-checkstyle_import]]
+.Tela de importação das regras customizadas
+image::/docs/img/checkstyle_import.png[]
+
+Ao voltar para a página de configuração do checkstyle, clique na regra customiada e em seguida em "Set as Default"
 
 
 === Findbugs plugin
