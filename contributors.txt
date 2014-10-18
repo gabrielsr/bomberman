@@ -43,8 +43,11 @@ Igor Sodre - igorsodre
 Kilmer Aleluia - kilmerluizaleluia
 
 == Grupo 7
-Repo:
-
+Repo:http://github.com/carlosshaka/bomberman
+Carlos Benedito Lima de Menezes Junior
+Rodrigo de Araujo Chaves
+Éden de Lucas Medeiros
+Vitor Bona de Faria
 == Grupo 8
 
 
