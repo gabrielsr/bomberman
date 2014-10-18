@@ -7,13 +7,13 @@ Programação Sistemática – 2º/2014
 Trabalho Prático – Bomberman - Iteração 1
 =========================================
 
-Prazo de entrega:: 14/10/2014
+Prazo de entrega:: 30/10/2014
 
-Iteração 1 - Descrição
+Iteração 2 - Descrição
 -----------------------
 
-Nesta iteração iremos desenvolver os módulos simuladores como descrito em link:modules_simulation.adoc
-Cada grupo irá desenvolver um módulo como definido na aula do dia 18/09/2014.
+Nesta iteração iremos concluir o desenvolvimento dos módulos simuladores como descrito em link:modules_simulation.adoc e utilizando padrões de codificação, análise estática de código e 
+teste unitário.
 
 
 Metas da Sprint
@@ -68,7 +68,6 @@ Motivação::
  - Tornar o projeto acessível a novos desenvolvedores
 
 
-
 Nessa etapa será desenvolvido módulos simuladores. Estes módulos serão consituidos de:
 
 * Components (dados das entidades do jogo)
@@ -78,12 +77,6 @@ Nessa etapa será desenvolvido módulos simuladores. Estes módulos serão consi
 
 Seguindo a descrição do documento link:arquitetura.adoc
 
-
-Observação:
-
-Seja C ou Java, utilize os princípios de modularidade na criação dos módulos ou classes, definindos seus módulos de definição (interfaces), módulos de implementação (classe) e organizando suas compilações e lincagens de forma adequada via um único makefile. 
-
-Na criação dos módulos, lembre-se de usar as diretivas de controle para evitar inclusões múltiplas e identificando também o servidor.
 
 
 Parte Escrita
