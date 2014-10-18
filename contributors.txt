@@ -4,8 +4,6 @@ Grupos
 == Grupo 0
 Repo: http://github.com/gabrielsr/bomberman
 
-Repositório: http://github.com/gabrielsr/bomberman
-
 * Gabriel Rodrigues - gabrielsr
 Huguinho -  huginho_donalts
 Zezinho  -  zezinho_donalts	
@@ -22,6 +20,8 @@ Jefferson -  jeffvfa
 
 == Grupo 2
 Repo:
+Repositório: https://github.com/MaxFernandes/bomberman
+* Maxwell Fernandes
 
 == Grupo 3
 Repo:http://github.com/Giulialeixo/bomberman
