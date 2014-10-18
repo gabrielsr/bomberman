@@ -19,7 +19,10 @@ public class Health extends Component {
 	 * monster ou character.
 	 */
 	private boolean canTakeDamaged;
-
+	/**
+	 * Armazena o número de tentativas que o character tem de reviver.
+	 */
+	private int availableTries;
 
 	/** 
 	 * Inicializa vida completa a uma entidade Monster ou Entity 
@@ -36,11 +39,19 @@ public class Health extends Component {
 	 * 
 	 * @return lifeEntity
 	 * */
-	private int getLifeEntity(){
+	public int getLifeEntity(){
 		return lifeEntity;
 	}
 	
-
+	/** 
+	 * Diminui o valor da vida da entidade pelo método takeDamage() da classe LifeSystem
+	 * pelo método takeDamage() da classe LifeSystem
+	 * 
+	* */
+	public void lifeDrecrement(){
+		lifeEntity --;
+	}
+	
 	/**
 	 * Atribui a possibilidade de causar dano a uma entidade.
 	 * Logica: Apos a retirada de algum dano ao health da entity, System 
@@ -64,7 +75,27 @@ public class Health extends Component {
 	 * 
 	 * @return canTakeDamaged 
 	 */
-	private boolean isCanTakeDamaged(){
+	public boolean isCanTakeDamaged(){
 		return canTakeDamaged;
 	}
+	/**
+	 * Seta o número de tentativas iniciais
+	 * 
+	 */
+	public void setAvailableTries(int tries){
+		availableTries = tries;
+	}
+	/**
+	 * Retorna o valor de tentativas disponíveis
+	 */
+	public int getAvailableTries(){
+		return availableTries;
+	}
+	/**
+	 * Decrementa o número de tentativas disponíveis ao morrer
+	 */
+	public void availableTriesDecrement(){
+		availableTries --;
+	}
+	
 }
