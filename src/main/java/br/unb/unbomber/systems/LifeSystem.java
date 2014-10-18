@@ -83,7 +83,10 @@ public class LifeSystem extends BaseSystem {
 	}	
 	
 	public void takeDamaged(Health life){
-		
+		if(life.isCanTakeDamaged() && life.getLifeEntity() > 0){
+			life.lifeDrecrement();
+			
+		}
 		//TODO Implementar a retirada de Health a uma entidade.
 		//ISSUE Component life j� est� contido com a TargetId da colis�o?
 		
