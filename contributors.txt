@@ -18,8 +18,7 @@ Repo: http://github.com/DRA2840/bomberman
 * Breno Xavier -  brenoxp2008	
 * Jefferson -  jeffvfa
 
-== Grupo 2
-
+== Grupo 
 Repositório: https://github.com/MaxFernandes/bomberman
 
 * Maxwell Fernandes
@@ -44,7 +43,6 @@ Igor Sodre - igorsodre
 Kilmer Aleluia - kilmerluizaleluia
 
 == Grupo 7
-
 Repo:http://github.com/carlosshaka/bomberman
 Carlos Benedito Lima de Menezes Junior
 Rodrigo de Araujo Chaves

@@ -19,6 +19,7 @@ public class Health extends Component {
 	 */
 	private boolean canTakeDamaged;
 
+
 	/**
 	 * Armazena o n�mero de tentativas que o character tem de reviver.
 	 */
