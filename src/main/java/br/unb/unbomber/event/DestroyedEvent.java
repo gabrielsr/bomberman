@@ -1,29 +1,40 @@
-//DestroyedEvent
-// Quando uma entidade nao conter mais health.
-// Coleta a Id da entidade que sera destruida do grid.
-
-/* Indica de qual pacote o arquivo pertence */
-/* No caso ele pertence ao Event */
 package br.unb.unbomber.event;
 
-/* Interface para dados de Event */
 import br.unb.unbomber.core.Event;
 
-/* Heranca unica do evento DestroyedEvent */
+/**
+ * Classe evento que indica que uma entidade nao possui mais vida.
+ * 
+ * @version 0.2 21 Out 2014
+ * @author Grupo 5 - Dayanne <dayannefernandesc@gmail.com>
+ */
 public class DestroyedEvent extends Event {
+	/** Id da entidade que sera destruida. */
 	int sourceId;
 
-	/* Construtor do Evento */
+	/**
+	 * Construtor da classe.
+	 * 
+	 * @param sourceId
+	 */
 	public DestroyedEvent(int sourceId) {
-		this.sourceId = sourceId;
+		setSourceId(sourceId);
 	}
 
-	// get the id of an entity which will be destroyed
+	/**
+	 * Coleta a identidade da entidade que sera destroida.
+	 * 
+	 * @return sourceId
+	 */
 	public int getSourceId() {
 		return sourceId;
 	}
 
-	// set the id of an entity which will be destroyed
+	/**
+	 * Atribui a identidade da entidade que sera destroida.
+	 * 
+	 * @return sourceId
+	 */
 	public void setSourceId(int sourceId) {
 		this.sourceId = sourceId;
 	}

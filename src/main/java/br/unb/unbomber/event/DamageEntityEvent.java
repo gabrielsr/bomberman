@@ -1,42 +1,63 @@
-//DamageEntityEvent
-//Quando uma entidade tomar dano de uma outra entidade.
-// Coleta a Id que recebeu dano e a Id e levou dano.
-
-/* Indica de qual pacote o arquivo pertence */
-/* No caso ele pertence ao Event */
 package br.unb.unbomber.event;
 
-/* Interface para dados de Event */
 import br.unb.unbomber.core.Event;
 
-/* Heranca unica do evento DamageEntityEvent */
+/**
+ * Classe evento que indica que uma entidade tomou dano de uma outra entidade.
+ * 
+ * @version 0.2 21 Out 2014
+ * @author Grupo 5 - Dayanne <dayannefernandesc@gmail.com>
+ */
 public class DamageEntityEvent extends Event {
+	/** Id da entidade que realizou o dano. */
 	int sourceId;
+	/** Id da entidade que sofreu o dano. */
 	int targetId;
-	
-	/* Construtor do Evento */
-	public DamageEntityEvent(int sourceId, int targetId){
-		this.sourceId = sourceId;
-		this.targetId = targetId;
+
+	/**
+	 * Construtor da classe.
+	 * 
+	 * @param sourceId  
+	 * @param targetId
+	 */
+	public DamageEntityEvent(int sourceId, int targetId) {
+		setSourceId(sourceId);
+		setTarget(targetId);
 	}
-	
-	//get the id of an entity which has taken the damage
-	public int getSourceId(){
+
+	/** 
+	 * Coleta a identidade da entidade que realizou o dano. 
+	 * 
+	 * @return sourceId
+	 */
+	public int getSourceId() {
 		return sourceId;
 	}
-	
-	//set the id of an entity which has taken the damage
-	public void  setSourceId(int sourceId){
+
+	/** 
+	 * Atribui a identidade da entidade que realizou o dano.  
+	 * 
+	 * @param sourceId
+	 */
+	public void setSourceId(int sourceId) {
 		this.sourceId = sourceId;
 	}
-	
-	//get the id of an entity which has caused the damage
-	public int  getTargetId(){
+
+	/** 
+	 * Coleta a identidade da entidade que sofreu o dano. 
+	 * 
+	 * @return targetId
+	 */
+	public int getTargetId() {
 		return targetId;
 	}
-	
-	//set the id of an entity which has caused the damage
-	public void  setTarget(int sourceId){
+
+	/** 
+	 * Atribui a identidade da entidade que sofreu o dano. 
+	 * 
+	 * @param targetId
+	 */
+	public void setTarget(int sourceId) {
 		this.targetId = sourceId;
 	}
 
