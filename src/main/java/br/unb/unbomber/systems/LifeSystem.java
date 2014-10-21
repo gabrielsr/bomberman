@@ -8,6 +8,7 @@ import br.unb.unbomber.component.Explosive;
 import br.unb.unbomber.component.Health;
 import br.unb.unbomber.component.AvailableTries;
 import br.unb.unbomber.component.EntityType;
+import br.unb.unbomber.component.Timer;
 import br.unb.unbomber.core.BaseSystem;
 import br.unb.unbomber.core.Entity;
 import br.unb.unbomber.core.EntityManager;
@@ -19,12 +20,13 @@ import br.unb.unbomber.event.DamageEntityEvent;
 import br.unb.unbomber.event.DestroyedEvent;
 import br.unb.unbomber.event.GameOverEvent;
 import br.unb.unbomber.event.InvencibleEvent;
+import br.unb.unbomber.event.TimeOverEvent;
 
 /**
  * Classe reponsavel pelas regras e logicas do Modulo Life.
  * 
- * @version 0.1 14 Out 2014
- * @author Grupo 5 - Dayanne
+ * @version 0.2 21 Out 2014
+ * @author Grupo 5 - Dayanne <dayannefernandesc@gmail.com>
  */
 
 public class LifeSystem extends BaseSystem {
@@ -46,35 +48,56 @@ public class LifeSystem extends BaseSystem {
 
 	@Override
 	public void update() {
-
 		/** Coleta Eventos de Colisao */
 		List<Event> collisionEvents = getEntityManager().getEvents(
 				CollisionEvent.class);
 
-		for (Event event : collisionEvents) {
-			CollisionEvent collision = (CollisionEvent) event;
+		if (collisionEvents != null) {
+			for (Event event : collisionEvents) {
+				CollisionEvent collision = (CollisionEvent) event;
 
-			/**
-			 * @if Confere se ha colisao.
-			 * 
-			 *     Monster/Character - Gera dano no Character caso colidam.
-			 * 
-			 *     Bomb/Monster - Gera dano no Monster caso colidam.
-			 * 
-			 *     Bomb/Character - Gera dano no Character caso colidam.
-			 * 
-			 *     Monster/Explosion - Gera dano no Monster.
-			 * 
-			 *     Character/Explosion - Gera dano no Character.
-			 * 
-			 *     Outros casos nao sao gerado danos.
-			 */
-			if (isLifeDamage(collision)) {
-				Health targetCollisionLife = (Health) getEntityManager()
-						.getComponent(Health.class, collision.getTargetId());
+				/**
+				 * @if Confere a possibilidade de retirar dano entre as
+				 *     entidades do evento de colisao.
+				 * 
+				 *     Caso seja possivel entao a vida do alvo da colisao sera
+				 *     decrementada.
+				 * 
+				 *     Caso contrario o metodo seguira em frente tratando de
+				 *     outros eventos.
+				 */
+				if (isLifeDamage(collision)) {
+					Health targetCollisionLife = (Health) getEntityManager()
+							.getComponent(Health.class, collision.getTargetId());
 
-				takeDamaged(targetCollisionLife);
+					takeDamaged(targetCollisionLife);
 
+				}
+			}
+		}
+
+		/** Coleta Eventos de destruicao de entidades. */
+		List<Event> destroyedEvents = getEntityManager().getEvents(
+				DestroyedEvent.class);
+
+		if (destroyedEvents != null) {
+			for (Event event : destroyedEvents) {
+				DestroyedEvent destroyed = (DestroyedEvent) event;
+
+				/**
+				 * @if Confere a possibilidade de recriar a entidade.
+				 * 
+				 *     Caso a entidade ainda possuir tentativas de vida entao
+				 *     ela e recriada no Grid na celula inicial (0,0) e com modo
+				 *     Invencible ativo por 270 ticks.
+				 * 
+				 *     Caso contrario e gerado o evento de Game Over.
+				 */
+				if (countAvailableTries(destroyed)) {
+					recreateEntity(destroyed);
+				} else {
+					createGameOverEvent(destroyed);
+				}
 			}
 		}
 
@@ -82,7 +105,7 @@ public class LifeSystem extends BaseSystem {
 
 	public boolean isLifeDamage(CollisionEvent collision) {
 
-		/** Id e tipo da entidade que  realizou a colisao. */
+		/** Id e tipo da entidade que realizou a colisao. */
 		int sourceId;
 		EntityType entType1 = null;
 		/** Id e tipo da entidade que sofreu a colisao. */
@@ -96,7 +119,8 @@ public class LifeSystem extends BaseSystem {
 
 		/** Coleta as identidades dos agentes do evento de colisao. */
 		sourceId = collision.getSourceId();
-		targetId = collision.getTargetId();;
+		targetId = collision.getTargetId();
+		;
 
 		/** Procura o tipo da entidade pela a Id da mesma. */
 		entType1 = (EntityType) getEntityManager().getComponent(
@@ -132,10 +156,7 @@ public class LifeSystem extends BaseSystem {
 		 * 
 		 *     Caso seja possivel entao sua vida sera decrementada.
 		 * 
-		 *     Caso contrario, o componente sera passado para uma funcao
-		 *     auxiliar para contabilizar as tentativas de vidas que a entidade
-		 *     possui para que possa ser decidido se o jogo se encerrara ou se o
-		 *     personagem sera recriado no Grid.
+		 *     Caso contrario o metodo sai sem realizar nenhuma acao.
 		 */
 		if (targetCollisionLife.isCanTakeDamaged()) {
 			/** Coleta a vida da entidade. */
@@ -150,23 +171,23 @@ public class LifeSystem extends BaseSystem {
 			 * 
 			 *     Caso nao possua mais vida entao e atribuido que nao sera mais
 			 *     permitido retirar vida desta entidade *enquanto este nao for
-			 *     recriado*, logo entao e chamado outra funcao auxiliar para
-			 *     que seja recriado o personagem caso ele contenha mais
-			 *     tentativas de vidas.
+			 *     recriado* e o componente sera passado para um funcao auxiliar
+			 *     de criacao de evento de destruicao da entidade.
 			 * 
-			 *     Caso contrario.
+			 *     Caso contrario e atribuido que sera permitido retirar vida
+			 *     daquela entidade.
 			 * 
 			 */
-			if (lifeEntity == 0) {
+			if (lifeEntity <= 0) {
 				targetCollisionLife.setCanTakeDamaged(false);
 
-				// TODO recreateEntity(targetCollisionLife)
+				createDestroyEvent(targetCollisionLife);
+
+			} else {
+				targetCollisionLife.setCanTakeDamaged(true);
 			}
 
-		} else {
-			// TODO countAvailableTries(targetCollisionLife)
 		}
-
 	}
 
 	/**
@@ -197,6 +218,121 @@ public class LifeSystem extends BaseSystem {
 		}
 
 		return canTakeDamage;
+	}
+
+	/**
+	 * Metodo que cria evento de destruicao de uma entidade.
+	 * 
+	 * @param targetCollisionLife
+	 *            Componente que possui a Id que zerou a vida.
+	 */
+	public void createDestroyEvent(Health targetCollisionLife) {
+		/** Instancia do gerenciamento de entidades. */
+		EntityManager entityManager = getEntityManager();
+
+		/** Cria evento de destruicao da entidade. */
+		DestroyedEvent destroyEntity = new DestroyedEvent(
+				targetCollisionLife.getEntityId());
+
+		/** Adiciona este evento ao gerenciamento de entidades. */
+		entityManager.addEvent(destroyEntity);
+
+	}
+
+	/**
+	 * Metodo que avalia se e possivel retirar uma tentativa de vida da entidade
+	 * que sera destruida.
+	 * 
+	 * @param destroyed
+	 *            Evento que contem a Id da entidade que sera destruida.
+	 * @return haveLifeTries
+	 */
+	public boolean countAvailableTries(DestroyedEvent destroyed) {
+		/**
+		 * Booleano que ira indicar a possibilidade de retirar uma tentativa de
+		 * vida da entidade que foi destruida.
+		 */
+		boolean haveLifeTries;
+		/** Quantidade de tentativas de vida que a entidade possui. */
+		int lifeTries;
+
+		/**
+		 * Coleta componente de quantidade de tentativas de vidas pelo Id da
+		 * entidade que vai ser destruida.
+		 */
+		AvailableTries availableTries = (AvailableTries) getEntityManager()
+				.getComponent(AvailableTries.class, destroyed.getSourceId());
+
+		lifeTries = availableTries.getLifeTries();
+
+		if (lifeTries > 0) {
+			haveLifeTries = true;
+		} else {
+			haveLifeTries = false;
+		}
+
+		return haveLifeTries;
+	}
+
+	/**
+	 * Metodo que recria a entidade na celula inicial do Grid e atribui o modo
+	 * Invencible a entidade por 270 ticks, o qual nao podera tomar dano.
+	 * 
+	 * @param destroyed
+	 *            Evento que contem a Id da entidade que sera recriada.
+	 */
+	public void recreateEntity(DestroyedEvent destroyed) {
+		/** Quantidade de tentativas de vida que a entidade possui. */
+		int avTries;
+
+		/** Instancia do gerenciamento de entidades. */
+		EntityManager entityManager = getEntityManager();
+		Entity renewEntity = new Entity(destroyed.getSourceId());
+
+		/** Criacao da celula inicial. */
+		CellPlacement placement = new CellPlacement();
+		placement.setCellX(0);
+		placement.setCellY(0);
+
+		/** Criacao da vida inicial. */
+		Health life = new Health();
+		life.setLifeEntity(1);
+		life.setCanTakeDamaged(true);
+
+		/** Decrementa de uma tentativa de vida. */
+		AvailableTries availableTries = (AvailableTries) getEntityManager()
+				.getComponent(AvailableTries.class, destroyed.getSourceId());
+		avTries = availableTries.getLifeTries();
+		avTries--;
+		availableTries.setLifeTries(avTries);
+
+		/** Criacao do Evento de Invencible para a entidade recriada */
+		InvencibleEvent invencibleEvent = new InvencibleEvent(
+				destroyed.getSourceId());
+
+		/** Adicionando componentes a entidade recriada */
+		renewEntity.addComponent(placement);
+		renewEntity.addComponent(life);
+		renewEntity.addComponent(availableTries);
+
+		/** Adicionando evento de invencivel para a entidade. */
+		entityManager.addEvent(invencibleEvent);
+
+		/** Atualiza a entidade recriada */
+		entityManager.update(renewEntity);
+	}
+
+	public void createGameOverEvent(DestroyedEvent destroyed) {
+		/** Retira a entidade do Grid */
+		destroyEntity(destroyed);
+	}
+
+	public void destroyEntity(DestroyedEvent destroyed) {
+		/** Instancia do gerenciamento de entidades. */
+		EntityManager entityManager = getEntityManager();
+
+		/** Remove a entidade da lista de entidades. */
+		entityManager.removeEntityById(destroyed.getSourceId());
 	}
 
 }

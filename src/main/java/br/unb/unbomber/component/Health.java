@@ -5,8 +5,8 @@ import br.unb.unbomber.core.Component;
 /**
  * Classe para verificar se houve dano a uma entidade.
  * 
- * @version 0.1 14 Out 2014
- * @author Grupo 5 - Dayanne
+ * @version 0.2 21 Out 2014
+ * @author Grupo 5 - Dayanne <dayannefernandesc@gmail.com>
  */
 
 public class Health extends Component {

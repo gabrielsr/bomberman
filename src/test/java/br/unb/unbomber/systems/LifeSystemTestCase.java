@@ -24,8 +24,8 @@ import br.unb.unbomber.event.CollisionEvent;
 /**
  * Classe de testes do LifeSystem do Módulo Life.
  * 
- * @version 0.1 14 Out 2014
- * @author Grupo 5 - Dayanne
+ * @version 0.2 21 Out 2014
+ * @author Grupo 5 - Dayanne <dayannefernandesc@gmail.com>
  */
 
 public class LifeSystemTestCase {

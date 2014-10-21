@@ -8,7 +8,7 @@ import br.unb.unbomber.core.Component;
  * Tipos: Char, Monster, Bomb, Hard Block, Soft Block e Power Up.
  * 
  * @version 0.1 20 Out 2014
- * @author Grupo 5 - Dayanne
+ * @author Grupo 5 - Dayanne <dayannefernandesc@gmail.com>
  */
 public class EntityType extends Component {
 
@@ -21,13 +21,13 @@ public class EntityType extends Component {
 
 	/** O tipo da entidade */
 	private EntType entType;
-	
+
 	/**
 	 * Construtor da classe.
 	 * 
-	 * @param entType  
+	 * @param entType
 	 */
-	public EntityType (EntType entType){
+	public EntityType(EntType entType) {
 		setEntType(entType);
 	}
 
