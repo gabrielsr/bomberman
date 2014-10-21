@@ -31,7 +31,9 @@ public class MovedEntityEvent extends Event {
 	public Direction getDirection(){
 		return this.direction;
 	} 
-	
+	public void setDirection(Direction direction){
+		this.direction = direction; 
+	}
 	public int getSpeed(){
 		return this.speed;
 	}

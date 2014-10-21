@@ -21,7 +21,7 @@ Repo: http://github.com/DRA2840/bomberman
 * Jefferson -  jeffvfa
 
 == Grupo 2
-Repo:
+
 Repositório: https://github.com/MaxFernandes/bomberman
 * Maxwell Fernandes
 
