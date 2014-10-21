@@ -6,6 +6,7 @@ import static org.junit.Assert.*;
 import java.util.List;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import br.unb.unbomber.component.BombDropper;
@@ -21,6 +22,7 @@ import br.unb.unbomber.event.ActionCommandEvent.ActionType;
 import br.unb.unbomber.event.ExplosionStartedEvent;
 import br.unb.unbomber.event.TimeOverEvent;
 
+@Ignore
 public class BombSystemTestCase2 {
 	
 	EntityManager entityManager;
