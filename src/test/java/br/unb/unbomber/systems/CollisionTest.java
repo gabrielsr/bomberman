@@ -4,7 +4,7 @@
 *João Paulo Araujo           -
 *Alexandre Magno             -
 *Marcelo Giordano            -
-*********************************************************************************************************************************/
+*********************************************************************************************************************************
 package br.unb.unbomber.event;
 
 import static org.junit.Assert.*;
@@ -12,11 +12,10 @@ import Event;
 
 import java.util.List;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import br.unb.unbomber.systems.CollisionSystem;
-@Ignore
+
 public class CollisionTest {
 
 	@Test
@@ -66,4 +65,4 @@ public class CollisionTest {
 				}
 			}
 
-}
+}*/
