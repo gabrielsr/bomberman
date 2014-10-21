@@ -2,25 +2,18 @@ package br.unb.unbomber.systems;
 
 import java.util.List;
 
-import br.unb.unbomber.component.EntityType.EntType;
-import br.unb.unbomber.component.CellPlacement;
-import br.unb.unbomber.component.Explosive;
-import br.unb.unbomber.component.Health;
 import br.unb.unbomber.component.AvailableTries;
+import br.unb.unbomber.component.CellPlacement;
 import br.unb.unbomber.component.EntityType;
-import br.unb.unbomber.component.Timer;
+import br.unb.unbomber.component.EntityType.EntType;
+import br.unb.unbomber.component.Health;
 import br.unb.unbomber.core.BaseSystem;
 import br.unb.unbomber.core.Entity;
 import br.unb.unbomber.core.EntityManager;
-import br.unb.unbomber.core.EntityManagerImpl;
 import br.unb.unbomber.core.Event;
-import br.unb.unbomber.core.Component;
 import br.unb.unbomber.event.CollisionEvent;
-import br.unb.unbomber.event.DamageEntityEvent;
 import br.unb.unbomber.event.DestroyedEvent;
-import br.unb.unbomber.event.GameOverEvent;
 import br.unb.unbomber.event.InvencibleEvent;
-import br.unb.unbomber.event.TimeOverEvent;
 
 /**
  * Classe reponsavel pelas regras e logicas do Modulo Life.

@@ -4,8 +4,6 @@ Grupos
 == Grupo 0
 Repo: http://github.com/gabrielsr/bomberman
 
-Repositório: http://github.com/gabrielsr/bomberman
-
 * Gabriel Rodrigues - gabrielsr
 Huguinho -  huginho_donalts
 Zezinho  -  zezinho_donalts	
@@ -23,6 +21,7 @@ Repo: http://github.com/DRA2840/bomberman
 == Grupo 2
 
 Repositório: https://github.com/MaxFernandes/bomberman
+
 * Maxwell Fernandes
 
 == Grupo 3
@@ -51,6 +50,7 @@ Carlos Benedito Lima de Menezes Junior
 Rodrigo de Araujo Chaves
 Éden de Lucas Medeiros
 Vitor Bona de Faria
+
 == Grupo 8
 
 
