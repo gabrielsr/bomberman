@@ -3,7 +3,6 @@ package br.unb.unbomber.core;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  * An Entity in the Entity Component System (ECS).
  *
@@ -13,11 +12,10 @@ public final class Entity {
 
 	/** The entity id. */
 	private int entityId;
-	
-	
+
 	/** The onwner id. */
 	private int ownerId;
-	
+
 	/** The components. */
 	private List<Component> components;
 
@@ -27,12 +25,12 @@ public final class Entity {
 	@Deprecated
 	public Entity() {
 	}
-	
-	
+
 	/**
 	 * Instantiates a new entity.
 	 *
-	 * @param uniqueId the unique id
+	 * @param uniqueId
+	 *            the unique id
 	 */
 	public Entity(int uniqueId) {
 		this.entityId = uniqueId;
@@ -41,13 +39,14 @@ public final class Entity {
 	/**
 	 * Adds the component.
 	 *
-	 * @param component the component
+	 * @param component
+	 *            the component
 	 */
-	public void addComponent(Component component){
+	public void addComponent(Component component) {
 		component.setEntityId(entityId);
 		getComponents().add(component);
 	}
-	
+
 	/**
 	 * Gets the components.
 	 *
@@ -72,11 +71,12 @@ public final class Entity {
 	/**
 	 * ID should be setted in the constructor.
 	 *
-	 * @param entityId the new entity id
+	 * @param entityId
+	 *            the new entity id
 	 * @see EntityManager#createEntity()
 	 */
 	@Deprecated
-	public void setEntityId(int entityId){
+	public void setEntityId(int entityId) {
 		// update components entityId
 		this.entityId = entityId;
 	}
@@ -93,11 +93,11 @@ public final class Entity {
 	/**
 	 * Sets the owner id.
 	 *
-	 * @param ownerId the new owner id
+	 * @param ownerId
+	 *            the new owner id
 	 */
 	public void setOwnerId(int ownerId) {
 		this.ownerId = ownerId;
 	}
-
 
 }
