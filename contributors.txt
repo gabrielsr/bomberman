@@ -1,47 +1,66 @@
-
-
 Grupos
 ------
 
 == Grupo 0
-Respositório: http://github.com/gabrielsr/bomberman
+Repo: http://github.com/gabrielsr/bomberman
 
 * Gabriel Rodrigues - gabrielsr
 Huguinho -  huginho_donalts
 Zezinho  -  zezinho_donalts	
 Luisinho -  huginho_donalts
 
-== Grupo 1
-Repositório: http://github.com/DRA2840/bomberman
+== Grupo 1 (Bomb Module)
 
-* Denis Albuquerque - zidenis
+Repo: http://github.com/DRA2840/bomberman
+
+Diego Azevedo - DRA2840
+Denis Albuquerque -  zidenis
+Breno Xavier -  brenoxp2008	
+Jefferson -  jeffvfa
 
 == Grupo 2
-Repositório:
+Repo:
+Repositório: https://github.com/MaxFernandes/bomberman
+* Maxwell Fernandes
 
 == Grupo 3
-Repositório:
+Repo:http://github.com/Giulialeixo/bomberman
+
+* Giulia Aleixo - Giulialeixo
+* Hichemm Khalyd - 
+* Guilherme Pedrinha
 
 == Grupo 4
-Repositório:
+Repo:
 
 == Grupo 5
-Repositório:
+Repo:
 
 == Grupo 6
-Repositório:
+Repo:http://github.com/igorsodre/bomberman
+Pedro Borges Pio - pedrobpio
+Igor Sodre - igorsodre
+Kilmer Aleluia - kilmerluizaleluia
 
 == Grupo 7
-Repositório:
-
+Repo:http://github.com/carlosshaka/bomberman
+Carlos Benedito Lima de Menezes Junior
+Rodrigo de Araujo Chaves
+Éden de Lucas Medeiros
+Vitor Bona de Faria
 == Grupo 8
-Repositório:
+
 
 == Grupo 9
-Repositório:
+Repo: https://github.com/paulovgf/bomberman
+* Paulo Victor G. Farias - paulovgf
+* William Simião - williamsimiao
+* Yuri Alexsander - yurialeksndr
 
 == Grupo 10
-Repositório:
+Repo: https://github.com/cic943003/bomberman
+
+* Camila Imbuzeiro Camargo - cic943003
 
 
 

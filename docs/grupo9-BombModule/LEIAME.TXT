@@ -1,0 +1,43 @@
+
+/*********************************************************************************************************************
+ *  >>>> Programação Sistemática
+ *  >>>> Turma "A" 
+ *  >>>> Trabalho 1 - Parte 1 
+ *  >>>> Alunos: Paulo Victor Farias, Yuri Alexsander e William Simião
+ *  >>>> Grupo 9 - Bomb
+ *  >>>> UnB - Outubro/2014
+ *  >>>> Professora: Genaína Rodrigues
+ *
+ *
+ *  >>>> Objetivo: Gerar o módulo simulador Bomb e sua 
+ *
+ *  >>>> Conteúdo da pasta Sprint1b-GRUPO9
+ *  
+ *      > Pasta src:
+ *			Contem o código alterado:
+ *					- BombSystem.java
+ *					- BombSystemTestCase.java
+ *					- ActionCommandEvent.java
+ *
+ *			LEIAME.txt - arquivo explicativo.
+ *			RELATORIO-PAULO.txt - relatório sobre as atividas desempenhadas pelo membro do grupo.
+ *			RELATORIO-WILLIAM.txt - relatório sobre as atividas desempenhadas pelo membro do grupo.
+ *			RELATORIO-YURI.txt - relatório sobre as atividas desempenhadas pelo membro do grupo.
+ *
+ *
+ *  Padrão: escrito em Java.
+ *         
+ *
+ *                        
+ * Foram feitos testes no sistema Linux Ubuntu(64 bits), sendo
+ * que a versão entregue não apresentou warnings ou errors do eclipse.
+ * 
+ *
+ *
+ * >>> Referência;
+ * 
+ * 	https://github.com/gabrielsr/bomberman/
+ *
+ * Acessado em 12/10/2014
+ *
+ ******************************************************************************/

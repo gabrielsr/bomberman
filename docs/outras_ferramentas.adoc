@@ -1,0 +1,86 @@
+﻿= Outros plugins
+
+== Checkstyle Eclipse plugin
+
+Instalação::
+
+No Eclipse vá em  
+> Help > Marketplace 
+
+Digite no campo search:
+ Checkstyle
+ 
+Escolha  Checkstyle Plug-in 5.7.0
+Confirme. Ao final da instalação reinicie o Eclipse.
+
+
+Configuração::
+
+Clique com botão direito no projeto
+> Properties > Checkstyle > Simpla - use the following check configuration for all files >
+Escolha a opção Sun Checks (Eclipse) - (Global)
+
+Execução::
+
+Clique com o botão direito no projeto > Checkstyle > Checkcode with checkstyle
+
+Devem aparecer marcações nas classes apontando incorreções de estilo
+encontradas pelo checkstyle.
+
+
+== Findbugs plugin
+
+No Eclipse vá em  
+> Help > Marketplace 
+
+Digite no campo search:
+ Findbugs
+ 
+Escolha  Findbugs Eclipse Plugin 3.0.0
+Confirme. Ao final da instalação reinicie o Eclipse.
+
+
+Execução::
+
+Clique com o botão direito no projeto > Find bugs > Find bugs
+
+Será feita uma análise do código do projeto.
+
+Visualizar o resultado da análise::
+Window > Show View > Other... > Bugs Explorer > Ok
+
+
+== Doxygen
+
+Download do doxygen:: Baixe o doxygen na página no projeto ou através do gerente de pacotes da seu sistema operacional. O Doxygen está presente nos principais gerentes: (apt-get, yum, cholately, homebrew)
+
+Página do projeto:
+ www.doxygen.org/
+
+Instalar plugin do Eclipse:: 
+
+. Help->Install New Software…
+. Click Add and add the Eclox repository: http://download.gna.org/eclox/updates
+. Install Eclox and Eclox Hot.
+. Reinicie o Eclipse
+. Configure a pasta de instalação do Doxygen (  Preferences->Doxygen )
+. Escolha seu arquivo de configuração, clicando no menu com o simbolo de @ e escolha o doxyfile em config/doxygen.Doxyfile 
+. O Doxygen deve então executar e exibir o log de execução.
+. A documentação será gerada na pasta build/doxygen
+
+
+Documente seu código:: O manual do doxygen te dá informações de como formatar seu código adequadamente. 
+
+Lembre se de documentar::
+Classes::
+. incluir um descrição breve na primeira linha terminada por ponto.
+. incluir um descrição mais detalhada em seguida.
+. incluir as tags @author com seu nome e e-mail
+
+Métodos::
+. incluir documentação de retornos com  @return
+. incluir documentação de parâmetros com @param
+ 
+
+
+

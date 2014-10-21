@@ -1,7 +1,6 @@
 package br.unb.unbomber;
 
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class UnbomberDesktop.
  */
@@ -12,9 +11,9 @@ public class UnbomberDesktop {
 	 *
 	 * @param args the arguments
 	 */
-	public static void main(String[] args){
+	public static void main(String[] args) {
 		
-		Game game = new Game();
+		final Game game = new Game();
 		game.run();
 		
 		

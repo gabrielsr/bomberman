@@ -9,7 +9,6 @@ package br.unb.unbomber.event;
 
 import br.unb.unbomber.core.Event;
 public class CollisionEvent extends Event {
-
 	private int sourceId;
 	private int targetId;
 	private boolean isTargetId;
@@ -18,7 +17,6 @@ public class CollisionEvent extends Event {
 		setSourceId( sourceId );
 		setTargetId( targetId );
 	}
-	
 	//get the id of an entity which collided
 	public int getSourceId(){
 		return sourceId;
@@ -45,4 +43,5 @@ public class CollisionEvent extends Event {
 		this.isTargetId = isTargetId;
 	}
 	
+
 }

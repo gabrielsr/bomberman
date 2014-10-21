@@ -2,6 +2,7 @@ package br.unb.unbomber.event;
 
 import br.unb.unbomber.core.Event;
 
+
 /**
  * Classe que indica quando uma entidade coletar um Power Up do tipo Life.
  * 

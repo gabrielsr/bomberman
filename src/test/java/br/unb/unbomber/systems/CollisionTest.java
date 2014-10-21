@@ -1,7 +1,7 @@
 /********************************************************************************************************************************
 *Grupo 2:
 *Maxwell Moura Fernandes     - 10/0116175
-*Jo„o Paulo Araujo           -
+*Jo√£o Paulo Araujo           -
 *Alexandre Magno             -
 *Marcelo Giordano            -
 *********************************************************************************************************************************/
@@ -45,7 +45,7 @@ public class CollisionTest {
 		
 		assert(ACollisionBTest(collisionEvents, b.getEntityId(), a.getEntityId()));
 		
-		//A e B na mesma direÁ„o com B mais r·pido - respons·vel pela colis„o
+		//A e B na mesma dire√ß√£o com B mais r√°pido - respons√°vel pela colis√£o
 		a.setDirection(DIREITA);
 		a.setSpeed(1);
 		getEntityManager().addEvent(a);

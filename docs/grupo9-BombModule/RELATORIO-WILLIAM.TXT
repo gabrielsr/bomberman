@@ -1,0 +1,23 @@
+>>>> Relatório de atividades esperadas do membro William.
+
+Data 		| Horas Trabalhadas 	| Tipo Tarefa 				| Descrição da Tarefa Realizada
+-------------------------------------------------------------------------------------------------------------------------------------------------
+02/10/2014	| 0,5 hora				| Estudar					| Nesta tarefa será realizado um estudo sobre
+																  a arquitetura do projeto para evitar retrabalho
+																  inútil.
+
+04/10/2014	| 2 Horas 				| Codificar módulo			| Codificar o TODO verificar TimeOutEvent de bombas 
+																  que devem ser disparadas neste turno
+		
+05/10/2014	| 1 hora				| Realizar casos de testes	| Nesta tarefa serão realizados os casos de testes.
+
+06/10/2014	| 2 horas				| Diagnosticar e corrigir os| Nesta etapa haverá um diagnóstico do módulo para
+					  				  problemas encontrados		  ter certeza que ele cumpre tudo aquilo que é pedido
+											  					  em sua especificação. Caso haja algum problema este
+											  					  será corrigido.
+
+ - Total de horas de trabalho estimada: 5,5 Horas.
+ - Total de horas efetivamente gastas: 8 Horas. 
+ 		(4) estudar
+ 		(2) codificar o módulo e realizar casos de testes
+ 		(2) diagnosticar e corrigir os problemas encontrados
