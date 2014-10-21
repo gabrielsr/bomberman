@@ -15,10 +15,10 @@ Luisinho -  huginho_donalts
 
 Repo: http://github.com/DRA2840/bomberman
 
-Diego Azevedo - DRA2840
-Denis Albuquerque -  zidenis
-Breno Xavier -  brenoxp2008	
-Jefferson -  jeffvfa
+* Diego Azevedo - DRA2840
+* Denis Albuquerque -  zidenis
+* Breno Xavier -  brenoxp2008	
+* Jefferson -  jeffvfa
 
 == Grupo 2
 Repo:
