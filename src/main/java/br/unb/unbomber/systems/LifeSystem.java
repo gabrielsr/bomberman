@@ -2,12 +2,12 @@ package br.unb.unbomber.systems;
 
 import java.util.List;
 
-import br.unb.unbomber.component.EntityType.EntType;
 import br.unb.unbomber.component.CellPlacement;
 import br.unb.unbomber.component.Explosive;
 import br.unb.unbomber.component.Health;
 import br.unb.unbomber.component.AvailableTries;
-import br.unb.unbomber.component.EntityType;
+import br.unb.unbomber.component.LifeType;
+import br.unb.unbomber.component.LifeType.Type;
 import br.unb.unbomber.component.Timer;
 import br.unb.unbomber.core.BaseSystem;
 import br.unb.unbomber.core.Entity;
@@ -16,7 +16,6 @@ import br.unb.unbomber.core.EntityManagerImpl;
 import br.unb.unbomber.core.Event;
 import br.unb.unbomber.core.Component;
 import br.unb.unbomber.event.CollisionEvent;
-import br.unb.unbomber.event.DamageEntityEvent;
 import br.unb.unbomber.event.DestroyedEvent;
 import br.unb.unbomber.event.GameOverEvent;
 import br.unb.unbomber.event.InvencibleEvent;
@@ -107,10 +106,10 @@ public class LifeSystem extends BaseSystem {
 
 		/** Id e tipo da entidade que realizou a colisao. */
 		int sourceId;
-		EntityType entType1 = null;
+		LifeType entType1 = null;
 		/** Id e tipo da entidade que sofreu a colisao. */
 		int targetId;
-		EntityType entType2 = null;
+		LifeType entType2 = null;
 		/**
 		 * Booleano que ira indicar a possibilidade de retirar dano de uma
 		 * entidade que sofreu alguma colisao.
@@ -120,14 +119,13 @@ public class LifeSystem extends BaseSystem {
 		/** Coleta as identidades dos agentes do evento de colisao. */
 		sourceId = collision.getSourceId();
 		targetId = collision.getTargetId();
-		;
 
 		/** Procura o tipo da entidade pela a Id da mesma. */
-		entType1 = (EntityType) getEntityManager().getComponent(
-				EntityType.class, sourceId);
+		entType1 = (LifeType) getEntityManager().getComponent(LifeType.class,
+				sourceId);
 
-		entType2 = (EntityType) getEntityManager().getComponent(
-				EntityType.class, targetId);
+		entType2 = (LifeType) getEntityManager().getComponent(LifeType.class,
+				targetId);
 
 		/**
 		 * @if Confere se foi atribuido algum tipo de entidade aos componentes
@@ -200,18 +198,18 @@ public class LifeSystem extends BaseSystem {
 	 *            Entidade que sofreu a colisao.
 	 * @return canTakeDamage
 	 */
-	public boolean permittedTypeDamage(EntityType entType1, EntityType entType2) {
+	public boolean permittedTypeDamage(LifeType entType1, LifeType entType2) {
 		/**
 		 * Booleano que ira indicar a possibilidade de retirar dano de uma
 		 * entidade que sofreu alguma colisao.
 		 */
 		boolean canTakeDamage;
 
-		if (entType1.getEntType() == EntType.MONSTER
-				&& entType2.getEntType() == EntType.CHAR) {
+		if (entType1.getType() == Type.MONSTER
+				&& entType2.getType() == Type.CHAR) {
 			canTakeDamage = true;
-		} else if (entType1.getEntType() == EntType.BOMB
-				&& entType2.getEntType() == EntType.MONSTER) {
+		} else if (entType1.getType() == Type.BOMB
+				&& entType2.getType() == Type.MONSTER) {
 			canTakeDamage = true;
 		} else {
 			canTakeDamage = false;
@@ -227,15 +225,13 @@ public class LifeSystem extends BaseSystem {
 	 *            Componente que possui a Id que zerou a vida.
 	 */
 	public void createDestroyEvent(Health targetCollisionLife) {
-		/** Instancia do gerenciamento de entidades. */
-		EntityManager entityManager = getEntityManager();
 
 		/** Cria evento de destruicao da entidade. */
 		DestroyedEvent destroyEntity = new DestroyedEvent(
 				targetCollisionLife.getEntityId());
 
 		/** Adiciona este evento ao gerenciamento de entidades. */
-		entityManager.addEvent(destroyEntity);
+		getEntityManager().addEvent(destroyEntity);
 
 	}
 
@@ -285,21 +281,19 @@ public class LifeSystem extends BaseSystem {
 		/** Quantidade de tentativas de vida que a entidade possui. */
 		int avTries;
 
-		/** Instancia do gerenciamento de entidades. */
-		EntityManager entityManager = getEntityManager();
-		Entity renewEntity = new Entity(destroyed.getSourceId());
-
-		/** Criacao da celula inicial. */
-		CellPlacement placement = new CellPlacement();
+		/** Atribuicao da entidade destruida a celula inicial. */
+		CellPlacement placement = (CellPlacement) getEntityManager()
+				.getComponent(CellPlacement.class, destroyed.getSourceId());
 		placement.setCellX(0);
 		placement.setCellY(0);
 
-		/** Criacao da vida inicial. */
-		Health life = new Health();
+		/** Atribuicao da vida incial da entidade destruida. */
+		Health life = (Health) getEntityManager().getComponent(Health.class,
+				destroyed.getSourceId());
 		life.setLifeEntity(1);
 		life.setCanTakeDamaged(true);
 
-		/** Decrementa de uma tentativa de vida. */
+		/** Decrementa de uma tentativa de vida da entidade destruida. */
 		AvailableTries availableTries = (AvailableTries) getEntityManager()
 				.getComponent(AvailableTries.class, destroyed.getSourceId());
 		avTries = availableTries.getLifeTries();
@@ -310,16 +304,9 @@ public class LifeSystem extends BaseSystem {
 		InvencibleEvent invencibleEvent = new InvencibleEvent(
 				destroyed.getSourceId());
 
-		/** Adicionando componentes a entidade recriada */
-		renewEntity.addComponent(placement);
-		renewEntity.addComponent(life);
-		renewEntity.addComponent(availableTries);
-
 		/** Adicionando evento de invencivel para a entidade. */
-		entityManager.addEvent(invencibleEvent);
+		getEntityManager().addEvent(invencibleEvent);
 
-		/** Atualiza a entidade recriada */
-		entityManager.update(renewEntity);
 	}
 
 	public void createGameOverEvent(DestroyedEvent destroyed) {
@@ -328,11 +315,9 @@ public class LifeSystem extends BaseSystem {
 	}
 
 	public void destroyEntity(DestroyedEvent destroyed) {
-		/** Instancia do gerenciamento de entidades. */
-		EntityManager entityManager = getEntityManager();
 
 		/** Remove a entidade da lista de entidades. */
-		entityManager.removeEntityById(destroyed.getSourceId());
+		getEntityManager().removeEntityById(destroyed.getSourceId());
 	}
 
 }

@@ -19,7 +19,7 @@ public class Health extends Component {
 	 */
 	private boolean canTakeDamaged;
 
-	/** 
+	/**
 	 * Inicializa vida completa a uma entidade Monster ou Entity.
 	 * 
 	 * @param lifeEntity
@@ -50,7 +50,6 @@ public class Health extends Component {
 		this.canTakeDamaged = canTakeDamaged;
 	}
 
-
 	/**
 	 * Coleta a possibilidade de causar dano a uma entidade. Logica: System
 	 * confere a possibilidade de retirar danos, caso seja possivel ela chama
@@ -59,7 +58,7 @@ public class Health extends Component {
 	 * 
 	 * @return canTakeDamaged
 	 */
-	public boolean isCanTakeDamaged(){
+	public boolean isCanTakeDamaged() {
 		return canTakeDamaged;
 	}
 }
