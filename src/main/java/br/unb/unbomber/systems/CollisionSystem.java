@@ -105,8 +105,9 @@ public class CollisionSystem extends BaseSystem {
 						test = collisionMade(collMade,
 								movedEntityEvent.getEntityId(),
 								cellPlacement2.getEntityId());
-						if (test == true)
+						if (test == true) {
 							continue;
+						}
 
 						// Passa o id de uma entidade e
 						// recebe um evento relacionado ao movimento de uma
