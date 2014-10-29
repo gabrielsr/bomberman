@@ -101,26 +101,27 @@ public class CollisionSystemTestCase {
 			assertEquals(entityA.getEntityId(), collisionEvent.getSourceId());
 		}
 	}
-	
-	//Se nenhum evento de colisão foi gerado para dois elementos que nao se colidem
-	public void noneCollision(){
+
+	// Se nenhum evento de colisão foi gerado para dois elementos que nao se
+	// colidem
+	public void noneCollision() {
 		Entity entityA = createEntity(1, 1, 2);
 		Entity entityB = createEntity(3, 4, 0);
-		
+
 		MovedEntityEvent mEntityA = createMovedEntityEvent(
 				entityA.getEntityId(), Direction.RIGHT);
 		MovedEntityEvent mEntityB = createMovedEntityEvent(
 				entityB.getEntityId(), Direction.RIGHT);
-		
+
 		collisionSystem.update();
 		List<Event> collisionEvents = entityManager
 				.getEvents(CollisionEvent.class);
-		
-		for(Event event : collisionEvents){
+
+		for (Event event : collisionEvents) {
 			CollisionEvent collisionEvent = (CollisionEvent) event;
 			assertFalse(entityA.getEntityId() == collisionEvent.getSourceId());
 		}
-		
+
 	}
 
 	/* Métodos usados pelos casos de teste acima */
