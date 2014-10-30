@@ -27,7 +27,7 @@ public class CollisionSystem extends BaseSystem {
 	}
 
 	/* Método construtor.
-	 * \param entityManager é uma entidade do sistema principal.
+	 * @param entityManager é uma entidade do sistema principal.
 	 * */
 	public CollisionSystem(EntityManager entityManager) {
 		super(entityManager);
@@ -40,7 +40,7 @@ public class CollisionSystem extends BaseSystem {
 
 	}
 
-	/* funcao que verifica se houve colisao. Para cada colisao encontrada, um
+	/* Funcao que verifica se houve colisao. Para cada colisao encontrada, um
 	 * evento (CollisionEvent) com o
 	 * id da entidade fonte e o id da entidade alvo e adicionado ao conjuto de
 	 * eventos. 
