@@ -1,4 +1,4 @@
-Grupos
+﻿Grupos
 ------
 
 == Grupo 0
@@ -37,7 +37,7 @@ Repositório:http://github.com/Giulialeixo/bomberman
 
 * Giulia Aleixo - Giulialeixo
 * Hichemm Khalyd - 
-* Guilherme Pedrinha
+* Guilherme Pedrinha - 
 
 == Grupo 9
 Repositório:
