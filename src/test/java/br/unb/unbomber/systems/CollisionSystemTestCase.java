@@ -31,7 +31,7 @@ public class CollisionSystemTestCase {
 	CollisionSystem collisionSystem;
 
 	
-	/* Arruma o ambiente para o teste
+	/** Arruma o ambiente para o teste
 	 *  O Before indica que esse método será executado antes.
 	 * */
 	@Before

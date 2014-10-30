@@ -17,33 +17,34 @@ import br.unb.unbomber.core.Event;
 import br.unb.unbomber.event.CollisionEvent;
 import br.unb.unbomber.event.MovedEntityEvent;
 
-/* Classe que controla os eventos de colisão do jogo.
+/* Classe que controla os eventos de colisï¿½o do jogo.
  * */
 public class CollisionSystem extends BaseSystem {
 
-	/// Método construtor da classe.
+	/// Mï¿½todo construtor da classe.
 	public CollisionSystem() {
 		super();
 	}
 
-	/* Método construtor.
-	 * @param entityManager é uma entidade do sistema principal.
+	/* Mï¿½todo construtor.
+	 * @param entityManager ï¿½ uma entidade do sistema principal.
 	 * */
 	public CollisionSystem(EntityManager entityManager) {
 		super(entityManager);
 	}
 
 	// @ override
-	/// Método principal da classe, executado para identificar as colisoes. 
+	/// Mï¿½todo principal da classe, executado para identificar as colisoes. 
 	public void update() {
 		testOfCollision();
 
 	}
 
-	/* Funcao que verifica se houve colisao. Para cada colisao encontrada, um
+	/** Funcao que verifica se houve colisao. Para cada colisao encontrada, um
 	 * evento (CollisionEvent) com o
 	 * id da entidade fonte e o id da entidade alvo e adicionado ao conjuto de
 	 * eventos. 
+	 * 
 	 */
 	public void testOfCollision() {
 		
