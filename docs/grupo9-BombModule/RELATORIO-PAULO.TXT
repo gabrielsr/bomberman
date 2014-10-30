@@ -1,24 +1,72 @@
->>>> Relatório de atividades esperadas do membro Paulo.
+>>> Grupo 9:
 
-Data 		| Horas Trabalhadas 	| Tipo Tarefa 				| Descrição da Tarefa Realizada
--------------------------------------------------------------------------------------------------------------------------------------------------
-02/10/2014	| 1 hora				| Especificar o módulo		| Nesta tarefa será realizada uma especificação
-										  					  	  mais específica acerca do módulo Bomb.
+	- Paulo Victor
+	- William Simião
+	- Yuri Alexsander
 
-03/10/2014	| 1 hora				| Revisar especificações	| Checar se as especificações estão de acordo com
-										 				      	  aquilo que está sendo pedido.
+>>> Relatório das atividades esperadas do membro Paulo Victor:
 
-04/10/2014	| 2,5Horas 				| Codificar o módulo		| Codificar o TODO verificar se o character não
-																  droppou mais do que o número de bombas permitido.
-																  E codificar a bomba que é controlada remotamente 
-																  fazer o link para que o usuário possa explodi-la
-																  remotamente.
+>>> Parte 1:
 
-05/10/2014	| 1 hora				| Redigir casos de testes	| Nesta tarefa serão redigidos os casos de testes
-										  					  	  para garantir a validade do módulo.
+ >> Sprint 1a e 1b: (02/10 - 14/10)
 
- - Total de horas de trabalho estimada: 5,5 Horas.
- - Total de horas efetivamente gastas: 7 Horas. 
- 		(1) especificar o módulo
- 		(1) revisar especificações
- 		(5) codificar o módulo e redigir casos de testes
+	- Tarefas estimadas:
+
+	Data 		| Horas Trabalhadas 	| Tipo Tarefa 				| Descrição da Tarefa Realizada
+	-------------------------------------------------------------------------------------------------------------------
+	02/10/2014	| 1 hora				| Especificar o módulo		| Nesta tarefa será realizada uma especificação
+											  					  	  mais específica acerca do módulo Bomb.
+
+	03/10/2014	| 1 hora				| Revisar especificações	| Checar se as especificações estão de acordo com
+											 				      	  aquilo que está sendo pedido.
+
+	04/10/2014	| 2,5 horas 			| Codificar o módulo		| Codificar o TODO verificar se o character não
+																	  droppou mais do que o número de bombas permitido.
+																	  E codificar a bomba que é controlada remotamente 
+																	  fazer o link para que o usuário possa explodi-la
+																	  remotamente.
+
+	08/10/2014	| 1 hora				| Redigir casos de testes	| Nesta tarefa serão redigidos os casos de testes
+											  					  	  para garantir a validade do módulo.
+
+	14/10/2014	| 1 hora 				| Estudo da ferramenta GitHub | Estudo do Git e envio do projeto.			
+
+	- Tarefas executadas:
+
+		02/10/2014 - Especificar o módulo - 1 hora
+		03/10/2014 - Revisar especificações - 1 hora
+		04/10/2014 - Codificar o módulo (condição de PermittedSimultaneousBombs) - 1 hora
+		07/10/2014 - Codificar o módulo (TriggerRemoteBomb) - 2 horas
+		10/10/2014 - Redigir casos de testes - 2 horas
+		14/10/2014 - Estudo da ferramenta GitHub - 0,5 hora
+
+	- Tempo estimado: 6,5 horas
+	- Tempo gasto: 7,5 horas
+
+ >> Sprint 2: (15/10 - 30/10)	
+	
+	Data 		| Horas Trabalhadas 	| Tipo Tarefa 				| Descrição da Tarefa Realizada
+	------------------------------------------------------------------------------------------------------------------------------
+
+	16/10/2014	| 2 horas 				| Estudar padrões de documentação	| Estudo dos padrões de documentação da Sun e JavaDoc.
+
+	18/10/2014	| 2 horas               | Documentar e ajustar comentários  | Documentação do BombSystem e ajuste nos comentários.
+
+	21/10/2014	| 1 hora   				| Procurar bugs e checkstyle		| Uso da ferramenta find bugs e do debugger do Eclipse
+																			  para encontrar eventuais bugs. E do checkstyle para
+																			  checar a documentação do código.
+
+
+	30/10/2014	| 0,5 hora 				| Revisar todo o código do módulo	| Revisão do BombSystem e do BombSystemTestCase. 
+										  e fazer o pull request no github.
+
+
+	- Tarefas executadas:
+
+		16/10/2014 - Estudar padrões de documentação - 1 hora
+		16/10/2014 - Documentar e ajustar comentários - 1 hora
+		28/10/2014 - Procurar bugs e checkstyle - 2 horas
+		30/10/2014 - Revisar todo o código do módulo e fazer o pull request no github - 0,5 hora
+
+	- Tempo estimado: 5,5 horas
+	- Tempo gasto: 4,5 horas
