@@ -4,11 +4,6 @@
 == Grupo 0
 Repo: http://github.com/gabrielsr/bomberman
 
-* Gabriel Rodrigues - gabrielsr
-Huguinho -  huginho_donalts
-Zezinho  -  zezinho_donalts	
-Luisinho -  huginho_donalts
-
 == Grupo 1 (Bomb Module)
 
 Repo: http://github.com/DRA2840/bomberman
