@@ -17,44 +17,51 @@ import br.unb.unbomber.core.Event;
 import br.unb.unbomber.event.CollisionEvent;
 import br.unb.unbomber.event.MovedEntityEvent;
 
+/* Classe que controla os eventos de colis�o do jogo.
+ * */
 public class CollisionSystem extends BaseSystem {
 
-	// Não sei a utilidade desses construtores.
+	/// M�todo construtor da classe.
 	public CollisionSystem() {
 		super();
 	}
 
+	/* M�todo construtor.
+	 * @param entityManager � uma entidade do sistema principal.
+	 * */
 	public CollisionSystem(EntityManager entityManager) {
 		super(entityManager);
 	}
 
 	// @ override
+	/// M�todo principal da classe, executado para identificar as colisoes. 
 	public void update() {
 		testOfCollision();
 
 	}
 
-	// função que verifica se houve colisão. Para cada colisão encontrada, um
-	// evento (CollisionEvent) com o
-	// id da entidade fonte e o id da entidade alvo é adicionado ao conjuto de
-	// eventos.
+	/** Funcao que verifica se houve colisao. Para cada colisao encontrada, um
+	 * evento (CollisionEvent) com o
+	 * id da entidade fonte e o id da entidade alvo e adicionado ao conjuto de
+	 * eventos. 
+	 * 
+	 */
 	public void testOfCollision() {
-		// Get a CellPlacement components
+		
 		List<Component> placeComponents = getEntityManager().getComponents(
-				CellPlacement.class);
-		// Get a CollisionEvent events
+				CellPlacement.class); /**< lista que contem o posicionamento das entidades no ultimo tick. */
+		
 		List<Event> movedEntityEvents = getEntityManager().getEvents(
-				MovedEntityEvent.class);
-		// Cria um array que conterá as colisões já feitas para não gerar dois
-		// eventos para a mesma colisão.
-		// É um array que em cada posição terá um array de inteiros contendo o
-		// id source e target da colisão.
-		int collMade[][] = new int[movedEntityEvents.size()][2];
+				MovedEntityEvent.class); /**< lista das entidades que se moveram no ultimo tick. */
+
+		int collMade[][] = new int[movedEntityEvents.size()][2]; /**< Cria um array que contera as colisoes ja feitas para nao 
+																		gerar dois eventos para a mesma colisao. O primeiro indice
+																		refere-se ao source e o segundo ao target. */
 		// Receberá a dupla de id's das entidades que colidiram.
 		// int coll[] = new int[2];
-		int aux;
-		// Declared variables used inside the for
-		MovedEntityEvent movedEntityEvent;
+		int aux; /**< variavel auxiliar. */
+
+		MovedEntityEvent movedEntityEvent; /**< variavel usada no for a seguir. */
 
 		// itera pela lista de entidades que se moveram. O movimento é indicado
 		// pela existência de um evento
@@ -105,8 +112,9 @@ public class CollisionSystem extends BaseSystem {
 						test = collisionMade(collMade,
 								movedEntityEvent.getEntityId(),
 								cellPlacement2.getEntityId());
-						if (test == true)
+						if (test == true) {
 							continue;
+						}
 
 						// Passa o id de uma entidade e
 						// recebe um evento relacionado ao movimento de uma
@@ -196,18 +204,26 @@ public class CollisionSystem extends BaseSystem {
 			// ao movimento de entidades.
 	}// fim do testOfCollision
 
+	/* prepara o objeto para ser adicionado ao conjunto de eventos de
+	 * colisao.
+	 * @param sourceId e o objeto que ocasionou a colisao.
+	 * @param targetId e o objeto que colidiu passivamente.
+	 * */
 	private void makeCollisionEvent(int sourceId, int targetId) {
-		// prepara o objeto para ser adicionado ao conjunto de eventos de
-		// colisão.
+		
 		CollisionEvent collisionEvent = new CollisionEvent(sourceId, targetId);
 
 		// adiciona o novo evento de colisão
 		getEntityManager().addEvent(collisionEvent);
 	}
 
-	// Função provisória. O ideal era que o EntityManager tivesse um método que
-	// retornasse um evento específico
-	// como ele tem para componente.
+	/* Funcao provisoria. O ideal era que o EntityManager tivesse um metodo que
+	 * retornasse um evento especifico
+	 * como ele tem para componente.
+	 * @param movedEntityList lista de entidades que se moveram no ultimo tick do relogio.
+	 * @param id id da entidade que se quer saber se colidiu.
+	 * @return o evento de colisao especifico da entidade com id indicado.
+	 */
 	private MovedEntityEvent getEvent(List<Event> movedEntityList, int id) {
 		MovedEntityEvent mee;
 		for (Event evt : movedEntityList) {
@@ -218,8 +234,13 @@ public class CollisionSystem extends BaseSystem {
 		return null;
 	}
 
-	// Verifica se já aconteceu alguma colisão entre id1 e id2. Se sim retorna
-	// true.
+	/* Verifica se ja aconteceu alguma colisao entre id1 e id2. Se sim retorna
+	 * true.
+	 * @param collmade lista de colisoes que ocorreram no ultimo tick do jogo.
+	 * @param id1 id da entidade que ocasionou a colisao.
+	 * @param id2 id da entidade que sofreu a colisao.
+	 * @return True se id1 e id2 colidiram.
+	 */
 	private boolean collisionMade(int[][] collMade, int id1, int id2) {
 
 		for (int[] aux : collMade) {
