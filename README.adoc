@@ -124,14 +124,12 @@ A cada push para o repositório, é feito um build completo do projeto, executan
 modificações inseriram alguma falta ou quebraram algum teste.
 
 Para verificar o status das últimas construções, entre no link: 
-
-	https://travis-ci.org/DRA2840/bomberman/builds
+	https://travis-ci.org/gabrielsr/bomberman/builds
 	
 Além disso, após o build é feita uma análise da cobertura dos testes, usando as ferramentas 
 http://cobertura.github.io/cobertura/[Cobertura] e http://www.eclemma.org/jacoco/[Jacoco]. 
 Para ver os resultados dos últimos testes, entre no link:
-
-	https://coveralls.io/r/DRA2840/bomberman
+	https://coveralls.io/r/gabrielsr/bomberman
 
 
 
