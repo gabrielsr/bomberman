@@ -26,7 +26,6 @@ import br.unb.unbomber.event.CollisionEvent;
 import br.unb.unbomber.event.MovedEntityEvent;
 import br.unb.unbomber.systems.CollisionSystem;
 
-@Ignore
 public class CollisionSystemTestCase {
 
 	EntityManager entityManager;

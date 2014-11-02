@@ -12,7 +12,8 @@ import br.unb.unbomber.component.ExplosionBarrier.ExplosionBarrierType;
 import br.unb.unbomber.core.Entity;
 import br.unb.unbomber.core.EntityManager;
 import br.unb.unbomber.core.EntitySystemImpl;
-@Ignore
+
+
 public class ExplosionSystemTestCase {
 
     EntityManager entityManager;

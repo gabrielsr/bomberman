@@ -34,7 +34,6 @@ import br.unb.unbomber.event.ActionCommandEvent.ActionType;
 import br.unb.unbomber.event.ExplosionStartedEvent;
 import br.unb.unbomber.event.TimeOverEvent;
 
-@Ignore
 public class BombSystemTestCase2 {
 	
 	EntityManager entityManager;
