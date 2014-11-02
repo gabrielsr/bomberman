@@ -13,8 +13,8 @@ import br.unb.unbomber.component.CellPlacement;
 import br.unb.unbomber.component.Explosive;
 import br.unb.unbomber.component.Health;
 import br.unb.unbomber.component.AvailableTries;
-import br.unb.unbomber.component.EntityType;
-import br.unb.unbomber.component.EntityType.EntType;
+import br.unb.unbomber.component.LifeType;
+import br.unb.unbomber.component.LifeType.Type;
 import br.unb.unbomber.core.Component;
 import br.unb.unbomber.core.Entity;
 import br.unb.unbomber.core.EntityManager;
@@ -58,9 +58,9 @@ public class LifeSystemTestCase {
 		Entity entity2 = entityManager.createEntity();
 
 		/** Inicia os componentes de atribuicao de tipos das entidades. */
-		entity1.addComponent(new EntityType(EntType.CHAR));
+		entity1.addComponent(new LifeType(Type.CHAR));
 		entityManager.update(entity1);
-		entity2.addComponent(new EntityType(EntType.CHAR));
+		entity2.addComponent(new LifeType(Type.CHAR));
 		entityManager.update(entity2);
 
 		/** Cria evento de colisao entre as entidades Char e Char */
@@ -89,9 +89,9 @@ public class LifeSystemTestCase {
 		Entity entity2 = entityManager.createEntity();
 
 		/** Inicia os componentes de atribuicao de tipos das entidades. */
-		entity1.addComponent(new EntityType(EntType.MONSTER));
+		entity1.addComponent(new LifeType(Type.MONSTER));
 		entityManager.update(entity1);
-		entity2.addComponent(new EntityType(EntType.CHAR));
+		entity2.addComponent(new LifeType(Type.CHAR));
 		entityManager.update(entity2);
 
 		/** Cria evento de colisao entre as entidades Char e Monster */
