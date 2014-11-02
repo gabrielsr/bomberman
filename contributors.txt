@@ -1,4 +1,4 @@
-Grupos
+﻿Grupos
 ------
 
 == Grupo 0
@@ -13,12 +13,13 @@ Luisinho -  huginho_donalts
 
 Repo: http://github.com/DRA2840/bomberman
 
+== Grupo 1
 * Diego Azevedo - DRA2840
 * Denis Albuquerque -  zidenis
 * Breno Xavier -  brenoxp2008	
 * Jefferson -  jeffvfa
 
-== Grupo 
+== Grupo 2
 Repositório: https://github.com/MaxFernandes/bomberman
 
 * Maxwell Fernandes
