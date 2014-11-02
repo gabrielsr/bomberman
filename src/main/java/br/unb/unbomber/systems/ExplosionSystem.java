@@ -6,186 +6,278 @@ import java.util.List;
 import br.unb.unbomber.component.CellPlacement;
 import br.unb.unbomber.component.Direction;
 import br.unb.unbomber.component.Explosion;
+import br.unb.unbomber.component.ExplosionBarrier;
+import br.unb.unbomber.component.ExplosionBarrier.ExplosionBarrierType;
 import br.unb.unbomber.component.Timer;
 import br.unb.unbomber.core.BaseSystem;
+import br.unb.unbomber.core.Component;
 import br.unb.unbomber.core.Entity;
 import br.unb.unbomber.core.EntityManager;
 import br.unb.unbomber.core.Event;
 import br.unb.unbomber.event.ExplosionStartedEvent;
+import br.unb.unbomber.event.InAnExplosionEvent;
 
 public class ExplosionSystem extends BaseSystem {
 
-	// List of already treated events
+	/* List of already treated events */
+
 	List<ExplosionStartedEvent> treatedEvents;
-	int nextId = 1;
 
 	public ExplosionSystem() {
 		super();
 	}
 
 	public ExplosionSystem(EntityManager entityManager) {
+
 		super(entityManager);
+
 	}
 
 	@Override
 	public void start() {
+
 		treatedEvents = new ArrayList<ExplosionStartedEvent>();
 		super.start();
+
 	}
 
 	@Override
 	public void update() {
 
-		// flag to see if an event was already treated
+		/* flag to see if an event was already treated */
 		int flag;
 
-		// Get all ExplosionStartedEvents from EntityManager
+		/* Get all ExplosionStartedEvents from EntityManager */
+
 		List<Event> events = getEntityManager().getEvents(
 				ExplosionStartedEvent.class);
 
-		// treat all non treated events
+		/* treat all non treated events */
 		for (Event event : events) {
 
-			// check if this event was already treated
+			/*
+			 * check if this event was already treated
+			 */
+
 			flag = 0;
 			for (int i = 0; i < treatedEvents.size(); i++) {
-				if (treatedEvents.get(i).getOwnerId() == event.getOwnerId()) {
+
+				if (treatedEvents.get(i).getEventId() == event.getEventId()) {
+
 					flag = 1;
 					break;
+
 				}
 			}
-			// if event was not treated
+
+			/* if event was not treated */
 			if (flag == 0) {
-				// typecasting to use the specific event
+
+				/* typecasting to use the specific event */
 				ExplosionStartedEvent explosionStartedEvent = (ExplosionStartedEvent) event;
-				// creating explosion
+				/* creating explosion */
 				createExplosion(explosionStartedEvent.getInitialPosition(),
-						explosionStartedEvent.getPower());
-				// put the treated event on the treatedEvents list
+						explosionStartedEvent.getExplosionRange());
+				/* put the treated event on the treatedEvents list */
 				treatedEvents.add(explosionStartedEvent);
 			}
+
+			/* checks if someone entered an explosion */
+			enteredExplosion();
+
 		}
 
 	}
-	
-	/** 
-	   \mainpage
-	   \author Guilherme Pedrinha, Giulia Aleixo, Hichemm Khalyd.
-	   \since 12/10/2014
-	   \version 1.0
-	 */ 
 
-	/**
-	  \brief cria a explosão*/
 	public void createExplosion(CellPlacement expPlacement, int expRange) {
-		/**
-		 \details Cria a explosão recebendo o posicionamento e o range da explosão
-		  \param expPlacement indica um array com duas posições
-		  \param expRange indica um inteiro com o Range da explosão
-		  \return essa função não retorna nada		  
-		 */
-		
-		//cria uma entidade explosão
+
 		Entity explosionEntity = new Entity();
-		//adiciona a nova entidade no entity manager
 		getEntityManager().addEntity(explosionEntity);
-		
-		//cria um objeto explosão
+
 		Explosion exp = new Explosion();
-		//seta o id dela com o id da entidade explosão
 		exp.setEntityId(explosionEntity.getEntityId());
-		//seta o range com o range recebido pelo parametro
-		exp.setRange(expRange);
-		
-		// seta o id do expPlacement com o id da entidade explosão
+		exp.setExplosionRange(expRange);
+
 		expPlacement.setEntityId(explosionEntity.getEntityId());
-		//cria um timer de 16 turnos
+
 		Timer expTimer = new Timer(16, null);
-        //adiciona o objeto exp , o exlPlacement e o expTimer como components da entidade explosão 
+
 		explosionEntity.addComponent(exp);
 		explosionEntity.addComponent(expPlacement);
 		explosionEntity.addComponent(expTimer);
-		
-		//seta a direção a qual a explosão vai se propagar para cima
+
 		exp.setPropagationDirection(Direction.UP);
 		propagateExplosion(exp, expPlacement, expRange);
-		//seta a direção a qual a explosão vai se propagar para baixo
+
 		exp.setPropagationDirection(Direction.DOWN);
 		propagateExplosion(exp, expPlacement, expRange);
-		//seta a direção a qual a explosão vai se propagar para a esquerda
+
 		exp.setPropagationDirection(Direction.LEFT);
 		propagateExplosion(exp, expPlacement, expRange);
-		//seta a direção a qual a explosão vai se propagar para a direita
+
 		exp.setPropagationDirection(Direction.RIGHT);
 		propagateExplosion(exp, expPlacement, expRange);
-		
-		
+
 	}
 
-	/**
-	  \brief Propaga a explosão pelo grid*/
-	public void propagateExplosion(Explosion exp, CellPlacement cellPlacement, int range) {
-		/**
-		  \details Propaga a explosão pelo grid
-		  \param exp recebe a explosão
-		  \param cellplacement recebe em que celula do grid a explosão atualmente
-		  \param range recebe o Range da explosão
-		  \return essa função não retorna nada
-		  */
-		
+	public void propagateExplosion(Explosion exp, CellPlacement cellPlacement,
+			int range) {
+
 		if (range != 0 && detectExplosionCollision(exp, cellPlacement)) {
-			// enquanto range diferente de zero, detecta se há colisão com a proxima celula
-			
+
 			Entity explosionEntity = new Entity();
 			getEntityManager().addEntity(explosionEntity);
-			
+
 			Explosion newExp = new Explosion();
 			newExp.setEntityId(explosionEntity.getEntityId());
-			newExp.setRange(range);
-			 
+			newExp.setExplosionRange(range);
+
 			CellPlacement newExpPlacement = new CellPlacement();
 			newExpPlacement.setEntityId(explosionEntity.getEntityId());
-			
-			if(exp.getPropagationDirection() == Direction.UP){
-				//faz com que a explosão ande uma célula para cima
+
+			if (exp.getPropagationDirection() == Direction.UP) {
 				newExpPlacement.setCellX(cellPlacement.getCellX());
 				newExpPlacement.setCellY(cellPlacement.getCellX() + 1);
-			}
-			else if(exp.getPropagationDirection() == Direction.DOWN){
-				//faz com que a explosão ande uma célula para cbaixo
+			} else if (exp.getPropagationDirection() == Direction.DOWN) {
 				newExpPlacement.setCellX(cellPlacement.getCellX());
 				newExpPlacement.setCellY(cellPlacement.getCellX() - 1);
-			}
-			else if(exp.getPropagationDirection() == Direction.LEFT){
-				//faz com que a explosão ande uma célula para a esquerda
+			} else if (exp.getPropagationDirection() == Direction.LEFT) {
 				newExpPlacement.setCellX(cellPlacement.getCellX() - 1);
 				newExpPlacement.setCellY(cellPlacement.getCellX());
-			}
-			else{
-				//faz com que a explosão ande uma célula para a direita
+			} else {
 				newExpPlacement.setCellX(cellPlacement.getCellX() + 1);
 				newExpPlacement.setCellY(cellPlacement.getCellX());
 			}
-			
-			//cria a duração da explosão
+
 			Timer expTimer = new Timer(16, null);
 
 			explosionEntity.addComponent(exp);
 			explosionEntity.addComponent(newExpPlacement);
 			explosionEntity.addComponent(expTimer);
-			
+
 			--range;
-			propagateExplosion(newExp,newExpPlacement,range);
+			propagateExplosion(newExp, newExpPlacement, range);
 		}
 	}
 
+	/* checks if someone entered an explosion */
+	private void enteredExplosion() {
 
-	public boolean detectExplosionCollision(Explosion explosion, CellPlacement cellPlacement) {
-		return true;
+		List<Component> cellPlacements = getEntityManager().getComponents(
+				CellPlacement.class);
+
+		List<Component> explosions = getEntityManager().getComponents(
+				Explosion.class);
+
+		CellPlacement cellPlacement;
+
+		Explosion explosion;
+
+		CellPlacement explosionPlacement;
+
+		for (Component componentExplosion : explosions) {
+
+			for (Component componentCellPlacement : cellPlacements) {
+
+				cellPlacement = (CellPlacement) componentCellPlacement;
+				explosion = (Explosion) componentExplosion;
+				explosionPlacement = (CellPlacement) getEntityManager()
+						.getComponent(CellPlacement.class,
+								explosion.getEntityId());
+				if (explosionPlacement.getCellX() == cellPlacement.getCellX()
+						&& explosionPlacement.getCellY() == cellPlacement
+								.getCellY()) {
+
+					InAnExplosionEvent inAnExplosionEvent = new InAnExplosionEvent();
+					inAnExplosionEvent.setOwnerId(explosion.getEntityId());
+					inAnExplosionEvent.setIdHit(cellPlacement.getEntityId());
+					getEntityManager().addEvent(inAnExplosionEvent);
+
+				}
+			}
+		}
+
 	}
 
-	public void processExplosionCollision(Entity entity) {
+	/*
+	 * creates InAnExplosion event when an powerUp, character, monster, bomb or
+	 * softBlock collides with the explosion. Returns true if the explosion
+	 * should propagate and false otherwise
+	 */
+	public boolean processExplosionCollision(int entityId, Explosion explosion) {
 
+		ExplosionBarrier explosionBarrier = (ExplosionBarrier) getEntityManager()
+				.getComponent(ExplosionBarrier.class, entityId);
+
+		if (explosionBarrier.getType() == ExplosionBarrierType.BLOCKER) {
+
+			return false;
+
+		} else if (explosionBarrier.getType() == ExplosionBarrierType.STOPPER) {
+
+			InAnExplosionEvent inAnExplosionEvent = new InAnExplosionEvent();
+			inAnExplosionEvent.setIdHit(entityId);
+			inAnExplosionEvent.setOwnerId(explosion.getEntityId());
+			getEntityManager().addEvent(inAnExplosionEvent);
+			return false;
+
+		} else {
+
+			InAnExplosionEvent inAnExplosionEvent = new InAnExplosionEvent();
+			inAnExplosionEvent.setIdHit(entityId);
+			inAnExplosionEvent.setOwnerId(explosion.getEntityId());
+			getEntityManager().addEvent(inAnExplosionEvent);
+			return true;
+
+		}
+	}
+
+	/* returns true if the explosion should propagate and false otherwise */
+	public boolean detectExplosionCollision(Explosion explosion,
+			CellPlacement explosionPlacement) {
+
+		Direction direction = explosion.getPropagationDirection();
+		CellPlacement nextSpace = new CellPlacement();
+		if (direction == Direction.LEFT) {
+
+			nextSpace.setCellY(explosionPlacement.getCellY());
+			nextSpace.setCellX(explosionPlacement.getCellX() - 1);
+
+		} else if (direction == Direction.RIGHT) {
+
+			nextSpace.setCellY(explosionPlacement.getCellY());
+			nextSpace.setCellX(explosionPlacement.getCellX() + 1);
+
+		} else if (direction == Direction.UP) {
+
+			nextSpace.setCellY(explosionPlacement.getCellY() + 1);
+			nextSpace.setCellX(explosionPlacement.getCellX());
+
+		} else {
+
+			nextSpace.setCellY(explosionPlacement.getCellY() - 1);
+			nextSpace.setCellX(explosionPlacement.getCellX());
+
+		}
+
+		List<Component> components = getEntityManager().getComponents(
+				CellPlacement.class);
+
+		CellPlacement cellPlacement;
+
+		for (Component component : components) {
+
+			cellPlacement = (CellPlacement) component;
+			if (nextSpace.getCellX() == cellPlacement.getCellX()
+					&& nextSpace.getCellY() == cellPlacement.getCellY()) {
+
+				return processExplosionCollision(component.getEntityId(),
+						explosion);
+
+			}
+		}
+
+		return true;
 	}
 
 }
