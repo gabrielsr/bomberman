@@ -1,8 +1,8 @@
 Introdução
 ==========
 
-image:https://travis-ci.org/DRA2840/bomberman.svg?branch=master["Build Status", link="https://travis-ci.org/DRA2840/bomberman"]
-image:http://img.shields.io/coveralls/DRA2840/bomberman/master.svg["Coverage Status", link="https://coveralls.io/r/DRA2840/bomberman?branch=master"]
+image:https://travis-ci.org/gabrielsr/bomberman.svg?branch=master["Build Status", link="https://travis-ci.org/gabrielsr/bomberman"]
+image:http://img.shields.io/coveralls/gabrielsr/bomberman/master.svg["Coverage Status", link="https://coveralls.io/r/gabrielsr/bomberman?branch=master"]
 
 
 Projeto em Desenvolvimento de um Bomberman clone utilizando programação modular, 
