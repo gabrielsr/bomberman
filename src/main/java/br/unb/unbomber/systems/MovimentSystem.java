@@ -27,6 +27,7 @@ public class MovimentSystem extends BaseSystem {
 		 * 
 		 * tivemos um problema nessa parte a ser comentado na documentacao
 		 * temos que fazer uma kapirotagem marota aki
+		 * eu nao fiz nada
 		 */
 
 		/* cria uma lista de eventos de movimentos feitos */
@@ -42,7 +43,7 @@ public class MovimentSystem extends BaseSystem {
 			/* retira um evento da lista */
 			MovementCommandEvent actionCommand = (MovementCommandEvent) event;
 
-			/* recebe o id da entidade que realizará o movimento */
+			/* recebe o id da entidade que realizarï¿½ o movimento */
 			int id = actionCommand.getEntityId();
 
 			/* recebe a velocidade da entidade */
