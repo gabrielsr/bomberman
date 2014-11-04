@@ -1,0 +1,91 @@
+\hypertarget{struct_c_u___failure_record}{\section{C\+U\+\_\+\+Failure\+Record Struct Reference}
+\label{struct_c_u___failure_record}\index{C\+U\+\_\+\+Failure\+Record@{C\+U\+\_\+\+Failure\+Record}}
+}
+
+
+Data type for holding assertion failure information (linked list).  
+
+
+
+
+{\ttfamily \#include $<$Test\+Run.\+h$>$}
+
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+unsigned int \hyperlink{struct_c_u___failure_record_a124d4ce97d29bae29f952250da03536b}{ui\+Line\+Number}
+\begin{DoxyCompactList}\small\item\em Line number of failure. \end{DoxyCompactList}\item 
+char $\ast$ \hyperlink{struct_c_u___failure_record_a5b72f6fe23e35605545809f435884da3}{str\+File\+Name}
+\begin{DoxyCompactList}\small\item\em Name of file where failure occurred. \end{DoxyCompactList}\item 
+char $\ast$ \hyperlink{struct_c_u___failure_record_a645edad1e32b1533bd55c501b2c4d591}{str\+Condition}
+\begin{DoxyCompactList}\small\item\em Test condition which failed. \end{DoxyCompactList}\item 
+\hyperlink{group___framework_ga249c43fbe4e53452b3f90db1437da04b}{C\+U\+\_\+p\+Test} \hyperlink{struct_c_u___failure_record_ad1c88882d83b15d2c2d73a8562f8fced}{p\+Test}
+\begin{DoxyCompactList}\small\item\em Test containing failure. \end{DoxyCompactList}\item 
+\hyperlink{group___framework_gaba832ae8b235f5e70d6a4ac9c3bb1219}{C\+U\+\_\+p\+Suite} \hyperlink{struct_c_u___failure_record_a773e1afb22505c6fc487043222617731}{p\+Suite}
+\begin{DoxyCompactList}\small\item\em Suite containing test having failure. \end{DoxyCompactList}\item 
+struct \hyperlink{struct_c_u___failure_record}{C\+U\+\_\+\+Failure\+Record} $\ast$ \hyperlink{struct_c_u___failure_record_aef89a7d18b1e082202368decabe8c1f8}{p\+Next}
+\begin{DoxyCompactList}\small\item\em Pointer to next record in linked list. \end{DoxyCompactList}\item 
+struct \hyperlink{struct_c_u___failure_record}{C\+U\+\_\+\+Failure\+Record} $\ast$ \hyperlink{struct_c_u___failure_record_a617e40c3052b6b7cf3a873296ed27e56}{p\+Prev}
+\begin{DoxyCompactList}\small\item\em Pointer to previous record in linked list. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Data type for holding assertion failure information (linked list). 
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{struct_c_u___failure_record_aef89a7d18b1e082202368decabe8c1f8}{\index{C\+U\+\_\+\+Failure\+Record@{C\+U\+\_\+\+Failure\+Record}!p\+Next@{p\+Next}}
+\index{p\+Next@{p\+Next}!C\+U\+\_\+\+Failure\+Record@{C\+U\+\_\+\+Failure\+Record}}
+\subsubsection[{p\+Next}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf C\+U\+\_\+\+Failure\+Record}$\ast$ C\+U\+\_\+\+Failure\+Record\+::p\+Next}}\label{struct_c_u___failure_record_aef89a7d18b1e082202368decabe8c1f8}
+
+
+Pointer to next record in linked list. 
+
+\hypertarget{struct_c_u___failure_record_a617e40c3052b6b7cf3a873296ed27e56}{\index{C\+U\+\_\+\+Failure\+Record@{C\+U\+\_\+\+Failure\+Record}!p\+Prev@{p\+Prev}}
+\index{p\+Prev@{p\+Prev}!C\+U\+\_\+\+Failure\+Record@{C\+U\+\_\+\+Failure\+Record}}
+\subsubsection[{p\+Prev}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf C\+U\+\_\+\+Failure\+Record}$\ast$ C\+U\+\_\+\+Failure\+Record\+::p\+Prev}}\label{struct_c_u___failure_record_a617e40c3052b6b7cf3a873296ed27e56}
+
+
+Pointer to previous record in linked list. 
+
+\hypertarget{struct_c_u___failure_record_a773e1afb22505c6fc487043222617731}{\index{C\+U\+\_\+\+Failure\+Record@{C\+U\+\_\+\+Failure\+Record}!p\+Suite@{p\+Suite}}
+\index{p\+Suite@{p\+Suite}!C\+U\+\_\+\+Failure\+Record@{C\+U\+\_\+\+Failure\+Record}}
+\subsubsection[{p\+Suite}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\+U\+\_\+p\+Suite} C\+U\+\_\+\+Failure\+Record\+::p\+Suite}}\label{struct_c_u___failure_record_a773e1afb22505c6fc487043222617731}
+
+
+Suite containing test having failure. 
+
+\hypertarget{struct_c_u___failure_record_ad1c88882d83b15d2c2d73a8562f8fced}{\index{C\+U\+\_\+\+Failure\+Record@{C\+U\+\_\+\+Failure\+Record}!p\+Test@{p\+Test}}
+\index{p\+Test@{p\+Test}!C\+U\+\_\+\+Failure\+Record@{C\+U\+\_\+\+Failure\+Record}}
+\subsubsection[{p\+Test}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\+U\+\_\+p\+Test} C\+U\+\_\+\+Failure\+Record\+::p\+Test}}\label{struct_c_u___failure_record_ad1c88882d83b15d2c2d73a8562f8fced}
+
+
+Test containing failure. 
+
+\hypertarget{struct_c_u___failure_record_a645edad1e32b1533bd55c501b2c4d591}{\index{C\+U\+\_\+\+Failure\+Record@{C\+U\+\_\+\+Failure\+Record}!str\+Condition@{str\+Condition}}
+\index{str\+Condition@{str\+Condition}!C\+U\+\_\+\+Failure\+Record@{C\+U\+\_\+\+Failure\+Record}}
+\subsubsection[{str\+Condition}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ C\+U\+\_\+\+Failure\+Record\+::str\+Condition}}\label{struct_c_u___failure_record_a645edad1e32b1533bd55c501b2c4d591}
+
+
+Test condition which failed. 
+
+\hypertarget{struct_c_u___failure_record_a5b72f6fe23e35605545809f435884da3}{\index{C\+U\+\_\+\+Failure\+Record@{C\+U\+\_\+\+Failure\+Record}!str\+File\+Name@{str\+File\+Name}}
+\index{str\+File\+Name@{str\+File\+Name}!C\+U\+\_\+\+Failure\+Record@{C\+U\+\_\+\+Failure\+Record}}
+\subsubsection[{str\+File\+Name}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ C\+U\+\_\+\+Failure\+Record\+::str\+File\+Name}}\label{struct_c_u___failure_record_a5b72f6fe23e35605545809f435884da3}
+
+
+Name of file where failure occurred. 
+
+\hypertarget{struct_c_u___failure_record_a124d4ce97d29bae29f952250da03536b}{\index{C\+U\+\_\+\+Failure\+Record@{C\+U\+\_\+\+Failure\+Record}!ui\+Line\+Number@{ui\+Line\+Number}}
+\index{ui\+Line\+Number@{ui\+Line\+Number}!C\+U\+\_\+\+Failure\+Record@{C\+U\+\_\+\+Failure\+Record}}
+\subsubsection[{ui\+Line\+Number}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int C\+U\+\_\+\+Failure\+Record\+::ui\+Line\+Number}}\label{struct_c_u___failure_record_a124d4ce97d29bae29f952250da03536b}
+
+
+Line number of failure. 
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Igor/git/bomberman/src/test/c/\+C\+Unit/\hyperlink{_test_run_8h}{Test\+Run.\+h}\end{DoxyCompactItemize}

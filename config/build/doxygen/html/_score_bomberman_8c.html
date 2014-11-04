@@ -93,6 +93,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">ScoreBomberman.c File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Este é o módulo de implementação dos módulos que tratam o score(pontuação) do jogo Bomberman, criado pelo Grupo 10 da turma de Programação Sistemática 2-2014, ministrada pela professora Genaína Nunes Rodrigues, na Universidade de Brasília.  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
@@ -101,49 +104,63 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structscore.html">score</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Estrutura STR_Score (interna ao módulo).  <a href="structscore.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtabela.html">tabela</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Estrutura STR_Tabela (interna ao módulo).  <a href="structtabela.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrecebe.html">recebe</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Estrutura LST_Event.  <a href="structrecebe.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structnomes.html">nomes</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Estrutura LST_Name.  <a href="structnomes.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:ad3f8ad49af01883db7d4964ff3a0ca9f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_score_bomberman_8c.html#ad3f8ad49af01883db7d4964ff3a0ca9f">SERVIDOR_SCORE</a></td></tr>
+<tr class="memdesc:ad3f8ad49af01883db7d4964ff3a0ca9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Esta definição serve para separar o programa servidor do programa cliente.  <a href="#ad3f8ad49af01883db7d4964ff3a0ca9f">More...</a><br /></td></tr>
 <tr class="separator:ad3f8ad49af01883db7d4964ff3a0ca9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8f899d075f01f6a01e44310d8e1f753a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_score_bomberman_8c.html#a8f899d075f01f6a01e44310d8e1f753a">PLAYER_MAX</a>&#160;&#160;&#160;4</td></tr>
+<tr class="memdesc:a8f899d075f01f6a01e44310d8e1f753a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Definição do número máximo de jogadores.  <a href="#a8f899d075f01f6a01e44310d8e1f753a">More...</a><br /></td></tr>
 <tr class="separator:a8f899d075f01f6a01e44310d8e1f753a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a760a67ba30383c0f2b3c3b0106a8e79c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_score_bomberman_8c.html#a760a67ba30383c0f2b3c3b0106a8e79c">SCORE_MONSTER_DEATH</a>&#160;&#160;&#160;100	/*pontuação referente ao assassinato de um monstro*/</td></tr>
+<tr class="memitem:a760a67ba30383c0f2b3c3b0106a8e79c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_score_bomberman_8c.html#a760a67ba30383c0f2b3c3b0106a8e79c">SCORE_MONSTER_DEATH</a>&#160;&#160;&#160;100</td></tr>
+<tr class="memdesc:a760a67ba30383c0f2b3c3b0106a8e79c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pontuação referente ao assassinato de um monstro.  <a href="#a760a67ba30383c0f2b3c3b0106a8e79c">More...</a><br /></td></tr>
 <tr class="separator:a760a67ba30383c0f2b3c3b0106a8e79c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9542c057a72c258bd908781a34eaaa01"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_score_bomberman_8c.html#a9542c057a72c258bd908781a34eaaa01">SCORE_EXP_SB</a>&#160;&#160;&#160;10			/*pontuação referente à explosão de um soft block*/</td></tr>
+<tr class="memitem:a9542c057a72c258bd908781a34eaaa01"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_score_bomberman_8c.html#a9542c057a72c258bd908781a34eaaa01">SCORE_EXP_SB</a>&#160;&#160;&#160;10</td></tr>
+<tr class="memdesc:a9542c057a72c258bd908781a34eaaa01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pontuação referente à explosão de um soft block.  <a href="#a9542c057a72c258bd908781a34eaaa01">More...</a><br /></td></tr>
 <tr class="separator:a9542c057a72c258bd908781a34eaaa01"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad9a48826ce122de8d406038faec62574"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_score_bomberman_8c.html#ad9a48826ce122de8d406038faec62574">SCORE_PICKUP_POWERUP</a>&#160;&#160;&#160;30	/*pontuação referente à obtenção de um power up*/</td></tr>
+<tr class="memitem:ad9a48826ce122de8d406038faec62574"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_score_bomberman_8c.html#ad9a48826ce122de8d406038faec62574">SCORE_PICKUP_POWERUP</a>&#160;&#160;&#160;30</td></tr>
+<tr class="memdesc:ad9a48826ce122de8d406038faec62574"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pontuação referente à obtenção de um power up.  <a href="#ad9a48826ce122de8d406038faec62574">More...</a><br /></td></tr>
 <tr class="separator:ad9a48826ce122de8d406038faec62574"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9d6e3238ea9ca2eb6e493a0dcb796b26"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_score_bomberman_8c.html#a9d6e3238ea9ca2eb6e493a0dcb796b26">SCORE_CHARACTER_DEATH</a>&#160;&#160;&#160;200/*pontuação referente ao assassinato de outro jogador*/</td></tr>
+<tr class="memitem:a9d6e3238ea9ca2eb6e493a0dcb796b26"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_score_bomberman_8c.html#a9d6e3238ea9ca2eb6e493a0dcb796b26">SCORE_CHARACTER_DEATH</a>&#160;&#160;&#160;200</td></tr>
+<tr class="memdesc:a9d6e3238ea9ca2eb6e493a0dcb796b26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pontuação referente ao assassinato de outro jogador.  <a href="#a9d6e3238ea9ca2eb6e493a0dcb796b26">More...</a><br /></td></tr>
 <tr class="separator:a9d6e3238ea9ca2eb6e493a0dcb796b26"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:aae1ea739bac5e5bd4396e9d530af1ffd"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_score_bomberman_8c.html#aae1ea739bac5e5bd4396e9d530af1ffd">MS_scoreModuleInterface</a> (<a class="el" href="_score_bomberman_8h.html#a86bf1876cd70ae445a8d41c21f10a6a9">LST_Event</a> *events)</td></tr>
+<tr class="memdesc:aae1ea739bac5e5bd4396e9d530af1ffd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Esta função recebe uma lista de LST_Events (struct recebe) do turno do jogo e chama outra função (interna ao módulo) para montar e contabilizar a pontuação dos jogadores envolvidos.  <a href="#aae1ea739bac5e5bd4396e9d530af1ffd">More...</a><br /></td></tr>
 <tr class="separator:aae1ea739bac5e5bd4396e9d530af1ffd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abe95d65fcc138e3ac8611044c1f201ae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_score_bomberman_8c.html#abe95d65fcc138e3ac8611044c1f201ae">MS_sendPlayerNameEvent</a> (<a class="el" href="_score_bomberman_8h.html#adfc002e678376cd7694dc9942e610803">LST_Name</a> *<a class="el" href="structnomes.html">nomes</a>)</td></tr>
+<tr class="memdesc:abe95d65fcc138e3ac8611044c1f201ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função que tem o propósito de armazenar o nome dos jogadores para futura referência (criação da tabela de High Scores).  <a href="#abe95d65fcc138e3ac8611044c1f201ae">More...</a><br /></td></tr>
 <tr class="separator:abe95d65fcc138e3ac8611044c1f201ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a57998444b80eb587f83a4f78256dc44a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_score_bomberman_8c.html#a57998444b80eb587f83a4f78256dc44a">findEvent</a> (int comando, int jogador)</td></tr>
-<tr class="separator:a57998444b80eb587f83a4f78256dc44a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a73877a4f1072bd6850f0f6921d82c975"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_score_bomberman_8c.html#a73877a4f1072bd6850f0f6921d82c975">criaTabelaHighScore</a> (<a class="el" href="_score_bomberman_8h.html#a06457dff28fe470b2edfa5135438e5b0">STR_Score</a> *scores)</td></tr>
-<tr class="separator:a73877a4f1072bd6850f0f6921d82c975"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a89fe72dd39377fdbc9303ee385c6b072"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_score_bomberman_8c.html#a89fe72dd39377fdbc9303ee385c6b072">inicializaScore</a> (<a class="el" href="_score_bomberman_8h.html#a06457dff28fe470b2edfa5135438e5b0">STR_Score</a> *scores)</td></tr>
-<tr class="separator:a89fe72dd39377fdbc9303ee385c6b072"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aba137ad269eda370cbfd70e334f79f7b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_score_bomberman_8c.html#aba137ad269eda370cbfd70e334f79f7b">addScore</a> (char action, int player, <a class="el" href="_score_bomberman_8h.html#a06457dff28fe470b2edfa5135438e5b0">STR_Score</a> *scores)</td></tr>
-<tr class="separator:aba137ad269eda370cbfd70e334f79f7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4e331597f0cad83c700075b273839637"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_score_bomberman_8c.html#a4e331597f0cad83c700075b273839637">MS_getScore</a> (int jogador)</td></tr>
+<tr class="memdesc:a4e331597f0cad83c700075b273839637"><td class="mdescLeft">&#160;</td><td class="mdescRight">Essa função tem como função retornar a pontuação de um jogador para outros módulos.  <a href="#a4e331597f0cad83c700075b273839637">More...</a><br /></td></tr>
 <tr class="separator:a4e331597f0cad83c700075b273839637"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7d5805ac6145ffcc90db71dd6ee27826"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_score_bomberman_8c.html#a7d5805ac6145ffcc90db71dd6ee27826">clearScore</a> (<a class="el" href="_score_bomberman_8h.html#a06457dff28fe470b2edfa5135438e5b0">STR_Score</a> *scores)</td></tr>
-<tr class="separator:a7d5805ac6145ffcc90db71dd6ee27826"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Macro Definition Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Este é o módulo de implementação dos módulos que tratam o score(pontuação) do jogo Bomberman, criado pelo Grupo 10 da turma de Programação Sistemática 2-2014, ministrada pela professora Genaína Nunes Rodrigues, na Universidade de Brasília. </p>
+<dl class="section author"><dt>Author</dt><dd>Camila Imbuzeiro Camargo </dd>
+<dd>
+Lucas Araújo Pena </dd>
+<dd>
+Miguel Angelo Montagner Filho </dd>
+<dd>
+Nicolas Machado Schumacher </dd></dl>
+<dl class="section since"><dt>Since</dt><dd>07/10/2014 </dd></dl>
+<dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
+</div><h2 class="groupheader">Macro Definition Documentation</h2>
 <a class="anchor" id="a8f899d075f01f6a01e44310d8e1f753a"></a>
 <div class="memitem">
 <div class="memproto">
@@ -154,6 +171,8 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Definição do número máximo de jogadores. </p>
+
 </div>
 </div>
 <a class="anchor" id="a9d6e3238ea9ca2eb6e493a0dcb796b26"></a>
@@ -161,10 +180,12 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define SCORE_CHARACTER_DEATH&#160;&#160;&#160;200/*pontuação referente ao assassinato de outro jogador*/</td>
+          <td class="memname">#define SCORE_CHARACTER_DEATH&#160;&#160;&#160;200</td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Pontuação referente ao assassinato de outro jogador. </p>
 
 </div>
 </div>
@@ -173,10 +194,12 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define SCORE_EXP_SB&#160;&#160;&#160;10			/*pontuação referente à explosão de um soft block*/</td>
+          <td class="memname">#define SCORE_EXP_SB&#160;&#160;&#160;10</td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Pontuação referente à explosão de um soft block. </p>
 
 </div>
 </div>
@@ -185,10 +208,12 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define SCORE_MONSTER_DEATH&#160;&#160;&#160;100	/*pontuação referente ao assassinato de um monstro*/</td>
+          <td class="memname">#define SCORE_MONSTER_DEATH&#160;&#160;&#160;100</td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Pontuação referente ao assassinato de um monstro. </p>
 
 </div>
 </div>
@@ -197,10 +222,12 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define SCORE_PICKUP_POWERUP&#160;&#160;&#160;30	/*pontuação referente à obtenção de um power up*/</td>
+          <td class="memname">#define SCORE_PICKUP_POWERUP&#160;&#160;&#160;30</td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Pontuação referente à obtenção de um power up. </p>
 
 </div>
 </div>
@@ -214,115 +241,11 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Esta definição serve para separar o programa servidor do programa cliente. </p>
+
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="aba137ad269eda370cbfd70e334f79f7b"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int addScore </td>
-          <td>(</td>
-          <td class="paramtype">char&#160;</td>
-          <td class="paramname"><em>action</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>player</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="_score_bomberman_8h.html#a06457dff28fe470b2edfa5135438e5b0">STR_Score</a> *&#160;</td>
-          <td class="paramname"><em>scores</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a7d5805ac6145ffcc90db71dd6ee27826"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void clearScore </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="_score_bomberman_8h.html#a06457dff28fe470b2edfa5135438e5b0">STR_Score</a> *&#160;</td>
-          <td class="paramname"><em>scores</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a73877a4f1072bd6850f0f6921d82c975"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void criaTabelaHighScore </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="_score_bomberman_8h.html#a06457dff28fe470b2edfa5135438e5b0">STR_Score</a> *&#160;</td>
-          <td class="paramname"><em>scores</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a57998444b80eb587f83a4f78256dc44a"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int findEvent </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>comando</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>jogador</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a89fe72dd39377fdbc9303ee385c6b072"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void inicializaScore </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="_score_bomberman_8h.html#a06457dff28fe470b2edfa5135438e5b0">STR_Score</a> *&#160;</td>
-          <td class="paramname"><em>scores</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="a4e331597f0cad83c700075b273839637"></a>
 <div class="memitem">
 <div class="memproto">
@@ -336,6 +259,15 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Essa função tem como função retornar a pontuação de um jogador para outros módulos. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">jogador</td><td>o jogador da qual deseja-se obter a pontuação. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a função retorna 1 caso dê algum erro (jogador inexistente) e retorna um valor diferente de um caso tudo tenha corrido bem. </dd></dl>
 
 </div>
 </div>
@@ -353,6 +285,15 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Esta função recebe uma lista de LST_Events (struct recebe) do turno do jogo e chama outra função (interna ao módulo) para montar e contabilizar a pontuação dos jogadores envolvidos. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">events</td><td>uma lista do tipo LST_Events que representa os eventos do turno. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>retorna 0 se não houve problemas na execução (valores errados enviados, como comandos ou jogadores inexistentes) e 1 se tudo correu bem. </dd></dl>
+
 </div>
 </div>
 <a class="anchor" id="abe95d65fcc138e3ac8611044c1f201ae"></a>
@@ -369,12 +310,22 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Função que tem o propósito de armazenar o nome dos jogadores para futura referência (criação da tabela de High Scores). </p>
+<p>Essa função deve ser chamada logo após a nomeação dos jogadores, antes da inicialização do jogo. Se esta função não for chamada, a função que cria a tabela de High Scores não terá uma referência na hora de relacionar um jogador com sua pontuação.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nomes</td><td>uma lista do tipo LST_Name (struct nomes) que traz consigo em cada célula o número e o nome de um jogador. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
+
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Oct 30 2014 23:47:14 for Bomberman by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Nov 3 2014 23:35:15 for Bomberman by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

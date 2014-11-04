@@ -1,7 +1,7 @@
 var searchData=
 [
   ['tabela',['tabela',['../structtabela.html',1,'']]],
-  ['takedamaged',['takeDamaged',['../classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system.html#a5579a50f9e315c67a66db8c6f2b304fe',1,'br::unb::unbomber::systems::LifeSystem']]],
+  ['takedamaged',['takeDamaged',['../classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system.html#a3d84ab6ee592745e577494c07146369a',1,'br::unb::unbomber::systems::LifeSystem']]],
   ['targetid',['targetId',['../classbr_1_1unb_1_1unbomber_1_1event_1_1_collision_event.html#a3b46d8cfa814478929fb264594f4c1eb',1,'br::unb::unbomber::event::CollisionEvent']]],
   ['testa_5faddscore_5fparadestruicaosoftblockp2',['testa_addScore_ParaDestruicaoSoftBlockP2',['../_bomberman___score___teste_8c.html#a0c2341db61f7dabc82a63f2a3ec4599d',1,'Bomberman_Score_Teste.c']]],
   ['testa_5faddscore_5fparaduplapontuacaop1',['testa_addScore_ParaDuplaPontuacaoP1',['../_bomberman___score___teste_8c.html#abb336b625d8ca5a046b693c02b5381e8',1,'Bomberman_Score_Teste.c']]],
@@ -24,10 +24,12 @@ var searchData=
   ['testa_5finicializascore_5fparap2',['testa_inicializaScore_ParaP2',['../_bomberman___score___teste_8c.html#ac02380c95fa051b66d753ee7b8e4eda7',1,'Bomberman_Score_Teste.c']]],
   ['testa_5finicializascore_5fparap3',['testa_inicializaScore_ParaP3',['../_bomberman___score___teste_8c.html#a7632e3662d8c476244a9807f03595ae4',1,'Bomberman_Score_Teste.c']]],
   ['testa_5finicializascore_5fparap4',['testa_inicializaScore_ParaP4',['../_bomberman___score___teste_8c.html#adcddf7732ace9c996ec24376bb462c02',1,'Bomberman_Score_Teste.c']]],
+  ['testbomhassamerangeasdropper',['testBomHasSameRangeAsDropper',['../classbr_1_1unb_1_1unbomber_1_1systems_1_1_bomb_system_test_case.html#a32cfa477841384686c1b2229a35637e7',1,'br::unb::unbomber::systems::BombSystemTestCase']]],
   ['testconstructor',['testConstructor',['../classbr_1_1unb_1_1unbomber_1_1systems_1_1_bomb_system_test_case.html#aee8e84898d06603c217bce292da25b52',1,'br::unb::unbomber::systems::BombSystemTestCase']]],
   ['testdb_2eh',['TestDB.h',['../_test_d_b_8h.html',1,'']]],
   ['testifanexplosioneventtriggersanotherbomb',['testIfAnExplosionEventTriggersAnotherBomb',['../classbr_1_1unb_1_1unbomber_1_1systems_1_1_bomb_system_test_case.html#a1453b7b0ace81d7ea7c04d1b994f5022',1,'br::unb::unbomber::systems::BombSystemTestCase']]],
   ['testofcollision',['testOfCollision',['../classbr_1_1unb_1_1unbomber_1_1systems_1_1_collision_system.html#abb605c101fe1d964afee5d656f03235e',1,'br::unb::unbomber::systems::CollisionSystem']]],
+  ['testpositionandrangeofexplosion',['testPositionAndRangeOfExplosion',['../classbr_1_1unb_1_1unbomber_1_1systems_1_1_bomb_system_test_case.html#aca6b0fccec0022c50191b1c3fe077097',1,'br::unb::unbomber::systems::BombSystemTestCase']]],
   ['testrun_2eh',['TestRun.h',['../_test_run_8h.html',1,'']]],
   ['tick',['tick',['../classbr_1_1unb_1_1unbomber_1_1component_1_1_timer.html#a1d1db578ecf8f0a785a58d2c56ed3e97',1,'br::unb::unbomber::component::Timer']]],
   ['timeoverevent',['TimeOverEvent',['../classbr_1_1unb_1_1unbomber_1_1event_1_1_time_over_event.html',1,'br::unb::unbomber::event']]],
@@ -36,8 +38,8 @@ var searchData=
   ['timer',['Timer',['../classbr_1_1unb_1_1unbomber_1_1component_1_1_timer.html#a8b7a436f14fc18015f1051e6335f4a25',1,'br::unb::unbomber::component::Timer']]],
   ['timer',['Timer',['../classbr_1_1unb_1_1unbomber_1_1component_1_1_timer.html',1,'br::unb::unbomber::component']]],
   ['timer_2ejava',['Timer.java',['../_timer_8java.html',1,'']]],
-  ['timesystem',['TimeSystem',['../classbr_1_1unb_1_1unbomber_1_1systems_1_1_time_system.html',1,'br::unb::unbomber::systems']]],
   ['timesystem',['TimeSystem',['../classbr_1_1unb_1_1unbomber_1_1systems_1_1_time_system.html#a825a265470d1a8dc3ae1d844f8ef89cf',1,'br.unb.unbomber.systems.TimeSystem.TimeSystem()'],['../classbr_1_1unb_1_1unbomber_1_1systems_1_1_time_system.html#a90615ccf4a2ed1a327d0734c48c71715',1,'br.unb.unbomber.systems.TimeSystem.TimeSystem(EntityManager model)']]],
+  ['timesystem',['TimeSystem',['../classbr_1_1unb_1_1unbomber_1_1systems_1_1_time_system.html',1,'br::unb::unbomber::systems']]],
   ['timesystem_2ejava',['TimeSystem.java',['../_time_system_8java.html',1,'']]],
   ['timesystemtestcase',['TimeSystemTestCase',['../classbr_1_1unb_1_1unbomber_1_1systems_1_1_time_system_test_case.html',1,'br::unb::unbomber::systems']]],
   ['timesystemtestcase_2ejava',['TimeSystemTestCase.java',['../_time_system_test_case_8java.html',1,'']]],
@@ -46,5 +48,6 @@ var searchData=
   ['triggeredaftertimetoexplodetest',['triggeredAfterTimeToExplodeTest',['../classbr_1_1unb_1_1unbomber_1_1systems_1_1_bomb_system_test_case.html#afc3c21e0f32a96f21d45bc5b0ccb4ee2',1,'br.unb.unbomber.systems.BombSystemTestCase.triggeredAfterTimeToExplodeTest()'],['../classbr_1_1unb_1_1unbomber_1_1systems_1_1_bomb_system_test_case2.html#a8842b92e680ebfa498ac6bf385435994',1,'br.unb.unbomber.systems.BombSystemTestCase2.triggeredAfterTimeToExplodeTest()']]],
   ['triggers_5fremote_5fbomb',['TRIGGERS_REMOTE_BOMB',['../enumbr_1_1unb_1_1unbomber_1_1event_1_1_action_command_event_1_1_action_type.html#af0e9b168014d570579db0d2917a54384',1,'br::unb::unbomber::event::ActionCommandEvent::ActionType']]],
   ['triggersaremotelycontroledbombtest',['triggersARemotelyControledBombTest',['../classbr_1_1unb_1_1unbomber_1_1systems_1_1_bomb_system_test_case.html#aa95a8f7ed01e762f9b42891b1ff0ab0a',1,'br::unb::unbomber::systems::BombSystemTestCase']]],
-  ['type',['type',['../classbr_1_1unb_1_1unbomber_1_1component_1_1_explosion_barrier.html#a6678091bcf2ec0118ad896d6502da892',1,'br.unb.unbomber.component.ExplosionBarrier.type()'],['../classbr_1_1unb_1_1unbomber_1_1event_1_1_action_command_event.html#ae3fcdcc187420aaf77783896fb74490c',1,'br.unb.unbomber.event.ActionCommandEvent.type()'],['../classbr_1_1unb_1_1unbomber_1_1event_1_1_movement_command_event.html#a122cdd825b8fd6e2af29546476c8c2f2',1,'br.unb.unbomber.event.MovementCommandEvent.type()']]]
+  ['type',['type',['../classbr_1_1unb_1_1unbomber_1_1component_1_1_explosion_barrier.html#a6678091bcf2ec0118ad896d6502da892',1,'br.unb.unbomber.component.ExplosionBarrier.type()'],['../classbr_1_1unb_1_1unbomber_1_1component_1_1_life_type.html#a0eef757b0cf6ff6b8b740b93f2a0bfa0',1,'br.unb.unbomber.component.LifeType.type()'],['../classbr_1_1unb_1_1unbomber_1_1event_1_1_action_command_event.html#ae3fcdcc187420aaf77783896fb74490c',1,'br.unb.unbomber.event.ActionCommandEvent.type()'],['../classbr_1_1unb_1_1unbomber_1_1event_1_1_movement_command_event.html#a122cdd825b8fd6e2af29546476c8c2f2',1,'br.unb.unbomber.event.MovementCommandEvent.type()']]],
+  ['type',['Type',['../enumbr_1_1unb_1_1unbomber_1_1component_1_1_life_type_1_1_type.html',1,'br::unb::unbomber::component::LifeType']]]
 ];

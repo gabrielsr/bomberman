@@ -1,0 +1,173 @@
+\hypertarget{classbr_1_1unb_1_1unbomber_1_1component_1_1_timer}{\section{br.\+unb.\+unbomber.\+component.\+Timer Class Reference}
+\label{classbr_1_1unb_1_1unbomber_1_1component_1_1_timer}\index{br.\+unb.\+unbomber.\+component.\+Timer@{br.\+unb.\+unbomber.\+component.\+Timer}}
+}
+
+
+The \hyperlink{classbr_1_1unb_1_1unbomber_1_1component_1_1_timer}{Timer} Component.  
+
+
+Inheritance diagram for br.\+unb.\+unbomber.\+component.\+Timer\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classbr_1_1unb_1_1unbomber_1_1component_1_1_timer}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classbr_1_1unb_1_1unbomber_1_1component_1_1_timer_a8b7a436f14fc18015f1051e6335f4a25}{Timer} (long \hyperlink{classbr_1_1unb_1_1unbomber_1_1component_1_1_timer_ac50112dc7d20272d80c32d32019e9b9a}{elapsed\+Time}, \hyperlink{classbr_1_1unb_1_1unbomber_1_1core_1_1_event}{Event} \hyperlink{classbr_1_1unb_1_1unbomber_1_1component_1_1_timer_afb03bb22d0faae22c10461086fa9486e}{event})
+\begin{DoxyCompactList}\small\item\em Instantiates a new timer. \end{DoxyCompactList}\item 
+void \hyperlink{classbr_1_1unb_1_1unbomber_1_1component_1_1_timer_a1d1db578ecf8f0a785a58d2c56ed3e97}{tick} ()
+\begin{DoxyCompactList}\small\item\em Tick. \end{DoxyCompactList}\item 
+boolean \hyperlink{classbr_1_1unb_1_1unbomber_1_1component_1_1_timer_aef2afadc30b76c3359bf615c75889079}{is\+Over} ()
+\begin{DoxyCompactList}\small\item\em Checks if is over. \end{DoxyCompactList}\item 
+boolean \hyperlink{classbr_1_1unb_1_1unbomber_1_1component_1_1_timer_a741e5c972185dc83625b840b30c3d05c}{is\+Active} ()
+\begin{DoxyCompactList}\small\item\em Checks if is active. \end{DoxyCompactList}\item 
+void \hyperlink{classbr_1_1unb_1_1unbomber_1_1component_1_1_timer_a39aaaaa59736b4744cb3c064795826ba}{set\+Active} (boolean \hyperlink{classbr_1_1unb_1_1unbomber_1_1component_1_1_timer_a8e0a7bdef47826d7af3e4d10b839a02b}{active})
+\begin{DoxyCompactList}\small\item\em Sets the active. \end{DoxyCompactList}\item 
+\hyperlink{classbr_1_1unb_1_1unbomber_1_1core_1_1_event}{Event} \hyperlink{classbr_1_1unb_1_1unbomber_1_1component_1_1_timer_aacfd2ff448d543c394cd165dcb33f118}{get\+Event} ()
+\begin{DoxyCompactList}\small\item\em Gets the event. \end{DoxyCompactList}\item 
+void \hyperlink{classbr_1_1unb_1_1unbomber_1_1component_1_1_timer_af3ac14e5b78a1595782fa73b34820954}{set\+Entity\+Id} (int \hyperlink{classbr_1_1unb_1_1unbomber_1_1core_1_1_component_a3eff11219571ba1890651e922b9879ef}{entity\+Id})
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+long \hyperlink{classbr_1_1unb_1_1unbomber_1_1component_1_1_timer_ac50112dc7d20272d80c32d32019e9b9a}{elapsed\+Time}
+\begin{DoxyCompactList}\small\item\em The elapsed time. \end{DoxyCompactList}\item 
+boolean \hyperlink{classbr_1_1unb_1_1unbomber_1_1component_1_1_timer_a8e0a7bdef47826d7af3e4d10b839a02b}{active} = true
+\begin{DoxyCompactList}\small\item\em The active. \end{DoxyCompactList}\item 
+\hyperlink{classbr_1_1unb_1_1unbomber_1_1core_1_1_event}{Event} \hyperlink{classbr_1_1unb_1_1unbomber_1_1component_1_1_timer_afb03bb22d0faae22c10461086fa9486e}{event}
+\begin{DoxyCompactList}\small\item\em The event. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \hyperlink{classbr_1_1unb_1_1unbomber_1_1component_1_1_timer}{Timer} Component. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classbr_1_1unb_1_1unbomber_1_1component_1_1_timer_a8b7a436f14fc18015f1051e6335f4a25}{\index{br\+::unb\+::unbomber\+::component\+::\+Timer@{br\+::unb\+::unbomber\+::component\+::\+Timer}!Timer@{Timer}}
+\index{Timer@{Timer}!br\+::unb\+::unbomber\+::component\+::\+Timer@{br\+::unb\+::unbomber\+::component\+::\+Timer}}
+\subsubsection[{Timer}]{\setlength{\rightskip}{0pt plus 5cm}br.\+unb.\+unbomber.\+component.\+Timer.\+Timer (
+\begin{DoxyParamCaption}
+\item[{long}]{elapsed\+Time, }
+\item[{{\bf Event}}]{event}
+\end{DoxyParamCaption}
+)}}\label{classbr_1_1unb_1_1unbomber_1_1component_1_1_timer_a8b7a436f14fc18015f1051e6335f4a25}
+
+
+Instantiates a new timer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em elapsed\+Time} & the elapsed time \\
+\hline
+{\em event} & the event \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classbr_1_1unb_1_1unbomber_1_1component_1_1_timer_aacfd2ff448d543c394cd165dcb33f118}{\index{br\+::unb\+::unbomber\+::component\+::\+Timer@{br\+::unb\+::unbomber\+::component\+::\+Timer}!get\+Event@{get\+Event}}
+\index{get\+Event@{get\+Event}!br\+::unb\+::unbomber\+::component\+::\+Timer@{br\+::unb\+::unbomber\+::component\+::\+Timer}}
+\subsubsection[{get\+Event}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Event} br.\+unb.\+unbomber.\+component.\+Timer.\+get\+Event (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classbr_1_1unb_1_1unbomber_1_1component_1_1_timer_aacfd2ff448d543c394cd165dcb33f118}
+
+
+Gets the event. 
+
+\begin{DoxyReturn}{Returns}
+the event 
+\end{DoxyReturn}
+\hypertarget{classbr_1_1unb_1_1unbomber_1_1component_1_1_timer_a741e5c972185dc83625b840b30c3d05c}{\index{br\+::unb\+::unbomber\+::component\+::\+Timer@{br\+::unb\+::unbomber\+::component\+::\+Timer}!is\+Active@{is\+Active}}
+\index{is\+Active@{is\+Active}!br\+::unb\+::unbomber\+::component\+::\+Timer@{br\+::unb\+::unbomber\+::component\+::\+Timer}}
+\subsubsection[{is\+Active}]{\setlength{\rightskip}{0pt plus 5cm}boolean br.\+unb.\+unbomber.\+component.\+Timer.\+is\+Active (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classbr_1_1unb_1_1unbomber_1_1component_1_1_timer_a741e5c972185dc83625b840b30c3d05c}
+
+
+Checks if is active. 
+
+\begin{DoxyReturn}{Returns}
+true, if is active 
+\end{DoxyReturn}
+\hypertarget{classbr_1_1unb_1_1unbomber_1_1component_1_1_timer_aef2afadc30b76c3359bf615c75889079}{\index{br\+::unb\+::unbomber\+::component\+::\+Timer@{br\+::unb\+::unbomber\+::component\+::\+Timer}!is\+Over@{is\+Over}}
+\index{is\+Over@{is\+Over}!br\+::unb\+::unbomber\+::component\+::\+Timer@{br\+::unb\+::unbomber\+::component\+::\+Timer}}
+\subsubsection[{is\+Over}]{\setlength{\rightskip}{0pt plus 5cm}boolean br.\+unb.\+unbomber.\+component.\+Timer.\+is\+Over (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classbr_1_1unb_1_1unbomber_1_1component_1_1_timer_aef2afadc30b76c3359bf615c75889079}
+
+
+Checks if is over. 
+
+\begin{DoxyReturn}{Returns}
+true, if is over 
+\end{DoxyReturn}
+\hypertarget{classbr_1_1unb_1_1unbomber_1_1component_1_1_timer_a39aaaaa59736b4744cb3c064795826ba}{\index{br\+::unb\+::unbomber\+::component\+::\+Timer@{br\+::unb\+::unbomber\+::component\+::\+Timer}!set\+Active@{set\+Active}}
+\index{set\+Active@{set\+Active}!br\+::unb\+::unbomber\+::component\+::\+Timer@{br\+::unb\+::unbomber\+::component\+::\+Timer}}
+\subsubsection[{set\+Active}]{\setlength{\rightskip}{0pt plus 5cm}void br.\+unb.\+unbomber.\+component.\+Timer.\+set\+Active (
+\begin{DoxyParamCaption}
+\item[{boolean}]{active}
+\end{DoxyParamCaption}
+)}}\label{classbr_1_1unb_1_1unbomber_1_1component_1_1_timer_a39aaaaa59736b4744cb3c064795826ba}
+
+
+Sets the active. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em active} & the new active \\
+\hline
+\end{DoxyParams}
+\hypertarget{classbr_1_1unb_1_1unbomber_1_1component_1_1_timer_af3ac14e5b78a1595782fa73b34820954}{\index{br\+::unb\+::unbomber\+::component\+::\+Timer@{br\+::unb\+::unbomber\+::component\+::\+Timer}!set\+Entity\+Id@{set\+Entity\+Id}}
+\index{set\+Entity\+Id@{set\+Entity\+Id}!br\+::unb\+::unbomber\+::component\+::\+Timer@{br\+::unb\+::unbomber\+::component\+::\+Timer}}
+\subsubsection[{set\+Entity\+Id}]{\setlength{\rightskip}{0pt plus 5cm}void br.\+unb.\+unbomber.\+component.\+Timer.\+set\+Entity\+Id (
+\begin{DoxyParamCaption}
+\item[{int}]{entity\+Id}
+\end{DoxyParamCaption}
+)}}\label{classbr_1_1unb_1_1unbomber_1_1component_1_1_timer_af3ac14e5b78a1595782fa73b34820954}
+\hypertarget{classbr_1_1unb_1_1unbomber_1_1component_1_1_timer_a1d1db578ecf8f0a785a58d2c56ed3e97}{\index{br\+::unb\+::unbomber\+::component\+::\+Timer@{br\+::unb\+::unbomber\+::component\+::\+Timer}!tick@{tick}}
+\index{tick@{tick}!br\+::unb\+::unbomber\+::component\+::\+Timer@{br\+::unb\+::unbomber\+::component\+::\+Timer}}
+\subsubsection[{tick}]{\setlength{\rightskip}{0pt plus 5cm}void br.\+unb.\+unbomber.\+component.\+Timer.\+tick (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classbr_1_1unb_1_1unbomber_1_1component_1_1_timer_a1d1db578ecf8f0a785a58d2c56ed3e97}
+
+
+Tick. 
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classbr_1_1unb_1_1unbomber_1_1component_1_1_timer_a8e0a7bdef47826d7af3e4d10b839a02b}{\index{br\+::unb\+::unbomber\+::component\+::\+Timer@{br\+::unb\+::unbomber\+::component\+::\+Timer}!active@{active}}
+\index{active@{active}!br\+::unb\+::unbomber\+::component\+::\+Timer@{br\+::unb\+::unbomber\+::component\+::\+Timer}}
+\subsubsection[{active}]{\setlength{\rightskip}{0pt plus 5cm}boolean br.\+unb.\+unbomber.\+component.\+Timer.\+active = true\hspace{0.3cm}{\ttfamily [private]}}}\label{classbr_1_1unb_1_1unbomber_1_1component_1_1_timer_a8e0a7bdef47826d7af3e4d10b839a02b}
+
+
+The active. 
+
+\hypertarget{classbr_1_1unb_1_1unbomber_1_1component_1_1_timer_ac50112dc7d20272d80c32d32019e9b9a}{\index{br\+::unb\+::unbomber\+::component\+::\+Timer@{br\+::unb\+::unbomber\+::component\+::\+Timer}!elapsed\+Time@{elapsed\+Time}}
+\index{elapsed\+Time@{elapsed\+Time}!br\+::unb\+::unbomber\+::component\+::\+Timer@{br\+::unb\+::unbomber\+::component\+::\+Timer}}
+\subsubsection[{elapsed\+Time}]{\setlength{\rightskip}{0pt plus 5cm}long br.\+unb.\+unbomber.\+component.\+Timer.\+elapsed\+Time\hspace{0.3cm}{\ttfamily [private]}}}\label{classbr_1_1unb_1_1unbomber_1_1component_1_1_timer_ac50112dc7d20272d80c32d32019e9b9a}
+
+
+The elapsed time. 
+
+\hypertarget{classbr_1_1unb_1_1unbomber_1_1component_1_1_timer_afb03bb22d0faae22c10461086fa9486e}{\index{br\+::unb\+::unbomber\+::component\+::\+Timer@{br\+::unb\+::unbomber\+::component\+::\+Timer}!event@{event}}
+\index{event@{event}!br\+::unb\+::unbomber\+::component\+::\+Timer@{br\+::unb\+::unbomber\+::component\+::\+Timer}}
+\subsubsection[{event}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Event} br.\+unb.\+unbomber.\+component.\+Timer.\+event\hspace{0.3cm}{\ttfamily [private]}}}\label{classbr_1_1unb_1_1unbomber_1_1component_1_1_timer_afb03bb22d0faae22c10461086fa9486e}
+
+
+The event. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Igor/git/bomberman/src/main/java/br/unb/unbomber/component/\hyperlink{_timer_8java}{Timer.\+java}\end{DoxyCompactItemize}

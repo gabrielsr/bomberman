@@ -5,7 +5,6 @@ var searchData=
   ['inanexplosionevent',['InAnExplosionEvent',['../classbr_1_1unb_1_1unbomber_1_1event_1_1_in_an_explosion_event.html',1,'br::unb::unbomber::event']]],
   ['inanexplosionevent_2ejava',['InAnExplosionEvent.java',['../_in_an_explosion_event_8java.html',1,'']]],
   ['increasehealthtest',['increaseHealthTest',['../classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system_test_case.html#abfbef680117fc6219894a59dd65a4e4d',1,'br::unb::unbomber::systems::LifeSystemTestCase']]],
-  ['inicializascore',['inicializaScore',['../_score_bomberman_8c.html#a89fe72dd39377fdbc9303ee385c6b072',1,'ScoreBomberman.c']]],
   ['init',['init',['../classbr_1_1unb_1_1unbomber_1_1core_1_1_entity_manager_impl.html#ade23c489b4633ba68401b12c726a4868',1,'br.unb.unbomber.core.EntityManagerImpl.init()'],['../classbr_1_1unb_1_1unbomber_1_1core_1_1_entity_system_impl.html#a30972e66e69443f5b5c745e952046607',1,'br.unb.unbomber.core.EntitySystemImpl.init()']]],
   ['initialcell',['initialCell',['../classbr_1_1unb_1_1unbomber_1_1event_1_1_movement_execution_event.html#a983de322d2ea854004ab7851ba23d7e3',1,'br::unb::unbomber::event::MovementExecutionEvent']]],
   ['initialposition',['initialPosition',['../classbr_1_1unb_1_1unbomber_1_1event_1_1_explosion_started_event.html#abfef22edb8b12f9a74b7de602026a513',1,'br::unb::unbomber::event::ExplosionStartedEvent']]],
@@ -18,10 +17,11 @@ var searchData=
   ['isarebombspassthrough',['isAreBombsPassThrough',['../classbr_1_1unb_1_1unbomber_1_1component_1_1_bomb_dropper.html#a0ea96595070322eaa0a207c26018c7e5',1,'br::unb::unbomber::component::BombDropper']]],
   ['iscanremotetrigger',['isCanRemoteTrigger',['../classbr_1_1unb_1_1unbomber_1_1component_1_1_bomb_dropper.html#a13115bd28c318e658caed10bda18be47',1,'br::unb::unbomber::component::BombDropper']]],
   ['iscantakedamaged',['isCanTakeDamaged',['../classbr_1_1unb_1_1unbomber_1_1component_1_1_health.html#ab751a7b09387da37afc96a80e319c4c2',1,'br::unb::unbomber::component::Health']]],
-  ['iscantakelife',['isCanTakeLife',['../classbr_1_1unb_1_1unbomber_1_1component_1_1available_tries.html#a99696e8ded6e75c3371c7501a0b40bdc',1,'br::unb::unbomber::component::availableTries']]],
   ['isfirstbombinfinite',['isFirstBombInfinite',['../classbr_1_1unb_1_1unbomber_1_1component_1_1_bomb_dropper.html#ab0205483e58c4f014a896719dc732d1c',1,'br::unb::unbomber::component::BombDropper']]],
   ['isfirstbomblandmine',['isFirstBombLandMine',['../classbr_1_1unb_1_1unbomber_1_1component_1_1_bomb_dropper.html#a7a34198d95a01419c83ec503e3e897ab',1,'br::unb::unbomber::component::BombDropper']]],
   ['ishardpassthrough',['isHardPassThrough',['../classbr_1_1unb_1_1unbomber_1_1component_1_1_explosion.html#a222793e61a40380a58bab0be162f3088',1,'br.unb.unbomber.component.Explosion.isHardPassThrough()'],['../classbr_1_1unb_1_1unbomber_1_1component_1_1_explosion.html#a361ccb52dcd5922bc52c9e373006c27c',1,'br.unb.unbomber.component.Explosion.isHardPassThrough()']]],
+  ['islifedamage',['isLifeDamage',['../classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system.html#ac4644a67be6412b93fc47700e8c5e629',1,'br::unb::unbomber::systems::LifeSystem']]],
   ['isover',['isOver',['../classbr_1_1unb_1_1unbomber_1_1component_1_1_timer.html#aef2afadc30b76c3359bf615c75889079',1,'br::unb::unbomber::component::Timer']]],
-  ['ispassthrough',['isPassThrough',['../classbr_1_1unb_1_1unbomber_1_1component_1_1_explosion.html#a09d4a0871d67a4a12a815b354b2272c4',1,'br.unb.unbomber.component.Explosion.isPassThrough()'],['../classbr_1_1unb_1_1unbomber_1_1component_1_1_explosion.html#aa184c236a60195769dc4c16ae4c7cb64',1,'br.unb.unbomber.component.Explosion.isPassThrough()']]]
+  ['ispassthrough',['isPassThrough',['../classbr_1_1unb_1_1unbomber_1_1component_1_1_explosion.html#a09d4a0871d67a4a12a815b354b2272c4',1,'br.unb.unbomber.component.Explosion.isPassThrough()'],['../classbr_1_1unb_1_1unbomber_1_1component_1_1_explosion.html#aa184c236a60195769dc4c16ae4c7cb64',1,'br.unb.unbomber.component.Explosion.isPassThrough()']]],
+  ['istargetid',['isTargetId',['../classbr_1_1unb_1_1unbomber_1_1event_1_1_collision_event.html#a84a28b5d5ed39f6de13ab961f8fc6a84',1,'br::unb::unbomber::event::CollisionEvent']]]
 ];

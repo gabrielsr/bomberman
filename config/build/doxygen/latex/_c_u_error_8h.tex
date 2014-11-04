@@ -1,0 +1,66 @@
+\hypertarget{_c_u_error_8h}{\section{C\+:/\+Users/\+Igor/git/bomberman/src/test/c/\+C\+Unit/\+C\+U\+Error.h File Reference}
+\label{_c_u_error_8h}\index{C\+:/\+Users/\+Igor/git/bomberman/src/test/c/\+C\+Unit/\+C\+U\+Error.\+h@{C\+:/\+Users/\+Igor/git/bomberman/src/test/c/\+C\+Unit/\+C\+U\+Error.\+h}}
+}
+
+
+Error handling functions (user interface).  
+
+
+{\ttfamily \#include $<$errno.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}C\+Unit.\+h\char`\"{}}\\*
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef enum \hyperlink{group___framework_ga50053b4edbfc96a88027dd57c580ca35}{C\+U\+\_\+\+Error\+Action} \hyperlink{group___framework_gab68a2bd9fee7d73f79c0cfc68c576b3a}{C\+U\+\_\+\+Error\+Action}
+\begin{DoxyCompactList}\small\item\em C\+Unit error action codes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{group___framework_ga743a2a025ee3eb792d7d85f0eea347e6}{C\+U\+\_\+\+Error\+Code} \{ \\*
+\hyperlink{group___framework_gga743a2a025ee3eb792d7d85f0eea347e6afcb0cc348cf634702f1c5e25935d44a8}{C\+U\+E\+\_\+\+S\+U\+C\+C\+E\+S\+S} = 0, 
+\hyperlink{group___framework_gga743a2a025ee3eb792d7d85f0eea347e6a2f82abb90b2a2d492db87e448fe94695}{C\+U\+E\+\_\+\+N\+O\+M\+E\+M\+O\+R\+Y} = 1, 
+\hyperlink{group___framework_gga743a2a025ee3eb792d7d85f0eea347e6a16db381bf73522f2066dbbb2324ae43e}{C\+U\+E\+\_\+\+N\+O\+R\+E\+G\+I\+S\+T\+R\+Y} = 10, 
+\hyperlink{group___framework_gga743a2a025ee3eb792d7d85f0eea347e6a7180a32e4bab478c48106ced1bd2f45f}{C\+U\+E\+\_\+\+R\+E\+G\+I\+S\+T\+R\+Y\+\_\+\+E\+X\+I\+S\+T\+S} = 11, 
+\\*
+\hyperlink{group___framework_gga743a2a025ee3eb792d7d85f0eea347e6a1cc2803f92c68820082863c7f4382dee}{C\+U\+E\+\_\+\+N\+O\+S\+U\+I\+T\+E} = 20, 
+\hyperlink{group___framework_gga743a2a025ee3eb792d7d85f0eea347e6ad7d4cab2e564b649c092f6592cbe741b}{C\+U\+E\+\_\+\+N\+O\+\_\+\+S\+U\+I\+T\+E\+N\+A\+M\+E} = 21, 
+\hyperlink{group___framework_gga743a2a025ee3eb792d7d85f0eea347e6a27d24c5a8abf443d42e379ccf9b6c66f}{C\+U\+E\+\_\+\+S\+I\+N\+I\+T\+\_\+\+F\+A\+I\+L\+E\+D} = 22, 
+\hyperlink{group___framework_gga743a2a025ee3eb792d7d85f0eea347e6a234df9dd9791b372a66e108d0fb257b3}{C\+U\+E\+\_\+\+S\+C\+L\+E\+A\+N\+\_\+\+F\+A\+I\+L\+E\+D} = 23, 
+\\*
+\hyperlink{group___framework_gga743a2a025ee3eb792d7d85f0eea347e6a6a6f1a133e6e8c86e34f7998afe47cb8}{C\+U\+E\+\_\+\+D\+U\+P\+\_\+\+S\+U\+I\+T\+E} = 24, 
+\hyperlink{group___framework_gga743a2a025ee3eb792d7d85f0eea347e6af4bb969a1bc968ee1ea2bfdee4e17e74}{C\+U\+E\+\_\+\+N\+O\+T\+E\+S\+T} = 30, 
+\hyperlink{group___framework_gga743a2a025ee3eb792d7d85f0eea347e6aca556b5e8584cba31434067e5262ccbb}{C\+U\+E\+\_\+\+N\+O\+\_\+\+T\+E\+S\+T\+N\+A\+M\+E} = 31, 
+\hyperlink{group___framework_gga743a2a025ee3eb792d7d85f0eea347e6a2dc4a307e6394ef1f71ade9747bbb0d8}{C\+U\+E\+\_\+\+D\+U\+P\+\_\+\+T\+E\+S\+T} = 32, 
+\\*
+\hyperlink{group___framework_gga743a2a025ee3eb792d7d85f0eea347e6ad6a618361e109424f99c428e520d2dbc}{C\+U\+E\+\_\+\+T\+E\+S\+T\+\_\+\+N\+O\+T\+\_\+\+I\+N\+\_\+\+S\+U\+I\+T\+E} = 33, 
+\hyperlink{group___framework_gga743a2a025ee3eb792d7d85f0eea347e6abd6a84f6bed1373048d3ae8b66897435}{C\+U\+E\+\_\+\+F\+O\+P\+E\+N\+\_\+\+F\+A\+I\+L\+E\+D} = 40, 
+\hyperlink{group___framework_gga743a2a025ee3eb792d7d85f0eea347e6aae17fe401deb6eaa939b12e063c564db}{C\+U\+E\+\_\+\+F\+C\+L\+O\+S\+E\+\_\+\+F\+A\+I\+L\+E\+D} = 41, 
+\hyperlink{group___framework_gga743a2a025ee3eb792d7d85f0eea347e6ad8d21285b78e3f1c8a5dfde54bce4a68}{C\+U\+E\+\_\+\+B\+A\+D\+\_\+\+F\+I\+L\+E\+N\+A\+M\+E} = 42, 
+\\*
+\hyperlink{group___framework_gga743a2a025ee3eb792d7d85f0eea347e6ae5246e226eba26a7d746c6db5b523cee}{C\+U\+E\+\_\+\+W\+R\+I\+T\+E\+\_\+\+E\+R\+R\+O\+R} = 43
+ \}
+\begin{DoxyCompactList}\small\item\em C\+Unit error codes. \end{DoxyCompactList}\item 
+enum \hyperlink{group___framework_ga50053b4edbfc96a88027dd57c580ca35}{C\+U\+\_\+\+Error\+Action} \{ \hyperlink{group___framework_gga50053b4edbfc96a88027dd57c580ca35a8d128d9f1ef78818816d62dd5d0a7043}{C\+U\+E\+A\+\_\+\+I\+G\+N\+O\+R\+E}, 
+\hyperlink{group___framework_gga50053b4edbfc96a88027dd57c580ca35a88e2ea08ccaf759fdd948051b0c156a7}{C\+U\+E\+A\+\_\+\+F\+A\+I\+L}, 
+\hyperlink{group___framework_gga50053b4edbfc96a88027dd57c580ca35a5356f9f4514df11bc7543ac8ea71d66b}{C\+U\+E\+A\+\_\+\+A\+B\+O\+R\+T}
+ \}
+\begin{DoxyCompactList}\small\item\em C\+Unit error action codes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group___framework_ga22e538403fdee24be3388ab473fe64d5}{C\+U\+\_\+\+E\+X\+P\+O\+R\+T} \hyperlink{group___framework_ga743a2a025ee3eb792d7d85f0eea347e6}{C\+U\+\_\+\+Error\+Code} \hyperlink{group___framework_ga0bf3f9733e5fa0c0ed6ca0a37a2d995e}{C\+U\+\_\+get\+\_\+error} (void)
+\item 
+\hyperlink{group___framework_ga22e538403fdee24be3388ab473fe64d5}{C\+U\+\_\+\+E\+X\+P\+O\+R\+T} const char $\ast$ \hyperlink{group___framework_gaee27bf496da77437288bc9fe2a0b20ed}{C\+U\+\_\+get\+\_\+error\+\_\+msg} (void)
+\item 
+\hyperlink{group___framework_ga22e538403fdee24be3388ab473fe64d5}{C\+U\+\_\+\+E\+X\+P\+O\+R\+T} void \hyperlink{group___framework_ga58f4bdc1a05802f89005a487768b3d75}{C\+U\+\_\+set\+\_\+error\+\_\+action} (\hyperlink{group___framework_ga50053b4edbfc96a88027dd57c580ca35}{C\+U\+\_\+\+Error\+Action} action)
+\item 
+\hyperlink{group___framework_ga22e538403fdee24be3388ab473fe64d5}{C\+U\+\_\+\+E\+X\+P\+O\+R\+T} \hyperlink{group___framework_ga50053b4edbfc96a88027dd57c580ca35}{C\+U\+\_\+\+Error\+Action} \hyperlink{group___framework_gab2e98ce95448aa5a04a4875bc8152d6e}{C\+U\+\_\+get\+\_\+error\+\_\+action} (void)
+\item 
+void \hyperlink{group___framework_ga58bf87d9e3fa751ca0c5d2aea7f846b7}{C\+U\+\_\+set\+\_\+error} (\hyperlink{group___framework_ga743a2a025ee3eb792d7d85f0eea347e6}{C\+U\+\_\+\+Error\+Code} error)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Error handling functions (user interface). 
+
+C\+Unit uses a simple (and conventional) error handling strategy. Functions that can generate errors set (and usually return) an error code to indicate the run status. The error code can be inspected using the \hyperlink{group___framework_ga0bf3f9733e5fa0c0ed6ca0a37a2d995e}{C\+U\+\_\+get\+\_\+error()} function. A descriptive error message can be retrieved using \hyperlink{group___framework_gaee27bf496da77437288bc9fe2a0b20ed}{C\+U\+\_\+get\+\_\+error\+\_\+msg()}. 

@@ -7,6 +7,7 @@ var searchData=
   ['basic',['Basic',['../group___basic.html',1,'']]],
   ['basic_2eh',['Basic.h',['../_basic_8h.html',1,'']]],
   ['blocker',['BLOCKER',['../enumbr_1_1unb_1_1unbomber_1_1component_1_1_explosion_barrier_1_1_explosion_barrier_type.html#adb66bff5cf3328d1e6ed12c8a1a27d3b',1,'br::unb::unbomber::component::ExplosionBarrier::ExplosionBarrierType']]],
+  ['bomb',['BOMB',['../enumbr_1_1unb_1_1unbomber_1_1component_1_1_life_type_1_1_type.html#a05ebe19d1e03884c4f1215e4fcfb84a3',1,'br::unb::unbomber::component::LifeType::Type']]],
   ['bombdropper',['BombDropper',['../classbr_1_1unb_1_1unbomber_1_1component_1_1_bomb_dropper.html',1,'br::unb::unbomber::component']]],
   ['bombdropper_2ejava',['BombDropper.java',['../_bomb_dropper_8java.html',1,'']]],
   ['bomberman_5fscore_5fteste_2ec',['Bomberman_Score_Teste.c',['../_bomberman___score___teste_8c.html',1,'']]],

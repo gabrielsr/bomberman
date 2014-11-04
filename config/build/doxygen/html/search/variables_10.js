@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['uilinenumber',['uiLineNumber',['../struct_c_u___failure_record.html#a124d4ce97d29bae29f952250da03536b',1,'CU_FailureRecord']]],
-  ['uinumberofsuites',['uiNumberOfSuites',['../struct_c_u___test_registry.html#aed4b67b99d6e0c875bcf08e924a82d68',1,'CU_TestRegistry']]],
-  ['uinumberoftests',['uiNumberOfTests',['../struct_c_u___suite.html#ac35747775ea5ffbb4cc1a2eb17dd1ca3',1,'CU_Suite::uiNumberOfTests()'],['../struct_c_u___test_registry.html#a2ecdcc62de28e626fd55d8dc903df06c',1,'CU_TestRegistry::uiNumberOfTests()']]],
-  ['uniqueidsequence',['uniqueIdSequence',['../classbr_1_1unb_1_1unbomber_1_1core_1_1_entity_manager_impl.html#a68e7d8adbdf22a16de5f28264c6312a8',1,'br::unb::unbomber::core::EntityManagerImpl']]],
-  ['up',['UP',['../enumbr_1_1unb_1_1unbomber_1_1component_1_1_direction.html#ad6284477e0be6b560ab3f4a2b5fe677a',1,'br::unb::unbomber::component::Direction']]]
+  ['targetid',['targetId',['../classbr_1_1unb_1_1unbomber_1_1event_1_1_collision_event.html#a3b46d8cfa814478929fb264594f4c1eb',1,'br::unb::unbomber::event::CollisionEvent']]],
+  ['total',['total',['../structtabela.html#a73b82aedb681bf07ed6c07be3c701d37',1,'tabela']]],
+  ['triggered_5fbomb_5faction',['TRIGGERED_BOMB_ACTION',['../classbr_1_1unb_1_1unbomber_1_1systems_1_1_bomb_system.html#a0908ea540a88c9172ab9a55882a8ea51',1,'br.unb.unbomber.systems.BombSystem.TRIGGERED_BOMB_ACTION()'],['../classbr_1_1unb_1_1unbomber_1_1systems_1_1_bomb_system2.html#a885bd36ce376479b7fb3e09c71a21f21',1,'br.unb.unbomber.systems.BombSystem2.TRIGGERED_BOMB_ACTION()']]],
+  ['type',['type',['../classbr_1_1unb_1_1unbomber_1_1component_1_1_explosion_barrier.html#a6678091bcf2ec0118ad896d6502da892',1,'br.unb.unbomber.component.ExplosionBarrier.type()'],['../classbr_1_1unb_1_1unbomber_1_1component_1_1_life_type.html#a0eef757b0cf6ff6b8b740b93f2a0bfa0',1,'br.unb.unbomber.component.LifeType.type()'],['../classbr_1_1unb_1_1unbomber_1_1event_1_1_action_command_event.html#ae3fcdcc187420aaf77783896fb74490c',1,'br.unb.unbomber.event.ActionCommandEvent.type()'],['../classbr_1_1unb_1_1unbomber_1_1event_1_1_movement_command_event.html#a122cdd825b8fd6e2af29546476c8c2f2',1,'br.unb.unbomber.event.MovementCommandEvent.type()']]]
 ];

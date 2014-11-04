@@ -90,17 +90,25 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">recebe Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Estrutura LST_Event.  
+ <a href="structrecebe.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a8d29126b1902f0e8206fb54d7b73cf55"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrecebe.html#a8d29126b1902f0e8206fb54d7b73cf55">comando</a></td></tr>
+<tr class="memdesc:a8d29126b1902f0e8206fb54d7b73cf55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inteiro que representa o tipo de ação que ocorreu no jogo.  <a href="#a8d29126b1902f0e8206fb54d7b73cf55">More...</a><br /></td></tr>
 <tr class="separator:a8d29126b1902f0e8206fb54d7b73cf55"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa3c608135add531f3120b2460e09bff2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrecebe.html#aa3c608135add531f3120b2460e09bff2">player</a></td></tr>
+<tr class="memdesc:aa3c608135add531f3120b2460e09bff2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Junto com o comando deve ser enviado o inteiro representante do jogador responsável pela ação.  <a href="#aa3c608135add531f3120b2460e09bff2">More...</a><br /></td></tr>
 <tr class="separator:aa3c608135add531f3120b2460e09bff2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afd17b6474940eb351c1635212f426597"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structrecebe.html">recebe</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrecebe.html#afd17b6474940eb351c1635212f426597">next</a></td></tr>
+<tr class="memdesc:afd17b6474940eb351c1635212f426597"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ponteiro para o próximo elemento da lista.  <a href="#afd17b6474940eb351c1635212f426597">More...</a><br /></td></tr>
 <tr class="separator:afd17b6474940eb351c1635212f426597"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Data Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Estrutura LST_Event. </p>
+</div><h2 class="groupheader">Member Data Documentation</h2>
 <a class="anchor" id="a8d29126b1902f0e8206fb54d7b73cf55"></a>
 <div class="memitem">
 <div class="memproto">
@@ -110,6 +118,9 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Inteiro que representa o tipo de ação que ocorreu no jogo. </p>
+<p>'0' representa a inicialização do jogo, '1' representa a morte de um monstro, '2' representa a explosão de um soft block, '3' representa a coleta de um power up, '4' representa a morte de um outro personagem e '5' representa a finalização do jogo. </p>
 
 </div>
 </div>
@@ -123,6 +134,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Ponteiro para o próximo elemento da lista. </p>
+
 </div>
 </div>
 <a class="anchor" id="aa3c608135add531f3120b2460e09bff2"></a>
@@ -135,6 +148,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Junto com o comando deve ser enviado o inteiro representante do jogador responsável pela ação. </p>
+<p>Em comandos em que não está envolvido um personagem (inicialização e finalização do jogo, por exemplo), qualquer valor de 'player' pode ser enviado, pois ele não será computado. </p>
+
 </div>
 </div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
@@ -143,7 +159,7 @@ Public Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Oct 30 2014 23:47:15 for Bomberman by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Nov 3 2014 23:35:16 for Bomberman by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

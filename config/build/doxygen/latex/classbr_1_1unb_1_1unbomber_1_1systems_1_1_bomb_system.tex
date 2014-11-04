@@ -1,0 +1,173 @@
+\hypertarget{classbr_1_1unb_1_1unbomber_1_1systems_1_1_bomb_system}{\section{br.\+unb.\+unbomber.\+systems.\+Bomb\+System Class Reference}
+\label{classbr_1_1unb_1_1unbomber_1_1systems_1_1_bomb_system}\index{br.\+unb.\+unbomber.\+systems.\+Bomb\+System@{br.\+unb.\+unbomber.\+systems.\+Bomb\+System}}
+}
+Inheritance diagram for br.\+unb.\+unbomber.\+systems.\+Bomb\+System\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classbr_1_1unb_1_1unbomber_1_1systems_1_1_bomb_system}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classbr_1_1unb_1_1unbomber_1_1systems_1_1_bomb_system_a504e7f8b28fa329cc3c675728f385a40}{Bomb\+System} ()
+\begin{DoxyCompactList}\small\item\em bomb constructor \end{DoxyCompactList}\item 
+\hyperlink{classbr_1_1unb_1_1unbomber_1_1systems_1_1_bomb_system_aed218132c2c620ecf2ff739277712c83}{Bomb\+System} (\hyperlink{interfacebr_1_1unb_1_1unbomber_1_1core_1_1_entity_manager}{Entity\+Manager} model)
+\begin{DoxyCompactList}\small\item\em bomb constructor \end{DoxyCompactList}\item 
+void \hyperlink{classbr_1_1unb_1_1unbomber_1_1systems_1_1_bomb_system_a4ba7ac7c485767d8558c0d66d3eaef8d}{update} ()
+\begin{DoxyCompactList}\small\item\em Method for the updating of all bombs. \end{DoxyCompactList}\item 
+final void \hyperlink{classbr_1_1unb_1_1unbomber_1_1systems_1_1_bomb_system_a16b823fc7dcf24521549a0c3ed4f61d1}{verify\+And\+Drop\+Bomb} (\hyperlink{classbr_1_1unb_1_1unbomber_1_1component_1_1_bomb_dropper}{Bomb\+Dropper} dropper)
+\begin{DoxyCompactList}\small\item\em Drop a bomb if dropper didn't reach the limit. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classbr_1_1unb_1_1unbomber_1_1systems_1_1_bomb_system_a05ad21f7aae0aed9b71bd021112e875a}{create\+Explosion\+Event} (int bomb\+I\+D)
+\begin{DoxyCompactList}\small\item\em creates a create\+Explosion\+Event event \end{DoxyCompactList}\item 
+\hyperlink{classbr_1_1unb_1_1unbomber_1_1core_1_1_entity}{Entity} \hyperlink{classbr_1_1unb_1_1unbomber_1_1systems_1_1_bomb_system_a3f5f3a7f4a7f0451a105c6cd98ada694}{create\+Remote\+Bomb} (\hyperlink{classbr_1_1unb_1_1unbomber_1_1component_1_1_bomb_dropper}{Bomb\+Dropper} dropper)
+\item 
+\hyperlink{classbr_1_1unb_1_1unbomber_1_1core_1_1_entity}{Entity} \hyperlink{classbr_1_1unb_1_1unbomber_1_1systems_1_1_bomb_system_a89cb29bc0ee35d20bc03bd63aa2ba5e0}{create\+Time\+Bomb} (final \hyperlink{classbr_1_1unb_1_1unbomber_1_1component_1_1_bomb_dropper}{Bomb\+Dropper} dropper)
+\begin{DoxyCompactList}\small\item\em Create a timed bomb. \end{DoxyCompactList}\item 
+\hyperlink{classbr_1_1unb_1_1unbomber_1_1core_1_1_entity}{Entity} \hyperlink{classbr_1_1unb_1_1unbomber_1_1systems_1_1_bomb_system_a7645b35ae4c83053bf80340e246d789e}{create\+Generic\+Bomb} (\hyperlink{classbr_1_1unb_1_1unbomber_1_1component_1_1_bomb_dropper}{Bomb\+Dropper} dropper)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+final String \hyperlink{classbr_1_1unb_1_1unbomber_1_1systems_1_1_bomb_system_a0908ea540a88c9172ab9a55882a8ea51}{T\+R\+I\+G\+G\+E\+R\+E\+D\+\_\+\+B\+O\+M\+B\+\_\+\+A\+C\+T\+I\+O\+N} = \char`\"{}B\+O\+M\+B\+\_\+\+T\+R\+I\+G\+G\+E\+R\+E\+D\char`\"{}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+\begin{DoxyAuthor}{Author}
+ \href{https://github.com/JeffVFA}{\tt Jeff\+V\+F\+A} 
+
+ \href{https://github.com/zidenis}{\tt zidenis } 
+
+ \href{https://github.com/DRA2840}{\tt D\+R\+A2840 } 
+
+ \href{https://github.com/brenoxp2008}{\tt brenoxp2008} 
+\end{DoxyAuthor}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classbr_1_1unb_1_1unbomber_1_1systems_1_1_bomb_system_a504e7f8b28fa329cc3c675728f385a40}{\index{br\+::unb\+::unbomber\+::systems\+::\+Bomb\+System@{br\+::unb\+::unbomber\+::systems\+::\+Bomb\+System}!Bomb\+System@{Bomb\+System}}
+\index{Bomb\+System@{Bomb\+System}!br\+::unb\+::unbomber\+::systems\+::\+Bomb\+System@{br\+::unb\+::unbomber\+::systems\+::\+Bomb\+System}}
+\subsubsection[{Bomb\+System}]{\setlength{\rightskip}{0pt plus 5cm}br.\+unb.\+unbomber.\+systems.\+Bomb\+System.\+Bomb\+System (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classbr_1_1unb_1_1unbomber_1_1systems_1_1_bomb_system_a504e7f8b28fa329cc3c675728f385a40}
+
+
+bomb constructor 
+
+\hypertarget{classbr_1_1unb_1_1unbomber_1_1systems_1_1_bomb_system_aed218132c2c620ecf2ff739277712c83}{\index{br\+::unb\+::unbomber\+::systems\+::\+Bomb\+System@{br\+::unb\+::unbomber\+::systems\+::\+Bomb\+System}!Bomb\+System@{Bomb\+System}}
+\index{Bomb\+System@{Bomb\+System}!br\+::unb\+::unbomber\+::systems\+::\+Bomb\+System@{br\+::unb\+::unbomber\+::systems\+::\+Bomb\+System}}
+\subsubsection[{Bomb\+System}]{\setlength{\rightskip}{0pt plus 5cm}br.\+unb.\+unbomber.\+systems.\+Bomb\+System.\+Bomb\+System (
+\begin{DoxyParamCaption}
+\item[{{\bf Entity\+Manager}}]{model}
+\end{DoxyParamCaption}
+)}}\label{classbr_1_1unb_1_1unbomber_1_1systems_1_1_bomb_system_aed218132c2c620ecf2ff739277712c83}
+
+
+bomb constructor 
+
+
+\begin{DoxyParams}{Parameters}
+{\em model} & one instance of the Entity\+Manager \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classbr_1_1unb_1_1unbomber_1_1systems_1_1_bomb_system_a05ad21f7aae0aed9b71bd021112e875a}{\index{br\+::unb\+::unbomber\+::systems\+::\+Bomb\+System@{br\+::unb\+::unbomber\+::systems\+::\+Bomb\+System}!create\+Explosion\+Event@{create\+Explosion\+Event}}
+\index{create\+Explosion\+Event@{create\+Explosion\+Event}!br\+::unb\+::unbomber\+::systems\+::\+Bomb\+System@{br\+::unb\+::unbomber\+::systems\+::\+Bomb\+System}}
+\subsubsection[{create\+Explosion\+Event}]{\setlength{\rightskip}{0pt plus 5cm}void br.\+unb.\+unbomber.\+systems.\+Bomb\+System.\+create\+Explosion\+Event (
+\begin{DoxyParamCaption}
+\item[{int}]{bomb\+I\+D}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{classbr_1_1unb_1_1unbomber_1_1systems_1_1_bomb_system_a05ad21f7aae0aed9b71bd021112e875a}
+
+
+creates a create\+Explosion\+Event event 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bomb\+I\+D} & id of the event \\
+\hline
+\end{DoxyParams}
+\hypertarget{classbr_1_1unb_1_1unbomber_1_1systems_1_1_bomb_system_a7645b35ae4c83053bf80340e246d789e}{\index{br\+::unb\+::unbomber\+::systems\+::\+Bomb\+System@{br\+::unb\+::unbomber\+::systems\+::\+Bomb\+System}!create\+Generic\+Bomb@{create\+Generic\+Bomb}}
+\index{create\+Generic\+Bomb@{create\+Generic\+Bomb}!br\+::unb\+::unbomber\+::systems\+::\+Bomb\+System@{br\+::unb\+::unbomber\+::systems\+::\+Bomb\+System}}
+\subsubsection[{create\+Generic\+Bomb}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Entity} br.\+unb.\+unbomber.\+systems.\+Bomb\+System.\+create\+Generic\+Bomb (
+\begin{DoxyParamCaption}
+\item[{{\bf Bomb\+Dropper}}]{dropper}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{classbr_1_1unb_1_1unbomber_1_1systems_1_1_bomb_system_a7645b35ae4c83053bf80340e246d789e}
+\hypertarget{classbr_1_1unb_1_1unbomber_1_1systems_1_1_bomb_system_a3f5f3a7f4a7f0451a105c6cd98ada694}{\index{br\+::unb\+::unbomber\+::systems\+::\+Bomb\+System@{br\+::unb\+::unbomber\+::systems\+::\+Bomb\+System}!create\+Remote\+Bomb@{create\+Remote\+Bomb}}
+\index{create\+Remote\+Bomb@{create\+Remote\+Bomb}!br\+::unb\+::unbomber\+::systems\+::\+Bomb\+System@{br\+::unb\+::unbomber\+::systems\+::\+Bomb\+System}}
+\subsubsection[{create\+Remote\+Bomb}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Entity} br.\+unb.\+unbomber.\+systems.\+Bomb\+System.\+create\+Remote\+Bomb (
+\begin{DoxyParamCaption}
+\item[{{\bf Bomb\+Dropper}}]{dropper}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{classbr_1_1unb_1_1unbomber_1_1systems_1_1_bomb_system_a3f5f3a7f4a7f0451a105c6cd98ada694}
+\hypertarget{classbr_1_1unb_1_1unbomber_1_1systems_1_1_bomb_system_a89cb29bc0ee35d20bc03bd63aa2ba5e0}{\index{br\+::unb\+::unbomber\+::systems\+::\+Bomb\+System@{br\+::unb\+::unbomber\+::systems\+::\+Bomb\+System}!create\+Time\+Bomb@{create\+Time\+Bomb}}
+\index{create\+Time\+Bomb@{create\+Time\+Bomb}!br\+::unb\+::unbomber\+::systems\+::\+Bomb\+System@{br\+::unb\+::unbomber\+::systems\+::\+Bomb\+System}}
+\subsubsection[{create\+Time\+Bomb}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Entity} br.\+unb.\+unbomber.\+systems.\+Bomb\+System.\+create\+Time\+Bomb (
+\begin{DoxyParamCaption}
+\item[{final {\bf Bomb\+Dropper}}]{dropper}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{classbr_1_1unb_1_1unbomber_1_1systems_1_1_bomb_system_a89cb29bc0ee35d20bc03bd63aa2ba5e0}
+
+
+Create a timed bomb. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dropper} & \hyperlink{}{Bomb\+Dropper} that will drop a bomb \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+new Bomb 
+\end{DoxyReturn}
+\hypertarget{classbr_1_1unb_1_1unbomber_1_1systems_1_1_bomb_system_a4ba7ac7c485767d8558c0d66d3eaef8d}{\index{br\+::unb\+::unbomber\+::systems\+::\+Bomb\+System@{br\+::unb\+::unbomber\+::systems\+::\+Bomb\+System}!update@{update}}
+\index{update@{update}!br\+::unb\+::unbomber\+::systems\+::\+Bomb\+System@{br\+::unb\+::unbomber\+::systems\+::\+Bomb\+System}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}void br.\+unb.\+unbomber.\+systems.\+Bomb\+System.\+update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classbr_1_1unb_1_1unbomber_1_1systems_1_1_bomb_system_a4ba7ac7c485767d8558c0d66d3eaef8d}
+
+
+Method for the updating of all bombs. 
+
+This method is called every turn. It checks if there is any \hyperlink{}{Event} related to this module and process them. 
+
+Implements \hyperlink{interfacebr_1_1unb_1_1unbomber_1_1core_1_1_system_a6b1268f3fef77e2ce797eedc1b34eb44}{br.\+unb.\+unbomber.\+core.\+System}.
+
+\hypertarget{classbr_1_1unb_1_1unbomber_1_1systems_1_1_bomb_system_a16b823fc7dcf24521549a0c3ed4f61d1}{\index{br\+::unb\+::unbomber\+::systems\+::\+Bomb\+System@{br\+::unb\+::unbomber\+::systems\+::\+Bomb\+System}!verify\+And\+Drop\+Bomb@{verify\+And\+Drop\+Bomb}}
+\index{verify\+And\+Drop\+Bomb@{verify\+And\+Drop\+Bomb}!br\+::unb\+::unbomber\+::systems\+::\+Bomb\+System@{br\+::unb\+::unbomber\+::systems\+::\+Bomb\+System}}
+\subsubsection[{verify\+And\+Drop\+Bomb}]{\setlength{\rightskip}{0pt plus 5cm}final void br.\+unb.\+unbomber.\+systems.\+Bomb\+System.\+verify\+And\+Drop\+Bomb (
+\begin{DoxyParamCaption}
+\item[{{\bf Bomb\+Dropper}}]{dropper}
+\end{DoxyParamCaption}
+)}}\label{classbr_1_1unb_1_1unbomber_1_1systems_1_1_bomb_system_a16b823fc7dcf24521549a0c3ed4f61d1}
+
+
+Drop a bomb if dropper didn't reach the limit. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dropper} & \hyperlink{}{Bomb\+Dropper} that wants to drop a bomb \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classbr_1_1unb_1_1unbomber_1_1systems_1_1_bomb_system_a0908ea540a88c9172ab9a55882a8ea51}{\index{br\+::unb\+::unbomber\+::systems\+::\+Bomb\+System@{br\+::unb\+::unbomber\+::systems\+::\+Bomb\+System}!T\+R\+I\+G\+G\+E\+R\+E\+D\+\_\+\+B\+O\+M\+B\+\_\+\+A\+C\+T\+I\+O\+N@{T\+R\+I\+G\+G\+E\+R\+E\+D\+\_\+\+B\+O\+M\+B\+\_\+\+A\+C\+T\+I\+O\+N}}
+\index{T\+R\+I\+G\+G\+E\+R\+E\+D\+\_\+\+B\+O\+M\+B\+\_\+\+A\+C\+T\+I\+O\+N@{T\+R\+I\+G\+G\+E\+R\+E\+D\+\_\+\+B\+O\+M\+B\+\_\+\+A\+C\+T\+I\+O\+N}!br\+::unb\+::unbomber\+::systems\+::\+Bomb\+System@{br\+::unb\+::unbomber\+::systems\+::\+Bomb\+System}}
+\subsubsection[{T\+R\+I\+G\+G\+E\+R\+E\+D\+\_\+\+B\+O\+M\+B\+\_\+\+A\+C\+T\+I\+O\+N}]{\setlength{\rightskip}{0pt plus 5cm}final String br.\+unb.\+unbomber.\+systems.\+Bomb\+System.\+T\+R\+I\+G\+G\+E\+R\+E\+D\+\_\+\+B\+O\+M\+B\+\_\+\+A\+C\+T\+I\+O\+N = \char`\"{}B\+O\+M\+B\+\_\+\+T\+R\+I\+G\+G\+E\+R\+E\+D\char`\"{}\hspace{0.3cm}{\ttfamily [private]}}}\label{classbr_1_1unb_1_1unbomber_1_1systems_1_1_bomb_system_a0908ea540a88c9172ab9a55882a8ea51}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Igor/git/bomberman/src/main/java/br/unb/unbomber/systems/\hyperlink{_bomb_system_8java}{Bomb\+System.\+java}\end{DoxyCompactItemize}

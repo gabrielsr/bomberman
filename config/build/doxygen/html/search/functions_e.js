@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['takedamaged',['takeDamaged',['../classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system.html#a5579a50f9e315c67a66db8c6f2b304fe',1,'br::unb::unbomber::systems::LifeSystem']]],
+  ['takedamaged',['takeDamaged',['../classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system.html#a3d84ab6ee592745e577494c07146369a',1,'br::unb::unbomber::systems::LifeSystem']]],
   ['testa_5faddscore_5fparadestruicaosoftblockp2',['testa_addScore_ParaDestruicaoSoftBlockP2',['../_bomberman___score___teste_8c.html#a0c2341db61f7dabc82a63f2a3ec4599d',1,'Bomberman_Score_Teste.c']]],
   ['testa_5faddscore_5fparaduplapontuacaop1',['testa_addScore_ParaDuplaPontuacaoP1',['../_bomberman___score___teste_8c.html#abb336b625d8ca5a046b693c02b5381e8',1,'Bomberman_Score_Teste.c']]],
   ['testa_5faddscore_5fparaletrainexistentep1',['testa_addScore_ParaLetraInexistenteP1',['../_bomberman___score___teste_8c.html#a6444a8d95195c3a66e4f62f533d3ded5',1,'Bomberman_Score_Teste.c']]],
@@ -22,9 +22,11 @@ var searchData=
   ['testa_5finicializascore_5fparap2',['testa_inicializaScore_ParaP2',['../_bomberman___score___teste_8c.html#ac02380c95fa051b66d753ee7b8e4eda7',1,'Bomberman_Score_Teste.c']]],
   ['testa_5finicializascore_5fparap3',['testa_inicializaScore_ParaP3',['../_bomberman___score___teste_8c.html#a7632e3662d8c476244a9807f03595ae4',1,'Bomberman_Score_Teste.c']]],
   ['testa_5finicializascore_5fparap4',['testa_inicializaScore_ParaP4',['../_bomberman___score___teste_8c.html#adcddf7732ace9c996ec24376bb462c02',1,'Bomberman_Score_Teste.c']]],
+  ['testbomhassamerangeasdropper',['testBomHasSameRangeAsDropper',['../classbr_1_1unb_1_1unbomber_1_1systems_1_1_bomb_system_test_case.html#a32cfa477841384686c1b2229a35637e7',1,'br::unb::unbomber::systems::BombSystemTestCase']]],
   ['testconstructor',['testConstructor',['../classbr_1_1unb_1_1unbomber_1_1systems_1_1_bomb_system_test_case.html#aee8e84898d06603c217bce292da25b52',1,'br::unb::unbomber::systems::BombSystemTestCase']]],
   ['testifanexplosioneventtriggersanotherbomb',['testIfAnExplosionEventTriggersAnotherBomb',['../classbr_1_1unb_1_1unbomber_1_1systems_1_1_bomb_system_test_case.html#a1453b7b0ace81d7ea7c04d1b994f5022',1,'br::unb::unbomber::systems::BombSystemTestCase']]],
   ['testofcollision',['testOfCollision',['../classbr_1_1unb_1_1unbomber_1_1systems_1_1_collision_system.html#abb605c101fe1d964afee5d656f03235e',1,'br::unb::unbomber::systems::CollisionSystem']]],
+  ['testpositionandrangeofexplosion',['testPositionAndRangeOfExplosion',['../classbr_1_1unb_1_1unbomber_1_1systems_1_1_bomb_system_test_case.html#aca6b0fccec0022c50191b1c3fe077097',1,'br::unb::unbomber::systems::BombSystemTestCase']]],
   ['tick',['tick',['../classbr_1_1unb_1_1unbomber_1_1component_1_1_timer.html#a1d1db578ecf8f0a785a58d2c56ed3e97',1,'br::unb::unbomber::component::Timer']]],
   ['timeoverevent',['TimeOverEvent',['../classbr_1_1unb_1_1unbomber_1_1event_1_1_time_over_event.html#a6d0ff275c61c512d0ca01993c1a472da',1,'br.unb.unbomber.event.TimeOverEvent.TimeOverEvent()'],['../classbr_1_1unb_1_1unbomber_1_1event_1_1_time_over_event.html#a7c52cdf1285695881a58e0f9ebb6a15a',1,'br.unb.unbomber.event.TimeOverEvent.TimeOverEvent(int ownerId, String action)']]],
   ['timer',['Timer',['../classbr_1_1unb_1_1unbomber_1_1component_1_1_timer.html#a8b7a436f14fc18015f1051e6335f4a25',1,'br::unb::unbomber::component::Timer']]],

@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['enemydestroyedevent_2ejava',['EnemyDestroyedEvent.java',['../_enemy_destroyed_event_8java.html',1,'']]],
   ['entity_2ejava',['Entity.java',['../_entity_8java.html',1,'']]],
   ['entitymanager_2ejava',['EntityManager.java',['../_entity_manager_8java.html',1,'']]],
   ['entitymanagerimpl_2ejava',['EntityManagerImpl.java',['../_entity_manager_impl_8java.html',1,'']]],
