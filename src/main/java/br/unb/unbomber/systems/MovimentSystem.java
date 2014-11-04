@@ -26,6 +26,7 @@ public class MovimentSystem extends BaseSystem {
 		 * }
 		 * 
 		 * tivemos um problema nessa parte a ser comentado na documentacao
+		 * temos que fazer uma kapirotagem marota aki
 		 */
 
 		/* cria uma lista de eventos de movimentos feitos */
