@@ -24,6 +24,7 @@ import br.unb.unbomber.core.Component;
 import br.unb.unbomber.core.Entity;
 import br.unb.unbomber.core.EntityManager;
 import br.unb.unbomber.core.EntityManagerImpl;
+import br.unb.unbomber.core.Event;
 import br.unb.unbomber.event.ActionCommandEvent;
 import br.unb.unbomber.event.InAnExplosionEvent;
 import br.unb.unbomber.event.ActionCommandEvent.ActionType;
@@ -77,6 +78,30 @@ public class BombSystemTestCase {
 		List<Component> explosives = (List<Component>) entityManager.getComponents(Explosive.class);
 		assertNotNull(explosives);
 		assertFalse(explosives.isEmpty());
+	}
+	
+	@Test
+	public void testBomHasSameRangeAsDropper(){
+	    //Create Dropper
+	    Entity anEntity = createDropperEntity();
+        BombDropper bombDropper = (BombDropper) entityManager.getComponent(BombDropper.class, anEntity.getEntityId());
+        
+        //Modify the explosion Range
+        int explosionRange = 5;
+        bombDropper.setExplosionRange(explosionRange);
+        
+        //put one bomb on grid
+        pubBombOnGrid(0,0, bombDropper);
+        
+        //run the system
+        bombSystem.update();
+        
+        List<Component> explosives = (List<Component>) entityManager.getComponents(Explosive.class);
+        
+        Explosive explosive = (Explosive) explosives.get(0);
+        
+        assertEquals(explosionRange, explosive.getExplosionRange() );
+        
 	}
 	
 	/**
@@ -181,10 +206,14 @@ public class BombSystemTestCase {
 		//first BOOM!!!
 		assertEquals(entityManager.getEvents(ExplosionStartedEvent.class).size(), 1);
 		
-		////one more time (91 times total)
+		//one more time (91 times total)
 		updateSystems(1);
-		////second BOOM!!!
+		//second BOOM!!!
 		assertEquals(entityManager.getEvents(ExplosionStartedEvent.class).size(), 2);
+		
+		//And the events are different
+		assertNotSame(entityManager.getEvents(ExplosionStartedEvent.class).get(0).getEventId(),
+		        entityManager.getEvents(ExplosionStartedEvent.class).get(1).getEventId());
 		
 		//runs more 30 iterations
 		updateSystems(30);
@@ -271,7 +300,38 @@ public class BombSystemTestCase {
 		assertEquals(entityManager.getEvents(ExplosionStartedEvent.class).size(), 1);
 	}
 	
-	
+	@Test
+	public void testPositionAndRangeOfExplosion(){
+	    
+	    final int x = 13;
+	    final int y = 7;
+	    final int range = 3;
+	    
+	    
+	    // create a entity with components:
+        // * bombDropper
+        // * placement
+        Entity anEntity = createDropperEntity();
+        
+        BombDropper bombDropper = (BombDropper) entityManager.getComponent(BombDropper.class, anEntity.getEntityId());
+        bombDropper.setExplosionRange(range);
+        
+        //put one bomb on grid
+        pubBombOnGrid(x,y, bombDropper);
+        
+        //initialize time system
+        timeSystem = new TimeSystem(entityManager);
+        
+        //runs 90 game iterations
+        updateSystems(90);
+        
+        List<Event> explosionsStarting = entityManager.getEvents(ExplosionStartedEvent.class);
+        ExplosionStartedEvent explosionStarted = (ExplosionStartedEvent) explosionsStarting.get(0);
+        
+        assertEquals(x, explosionStarted.getInitialPosition().getCellX());
+        assertEquals(y, explosionStarted.getInitialPosition().getCellY());
+        assertEquals(range, explosionStarted.getExplosionRange());
+	}
 	
 	
 	

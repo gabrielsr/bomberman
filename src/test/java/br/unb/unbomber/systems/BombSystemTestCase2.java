@@ -1,4 +1,16 @@
-
+/**
+ * BombSystemTestCase2
+ *
+ * Version 1
+ *
+ * UnB
+ *
+ * Handles tests from the BombSystem2
+ * @author Paulo, William, Yure.
+ * @since 30/10/14
+ * @version 3.0 
+ */
+ 
 package br.unb.unbomber.systems;
 
 import static org.junit.Assert.*;
@@ -6,6 +18,7 @@ import static org.junit.Assert.*;
 import java.util.List;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import br.unb.unbomber.component.BombDropper;
@@ -15,7 +28,7 @@ import br.unb.unbomber.component.Timer;
 import br.unb.unbomber.core.Component;
 import br.unb.unbomber.core.Entity;
 import br.unb.unbomber.core.EntityManager;
-import br.unb.unbomber.core.EntitySystemImpl;
+import br.unb.unbomber.core.EntityManagerImpl;
 import br.unb.unbomber.event.ActionCommandEvent;
 import br.unb.unbomber.event.ActionCommandEvent.ActionType;
 import br.unb.unbomber.event.ExplosionStartedEvent;
@@ -25,14 +38,16 @@ public class BombSystemTestCase2 {
 	
 	EntityManager entityManager;
 	BombSystem2 system;
+	TimeSystem timeSystem;
 	
 	@Before
 	public void setUp() throws Exception {
 		
 		//init a new system for each test case
-		EntitySystemImpl.init();
-		entityManager = EntitySystemImpl.getInstance();
+		EntityManagerImpl.init();
+		entityManager = EntityManagerImpl.getInstance();
 		system = new BombSystem2(entityManager);
+		
 	}
 	
 
@@ -41,11 +56,10 @@ public class BombSystemTestCase2 {
 		// create a entity with components:
 		// * bombDropper
 		// * placement
-		Entity anEntity = new Entity();
+		Entity anEntity = entityManager.createEntity();
 		
 		//Create the placement component
 		CellPlacement dropperPlacement = new CellPlacement();
-	
 			
 		// add the dropper to the model
 		// SO it get an entityId (needed as the new bomb dropped will need it as its ownerId)
@@ -53,8 +67,6 @@ public class BombSystemTestCase2 {
 		
 		anEntity.addComponent(bombDropper);
 		anEntity.addComponent(dropperPlacement);
-		
-		entityManager.addEntity(anEntity);
 		
 		//create an DROP_BOMB Command Event
 		ActionCommandEvent event = new ActionCommandEvent(ActionType.DROP_BOMB, bombDropper.getEntityId());
@@ -76,7 +88,7 @@ public class BombSystemTestCase2 {
 	public void dropBombAtSamePlaceTest() {
 		
 		// create a entity
-		Entity anEntity = new Entity();
+		Entity anEntity = entityManager.createEntity();
 		
 		//Create the placement component
 		CellPlacement dropperPlacement = new CellPlacement();
@@ -93,10 +105,6 @@ public class BombSystemTestCase2 {
 		// add the components
 		anEntity.addComponent(bombDropper);
 		anEntity.addComponent(dropperPlacement);
-		
-		// add the dropper to the model
-		// SO it get an entityId (needed as the new bomb dropped will need it as its ownerId)
-		entityManager.addEntity(anEntity);
 		
 		//create an DROP_BOMB Command Event
 		ActionCommandEvent event = new ActionCommandEvent(ActionType.DROP_BOMB, bombDropper.getEntityId());
@@ -127,7 +135,7 @@ public class BombSystemTestCase2 {
 	public void dropBombTooManySimultaneousBombsTest(){
 		
 		//adding a bombDropper entity 
-		Entity bombDropper = new Entity();
+		Entity bombDropper = entityManager.createEntity();
 		
 		BombDropper dropper = new BombDropper();
 		
@@ -138,9 +146,6 @@ public class BombSystemTestCase2 {
 	
 		// adding the dropper component to the bombDropper entity
 		bombDropper.addComponent(dropper);
-		
-		// adding the bomb entity to the entity manager
-		entityManager.addEntity(bombDropper);
 		
 		//creating the DROP_BOMB command
 		ActionCommandEvent event = new ActionCommandEvent(ActionType.DROP_BOMB, dropper.getEntityId());
@@ -183,7 +188,7 @@ public class BombSystemTestCase2 {
 	@Test
 	public void waitTimeExplodeTest(){
 		
-		Entity dropperEntity = new Entity();
+		Entity dropperEntity = entityManager.createEntity();
 
 		//adding the dropper to the entity
 		BombDropper dropper = new BombDropper();
@@ -196,8 +201,6 @@ public class BombSystemTestCase2 {
 		//adding components to dropper entity
 		dropperEntity.addComponent(dropper);
 		dropperEntity.addComponent(dropperPlacement);
-		
-		entityManager.addEntity(dropperEntity);
 		
 		//now we will create a bomb entity
 		CellPlacement bombPosition = new CellPlacement();
@@ -226,8 +229,8 @@ public class BombSystemTestCase2 {
 	@Test
 	public void triggeredAfterTimeToExplodeTest(){
 		
-		Entity dropperEntity = new Entity();
-
+		Entity dropperEntity = entityManager.createEntity();
+	
 		//adding the dropper to the entity
 		BombDropper dropper = new BombDropper();
 		
@@ -239,9 +242,7 @@ public class BombSystemTestCase2 {
 		//adding components to dropper entity
 		dropperEntity.addComponent(dropper);
 		dropperEntity.addComponent(dropperPlacement);
-		
-		entityManager.addEntity(dropperEntity);
-		
+			
 		//now we will create a bomb entity
 		CellPlacement bombPosition = new CellPlacement();
 		bombPosition.setCellX(1);
@@ -264,7 +265,8 @@ public class BombSystemTestCase2 {
 	
 	private void createBomb(CellPlacement bombPosition, BombDropper dropper){
 	
-		Entity bomb = new Entity();
+		Entity bomb = entityManager.createEntity();
+		
 		
 		CellPlacement dropperPlacement = new CellPlacement();
 		
@@ -288,6 +290,6 @@ public class BombSystemTestCase2 {
 		
 	}
 
-}	
+}	// end of tests
 		
 	

@@ -15,6 +15,9 @@ public class UnbomberDesktop {
 		
 		final Game game = new Game();
 		game.run();
+		
+		
+		
 	}
 	
 }
