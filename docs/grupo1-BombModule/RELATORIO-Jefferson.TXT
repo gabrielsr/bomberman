@@ -52,6 +52,15 @@ Data		| Horas Trabalhadas	| Tipo Tarefa 				| Descrição da Tarefa
 ----------------+-----------------------+---------------------------------------+-------------------...
 
 
+## Sprint 3 (de 28/10 a 13/11)
+# Planejado
+
+Num Tarefa   | Tipo Tarefa                     | Descrição da Tarefa
+-------------+---------------------------------+--------------------------------------------------------------------------
+ 01          | Estudar                         | Est. libGDX
+ 02          | Codificar                       | Prototipar telas iniciais do jogo
+ 
+ 
 ## Referências
 
 [1] http://www.gamedev.net/page/resources/_/technical/game-programming/case-study-bomberman-mechanics-in-an-entity-component-system-r3159
