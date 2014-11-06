@@ -1,0 +1,174 @@
+\hypertarget{_score_bomberman_8c}{\section{C\+:/\+Users/\+Igor/git/bomberman/src/main/c/\+Score\+Bomberman.c File Reference}
+\label{_score_bomberman_8c}\index{C\+:/\+Users/\+Igor/git/bomberman/src/main/c/\+Score\+Bomberman.\+c@{C\+:/\+Users/\+Igor/git/bomberman/src/main/c/\+Score\+Bomberman.\+c}}
+}
+
+
+Este é o módulo de implementação dos módulos que tratam o score(pontuação) do jogo Bomberman, criado pelo Grupo 10 da turma de Programação Sistemática 2-\/2014, ministrada pela professora Genaína Nunes Rodrigues, na Universidade de Brasília.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\\*
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+{\ttfamily \#include $<$string.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}Score\+Bomberman.\+h\char`\"{}}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structscore}{score}
+\begin{DoxyCompactList}\small\item\em Estrutura S\+T\+R\+\_\+\+Score (interna ao módulo). \end{DoxyCompactList}\item 
+struct \hyperlink{structtabela}{tabela}
+\begin{DoxyCompactList}\small\item\em Estrutura S\+T\+R\+\_\+\+Tabela (interna ao módulo). \end{DoxyCompactList}\item 
+struct \hyperlink{structrecebe}{recebe}
+\begin{DoxyCompactList}\small\item\em Estrutura L\+S\+T\+\_\+\+Event. \end{DoxyCompactList}\item 
+struct \hyperlink{structnomes}{nomes}
+\begin{DoxyCompactList}\small\item\em Estrutura L\+S\+T\+\_\+\+Name. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{_score_bomberman_8c_ad3f8ad49af01883db7d4964ff3a0ca9f}{S\+E\+R\+V\+I\+D\+O\+R\+\_\+\+S\+C\+O\+R\+E}
+\begin{DoxyCompactList}\small\item\em Esta definição serve para separar o programa servidor do programa cliente. \end{DoxyCompactList}\item 
+\#define \hyperlink{_score_bomberman_8c_a8f899d075f01f6a01e44310d8e1f753a}{P\+L\+A\+Y\+E\+R\+\_\+\+M\+A\+X}~4
+\begin{DoxyCompactList}\small\item\em Definição do número máximo de jogadores. \end{DoxyCompactList}\item 
+\#define \hyperlink{_score_bomberman_8c_a760a67ba30383c0f2b3c3b0106a8e79c}{S\+C\+O\+R\+E\+\_\+\+M\+O\+N\+S\+T\+E\+R\+\_\+\+D\+E\+A\+T\+H}~100
+\begin{DoxyCompactList}\small\item\em Pontuação referente ao assassinato de um monstro. \end{DoxyCompactList}\item 
+\#define \hyperlink{_score_bomberman_8c_a9542c057a72c258bd908781a34eaaa01}{S\+C\+O\+R\+E\+\_\+\+E\+X\+P\+\_\+\+S\+B}~10
+\begin{DoxyCompactList}\small\item\em Pontuação referente à explosão de um soft block. \end{DoxyCompactList}\item 
+\#define \hyperlink{_score_bomberman_8c_ad9a48826ce122de8d406038faec62574}{S\+C\+O\+R\+E\+\_\+\+P\+I\+C\+K\+U\+P\+\_\+\+P\+O\+W\+E\+R\+U\+P}~30
+\begin{DoxyCompactList}\small\item\em Pontuação referente à obtenção de um power up. \end{DoxyCompactList}\item 
+\#define \hyperlink{_score_bomberman_8c_a9d6e3238ea9ca2eb6e493a0dcb796b26}{S\+C\+O\+R\+E\+\_\+\+C\+H\+A\+R\+A\+C\+T\+E\+R\+\_\+\+D\+E\+A\+T\+H}~200
+\begin{DoxyCompactList}\small\item\em Pontuação referente ao assassinato de outro jogador. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{_score_bomberman_8c_aae1ea739bac5e5bd4396e9d530af1ffd}{M\+S\+\_\+score\+Module\+Interface} (\hyperlink{_score_bomberman_8h_a86bf1876cd70ae445a8d41c21f10a6a9}{L\+S\+T\+\_\+\+Event} $\ast$events)
+\begin{DoxyCompactList}\small\item\em Esta função recebe uma lista de L\+S\+T\+\_\+\+Events (struct recebe) do turno do jogo e chama outra função (interna ao módulo) para montar e contabilizar a pontuação dos jogadores envolvidos. \end{DoxyCompactList}\item 
+void \hyperlink{_score_bomberman_8c_abe95d65fcc138e3ac8611044c1f201ae}{M\+S\+\_\+send\+Player\+Name\+Event} (\hyperlink{_score_bomberman_8h_adfc002e678376cd7694dc9942e610803}{L\+S\+T\+\_\+\+Name} $\ast$\hyperlink{structnomes}{nomes})
+\begin{DoxyCompactList}\small\item\em Função que tem o propósito de armazenar o nome dos jogadores para futura referência (criação da tabela de High Scores). \end{DoxyCompactList}\item 
+int \hyperlink{_score_bomberman_8c_a4e331597f0cad83c700075b273839637}{M\+S\+\_\+get\+Score} (int jogador)
+\begin{DoxyCompactList}\small\item\em Essa função tem como função retornar a pontuação de um jogador para outros módulos. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Este é o módulo de implementação dos módulos que tratam o score(pontuação) do jogo Bomberman, criado pelo Grupo 10 da turma de Programação Sistemática 2-\/2014, ministrada pela professora Genaína Nunes Rodrigues, na Universidade de Brasília. 
+
+\begin{DoxyAuthor}{Author}
+Camila Imbuzeiro Camargo 
+
+Lucas Araújo Pena 
+
+Miguel Angelo Montagner Filho 
+
+Nicolas Machado Schumacher 
+\end{DoxyAuthor}
+\begin{DoxySince}{Since}
+07/10/2014 
+\end{DoxySince}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\hypertarget{_score_bomberman_8c_a8f899d075f01f6a01e44310d8e1f753a}{\index{Score\+Bomberman.\+c@{Score\+Bomberman.\+c}!P\+L\+A\+Y\+E\+R\+\_\+\+M\+A\+X@{P\+L\+A\+Y\+E\+R\+\_\+\+M\+A\+X}}
+\index{P\+L\+A\+Y\+E\+R\+\_\+\+M\+A\+X@{P\+L\+A\+Y\+E\+R\+\_\+\+M\+A\+X}!Score\+Bomberman.\+c@{Score\+Bomberman.\+c}}
+\subsubsection[{P\+L\+A\+Y\+E\+R\+\_\+\+M\+A\+X}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\+L\+A\+Y\+E\+R\+\_\+\+M\+A\+X~4}}\label{_score_bomberman_8c_a8f899d075f01f6a01e44310d8e1f753a}
+
+
+Definição do número máximo de jogadores. 
+
+\hypertarget{_score_bomberman_8c_a9d6e3238ea9ca2eb6e493a0dcb796b26}{\index{Score\+Bomberman.\+c@{Score\+Bomberman.\+c}!S\+C\+O\+R\+E\+\_\+\+C\+H\+A\+R\+A\+C\+T\+E\+R\+\_\+\+D\+E\+A\+T\+H@{S\+C\+O\+R\+E\+\_\+\+C\+H\+A\+R\+A\+C\+T\+E\+R\+\_\+\+D\+E\+A\+T\+H}}
+\index{S\+C\+O\+R\+E\+\_\+\+C\+H\+A\+R\+A\+C\+T\+E\+R\+\_\+\+D\+E\+A\+T\+H@{S\+C\+O\+R\+E\+\_\+\+C\+H\+A\+R\+A\+C\+T\+E\+R\+\_\+\+D\+E\+A\+T\+H}!Score\+Bomberman.\+c@{Score\+Bomberman.\+c}}
+\subsubsection[{S\+C\+O\+R\+E\+\_\+\+C\+H\+A\+R\+A\+C\+T\+E\+R\+\_\+\+D\+E\+A\+T\+H}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\+C\+O\+R\+E\+\_\+\+C\+H\+A\+R\+A\+C\+T\+E\+R\+\_\+\+D\+E\+A\+T\+H~200}}\label{_score_bomberman_8c_a9d6e3238ea9ca2eb6e493a0dcb796b26}
+
+
+Pontuação referente ao assassinato de outro jogador. 
+
+\hypertarget{_score_bomberman_8c_a9542c057a72c258bd908781a34eaaa01}{\index{Score\+Bomberman.\+c@{Score\+Bomberman.\+c}!S\+C\+O\+R\+E\+\_\+\+E\+X\+P\+\_\+\+S\+B@{S\+C\+O\+R\+E\+\_\+\+E\+X\+P\+\_\+\+S\+B}}
+\index{S\+C\+O\+R\+E\+\_\+\+E\+X\+P\+\_\+\+S\+B@{S\+C\+O\+R\+E\+\_\+\+E\+X\+P\+\_\+\+S\+B}!Score\+Bomberman.\+c@{Score\+Bomberman.\+c}}
+\subsubsection[{S\+C\+O\+R\+E\+\_\+\+E\+X\+P\+\_\+\+S\+B}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\+C\+O\+R\+E\+\_\+\+E\+X\+P\+\_\+\+S\+B~10}}\label{_score_bomberman_8c_a9542c057a72c258bd908781a34eaaa01}
+
+
+Pontuação referente à explosão de um soft block. 
+
+\hypertarget{_score_bomberman_8c_a760a67ba30383c0f2b3c3b0106a8e79c}{\index{Score\+Bomberman.\+c@{Score\+Bomberman.\+c}!S\+C\+O\+R\+E\+\_\+\+M\+O\+N\+S\+T\+E\+R\+\_\+\+D\+E\+A\+T\+H@{S\+C\+O\+R\+E\+\_\+\+M\+O\+N\+S\+T\+E\+R\+\_\+\+D\+E\+A\+T\+H}}
+\index{S\+C\+O\+R\+E\+\_\+\+M\+O\+N\+S\+T\+E\+R\+\_\+\+D\+E\+A\+T\+H@{S\+C\+O\+R\+E\+\_\+\+M\+O\+N\+S\+T\+E\+R\+\_\+\+D\+E\+A\+T\+H}!Score\+Bomberman.\+c@{Score\+Bomberman.\+c}}
+\subsubsection[{S\+C\+O\+R\+E\+\_\+\+M\+O\+N\+S\+T\+E\+R\+\_\+\+D\+E\+A\+T\+H}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\+C\+O\+R\+E\+\_\+\+M\+O\+N\+S\+T\+E\+R\+\_\+\+D\+E\+A\+T\+H~100}}\label{_score_bomberman_8c_a760a67ba30383c0f2b3c3b0106a8e79c}
+
+
+Pontuação referente ao assassinato de um monstro. 
+
+\hypertarget{_score_bomberman_8c_ad9a48826ce122de8d406038faec62574}{\index{Score\+Bomberman.\+c@{Score\+Bomberman.\+c}!S\+C\+O\+R\+E\+\_\+\+P\+I\+C\+K\+U\+P\+\_\+\+P\+O\+W\+E\+R\+U\+P@{S\+C\+O\+R\+E\+\_\+\+P\+I\+C\+K\+U\+P\+\_\+\+P\+O\+W\+E\+R\+U\+P}}
+\index{S\+C\+O\+R\+E\+\_\+\+P\+I\+C\+K\+U\+P\+\_\+\+P\+O\+W\+E\+R\+U\+P@{S\+C\+O\+R\+E\+\_\+\+P\+I\+C\+K\+U\+P\+\_\+\+P\+O\+W\+E\+R\+U\+P}!Score\+Bomberman.\+c@{Score\+Bomberman.\+c}}
+\subsubsection[{S\+C\+O\+R\+E\+\_\+\+P\+I\+C\+K\+U\+P\+\_\+\+P\+O\+W\+E\+R\+U\+P}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\+C\+O\+R\+E\+\_\+\+P\+I\+C\+K\+U\+P\+\_\+\+P\+O\+W\+E\+R\+U\+P~30}}\label{_score_bomberman_8c_ad9a48826ce122de8d406038faec62574}
+
+
+Pontuação referente à obtenção de um power up. 
+
+\hypertarget{_score_bomberman_8c_ad3f8ad49af01883db7d4964ff3a0ca9f}{\index{Score\+Bomberman.\+c@{Score\+Bomberman.\+c}!S\+E\+R\+V\+I\+D\+O\+R\+\_\+\+S\+C\+O\+R\+E@{S\+E\+R\+V\+I\+D\+O\+R\+\_\+\+S\+C\+O\+R\+E}}
+\index{S\+E\+R\+V\+I\+D\+O\+R\+\_\+\+S\+C\+O\+R\+E@{S\+E\+R\+V\+I\+D\+O\+R\+\_\+\+S\+C\+O\+R\+E}!Score\+Bomberman.\+c@{Score\+Bomberman.\+c}}
+\subsubsection[{S\+E\+R\+V\+I\+D\+O\+R\+\_\+\+S\+C\+O\+R\+E}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\+E\+R\+V\+I\+D\+O\+R\+\_\+\+S\+C\+O\+R\+E}}\label{_score_bomberman_8c_ad3f8ad49af01883db7d4964ff3a0ca9f}
+
+
+Esta definição serve para separar o programa servidor do programa cliente. 
+
+
+
+\subsection{Function Documentation}
+\hypertarget{_score_bomberman_8c_a4e331597f0cad83c700075b273839637}{\index{Score\+Bomberman.\+c@{Score\+Bomberman.\+c}!M\+S\+\_\+get\+Score@{M\+S\+\_\+get\+Score}}
+\index{M\+S\+\_\+get\+Score@{M\+S\+\_\+get\+Score}!Score\+Bomberman.\+c@{Score\+Bomberman.\+c}}
+\subsubsection[{M\+S\+\_\+get\+Score}]{\setlength{\rightskip}{0pt plus 5cm}int M\+S\+\_\+get\+Score (
+\begin{DoxyParamCaption}
+\item[{int}]{jogador}
+\end{DoxyParamCaption}
+)}}\label{_score_bomberman_8c_a4e331597f0cad83c700075b273839637}
+
+
+Essa função tem como função retornar a pontuação de um jogador para outros módulos. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em jogador} & o jogador da qual deseja-\/se obter a pontuação. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a função retorna 1 caso dê algum erro (jogador inexistente) e retorna um valor diferente de um caso tudo tenha corrido bem. 
+\end{DoxyReturn}
+\hypertarget{_score_bomberman_8c_aae1ea739bac5e5bd4396e9d530af1ffd}{\index{Score\+Bomberman.\+c@{Score\+Bomberman.\+c}!M\+S\+\_\+score\+Module\+Interface@{M\+S\+\_\+score\+Module\+Interface}}
+\index{M\+S\+\_\+score\+Module\+Interface@{M\+S\+\_\+score\+Module\+Interface}!Score\+Bomberman.\+c@{Score\+Bomberman.\+c}}
+\subsubsection[{M\+S\+\_\+score\+Module\+Interface}]{\setlength{\rightskip}{0pt plus 5cm}int M\+S\+\_\+score\+Module\+Interface (
+\begin{DoxyParamCaption}
+\item[{{\bf L\+S\+T\+\_\+\+Event} $\ast$}]{events}
+\end{DoxyParamCaption}
+)}}\label{_score_bomberman_8c_aae1ea739bac5e5bd4396e9d530af1ffd}
+
+
+Esta função recebe uma lista de L\+S\+T\+\_\+\+Events (struct recebe) do turno do jogo e chama outra função (interna ao módulo) para montar e contabilizar a pontuação dos jogadores envolvidos. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em events} & uma lista do tipo L\+S\+T\+\_\+\+Events que representa os eventos do turno. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+retorna 0 se não houve problemas na execução (valores errados enviados, como comandos ou jogadores inexistentes) e 1 se tudo correu bem. 
+\end{DoxyReturn}
+\hypertarget{_score_bomberman_8c_abe95d65fcc138e3ac8611044c1f201ae}{\index{Score\+Bomberman.\+c@{Score\+Bomberman.\+c}!M\+S\+\_\+send\+Player\+Name\+Event@{M\+S\+\_\+send\+Player\+Name\+Event}}
+\index{M\+S\+\_\+send\+Player\+Name\+Event@{M\+S\+\_\+send\+Player\+Name\+Event}!Score\+Bomberman.\+c@{Score\+Bomberman.\+c}}
+\subsubsection[{M\+S\+\_\+send\+Player\+Name\+Event}]{\setlength{\rightskip}{0pt plus 5cm}void M\+S\+\_\+send\+Player\+Name\+Event (
+\begin{DoxyParamCaption}
+\item[{{\bf L\+S\+T\+\_\+\+Name} $\ast$}]{nomes}
+\end{DoxyParamCaption}
+)}}\label{_score_bomberman_8c_abe95d65fcc138e3ac8611044c1f201ae}
+
+
+Função que tem o propósito de armazenar o nome dos jogadores para futura referência (criação da tabela de High Scores). 
+
+Essa função deve ser chamada logo após a nomeação dos jogadores, antes da inicialização do jogo. Se esta função não for chamada, a função que cria a tabela de High Scores não terá uma referência na hora de relacionar um jogador com sua pontuação.
+
+
+\begin{DoxyParams}{Parameters}
+{\em nomes} & uma lista do tipo L\+S\+T\+\_\+\+Name (struct nomes) que traz consigo em cada célula o número e o nome de um jogador. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}

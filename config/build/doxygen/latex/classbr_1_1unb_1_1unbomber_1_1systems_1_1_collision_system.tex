@@ -1,0 +1,118 @@
+\hypertarget{classbr_1_1unb_1_1unbomber_1_1systems_1_1_collision_system}{\section{br.\+unb.\+unbomber.\+systems.\+Collision\+System Class Reference}
+\label{classbr_1_1unb_1_1unbomber_1_1systems_1_1_collision_system}\index{br.\+unb.\+unbomber.\+systems.\+Collision\+System@{br.\+unb.\+unbomber.\+systems.\+Collision\+System}}
+}
+Inheritance diagram for br.\+unb.\+unbomber.\+systems.\+Collision\+System\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classbr_1_1unb_1_1unbomber_1_1systems_1_1_collision_system}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classbr_1_1unb_1_1unbomber_1_1systems_1_1_collision_system_a75a6f5b88cd4b719a55b907ea6cee274}{Collision\+System} ()
+\begin{DoxyCompactList}\small\item\em M�todo construtor da classe. \end{DoxyCompactList}\item 
+\hyperlink{classbr_1_1unb_1_1unbomber_1_1systems_1_1_collision_system_a40e0e2849d512f95f6082bec10b831b7}{Collision\+System} (\hyperlink{interfacebr_1_1unb_1_1unbomber_1_1core_1_1_entity_manager}{Entity\+Manager} \hyperlink{classbr_1_1unb_1_1unbomber_1_1core_1_1_base_system_acb388352563da4567a9641f97b7931ca}{entity\+Manager})
+\item 
+void \hyperlink{classbr_1_1unb_1_1unbomber_1_1systems_1_1_collision_system_ae4a5755b3e48138cee8350d41fed43b3}{update} ()
+\begin{DoxyCompactList}\small\item\em M�todo principal da classe, executado para identificar as colisoes. \end{DoxyCompactList}\item 
+void \hyperlink{classbr_1_1unb_1_1unbomber_1_1systems_1_1_collision_system_abb605c101fe1d964afee5d656f03235e}{test\+Of\+Collision} ()
+\begin{DoxyCompactList}\small\item\em Funcao que verifica se houve colisao. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classbr_1_1unb_1_1unbomber_1_1systems_1_1_collision_system_af116794c8ae3fa8492dfe731152db081}{make\+Collision\+Event} (int source\+Id, int target\+Id)
+\item 
+\hyperlink{classbr_1_1unb_1_1unbomber_1_1event_1_1_moved_entity_event}{Moved\+Entity\+Event} \hyperlink{classbr_1_1unb_1_1unbomber_1_1systems_1_1_collision_system_a9d286c6a61a00ebfaddbbc03688dff6d}{get\+Event} (List$<$ \hyperlink{classbr_1_1unb_1_1unbomber_1_1core_1_1_event}{Event} $>$ moved\+Entity\+List, int id)
+\item 
+boolean \hyperlink{classbr_1_1unb_1_1unbomber_1_1systems_1_1_collision_system_a30e3efc5d6c07c1e98a2b3477d97bb49}{collision\+Made} (int\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} coll\+Made, int id1, int id2)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classbr_1_1unb_1_1unbomber_1_1systems_1_1_collision_system_a75a6f5b88cd4b719a55b907ea6cee274}{\index{br\+::unb\+::unbomber\+::systems\+::\+Collision\+System@{br\+::unb\+::unbomber\+::systems\+::\+Collision\+System}!Collision\+System@{Collision\+System}}
+\index{Collision\+System@{Collision\+System}!br\+::unb\+::unbomber\+::systems\+::\+Collision\+System@{br\+::unb\+::unbomber\+::systems\+::\+Collision\+System}}
+\subsubsection[{Collision\+System}]{\setlength{\rightskip}{0pt plus 5cm}br.\+unb.\+unbomber.\+systems.\+Collision\+System.\+Collision\+System (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classbr_1_1unb_1_1unbomber_1_1systems_1_1_collision_system_a75a6f5b88cd4b719a55b907ea6cee274}
+
+
+M�todo construtor da classe. 
+
+\hypertarget{classbr_1_1unb_1_1unbomber_1_1systems_1_1_collision_system_a40e0e2849d512f95f6082bec10b831b7}{\index{br\+::unb\+::unbomber\+::systems\+::\+Collision\+System@{br\+::unb\+::unbomber\+::systems\+::\+Collision\+System}!Collision\+System@{Collision\+System}}
+\index{Collision\+System@{Collision\+System}!br\+::unb\+::unbomber\+::systems\+::\+Collision\+System@{br\+::unb\+::unbomber\+::systems\+::\+Collision\+System}}
+\subsubsection[{Collision\+System}]{\setlength{\rightskip}{0pt plus 5cm}br.\+unb.\+unbomber.\+systems.\+Collision\+System.\+Collision\+System (
+\begin{DoxyParamCaption}
+\item[{{\bf Entity\+Manager}}]{entity\+Manager}
+\end{DoxyParamCaption}
+)}}\label{classbr_1_1unb_1_1unbomber_1_1systems_1_1_collision_system_a40e0e2849d512f95f6082bec10b831b7}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classbr_1_1unb_1_1unbomber_1_1systems_1_1_collision_system_a30e3efc5d6c07c1e98a2b3477d97bb49}{\index{br\+::unb\+::unbomber\+::systems\+::\+Collision\+System@{br\+::unb\+::unbomber\+::systems\+::\+Collision\+System}!collision\+Made@{collision\+Made}}
+\index{collision\+Made@{collision\+Made}!br\+::unb\+::unbomber\+::systems\+::\+Collision\+System@{br\+::unb\+::unbomber\+::systems\+::\+Collision\+System}}
+\subsubsection[{collision\+Made}]{\setlength{\rightskip}{0pt plus 5cm}boolean br.\+unb.\+unbomber.\+systems.\+Collision\+System.\+collision\+Made (
+\begin{DoxyParamCaption}
+\item[{int}]{coll\+Made\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]}, }
+\item[{int}]{id1, }
+\item[{int}]{id2}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{classbr_1_1unb_1_1unbomber_1_1systems_1_1_collision_system_a30e3efc5d6c07c1e98a2b3477d97bb49}
+\hypertarget{classbr_1_1unb_1_1unbomber_1_1systems_1_1_collision_system_a9d286c6a61a00ebfaddbbc03688dff6d}{\index{br\+::unb\+::unbomber\+::systems\+::\+Collision\+System@{br\+::unb\+::unbomber\+::systems\+::\+Collision\+System}!get\+Event@{get\+Event}}
+\index{get\+Event@{get\+Event}!br\+::unb\+::unbomber\+::systems\+::\+Collision\+System@{br\+::unb\+::unbomber\+::systems\+::\+Collision\+System}}
+\subsubsection[{get\+Event}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Moved\+Entity\+Event} br.\+unb.\+unbomber.\+systems.\+Collision\+System.\+get\+Event (
+\begin{DoxyParamCaption}
+\item[{List$<$ {\bf Event} $>$}]{moved\+Entity\+List, }
+\item[{int}]{id}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{classbr_1_1unb_1_1unbomber_1_1systems_1_1_collision_system_a9d286c6a61a00ebfaddbbc03688dff6d}
+\hypertarget{classbr_1_1unb_1_1unbomber_1_1systems_1_1_collision_system_af116794c8ae3fa8492dfe731152db081}{\index{br\+::unb\+::unbomber\+::systems\+::\+Collision\+System@{br\+::unb\+::unbomber\+::systems\+::\+Collision\+System}!make\+Collision\+Event@{make\+Collision\+Event}}
+\index{make\+Collision\+Event@{make\+Collision\+Event}!br\+::unb\+::unbomber\+::systems\+::\+Collision\+System@{br\+::unb\+::unbomber\+::systems\+::\+Collision\+System}}
+\subsubsection[{make\+Collision\+Event}]{\setlength{\rightskip}{0pt plus 5cm}void br.\+unb.\+unbomber.\+systems.\+Collision\+System.\+make\+Collision\+Event (
+\begin{DoxyParamCaption}
+\item[{int}]{source\+Id, }
+\item[{int}]{target\+Id}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{classbr_1_1unb_1_1unbomber_1_1systems_1_1_collision_system_af116794c8ae3fa8492dfe731152db081}
+\hypertarget{classbr_1_1unb_1_1unbomber_1_1systems_1_1_collision_system_abb605c101fe1d964afee5d656f03235e}{\index{br\+::unb\+::unbomber\+::systems\+::\+Collision\+System@{br\+::unb\+::unbomber\+::systems\+::\+Collision\+System}!test\+Of\+Collision@{test\+Of\+Collision}}
+\index{test\+Of\+Collision@{test\+Of\+Collision}!br\+::unb\+::unbomber\+::systems\+::\+Collision\+System@{br\+::unb\+::unbomber\+::systems\+::\+Collision\+System}}
+\subsubsection[{test\+Of\+Collision}]{\setlength{\rightskip}{0pt plus 5cm}void br.\+unb.\+unbomber.\+systems.\+Collision\+System.\+test\+Of\+Collision (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classbr_1_1unb_1_1unbomber_1_1systems_1_1_collision_system_abb605c101fe1d964afee5d656f03235e}
+
+
+Funcao que verifica se houve colisao. 
+
+Para cada colisao encontrada, um evento (Collision\+Event) com o id da entidade fonte e o id da entidade alvo e adicionado ao conjuto de eventos. $<$ lista que contem o posicionamento das entidades no ultimo tick.
+
+$<$ lista das entidades que se moveram no ultimo tick.
+
+$<$ Cria um array que contera as colisoes ja feitas para nao gerar dois eventos para a mesma colisao. O primeiro indice refere-\/se ao source e o segundo ao target.
+
+$<$ variavel auxiliar.
+
+$<$ variavel usada no for a seguir. \hypertarget{classbr_1_1unb_1_1unbomber_1_1systems_1_1_collision_system_ae4a5755b3e48138cee8350d41fed43b3}{\index{br\+::unb\+::unbomber\+::systems\+::\+Collision\+System@{br\+::unb\+::unbomber\+::systems\+::\+Collision\+System}!update@{update}}
+\index{update@{update}!br\+::unb\+::unbomber\+::systems\+::\+Collision\+System@{br\+::unb\+::unbomber\+::systems\+::\+Collision\+System}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}void br.\+unb.\+unbomber.\+systems.\+Collision\+System.\+update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classbr_1_1unb_1_1unbomber_1_1systems_1_1_collision_system_ae4a5755b3e48138cee8350d41fed43b3}
+
+
+M�todo principal da classe, executado para identificar as colisoes. 
+
+
+
+Implements \hyperlink{interfacebr_1_1unb_1_1unbomber_1_1core_1_1_system_a6b1268f3fef77e2ce797eedc1b34eb44}{br.\+unb.\+unbomber.\+core.\+System}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Igor/git/bomberman/src/main/java/br/unb/unbomber/systems/\hyperlink{_collision_system_8java}{Collision\+System.\+java}\end{DoxyCompactItemize}

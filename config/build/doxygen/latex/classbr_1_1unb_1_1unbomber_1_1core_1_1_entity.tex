@@ -1,0 +1,199 @@
+\hypertarget{classbr_1_1unb_1_1unbomber_1_1core_1_1_entity}{\section{br.\+unb.\+unbomber.\+core.\+Entity Class Reference}
+\label{classbr_1_1unb_1_1unbomber_1_1core_1_1_entity}\index{br.\+unb.\+unbomber.\+core.\+Entity@{br.\+unb.\+unbomber.\+core.\+Entity}}
+}
+
+
+An \hyperlink{classbr_1_1unb_1_1unbomber_1_1core_1_1_entity}{Entity} in the \hyperlink{classbr_1_1unb_1_1unbomber_1_1core_1_1_entity}{Entity} \hyperlink{classbr_1_1unb_1_1unbomber_1_1core_1_1_component}{Component} \hyperlink{interfacebr_1_1unb_1_1unbomber_1_1core_1_1_system}{System} (E\+C\+S).  
+
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classbr_1_1unb_1_1unbomber_1_1core_1_1_entity_a327a249a220f4a88f5b1e5b4778f4cf4}{Entity} ()
+\begin{DoxyCompactList}\small\item\em This method is deprecated. \end{DoxyCompactList}\item 
+\hyperlink{classbr_1_1unb_1_1unbomber_1_1core_1_1_entity_ac81c6ff84e247d4f07ea50369c82d142}{Entity} (int unique\+Id)
+\begin{DoxyCompactList}\small\item\em Instantiates a new entity. \end{DoxyCompactList}\item 
+void \hyperlink{classbr_1_1unb_1_1unbomber_1_1core_1_1_entity_a4dcc0f5903b3ac4af4600fee95bb2328}{add\+Component} (\hyperlink{classbr_1_1unb_1_1unbomber_1_1core_1_1_component}{Component} component)
+\begin{DoxyCompactList}\small\item\em Adds the component. \end{DoxyCompactList}\item 
+List$<$ \hyperlink{classbr_1_1unb_1_1unbomber_1_1core_1_1_component}{Component} $>$ \hyperlink{classbr_1_1unb_1_1unbomber_1_1core_1_1_entity_aa3c56973895e2b1b0a5c2d8c48dfed56}{get\+Components} ()
+\begin{DoxyCompactList}\small\item\em Gets the components. \end{DoxyCompactList}\item 
+int \hyperlink{classbr_1_1unb_1_1unbomber_1_1core_1_1_entity_a7d600891c92aebdf3e1e1c16badf113e}{get\+Entity\+Id} ()
+\begin{DoxyCompactList}\small\item\em Gets the entity id. \end{DoxyCompactList}\item 
+void \hyperlink{classbr_1_1unb_1_1unbomber_1_1core_1_1_entity_a1cebc29bd7f488c01f59ae302316d58d}{set\+Entity\+Id} (int \hyperlink{classbr_1_1unb_1_1unbomber_1_1core_1_1_entity_aa5df23ec02ab11ec73f5e9a66dc682c8}{entity\+Id})
+\begin{DoxyCompactList}\small\item\em I\+D should be setted in the constructor. \end{DoxyCompactList}\item 
+int \hyperlink{classbr_1_1unb_1_1unbomber_1_1core_1_1_entity_a3f3a4fc359762fe375117933affaf4f7}{get\+Owner\+Id} ()
+\begin{DoxyCompactList}\small\item\em Gets the owner id. \end{DoxyCompactList}\item 
+void \hyperlink{classbr_1_1unb_1_1unbomber_1_1core_1_1_entity_a89e701f01f69f98550e2a66d2f3cc092}{set\+Owner\+Id} (int \hyperlink{classbr_1_1unb_1_1unbomber_1_1core_1_1_entity_a020f4ce97134330e74a1263c6335d017}{owner\+Id})
+\begin{DoxyCompactList}\small\item\em Sets the owner id. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{classbr_1_1unb_1_1unbomber_1_1core_1_1_entity_aa5df23ec02ab11ec73f5e9a66dc682c8}{entity\+Id}
+\begin{DoxyCompactList}\small\item\em The entity id. \end{DoxyCompactList}\item 
+int \hyperlink{classbr_1_1unb_1_1unbomber_1_1core_1_1_entity_a020f4ce97134330e74a1263c6335d017}{owner\+Id}
+\begin{DoxyCompactList}\small\item\em The onwner id. \end{DoxyCompactList}\item 
+List$<$ \hyperlink{classbr_1_1unb_1_1unbomber_1_1core_1_1_component}{Component} $>$ \hyperlink{classbr_1_1unb_1_1unbomber_1_1core_1_1_entity_a279d8487cde874b41f41b92cc7820f33}{components}
+\begin{DoxyCompactList}\small\item\em The components. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+An \hyperlink{classbr_1_1unb_1_1unbomber_1_1core_1_1_entity}{Entity} in the \hyperlink{classbr_1_1unb_1_1unbomber_1_1core_1_1_entity}{Entity} \hyperlink{classbr_1_1unb_1_1unbomber_1_1core_1_1_component}{Component} \hyperlink{interfacebr_1_1unb_1_1unbomber_1_1core_1_1_system}{System} (E\+C\+S). 
+
+\begin{DoxyAuthor}{Author}
+Gabriel Rodrigues \href{mailto:gabrielsr@gmail.com}{\tt gabrielsr@gmail.\+com} 
+\end{DoxyAuthor}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classbr_1_1unb_1_1unbomber_1_1core_1_1_entity_a327a249a220f4a88f5b1e5b4778f4cf4}{\index{br\+::unb\+::unbomber\+::core\+::\+Entity@{br\+::unb\+::unbomber\+::core\+::\+Entity}!Entity@{Entity}}
+\index{Entity@{Entity}!br\+::unb\+::unbomber\+::core\+::\+Entity@{br\+::unb\+::unbomber\+::core\+::\+Entity}}
+\subsubsection[{Entity}]{\setlength{\rightskip}{0pt plus 5cm}br.\+unb.\+unbomber.\+core.\+Entity.\+Entity (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classbr_1_1unb_1_1unbomber_1_1core_1_1_entity_a327a249a220f4a88f5b1e5b4778f4cf4}
+
+
+This method is deprecated. 
+
+You should use \hyperlink{interfacebr_1_1unb_1_1unbomber_1_1core_1_1_entity_manager_ac46fec4c16bfb9f580e18e3f57625d68}{Entity\+Manager.\+create\+Entity()} \hypertarget{classbr_1_1unb_1_1unbomber_1_1core_1_1_entity_ac81c6ff84e247d4f07ea50369c82d142}{\index{br\+::unb\+::unbomber\+::core\+::\+Entity@{br\+::unb\+::unbomber\+::core\+::\+Entity}!Entity@{Entity}}
+\index{Entity@{Entity}!br\+::unb\+::unbomber\+::core\+::\+Entity@{br\+::unb\+::unbomber\+::core\+::\+Entity}}
+\subsubsection[{Entity}]{\setlength{\rightskip}{0pt plus 5cm}br.\+unb.\+unbomber.\+core.\+Entity.\+Entity (
+\begin{DoxyParamCaption}
+\item[{int}]{unique\+Id}
+\end{DoxyParamCaption}
+)}}\label{classbr_1_1unb_1_1unbomber_1_1core_1_1_entity_ac81c6ff84e247d4f07ea50369c82d142}
+
+
+Instantiates a new entity. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em unique\+Id} & the unique id \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classbr_1_1unb_1_1unbomber_1_1core_1_1_entity_a4dcc0f5903b3ac4af4600fee95bb2328}{\index{br\+::unb\+::unbomber\+::core\+::\+Entity@{br\+::unb\+::unbomber\+::core\+::\+Entity}!add\+Component@{add\+Component}}
+\index{add\+Component@{add\+Component}!br\+::unb\+::unbomber\+::core\+::\+Entity@{br\+::unb\+::unbomber\+::core\+::\+Entity}}
+\subsubsection[{add\+Component}]{\setlength{\rightskip}{0pt plus 5cm}void br.\+unb.\+unbomber.\+core.\+Entity.\+add\+Component (
+\begin{DoxyParamCaption}
+\item[{{\bf Component}}]{component}
+\end{DoxyParamCaption}
+)}}\label{classbr_1_1unb_1_1unbomber_1_1core_1_1_entity_a4dcc0f5903b3ac4af4600fee95bb2328}
+
+
+Adds the component. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em component} & the component \\
+\hline
+\end{DoxyParams}
+\hypertarget{classbr_1_1unb_1_1unbomber_1_1core_1_1_entity_aa3c56973895e2b1b0a5c2d8c48dfed56}{\index{br\+::unb\+::unbomber\+::core\+::\+Entity@{br\+::unb\+::unbomber\+::core\+::\+Entity}!get\+Components@{get\+Components}}
+\index{get\+Components@{get\+Components}!br\+::unb\+::unbomber\+::core\+::\+Entity@{br\+::unb\+::unbomber\+::core\+::\+Entity}}
+\subsubsection[{get\+Components}]{\setlength{\rightskip}{0pt plus 5cm}List$<${\bf Component}$>$ br.\+unb.\+unbomber.\+core.\+Entity.\+get\+Components (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classbr_1_1unb_1_1unbomber_1_1core_1_1_entity_aa3c56973895e2b1b0a5c2d8c48dfed56}
+
+
+Gets the components. 
+
+\begin{DoxyReturn}{Returns}
+the components 
+\end{DoxyReturn}
+\hypertarget{classbr_1_1unb_1_1unbomber_1_1core_1_1_entity_a7d600891c92aebdf3e1e1c16badf113e}{\index{br\+::unb\+::unbomber\+::core\+::\+Entity@{br\+::unb\+::unbomber\+::core\+::\+Entity}!get\+Entity\+Id@{get\+Entity\+Id}}
+\index{get\+Entity\+Id@{get\+Entity\+Id}!br\+::unb\+::unbomber\+::core\+::\+Entity@{br\+::unb\+::unbomber\+::core\+::\+Entity}}
+\subsubsection[{get\+Entity\+Id}]{\setlength{\rightskip}{0pt plus 5cm}int br.\+unb.\+unbomber.\+core.\+Entity.\+get\+Entity\+Id (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classbr_1_1unb_1_1unbomber_1_1core_1_1_entity_a7d600891c92aebdf3e1e1c16badf113e}
+
+
+Gets the entity id. 
+
+\begin{DoxyReturn}{Returns}
+the entity id 
+\end{DoxyReturn}
+\hypertarget{classbr_1_1unb_1_1unbomber_1_1core_1_1_entity_a3f3a4fc359762fe375117933affaf4f7}{\index{br\+::unb\+::unbomber\+::core\+::\+Entity@{br\+::unb\+::unbomber\+::core\+::\+Entity}!get\+Owner\+Id@{get\+Owner\+Id}}
+\index{get\+Owner\+Id@{get\+Owner\+Id}!br\+::unb\+::unbomber\+::core\+::\+Entity@{br\+::unb\+::unbomber\+::core\+::\+Entity}}
+\subsubsection[{get\+Owner\+Id}]{\setlength{\rightskip}{0pt plus 5cm}int br.\+unb.\+unbomber.\+core.\+Entity.\+get\+Owner\+Id (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classbr_1_1unb_1_1unbomber_1_1core_1_1_entity_a3f3a4fc359762fe375117933affaf4f7}
+
+
+Gets the owner id. 
+
+\begin{DoxyReturn}{Returns}
+the owner id 
+\end{DoxyReturn}
+\hypertarget{classbr_1_1unb_1_1unbomber_1_1core_1_1_entity_a1cebc29bd7f488c01f59ae302316d58d}{\index{br\+::unb\+::unbomber\+::core\+::\+Entity@{br\+::unb\+::unbomber\+::core\+::\+Entity}!set\+Entity\+Id@{set\+Entity\+Id}}
+\index{set\+Entity\+Id@{set\+Entity\+Id}!br\+::unb\+::unbomber\+::core\+::\+Entity@{br\+::unb\+::unbomber\+::core\+::\+Entity}}
+\subsubsection[{set\+Entity\+Id}]{\setlength{\rightskip}{0pt plus 5cm}void br.\+unb.\+unbomber.\+core.\+Entity.\+set\+Entity\+Id (
+\begin{DoxyParamCaption}
+\item[{int}]{entity\+Id}
+\end{DoxyParamCaption}
+)}}\label{classbr_1_1unb_1_1unbomber_1_1core_1_1_entity_a1cebc29bd7f488c01f59ae302316d58d}
+
+
+I\+D should be setted in the constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em entity\+Id} & the new entity id \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{interfacebr_1_1unb_1_1unbomber_1_1core_1_1_entity_manager_ac46fec4c16bfb9f580e18e3f57625d68}{Entity\+Manager\+::create\+Entity()} 
+\end{DoxySeeAlso}
+\hypertarget{classbr_1_1unb_1_1unbomber_1_1core_1_1_entity_a89e701f01f69f98550e2a66d2f3cc092}{\index{br\+::unb\+::unbomber\+::core\+::\+Entity@{br\+::unb\+::unbomber\+::core\+::\+Entity}!set\+Owner\+Id@{set\+Owner\+Id}}
+\index{set\+Owner\+Id@{set\+Owner\+Id}!br\+::unb\+::unbomber\+::core\+::\+Entity@{br\+::unb\+::unbomber\+::core\+::\+Entity}}
+\subsubsection[{set\+Owner\+Id}]{\setlength{\rightskip}{0pt plus 5cm}void br.\+unb.\+unbomber.\+core.\+Entity.\+set\+Owner\+Id (
+\begin{DoxyParamCaption}
+\item[{int}]{owner\+Id}
+\end{DoxyParamCaption}
+)}}\label{classbr_1_1unb_1_1unbomber_1_1core_1_1_entity_a89e701f01f69f98550e2a66d2f3cc092}
+
+
+Sets the owner id. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em owner\+Id} & the new owner id \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classbr_1_1unb_1_1unbomber_1_1core_1_1_entity_a279d8487cde874b41f41b92cc7820f33}{\index{br\+::unb\+::unbomber\+::core\+::\+Entity@{br\+::unb\+::unbomber\+::core\+::\+Entity}!components@{components}}
+\index{components@{components}!br\+::unb\+::unbomber\+::core\+::\+Entity@{br\+::unb\+::unbomber\+::core\+::\+Entity}}
+\subsubsection[{components}]{\setlength{\rightskip}{0pt plus 5cm}List$<${\bf Component}$>$ br.\+unb.\+unbomber.\+core.\+Entity.\+components\hspace{0.3cm}{\ttfamily [private]}}}\label{classbr_1_1unb_1_1unbomber_1_1core_1_1_entity_a279d8487cde874b41f41b92cc7820f33}
+
+
+The components. 
+
+\hypertarget{classbr_1_1unb_1_1unbomber_1_1core_1_1_entity_aa5df23ec02ab11ec73f5e9a66dc682c8}{\index{br\+::unb\+::unbomber\+::core\+::\+Entity@{br\+::unb\+::unbomber\+::core\+::\+Entity}!entity\+Id@{entity\+Id}}
+\index{entity\+Id@{entity\+Id}!br\+::unb\+::unbomber\+::core\+::\+Entity@{br\+::unb\+::unbomber\+::core\+::\+Entity}}
+\subsubsection[{entity\+Id}]{\setlength{\rightskip}{0pt plus 5cm}int br.\+unb.\+unbomber.\+core.\+Entity.\+entity\+Id\hspace{0.3cm}{\ttfamily [private]}}}\label{classbr_1_1unb_1_1unbomber_1_1core_1_1_entity_aa5df23ec02ab11ec73f5e9a66dc682c8}
+
+
+The entity id. 
+
+\hypertarget{classbr_1_1unb_1_1unbomber_1_1core_1_1_entity_a020f4ce97134330e74a1263c6335d017}{\index{br\+::unb\+::unbomber\+::core\+::\+Entity@{br\+::unb\+::unbomber\+::core\+::\+Entity}!owner\+Id@{owner\+Id}}
+\index{owner\+Id@{owner\+Id}!br\+::unb\+::unbomber\+::core\+::\+Entity@{br\+::unb\+::unbomber\+::core\+::\+Entity}}
+\subsubsection[{owner\+Id}]{\setlength{\rightskip}{0pt plus 5cm}int br.\+unb.\+unbomber.\+core.\+Entity.\+owner\+Id\hspace{0.3cm}{\ttfamily [private]}}}\label{classbr_1_1unb_1_1unbomber_1_1core_1_1_entity_a020f4ce97134330e74a1263c6335d017}
+
+
+The onwner id. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Igor/git/bomberman/src/main/java/br/unb/unbomber/core/\hyperlink{_entity_8java}{Entity.\+java}\end{DoxyCompactItemize}

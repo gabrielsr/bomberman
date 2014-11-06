@@ -1,0 +1,158 @@
+\hypertarget{_score_bomberman_8h}{\section{C\+:/\+Users/\+Igor/git/bomberman/src/main/c/\+Score\+Bomberman.h File Reference}
+\label{_score_bomberman_8h}\index{C\+:/\+Users/\+Igor/git/bomberman/src/main/c/\+Score\+Bomberman.\+h@{C\+:/\+Users/\+Igor/git/bomberman/src/main/c/\+Score\+Bomberman.\+h}}
+}
+
+
+Este é o módulo de definição das funções que tratam o score(pontuação) do jogo Bomberman, criado pelo Grupo 10 da turma de Programação Sistemática 2-\/2014, ministrada pela professora Genaína Nunes Rodrigues, na Universidade de Brasília.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\\*
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{_score_bomberman_8h_a8ef732ccc99889e366340117ebf15c5c}{E\+X\+T\+\_\+\+M\+O\+D\+\_\+\+S\+C\+O\+R\+E}~extern
+\begin{DoxyCompactList}\small\item\em Definição que estabelece quais funções serão externas e quais funções serão internas ao módulo. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \hyperlink{structscore}{score} \hyperlink{_score_bomberman_8h_a06457dff28fe470b2edfa5135438e5b0}{S\+T\+R\+\_\+\+Score}
+\begin{DoxyCompactList}\small\item\em Estrutura principal que lidará com a incrementação e o armazenamento da pontuação (interna ao módulo). \end{DoxyCompactList}\item 
+typedef struct \hyperlink{structrecebe}{recebe} \hyperlink{_score_bomberman_8h_a86bf1876cd70ae445a8d41c21f10a6a9}{L\+S\+T\+\_\+\+Event}
+\begin{DoxyCompactList}\small\item\em Estrutura que supostamente será recebida por outros módulos (a cada tique) para que seja possível atualizar a pontuação. \end{DoxyCompactList}\item 
+typedef struct \hyperlink{structtabela}{tabela} \hyperlink{_score_bomberman_8h_a8ddd919b1e7775115a885e51ea8271ef}{S\+T\+R\+\_\+\+Tabela}
+\begin{DoxyCompactList}\small\item\em Estrutura auxiliar da função cria\+Tabela\+High\+Score (interna ao módulo). \end{DoxyCompactList}\item 
+typedef struct \hyperlink{structnomes}{nomes} \hyperlink{_score_bomberman_8h_adfc002e678376cd7694dc9942e610803}{L\+S\+T\+\_\+\+Name}
+\begin{DoxyCompactList}\small\item\em Estrutura que enviará o nome dos jogadores para este módulo. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_score_bomberman_8h_a8ef732ccc99889e366340117ebf15c5c}{E\+X\+T\+\_\+\+M\+O\+D\+\_\+\+S\+C\+O\+R\+E} int \hyperlink{_score_bomberman_8h_aa28a15596d3e2c7683f54b4cc3a9da72}{M\+S\+\_\+score\+Module\+Interface} (\hyperlink{_score_bomberman_8h_a86bf1876cd70ae445a8d41c21f10a6a9}{L\+S\+T\+\_\+\+Event} $\ast$events)
+\begin{DoxyCompactList}\small\item\em Esta função recebe uma lista de L\+S\+T\+\_\+\+Events (struct recebe) do turno do jogo e chama outra função (interna ao módulo) para montar e contabilizar a pontuação dos jogadores envolvidos. \end{DoxyCompactList}\item 
+\hyperlink{_score_bomberman_8h_a8ef732ccc99889e366340117ebf15c5c}{E\+X\+T\+\_\+\+M\+O\+D\+\_\+\+S\+C\+O\+R\+E} void \hyperlink{_score_bomberman_8h_a6305f0cabe5b229d46d6a015bf14896f}{M\+S\+\_\+send\+Player\+Name\+Event} (\hyperlink{_score_bomberman_8h_adfc002e678376cd7694dc9942e610803}{L\+S\+T\+\_\+\+Name} $\ast$\hyperlink{structnomes}{nomes})
+\begin{DoxyCompactList}\small\item\em Função que tem o propósito de armazenar o nome dos jogadores para futura referência (criação da tabela de High Scores). \end{DoxyCompactList}\item 
+\hyperlink{_score_bomberman_8h_a8ef732ccc99889e366340117ebf15c5c}{E\+X\+T\+\_\+\+M\+O\+D\+\_\+\+S\+C\+O\+R\+E} int \hyperlink{_score_bomberman_8h_aa5f07ce7b320d82ce5bb4fa746633b2b}{M\+S\+\_\+get\+Score} (int jogador)
+\begin{DoxyCompactList}\small\item\em Essa função tem como função retornar a pontuação de um jogador para outros módulos. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Este é o módulo de definição das funções que tratam o score(pontuação) do jogo Bomberman, criado pelo Grupo 10 da turma de Programação Sistemática 2-\/2014, ministrada pela professora Genaína Nunes Rodrigues, na Universidade de Brasília. 
+
+\begin{DoxyAuthor}{Author}
+Camila Imbuzeiro Camargo 
+
+Lucas Araújo Pena 
+
+Miguel Angelo Montagner Filho 
+
+Nicolas Machado Schumacher 
+\end{DoxyAuthor}
+\begin{DoxySince}{Since}
+07/10/2014 
+\end{DoxySince}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\hypertarget{_score_bomberman_8h_a8ef732ccc99889e366340117ebf15c5c}{\index{Score\+Bomberman.\+h@{Score\+Bomberman.\+h}!E\+X\+T\+\_\+\+M\+O\+D\+\_\+\+S\+C\+O\+R\+E@{E\+X\+T\+\_\+\+M\+O\+D\+\_\+\+S\+C\+O\+R\+E}}
+\index{E\+X\+T\+\_\+\+M\+O\+D\+\_\+\+S\+C\+O\+R\+E@{E\+X\+T\+\_\+\+M\+O\+D\+\_\+\+S\+C\+O\+R\+E}!Score\+Bomberman.\+h@{Score\+Bomberman.\+h}}
+\subsubsection[{E\+X\+T\+\_\+\+M\+O\+D\+\_\+\+S\+C\+O\+R\+E}]{\setlength{\rightskip}{0pt plus 5cm}\#define E\+X\+T\+\_\+\+M\+O\+D\+\_\+\+S\+C\+O\+R\+E~extern}}\label{_score_bomberman_8h_a8ef732ccc99889e366340117ebf15c5c}
+
+
+Definição que estabelece quais funções serão externas e quais funções serão internas ao módulo. 
+
+
+
+\subsection{Typedef Documentation}
+\hypertarget{_score_bomberman_8h_a86bf1876cd70ae445a8d41c21f10a6a9}{\index{Score\+Bomberman.\+h@{Score\+Bomberman.\+h}!L\+S\+T\+\_\+\+Event@{L\+S\+T\+\_\+\+Event}}
+\index{L\+S\+T\+\_\+\+Event@{L\+S\+T\+\_\+\+Event}!Score\+Bomberman.\+h@{Score\+Bomberman.\+h}}
+\subsubsection[{L\+S\+T\+\_\+\+Event}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf recebe} {\bf L\+S\+T\+\_\+\+Event}}}\label{_score_bomberman_8h_a86bf1876cd70ae445a8d41c21f10a6a9}
+
+
+Estrutura que supostamente será recebida por outros módulos (a cada tique) para que seja possível atualizar a pontuação. 
+
+\hypertarget{_score_bomberman_8h_adfc002e678376cd7694dc9942e610803}{\index{Score\+Bomberman.\+h@{Score\+Bomberman.\+h}!L\+S\+T\+\_\+\+Name@{L\+S\+T\+\_\+\+Name}}
+\index{L\+S\+T\+\_\+\+Name@{L\+S\+T\+\_\+\+Name}!Score\+Bomberman.\+h@{Score\+Bomberman.\+h}}
+\subsubsection[{L\+S\+T\+\_\+\+Name}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf nomes} {\bf L\+S\+T\+\_\+\+Name}}}\label{_score_bomberman_8h_adfc002e678376cd7694dc9942e610803}
+
+
+Estrutura que enviará o nome dos jogadores para este módulo. 
+
+\hypertarget{_score_bomberman_8h_a06457dff28fe470b2edfa5135438e5b0}{\index{Score\+Bomberman.\+h@{Score\+Bomberman.\+h}!S\+T\+R\+\_\+\+Score@{S\+T\+R\+\_\+\+Score}}
+\index{S\+T\+R\+\_\+\+Score@{S\+T\+R\+\_\+\+Score}!Score\+Bomberman.\+h@{Score\+Bomberman.\+h}}
+\subsubsection[{S\+T\+R\+\_\+\+Score}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf score} {\bf S\+T\+R\+\_\+\+Score}}}\label{_score_bomberman_8h_a06457dff28fe470b2edfa5135438e5b0}
+
+
+Estrutura principal que lidará com a incrementação e o armazenamento da pontuação (interna ao módulo). 
+
+\hypertarget{_score_bomberman_8h_a8ddd919b1e7775115a885e51ea8271ef}{\index{Score\+Bomberman.\+h@{Score\+Bomberman.\+h}!S\+T\+R\+\_\+\+Tabela@{S\+T\+R\+\_\+\+Tabela}}
+\index{S\+T\+R\+\_\+\+Tabela@{S\+T\+R\+\_\+\+Tabela}!Score\+Bomberman.\+h@{Score\+Bomberman.\+h}}
+\subsubsection[{S\+T\+R\+\_\+\+Tabela}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf tabela} {\bf S\+T\+R\+\_\+\+Tabela}}}\label{_score_bomberman_8h_a8ddd919b1e7775115a885e51ea8271ef}
+
+
+Estrutura auxiliar da função cria\+Tabela\+High\+Score (interna ao módulo). 
+
+
+
+\subsection{Function Documentation}
+\hypertarget{_score_bomberman_8h_aa5f07ce7b320d82ce5bb4fa746633b2b}{\index{Score\+Bomberman.\+h@{Score\+Bomberman.\+h}!M\+S\+\_\+get\+Score@{M\+S\+\_\+get\+Score}}
+\index{M\+S\+\_\+get\+Score@{M\+S\+\_\+get\+Score}!Score\+Bomberman.\+h@{Score\+Bomberman.\+h}}
+\subsubsection[{M\+S\+\_\+get\+Score}]{\setlength{\rightskip}{0pt plus 5cm}{\bf E\+X\+T\+\_\+\+M\+O\+D\+\_\+\+S\+C\+O\+R\+E} int M\+S\+\_\+get\+Score (
+\begin{DoxyParamCaption}
+\item[{int}]{jogador}
+\end{DoxyParamCaption}
+)}}\label{_score_bomberman_8h_aa5f07ce7b320d82ce5bb4fa746633b2b}
+
+
+Essa função tem como função retornar a pontuação de um jogador para outros módulos. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em jogador} & o jogador da qual deseja-\/se obter a pontuação. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a função retorna 1 caso dê algum erro (jogador inexistente) e retorna um valor diferente de um caso tudo tenha corrido bem. 
+\end{DoxyReturn}
+\hypertarget{_score_bomberman_8h_aa28a15596d3e2c7683f54b4cc3a9da72}{\index{Score\+Bomberman.\+h@{Score\+Bomberman.\+h}!M\+S\+\_\+score\+Module\+Interface@{M\+S\+\_\+score\+Module\+Interface}}
+\index{M\+S\+\_\+score\+Module\+Interface@{M\+S\+\_\+score\+Module\+Interface}!Score\+Bomberman.\+h@{Score\+Bomberman.\+h}}
+\subsubsection[{M\+S\+\_\+score\+Module\+Interface}]{\setlength{\rightskip}{0pt plus 5cm}{\bf E\+X\+T\+\_\+\+M\+O\+D\+\_\+\+S\+C\+O\+R\+E} int M\+S\+\_\+score\+Module\+Interface (
+\begin{DoxyParamCaption}
+\item[{{\bf L\+S\+T\+\_\+\+Event} $\ast$}]{events}
+\end{DoxyParamCaption}
+)}}\label{_score_bomberman_8h_aa28a15596d3e2c7683f54b4cc3a9da72}
+
+
+Esta função recebe uma lista de L\+S\+T\+\_\+\+Events (struct recebe) do turno do jogo e chama outra função (interna ao módulo) para montar e contabilizar a pontuação dos jogadores envolvidos. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em events} & uma lista do tipo L\+S\+T\+\_\+\+Events que representa os eventos do turno. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+retorna 0 se não houve problemas na execução (valores errados enviados, como comandos ou jogadores inexistentes) e 1 se tudo correu bem. 
+\end{DoxyReturn}
+\hypertarget{_score_bomberman_8h_a6305f0cabe5b229d46d6a015bf14896f}{\index{Score\+Bomberman.\+h@{Score\+Bomberman.\+h}!M\+S\+\_\+send\+Player\+Name\+Event@{M\+S\+\_\+send\+Player\+Name\+Event}}
+\index{M\+S\+\_\+send\+Player\+Name\+Event@{M\+S\+\_\+send\+Player\+Name\+Event}!Score\+Bomberman.\+h@{Score\+Bomberman.\+h}}
+\subsubsection[{M\+S\+\_\+send\+Player\+Name\+Event}]{\setlength{\rightskip}{0pt plus 5cm}{\bf E\+X\+T\+\_\+\+M\+O\+D\+\_\+\+S\+C\+O\+R\+E} void M\+S\+\_\+send\+Player\+Name\+Event (
+\begin{DoxyParamCaption}
+\item[{{\bf L\+S\+T\+\_\+\+Name} $\ast$}]{nomes}
+\end{DoxyParamCaption}
+)}}\label{_score_bomberman_8h_a6305f0cabe5b229d46d6a015bf14896f}
+
+
+Função que tem o propósito de armazenar o nome dos jogadores para futura referência (criação da tabela de High Scores). 
+
+Essa função deve ser chamada logo após a nomeação dos jogadores, antes da inicialização do jogo. Se esta função não for chamada, a função que cria a tabela de High Scores não terá uma referência na hora de relacionar um jogador com sua pontuação.
+
+
+\begin{DoxyParams}{Parameters}
+{\em nomes} & uma lista do tipo L\+S\+T\+\_\+\+Name (struct nomes) que traz consigo em cada célula o número e o nome de um jogador. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}

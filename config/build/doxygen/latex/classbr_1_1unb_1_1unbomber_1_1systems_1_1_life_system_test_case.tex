@@ -1,0 +1,147 @@
+\hypertarget{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system_test_case}{\section{br.\+unb.\+unbomber.\+systems.\+Life\+System\+Test\+Case Class Reference}
+\label{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system_test_case}\index{br.\+unb.\+unbomber.\+systems.\+Life\+System\+Test\+Case@{br.\+unb.\+unbomber.\+systems.\+Life\+System\+Test\+Case}}
+}
+
+
+Classe de testes do \hyperlink{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system}{Life\+System} do Módulo Life.  
+
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system_test_case_acff3a0b14b7e1d59007766ae222e98db}{set\+Up} ()  throws Exception 
+\item 
+void \hyperlink{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system_test_case_a0ef30d6b8d184af287751fc94e210bb5}{no\+Decrement\+Health\+Test} ()
+\begin{DoxyCompactList}\small\item\em Testa uma colisao que nao deveria ocorrer dano. \end{DoxyCompactList}\item 
+void \hyperlink{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system_test_case_abc8abedb916509610e9b243774cff5ab}{decrement\+Health\+Test} ()
+\begin{DoxyCompactList}\small\item\em Testa uma colisao que deveria ocorrer dano. \end{DoxyCompactList}\item 
+void \hyperlink{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system_test_case_abfbef680117fc6219894a59dd65a4e4d}{increase\+Health\+Test} ()
+\begin{DoxyCompactList}\small\item\em Testa se quando ocorrer a colisao de Char e Power Up de incremento de vida entao esta entidade tem sua vida incrementada. \end{DoxyCompactList}\item 
+void \hyperlink{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system_test_case_ae3154fc134b3d4d4b8f29ee99bf64ea0}{destroyif\+Health\+Zero\+Test} ()
+\begin{DoxyCompactList}\small\item\em Testa a destruicao de uma entidade Char ou Monster quando sua vida chega a zero. \end{DoxyCompactList}\item 
+void \hyperlink{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system_test_case_aa01ee69d6e1e5dc3c5469664c0d5b48a}{recreate\+If\+Has\+More\+Tries\+Test} ()
+\begin{DoxyCompactList}\small\item\em Testa se quando uma entidade Char, apos perder uma vida e possuir vidas restantes, e recriado na celula inicial e com invecibilidade. \end{DoxyCompactList}\item 
+void \hyperlink{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system_test_case_a8d976e0134e80883f11a05bc429f1628}{game\+Over\+If\+Has\+No\+More\+Tries\+Test} ()
+\begin{DoxyCompactList}\small\item\em Testa se o jogo acaba caso um Char nao possuir mais vidas. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Classe de testes do \hyperlink{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system}{Life\+System} do Módulo Life. 
+
+\begin{DoxyVersion}{Version}
+0.\+2 21 Out 2014 
+\end{DoxyVersion}
+\begin{DoxyAuthor}{Author}
+Grupo 5 -\/ Dayanne \href{mailto:dayannefernandesc@gmail.com}{\tt dayannefernandesc@gmail.\+com} 
+\end{DoxyAuthor}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system_test_case_abc8abedb916509610e9b243774cff5ab}{\index{br\+::unb\+::unbomber\+::systems\+::\+Life\+System\+Test\+Case@{br\+::unb\+::unbomber\+::systems\+::\+Life\+System\+Test\+Case}!decrement\+Health\+Test@{decrement\+Health\+Test}}
+\index{decrement\+Health\+Test@{decrement\+Health\+Test}!br\+::unb\+::unbomber\+::systems\+::\+Life\+System\+Test\+Case@{br\+::unb\+::unbomber\+::systems\+::\+Life\+System\+Test\+Case}}
+\subsubsection[{decrement\+Health\+Test}]{\setlength{\rightskip}{0pt plus 5cm}void br.\+unb.\+unbomber.\+systems.\+Life\+System\+Test\+Case.\+decrement\+Health\+Test (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system_test_case_abc8abedb916509610e9b243774cff5ab}
+
+
+Testa uma colisao que deveria ocorrer dano. 
+
+\begin{DoxyReturn}{Returns}
+Passa no teste se o valor retornado e T\+R\+U\+E. 
+\end{DoxyReturn}
+Criacao das entidades.
+
+Inicia os componentes de atribuicao de tipos das entidades.
+
+Cria evento de colisao entre as entidades Char e Monster
+
+Adiciona este evento ao \hyperlink{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system}{Life\+System} e recebe se foi retirado dano da colisao simulada.\hypertarget{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system_test_case_ae3154fc134b3d4d4b8f29ee99bf64ea0}{\index{br\+::unb\+::unbomber\+::systems\+::\+Life\+System\+Test\+Case@{br\+::unb\+::unbomber\+::systems\+::\+Life\+System\+Test\+Case}!destroyif\+Health\+Zero\+Test@{destroyif\+Health\+Zero\+Test}}
+\index{destroyif\+Health\+Zero\+Test@{destroyif\+Health\+Zero\+Test}!br\+::unb\+::unbomber\+::systems\+::\+Life\+System\+Test\+Case@{br\+::unb\+::unbomber\+::systems\+::\+Life\+System\+Test\+Case}}
+\subsubsection[{destroyif\+Health\+Zero\+Test}]{\setlength{\rightskip}{0pt plus 5cm}void br.\+unb.\+unbomber.\+systems.\+Life\+System\+Test\+Case.\+destroyif\+Health\+Zero\+Test (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system_test_case_ae3154fc134b3d4d4b8f29ee99bf64ea0}
+
+
+Testa a destruicao de uma entidade Char ou Monster quando sua vida chega a zero. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system_test_case_a8d976e0134e80883f11a05bc429f1628}{\index{br\+::unb\+::unbomber\+::systems\+::\+Life\+System\+Test\+Case@{br\+::unb\+::unbomber\+::systems\+::\+Life\+System\+Test\+Case}!game\+Over\+If\+Has\+No\+More\+Tries\+Test@{game\+Over\+If\+Has\+No\+More\+Tries\+Test}}
+\index{game\+Over\+If\+Has\+No\+More\+Tries\+Test@{game\+Over\+If\+Has\+No\+More\+Tries\+Test}!br\+::unb\+::unbomber\+::systems\+::\+Life\+System\+Test\+Case@{br\+::unb\+::unbomber\+::systems\+::\+Life\+System\+Test\+Case}}
+\subsubsection[{game\+Over\+If\+Has\+No\+More\+Tries\+Test}]{\setlength{\rightskip}{0pt plus 5cm}void br.\+unb.\+unbomber.\+systems.\+Life\+System\+Test\+Case.\+game\+Over\+If\+Has\+No\+More\+Tries\+Test (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system_test_case_a8d976e0134e80883f11a05bc429f1628}
+
+
+Testa se o jogo acaba caso um Char nao possuir mais vidas. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system_test_case_abfbef680117fc6219894a59dd65a4e4d}{\index{br\+::unb\+::unbomber\+::systems\+::\+Life\+System\+Test\+Case@{br\+::unb\+::unbomber\+::systems\+::\+Life\+System\+Test\+Case}!increase\+Health\+Test@{increase\+Health\+Test}}
+\index{increase\+Health\+Test@{increase\+Health\+Test}!br\+::unb\+::unbomber\+::systems\+::\+Life\+System\+Test\+Case@{br\+::unb\+::unbomber\+::systems\+::\+Life\+System\+Test\+Case}}
+\subsubsection[{increase\+Health\+Test}]{\setlength{\rightskip}{0pt plus 5cm}void br.\+unb.\+unbomber.\+systems.\+Life\+System\+Test\+Case.\+increase\+Health\+Test (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system_test_case_abfbef680117fc6219894a59dd65a4e4d}
+
+
+Testa se quando ocorrer a colisao de Char e Power Up de incremento de vida entao esta entidade tem sua vida incrementada. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system_test_case_a0ef30d6b8d184af287751fc94e210bb5}{\index{br\+::unb\+::unbomber\+::systems\+::\+Life\+System\+Test\+Case@{br\+::unb\+::unbomber\+::systems\+::\+Life\+System\+Test\+Case}!no\+Decrement\+Health\+Test@{no\+Decrement\+Health\+Test}}
+\index{no\+Decrement\+Health\+Test@{no\+Decrement\+Health\+Test}!br\+::unb\+::unbomber\+::systems\+::\+Life\+System\+Test\+Case@{br\+::unb\+::unbomber\+::systems\+::\+Life\+System\+Test\+Case}}
+\subsubsection[{no\+Decrement\+Health\+Test}]{\setlength{\rightskip}{0pt plus 5cm}void br.\+unb.\+unbomber.\+systems.\+Life\+System\+Test\+Case.\+no\+Decrement\+Health\+Test (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system_test_case_a0ef30d6b8d184af287751fc94e210bb5}
+
+
+Testa uma colisao que nao deveria ocorrer dano. 
+
+\begin{DoxyReturn}{Returns}
+Passa no teste se o valor retornado e F\+A\+L\+S\+E. 
+\end{DoxyReturn}
+Criacao das entidades.
+
+Inicia os componentes de atribuicao de tipos das entidades.
+
+Cria evento de colisao entre as entidades Char e Char
+
+Adiciona este evento ao \hyperlink{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system}{Life\+System} e recebe se foi retirado dano da colisao simulada.\hypertarget{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system_test_case_aa01ee69d6e1e5dc3c5469664c0d5b48a}{\index{br\+::unb\+::unbomber\+::systems\+::\+Life\+System\+Test\+Case@{br\+::unb\+::unbomber\+::systems\+::\+Life\+System\+Test\+Case}!recreate\+If\+Has\+More\+Tries\+Test@{recreate\+If\+Has\+More\+Tries\+Test}}
+\index{recreate\+If\+Has\+More\+Tries\+Test@{recreate\+If\+Has\+More\+Tries\+Test}!br\+::unb\+::unbomber\+::systems\+::\+Life\+System\+Test\+Case@{br\+::unb\+::unbomber\+::systems\+::\+Life\+System\+Test\+Case}}
+\subsubsection[{recreate\+If\+Has\+More\+Tries\+Test}]{\setlength{\rightskip}{0pt plus 5cm}void br.\+unb.\+unbomber.\+systems.\+Life\+System\+Test\+Case.\+recreate\+If\+Has\+More\+Tries\+Test (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system_test_case_aa01ee69d6e1e5dc3c5469664c0d5b48a}
+
+
+Testa se quando uma entidade Char, apos perder uma vida e possuir vidas restantes, e recriado na celula inicial e com invecibilidade. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system_test_case_acff3a0b14b7e1d59007766ae222e98db}{\index{br\+::unb\+::unbomber\+::systems\+::\+Life\+System\+Test\+Case@{br\+::unb\+::unbomber\+::systems\+::\+Life\+System\+Test\+Case}!set\+Up@{set\+Up}}
+\index{set\+Up@{set\+Up}!br\+::unb\+::unbomber\+::systems\+::\+Life\+System\+Test\+Case@{br\+::unb\+::unbomber\+::systems\+::\+Life\+System\+Test\+Case}}
+\subsubsection[{set\+Up}]{\setlength{\rightskip}{0pt plus 5cm}void br.\+unb.\+unbomber.\+systems.\+Life\+System\+Test\+Case.\+set\+Up (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) throws Exception}}\label{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system_test_case_acff3a0b14b7e1d59007766ae222e98db}
+Inicia um sistema para cada caso de teste 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Igor/git/bomberman/src/test/java/br/unb/unbomber/systems/\hyperlink{_life_system_test_case_8java}{Life\+System\+Test\+Case.\+java}\end{DoxyCompactItemize}

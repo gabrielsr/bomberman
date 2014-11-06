@@ -1,0 +1,82 @@
+\hypertarget{struct_c_u___test}{\section{C\+U\+\_\+\+Test Struct Reference}
+\label{struct_c_u___test}\index{C\+U\+\_\+\+Test@{C\+U\+\_\+\+Test}}
+}
+
+
+C\+Unit test case data type.  
+
+
+
+
+{\ttfamily \#include $<$Test\+D\+B.\+h$>$}
+
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+char $\ast$ \hyperlink{struct_c_u___test_ae1f688f9e108805d7f59ee364c5eb2a2}{p\+Name}
+\begin{DoxyCompactList}\small\item\em Test name. \end{DoxyCompactList}\item 
+\hyperlink{group___framework_ga5868148b642b30635b8fe7f095c5b493}{C\+U\+\_\+\+Test\+Func} \hyperlink{struct_c_u___test_a9543ec07c51ec70a40cdd845ce3bf55b}{p\+Test\+Func}
+\begin{DoxyCompactList}\small\item\em Pointer to the test function. \end{DoxyCompactList}\item 
+jmp\+\_\+buf $\ast$ \hyperlink{struct_c_u___test_ada5212c6bacdbaf9319968d895a69ce4}{p\+Jump\+Buf}
+\begin{DoxyCompactList}\small\item\em Jump buffer for setjmp/longjmp test abort mechanism. \end{DoxyCompactList}\item 
+struct \hyperlink{struct_c_u___test}{C\+U\+\_\+\+Test} $\ast$ \hyperlink{struct_c_u___test_abca70319a9ee946094bd7de3e3207141}{p\+Next}
+\begin{DoxyCompactList}\small\item\em Pointer to the next test in linked list. \end{DoxyCompactList}\item 
+struct \hyperlink{struct_c_u___test}{C\+U\+\_\+\+Test} $\ast$ \hyperlink{struct_c_u___test_a1b0ae6d72f43397547a0ff3680001c24}{p\+Prev}
+\begin{DoxyCompactList}\small\item\em Pointer to the previous test in linked list. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+C\+Unit test case data type. 
+
+\hyperlink{struct_c_u___test}{C\+U\+\_\+\+Test} is a linked list of unit tests. Each test has a name and a callable test function, as well as links to the next and previous tests in the list. A test also holds a jmp\+\_\+buf reference for use in implementing fatal assertions. 
+
+Generally, the linked list includes tests which are associated with each other in a \hyperlink{struct_c_u___suite}{C\+U\+\_\+\+Suite}. As a result, tests are run in the order in which they are added to a suite (see \hyperlink{group___framework_gad9f198a8a5fa8cc6870c3c8be873869f}{C\+U\+\_\+add\+\_\+test()}). 
+
+In the current implementation, the name of each \hyperlink{struct_c_u___test}{C\+U\+\_\+\+Test} in a suite must have a unique name. There is no restriction on the test function. This means that the same function could, in principle, be called more than once as long as it is registered with different tests having distinct names. \begin{DoxySeeAlso}{See also}
+\hyperlink{struct_c_u___suite}{C\+U\+\_\+\+Suite} 
+
+\hyperlink{struct_c_u___test_registry}{C\+U\+\_\+\+Test\+Registry} 
+\end{DoxySeeAlso}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{struct_c_u___test_ada5212c6bacdbaf9319968d895a69ce4}{\index{C\+U\+\_\+\+Test@{C\+U\+\_\+\+Test}!p\+Jump\+Buf@{p\+Jump\+Buf}}
+\index{p\+Jump\+Buf@{p\+Jump\+Buf}!C\+U\+\_\+\+Test@{C\+U\+\_\+\+Test}}
+\subsubsection[{p\+Jump\+Buf}]{\setlength{\rightskip}{0pt plus 5cm}jmp\+\_\+buf$\ast$ C\+U\+\_\+\+Test\+::p\+Jump\+Buf}}\label{struct_c_u___test_ada5212c6bacdbaf9319968d895a69ce4}
+
+
+Jump buffer for setjmp/longjmp test abort mechanism. 
+
+\hypertarget{struct_c_u___test_ae1f688f9e108805d7f59ee364c5eb2a2}{\index{C\+U\+\_\+\+Test@{C\+U\+\_\+\+Test}!p\+Name@{p\+Name}}
+\index{p\+Name@{p\+Name}!C\+U\+\_\+\+Test@{C\+U\+\_\+\+Test}}
+\subsubsection[{p\+Name}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ C\+U\+\_\+\+Test\+::p\+Name}}\label{struct_c_u___test_ae1f688f9e108805d7f59ee364c5eb2a2}
+
+
+Test name. 
+
+\hypertarget{struct_c_u___test_abca70319a9ee946094bd7de3e3207141}{\index{C\+U\+\_\+\+Test@{C\+U\+\_\+\+Test}!p\+Next@{p\+Next}}
+\index{p\+Next@{p\+Next}!C\+U\+\_\+\+Test@{C\+U\+\_\+\+Test}}
+\subsubsection[{p\+Next}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf C\+U\+\_\+\+Test}$\ast$ C\+U\+\_\+\+Test\+::p\+Next}}\label{struct_c_u___test_abca70319a9ee946094bd7de3e3207141}
+
+
+Pointer to the next test in linked list. 
+
+\hypertarget{struct_c_u___test_a1b0ae6d72f43397547a0ff3680001c24}{\index{C\+U\+\_\+\+Test@{C\+U\+\_\+\+Test}!p\+Prev@{p\+Prev}}
+\index{p\+Prev@{p\+Prev}!C\+U\+\_\+\+Test@{C\+U\+\_\+\+Test}}
+\subsubsection[{p\+Prev}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf C\+U\+\_\+\+Test}$\ast$ C\+U\+\_\+\+Test\+::p\+Prev}}\label{struct_c_u___test_a1b0ae6d72f43397547a0ff3680001c24}
+
+
+Pointer to the previous test in linked list. 
+
+\hypertarget{struct_c_u___test_a9543ec07c51ec70a40cdd845ce3bf55b}{\index{C\+U\+\_\+\+Test@{C\+U\+\_\+\+Test}!p\+Test\+Func@{p\+Test\+Func}}
+\index{p\+Test\+Func@{p\+Test\+Func}!C\+U\+\_\+\+Test@{C\+U\+\_\+\+Test}}
+\subsubsection[{p\+Test\+Func}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\+U\+\_\+\+Test\+Func} C\+U\+\_\+\+Test\+::p\+Test\+Func}}\label{struct_c_u___test_a9543ec07c51ec70a40cdd845ce3bf55b}
+
+
+Pointer to the test function. 
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Igor/git/bomberman/src/test/c/\+C\+Unit/\hyperlink{_test_d_b_8h}{Test\+D\+B.\+h}\end{DoxyCompactItemize}

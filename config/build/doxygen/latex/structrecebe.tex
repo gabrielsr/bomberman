@@ -1,0 +1,51 @@
+\hypertarget{structrecebe}{\section{recebe Struct Reference}
+\label{structrecebe}\index{recebe@{recebe}}
+}
+
+
+Estrutura L\+S\+T\+\_\+\+Event.  
+
+
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{structrecebe_a8d29126b1902f0e8206fb54d7b73cf55}{comando}
+\begin{DoxyCompactList}\small\item\em Inteiro que representa o tipo de ação que ocorreu no jogo. \end{DoxyCompactList}\item 
+int \hyperlink{structrecebe_aa3c608135add531f3120b2460e09bff2}{player}
+\begin{DoxyCompactList}\small\item\em Junto com o comando deve ser enviado o inteiro representante do jogador responsável pela ação. \end{DoxyCompactList}\item 
+struct \hyperlink{structrecebe}{recebe} $\ast$ \hyperlink{structrecebe_afd17b6474940eb351c1635212f426597}{next}
+\begin{DoxyCompactList}\small\item\em Ponteiro para o próximo elemento da lista. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Estrutura L\+S\+T\+\_\+\+Event. 
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{structrecebe_a8d29126b1902f0e8206fb54d7b73cf55}{\index{recebe@{recebe}!comando@{comando}}
+\index{comando@{comando}!recebe@{recebe}}
+\subsubsection[{comando}]{\setlength{\rightskip}{0pt plus 5cm}int recebe\+::comando}}\label{structrecebe_a8d29126b1902f0e8206fb54d7b73cf55}
+
+
+Inteiro que representa o tipo de ação que ocorreu no jogo. 
+
+'0' representa a inicialização do jogo, '1' representa a morte de um monstro, '2' representa a explosão de um soft block, '3' representa a coleta de um power up, '4' representa a morte de um outro personagem e '5' representa a finalização do jogo. \hypertarget{structrecebe_afd17b6474940eb351c1635212f426597}{\index{recebe@{recebe}!next@{next}}
+\index{next@{next}!recebe@{recebe}}
+\subsubsection[{next}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf recebe}$\ast$ recebe\+::next}}\label{structrecebe_afd17b6474940eb351c1635212f426597}
+
+
+Ponteiro para o próximo elemento da lista. 
+
+\hypertarget{structrecebe_aa3c608135add531f3120b2460e09bff2}{\index{recebe@{recebe}!player@{player}}
+\index{player@{player}!recebe@{recebe}}
+\subsubsection[{player}]{\setlength{\rightskip}{0pt plus 5cm}int recebe\+::player}}\label{structrecebe_aa3c608135add531f3120b2460e09bff2}
+
+
+Junto com o comando deve ser enviado o inteiro representante do jogador responsável pela ação. 
+
+Em comandos em que não está envolvido um personagem (inicialização e finalização do jogo, por exemplo), qualquer valor de 'player' pode ser enviado, pois ele não será computado. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Igor/git/bomberman/src/main/c/\hyperlink{_score_bomberman_8c}{Score\+Bomberman.\+c}\end{DoxyCompactItemize}

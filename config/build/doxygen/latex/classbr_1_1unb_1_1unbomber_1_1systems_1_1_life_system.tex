@@ -1,0 +1,237 @@
+\hypertarget{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system}{\section{br.\+unb.\+unbomber.\+systems.\+Life\+System Class Reference}
+\label{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system}\index{br.\+unb.\+unbomber.\+systems.\+Life\+System@{br.\+unb.\+unbomber.\+systems.\+Life\+System}}
+}
+
+
+Classe reponsavel pelas regras e logicas do Modulo Life.  
+
+
+Inheritance diagram for br.\+unb.\+unbomber.\+systems.\+Life\+System\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system_a59a5d0f16643f9ac2a19fef6cfd62b42}{Life\+System} ()
+\begin{DoxyCompactList}\small\item\em Instancia o Entity\+Manager a partir da classe pai Base\+System. \end{DoxyCompactList}\item 
+\hyperlink{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system_a4c65f6e17a754612781366c618825f5d}{Life\+System} (\hyperlink{interfacebr_1_1unb_1_1unbomber_1_1core_1_1_entity_manager}{Entity\+Manager} model)
+\begin{DoxyCompactList}\small\item\em Construtor da Classe. \end{DoxyCompactList}\item 
+void \hyperlink{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system_add7a0f79e5f256407ba1d14cf5fc8610}{update} ()
+\begin{DoxyCompactList}\small\item\em Update. \end{DoxyCompactList}\item 
+boolean \hyperlink{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system_ac4644a67be6412b93fc47700e8c5e629}{is\+Life\+Damage} (\hyperlink{classbr_1_1unb_1_1unbomber_1_1event_1_1_collision_event}{Collision\+Event} collision)
+\item 
+void \hyperlink{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system_a3d84ab6ee592745e577494c07146369a}{take\+Damaged} (\hyperlink{classbr_1_1unb_1_1unbomber_1_1component_1_1_health}{Health} target\+Collision\+Life)
+\item 
+boolean \hyperlink{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system_a62ea7abe8df87807153ec47dd0ca5955}{permitted\+Type\+Damage} (\hyperlink{classbr_1_1unb_1_1unbomber_1_1component_1_1_life_type}{Life\+Type} ent\+Type1, \hyperlink{classbr_1_1unb_1_1unbomber_1_1component_1_1_life_type}{Life\+Type} ent\+Type2)
+\begin{DoxyCompactList}\small\item\em Metodo que avalia a possibilidade de ser retirado dano de alguma entidade em um evento de colisao. \end{DoxyCompactList}\item 
+void \hyperlink{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system_a3295a485d65a8676cca8b72306e44ada}{create\+Destroy\+Event} (\hyperlink{classbr_1_1unb_1_1unbomber_1_1component_1_1_health}{Health} target\+Collision\+Life)
+\begin{DoxyCompactList}\small\item\em Metodo que cria evento de destruicao de uma entidade. \end{DoxyCompactList}\item 
+boolean \hyperlink{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system_a976c49ecfc7f8d47fb2fe41e4f957304}{count\+Available\+Tries} (\hyperlink{classbr_1_1unb_1_1unbomber_1_1event_1_1_destroyed_event}{Destroyed\+Event} destroyed)
+\begin{DoxyCompactList}\small\item\em Metodo que avalia se e possivel retirar uma tentativa de vida da entidade que sera destruida. \end{DoxyCompactList}\item 
+void \hyperlink{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system_a016c596c22b91ab4aa204e4b17ba27e1}{recreate\+Entity} (\hyperlink{classbr_1_1unb_1_1unbomber_1_1event_1_1_destroyed_event}{Destroyed\+Event} destroyed)
+\begin{DoxyCompactList}\small\item\em Metodo que recria a entidade na celula inicial do Grid e atribui o modo Invencible a entidade por 270 ticks, o qual nao podera tomar dano. \end{DoxyCompactList}\item 
+void \hyperlink{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system_a41c42642036835d1b3af52eee01f6b60}{create\+Game\+Over\+Event} (\hyperlink{classbr_1_1unb_1_1unbomber_1_1event_1_1_destroyed_event}{Destroyed\+Event} destroyed)
+\item 
+void \hyperlink{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system_ad5f784dba0df9fb442a036a9426145e8}{destroy\+Entity} (\hyperlink{classbr_1_1unb_1_1unbomber_1_1event_1_1_destroyed_event}{Destroyed\+Event} destroyed)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Classe reponsavel pelas regras e logicas do Modulo Life. 
+
+\begin{DoxyVersion}{Version}
+0.\+2 21 Out 2014 
+\end{DoxyVersion}
+\begin{DoxyAuthor}{Author}
+Grupo 5 -\/ Dayanne \href{mailto:dayannefernandesc@gmail.com}{\tt dayannefernandesc@gmail.\+com} 
+\end{DoxyAuthor}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system_a59a5d0f16643f9ac2a19fef6cfd62b42}{\index{br\+::unb\+::unbomber\+::systems\+::\+Life\+System@{br\+::unb\+::unbomber\+::systems\+::\+Life\+System}!Life\+System@{Life\+System}}
+\index{Life\+System@{Life\+System}!br\+::unb\+::unbomber\+::systems\+::\+Life\+System@{br\+::unb\+::unbomber\+::systems\+::\+Life\+System}}
+\subsubsection[{Life\+System}]{\setlength{\rightskip}{0pt plus 5cm}br.\+unb.\+unbomber.\+systems.\+Life\+System.\+Life\+System (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system_a59a5d0f16643f9ac2a19fef6cfd62b42}
+
+
+Instancia o Entity\+Manager a partir da classe pai Base\+System. 
+
+\hypertarget{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system_a4c65f6e17a754612781366c618825f5d}{\index{br\+::unb\+::unbomber\+::systems\+::\+Life\+System@{br\+::unb\+::unbomber\+::systems\+::\+Life\+System}!Life\+System@{Life\+System}}
+\index{Life\+System@{Life\+System}!br\+::unb\+::unbomber\+::systems\+::\+Life\+System@{br\+::unb\+::unbomber\+::systems\+::\+Life\+System}}
+\subsubsection[{Life\+System}]{\setlength{\rightskip}{0pt plus 5cm}br.\+unb.\+unbomber.\+systems.\+Life\+System.\+Life\+System (
+\begin{DoxyParamCaption}
+\item[{{\bf Entity\+Manager}}]{model}
+\end{DoxyParamCaption}
+)}}\label{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system_a4c65f6e17a754612781366c618825f5d}
+
+
+Construtor da Classe. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em model} & \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system_a976c49ecfc7f8d47fb2fe41e4f957304}{\index{br\+::unb\+::unbomber\+::systems\+::\+Life\+System@{br\+::unb\+::unbomber\+::systems\+::\+Life\+System}!count\+Available\+Tries@{count\+Available\+Tries}}
+\index{count\+Available\+Tries@{count\+Available\+Tries}!br\+::unb\+::unbomber\+::systems\+::\+Life\+System@{br\+::unb\+::unbomber\+::systems\+::\+Life\+System}}
+\subsubsection[{count\+Available\+Tries}]{\setlength{\rightskip}{0pt plus 5cm}boolean br.\+unb.\+unbomber.\+systems.\+Life\+System.\+count\+Available\+Tries (
+\begin{DoxyParamCaption}
+\item[{{\bf Destroyed\+Event}}]{destroyed}
+\end{DoxyParamCaption}
+)}}\label{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system_a976c49ecfc7f8d47fb2fe41e4f957304}
+
+
+Metodo que avalia se e possivel retirar uma tentativa de vida da entidade que sera destruida. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em destroyed} & Evento que contem a Id da entidade que sera destruida. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+have\+Life\+Tries 
+\end{DoxyReturn}
+Booleano que ira indicar a possibilidade de retirar uma tentativa de vida da entidade que foi destruida.
+
+Quantidade de tentativas de vida que a entidade possui.
+
+Coleta componente de quantidade de tentativas de vidas pelo Id da entidade que vai ser destruida.\hypertarget{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system_a3295a485d65a8676cca8b72306e44ada}{\index{br\+::unb\+::unbomber\+::systems\+::\+Life\+System@{br\+::unb\+::unbomber\+::systems\+::\+Life\+System}!create\+Destroy\+Event@{create\+Destroy\+Event}}
+\index{create\+Destroy\+Event@{create\+Destroy\+Event}!br\+::unb\+::unbomber\+::systems\+::\+Life\+System@{br\+::unb\+::unbomber\+::systems\+::\+Life\+System}}
+\subsubsection[{create\+Destroy\+Event}]{\setlength{\rightskip}{0pt plus 5cm}void br.\+unb.\+unbomber.\+systems.\+Life\+System.\+create\+Destroy\+Event (
+\begin{DoxyParamCaption}
+\item[{{\bf Health}}]{target\+Collision\+Life}
+\end{DoxyParamCaption}
+)}}\label{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system_a3295a485d65a8676cca8b72306e44ada}
+
+
+Metodo que cria evento de destruicao de uma entidade. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em target\+Collision\+Life} & Componente que possui a Id que zerou a vida. \\
+\hline
+\end{DoxyParams}
+Cria evento de destruicao da entidade.
+
+Adiciona este evento ao gerenciamento de entidades. \hypertarget{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system_a41c42642036835d1b3af52eee01f6b60}{\index{br\+::unb\+::unbomber\+::systems\+::\+Life\+System@{br\+::unb\+::unbomber\+::systems\+::\+Life\+System}!create\+Game\+Over\+Event@{create\+Game\+Over\+Event}}
+\index{create\+Game\+Over\+Event@{create\+Game\+Over\+Event}!br\+::unb\+::unbomber\+::systems\+::\+Life\+System@{br\+::unb\+::unbomber\+::systems\+::\+Life\+System}}
+\subsubsection[{create\+Game\+Over\+Event}]{\setlength{\rightskip}{0pt plus 5cm}void br.\+unb.\+unbomber.\+systems.\+Life\+System.\+create\+Game\+Over\+Event (
+\begin{DoxyParamCaption}
+\item[{{\bf Destroyed\+Event}}]{destroyed}
+\end{DoxyParamCaption}
+)}}\label{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system_a41c42642036835d1b3af52eee01f6b60}
+Retira a entidade do Grid \hypertarget{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system_ad5f784dba0df9fb442a036a9426145e8}{\index{br\+::unb\+::unbomber\+::systems\+::\+Life\+System@{br\+::unb\+::unbomber\+::systems\+::\+Life\+System}!destroy\+Entity@{destroy\+Entity}}
+\index{destroy\+Entity@{destroy\+Entity}!br\+::unb\+::unbomber\+::systems\+::\+Life\+System@{br\+::unb\+::unbomber\+::systems\+::\+Life\+System}}
+\subsubsection[{destroy\+Entity}]{\setlength{\rightskip}{0pt plus 5cm}void br.\+unb.\+unbomber.\+systems.\+Life\+System.\+destroy\+Entity (
+\begin{DoxyParamCaption}
+\item[{{\bf Destroyed\+Event}}]{destroyed}
+\end{DoxyParamCaption}
+)}}\label{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system_ad5f784dba0df9fb442a036a9426145e8}
+Remove a entidade da lista de entidades. \hypertarget{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system_ac4644a67be6412b93fc47700e8c5e629}{\index{br\+::unb\+::unbomber\+::systems\+::\+Life\+System@{br\+::unb\+::unbomber\+::systems\+::\+Life\+System}!is\+Life\+Damage@{is\+Life\+Damage}}
+\index{is\+Life\+Damage@{is\+Life\+Damage}!br\+::unb\+::unbomber\+::systems\+::\+Life\+System@{br\+::unb\+::unbomber\+::systems\+::\+Life\+System}}
+\subsubsection[{is\+Life\+Damage}]{\setlength{\rightskip}{0pt plus 5cm}boolean br.\+unb.\+unbomber.\+systems.\+Life\+System.\+is\+Life\+Damage (
+\begin{DoxyParamCaption}
+\item[{{\bf Collision\+Event}}]{collision}
+\end{DoxyParamCaption}
+)}}\label{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system_ac4644a67be6412b93fc47700e8c5e629}
+Id e tipo da entidade que realizou a colisao.
+
+Id e tipo da entidade que sofreu a colisao.
+
+Booleano que ira indicar a possibilidade de retirar dano de uma entidade que sofreu alguma colisao.
+
+Coleta as identidades dos agentes do evento de colisao.
+
+Procura o tipo da entidade pela a Id da mesma.\hypertarget{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system_a62ea7abe8df87807153ec47dd0ca5955}{\index{br\+::unb\+::unbomber\+::systems\+::\+Life\+System@{br\+::unb\+::unbomber\+::systems\+::\+Life\+System}!permitted\+Type\+Damage@{permitted\+Type\+Damage}}
+\index{permitted\+Type\+Damage@{permitted\+Type\+Damage}!br\+::unb\+::unbomber\+::systems\+::\+Life\+System@{br\+::unb\+::unbomber\+::systems\+::\+Life\+System}}
+\subsubsection[{permitted\+Type\+Damage}]{\setlength{\rightskip}{0pt plus 5cm}boolean br.\+unb.\+unbomber.\+systems.\+Life\+System.\+permitted\+Type\+Damage (
+\begin{DoxyParamCaption}
+\item[{{\bf Life\+Type}}]{ent\+Type1, }
+\item[{{\bf Life\+Type}}]{ent\+Type2}
+\end{DoxyParamCaption}
+)}}\label{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system_a62ea7abe8df87807153ec47dd0ca5955}
+
+
+Metodo que avalia a possibilidade de ser retirado dano de alguma entidade em um evento de colisao. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ent\+Type1} & Entidade que realizou a colisao. \\
+\hline
+{\em ent\+Type2} & Entidade que sofreu a colisao. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+can\+Take\+Damage 
+\end{DoxyReturn}
+Booleano que ira indicar a possibilidade de retirar dano de uma entidade que sofreu alguma colisao.\hypertarget{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system_a016c596c22b91ab4aa204e4b17ba27e1}{\index{br\+::unb\+::unbomber\+::systems\+::\+Life\+System@{br\+::unb\+::unbomber\+::systems\+::\+Life\+System}!recreate\+Entity@{recreate\+Entity}}
+\index{recreate\+Entity@{recreate\+Entity}!br\+::unb\+::unbomber\+::systems\+::\+Life\+System@{br\+::unb\+::unbomber\+::systems\+::\+Life\+System}}
+\subsubsection[{recreate\+Entity}]{\setlength{\rightskip}{0pt plus 5cm}void br.\+unb.\+unbomber.\+systems.\+Life\+System.\+recreate\+Entity (
+\begin{DoxyParamCaption}
+\item[{{\bf Destroyed\+Event}}]{destroyed}
+\end{DoxyParamCaption}
+)}}\label{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system_a016c596c22b91ab4aa204e4b17ba27e1}
+
+
+Metodo que recria a entidade na celula inicial do Grid e atribui o modo Invencible a entidade por 270 ticks, o qual nao podera tomar dano. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em destroyed} & Evento que contem a Id da entidade que sera recriada. \\
+\hline
+\end{DoxyParams}
+Quantidade de tentativas de vida que a entidade possui.
+
+Atribuicao da entidade destruida a celula inicial.
+
+Atribuicao da vida incial da entidade destruida.
+
+Decrementa de uma tentativa de vida da entidade destruida.
+
+Criacao do Evento de Invencible para a entidade recriada
+
+Adicionando evento de invencivel para a entidade. \hypertarget{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system_a3d84ab6ee592745e577494c07146369a}{\index{br\+::unb\+::unbomber\+::systems\+::\+Life\+System@{br\+::unb\+::unbomber\+::systems\+::\+Life\+System}!take\+Damaged@{take\+Damaged}}
+\index{take\+Damaged@{take\+Damaged}!br\+::unb\+::unbomber\+::systems\+::\+Life\+System@{br\+::unb\+::unbomber\+::systems\+::\+Life\+System}}
+\subsubsection[{take\+Damaged}]{\setlength{\rightskip}{0pt plus 5cm}void br.\+unb.\+unbomber.\+systems.\+Life\+System.\+take\+Damaged (
+\begin{DoxyParamCaption}
+\item[{{\bf Health}}]{target\+Collision\+Life}
+\end{DoxyParamCaption}
+)}}\label{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system_a3d84ab6ee592745e577494c07146369a}
+Vida da entidade que sofreu a colisao.
+
+Coleta a vida da entidade.
+
+Decrementa a vida da entidade.
+
+Atribui a vida decrementada a entidade de origem.\hypertarget{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system_add7a0f79e5f256407ba1d14cf5fc8610}{\index{br\+::unb\+::unbomber\+::systems\+::\+Life\+System@{br\+::unb\+::unbomber\+::systems\+::\+Life\+System}!update@{update}}
+\index{update@{update}!br\+::unb\+::unbomber\+::systems\+::\+Life\+System@{br\+::unb\+::unbomber\+::systems\+::\+Life\+System}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}void br.\+unb.\+unbomber.\+systems.\+Life\+System.\+update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classbr_1_1unb_1_1unbomber_1_1systems_1_1_life_system_add7a0f79e5f256407ba1d14cf5fc8610}
+
+
+Update. 
+
+Coleta Eventos de Colisao
+
+Coleta Eventos de destruicao de entidades.
+
+Implements \hyperlink{interfacebr_1_1unb_1_1unbomber_1_1core_1_1_system_a6b1268f3fef77e2ce797eedc1b34eb44}{br.\+unb.\+unbomber.\+core.\+System}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Igor/git/bomberman/src/main/java/br/unb/unbomber/systems/\hyperlink{_life_system_8java}{Life\+System.\+java}\end{DoxyCompactItemize}
