@@ -5,10 +5,9 @@
 *Alexandre Magno             -
 *Marcelo Giordano            -
 *********************************************************************************************************************************/
-package br.unb.unbomber.event;
+package br.unb.unbomber.systems;
 
 import static org.junit.Assert.*;
-import Event;
 
 import java.util.List;
 
@@ -67,4 +66,5 @@ public class CollisionTest {
 				}
 			}
 
+		}
 }
