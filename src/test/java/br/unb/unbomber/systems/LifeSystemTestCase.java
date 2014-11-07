@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.Ignore;
 
 import br.unb.unbomber.component.CellPlacement;
 import br.unb.unbomber.component.Explosive;
@@ -22,12 +23,12 @@ import br.unb.unbomber.core.EntityManagerImpl;
 import br.unb.unbomber.event.CollisionEvent;
 
 /**
- * Classe de testes do LifeSystem do Módulo Life.
+ * Classe de testes do LifeSystem do Mï¿½dulo Life.
  * 
  * @version 0.2 21 Out 2014
  * @author Grupo 5 - Dayanne <dayannefernandesc@gmail.com>
  */
-
+@Ignore
 public class LifeSystemTestCase {
 
 	/** Gerenciador das entidades. */

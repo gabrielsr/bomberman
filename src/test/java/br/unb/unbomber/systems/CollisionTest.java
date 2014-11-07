@@ -13,9 +13,11 @@ import Event;
 import java.util.List;
 
 import org.junit.Test;
+import org.junit.Ignore;
 
 import br.unb.unbomber.systems.CollisionSystem;
 
+@Ignore
 public class CollisionTest {
 
 	@Test
