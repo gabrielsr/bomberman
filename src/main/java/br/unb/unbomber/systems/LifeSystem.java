@@ -184,7 +184,9 @@ public class LifeSystem extends BaseSystem {
 	 * @param collision
 	 *            Evento que contem a Id da entidade que colidiu e a Id da
 	 *            entidade que sofreu a colisão.
-	 * @return canTakeDamage
+	 * @return boolean Retorna true se for permitido a possibilidade de retirar
+	 *         dano de uma entidade que sofreu alguma colisão, e false caso
+	 *         contrário.
 	 */
 	public boolean isLifeDamage(CollisionEvent collision) {
 
@@ -194,11 +196,6 @@ public class LifeSystem extends BaseSystem {
 		/** Id e tipo da entidade que sofreu a colisão. */
 		int targetId;
 		LifeType entType2 = null;
-		/**
-		 * Booleano que irá indicar a possibilidade de retirar dano de uma
-		 * entidade que sofreu alguma colisão.
-		 */
-		boolean canTakeDamage = false;
 
 		/** Coleta as identidades dos agentes do evento de colisão. */
 		sourceId = collision.getSourceId();
@@ -212,20 +209,14 @@ public class LifeSystem extends BaseSystem {
 				targetId);
 
 		/**
-		 * @if Confere se foi atribuído algum tipo de entidade aos componentes
-		 *     declarados no escopo deste metodo.
-		 * 
-		 *     Caso ambos forem definidos então a função auxiliar de validação
-		 *     de danos entre colisões será chamada retornando a possibilidade
-		 *     de colisão entre os tipos passados.
-		 * 
-		 *     Caso contrário e retornado false.
+		 * Retorna boolean true se ambas entidades tiverem os tipos definidos e
+		 * a função auxiliar de validação de danos entre colisões retornar a
+		 * possibilidade como true de colisão entre os tipos passados. Caso
+		 * contrário retorna false.
 		 */
-		if (entType1 != null && entType2 != null) {
-			canTakeDamage = permittedTypeDamage(entType1, entType2);
-		}
+		return ((entType1 != null && entType2 != null) && permittedTypeDamage(
+				entType1, entType2));
 
-		return canTakeDamage;
 	}
 
 	/**
@@ -285,58 +276,33 @@ public class LifeSystem extends BaseSystem {
 	 * 
 	 * @param entTypes
 	 *            Componente de vida das entidades.
-	 * @return canTakeDamage
+	 * @return boolean Retorna true se for possível retirar dano de uma entidade
+	 *         que sofreu alguma colisão.
 	 */
 	public boolean permittedTypeDamage(LifeType... entTypes) {
 		/**
-		 * Booleano que irá indicar a possibilidade de retirar dano de uma
-		 * entidade que sofreu alguma colisão.
+		 * @if Confere se foi passado duas entidades ou uma entidade para o
+		 *     método.
+		 * 
+		 *     Caso for passado dois então o método vai ser utilizado para
+		 *     comparar a possibilidade de tirar vida em uma colisão de duas
+		 *     entidades.
+		 * 
+		 *     Caso for passado uma entidade então será averiguada a
+		 *     possibilidade de retirar vida dela.
 		 */
-		boolean canTakeDamage = false;
-		/** Lista de entidades que foi passada para o método. */
-		List<LifeType> ents;
-		ents = null;
+		if (entTypes.length == 2) {
+			return ((entTypes[0].getType() == Type.MONSTER && entTypes[1]
+					.getType() == Type.CHAR) || (entTypes[0].getType() == Type.BOMB && entTypes[1]
+					.getType() == Type.MONSTER));
 
-		for (LifeType entType : entTypes) {
-			ents.add(entType);
+		} else if (entTypes.length == 1) {
+			return (entTypes[0].getType() == Type.MONSTER || entTypes[0]
+					.getType() == Type.CHAR);
+
 		}
 
-		/**
-		 * @if Confere se foi passado algum entidade para o método.
-		 */
-		if (!ents.isEmpty()) {
-			/**
-			 * @if Confere se foi passado duas entidades ou uma entidade para o
-			 *     método.
-			 * 
-			 *     Caso for passado dois então o método vai ser utilizado para
-			 *     comparar a possibilidade de tirar vida em uma colisão de duas
-			 *     entidades.
-			 * 
-			 *     Caso for passado uma entidade então será averiguada a
-			 *     possibilidade de retirar vida dela.
-			 */
-			if (entTypes.length == 2) {
-				if (ents.get(0).getType() == Type.MONSTER
-						&& ents.get(1).getType() == Type.CHAR) {
-					canTakeDamage = true;
-				} else if (ents.get(0).getType() == Type.BOMB
-						&& ents.get(1).getType() == Type.MONSTER) {
-					canTakeDamage = true;
-				} else {
-					canTakeDamage = false;
-				}
-			} else if (entTypes.length == 1) {
-				if (ents.get(0).getType() == Type.MONSTER
-						|| ents.get(0).getType() == Type.CHAR) {
-					canTakeDamage = true;
-				} else {
-					canTakeDamage = false;
-				}
-			}
-		}
-
-		return canTakeDamage;
+		return false;
 	}
 
 	/**
@@ -362,14 +328,11 @@ public class LifeSystem extends BaseSystem {
 	 * 
 	 * @param destroyed
 	 *            Evento que contem a Id da entidade que será destruída.
-	 * @return haveLifeTries
+	 * @return boolean Retorna true se for possível retirar uma tentativa de
+	 *         vida da entidade que foi destruída. Caso contrário é retornado
+	 *         falso.
 	 */
 	public boolean countAvailableTries(DestroyedEvent destroyed) {
-		/**
-		 * Booleano que irá indicar a possibilidade de retirar uma tentativa de
-		 * vida da entidade que foi destruída.
-		 */
-		boolean haveLifeTries;
 		/** Quantidade de tentativas de vida que a entidade possui. */
 		int lifeTries;
 
@@ -382,13 +345,8 @@ public class LifeSystem extends BaseSystem {
 
 		lifeTries = availableTries.getLifeTries();
 
-		if (lifeTries > 0) {
-			haveLifeTries = true;
-		} else {
-			haveLifeTries = false;
-		}
+		return (lifeTries > 0);
 
-		return haveLifeTries;
 	}
 
 	/**
@@ -463,38 +421,26 @@ public class LifeSystem extends BaseSystem {
 	 * @param collision
 	 *            Evento que contem a Id da entidade que colidiu e a Id da
 	 *            entidade que sofreu a colisão.
-	 * @return canTakeDamage
+	 * @return boolean Retorna true for possível retirar dano de uma entidade
+	 *         que está na explosão.
 	 */
 	public boolean isDamageExplosion(InAnExplosionEvent explosion) {
 
 		/** Id e tipo da entidade que está na explosão. */
 		int sourceId = explosion.getIdHit();
 		LifeType entType = null;
-		/**
-		 * Booleano que irá indicar a possibilidade de retirar dano da entidade
-		 * que está na explosão.
-		 */
-		boolean canTakeDamage = false;
 
 		/** Procura o tipo da entidade pela a Id da mesma. */
 		entType = (LifeType) getEntityManager().getComponent(LifeType.class,
 				sourceId);
 
 		/**
-		 * @if Confere se foi atribuído algum tipo de entidade aos componentes
-		 *     declarados no escopo deste metodo.
-		 * 
-		 *     Caso foi definido o tipo da entidade, então a função auxiliar de
-		 *     validação de danos entre colisões será chamada retornando a
-		 *     possibilidade de colisão entre os tipos passados.
-		 * 
-		 *     Caso contrário e retornado false.
+		 * Retorna boolean true se caso for definido o tipo da entidade, e a
+		 * função auxiliar de validação de danos entre colisões retornar a
+		 * possibilidade como true. Caso contrário e retornado false.
 		 */
-		if (entType != null) {
-			canTakeDamage = permittedTypeDamage(entType);
-		}
+		return (entType != null && permittedTypeDamage(entType));
 
-		return canTakeDamage;
 	}
 
 	/**
@@ -502,13 +448,10 @@ public class LifeSystem extends BaseSystem {
 	 * 
 	 * @param entType
 	 *            Componente de vida da entidade.
-	 * @return canRecreate
+	 * @return boolean Retorna true se for possível a entidade passada ser
+	 *         recriada.
 	 */
 	public boolean permittedRecreate(DestroyedEvent destroyed) {
-		/**
-		 * Booleano que irá indicar a possibilidade de entidade ser recriada.
-		 */
-		boolean canRecreate = false;
 		/** Declaração da Id e do tipo da entidade. */
 		int sourceId;
 		LifeType entType;
@@ -519,26 +462,12 @@ public class LifeSystem extends BaseSystem {
 				sourceId);
 
 		/**
-		 * @if Confere se foi atribuído algum tipo de entidade ao componente
-		 *     declarados no escopo deste metodo.
+		 * Retorna true se foi atribuído algum tipo de entidade ao componente
+		 * declarado no escopo deste método e caso a entidade for do tipo Char.
+		 * Caso contrário não será possível, como por exemplo um tipo Monster.
 		 */
-		if (entType != null) {
-			/**
-			 * @if Confere o tipo da entidade.
-			 * 
-			 *     Caso for um char é possível ser recriado.
-			 * 
-			 *     Caso contrário não será possível, como por exemplo um tipo
-			 *     Monster.
-			 */
-			if (entType.getType() == Type.CHAR) {
-				canRecreate = true;
-			} else {
-				canRecreate = false;
-			}
-		}
+		return (entType != null && entType.getType() == Type.CHAR);
 
-		return canRecreate;
 	}
 
 }
