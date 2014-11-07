@@ -49,6 +49,21 @@ Num Tarefa   | Tipo Tarefa 			| Descrição da Tarefa
 
 # Executado
 
+Data 	| Horas Trabalhadas	| Num Tarefa	| Descrição da Tarefa
+---------------+----------------+---------------+--------------------------------------------------------------------------...
+
+
+## Sprint 3 (de 28/10 a 13/11)
+
+# Planejado
+
+Num Tarefa   | Tipo Tarefa 			| Descrição da Tarefa
+-------------+----------------------------------+-------------------------------+----------------------------------...
+ 01	     | Estudar				| Estudar LibGDX [3]
+ 02 	     | Códificar Tela Inicial do Jogo	| Prototipar telas iniciais do jogo
+
+# Executado
+
 Data | Horas Trabalhadas	| Num Tarefa	| Descrição da Tarefa
 ---------------+----------------+---------------+--------------------------------------------------------------------------...
 

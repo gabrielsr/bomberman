@@ -30,9 +30,12 @@ import br.unb.unbomber.event.InAnExplosionEvent;
 import br.unb.unbomber.event.TimeOverEvent;
 
 /**
- * 
- *
+ * @author <img src="https://avatars2.githubusercontent.com/u/8586137?v=2&s=30" width="30" height="30"/> <a href="https://github.com/JeffVFA" target="_blank">JeffVFA</a>
+ * @author <img src="https://avatars1.githubusercontent.com/u/4968411?v=2&s=30" width="30" height="30"/> <a href="https://github.com/zidenis" target="_blank"> zidenis </a>
+ * @author <img src="https://avatars2.githubusercontent.com/u/3778188?v=2&s=30" width="30" height="30"/> <a href="https://github.com/DRA2840" target="_blank"> DRA2840 </a>
+ * @author <img src="https://avatars2.githubusercontent.com/u/7716247?v=2&s=30" width="30" height="30"/> <a href="https://github.com/brenoxp2008" target="_blank"> brenoxp2008</a>
  */
+
 public class BombSystem extends BaseSystem {
 	/*
 	 * documented by @author JeffVFA //Define default Value of a bomb
