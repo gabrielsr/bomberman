@@ -13,6 +13,9 @@ public class AvailableTries extends Component {
 
 	/** Quantidade de vidas que um entidade Character possui */
 	private int lifeTries;
+	/* Coleta True ou False caso seja permitido retirar dano de uma entidade
+	 * monster ou character.
+//	 */
 	/**
 	 * Informa True ou False caso seja permitido retirar dano de uma entidade
 	 * Character.

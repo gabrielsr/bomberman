@@ -1,4 +1,5 @@
 Bomberman project/sound/
+
 Bomberman project/bin/
 Bomberman\ project/images/
 
@@ -21,3 +22,6 @@ Bomberman\ project/images/
 # Windows
 Thumbs.ini
 Desktop.ini
+
+#Para evitar mudancas de ida e volta de I.C no readme
+README.adoc

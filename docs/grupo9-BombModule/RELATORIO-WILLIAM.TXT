@@ -1,23 +1,76 @@
->>>> Relatório de atividades esperadas do membro William.
+>>> Grupo 9:
 
-Data 		| Horas Trabalhadas 	| Tipo Tarefa 				| Descrição da Tarefa Realizada
--------------------------------------------------------------------------------------------------------------------------------------------------
-02/10/2014	| 0,5 hora				| Estudar					| Nesta tarefa será realizado um estudo sobre
-																  a arquitetura do projeto para evitar retrabalho
-																  inútil.
+	- Paulo Victor
+	- William Simião
+	- Yuri Alexsander
 
-04/10/2014	| 2 Horas 				| Codificar módulo			| Codificar o TODO verificar TimeOutEvent de bombas 
-																  que devem ser disparadas neste turno
-		
-05/10/2014	| 1 hora				| Realizar casos de testes	| Nesta tarefa serão realizados os casos de testes.
+>>> Relatório das atividades esperadas do membro William Simião:
 
-06/10/2014	| 2 horas				| Diagnosticar e corrigir os| Nesta etapa haverá um diagnóstico do módulo para
-					  				  problemas encontrados		  ter certeza que ele cumpre tudo aquilo que é pedido
-											  					  em sua especificação. Caso haja algum problema este
-											  					  será corrigido.
+>>> Parte 1:
 
- - Total de horas de trabalho estimada: 5,5 Horas.
- - Total de horas efetivamente gastas: 8 Horas. 
- 		(4) estudar
- 		(2) codificar o módulo e realizar casos de testes
- 		(2) diagnosticar e corrigir os problemas encontrados
+ >> Sprint 1a e 1b: (02/10 - 14/10)
+
+	- Tarefas estimadas:
+
+	Data 		| Horas Trabalhadas 	| Tipo Tarefa 				| Descrição da Tarefa Realizada
+	-------------------------------------------------------------------------------------------------------------------------------------------------
+	02/10/2014	| 0,5 hora				| Estudar					| Nesta tarefa será realizado um estudo sobre
+																	  a arquitetura do projeto para evitar retrabalho
+																	  inútil.
+
+	04/10/2014	| 2 Horas 				| Codificar módulo			| Codificar o TODO verificar TimeOutEvent de bombas 
+																	  que devem ser disparadas neste turno
+			
+	05/10/2014	| 1 hora				| Realizar casos de testes	| Nesta tarefa serão realizados os casos de testes.
+
+	06/10/2014	| 2 horas				| Diagnosticar e corrigir os| Nesta etapa haverá um diagnóstico do módulo para
+						  				  problemas encontrados		  ter certeza que ele cumpre tudo aquilo que é pedido
+												  					  em sua especificação. Caso haja algum problema este
+												  					  será corrigido.
+
+	
+	- Tarefas executadas:
+
+		02/10/2014 - Estudar- 4 horas
+		04/10/2014 - Codificar módulo (TimeOutEvent) - 1 hora
+		07/10/2014 - Realizar casos de teste - 1 hora
+		06/10/2014 - Diagnosticar e corrigir os problemas encontrados - 1 hora
+	 
+	 - Tempo estimado: 5,5 horas
+	 - Tempo gasto: 7 horas
+
+ >> Sprint 2: (15/10 - 30/10)	
+	
+	Data 		| Horas Trabalhadas 	| Tipo Tarefa 				| Descrição da Tarefa Realizada
+	------------------------------------------------------------------------------------------------------------------------------
+
+	16/10/2014	| 2 horas 				| Estudar padrões de documentação	| Estudo dos padrões de documentação da Sun e JavaDoc.
+
+	18/10/2014	| 2 horas               | Documentar e ajustar comentários  | Documentação do BombSystem e ajuste nos comentários.
+
+	18/10/2014	| 2 horas               | Estudar ferramenta GitHub         | Estudo de como usar o github.
+
+	30/10/2014	| 1 hora   				| Gerar a documentação 				| Com auxílio da ferramenta doxygen, gerar a documentação.
+
+	
+	- Tarefas executadas:
+
+		16/10/2014 - Estudar padrões de documentação - 1 hora
+		18/10/2014 - Estudar ferramenta GitHub - 2 horas
+		30/10/2014 - Gerar a documentação - 3 horas
+
+	- Tempo estimado: 5 horas
+	- Tempo gasto: 6 horas
+
+
+
+
+
+
+
+
+
+
+
+
+

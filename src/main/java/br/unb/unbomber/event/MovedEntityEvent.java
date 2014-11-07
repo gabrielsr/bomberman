@@ -1,10 +1,10 @@
 /********************************************************************************************************************************
-*Grupo 2:
-*Maxwell Moura Fernandes     - 10/0116175
-*João Paulo Araujo           -
-*Alexandre Magno             -
-*Marcelo Giordano            -
-*********************************************************************************************************************************/
+ *Grupo 2:
+ *Maxwell Moura Fernandes     - 10/0116175
+ *João Paulo Araujo           -
+ *Alexandre Magno             -
+ *Marcelo Giordano            -
+ *********************************************************************************************************************************/
 package br.unb.unbomber.event;
 
 import br.unb.unbomber.component.Direction;
@@ -15,29 +15,32 @@ public class MovedEntityEvent extends Event {
 	int entityId;
 	Direction direction;
 	int speed;
-	
-	//get the id of an entity which moved
-	public int getEntityId(){
+
+	// get the id of an entity which moved
+	public int getEntityId() {
 		return this.entityId;
 	}
-	
-	//set the id of an entity which moved
-	public void setId(int id){
-		
+
+	// set the id of an entity which moved
+	public void setId(int id) {
+
 	}
-	
-	
-	//TODO direção do moovimento.
-	public Direction getDirection(){
+
+	// TODO direção do moovimento.
+	public Direction getDirection() {
 		return this.direction;
-	} 
-	
-	public int getSpeed(){
+	}
+
+	public void setDirection(Direction direction) {
+		this.direction = direction;
+	}
+
+	public int getSpeed() {
 		return this.speed;
 	}
-	//TODO velocidade da entitade.
-	
-	//current position of an entity which moved in the last tick
-	//CellPlacement getCellPlacement()
-	
+	// TODO velocidade da entitade.
+
+	// current position of an entity which moved in the last tick
+	// CellPlacement getCellPlacement()
+
 }
