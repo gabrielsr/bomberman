@@ -56,15 +56,15 @@ public class CollisionTest {
 		
 	}
 	
-		private boolean ACollisionBTest(List<Event> collisionList, int idA, int idB){
-			CollisionEvent ce;
-			MovedEntityEvent mee;
-			for(Event evt1 : collisionList){
-				ce = (CollisionEvent) evt1;
-				if(ce.getSourceId() == idA){
-					return (ce.getTargetId() == idB);
-				}
+	private boolean ACollisionBTest(List<Event> collisionList, int idA, int idB){
+		CollisionEvent ce;
+		MovedEntityEvent mee;
+		for(Event evt1 : collisionList){
+			ce = (CollisionEvent) evt1;
+			if(ce.getSourceId() == idA){
+				return (ce.getTargetId() == idB);
 			}
-
 		}
+
+	}
 }
