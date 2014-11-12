@@ -7,8 +7,8 @@
  *********************************************************************************************************************************/
 package br.unb.unbomber.systems;
 
-import static junit.framework.Assert.*;
-import br.unb.unbomber.core.Event;
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertFalse;
 
 import java.util.List;
 
@@ -22,10 +22,11 @@ import br.unb.unbomber.component.Movable;
 import br.unb.unbomber.core.Entity;
 import br.unb.unbomber.core.EntityManager;
 import br.unb.unbomber.core.EntityManagerImpl;
+import br.unb.unbomber.core.Event;
 import br.unb.unbomber.event.CollisionEvent;
 import br.unb.unbomber.event.MovedEntityEvent;
-import br.unb.unbomber.systems.CollisionSystem;
 
+@Ignore
 public class CollisionSystemTestCase {
 
 	EntityManager entityManager;

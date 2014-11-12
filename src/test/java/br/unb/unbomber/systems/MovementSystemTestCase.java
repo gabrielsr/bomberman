@@ -1,7 +1,6 @@
 package br.unb.unbomber.systems;
 
-import static org.junit.Assert.*;
-import static junit.framework.Assert.*;
+import static junit.framework.Assert.assertEquals;
 
 import java.util.List;
 

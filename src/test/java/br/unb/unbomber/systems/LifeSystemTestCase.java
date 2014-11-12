@@ -2,27 +2,19 @@ package br.unb.unbomber.systems;
 
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
-import static junit.framework.Assert.assertNotNull;
-
-import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import br.unb.unbomber.component.CellPlacement;
-import br.unb.unbomber.component.Explosive;
-import br.unb.unbomber.component.Health;
-import br.unb.unbomber.component.AvailableTries;
 import br.unb.unbomber.component.LifeType;
 import br.unb.unbomber.component.LifeType.Type;
-import br.unb.unbomber.core.Component;
 import br.unb.unbomber.core.Entity;
 import br.unb.unbomber.core.EntityManager;
 import br.unb.unbomber.core.EntityManagerImpl;
 import br.unb.unbomber.event.CollisionEvent;
 
 /**
- * Classe de testes do LifeSystem do Módulo Life.
+ * Classe de testes do LifeSystem do Mï¿½dulo Life.
  * 
  * @version 0.2 21 Out 2014
  * @author Grupo 5 - Dayanne <dayannefernandesc@gmail.com>
