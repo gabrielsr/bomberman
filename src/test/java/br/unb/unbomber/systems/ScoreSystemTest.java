@@ -6,6 +6,7 @@ import static org.junit.Assert.*;
 import java.util.List;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import br.unb.unbomber.core.Component;
@@ -45,6 +46,7 @@ public class ScoreSystemTest {
 		assertTrue(true);
 	}
 	
+	@Ignore
 	@Test 
 	public void testUpdateDestroyed() {
 	
