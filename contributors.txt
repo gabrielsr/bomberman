@@ -46,7 +46,11 @@ Rodrigo de Araujo Chaves
 Vitor Bona de Faria
 
 == Grupo 8
-
+Repo:http://github.com/kfourit/bomberman-1
+Tiago de Oliveira Kfouri
+Vitor Pontes
+Henrique Torres
+Victor Martorelli
 
 == Grupo 9
 Repo: https://github.com/paulovgf/bomberman
