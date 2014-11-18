@@ -1,7 +1,6 @@
 package br.unb.unbomber.systems;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import br.unb.unbomber.component.CellPlacement;
