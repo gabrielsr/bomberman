@@ -5,12 +5,30 @@ import java.util.List;
 import br.unb.unbomber.component.CellPlacement;
 import br.unb.unbomber.component.Movable;
 import br.unb.unbomber.core.BaseSystem;
+import br.unb.unbomber.core.EntityManager;
 import br.unb.unbomber.core.Event;
 import br.unb.unbomber.event.MovementCommandEvent;
 import br.unb.unbomber.event.MovementCommandEvent.MovementType;
 import br.unb.unbomber.event.MovementMadeEvent;
 
 public class MovimentSystem extends BaseSystem {
+	
+	/**
+	 * bomb constructor
+	 */
+	public MovimentSystem() {
+		super();
+	}
+
+	/**
+	 * bomb constructor
+	 * 
+	 * @param model one instance of the EntityManager
+	 */
+	public MovimentSystem(EntityManager model) {
+		super(model);
+	}
+	
 	/* inicia as acoes de movimeto do jogo */
 	public void update() {
 
