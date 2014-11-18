@@ -13,19 +13,11 @@ package br.unb.unbomber.systems;
 
 import java.util.List;
 
-import br.unb.unbomber.core.Component;
-import br.unb.unbomber.core.Entity;
-import br.unb.unbomber.core.EntityManager;
-import br.unb.unbomber.core.Event;
-import br.unb.unbomber.component.Score;
 import br.unb.unbomber.component.Bounty;
 import br.unb.unbomber.core.BaseSystem;
-import br.unb.unbomber.event.ActionCommandEvent;
+import br.unb.unbomber.core.EntityManager;
+import br.unb.unbomber.core.Event;
 import br.unb.unbomber.event.DestroyedEvent;
-import br.unb.unbomber.event.InvencibleEvent;
-import br.unb.unbomber.event.LifePowerUpEvent;
-import br.unb.unbomber.event.TimeOverEvent;
-import br.unb.unbomber.event.ActionCommandEvent.ActionType;
 
 public class ScoreSystem extends BaseSystem {
 
