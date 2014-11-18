@@ -1,34 +1,41 @@
-///LifePowerUpEvent
-// Evento que aumenta health de alguma entidade.
-// Coleta Id de uma entidade que tenha coletado este Power Up.
-
 package br.unb.unbomber.event;
 
 import br.unb.unbomber.core.Event;
 
 
 /**
- * Classe para verificar a ocorrencia powerUp na entidade
+ * Classe que indica quando uma entidade coletar um Power Up do tipo Life.
  * 
- * @version 0.1 14 Out 2014
- * @author Grupo 5
+ * @version 0.2 21 Out 2014
+ * @author Grupo 5 - Dayanne <dayannefernandesc@gmail.com>
  */
-
-/* Heranca unica do evento LifePowerUpEvent */
 public class LifePowerUpEvent extends Event {
+	/** Id da entidade que coletou o Power Up. */
 	int sourceId;
 
-	/* Construtor do Evento */
+	/**
+	 * Construtor da classe.
+	 * 
+	 * @param sourceId
+	 */
 	public LifePowerUpEvent(int sourceId) {
-		this.sourceId = sourceId;
+		setSourceId(sourceId);
 	}
 
-	// get the id of an entity which has collected the power up
+	/**
+	 * Coleta a identidade da entidade que coletou o Power Up.
+	 * 
+	 * @return sourceId
+	 */
 	public int getSourceId() {
 		return sourceId;
 	}
 
-	// set the id of an entity which has collected the power up
+	/**
+	 * Atribui a identidade da entidade que coletou o Power Up.
+	 * 
+	 * @return sourceId
+	 */
 	public void setSourceId(int sourceId) {
 		this.sourceId = sourceId;
 	}

@@ -54,7 +54,21 @@ Data | Horas Trabalhadas    | Num Tarefa   | Comentários
 ---------------+------------+--------------+-------------------------------------------------------------------------------------------------------------------------------------
 14/10 (terça)  | 2 horas    | N/A          | Criei a bomba controlada remotamente, após conversar rapidamente com o grupo responsável por ler os comandos do teclado
 15/10 (quarta) | 3 horas    | 01 e 02      | Dei uma lida nas convenções da Sun, em algumas das ferramentas de análise estática, e configurei o checkstyle com algumas regras
-               |            |              | simplificadas, para que os membros do meu grupo tivessem mais facilidade em adequar o código à convenção.
+                                             simplificadas, para que os membros do meu grupo tivessem mais facilidade em adequar o código à convenção.
+16/10 e 17/10  | 3 horas    | N/A          | Estudando sobre virtualização Xen, para criar uma VM com Jenkins e Sonar para permitir I.C. e Code Coverage para todos os grupos
+                                           | Problema grande: Fazer isso em um Mac. 
+21/10 (terça)  | 30 minutos | N/A          | Pull com branch criado para o nosso grupo, ignorando classes de testes de outros módulos que estivessem falhando
+
+
+## Sprint 3 (de 28/10 a 13/11)
+# Planejado
+
+Num Tarefa   | Tipo Tarefa                     | Descrição da Tarefa
+-------------+---------------------------------+--------------------------------------------------------------------------
+ 01          | Estudar                         | Est. libGDX
+ 02          | Codificar                       | Prototipar telas iniciais do jogo
+ 
+ 
 
 
 ## Referências

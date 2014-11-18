@@ -1,27 +1,23 @@
-Grupos
+﻿Grupos
 ------
 
 == Grupo 0
 Repo: http://github.com/gabrielsr/bomberman
 
-Repositório: http://github.com/gabrielsr/bomberman
-
-* Gabriel Rodrigues - gabrielsr
-Huguinho -  huginho_donalts
-Zezinho  -  zezinho_donalts	
-Luisinho -  huginho_donalts
-
 == Grupo 1 (Bomb Module)
 
 Repo: http://github.com/DRA2840/bomberman
 
-Diego Azevedo - DRA2840
-Denis Albuquerque -  zidenis
-Breno Xavier -  brenoxp2008	
-Jefferson -  jeffvfa
+== Grupo 1
+* Diego Azevedo - DRA2840
+* Denis Albuquerque -  zidenis
+* Breno Xavier -  brenoxp2008	
+* Jefferson -  jeffvfa
 
 == Grupo 2
-Repo:
+Repositório: https://github.com/MaxFernandes/bomberman
+
+* Maxwell Fernandes
 
 == Grupo 3
 Repo:http://github.com/Giulialeixo/bomberman
@@ -43,10 +39,18 @@ Igor Sodre - igorsodre
 Kilmer Aleluia - kilmerluizaleluia
 
 == Grupo 7
-Repo:
+Repo:http://github.com/carlosshaka/bomberman
+Carlos Benedito Lima de Menezes Junior
+Rodrigo de Araujo Chaves
+Éden de Lucas Medeiros
+Vitor Bona de Faria
 
 == Grupo 8
-
+Repo:http://github.com/kfourit/bomberman-1
+Tiago de Oliveira Kfouri
+Vitor Pontes
+Henrique Torres
+Victor Martorelli
 
 == Grupo 9
 Repo: https://github.com/paulovgf/bomberman

@@ -93,6 +93,10 @@ public class EntityManagerImpl implements EntityManager {
 	@Override
 	public List<Event> getEvents(Class<?> type) {
 		List<Event> result = events.get(type);
+		if(result==null){
+			result = new ArrayList<Event>();
+			events.put(type, result);
+		}
 		return result;
 	}
 
@@ -101,7 +105,12 @@ public class EntityManagerImpl implements EntityManager {
 	 */
 	@Override
 	public List<Component> getComponents(Class<?> componentType) {
-		return this.components.get(componentType);
+		List<Component> result = components.get(componentType);
+		if(result==null){
+			result = new ArrayList<Component>();
+			components.put(componentType, result);
+		}
+		return result;
 	}
 
 	/* (non-Javadoc)

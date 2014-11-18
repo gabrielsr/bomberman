@@ -11,6 +11,7 @@ import br.unb.unbomber.core.Event;
 public class CollisionEvent extends Event {
 	private int sourceId;
 	private int targetId;
+	private boolean isTargetId;
 	
 	public CollisionEvent(int sourceId, int targetId){
 		setSourceId( sourceId );
@@ -22,16 +23,24 @@ public class CollisionEvent extends Event {
 	}
 	
 	//set the id of an entity which collided
-	private void setSourceId(int id){
-		sourceId = id;
+	public void setSourceId(int sourceId){
+		this.sourceId = sourceId;
 	}
 	
 	public int getTargetId(){
 		return targetId;
 	}
 	
-	private void setTargetId(int id){
-		targetId = id;
+	public void setTargetId(int targetId){
+		this.targetId = targetId;
+	}
+	
+	public boolean getIsTargetId(){
+		return isTargetId;
+	}
+	
+	public void setIsTargetId(boolean isTargetId){
+		this.isTargetId = isTargetId;
 	}
 	
 

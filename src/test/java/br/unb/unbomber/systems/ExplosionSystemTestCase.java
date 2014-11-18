@@ -1,6 +1,7 @@
 package br.unb.unbomber.systems;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import br.unb.unbomber.component.CellPlacement;
@@ -11,6 +12,7 @@ import br.unb.unbomber.component.ExplosionBarrier.ExplosionBarrierType;
 import br.unb.unbomber.core.Entity;
 import br.unb.unbomber.core.EntityManager;
 import br.unb.unbomber.core.EntitySystemImpl;
+
 
 public class ExplosionSystemTestCase {
 
