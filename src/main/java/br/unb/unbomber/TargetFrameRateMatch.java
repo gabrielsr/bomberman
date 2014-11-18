@@ -4,7 +4,7 @@ import java.util.Date;
 
 import br.unb.unbomber.core.BaseSystem;
 
-public class TargetFrameRateMatch extends SimpleMatch {
+public class TargetFrameRateMatch extends GameMatch {
 
 	long lastTickTimeInMillis;
 	
@@ -15,10 +15,15 @@ public class TargetFrameRateMatch extends SimpleMatch {
 
 		targetEnlapseMillis = 1000/rate;
 	}
+	public TargetFrameRateMatch(){
+		super();
+		int rate = 30;
+		targetEnlapseMillis = 1000/rate;
+	}
 	
 	@Override
-	public void tick() {
-		super.tick();
+	public void update() {
+		super.update();
 		waitTime();
 	}
 	
@@ -46,7 +51,7 @@ public class TargetFrameRateMatch extends SimpleMatch {
 	 */
 	public static void main(String[] args){
 		
-		SimpleMatch testMatch = new TargetFrameRateMatch(1);
+		GameMatch testMatch = new TargetFrameRateMatch(1);
 		
 		/** A Sysout System */
 		BaseSystem printSystem = new BaseSystem(){
@@ -58,7 +63,7 @@ public class TargetFrameRateMatch extends SimpleMatch {
 		testMatch.addSystem(printSystem);
 		
 		for(int i = 0; i<1000; i++){
-			testMatch.tick();
+			testMatch.update();
 		}
 	}
 	
