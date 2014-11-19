@@ -14,6 +14,7 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.Ignore;
 
 import br.unb.unbomber.component.CellPlacement;
 import br.unb.unbomber.component.Direction;

@@ -19,9 +19,9 @@ import br.unb.unbomber.event.CollisionEvent;
 import br.unb.unbomber.event.InAnExplosionEvent;
 
 /**
- * Classe de testes do LifeSystem do M�dulo Life.
+ * Classe de testes do LifeSystem do Módulo Life.
  * 
- * @version 0.2 21 Out 2014
+ * @version 0.3 19 Nov 2014
  * @author Grupo 5 - Dayanne <dayannefernandesc@gmail.com>
  */
 public class LifeSystemTestCase {
@@ -35,7 +35,7 @@ public class LifeSystemTestCase {
 	@Before
 	public void setUp() throws Exception {
 
-		/** Inicia um sistema para cada caso de teste */
+		/** Inicia um sistema para cada caso de teste. */
 		EntityManagerImpl.init();
 		entityManager = EntityManagerImpl.getInstance();
 		system = new LifeSystem(entityManager);
@@ -64,7 +64,7 @@ public class LifeSystemTestCase {
 		Entity entity1 = createEntity(2, 3, 0, 0, Type.CHAR);
 		Entity entity2 = createEntity(2, 3, 0, 0, Type.CHAR);
 
-		/** Cria evento de colisao entre as entidades Char e Char */
+		/** Cria evento de colisao entre as entidades Char e Char. */
 		CollisionEvent collEvent = new CollisionEvent(entity1.getEntityId(),
 				entity2.getEntityId());
 
@@ -93,7 +93,7 @@ public class LifeSystemTestCase {
 		Entity entity1 = createEntity(2, 3, 0, 0, Type.CHAR);
 		Entity entity2 = createEntity(2, 3, 0, 0, Type.MONSTER);
 
-		/** Cria evento de colisao entre as entidades Char e Monster */
+		/** Cria evento de colisao entre as entidades Char e Monster. */
 		CollisionEvent collEvent = new CollisionEvent(entity1.getEntityId(),
 				entity2.getEntityId());
 
@@ -135,7 +135,7 @@ public class LifeSystemTestCase {
 		Entity entity1 = createEntity(1, 1, 0, 0, Type.MONSTER);
 		Entity entity2 = createEntity(1, 3, 0, 0, Type.CHAR);
 
-		/** Cria evento de colisao entre as entidades Monster e Char */
+		/** Cria evento de colisao entre as entidades Monster e Char. */
 		CollisionEvent collEvent = new CollisionEvent(entity1.getEntityId(),
 				entity2.getEntityId());
 
@@ -220,7 +220,7 @@ public class LifeSystemTestCase {
 		Entity entity1 = createEntity(1, 1, 0, 0, Type.MONSTER);
 		Entity entity2 = createEntity(1, 3, 10, 15, Type.CHAR);
 
-		/** Cria evento de colisao entre as entidades Monster e Char */
+		/** Cria evento de colisao entre as entidades Monster e Char. */
 		CollisionEvent collEvent = new CollisionEvent(entity1.getEntityId(),
 				entity2.getEntityId());
 
@@ -258,8 +258,9 @@ public class LifeSystemTestCase {
 	public void gameOverIfHasNoMoreTriesTest() {
 
 	}
-	
-	private Entity createEntity(int health, int avTries, int cellx, int celly, Type t){
+
+	private Entity createEntity(int health, int avTries, int cellx, int celly,
+			Type t) {
 		/** Criacao da entidade. */
 		Entity entity = entityManager.createEntity();
 
@@ -276,7 +277,7 @@ public class LifeSystemTestCase {
 
 		/** Atualiza a entidade com os componentes atribuídos. */
 		entityManager.update(entity);
-		
+
 		return entity;
 	}
 }

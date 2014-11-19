@@ -20,7 +20,7 @@ import br.unb.unbomber.event.InAnExplosionEvent;
 /**
  * Classe reponsável pelas regras e lógicas do Módulo Life.
  * 
- * @version 0.3 06 Nov 2014
+ * @version 0.4 19 Nov 2014
  * @author Grupo 5 - Dayanne <dayannefernandesc@gmail.com>
  */
 
@@ -425,10 +425,10 @@ public class LifeSystem extends BaseSystem {
 	 * Método que confere se a colisão terá algum efeito à vida de alguma
 	 * entidade.
 	 * 
-	 * @param collision
-	 *            Evento que contem a Id da entidade que colidiu e a Id da
-	 *            entidade que sofreu a colisão.
-	 * @return boolean Retorna true for possível retirar dano de uma entidade
+	 * @param explosion
+	 *            Evento que contem a Id da entidade que sofrerá dano da
+	 *            explosão.
+	 * @return boolean Retorna true se for possível retirar dano de uma entidade
 	 *         que está na explosão.
 	 */
 	public boolean isDamageExplosion(InAnExplosionEvent explosion) {
@@ -453,8 +453,8 @@ public class LifeSystem extends BaseSystem {
 	/**
 	 * Método que avalia a possibilidade da entidade ser recriada.
 	 * 
-	 * @param entType
-	 *            Componente de vida da entidade.
+	 * @param destroyed
+	 *            Id da entidade que foi destruída.
 	 * @return boolean Retorna true se for possível a entidade passada ser
 	 *         recriada.
 	 */
@@ -478,10 +478,10 @@ public class LifeSystem extends BaseSystem {
 	}
 
 	/**
-	 * Método que retira a vida da entidade que damage em uma explosão.
+	 * Método que retira a vida da entidade em uma explosão.
 	 * 
-	 * @param collision
-	 *            Evento de colisão das entidades.
+	 * @param explosion
+	 *            Evento de explosão que possui a Id que sofrerá dano.
 	 */
 	private void takeDamagedExplosion(InAnExplosionEvent explosion) {
 		int lifeEntity;
