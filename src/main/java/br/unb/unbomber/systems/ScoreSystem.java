@@ -58,9 +58,8 @@ public class ScoreSystem extends BaseSystem {
 				DestroyedEvent destroyed = (DestroyedEvent) event;	
 				/*Ao encontrar o evento correto, vemos qual é a pontuação que a entidade destruída dá para quem a destruiu (bounty)*/
 				Bounty defuntopoints = (Bounty) getEntityManager().getComponent(Bounty.class, destroyed.getSourceId());
-				//TODO ACESSAR ENTIDADE DESTRUIDORA PARA PODER INCREMENTAR O SCORE. Aqui seria necessário que houvesse uma função para
-				//que fosse possível acessar o componente Score da entidade destruidora a partir do seu ID. Assim, seria possível usar 
-				//o  método addScore do componente dessa entidade, e consequentemente, atribuir à ela a sua pontuação de direito.
+				Score entScore = (Score) getEntityManager().getComponent(Score.class, destroyed.getSourceId());
+				entScore.addScore(defuntopoints.getBounty());
 			}
 		}
 	}
