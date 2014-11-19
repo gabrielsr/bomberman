@@ -2,21 +2,21 @@ package br.unb.unbomber.event;
 
 import br.unb.unbomber.core.Event;
 
-
 /**
  * Classe que indica quando uma entidade coletar um Power Up do tipo Life.
  * 
- * @version 0.2 21 Out 2014
+ * @version 0.3 19 Nov 2014
  * @author Grupo 5 - Dayanne <dayannefernandesc@gmail.com>
  */
 public class LifePowerUpEvent extends Event {
 	/** Id da entidade que coletou o Power Up. */
-	int sourceId;
+	private int sourceId;
 
 	/**
 	 * Construtor da classe.
 	 * 
 	 * @param sourceId
+	 *            Id da entidade que coletou o Power Up.
 	 */
 	public LifePowerUpEvent(int sourceId) {
 		setSourceId(sourceId);
@@ -25,7 +25,7 @@ public class LifePowerUpEvent extends Event {
 	/**
 	 * Coleta a identidade da entidade que coletou o Power Up.
 	 * 
-	 * @return sourceId
+	 * @return sourceId Id da entidade que coletou o Power Up.
 	 */
 	public int getSourceId() {
 		return sourceId;
@@ -34,7 +34,8 @@ public class LifePowerUpEvent extends Event {
 	/**
 	 * Atribui a identidade da entidade que coletou o Power Up.
 	 * 
-	 * @return sourceId
+	 * @param sourceId
+	 *            Id da entidade que coletou o Power Up.
 	 */
 	public void setSourceId(int sourceId) {
 		this.sourceId = sourceId;
