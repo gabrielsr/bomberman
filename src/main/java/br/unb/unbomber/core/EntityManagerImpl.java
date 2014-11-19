@@ -239,12 +239,14 @@ public class EntityManagerImpl implements EntityManager {
 			return;
 		}
 		
+		List<Component> componentsToRemoove = new ArrayList<Component>(); 
 		for(Component component: componentsOfType){
 			//remove if it has the expected entityId
 			if(component.getEntityId() == entityId){
-				componentsOfType.remove(component);
+				componentsToRemoove.add(component);
 			}
 		}
+		componentsOfType.removeAll(componentsToRemoove);
 	}
 
 	/* (non-Javadoc)
