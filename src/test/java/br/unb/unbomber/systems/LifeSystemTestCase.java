@@ -162,9 +162,8 @@ public class LifeSystemTestCase {
 	/**
 	 * Testa a destruicao de uma entidade Monster por uma Bomba.
 	 * 
-	 * @result Passa no teste se retornar True para a igualdade.
+	 * @result Passa no teste se retornar True.
 	 */
-	@Ignore
 	@Test
 	public void destroyMonsterIfHealthZeroTest() {
 		/** Criacao das entidades. */
@@ -201,10 +200,15 @@ public class LifeSystemTestCase {
 				AvailableTries.class, explosion.getIdHit());
 
 		/**
-		 * Verifica se foi retirado tentativa de vida da entidade após a
-		 * explosão.
+		 * Se o componente de tentativas de vida do MONSTER retornar null é
+		 * porque a entidade foi destruída após a explosão da bomba, logo passou
+		 * no teste. Caso contrário será retornado falso e não passará no teste.
 		 */
-		assertEquals(2, entLifes.getLifeTries());
+		if (entLifes == null) {
+			assertTrue(true);
+		} else {
+			assertTrue(false);
+		}
 
 	}
 

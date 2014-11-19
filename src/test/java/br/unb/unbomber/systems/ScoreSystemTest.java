@@ -47,7 +47,7 @@ public class ScoreSystemTest {
 		/*Cria a entidade que a destruiu*/
 		Entity entity2 = createDestroyerEntity();
 		/*Cria o evento de destruição e o adiciona na lista de eventos*/
-		DestroyedEvent destroyed = new DestroyedEvent(entity1.getEntityId());
+		DestroyedEvent destroyed = new DestroyedEvent(entity2.getEntityId(), entity1.getEntityId());
 		entityManager.addEvent(destroyed);
 		/*Testa a função*/
 		scsystem.update();
