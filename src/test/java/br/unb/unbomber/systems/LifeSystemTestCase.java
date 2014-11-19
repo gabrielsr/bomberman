@@ -11,13 +11,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.Ignore;
 
-import br.unb.unbomber.component.CellPlacement;
-import br.unb.unbomber.component.Explosive;
-import br.unb.unbomber.component.Health;
-import br.unb.unbomber.component.AvailableTries;
 import br.unb.unbomber.component.LifeType;
 import br.unb.unbomber.component.LifeType.Type;
-import br.unb.unbomber.core.Component;
+import br.unb.unbomber.component.Health;
+import br.unb.unbomber.component.AvailableTries;
 import br.unb.unbomber.core.Entity;
 import br.unb.unbomber.core.EntityManager;
 import br.unb.unbomber.core.EntityManagerImpl;
