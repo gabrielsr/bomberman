@@ -23,6 +23,17 @@ public class AvailableTries extends Component {
 	private boolean canTakeLife;
 
 	/**
+	 * Construtor da classe.
+	 * 
+	 * @param lifeTries
+	 * @param canTakeLife
+	 */
+	public AvailableTries(int lifeTries, boolean canTakeLife) {
+		setLifeTries(lifeTries);
+		setCanTakeLife(canTakeLife);	
+	}
+	
+	/**
 	 * Atribui o numero de tentativas que uma entidade Character possui.
 	 * 
 	 * @param lifeTries

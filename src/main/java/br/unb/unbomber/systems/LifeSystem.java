@@ -16,6 +16,7 @@ import br.unb.unbomber.event.DestroyedEvent;
 import br.unb.unbomber.event.GameOverEvent;
 import br.unb.unbomber.event.InvencibleEvent;
 import br.unb.unbomber.event.InAnExplosionEvent;
+
 /**
  * Classe reponsável pelas regras e lógicas do Módulo Life.
  * 
@@ -152,12 +153,7 @@ public class LifeSystem extends BaseSystem {
 					 *     outros eventos.
 					 */
 					if (isDamageExplosion(explosion)) {
-						Health targetCollisionLife = (Health) getEntityManager()
-								.getComponent(Health.class,
-										explosion.getIdHit());
-						explosion.getOwnerId();
-
-						takeDamagedExplosion(targetCollisionLife);
+						takeDamagedExplosion(explosion);
 
 					}
 
@@ -373,26 +369,26 @@ public class LifeSystem extends BaseSystem {
 
 		/** Atribuição da entidade destruída a celula inicial. */
 		CellPlacement placement = (CellPlacement) getEntityManager()
-				.getComponent(CellPlacement.class, destroyed.getSourceId());
+				.getComponent(CellPlacement.class, destroyed.getTargetId());
 		placement.setCellX(0);
 		placement.setCellY(0);
 
 		/** Atribuição da vida incial da entidade destruída. */
 		Health life = (Health) getEntityManager().getComponent(Health.class,
-				destroyed.getSourceId());
+				destroyed.getTargetId());
 		life.setLifeEntity(1);
 		life.setCanTakeDamaged(true);
 
 		/** Decrementa de uma tentativa de vida da entidade destruída. */
 		AvailableTries availableTries = (AvailableTries) getEntityManager()
-				.getComponent(AvailableTries.class, destroyed.getSourceId());
+				.getComponent(AvailableTries.class, destroyed.getTargetId());
 		avTries = availableTries.getLifeTries();
 		avTries--;
 		availableTries.setLifeTries(avTries);
 
 		/** Criação do Evento de Invencible para a entidade recriada */
 		InvencibleEvent invencibleEvent = new InvencibleEvent(
-				destroyed.getSourceId());
+				destroyed.getTargetId());
 
 		/** Adicionando evento de invencível para a entidade. */
 		getEntityManager().addEvent(invencibleEvent);
@@ -407,7 +403,7 @@ public class LifeSystem extends BaseSystem {
 	 */
 	private void createGameOverEvent(DestroyedEvent destroyed) {
 		/** Criação do Evento de Game Over para a entidade destruída. */
-		GameOverEvent gameOverEvent = new GameOverEvent(destroyed.getSourceId());
+		GameOverEvent gameOverEvent = new GameOverEvent(destroyed.getTargetId());
 
 		/** Adicionando evento de game over. */
 		getEntityManager().addEvent(gameOverEvent);
@@ -422,7 +418,7 @@ public class LifeSystem extends BaseSystem {
 	 */
 	private void destroyEntity(DestroyedEvent destroyed) {
 		/** Remove a entidade da lista de entidades. */
-		getEntityManager().removeEntityById(destroyed.getSourceId());
+		getEntityManager().removeEntityById(destroyed.getTargetId());
 	}
 
 	/**
@@ -464,13 +460,13 @@ public class LifeSystem extends BaseSystem {
 	 */
 	public boolean permittedRecreate(DestroyedEvent destroyed) {
 		/** Declaração da Id e do tipo da entidade. */
-		int sourceId;
+		int targetId;
 		LifeType entType;
 
 		/** Definição da Id e do tipo da entidade. */
-		sourceId = destroyed.getSourceId();
+		targetId = destroyed.getTargetId();
 		entType = (LifeType) getEntityManager().getComponent(LifeType.class,
-				sourceId);
+				targetId);
 
 		/**
 		 * Retorna true se foi atribuído algum tipo de entidade ao componente
@@ -487,8 +483,11 @@ public class LifeSystem extends BaseSystem {
 	 * @param collision
 	 *            Evento de colisão das entidades.
 	 */
-	private void takeDamagedExplosion(Health targetCollisionLife) {
+	private void takeDamagedExplosion(InAnExplosionEvent explosion) {
 		int lifeEntity;
+
+		Health targetCollisionLife = (Health) getEntityManager().getComponent(
+				Health.class, explosion.getIdHit());
 
 		/**
 		 * @if Confere a possibilidade de retirar vida da entidade.
@@ -520,8 +519,8 @@ public class LifeSystem extends BaseSystem {
 			if (lifeEntity <= 0) {
 				targetCollisionLife.setCanTakeDamaged(false);
 
-				// TODO coletar Id da bomba que gerou a explosão.
-				createDestroyEvent(0, targetCollisionLife.getEntityId());
+				createDestroyEvent(explosion.getOwnerId(),
+						targetCollisionLife.getEntityId());
 
 			} else {
 				targetCollisionLife.setCanTakeDamaged(true);

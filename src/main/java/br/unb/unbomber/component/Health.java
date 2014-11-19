@@ -1,5 +1,6 @@
 package br.unb.unbomber.component;
 
+import br.unb.unbomber.component.LifeType.Type;
 import br.unb.unbomber.core.Component;
 
 /**
@@ -18,6 +19,17 @@ public class Health extends Component {
 	 * monster ou character.
 	 */
 	private boolean canTakeDamaged;
+	
+	/**
+	 * Construtor da classe.
+	 * 
+	 * @param lifeEntity
+	 * @param canTakeDamaged
+	 */
+	public Health(int lifeEntity, boolean canTakeDamaged) {
+		setLifeEntity(lifeEntity);
+		setCanTakeDamaged(canTakeDamaged);	
+	}
 
 	/**
 	 * Inicializa vida completa a uma entidade Monster ou Entity.
