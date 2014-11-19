@@ -1,8 +1,9 @@
 package br.unb.unbomber.systems;
 
-import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertTrue;
-import static junit.framework.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 
@@ -28,7 +29,6 @@ import br.unb.unbomber.event.CollisionEvent;
  * @version 0.2 21 Out 2014
  * @author Grupo 5 - Dayanne <dayannefernandesc@gmail.com>
  */
-@Ignore
 public class LifeSystemTestCase {
 
 	/** Gerenciador das entidades. */
@@ -45,11 +45,22 @@ public class LifeSystemTestCase {
 		entityManager = EntityManagerImpl.getInstance();
 		system = new LifeSystem(entityManager);
 	}
+	
+	/**
+	 * Testa update do system de modo geral.
+	 * 
+	 * @result Passa no teste se o valor retornado e TRUE.
+	 */
+	@Test
+	public void testUpdate(){
+		system.update();
+		assertTrue(true);
+	}
 
 	/**
 	 * Testa uma colisao que nao deveria ocorrer dano.
 	 * 
-	 * @result Passa no teste se o valor retornado e FALSE.
+	 * @result Passa no teste se o valor retornado e TRUE.
 	 */
 	@Test
 	public void noDecrementHealthTest() {
@@ -57,24 +68,40 @@ public class LifeSystemTestCase {
 		/** Criacao das entidades. */
 		Entity entity1 = entityManager.createEntity();
 		Entity entity2 = entityManager.createEntity();
+		
+		/** Atribui os componentes básicos de vida das entidades. */
+		entity1.addComponent(new Health(1,true));
+		entity2.addComponent(new Health(1,true));
+		entity1.addComponent(new AvailableTries(3,true));
+		entity2.addComponent(new AvailableTries(3,true));
 
 		/** Inicia os componentes de atribuicao de tipos das entidades. */
 		entity1.addComponent(new LifeType(Type.CHAR));
-		entityManager.update(entity1);
 		entity2.addComponent(new LifeType(Type.CHAR));
+		
+		/** Atualiza as entidades com os componentes atribuídos. */
+		entityManager.update(entity1);
 		entityManager.update(entity2);
 
 		/** Cria evento de colisao entre as entidades Char e Char */
 		CollisionEvent collEvent = new CollisionEvent(entity1.getEntityId(),
 				entity2.getEntityId());
-
-		/**
-		 * Adiciona este evento ao LifeSystem e recebe se foi retirado dano da
-		 * colisao simulada.
-		 */
-		boolean isDamage = system.isLifeDamage(collEvent);
-
-		assertFalse(isDamage);
+		
+		/** Adiciona o evento de colisão na lista de Eventos. */
+		entityManager.addEvent(collEvent);
+		
+		/** Roda o sistema. */
+		system.update();
+		
+		/** Coleta a vida da entidade que sofreu a colisão. */
+		Health entHealth = (Health) entityManager
+				.getComponent(Health.class, collEvent.getTargetId());
+		
+		// AvailableTries entLifes = (AvailableTries) entityManager
+				// .getComponent(AvailableTries.class, collEvent.getTargetId());
+		
+		/** Verifica se não foi retirado vida da entidade após a colisão. */
+		assertEquals(1, entHealth.getLifeEntity());
 	}
 
 	/**
@@ -84,28 +111,45 @@ public class LifeSystemTestCase {
 	 */
 	@Test
 	public void decrementHealthTest() {
-
 		/** Criacao das entidades. */
 		Entity entity1 = entityManager.createEntity();
 		Entity entity2 = entityManager.createEntity();
+		
+		/** Atribui os componentes básicos de vida das entidades. */
+		entity1.addComponent(new Health(1,true));
+		entity2.addComponent(new Health(1,true));
+		entity1.addComponent(new AvailableTries(3,true));
+		entity2.addComponent(new AvailableTries(3,true));
 
 		/** Inicia os componentes de atribuicao de tipos das entidades. */
-		entity1.addComponent(new LifeType(Type.MONSTER));
+		entity1.addComponent(new LifeType(Type.CHAR));
+		entity2.addComponent(new LifeType(Type.MONSTER));
+		
+		/** Atualiza as entidades com os componentes atribuídos. */
 		entityManager.update(entity1);
-		entity2.addComponent(new LifeType(Type.CHAR));
 		entityManager.update(entity2);
 
-		/** Cria evento de colisao entre as entidades Char e Monster */
+		/** Cria evento de colisao entre as entidades Char e Char */
 		CollisionEvent collEvent = new CollisionEvent(entity1.getEntityId(),
 				entity2.getEntityId());
-
-		/**
-		 * Adiciona este evento ao LifeSystem e recebe se foi retirado dano da
-		 * colisao simulada.
-		 */
-		boolean isDamage = system.isLifeDamage(collEvent);
-
-		assertTrue(isDamage);
+		
+		/** Adiciona o evento de colisão na lista de Eventos. */
+		entityManager.addEvent(collEvent);
+		
+		/** Roda o sistema. */
+		system.update();
+		
+		/** Coleta a vida da entidade que sofreu a colisão. */
+		Health entHealth = (Health) entityManager
+				.getComponent(Health.class, collEvent.getTargetId());
+		
+		AvailableTries entLifes = (AvailableTries) entityManager
+				.getComponent(AvailableTries.class, collEvent.getTargetId());
+		
+		assertEquals(2, entLifes.getLifeTries());
+		/** Verifica se foi retirado vida da entidade após a colisão. */
+		assertEquals(0, entHealth.getLifeEntity());
+	
 	}
 
 	/**

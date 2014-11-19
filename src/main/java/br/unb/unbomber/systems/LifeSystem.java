@@ -71,12 +71,7 @@ public class LifeSystem extends BaseSystem {
 					 *     outros eventos.
 					 */
 					if (isLifeDamage(collision)) {
-						Health targetCollisionLife = (Health) getEntityManager()
-								.getComponent(Health.class,
-										collision.getTargetId());
-
-						takeDamaged(targetCollisionLife);
-
+						takeDamaged(collision);
 					}
 
 					/** Processa evento de colisão mesmo se não retirar vida. */
@@ -163,8 +158,9 @@ public class LifeSystem extends BaseSystem {
 						Health targetCollisionLife = (Health) getEntityManager()
 								.getComponent(Health.class,
 										explosion.getIdHit());
+						explosion.getOwnerId();
 
-						takeDamaged(targetCollisionLife);
+						takeDamagedExplosion(targetCollisionLife);
 
 					}
 
@@ -222,14 +218,29 @@ public class LifeSystem extends BaseSystem {
 	/**
 	 * Método que retira a vida da entidade que sofreu a colisão.
 	 * 
-	 * @param targetCollisionLife
-	 *            Componente que possui a quantidade de vida de uma entidade e
-	 *            sua Id.
+	 * @param collision
+	 *            Evento de colisão das entidades.
 	 */
-	private void takeDamaged(Health targetCollisionLife) {
-
+	private void takeDamaged(CollisionEvent collision) {
 		/** Vida da entidade que sofreu a colisão. */
-		int lifeEntity;
+		int lifeEntity, sourceId, targetId;
+		Health targetHealth;
+
+		/** Coleta os tipos das entidades da colisão. */
+		LifeType targetType = (LifeType) getEntityManager().getComponent(
+				LifeType.class, collision.getTargetId());
+
+		if (targetType.getType() == Type.MONSTER) {
+			targetHealth = (Health) getEntityManager().getComponent(
+					Health.class, collision.getSourceId());
+			sourceId = collision.getTargetId();
+			targetId = collision.getSourceId();
+		} else {
+			targetHealth = (Health) getEntityManager().getComponent(
+					Health.class, collision.getTargetId());
+			sourceId = collision.getSourceId();
+			targetId = collision.getTargetId();
+		}
 
 		/**
 		 * @if Confere a possibilidade de retirar vida da entidade.
@@ -238,13 +249,13 @@ public class LifeSystem extends BaseSystem {
 		 * 
 		 *     Caso contrário o método sai sem realizar nenhuma ação.
 		 */
-		if (targetCollisionLife.isCanTakeDamaged()) {
+		if (targetHealth.isCanTakeDamaged()) {
 			/** Coleta a vida da entidade. */
-			lifeEntity = targetCollisionLife.getLifeEntity();
+			lifeEntity = targetHealth.getLifeEntity();
 			/** Decrementa a vida da entidade. */
 			lifeEntity--;
 			/** Atribui a vida decrementada a entidade de origem. */
-			targetCollisionLife.setLifeEntity(lifeEntity);
+			targetHealth.setLifeEntity(lifeEntity);
 
 			/**
 			 * @if Confere se entidade nao possui mais vida.
@@ -259,12 +270,12 @@ public class LifeSystem extends BaseSystem {
 			 * 
 			 */
 			if (lifeEntity <= 0) {
-				targetCollisionLife.setCanTakeDamaged(false);
+				targetHealth.setCanTakeDamaged(false);
 
-				createDestroyEvent(targetCollisionLife);
+				createDestroyEvent(sourceId, targetId);
 
 			} else {
-				targetCollisionLife.setCanTakeDamaged(true);
+				targetHealth.setCanTakeDamaged(true);
 			}
 
 		}
@@ -293,8 +304,10 @@ public class LifeSystem extends BaseSystem {
 		 */
 		if (entTypes.length == 2) {
 			return ((entTypes[0].getType() == Type.MONSTER && entTypes[1]
-					.getType() == Type.CHAR) || (entTypes[0].getType() == Type.BOMB && entTypes[1]
-					.getType() == Type.MONSTER));
+					.getType() == Type.CHAR)
+					|| (entTypes[0].getType() == Type.BOMB && entTypes[1]
+							.getType() == Type.MONSTER) || (entTypes[0]
+					.getType() == Type.CHAR && entTypes[1].getType() == Type.MONSTER));
 
 		} else if (entTypes.length == 1) {
 			return (entTypes[0].getType() == Type.MONSTER || entTypes[0]
@@ -308,14 +321,15 @@ public class LifeSystem extends BaseSystem {
 	/**
 	 * Método que cria evento de destruição de uma entidade.
 	 * 
-	 * @param targetCollisionLife
-	 *            Componente que possui a Id que zerou a vida.
+	 * @param sourceId
+	 *            Identidade que gerou a destruição.
+	 * @param targetId
+	 *            Identidade que foi destruída.
 	 */
-	private void createDestroyEvent(Health targetCollisionLife) {
+	private void createDestroyEvent(int sourceId, int targetId) {
 
 		/** Cria evento de destruição da entidade. */
-		DestroyedEvent destroyEntity = new DestroyedEvent(
-				targetCollisionLife.getEntityId());
+		DestroyedEvent destroyEntity = new DestroyedEvent(sourceId, targetId);
 
 		/** Adiciona este evento ao gerenciamento de entidades. */
 		getEntityManager().addEvent(destroyEntity);
@@ -341,7 +355,7 @@ public class LifeSystem extends BaseSystem {
 		 * entidade que vai ser destruída.
 		 */
 		AvailableTries availableTries = (AvailableTries) getEntityManager()
-				.getComponent(AvailableTries.class, destroyed.getSourceId());
+				.getComponent(AvailableTries.class, destroyed.getTargetId());
 
 		lifeTries = availableTries.getLifeTries();
 
@@ -468,6 +482,55 @@ public class LifeSystem extends BaseSystem {
 		 */
 		return (entType != null && entType.getType() == Type.CHAR);
 
+	}
+
+	/**
+	 * Método que retira a vida da entidade que damage em uma explosão.
+	 * 
+	 * @param collision
+	 *            Evento de colisão das entidades.
+	 */
+	private void takeDamagedExplosion(Health targetCollisionLife) {
+		int lifeEntity;
+
+		/**
+		 * @if Confere a possibilidade de retirar vida da entidade.
+		 * 
+		 *     Caso seja possível então sua vida será decrementada.
+		 * 
+		 *     Caso contrário o método sai sem realizar nenhuma ação.
+		 */
+		if (targetCollisionLife.isCanTakeDamaged()) {
+			/** Coleta a vida da entidade. */
+			lifeEntity = targetCollisionLife.getLifeEntity();
+			/** Decrementa a vida da entidade. */
+			lifeEntity--;
+			/** Atribui a vida decrementada a entidade de origem. */
+			targetCollisionLife.setLifeEntity(lifeEntity);
+
+			/**
+			 * @if Confere se entidade nao possui mais vida.
+			 * 
+			 *     Caso nao possua mais vida então é atribuido que não será mais
+			 *     permitido retirar vida desta entidade *enquanto este nao for
+			 *     recriado* e o componente será passado para um função auxiliar
+			 *     de criação de evento de destruição da entidade.
+			 * 
+			 *     Caso contrário é atribuído que será permitido retirar vida
+			 *     daquela entidade.
+			 * 
+			 */
+			if (lifeEntity <= 0) {
+				targetCollisionLife.setCanTakeDamaged(false);
+
+				// TODO coletar Id da bomba que gerou a explosão.
+				createDestroyEvent(0, targetCollisionLife.getEntityId());
+
+			} else {
+				targetCollisionLife.setCanTakeDamaged(true);
+			}
+
+		}
 	}
 
 }
