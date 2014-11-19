@@ -1,8 +1,8 @@
 package br.unb.unbomber.systems;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.Ignore;
 
 import br.unb.unbomber.component.CellPlacement;
 import br.unb.unbomber.component.Direction;
