@@ -14,7 +14,6 @@ import br.unb.unbomber.core.Event;
 import br.unb.unbomber.event.CollisionEvent;
 import br.unb.unbomber.event.DestroyedEvent;
 import br.unb.unbomber.event.GameOverEvent;
-import br.unb.unbomber.event.InvencibleEvent;
 import br.unb.unbomber.event.InAnExplosionEvent;
 
 /**
@@ -387,11 +386,11 @@ public class LifeSystem extends BaseSystem {
 		availableTries.setLifeTries(avTries);
 
 		/** Criação do Evento de Invencible para a entidade recriada */
-		InvencibleEvent invencibleEvent = new InvencibleEvent(
-				destroyed.getTargetId());
+		//InvencibleEvent invencibleEvent = new InvencibleEvent(
+			//	destroyed.getTargetId());
 
 		/** Adicionando evento de invencível para a entidade. */
-		getEntityManager().addEvent(invencibleEvent);
+		//getEntityManager().addEvent(invencibleEvent);
 
 	}
 
