@@ -67,9 +67,7 @@ public class DiseasesSystem extends BaseSystem {
 				/* Creating an event according to the disease */
 				AquiredDiseaseEvent aquiredDiseaseEvent = new AquiredDiseaseEvent();
 				aquiredDiseaseEvent.setOwnerId(collisionEvent.getSourceId());
-				if (disease == DiseaseType.CHANGEPOSITION) {
-					aquiredDiseaseEvent.setDiseaseType(DiseaseType.CHANGEPOSITION);
-				} else if (disease == DiseaseType.DIARRHEA) {
+				if (disease == DiseaseType.DIARRHEA) {
 					aquiredDiseaseEvent.setDiseaseType(DiseaseType.DIARRHEA);
 				} else if (disease == DiseaseType.CONSTIPATION) {
 					aquiredDiseaseEvent.setDiseaseType(DiseaseType.CONSTIPATION);
@@ -111,16 +109,14 @@ public class DiseasesSystem extends BaseSystem {
 		int randomNumber = getRandomNumber();
 		DiseaseComponent diseaseComponent = new DiseaseComponent();
 		if (randomNumber == 1) {
-			diseaseComponent.setDiseaseType(DiseaseType.CHANGEPOSITION);
-		} else if (randomNumber == 2) {
 			diseaseComponent.setDiseaseType(DiseaseType.DIARRHEA);
-		} else if (randomNumber == 3) {
+		} else if (randomNumber == 2) {
 			diseaseComponent.setDiseaseType(DiseaseType.CONSTIPATION);
-		} else if (randomNumber == 4) {
+		} else if (randomNumber == 3) {
 			diseaseComponent.setDiseaseType(DiseaseType.LOWPOWER);
-		} else if (randomNumber == 5) {
+		} else if (randomNumber == 4) {
 			diseaseComponent.setDiseaseType(DiseaseType.RAPIDPACE);
-		} else if (randomNumber == 6) {
+		} else if (randomNumber == 5) {
 			diseaseComponent.setDiseaseType(DiseaseType.SLOWPACE);
 		}
 		/* Creating LifeType component*/
@@ -138,7 +134,7 @@ public class DiseasesSystem extends BaseSystem {
 	private int getRandomNumber() {
 		Random random = new Random();
 		int min = 1;
-		int max = 6;
+		int max = 5;
 		return random.nextInt(max - min + 1) + min;
 	}
 

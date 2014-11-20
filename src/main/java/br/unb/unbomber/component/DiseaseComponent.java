@@ -5,7 +5,6 @@ import br.unb.unbomber.core.Component;
 public class DiseaseComponent extends Component{
 	
 	public enum DiseaseType{
-		CHANGEPOSITION,
 		DIARRHEA,
 		CONSTIPATION,
 		LOWPOWER,
