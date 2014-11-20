@@ -13,7 +13,7 @@
  
 package br.unb.unbomber.systems;
 
-import static org.junit.Assert.*;
+import static junit.framework.Assert.*;
 
 import java.util.List;
 
@@ -24,7 +24,6 @@ import org.junit.Test;
 import br.unb.unbomber.component.BombDropper;
 import br.unb.unbomber.component.CellPlacement;
 import br.unb.unbomber.component.Explosive;
-import br.unb.unbomber.component.Timer;
 import br.unb.unbomber.core.Component;
 import br.unb.unbomber.core.Entity;
 import br.unb.unbomber.core.EntityManager;
@@ -32,12 +31,11 @@ import br.unb.unbomber.core.EntityManagerImpl;
 import br.unb.unbomber.event.ActionCommandEvent;
 import br.unb.unbomber.event.ActionCommandEvent.ActionType;
 import br.unb.unbomber.event.ExplosionStartedEvent;
-import br.unb.unbomber.event.TimeOverEvent;
 
 public class BombSystemTestCase2 {
 	
 	EntityManager entityManager;
-	BombSystem2 system;
+	BombSystem2 bombSystem2;
 	TimeSystem timeSystem;
 	
 	@Before
@@ -46,40 +44,39 @@ public class BombSystemTestCase2 {
 		//init a new system for each test case
 		EntityManagerImpl.init();
 		entityManager = EntityManagerImpl.getInstance();
-		system = new BombSystem2(entityManager);
+		bombSystem2 = new BombSystem2(entityManager);
+		timeSystem = new TimeSystem(entityManager);
 		
 	}
 	
-
+	/**
+	 * A dropped bomb should be created and added to the grid
+	 */
 	@Test
 	public void dropBombTest() {
-		// create a entity with components:
-		// * bombDropper
-		// * placement
-		Entity anEntity = entityManager.createEntity();
-		
-		//Create the placement component
-		CellPlacement dropperPlacement = new CellPlacement();
+	
+		//create new bombDropper 
+		Entity anEntity = createDropperEntity();
 			
-		// add the dropper to the model
-		// SO it get an entityId (needed as the new bomb dropped will need it as its ownerId)
-		BombDropper bombDropper = new BombDropper();
+		BombDropper bombDropper = (BombDropper) entityManager.getComponent(BombDropper.class, anEntity.getEntityId());
 		
-		anEntity.addComponent(bombDropper);
-		anEntity.addComponent(dropperPlacement);
+		//updating the entity on the entity manager
+		entityManager.update(anEntity);
 		
-		//create an DROP_BOMB Command Event
-		ActionCommandEvent event = new ActionCommandEvent(ActionType.DROP_BOMB, bombDropper.getEntityId());
-		entityManager.addEvent(event);
+		//put one bomb on grid
+		createBombOnGrid(0, 0, bombDropper);
 		
 		//run the system
-		system.update();
+		bombSystem2.update();
 		
-		//verify if a new explosive (a bomb component) was created
+		//verify if a new explosive bomb was created
 		List<Component> explosives = (List<Component>) entityManager.getComponents(Explosive.class);
+		
+		// there should be explosives
 		assertNotNull(explosives);
 		assertFalse(explosives.isEmpty());
-	}
+	
+	} // end of dropBombTest
 	
 	/**
 	 * A dropped bomb should be created into the same place of its dropper
@@ -87,209 +84,167 @@ public class BombSystemTestCase2 {
 	@Test
 	public void dropBombAtSamePlaceTest() {
 		
-		// create a entity
+		// create an entity
+		Entity anEntity = createDropperEntity();
+		
+		int CELL_X = 5;
+		int CELL_Y = 5;
+		
+		BombDropper bombDropper = (BombDropper) entityManager.getComponent(BombDropper.class, anEntity.getEntityId());
+		
+		//updating the entity on the entity manager
+		entityManager.update(anEntity);
+		
+		// create bomb on grid 
+		createBombOnGrid (CELL_X, CELL_Y, bombDropper);
+		
+		//update the system with the event
+		bombSystem2.update();
+		
+		//1 - get the list of explosives in game
+		//2 - create a component with the most recent explosive in game
+		//3 - get the CellPlacement from the 
+		List<Component> explosives = (List<Component>) entityManager.getComponents(Explosive.class);
+		Component explosive = explosives.get(0);
+		CellPlacement explosiveBombPlacement = (CellPlacement) entityManager.getComponent(CellPlacement.class, 
+																						explosive.getEntityId());
+		
+		//verify if its the correct placement for both positions
+		assertEquals(CELL_X, explosiveBombPlacement.getCellX());
+		assertEquals(CELL_Y, explosiveBombPlacement.getCellY());
+		
+	} // end of dropBombAtSamePlaceTest
+	
+	
+	/**
+	 * The character must not drop bombs if it exceeded the 
+	 * number of permitted simultaneous bombs.
+	 * 
+	 */
+	@Test
+	public void dropBombTooManySimultaneousBombsTest(){
+		
+		//value of permitted simultaneous bombs that the character can drop
+		//fake powerup 
+		int PermittedSimultaneousBombs = 3; 
+		
+		//creating a bombDropper entity 
+		Entity anEntity = createDropperEntity();
+		
+		BombDropper bombDropper = (BombDropper) entityManager.getComponent(BombDropper.class, anEntity.getEntityId());
+		
+		bombDropper.setPermittedSimultaneousBombs(PermittedSimultaneousBombs); 
+				
+		//add bombs 
+		createBombOnGrid(0,0, bombDropper);
+
+		//the number of PermittedSimultaneousBombs should be higher or equal the number of bombs dropped
+		assertTrue(entityManager.getComponents(Explosive.class).size() <= PermittedSimultaneousBombs);
+	
+	}
+
+	
+	/**
+	 * Checks if in the first 89 turns an ExplosionStartedEvent was created
+	 * 
+	 */
+	@Test
+	public void waitTimeToExplodeTest(){
+		
+		//creating a bombDropper entity
+		Entity anEntity = createDropperEntity();
+		
+		BombDropper bombDropper = (BombDropper) entityManager.getComponent(BombDropper.class, anEntity.getEntityId());
+		
+		//updating the entity on the entity manager
+		entityManager.update(anEntity);
+		
+		createBombOnGrid(0,0, bombDropper);
+		
+		//init the time system and update it 
+		timeSystem = new TimeSystem(entityManager);
+		timeSystem.update();
+		
+		//updating the system
+		int i = 0;
+		while (i < 88){
+			
+			bombSystem2.update();
+			timeSystem.update();
+			i++;
+			
+		}
+		
+		//there shouldn't be an ExplosionStartedEvent in the first 89 turns
+		assertNull(entityManager.getEvents(ExplosionStartedEvent.class));
+		
+	} // end of waitTimeToExplodeTest
+	
+	/**
+	 * Checks if a ExplosionStartedEvent was created after 90 turns
+	 */
+	@Test
+	public void triggeredAfterTimeToExplodeTest(){
+		
+		//creating a bombDropper entity
+		Entity anEntity = createDropperEntity();
+		
+		BombDropper bombDropper = (BombDropper) entityManager.getComponent(BombDropper.class, anEntity.getEntityId());
+				
+		createBombOnGrid(0,0, bombDropper); //updates the bombSystem2 once
+		
+		//init the time system and update it 
+		timeSystem = new TimeSystem(entityManager);
+		timeSystem.update();
+		
+		//updating the system
+		int i = 0;
+		while (i < 89) {
+			timeSystem.update();
+			bombSystem2.update();
+			i++;
+		}
+		
+		assertEquals(entityManager.getEvents(ExplosionStartedEvent.class).size(), 1);
+		
+	}
+	
+	private Entity createDropperEntity(){
+		
 		Entity anEntity = entityManager.createEntity();
 		
-		//Create the placement component
-		CellPlacement dropperPlacement = new CellPlacement();
-		
-		int CELL_X = 10;
-		int CELL_Y = 15;
-		
-		//set the dropper position
-		dropperPlacement.setCellX(CELL_X);
-		dropperPlacement.setCellY(CELL_Y);
-		
+		//Create Dropper
 		BombDropper bombDropper = new BombDropper();
+		bombDropper.setPermittedSimultaneousBombs(3);
 		
-		// add the components
+		//Create Placement
+		CellPlacement placement = new CellPlacement();
+		placement.setCellX(0);
+		placement.setCellY(0);
+		
+		//Add components
 		anEntity.addComponent(bombDropper);
-		anEntity.addComponent(dropperPlacement);
+		anEntity.addComponent(placement);
+		
+		entityManager.update(anEntity);
+		
+		return anEntity;
+	}
+	
+	private void createBombOnGrid (int x, int y, BombDropper bombDropper){
+		
+		CellPlacement placement = (CellPlacement) entityManager.getComponent(CellPlacement.class, bombDropper.getEntityId());
+		
+		placement.setCellX(x);
+		placement.setCellY(y);
 		
 		//create an DROP_BOMB Command Event
 		ActionCommandEvent event = new ActionCommandEvent(ActionType.DROP_BOMB, bombDropper.getEntityId());
 		entityManager.addEvent(event);
 		
-		//run the system
-		system.update();
-		
-		//get the position of the first explosive created: first get the explosive than get the associated position
-		List<Component> explosives = (List<Component>) entityManager.getComponents(Explosive.class);
-		Component explosive = explosives.get(0);
-		CellPlacement createBombPlacement = (CellPlacement) entityManager.getComponent(CellPlacement.class, explosive.getEntityId());
-		
-		//verify if its the correct value
-		assertEquals(CELL_X, createBombPlacement.getCellX());
-		assertEquals(CELL_Y, createBombPlacement.getCellY());
-		
+		bombSystem2.update();
 	}
-	
-	
-	/*
-	 * The character must not drop bombs if it exceeded the 
-	 * number of permitted simultaneous bombs.
-	 * 
-	 */
-	
-	@Test
-	public void dropBombTooManySimultaneousBombsTest(){
-		
-		//adding a bombDropper entity 
-		Entity bombDropper = entityManager.createEntity();
-		
-		BombDropper dropper = new BombDropper();
-		
-		//setting a static value to the permitted simultaneous bombs the character can drop
-		int PermittedSimultaneousBombs = 5; 
-		
-		dropper.setPermittedSimultaneousBombs(PermittedSimultaneousBombs);
-	
-		// adding the dropper component to the bombDropper entity
-		bombDropper.addComponent(dropper);
-		
-		//creating the DROP_BOMB command
-		ActionCommandEvent event = new ActionCommandEvent(ActionType.DROP_BOMB, dropper.getEntityId());
-		entityManager.addEvent(event);
-		
-		//run the system after command
-		system.update();
-		
-		//get the list of explosives in game
-		List<Component> explosivesInGame = (List<Component>) entityManager.getComponents(Explosive.class);
-		int numberOfBombsDroppedByDropper = 0; // bomb counter
-		
-		if (explosivesInGame != null){
-			for (Component component : explosivesInGame){
-					
-				Explosive bombInGame = (Explosive) component;
-				
-				// check if the current bomb was dropped by the current dropper
-				if(bombInGame.getOwnerId() == dropper.getEntityId()){
-					
-					// we have to consider only the bombs that are still ticking
-					Timer bombTimer = (Timer) entityManager.getComponent(Timer.class, bombInGame.getEntityId()); 
-		
-					// if timer higher than 0, the bomb is still ticking increment the counter.
-					if(!bombTimer.isOver()){
-						numberOfBombsDroppedByDropper++;
-					}				
-				}
-			}
-		}
-		
-		assertEquals(dropper.getPermittedSimultaneousBombs(), numberOfBombsDroppedByDropper);
-		
-	}
-
-	
-	/*
-	 * testa se nos primeiros 89 turnos n�o foi criado um ExplosionStartedEvent
-	 */
-	@Test
-	public void waitTimeExplodeTest(){
-		
-		Entity dropperEntity = entityManager.createEntity();
-
-		//adding the dropper to the entity
-		BombDropper dropper = new BombDropper();
-		
-		//setting dropper placement
-		CellPlacement dropperPlacement = new CellPlacement();
-		dropperPlacement.setCellX(1);
-		dropperPlacement.setCellY(1);
-		
-		//adding components to dropper entity
-		dropperEntity.addComponent(dropper);
-		dropperEntity.addComponent(dropperPlacement);
-		
-		//now we will create a bomb entity
-		CellPlacement bombPosition = new CellPlacement();
-		bombPosition.setCellX(1);
-		bombPosition.setCellY(1);
-		
-		BombDropper theDropper = (BombDropper) entityManager.getComponent(BombDropper.class, dropperEntity.getEntityId());
-	
-		createBomb(bombPosition, theDropper);
-		
-		//updating the system
-		int i = 0;
-		while (i < 89){
-			system.update();
-			i++;
-		}
-
-		//testando se um ExplosionStartedEvent foi criado nos primeiros 89 turnos
-		assertEquals(entityManager.getEvents(ExplosionStartedEvent.class).size(), 1);
-		
-	}
-	
-	/*
-	 * testa se um ExplosionStartedEvent � criado ap�s 90 turnos.
-	 */
-	@Test
-	public void triggeredAfterTimeToExplodeTest(){
-		
-		Entity dropperEntity = entityManager.createEntity();
-	
-		//adding the dropper to the entity
-		BombDropper dropper = new BombDropper();
-		
-		//setting dropper placement
-		CellPlacement dropperPlacement = new CellPlacement();
-		dropperPlacement.setCellX(1);
-		dropperPlacement.setCellY(1);
-		
-		//adding components to dropper entity
-		dropperEntity.addComponent(dropper);
-		dropperEntity.addComponent(dropperPlacement);
-			
-		//now we will create a bomb entity
-		CellPlacement bombPosition = new CellPlacement();
-		bombPosition.setCellX(1);
-		bombPosition.setCellY(1);
-		
-		BombDropper theDropper = (BombDropper) entityManager.getComponent(BombDropper.class, dropperEntity.getEntityId());
-	
-		createBomb(bombPosition, theDropper);
-		
-		//updating the system
-		int i = 0;
-		while (i < 90){
-			system.update();
-			i++;
-		}
-
-		//checando se um evento ExplosionStartedEvent foi criado
-		assertEquals(entityManager.getEvents(ExplosionStartedEvent.class).size(), 1);
-	}
-	
-	private void createBomb(CellPlacement bombPosition, BombDropper dropper){
-	
-		Entity bomb = entityManager.createEntity();
-		
-		
-		CellPlacement dropperPlacement = new CellPlacement();
-		
-		dropperPlacement = bombPosition;
-		
-		//creating the time event
-		TimeOverEvent triggeredBombEvent = new TimeOverEvent(); 
-		triggeredBombEvent.setAction("BOMB_TRIGGERED");
-		Timer timer = new Timer(90, triggeredBombEvent );
-		
-		//creating the range component
-		Explosive bombRange = new Explosive();
-		bombRange.setExplosionRange(dropper.getExplosionRange());
-		
-		// add the components to the bomb entity
-		bomb.addComponent(dropperPlacement);
-		bomb.addComponent(timer);
-		bomb.addComponent(bombRange);
-	
-		system.update();
-		
-	}
-
+	 	
 }	// end of tests
 		
 	
