@@ -1,13 +1,15 @@
 package br.unb.unbomber.component;
 
 import br.unb.unbomber.core.Component;
-import br.unb.unbomber.core.Event;
 
 import java.util.List;
 import java.util.ArrayList;
 
 /**
- * Classe para armazenar os Power Ups que uma entidade possui.
+ * Classe reponsavel por atribuir os tipos de power ups que uma entidade possui.
+ * 
+ * Tipos: HealthUp, LifeUp, FireUp, BombUp, RemoteControl, PassThrougBomb,
+ * SpeedUp, PassThroug, BoxingGloveAcquired, Invicible e KickAcquired.
  * 
  * @version 0.1 20 Nov 2014
  * @author Grupo 5 - Dayanne <dayannefernandesc@gmail.com>
@@ -15,82 +17,61 @@ import java.util.ArrayList;
 
 public class PowerUp extends Component {
 
-	/** Lista de eventos que indicam o power up coletado. */
-	private List<Event> listPowerUp = new ArrayList<Event>();
+	/** Os tipos de power que uma entidade pode possuir. */
+	public enum PowerType {
+
+		HEALTHUP, /** Aumenta vida da entidade. */
+		LIFEUP, /** Aumenta tentativa de vida da entidade. */
+		FIREUP, /** Aumenta range da explosão da bomba. */
+		BOMBUP, /** Aumenta a quantidade de bomba que pode ser dropada. */
+		REMOTECONTROL, /**
+		 * Atribui a possibilidade de controlar o momento de
+		 * explosão de uma bomba.
+		 */
+		PASSTHROUGBOMB, /** Atribui a possibilidade de passar por uma bomba. */
+		SPEEDUP, /** Aumenta a velocidade da entidade. */
+		PASSTHROUG, /** Atribui a possibilidade de passar sobre blocos. */
+		BOXINGGLOVEACQUIRED, /** Atribui a possibilidade de pegar uma bomba. */
+		INVINCIBLE, /** Atribui invencibilidade a entidade. */
+		KICKACQUIRED;
+		/** Atribui a possibilidade de chutar uma bomba. */
+
+	}
+	
+	/** Lista de power ups que uma entidade possui. */
+	private List<PowerType> listPowerUp = new ArrayList<PowerType>();
 
 	/**
 	 * Construtor da classe.
 	 * 
-	 * @param event
-	 *            Evento que indica o Power Up a ser adicionado na lista de
-	 *            Power Ups deste componente da entidade.
+	 * @param powerType
+	 *            Tipo da entidade
 	 */
-	public PowerUp(Event event) {
-		setEvent(event);
+	public PowerUp(PowerType powerType) {
+		setType(powerType);
+	}
+	
+	/**
+	 * Adiciona um tipo de Power Up para a entidade.
+	 * 
+	 * @param event
+	 *            Tipo de Power Up.
+	 */
+	public void setType(PowerType powerType) {
+		this.listPowerUp.add(powerType);
 	}
 
-	/**
-	 * Adiciona um evento de Power Up para a entidade.
-	 * 
-	 * @param event
-	 *            Evento de Power Up.
-	 */
-	public void setEvent(Event event) {
-		this.listPowerUp.add(event);
-	}
 
 	/**
-	 * Retorna o evento procurado, caso entidade não possua evento então é
-	 * retornado null.
+	 * Retorna a lista de tipos de power ups que uma entidade possui.
 	 * 
-	 * @param eventId
-	 *            Id do evento procurado.
-	 * 
-	 * @return eachEvent Evento procurado caso entidade possuí-lo.
+	 * @return listPowerUp Lista de power ups.
 	 */
-	public Event getEvent(int eventId) {
+	public List<PowerType> getTypes() {
 		if (listPowerUp != null) {
-			for (Event eachEvent : listPowerUp) {
-				if (eachEvent.getEventId() == eventId) {
-					return eachEvent;
-				}
-			}
+			return listPowerUp;
 		}
 		return null;
-	}
-
-	/**
-	 * Retorna a possibilidade de retirar um evento da lista de Power Ups da
-	 * entidade.
-	 * 
-	 * @return boolean Possibilidade de retirar evento da lista de Power Ups da
-	 *         entidade.
-	 */
-	public boolean canRemoveEvent() {
-		return (listPowerUp != null);
-	}
-
-	/**
-	 * Remove algum evento da lista de Power Ups da entidade.
-	 * 
-	 * @param eventId
-	 *            Id do evento procurado.
-	 */
-	public void removeEvent(int eventId) {
-		Event eventToRemove = new Event();
-		if (canRemoveEvent()) {
-			for (Event eachEvent : listPowerUp) {
-				if (eachEvent.getEventId() == eventId) {
-					eventToRemove = eachEvent;
-				}
-			}
-			this.listPowerUp.remove(eventToRemove);
-		}
-	}
-
-	/** Remove todos os eventos de Power Up da entidade. */
-	public void clearEvents() {
-		this.listPowerUp.clear();
 	}
 
 }

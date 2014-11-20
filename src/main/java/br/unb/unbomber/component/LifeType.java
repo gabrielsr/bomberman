@@ -20,8 +20,8 @@ public class LifeType extends Component {
 		BOMB, /** Entidade do tipo Bomba */
 		HARD_BLOCK, /** Entidade do tipo Hard Block */
 		SOFT_BLOCK, /** Entidade do tipo Soft Block */
-		POWER_UP;
-		/** Entidade do tipo Power Up */
+		POWER_UP,	/** Entidade do tipo Power Up */
+		DISEASE;	/** Entidade do tipo Disease */
 
 	}
 
