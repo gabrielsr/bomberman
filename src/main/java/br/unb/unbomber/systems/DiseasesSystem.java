@@ -5,12 +5,17 @@ import java.util.Random;
 
 import br.unb.unbomber.component.CellPlacement;
 import br.unb.unbomber.component.DiseaseComponent;
+import br.unb.unbomber.component.DiseaseComponent.DiseaseType;
 import br.unb.unbomber.component.ExplosionBarrier;
 import br.unb.unbomber.component.ExplosionBarrier.ExplosionBarrierType;
+import br.unb.unbomber.component.LifeType;
+import br.unb.unbomber.component.LifeType.Type;
 import br.unb.unbomber.core.BaseSystem;
 import br.unb.unbomber.core.Entity;
 import br.unb.unbomber.core.EntityManager;
 import br.unb.unbomber.core.Event;
+import br.unb.unbomber.event.AquiredDiseaseEvent;
+import br.unb.unbomber.event.CollisionEvent;
 import br.unb.unbomber.event.CreateDiseaseEvent;
 import br.unb.unbomber.event.InAnExplosionEvent;
 
@@ -40,6 +45,44 @@ public class DiseasesSystem extends BaseSystem {
 		}
 
 		/* Checking if someone got any disease in the field */
+		events = getEntityManager().getEvents(CollisionEvent.class);
+		for (Event event : events) {
+			/* Typecasting to use properly the event */
+			CollisionEvent collisionEvent = (CollisionEvent) event;
+			/* Checking if it was a collision char - disease */
+			LifeType sourceLifeType = (LifeType) getEntityManager()
+					.getComponent(LifeType.class,
+							collisionEvent.getSourceId());
+			LifeType targetLifeType = (LifeType) getEntityManager()
+					.getComponent(LifeType.class,
+							collisionEvent.getTargetId());
+			if (sourceLifeType.getType() == Type.CHAR
+					&& targetLifeType.getType() == Type.DISEASE) {
+				
+				/* Getting the DiseaseComponent */
+				DiseaseComponent diseaseComponent = (DiseaseComponent) getEntityManager()
+						.getComponent(DiseaseComponent.class,
+								collisionEvent.getTargetId());
+				DiseaseType disease = diseaseComponent.getDiseaseType();
+				/* Creating an event according to the disease */
+				AquiredDiseaseEvent aquiredDiseaseEvent = new AquiredDiseaseEvent();
+				aquiredDiseaseEvent.setOwnerId(collisionEvent.getSourceId());
+				if (disease == DiseaseType.CHANGEPOSITION) {
+					aquiredDiseaseEvent.setDiseaseType(DiseaseType.CHANGEPOSITION);
+				} else if (disease == DiseaseType.DIARRHEA) {
+					aquiredDiseaseEvent.setDiseaseType(DiseaseType.DIARRHEA);
+				} else if (disease == DiseaseType.CONSTIPATION) {
+					aquiredDiseaseEvent.setDiseaseType(DiseaseType.CONSTIPATION);
+				} else if (disease == DiseaseType.LOWPOWER) {
+					aquiredDiseaseEvent.setDiseaseType(DiseaseType.LOWPOWER);
+				} else if (disease == DiseaseType.RAPIDPACE) {
+					aquiredDiseaseEvent.setDiseaseType(DiseaseType.RAPIDPACE);
+				} else if (disease == DiseaseType.SLOWPACE) {
+					aquiredDiseaseEvent.setDiseaseType(DiseaseType.SLOWPACE);
+				}
+				getEntityManager().addEvent(aquiredDiseaseEvent);
+			}
+		}
 
 		/* Checking if any disease in the field should be destroyed by explosion */
 		events = getEntityManager().getEvents(InAnExplosionEvent.class);
@@ -68,24 +111,27 @@ public class DiseasesSystem extends BaseSystem {
 		int randomNumber = getRandomNumber();
 		DiseaseComponent diseaseComponent = new DiseaseComponent();
 		if (randomNumber == 1) {
-			diseaseComponent.setDescription("CHANGEPOSITION");
+			diseaseComponent.setDiseaseType(DiseaseType.CHANGEPOSITION);
 		} else if (randomNumber == 2) {
-			diseaseComponent.setDescription("DIARRHEA");
+			diseaseComponent.setDiseaseType(DiseaseType.DIARRHEA);
 		} else if (randomNumber == 3) {
-			diseaseComponent.setDescription("CONSTIPATION");
+			diseaseComponent.setDiseaseType(DiseaseType.CONSTIPATION);
 		} else if (randomNumber == 4) {
-			diseaseComponent.setDescription("LOWPOWER");
+			diseaseComponent.setDiseaseType(DiseaseType.LOWPOWER);
 		} else if (randomNumber == 5) {
-			diseaseComponent.setDescription("RAPIDPACE");
+			diseaseComponent.setDiseaseType(DiseaseType.RAPIDPACE);
 		} else if (randomNumber == 6) {
-			diseaseComponent.setDescription("SLOWPACE");
+			diseaseComponent.setDiseaseType(DiseaseType.SLOWPACE);
 		}
+		/* Creating LifeType component*/
+		LifeType lifeType = new LifeType(Type.DISEASE);
 
 		/* Creating the entity */
 		Entity disease = getEntityManager().createEntity();
 		disease.addComponent(cellPlacement);
 		disease.addComponent(explosionBarrier);
 		disease.addComponent(diseaseComponent);
+		disease.addComponent(lifeType);
 		getEntityManager().update(disease);
 	}
 

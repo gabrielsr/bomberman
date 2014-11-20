@@ -4,14 +4,23 @@ import br.unb.unbomber.core.Component;
 
 public class DiseaseComponent extends Component{
 	
-	private String description;
+	public enum DiseaseType{
+		CHANGEPOSITION,
+		DIARRHEA,
+		CONSTIPATION,
+		LOWPOWER,
+		RAPIDPACE,
+		SLOWPACE
+	}
+	
+	private DiseaseType diseaseType;
 
-	public String getDescription() {
-		return description;
+	public DiseaseType getDiseaseType() {
+		return diseaseType;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setDiseaseType(DiseaseType diseaseType) {
+		this.diseaseType = diseaseType;
 	}
 
 }
