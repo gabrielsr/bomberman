@@ -160,26 +160,37 @@ public class PowerUpSystem extends BaseSystem {
 		switch (num) {
 		case 0:
 			powerRand = new PowerUp(PowerType.BOMBUP);
+			break;
 		case 1:
 			powerRand = new PowerUp(PowerType.BOXINGGLOVEACQUIRED);
+			break;
 		case 2:
 			powerRand = new PowerUp(PowerType.FIREUP);
+			break;
 		case 3:
 			powerRand = new PowerUp(PowerType.HEALTHUP);
+			break;
 		case 4:
 			powerRand = new PowerUp(PowerType.INVINCIBLE);
+			break;
 		case 5:
 			powerRand = new PowerUp(PowerType.KICKACQUIRED);
+			break;
 		case 6:
 			powerRand = new PowerUp(PowerType.LIFEUP);
+			break;
 		case 7:
 			powerRand = new PowerUp(PowerType.PASSTHROUG);
+			break;
 		case 8:
 			powerRand = new PowerUp(PowerType.PASSTHROUGBOMB);
+			break;
 		case 9:
 			powerRand = new PowerUp(PowerType.REMOTECONTROL);
+			break;
 		case 10:
 			powerRand = new PowerUp(PowerType.SPEEDUP);
+			break;
 		default:
 			// Lançar alguma exceção.
 			break;
