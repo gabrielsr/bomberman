@@ -79,6 +79,7 @@ public class DiseasesSystem extends BaseSystem {
 					aquiredDiseaseEvent.setDiseaseType(DiseaseType.SLOWPACE);
 				}
 				getEntityManager().addEvent(aquiredDiseaseEvent);
+				getEntityManager().removeEntityById(collisionEvent.getSourceId());
 			}
 		}
 
