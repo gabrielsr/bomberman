@@ -1,0 +1,96 @@
+# AVISO - ABRIR MAXIMIZADO #
+Nome: Dayanne Fernandes da Cunha
+Matrícula: 130107191
+Grupo: 5
+
+RELATÓRIO - Sprint 3.b
+
+PROJETO BOMBERMAN
+
+O objetivo principal do jogo Bomberman é que os characters completem as fases depositando bombas em ordens e lugares estratégicos para destruir obstáculos e monsters.
+
+MÓDULO LIFE
+
+O módulo life do jogo tem o intuito de pontuar a quantidade de vida dos characters e monsters. O módulo recebe uma lista de eventos que são gerados por outros sistemas, e analisa-os buscando aqueles eventos que devem ser tratados por ele. Como saída, o módulo gera o evento de retirada de character ou de monster, quando a pontuação de vida atinge o valor zero.
+
+MÓDULO POWER UP
+
+O módulo power up do jogo tem como responsabilidade gerenciar a criação de forma pseudo aleatória (de acordo com evento de destruição de bloco ou mostro) e aquisição de powerups (items) que modificam as habilidades ou vida de uma entidade character. A aquisição de um powerup é realizada quando um character se move para uma célula onde foi criado um powerup, quando esta entidade adquire este powerup então o item é retirado do grid.
+
+Objetivos (GERAL)
+
+- Configurar ambientes de desenvolvimento do projeto; (DONE)
+	- Eclipse (Gradle, CheckStyles, FindBugs); (DONE)
+	- GitHub; (DONE)
+	- Doxygen. (DONE)
+- Implementar eventos gerados pelo Módulo Life; (DONE)
+	- DestroyedEvent; (DONE)
+	- GameOverEvent; (DONE)
+	- InvencibleEvent; (DONE)
+	- LifePowerUpEvent; (DONE)
+- Implementar componentes do Módulo Life; (DONE)
+	- AvailableTries; (DONE)
+	- Health; (DONE)
+	- LifeType; (DONE)
+- Implementar LifeSystem; (ONGOING)
+	- Eventos Gerados; (DONE)
+	- Eventos Tratados; (ONGOING)
+		- Evento Invencible; (ONGOING)
+- Implementar PowerUpSystem; (DONE)
+	- Eventos Gerados; (DONE)
+	- Eventos Tratados; (DONE)
+- Implementar testes unitários do sistema do Módulo Life; (ONGOING)
+	- Eventos que retiram e recebem danos; (DONE)
+	- Eventos que retiram e recebem tentativas de vida; (DONE)
+	- Eventos de destruição; (DONE)
+	- Eventos de Game Over. (ONGOING)
+-Implementar componentes do Módulo Power Up; (DONE)
+	- PowerUp; (DONE)
+- Implementar eventos gerados pelo Módulo PowerUp; (DONE)
+	- AcquiredPowerUpEvent; (DONE)
+- Conversar com o pessoal do Throw System e negociar como será a aquisição de Boxing Glove; (DONE)
+- Implementar testes unitários do sistema do Módulo de Power UP; (ONGOING)
+	- Eventos de aquisição de vida; (ONGOING)
+	- Eventos de aquisição de tentativas de vida; (ONGOING)
+	- Eventos que alteram propriedades da bomba; (ONGOING);
+	- Eventos que alteram propriedades de movimento; (ONGOING);
+	- Eventos que dão habilidade a uma entidade de movimentar uma bomba; (ONGOING);
+- Revisar código segundo padrões de código e corrigir erros; (ONGOING)
+- Executar findBugs e detectar e corrigir erros; (ONGOING)
+- Revisar a geração de documentação doxygen; (ONGOING)
+- Realizar pull request do projeto. (ONGOING)
+
+
+Objetivos (INDIVIDUAL)
+
+DATA		HORAS_TRABALHADAS	TIPO_TAREFA			DESCRIÇÃO_DA_TAREFA
+
+03/11/14	3 HORAS			IMPLEMENTAR LIFESYSTEM		TRATAR EVENTOS DE COLISÃO, VERIFICANDO SE É DE UMA ENTIDADE QUE CAUSARÁ OU RECEBERÁ 											DANO OU SE É UMA COLISÃO COM ALGUM POWER UP, DESTRUIÇÃO DE ENTIDADE E DE GAMEOVER.(DONE)
+03/11/14	3 HORAS			IMPLEMENTAR LIFESYSTEM		GERAR EVENTOS DE DESTRUIÇÃO DE ENTIDADE, INVENCIBILIDADE APOS ENTIDADE SER RECRIADA APOS 									DESTRUIÇÃO DA MESMA E DE GAMEOVER.(DONE)
+03/11/14	2 HORAS			IMPLEMENTAR EVENTOS		EVENTOS DO MÓDULO DE POWER UP COMO HEALTHUP E LIFEUP.
+04/11/14	3 HORAS			REVISAR CODIGO			VERIFICAR JAVADOC E CHECKSTYLE APOS IMPLEMENTAÇÕES E COMENTAR TODOS OS METODOS.
+04/11/14	2 HORAS			CORRIGIR ERROS			EXECUTAR FINDBUGS E VERIFICAR ERROS.
+04/11/14	0,5 HORA		DOC. PROJETO			REVISAR E GERAR DOCUMENTAÇÃO COM DOXYGEN.
+04/11/14	0,1 HORA		PULL REQUEST			REQUISTAR INSERÇÃO DO MÓDULO LIFE NO PROJETO GERAL.
+
+TOTAL		13,6 HORAS
+
+Tarefas Executadas (INDIVIDUAL)
+
+
+05/11/14	1 HORA			ESTUDAR LIBGDX			CLONEI O REPOSITÓRIO DO LIBGDX E FIZ PEQUENOS TUTORIAIS PARA UM MELHOR ENTENDIMENTO.
+06/11/14	4 HORAS			IMPLEMENTAR SYSTEM		IMPLEMENTAÇÃO DO LIFESYSTEM: GERA EVENTO DE GAME OVER MAIS NÃO O TRATA, GUARDA LISTA DE 										EVENTOS TRATADOS PARA NÃO TRATAR 2 VEZES. (VER FUTURAMENTE COMO REMOVER ESTES EVENTOS 											APÓS TRATADOS). DEIXANDO ALGUNS MÉTODOS DE CRIAÇÃO DO LIFESYSTEM COMO PRIVATE. FILTRA 											EVENTOS DE EXPLOSÃO. CONFERE A POSSIBILIDADE RECRIAÇÃO DA ENTIDADE, VERIFICANDO SE A 											ENTIDADE A SER DESTRUÍDA É DO TIPO CHAR OU MONSTER.
+10/11/14	0,5 HORA		CONFIGURAR AMBIENTE		CONFIGURAÇÃO DO AMBIENTE TRAVIS E COVERALL.
+12/11/14	0,5 HORA		REVISÃO DE CÓDIGO		REVISÃO DO SYSTEM LIFE, VERIFICAÇÃO DO JAVADOC, CHECKSTYLE E MÉTODOS COMENTADOS.
+18/11/14	5 HORAS			IMPLEMENTAR TESTES		IMPLEMENTAR TESTES SOBRE O SISTEMA DO MODULO LIFE, VERIFICAR RETIRADA E ATRIBUIÇÃO DE 											VIDA E TENTATIVAS DE VIDA.
+19/11/14	2 HORAS			IMPLEMENTAR TESTES		IMPLEMENTAR TESTES SOBRE O SISTEMA DO MODULO LIFE, VERIFICAR DESTRUIÇÃO DE ENTIDADES.
+19/11/14	1 HORA			REVISÃO DE CÓDIGO		REVISÃO DO TEST SYSTEM LIFE, VERIFICAÇÃO DO JAVADOC, CHECKSTYLE E MÉTODOS COMENTADOS.
+19/11/14	0,5 HORA		CORRIGIR ERROS			EXECUTAR FINDBUGS E VERIFICAR ERROS.
+19/11/14	0,5 HORA		DOC. PROJETO			REVISAR E GERAR DOCUMENTAÇÃO COM DOXYGEN.	
+20/11/14	0,5 HORA		IMPLEMENTAR EVENTS		IMPLEMENTAÇÃO DO EVENT DO MODULO DE POWER UP, ACQUIREDPOWERUPEVENT.
+20/11/14	2 HORA			IMPLEMENTAR COMPONENTS		IMPLEMENTAÇÃO DO COMPONENTE DO MODULO DE POWER UP, POWER UP, CONTENDO UM TIPO ENUM DOS 											TIPOS DE POWER UPS E A LISTA DE TIPOS ENUMS QUE UMA ENTIDADE PODE POSSUIR.
+20/11/14	4 HORA			IMPLEMENTAR SYSTEM		IMPLEMENTAÇÃO DO POWERUPSYSTEM : FILTRA E TRATA EVENTOS DE INEXPLOSIONEVENT E EVENTOS DE 									COLISÃO E GERA EVENTO DE ACQUIREDPOWERUPEVENT.
+20/11/14	1 HORA			REVISÃO DE CÓDIGO		REVISÃO DO EVENT, COMPONENTE E SYSTEM DO MODULO POWER UP, VERIFICAÇÃO DO JAVADOC, 											CHECKSTYLE E MÉTODOS COMENTADOS.
+
+TOTAL		22,5 HORAS
+
