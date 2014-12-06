@@ -1,0 +1,160 @@
+Módulos de Interface 
+===================
+
+
+Render Game Module
+------------------
+Controla a adaptação a diferentes tamanhos de tela. Controla renderização das telas.
+
+View Ports:: (adaptar a diferntes proporções de tela)
+
+Full Screen:: Controla entrada e saída do modo fullscreen no desktop.
+
+
+=== Telas
+. Main Menu
+. Draw Screen
+. WinAMatchScreen
+. WinACupScreen
+
+
+Render Match Module
+-------------------
+
+O processo de renderização pode ser dividido em 3 etapas:
+. ordenar as entidades de forma a fazer uma sobreposição correta na hora da renderização
+. definir qual sprite será renderizada levando em consideração animações e entidades com Sprite fixa
+. calcular a posição de um entidade na tela
+. utilizar a biblioteca gráfica para fazer a renderização
+
+
+=== Layers
+Para renderizar camadas corretamente (por exemplo, Character sobre uma bomb) constituimos o nosso mapa de camadas. A primeira contem o fundo. A segunda contem os blocos, bombas e powerups A terceira os personagens. 
+A quarta podem ter elementos do cenário que são superiores, como bombas jogadas. 
+
+=== Elementos
+
+Explosion:: Meio e fronteria de explosão - Uma explosão com força 1 (a última da propagação) tem sprite diferente. A sprite é rotacionada segundo a direção da propagação
+
+
+Face Direction:: characters e monstes tem sprites segundo a direção de seu último movimento.
+
+Animations:: Animações são sequências de sprites que são exibidas. Eventos podem disparar animações
+
+
+Bomb Pulse :: Time Bombs alternam entre 3 sprites (de tamanhos um pouco diferentes) enquanto estão contando o tempo antes de disparar explosão.
+
+Walk animation:: Sprites são alternadas para dar impressão de caminhar. Aplicáveis a Character e Moster
+
+Destructin Animation:: Entidades seguintes entidades possuem animação quando são destruidas:
+Characters, Monsters, Soft Blocks e Power Ups.
+	
+Invencible Filter :: Charactes e Monsters aparecem claros enquanto invencíveis. Alterna entre claro e normal a cada 3 turnos.
+
+Win:: comemoração quando um personagem ganha o jogo.
+
+=== Filtros
+
+MatchIntro :: quando uma partida é criada ela aparece com um efeito fadeIn.
+
+MatchEnd:: quando uma partida é finalizada ela some com um efeito de "quadriculação" (vide bomberman2)
+
+MatchPause:: tela fica escurecida.
+
+
+
+Render HUD Module
+-----------------
+Renderizar HUD, a barra superior que mostra a pontuação dos jogadores.
+
+Score: Exibe o score dos jogadores.
+
+Characters Number: exibe a HUD de acordo com o número de personagens. 
+
+Time:: Exibe o tempo da partida.
+TimeOver:: Exibe que o tempo da partida se esgotou.
+
+Audio Module
+------------
+
+Este módulo tem por objetivo 
+
+=== Responsabilidades
+A cada turno em uma partida tocar os sons relativos a eventos que ocorreram durante este turno.
+
+Durante a navegação do menu, tocar sons relativos a eventos que ocorreram na navegação do menu.
+
+Tocar a música tema de acordo com a configuração da partida.
+O mapeamento entre eventos e arquivos de áudio deve ser feito em um arquivo texto, fora do jogo.
+
+=== Components 
+(nenhum?)
+
+=== System
+
+==== Events Tratados
+* BombSetEvent
+* DestroyedEvent:: é tratado de forma diferente para Characters e para Monsters.
+
+* ExplosionStartedEvent
+* LifePowerUpEvent
+* MovedEntityEvent:: apenas para characters é tratado
+* TimeOverEvent 
+* GameOverEvent
+
+
+Eventos de Menu:
+* MenuChangeSelectionEvent 
+* MenuSelectionEvent
+
+Eventos de Tela
+* ScreenChange
+
+OBS: Ao iniciar uma partida é tocada uma música de início por alguns segundos, depois iniciada a música do stage.
+
+ScreenChange:: cada tela pode estar vinculada a uma música. As telas principais são:
+. OpenMovie
+. SplashScreen ( UnB )
+. MainMenu
+. ContinueScreen
+. CreditsScreen
+. DrawnScreen
+
+==== Events Gerados
+(nenhum?)
+
+=== Testes
+
+Roteiros de testes manuais funcionais.
+
+
+
+PlayerControl Module
+--------------------
+
+Este Módulo é responsável pelo controle de jogadores a Characters.
+
+=== Responsabilidades
+
+* Mapear character e player
+* Mapear player e um InputProvider. InputProvider's podem ser:
+** KeyboardInput
+** JoystickInput
+** NetworkInput
+* Mapear teclas e ações
+* Para cada turno ler as teclas precionadas e gerar Command*Event. Os Command*Event podem ser:
+** ActionCommandEvent
+** MovementCommandEvent
+
+=== Componentes
+ * Player
+
+=== System
+
+==== Events Tratados
+
+==== Events Gerados
+
+MovementCommandEvent:: Comandos de movimento da entidade.
+
+ActionCommandEvent:: Comandos de ações da entidade, como DROP_BOMB e EXPLODE_REMOTE_BOMB

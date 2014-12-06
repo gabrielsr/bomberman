@@ -16,6 +16,7 @@ import br.unb.unbomber.core.EntitySystemImpl;
 import br.unb.unbomber.event.MovementCommandEvent;
 import br.unb.unbomber.event.MovementCommandEvent.MovementType;
 
+@SuppressWarnings("deprecation")
 public class MovementSystemTestCase extends MovimentSystem {
 
 	EntityManager entityManager;
@@ -30,21 +31,21 @@ public class MovementSystemTestCase extends MovimentSystem {
 	}
 
 	@Test
-	public void MoveUpTest() {
-		Entity anEntity = new Entity();
+	public void moveUpTest() {
+		final Entity anEntity = new Entity();
 		/* recebe o atual posicionamento da entidade */
 		CellPlacement originalPlacement = new CellPlacement();
 
-		int CELL_X = 5;
-		int CELL_Y = 5;
-		int SPEED = 3;
+		final int CELL_X = 5;
+		final int CELL_Y = 5;
+		final int SPEED = 3;
 
 		/* atribui um posicionamento valido para a entidade */
 		originalPlacement.setCellX(CELL_X);
 		originalPlacement.setCellY(CELL_Y);
 
 		/* atribui uma velocidade valida para entidade */
-		Movable movable = new Movable();
+		final Movable movable = new Movable();
 		movable.setSpeed(SPEED);
 
 		/* adicona os componentes de posicionamento e mobilidade para a entidade */
@@ -55,7 +56,7 @@ public class MovementSystemTestCase extends MovimentSystem {
 		entityManager.addEntity(anEntity);
 
 		/* cria um evento valido de movimento do tipo MovementType.Mouve_UP */
-		MovementCommandEvent actionCommand = new MovementCommandEvent(
+		final MovementCommandEvent actionCommand = new MovementCommandEvent(
 				MovementType.MOVE_UP, movable.getEntityId());
 
 		/* adiciona o evento criado anteriormente a lista de eventos */
@@ -65,15 +66,15 @@ public class MovementSystemTestCase extends MovimentSystem {
 		system.update();
 
 		/* cria uma lista de componentes do tipo Movable */
-		List<Component> moves = (List<Component>) entityManager
+		final List<Component> moves = (List<Component>) entityManager
 				.getComponents(Movable.class);
 
-		MovementCommandEvent event = new MovementCommandEvent(
+		final MovementCommandEvent event = new MovementCommandEvent(
 				MovementType.MOVE_UP, actionCommand.getEntityId());
 		entityManager.addEvent(event);
 
-		Component move = moves.get(0);
-		CellPlacement createEntityPlacement = (CellPlacement) entityManager
+		final Component move = moves.get(0);
+		final CellPlacement createEntityPlacement = (CellPlacement) entityManager
 				.getComponent(CellPlacement.class, move.getEntityId());
 
 		/* verifica se o movimento feito foi realizado com sucesso */

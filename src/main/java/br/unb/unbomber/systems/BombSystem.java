@@ -191,7 +191,7 @@ public class BombSystem extends BaseSystem {
 		
 		// 3)
 		explosion.setEventId(entityManager.getUniqueId());
-		explosion.setOwnerId(bombExplosive.getOwnerId()); //The Explosion owner is the bomb ownwer 
+		explosion.setOwnerId(bombExplosive.getOwnerId()); //The Explosion owner is the bomb ownwer
 		explosion.setInitialPosition(bombPlacement); 
 		explosion.setExplosionRange(bombExplosive.getExplosionRange());
 		

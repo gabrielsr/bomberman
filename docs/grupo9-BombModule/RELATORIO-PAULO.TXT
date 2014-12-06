@@ -70,3 +70,24 @@
 
 	- Tempo estimado: 5,5 horas
 	- Tempo gasto: 4,5 horas
+
+ >> Sprint 3: (04/11 - )
+
+ 	Data 		| Horas Trabalhadas 	| Tipo Tarefa 				| Descrição da Tarefa Realizada
+	------------------------------------------------------------------------------------------------------------------------------
+
+	04/11/2014	| 2 horas 				| Estudar funcionamento do  | Estudo dos padrões do Kick Powerup dentro do jogo. 
+												Kick Powerup	
+ 
+ 	07/11/2014	| 3 horas 				| Implementar aquisição de 	| Implementar o código de como o Kick será adquirido.
+ 											Kick Acquired
+ 
+ 	11/11/2014	| 2 Horas               | Revisar código 			| Segundo padrões e corrigir erros.
+
+ 	14/11/2014	| 0,5 Hora 				| Realizar pull request		| Na ferramenta GitHub realizar um Pull Request
+
+ 	- Tempo estimado: 7,5 horas
+
+ 
+
+ 

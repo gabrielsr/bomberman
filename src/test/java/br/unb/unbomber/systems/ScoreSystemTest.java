@@ -52,8 +52,8 @@ public class ScoreSystemTest {
 		/*Testa a função*/
 		scsystem.update();
 		
-		Bounty a = (Bounty) entityManager.getComponent(Bounty.class, destroyed.getSourceId());
-		Score b = (Score) entityManager.getComponent(Score.class, entity2.getEntityId()); 
+		Bounty a = (Bounty) entityManager.getComponent(Bounty.class, destroyed.getTargetId());
+		Score b = (Score) entityManager.getComponent(Score.class, destroyed.getSourceId()); 
 		/*Compara os valores da recompensa de quem foi destruído com o da pontuação de quem recebeu*/
 		/*Quem destrói recebe um número de pontos igual ao da recompensa de quem foi destruído*/
 		assertTrue(a.getBounty() == b.getScore());

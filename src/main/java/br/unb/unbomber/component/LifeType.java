@@ -5,7 +5,7 @@ import br.unb.unbomber.core.Component;
 /**
  * Classe reponsavel por atribuir um tipo a uma entidade.
  * 
- * Tipos: Char, Monster, Bomb, Hard Block, Soft Block e Power Up.
+ * Tipos: Char, Monster, Bomb, Hard Block, Soft Block, Power Up e Disease.
  * 
  * @version 0.2 19 Nov 2014
  * @author Grupo 5 - Dayanne <dayannefernandesc@gmail.com>

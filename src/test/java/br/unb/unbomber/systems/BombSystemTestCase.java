@@ -199,7 +199,7 @@ public class BombSystemTestCase {
 		//runs 88 game iterations
 		updateSystems(88);
 		// testa se nos primeiros 89 turnos não foi criado ExplosionStartedEvent.
-		assertEquals(entityManager.getEvents(ExplosionStartedEvent.class).size(), 0 );
+		assertTrue(entityManager.getEvents(ExplosionStartedEvent.class).isEmpty());
 		
 		//one more time (90 times total)
 		updateSystems(1);
@@ -289,7 +289,7 @@ public class BombSystemTestCase {
 		//run the system
 		bombSystem.update();
 		
-		assertEquals(entityManager.getEvents(ExplosionStartedEvent.class).size(), 0 );
+		assertTrue(entityManager.getEvents(ExplosionStartedEvent.class).isEmpty());
 
 		//create an TRIGGERS_REMOTE_BOMB Command Event
 		ActionCommandEvent event = new ActionCommandEvent(ActionType.TRIGGERS_REMOTE_BOMB, bombDropper.getEntityId());
