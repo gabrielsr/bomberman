@@ -3,6 +3,8 @@ apply plugin: "maven"
 apply plugin: 'jacoco'
 apply plugin: 'cobertura'
 apply plugin: 'com.github.kt3k.coveralls'
+apply plugin: 'checkstyle'
+apply plugin: 'maven-publish'
 
 
 group = "br.unb.cic"
@@ -18,10 +20,10 @@ dependencies {
     testCompile 'junit:junit:4.9'
 }
 
-
 buildscript {
     repositories {
         mavenCentral()
+        jcenter()
     }
 
     dependencies {
@@ -36,5 +38,24 @@ jacocoTestReport {
     reports {
         xml.enabled = true // coveralls plugin depends on xml format report
         html.enabled = true
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+}
+publishing {
+    repositories {
+        maven {
+        	credentials {
+                username "gabrielsr"
+                password "23297bf212d35f849e9bd0227b8945bd7a7288e8"
+            }
+            url "https://api.bintray.com/maven/gabrielsr/bomberman/bomberman"
+        }
     }
 }

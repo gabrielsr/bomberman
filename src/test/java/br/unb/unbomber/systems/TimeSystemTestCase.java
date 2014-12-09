@@ -2,6 +2,7 @@ package br.unb.unbomber.systems;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -57,7 +58,7 @@ public class TimeSystemTestCase {
 		system.update();
 		
 		//assert no TimeOverEvent was created yet
-		assertNull(entityManager.getEvents(TimeOverEvent.class));
+		assertTrue(entityManager.getEvents(TimeOverEvent.class).isEmpty());
 		
 		// the 3rd and final tick
 		system.update();

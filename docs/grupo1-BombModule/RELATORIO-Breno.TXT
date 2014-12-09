@@ -39,6 +39,15 @@ Estudar					| Estudar convenções de código Java da Sun [3]
 Revisar documentação do Mod		| Adequar documentação do código quanto a Programming Practices (Chapter 10)
 Revisar código do módulos		| Executar ferramenta de análise estática para revisão do código do módulo. 
 
+
+## Sprint 3 (de 28/10 a 13/11)
+# Planejado
+
+Num Tarefa   | Tipo Tarefa                     | Descrição da Tarefa
+-------------+---------------------------------+--------------------------------------------------------------------------
+ 01          | Estudar                         | Est. libGDX
+ 02          | Codificar                       | Prototipar telas iniciais do jogo
+
 ## Referências
 
 [1] http://www.gamedev.net/page/resources/_/technical/game-programming/case-study-bomberman-mechanics-in-an-entity-component-system-r3159

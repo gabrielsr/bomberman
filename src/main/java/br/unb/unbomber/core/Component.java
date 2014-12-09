@@ -3,7 +3,7 @@ package br.unb.unbomber.core;
 /**
  * A Component in the Entity Component System (ECS).
  *
- * @author grodrigues
+ * @author Gabriel Rodrigues <gabrielsr@gmail.com>
  */
 public class Component {
 	

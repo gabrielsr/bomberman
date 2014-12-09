@@ -1,34 +1,49 @@
-//GameOverEvent
-//Quando um Character nao possuir mais health ou availableTries.
-// Coleta e atribui a Id da entidade que sera retirada do grid se Health
-// for igual a zero e ainda possuir vidas ou servira como parametro para
-// indicar GameOver caso a entidade nao tenha vida restante.
-
-/* Indica de qual pacote o arquivo pertence */
-/* No caso ele pertence ao Event */
 package br.unb.unbomber.event;
 
-/* Interface para dados de Event */
 import br.unb.unbomber.core.Event;
 
-/* Heranca unica do evento GameOverEvent */
+/**
+ * Classe evento que indica que uma entidade nao possui mais vida e tentativas
+ * de vida.
+ * 
+ * @version 0.3 19 Nov 2014
+ * @author Grupo 5 - Dayanne <dayannefernandesc@gmail.com>
+ */
+
 public class GameOverEvent extends Event {
-	int sourceId;
+	/** Id da entidade que nao possui mais vida e tentativas de vida. */
+	private int sourceId;
 
-	/* Construtor do Evento */
-	public GameOverEvent(int sourceId){
-		this.sourceId = sourceId;
-
+	/**
+	 * Construtor da classe.
+	 * 
+	 * @param sourceId
+	 *            Id da entidade que nao possui mais vida e tentativas de vida.
+	 */
+	public GameOverEvent(int sourceId) {
+		setSourceId(sourceId);
 	}
-	
-	//get the ID of an entity that has lost all lives.
-	public int getSourceId(){
+
+	/**
+	 * Coleta a identidade da entidade que nao possui mais vida e tentativas de
+	 * vida.
+	 * 
+	 * @return sourceId Id da entidade que nao possui mais vida e tentativas de
+	 *         vida.
+	 */
+	public int getSourceId() {
 		return sourceId;
 	}
-	
-	//set the ID of an entity that has lost all lives.
-	public void  setSourceId(int sourceId){
+
+	/**
+	 * Atribui a identidade da entidade que nao possui mais vida e tentativas de
+	 * vida.
+	 * 
+	 * @param sourceId
+	 *            Id da entidade que nao possui mais vida e tentativas de vida.
+	 */
+	public void setSourceId(int sourceId) {
 		this.sourceId = sourceId;
 	}
-	
+
 }

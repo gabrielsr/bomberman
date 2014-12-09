@@ -1,31 +1,68 @@
-//DestroyedEvent
-// Quando uma entidade nao conter mais health.
-// Coleta a Id da entidade que sera destruida do grid.
-
-/* Indica de qual pacote o arquivo pertence */
-/* No caso ele pertence ao Event */
 package br.unb.unbomber.event;
 
-/* Interface para dados de Event */
 import br.unb.unbomber.core.Event;
 
-/* Heranca unica do evento DestroyedEvent */
+/**
+ * Classe evento que indica a destruição de uma entidade.
+ * 
+ * @version 0.3 19 Nov 2014
+ * @author Grupo 5 - Dayanne <dayannefernandesc@gmail.com>
+ */
 public class DestroyedEvent extends Event {
-	int sourceId;
+	/** Entidade que gerou a destruição. */
+	private int sourceId;
+	/** Entidade que foi destruída. */
+	private int targetId;
 
-	/* Construtor do Evento */
-	public DestroyedEvent(int sourceId) {
-		this.sourceId = sourceId;
+	/**
+	 * Construtor da classe.
+	 * 
+	 * @param sourceId
+	 *            Entidade que gerou a destruição.
+	 * @param targetId
+	 *            Entidade que foi destruída.
+	 */
+	public DestroyedEvent(int sourceId, int targetId) {
+		setSourceId(sourceId);
+		setTargetId(targetId);
 	}
 
-	// get the id of an entity which will be destroyed
+	/**
+	 * Coleta a identidade que gerou a destruição.
+	 * 
+	 * @return sourceId Entidade que gerou a destruição.
+	 */
 	public int getSourceId() {
 		return sourceId;
 	}
 
-	// set the id of an entity which will be destroyed
+	/**
+	 * Atribui a identidade que gerou a destruição.
+	 * 
+	 * @param sourceId
+	 *            Entidade que gerou a destruição.
+	 */
 	public void setSourceId(int sourceId) {
 		this.sourceId = sourceId;
+	}
+
+	/**
+	 * Coleta a identidade da entidade que sera destruída.
+	 * 
+	 * @return targetId Entidade que foi destruída.
+	 */
+	public int getTargetId() {
+		return targetId;
+	}
+
+	/**
+	 * Atribui a identidade da entidade que sera destruída.
+	 * 
+	 * @param targetId
+	 *            Entidade que foi destruída.
+	 */
+	public void setTargetId(int targetId) {
+		this.targetId = targetId;
 	}
 
 }
