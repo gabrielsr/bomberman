@@ -1,27 +1,19 @@
 package br.unb.unbomber.systems;
 
-import static junit.framework.Assert.assertEquals;
-import static org.junit.Assert.*;
-
-import java.util.List;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.Ignore;
 
-import br.unb.unbomber.core.Component;
+import br.unb.unbomber.component.Bounty;
+import br.unb.unbomber.component.Score;
 import br.unb.unbomber.core.Entity;
 import br.unb.unbomber.core.EntityManager;
-import br.unb.unbomber.core.BaseSystem;
 import br.unb.unbomber.core.EntityManagerImpl;
-import br.unb.unbomber.core.Event;
-import br.unb.unbomber.component.Explosive;
-import br.unb.unbomber.component.Score;
-import br.unb.unbomber.component.Bounty;
 import br.unb.unbomber.event.DestroyedEvent;
-import br.unb.unbomber.event.InvencibleEvent;
-import br.unb.unbomber.event.LifePowerUpEvent;
-import br.unb.unbomber.systems.ScoreSystem; 
 
+@Ignore
 public class ScoreSystemTest {
 
 	

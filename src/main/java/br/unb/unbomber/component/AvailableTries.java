@@ -3,66 +3,65 @@ package br.unb.unbomber.component;
 import br.unb.unbomber.core.Component;
 
 /**
- * Classe para verificar quantas vidas uma entidade Character possui.
+ * Classe para verificar quantas vidas uma entidade possui.
  * 
- * @version 0.2 21 Out 2014
+ * @version 0.3 19 Nov 2014
  * @author Grupo 5 - Dayanne <dayannefernandesc@gmail.com>
  */
 
 public class AvailableTries extends Component {
 
-	/** Quantidade de vidas que um entidade Character possui */
+	/** Quantidade de vidas que um entidade possui. */
 	private int lifeTries;
-	/* Coleta True ou False caso seja permitido retirar dano de uma entidade
-	 * monster ou character.
-//	 */
-	/**
-	 * Informa True ou False caso seja permitido retirar dano de uma entidade
-	 * Character.
-	 */
+	/** Informa True ou False caso seja permitido retirar dano de uma entidade. */
 	private boolean canTakeLife;
 
 	/**
-	 * Atribui o numero de tentativas que uma entidade Character possui.
+	 * Construtor da classe.
 	 * 
 	 * @param lifeTries
+	 *            Quantidade de tentativas de vida.
+	 * @param canTakeLife
+	 *            Possibilidade de retirar tentativas de vida.
+	 */
+	public AvailableTries(int lifeTries, boolean canTakeLife) {
+		setLifeTries(lifeTries);
+		setCanTakeLife(canTakeLife);
+	}
+
+	/**
+	 * Atribui o numero de tentativas que uma entidade possui.
+	 * 
+	 * @param lifeTries
+	 *            Quantidade de tentativas de vida.
 	 */
 	public void setLifeTries(int lifeTries) {
 		this.lifeTries = lifeTries;
 	}
 
 	/**
-	 * Coleta a quantidade de vidas que uma entidade Character possui.
+	 * Coleta a quantidade de vidas que uma entidade possui.
 	 * 
-	 * @return lifeTries
+	 * @return lifeTries Quantidade de tentativas de vida.
 	 */
 	public int getLifeTries() {
 		return lifeTries;
 	}
 
 	/**
-	 * Atribui a possibilidade de retirar uma vida de uma entidade Character.
-	 * 
-	 * Logica: Apos a retirada de algum dano ao health da entity, System confere
-	 * se lifeEntity e igual zero, caso seja entao e questionado a possibilidade
-	 * de retirar vidas por isCanTakeLife ou, verifica a quantidade de vidas
-	 * restantes por getLifeTries. Se for possivel entao e atribuido uma vida a
-	 * menos no setLifeTries, e logo apos e conferido quantas vidas restantes a
-	 * entidade possui para que seja atualizado o setCanTakeLife de acordo com a
-	 * possibilidade.
+	 * Atribui a possibilidade de retirar uma vida de uma entidade.
 	 * 
 	 * @param canTakeLife
+	 *            Possibilidade de retirar tentativas de vida.
 	 */
 	public void setCanTakeLife(boolean canTakeLife) {
 		this.canTakeLife = canTakeLife;
 	}
 
 	/**
-	 * Coleta a possibilidade de retirar uma vida de uma entidade Character.
+	 * Coleta a possibilidade de retirar uma vida de uma entidade.
 	 * 
-	 * Logica descrita acima no metodo setCanTakeLife
-	 * 
-	 * @return canTakeLife
+	 * @return canTakeLife Possibilidade de retirar tentativas de vida.
 	 */
 	public boolean isCanTakeLife() {
 		return canTakeLife;
