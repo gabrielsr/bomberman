@@ -5,9 +5,9 @@ import br.unb.unbomber.core.Component;
 /**
  * Classe reponsavel por atribuir um tipo a uma entidade.
  * 
- * Tipos: Char, Monster, Bomb, Hard Block, Soft Block e Power Up.
+ * Tipos: Char, Monster, Bomb, Hard Block, Soft Block, Power Up e Disease.
  * 
- * @version 0.1 20 Out 2014
+ * @version 0.2 19 Nov 2014
  * @author Grupo 5 - Dayanne <dayannefernandesc@gmail.com>
  */
 public class LifeType extends Component {
@@ -22,7 +22,6 @@ public class LifeType extends Component {
 		SOFT_BLOCK,	/** Entidade do tipo Soft Block */
 		POWER_UP,	/** Entidade do tipo Power Up */
 		DISEASE;	/** Entidade do tipo Disease */
-
 	}
 
 	/** O tipo da entidade */
@@ -32,6 +31,7 @@ public class LifeType extends Component {
 	 * Construtor da classe.
 	 * 
 	 * @param type
+	 *            Tipo da entidade
 	 */
 	public LifeType(Type type) {
 		setType(type);
@@ -40,7 +40,7 @@ public class LifeType extends Component {
 	/**
 	 * Coleta o tipo de uma entidade.
 	 * 
-	 * @return type
+	 * @return type Tipo da entidade.
 	 */
 	public Type getType() {
 		return type;
@@ -50,6 +50,7 @@ public class LifeType extends Component {
 	 * Atribui um tipo de uma entidade.
 	 * 
 	 * @param type
+	 *            Tipo da entidade.
 	 */
 	public void setType(Type type) {
 		this.type = type;
