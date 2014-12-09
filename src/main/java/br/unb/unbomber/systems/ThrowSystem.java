@@ -16,6 +16,7 @@ import java.util.List;
 import br.unb.unbomber.component.CellPlacement;
 import br.unb.unbomber.component.Explosion;
 import br.unb.unbomber.component.PowerUp;
+import br.unb.unbomber.component.PowerUp.PowerType;
 import br.unb.unbomber.core.BaseSystem;
 import br.unb.unbomber.core.Component;
 import br.unb.unbomber.core.EntityManager;
@@ -67,7 +68,7 @@ public class ThrowSystem extends BaseSystem {
 			/** < recebe o id da entidade atual */
 			int id = actionCommand.getEntityId();
 			// fizemos isso pois ainda nao foi implementado o power up
-			Component powerup = entityManager.getComponent(PowerUp.class, id);
+			PowerUp powerup = (PowerUp)entityManager.getComponent(PowerUp.class, id);
 
 			/** < recebe o tipo do movimento realizado */
 			ActionType type = actionCommand.getType();
@@ -76,9 +77,8 @@ public class ThrowSystem extends BaseSystem {
 			 * < condicao que verifica se a blue glove esta ativo na entidade
 			 * verificada
 			 */
-			if (/* powerup.getBlueGlove() == */ true) { // TODO fizemos isso pois ainda nao
-													// foi implementado o power
-													// up
+			if ( powerup.getTypes().contains(PowerType.BOXINGGLOVEACQUIRED) ) {
+				
 				/**
 				 * < condicao que verifica se o movimento realizado eh de jogar
 				 * a bomba
