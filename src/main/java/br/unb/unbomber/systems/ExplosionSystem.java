@@ -5,6 +5,7 @@ import java.util.List;
 
 import br.unb.unbomber.component.CellPlacement;
 import br.unb.unbomber.component.Direction;
+import br.unb.unbomber.component.Draw;
 import br.unb.unbomber.component.Explosion;
 import br.unb.unbomber.component.ExplosionBarrier;
 import br.unb.unbomber.component.ExplosionBarrier.ExplosionBarrierType;
@@ -105,6 +106,7 @@ public class ExplosionSystem extends BaseSystem {
 		explosionEntity.addComponent(exp);
 		explosionEntity.addComponent(expPlacement);
 		explosionEntity.addComponent(expTimer);
+		explosionEntity.addComponent(new Draw("explosion"));
 
 		exp.setPropagationDirection(Direction.UP);
 		propagateExplosion(exp, expPlacement, expRange);
@@ -154,7 +156,7 @@ public class ExplosionSystem extends BaseSystem {
 			explosionEntity.addComponent(exp);
 			explosionEntity.addComponent(newExpPlacement);
 			explosionEntity.addComponent(expTimer);
-
+			explosionEntity.addComponent(new Draw("explosion"));
 			--range;
 			propagateExplosion(newExp, newExpPlacement, range);
 		}
@@ -209,6 +211,9 @@ public class ExplosionSystem extends BaseSystem {
 		ExplosionBarrier explosionBarrier = (ExplosionBarrier) getEntityManager()
 				.getComponent(ExplosionBarrier.class, entityId);
 
+		if(explosionBarrier == null){
+			return true;
+		}
 		if (explosionBarrier.getType() == ExplosionBarrierType.BLOCKER) {
 
 			return false;

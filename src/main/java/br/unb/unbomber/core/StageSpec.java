@@ -33,6 +33,9 @@ public class StageSpec {
 	/** Entities of the stage. Like Characters, Monsters */
 	private List<Entity> entities;
 
+	/** Initial Events */
+	private List<Event> events;
+	
 	public String getName() {
 		return name;
 	}
@@ -58,7 +61,7 @@ public class StageSpec {
 	}
 
 	public List<Entity> getEntities() {
-		if(entities ==null){
+		if(entities == null){
 			this.entities = new ArrayList<Entity>();
 		}
 		return entities;
@@ -66,6 +69,14 @@ public class StageSpec {
 
 	public void setEntities(List<Entity> entities) {
 		this.entities = entities;
+	}
+
+	public List<Event> getEvents() {
+		return events;
+	}
+
+	public void setEvents(List<Event> events) {
+		this.events = events;
 	}
 
 }

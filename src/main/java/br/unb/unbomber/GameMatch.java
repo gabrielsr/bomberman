@@ -2,6 +2,8 @@ package br.unb.unbomber;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import br.unb.unbomber.core.EntityManager;
 import br.unb.unbomber.core.EntityManagerImpl;
@@ -19,6 +21,8 @@ public class GameMatch {
 
 	/** The entity manager. */
 	EntityManager entityManager;
+	
+	private final static Logger LOGGER = Logger.getLogger(GameMatch.class.getName()); 
 	
 	
 	/**
@@ -62,12 +66,35 @@ public class GameMatch {
 		return this.entityManager;
 	}
 	
-	public void update() {
-
-		for(System system:this.systems){
-			system.update();
+	public void start() {
+		
+		if(this.systems == null){
+			return;
 		}
 		
+		for(System system:this.systems){
+			try{
+				system.start();
+			/** Log the system errors and continue*/
+			}catch(Exception e){
+				log("Not expected error in " + system.getClass().getName(), e);
+			}
+		}
+	}
+		
+	public void update() {
+		for(System system:this.systems){
+			try{
+				system.update();
+			/** Log the system errors and continue*/
+			}catch(Exception e){
+				log("Not expected error in " + system.getClass().getName(), e);
+			}
+		}
+	}
+	
+	public void log(String msg,Throwable thrown){
+		LOGGER.log(Level.SEVERE, msg, thrown);
 	}
 
 }
