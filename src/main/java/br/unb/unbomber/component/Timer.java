@@ -79,5 +79,8 @@ public class Timer extends Component {
 	@Override
 	public void setEntityId(int entityId) {
 		super.setEntityId(entityId);
+		if(this.event!=null){
+			this.event.setOwnerId(entityId);
+		}
 	}
 }
