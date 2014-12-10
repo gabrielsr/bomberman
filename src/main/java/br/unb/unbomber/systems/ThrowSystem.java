@@ -6,7 +6,7 @@
  * @author Pedro Borges Pio
  * @author Kilmer Luiz Aleluia
  * @since 3/11/2014
- * @version 1.0
+ * @version 1.0.1
  */
 
 package br.unb.unbomber.systems;
@@ -153,6 +153,8 @@ public class ThrowSystem extends BaseSystem {
 										 */
 										if (moveType == MovementType.MOVE_UP) {
 											Coord.setCellY(y + TRHOW_CONSTAT);
+											String pudim = "coisa";
+											System.out.println(pudim);
 										}
 										if (moveType == MovementType.MOVE_DOWN) {
 											Coord.setCellY(y - TRHOW_CONSTAT);
