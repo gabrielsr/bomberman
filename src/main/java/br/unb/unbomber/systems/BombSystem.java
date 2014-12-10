@@ -279,7 +279,7 @@ public class BombSystem extends BaseSystem {
 	}
 	
 	//Method created to avoid code duplication
-	private Entity createGenericBomb(BombDropper dropper){
+	Entity createGenericBomb(BombDropper dropper){
 		/*
 		 * The Bomb Entity is made of this components Explosive Placement Timer
 		 * components
