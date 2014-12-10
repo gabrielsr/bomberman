@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import br.unb.unbomber.GameMatch;
 
 /**
  * A Simple implementation of a Entity Managar. 
@@ -21,6 +25,10 @@ public class EntityManagerImpl implements EntityManager {
 	
 	/** The instance. */
 	private static EntityManager instance;
+	
+	/** Logger. Register interesting events for debug purpose **/
+	private final static Logger LOGGER = Logger.getLogger(EntityManagerImpl.class.getName()); 
+	
 	
 	/**
 	 * First id number. 
@@ -85,6 +93,7 @@ public class EntityManagerImpl implements EntityManager {
 			}
 			addComponent(component);
 		}
+		LOGGER.log(Level.INFO, "updated entity: " + entity.getEntityId());
 	}
 	
 	/* (non-Javadoc)

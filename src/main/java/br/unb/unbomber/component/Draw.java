@@ -16,6 +16,9 @@ public class Draw extends Component {
 	
 	private Object drawable;
 	
+	public Draw(){
+	}
+
 	public Draw(String type){
 		this.type = type;
 	}
