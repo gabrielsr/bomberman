@@ -1,5 +1,9 @@
 package br.unb.unbomber.core;
 
+import java.util.logging.Logger;
+
+import br.unb.unbomber.GameMatch;
+
 /**
  * A Base System for the Entity Component System (ECS) It init the Entity
  * Manager so Systems that extends this base class don't have to.
@@ -12,6 +16,10 @@ public abstract class BaseSystem implements System {
 	/** The entity manager. */
 	private EntityManager entityManager;
 
+	/** Get the reference to a LOGGER */
+	protected final static Logger LOGGER = Logger.getLogger(GameMatch.class.getName()); 
+	
+	
 	/*
 	 * Init Game System
 	 */
