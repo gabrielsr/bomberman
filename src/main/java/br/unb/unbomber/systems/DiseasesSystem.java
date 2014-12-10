@@ -5,11 +5,13 @@ import java.util.Random;
 
 import br.unb.unbomber.component.CellPlacement;
 import br.unb.unbomber.component.DiseaseComponent;
+import br.unb.unbomber.component.Draw;
 import br.unb.unbomber.component.DiseaseComponent.DiseaseType;
 import br.unb.unbomber.component.ExplosionBarrier;
 import br.unb.unbomber.component.ExplosionBarrier.ExplosionBarrierType;
 import br.unb.unbomber.component.LifeType;
 import br.unb.unbomber.component.LifeType.Type;
+import br.unb.unbomber.component.PowerUp.PowerType;
 import br.unb.unbomber.core.BaseSystem;
 import br.unb.unbomber.core.Entity;
 import br.unb.unbomber.core.EntityManager;
@@ -123,12 +125,15 @@ public class DiseasesSystem extends BaseSystem {
 		/* Creating LifeType component*/
 		LifeType lifeType = new LifeType(Type.DISEASE);
 
+		Draw draw = new Draw(Type.DISEASE.name());
+		
 		/* Creating the entity */
 		Entity disease = getEntityManager().createEntity();
 		disease.addComponent(cellPlacement);
 		disease.addComponent(explosionBarrier);
 		disease.addComponent(diseaseComponent);
 		disease.addComponent(lifeType);
+		disease.addComponent(draw);
 		getEntityManager().update(disease);
 	}
 
