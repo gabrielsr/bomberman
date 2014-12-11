@@ -128,8 +128,7 @@ public class ExplosionSystem extends BaseSystem {
 
 		if (range != 0 && detectExplosionCollision(exp, cellPlacement)) {
 
-			Entity explosionEntity = new Entity();
-			getEntityManager().addEntity(explosionEntity);
+			Entity explosionEntity = getEntityManager().createEntity();
 
 			Explosion newExp = new Explosion();
 			newExp.setEntityId(explosionEntity.getEntityId());
@@ -158,6 +157,7 @@ public class ExplosionSystem extends BaseSystem {
 			explosionEntity.addComponent(newExpPlacement);
 			explosionEntity.addComponent(expTimer);
 			explosionEntity.addComponent(new Draw("explosion"));
+			getEntityManager().update(explosionEntity);
 			--range;
 			propagateExplosion(newExp, newExpPlacement, range);
 		}
