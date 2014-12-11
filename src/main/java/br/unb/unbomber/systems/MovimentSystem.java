@@ -125,11 +125,9 @@ public class MovimentSystem extends BaseSystem {
 
 			for (Event colEvent : collisionEvents) {
 				CollisionEvent collision = (CollisionEvent) colEvent;
-				String pudim = "pudim";
-				System.out.println(pudim);
 
 				int sourceId = collision.getSourceId();
-				/** <caso haja colisão muda valor da variavel colidiu */
+				/** <caso haja colisï¿½o muda valor da variavel colidiu */
 				if (id == sourceId || id == collision.getTargetId()) {
 					colidiu++;
 

@@ -44,7 +44,6 @@ public class TargetFrameRateMatch extends GameMatch {
 		return ((new Date()).getTime());
 	}
 	
-	
 	/**
 	 * 1 sec turn, just for test
 	 * @param args
@@ -66,5 +65,6 @@ public class TargetFrameRateMatch extends GameMatch {
 			testMatch.update();
 		}
 	}
+
 	
 }
