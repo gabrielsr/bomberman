@@ -129,7 +129,7 @@ public class MovimentSystem extends BaseSystem {
 				System.out.println(pudim);
 
 				int sourceId = collision.getSourceId();
-				/** <caso haja colisão muda valor da variavel colidiu */
+				/** <caso haja colisao muda valor da variavel colidiu */
 				if (id == sourceId || id == collision.getTargetId()) {
 					colidiu++;
 
