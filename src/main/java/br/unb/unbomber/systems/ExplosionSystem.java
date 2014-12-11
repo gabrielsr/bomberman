@@ -119,9 +119,14 @@ public class ExplosionSystem extends BaseSystem {
 		expPlacement.setEntityId(explosionEntity.getEntityId());
 
 		Timer expTimer = new Timer(16, null);
+		
+		CellPlacement cellPlacement = new CellPlacement();
+		cellPlacement.setCellX(expPlacement.getCellX());
+		cellPlacement.setCellY(expPlacement.getCellY());
+		cellPlacement.setEntityId(explosionEntity.getEntityId());
 
 		explosionEntity.addComponent(exp);
-		explosionEntity.addComponent(expPlacement);
+		explosionEntity.addComponent(cellPlacement);
 		explosionEntity.addComponent(expTimer);
 
 		exp.setPropagationDirection(Direction.UP);
