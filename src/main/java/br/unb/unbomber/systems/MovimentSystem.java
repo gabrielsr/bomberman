@@ -1,18 +1,33 @@
+/**
+ * @file MovimentSystem.java 
+ * @brief Este modulo trata dos Movimentos jogo bomberman,  
+ * criado pelo grupo 6 da turma de programacao sistematica 2-2014 ministrada pela professora genaina
+ *
+ * @author Igor Chaves Sodre
+ * @author Pedro Borges Pio
+ * @author Kilmer Luiz Aleluia
+ * @since 01/10/2014
+ * @version 1.1
+ */
 package br.unb.unbomber.systems;
 
 import java.util.List;
 
 import br.unb.unbomber.component.CellPlacement;
+import br.unb.unbomber.component.Direction;
 import br.unb.unbomber.component.Movable;
 import br.unb.unbomber.core.BaseSystem;
+import br.unb.unbomber.core.Entity;
 import br.unb.unbomber.core.EntityManager;
 import br.unb.unbomber.core.Event;
+import br.unb.unbomber.event.CollisionEvent;
+import br.unb.unbomber.event.MovedEntityEvent;
 import br.unb.unbomber.event.MovementCommandEvent;
 import br.unb.unbomber.event.MovementCommandEvent.MovementType;
 import br.unb.unbomber.event.MovementMadeEvent;
 
 public class MovimentSystem extends BaseSystem {
-	
+
 	/**
 	 * bomb constructor
 	 */
@@ -23,86 +38,117 @@ public class MovimentSystem extends BaseSystem {
 	/**
 	 * bomb constructor
 	 * 
-	 * @param model one instance of the EntityManager
+	 * @param model
+	 *            one instance of the EntityManager
 	 */
 	public MovimentSystem(EntityManager model) {
 		super(model);
 	}
 	
-	/* inicia as acoes de movimeto do jogo */
+	//private EntityManager model;
+
+	private int originalX;
+	private int originalY;
+
+	/** < inicia as acoes de movimeto do jogo */
 	public void update() {
+		EntityManager manager = getEntityManager();
 
-		/*
-		 * List<Event> colision =
-		 * getEntityManager().getEvents(ColosionEvent.class);
-		 * 
-		 * 
-		 * for(Event bla:colision){ ColosionEvent var = (ColisionEvent)bla;
-		 * 
-		 * int ids=var.getSourceId(); int idt=var.getTargetId();
-		 * 
-		 * }
-		 * 
-		 * tivemos um problema nessa parte a ser comentado na documentacao
-		 * temos que fazer uma kapirotagem marota aki
-		 * eu nao fiz nada
-		 */
-
-		/* cria uma lista de eventos de movimentos feitos */
+		/** < cria uma lista de eventos de movimentos feitos */
 		List<Event> actionEvents = getEntityManager().getEvents(
 				MovementCommandEvent.class);
 
-		/* variavel que recebera as novas coordenadas a serem manipuladas */
+		/** < variavel que recebera as novas coordenadas a serem manipuladas */
 		CellPlacement Coord;
 
-		/* loop que trata os eventos capturados na lista movimentos anterior */
+		/** < loop que trata os eventos capturados na lista movimentos anterior */
 		for (Event event : actionEvents) {
 
-			/* retira um evento da lista */
+			/** < retira um evento da lista */
 			MovementCommandEvent actionCommand = (MovementCommandEvent) event;
 
-			/* recebe o id da entidade que realizarï¿½ o movimento */
+			/** < recebe o id da entidade que realizarï¿½ o movimento */
 			int id = actionCommand.getEntityId();
 
-			/* recebe a velocidade da entidade */
+			/** < recebe a velocidade da entidade */
 			Movable speedable = (Movable) getEntityManager().getComponent(
 					Movable.class, id);
-			int speed = speedable.getSpeed();
+			float speed = speedable.getSpeed();
 
-			/* recebe a posicao atual da entidade */
+			/** < recebe a posicao atual da entidade */
 			Coord = (CellPlacement) getEntityManager().getComponent(
 					CellPlacement.class, id);
-			/* recebe as coordenadas da posicao atual da entidade */
+			/** < recebe as coordenadas da posicao atual da entidade */
 			int x = Coord.getCellX();
 			int y = Coord.getCellY();
-
-			/*
-			 * verifica o tipo de movimento e atualiza as coordenadas x e y de
+			originalX = x;
+			originalY = y;
+			
+			MovedEntityEvent movedEntity = new MovedEntityEvent();
+			movedEntity.setSpeed(speed);
+			movedEntity.setId(id);
+			/**
+			 * < verifica o tipo de movimento e atualiza as coordenadas x e y de
 			 * acordo com o mesmo
 			 */
 			if (actionCommand.getType() == MovementType.MOVE_UP) {
-				y = (Coord.getCellY() + speed);
+				y = (int) (Coord.getCellY() + speed);
+				movedEntity.setDirection(Direction.UP);
+
 			}
 			if (actionCommand.getType() == MovementType.MOVE_DOWN) {
-				y = (Coord.getCellY() - speed);
+				y = (int) (Coord.getCellY() - speed);
+				movedEntity.setDirection(Direction.DOWN);
 			}
 			if (actionCommand.getType() == MovementType.MOVE_RIGHT) {
-				x = (Coord.getCellX() + speed);
+				x = (int) (Coord.getCellX() + speed);
+				movedEntity.setDirection(Direction.RIGHT);
 			}
 			if (actionCommand.getType() == MovementType.MOVE_LEFT) {
-				x = (Coord.getCellX() - speed);
+				x = (int) (Coord.getCellX() - speed);
+				movedEntity.setDirection(Direction.LEFT);
 			}
 
-			/* cria o evento de novo posicionamento da entidade */
-			MovementMadeEvent newPlacement = new MovementMadeEvent();
-			newPlacement.setNewCellY(y);
-			newPlacement.setNewCellX(x);
-
-			/* atribui um novo posicionamento a entidade */
-			Coord.setCellX(x);
+			/** < cria o evento de novo posicionamento da entidade */
+			// MovementMadeEvent newPlacement = new MovementMadeEvent();
+			manager.addEvent(movedEntity);
 			Coord.setCellY(y);
-		}
+			Coord.setCellX(x);
 
+			int colidiu = 0;
+
+			CollisionSystem collisionUpdate = new CollisionSystem(manager);
+			//collisionUpdate.update(); o colision system nao esta funcionando corretemente
+
+			List<Event> collisionEvents = getEntityManager().getEvents(
+					CollisionEvent.class);
+
+			for (Event colEvent : collisionEvents) {
+				CollisionEvent collision = (CollisionEvent) colEvent;
+				String pudim = "pudim";
+				System.out.println(pudim);
+
+				int sourceId = collision.getSourceId();
+				/** <caso haja colisão muda valor da variavel colidiu */
+				if (id == sourceId || id == collision.getTargetId()) {
+					colidiu++;
+
+				}
+				
+			}
+
+			/** < volta pro posicionamento original da entidade */
+			if (colidiu != 0) {
+				Coord.setCellX(originalX);
+				Coord.setCellY(originalY);
+				/*
+				 * String pudim = "pudim"; System.out.println(pudim);
+				 */
+			}else {
+				Coord.setCellX(x);
+				Coord.setCellY(y);
+			}
+		}
 	}
 
 }

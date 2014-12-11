@@ -5,6 +5,7 @@ import java.util.List;
 
 import br.unb.unbomber.component.CellPlacement;
 import br.unb.unbomber.component.Direction;
+import br.unb.unbomber.component.Draw;
 import br.unb.unbomber.component.Explosion;
 import br.unb.unbomber.component.ExplosionBarrier;
 import br.unb.unbomber.component.ExplosionBarrier.ExplosionBarrierType;
@@ -91,9 +92,8 @@ public class ExplosionSystem extends BaseSystem {
 
 	public void createExplosion(CellPlacement expPlacement, int expRange) {
 
-		Entity explosionEntity = new Entity();
-		getEntityManager().addEntity(explosionEntity);
-
+		Entity explosionEntity = getEntityManager().createEntity();
+		
 		Explosion exp = new Explosion();
 		exp.setEntityId(explosionEntity.getEntityId());
 		exp.setExplosionRange(expRange);
@@ -105,6 +105,7 @@ public class ExplosionSystem extends BaseSystem {
 		explosionEntity.addComponent(exp);
 		explosionEntity.addComponent(expPlacement);
 		explosionEntity.addComponent(expTimer);
+		explosionEntity.addComponent(new Draw("explosion"));
 
 		exp.setPropagationDirection(Direction.UP);
 		propagateExplosion(exp, expPlacement, expRange);
@@ -117,6 +118,8 @@ public class ExplosionSystem extends BaseSystem {
 
 		exp.setPropagationDirection(Direction.RIGHT);
 		propagateExplosion(exp, expPlacement, expRange);
+		
+		getEntityManager().update(explosionEntity);
 
 	}
 
@@ -125,8 +128,7 @@ public class ExplosionSystem extends BaseSystem {
 
 		if (range != 0 && detectExplosionCollision(exp, cellPlacement)) {
 
-			Entity explosionEntity = new Entity();
-			getEntityManager().addEntity(explosionEntity);
+			Entity explosionEntity = getEntityManager().createEntity();
 
 			Explosion newExp = new Explosion();
 			newExp.setEntityId(explosionEntity.getEntityId());
@@ -154,7 +156,8 @@ public class ExplosionSystem extends BaseSystem {
 			explosionEntity.addComponent(exp);
 			explosionEntity.addComponent(newExpPlacement);
 			explosionEntity.addComponent(expTimer);
-
+			explosionEntity.addComponent(new Draw("explosion"));
+			getEntityManager().update(explosionEntity);
 			--range;
 			propagateExplosion(newExp, newExpPlacement, range);
 		}
@@ -209,6 +212,9 @@ public class ExplosionSystem extends BaseSystem {
 		ExplosionBarrier explosionBarrier = (ExplosionBarrier) getEntityManager()
 				.getComponent(ExplosionBarrier.class, entityId);
 
+		if(explosionBarrier == null){
+			return true;
+		}
 		if (explosionBarrier.getType() == ExplosionBarrierType.BLOCKER) {
 
 			return false;

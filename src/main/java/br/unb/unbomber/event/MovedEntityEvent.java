@@ -14,7 +14,7 @@ import br.unb.unbomber.core.Event;
 public class MovedEntityEvent extends Event {
 	int entityId;
 	Direction direction;
-	int speed;
+	float speed;
 
 	// get the id of an entity which moved
 	public int getEntityId() {
@@ -35,8 +35,11 @@ public class MovedEntityEvent extends Event {
 		this.direction = direction;
 	}
 
-	public int getSpeed() {
+	public float getSpeed() {
 		return this.speed;
+	}
+	public void setSpeed(float speed2){
+		this.speed = speed2;
 	}
 	// TODO velocidade da entitade.
 

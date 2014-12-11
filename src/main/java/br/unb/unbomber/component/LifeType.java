@@ -14,19 +14,25 @@ public class LifeType extends Component {
 
 	/** Os tipos que uma Entidade pode ser. */
 	public enum Type {
-
-		CHAR, /** Entidade do tipo Character */
-		MONSTER, /** Entidade do tipo Monster */
-		BOMB, /** Entidade do tipo Bomba */
-		HARD_BLOCK, /** Entidade do tipo Hard Block */
-		SOFT_BLOCK, /** Entidade do tipo Soft Block */
+		
+		CHAR, 		/** Entidade do tipo Character */
+		MONSTER,  	/** Entidade do tipo Monster */
+		BOMB, 		/** Entidade do tipo Bomba */
+		HARD_BLOCK,	/** Entidade do tipo Hard Block */
+		SOFT_BLOCK,	/** Entidade do tipo Soft Block */
 		POWER_UP,	/** Entidade do tipo Power Up */
 		DISEASE;	/** Entidade do tipo Disease */
-
 	}
 
 	/** O tipo da entidade */
 	private Type type;
+	
+	/** 
+	 * No arguments contructor. 
+	 */
+	public LifeType(){
+		
+	}
 
 	/**
 	 * Construtor da classe.

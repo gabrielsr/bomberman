@@ -6,29 +6,26 @@
  * @author Pedro Borges Pio
  * @author Kilmer Luiz Aleluia
  * @since 3/11/2014
- * @version 1.0
+ * @version 1.0.1
  */
 
 package br.unb.unbomber.systems;
 
 import java.util.List;
 
-import org.apache.tools.ant.filters.LineContains.Contains;
-
 import br.unb.unbomber.component.CellPlacement;
 import br.unb.unbomber.component.Explosion;
+import br.unb.unbomber.component.PowerUp;
+import br.unb.unbomber.component.PowerUp.PowerType;
 import br.unb.unbomber.core.BaseSystem;
 import br.unb.unbomber.core.Component;
-import br.unb.unbomber.core.Entity;
 import br.unb.unbomber.core.EntityManager;
 import br.unb.unbomber.core.Event;
 import br.unb.unbomber.event.ActionCommandEvent;
 import br.unb.unbomber.event.ActionCommandEvent.ActionType;
-import br.unb.unbomber.event.BombThrowEvent;
 import br.unb.unbomber.event.CollisionEvent;
 import br.unb.unbomber.event.MovementCommandEvent;
 import br.unb.unbomber.event.MovementCommandEvent.MovementType;
-import br.unb.unbomber.event.MovementMadeEvent;
 
 public class ThrowSystem extends BaseSystem {
 
@@ -42,7 +39,7 @@ public class ThrowSystem extends BaseSystem {
 	}
 
 	/**
-	 * @brief medotodo que verifica se o player possui o blue glove, esta em
+	 * @brief medotodo que verifica se o player possui o BOXINGGLOVEACQUIRED, esta em
 	 *        contado com uma bomba e apertou o botao de acao e realiza o
 	 *        movimento adequado
 	 */
@@ -70,19 +67,18 @@ public class ThrowSystem extends BaseSystem {
 			ActionCommandEvent actionCommand = (ActionCommandEvent) event;
 			/** < recebe o id da entidade atual */
 			int id = actionCommand.getEntityId();
-			// fizemos isso pois ainda nao foi implementado o power up
-			Component powerup = entityManager.getComponent(PowerUp.class, id);
+			/**<instacia powerup  */
+			PowerUp powerup = (PowerUp)entityManager.getComponent(PowerUp.class, id);
 
 			/** < recebe o tipo do movimento realizado */
 			ActionType type = actionCommand.getType();
 
 			/**
-			 * < condicao que verifica se a blue glove esta ativo na entidade
+			 * < condicao que verifica se a BOXINGGLOVEACQUIRED esta ativo na entidade
 			 * verificada
 			 */
-			if (powerup.getBlueGlove() == true) { // fizemos isso pois ainda nao
-													// foi implementado o power
-													// up
+			if ( powerup.getTypes().contains(PowerType.BOXINGGLOVEACQUIRED) ) {
+				
 				/**
 				 * < condicao que verifica se o movimento realizado eh de jogar
 				 * a bomba
@@ -157,6 +153,8 @@ public class ThrowSystem extends BaseSystem {
 										 */
 										if (moveType == MovementType.MOVE_UP) {
 											Coord.setCellY(y + TRHOW_CONSTAT);
+											String pudim = "coisa";
+											System.out.println(pudim);
 										}
 										if (moveType == MovementType.MOVE_DOWN) {
 											Coord.setCellY(y - TRHOW_CONSTAT);

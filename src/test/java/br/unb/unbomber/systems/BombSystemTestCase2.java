@@ -18,8 +18,8 @@ import static junit.framework.Assert.*;
 import java.util.List;
 
 import org.junit.Before;
-import org.junit.Test;
 import org.junit.Ignore;
+import org.junit.Test;
 
 import br.unb.unbomber.component.BombDropper;
 import br.unb.unbomber.component.CellPlacement;
@@ -32,7 +32,6 @@ import br.unb.unbomber.event.ActionCommandEvent;
 import br.unb.unbomber.event.ActionCommandEvent.ActionType;
 import br.unb.unbomber.event.ExplosionStartedEvent;
 
-@Ignore
 public class BombSystemTestCase2 {
 	
 	EntityManager entityManager;

@@ -16,6 +16,7 @@ import java.util.Set;
 
 import br.unb.unbomber.component.BombDropper;
 import br.unb.unbomber.component.CellPlacement;
+import br.unb.unbomber.component.Draw;
 import br.unb.unbomber.component.Explosive;
 import br.unb.unbomber.component.Timer;
 import br.unb.unbomber.core.Component;
@@ -267,7 +268,6 @@ public class BombSystem extends BaseSystem {
 		// create Event for time over
 		TimeOverEvent triggeredBombEvent = new TimeOverEvent();
 		triggeredBombEvent.setAction(TRIGGERED_BOMB_ACTION);
-
 		// create timer component
 		Timer bombTimer = new Timer(90, triggeredBombEvent);
 
@@ -279,7 +279,7 @@ public class BombSystem extends BaseSystem {
 	}
 	
 	//Method created to avoid code duplication
-	private Entity createGenericBomb(BombDropper dropper){
+	Entity createGenericBomb(BombDropper dropper){
 		/*
 		 * The Bomb Entity is made of this components Explosive Placement Timer
 		 * components
@@ -310,7 +310,7 @@ public class BombSystem extends BaseSystem {
 		// Add components
 		bomb.addComponent(bombExplosive);
 		bomb.addComponent(bombPlacement);
-
+		bomb.addComponent(new Draw("bomb"));
 		return bomb;
 	}
 
