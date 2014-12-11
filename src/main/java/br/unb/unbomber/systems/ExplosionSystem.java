@@ -77,19 +77,36 @@ public class ExplosionSystem extends BaseSystem {
 				ExplosionStartedEvent explosionStartedEvent = (ExplosionStartedEvent) event;
 				/* creating explosion */
 				createExplosion(explosionStartedEvent.getInitialPosition(),
-						explosionStartedEvent.getExplosionRange());
+						explosionStartedEvent.getExplosionRange(), explosionStartedEvent.getOwnerId());
 				/* put the treated event on the treatedEvents list */
 				treatedEvents.add(explosionStartedEvent);
 			}
 
 			/* checks if someone entered an explosion */
 			enteredExplosion();
+			
+			tickExplosions();
 
 		}
 
 	}
 
-	public void createExplosion(CellPlacement expPlacement, int expRange) {
+	/**
+	 * Makes the time pass for the explosion and removes explosion if elapsed time is over
+	 */
+	private void tickExplosions() {
+		List<Component> explosions = getEntityManager().getComponents(Explosion.class);
+		for (Component component : explosions) {
+			Explosion explosion = (Explosion) component;
+			Timer timer = (Timer) getEntityManager().getComponent(Timer.class, explosion.getEntityId());
+			timer.tick();
+			if(timer.isOver()){
+				getEntityManager().removeEntityById(timer.getEntityId());
+			}
+		}
+	}
+
+	public void createExplosion(CellPlacement expPlacement, int expRange, int ownerId) {
 
 		Entity explosionEntity = new Entity();
 		getEntityManager().addEntity(explosionEntity);
@@ -97,6 +114,7 @@ public class ExplosionSystem extends BaseSystem {
 		Explosion exp = new Explosion();
 		exp.setEntityId(explosionEntity.getEntityId());
 		exp.setExplosionRange(expRange);
+		exp.setOwnerId(ownerId);
 
 		expPlacement.setEntityId(explosionEntity.getEntityId());
 
@@ -131,22 +149,23 @@ public class ExplosionSystem extends BaseSystem {
 			Explosion newExp = new Explosion();
 			newExp.setEntityId(explosionEntity.getEntityId());
 			newExp.setExplosionRange(range);
+			newExp.setOwnerId(exp.getOwnerId());
 
 			CellPlacement newExpPlacement = new CellPlacement();
 			newExpPlacement.setEntityId(explosionEntity.getEntityId());
 
 			if (exp.getPropagationDirection() == Direction.UP) {
 				newExpPlacement.setCellX(cellPlacement.getCellX());
-				newExpPlacement.setCellY(cellPlacement.getCellX() + 1);
+				newExpPlacement.setCellY(cellPlacement.getCellY() + 1);
 			} else if (exp.getPropagationDirection() == Direction.DOWN) {
 				newExpPlacement.setCellX(cellPlacement.getCellX());
-				newExpPlacement.setCellY(cellPlacement.getCellX() - 1);
+				newExpPlacement.setCellY(cellPlacement.getCellY() - 1);
 			} else if (exp.getPropagationDirection() == Direction.LEFT) {
 				newExpPlacement.setCellX(cellPlacement.getCellX() - 1);
-				newExpPlacement.setCellY(cellPlacement.getCellX());
+				newExpPlacement.setCellY(cellPlacement.getCellY());
 			} else {
 				newExpPlacement.setCellX(cellPlacement.getCellX() + 1);
-				newExpPlacement.setCellY(cellPlacement.getCellX());
+				newExpPlacement.setCellY(cellPlacement.getCellY());
 			}
 
 			Timer expTimer = new Timer(16, null);
@@ -217,7 +236,7 @@ public class ExplosionSystem extends BaseSystem {
 
 			InAnExplosionEvent inAnExplosionEvent = new InAnExplosionEvent();
 			inAnExplosionEvent.setIdHit(entityId);
-			inAnExplosionEvent.setOwnerId(explosion.getEntityId());
+			inAnExplosionEvent.setOwnerId(explosion.getOwnerId());
 			getEntityManager().addEvent(inAnExplosionEvent);
 			return false;
 
