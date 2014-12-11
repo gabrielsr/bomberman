@@ -127,7 +127,8 @@ public class MovimentSystem extends BaseSystem {
 				CollisionEvent collision = (CollisionEvent) colEvent;
 
 				int sourceId = collision.getSourceId();
-				/** <caso haja colis�o muda valor da variavel colidiu */
+
+				/** <caso haja colisao muda valor da variavel colidiu */
 				if (id == sourceId || id == collision.getTargetId()) {
 					colidiu++;
 
