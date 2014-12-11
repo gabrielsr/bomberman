@@ -158,6 +158,42 @@ public class LifeSystemTestCase {
 		 */
 		assertEquals(2, entLifes.getLifeTries());
 	}
+	
+	/**
+	 * Testa a remoção de uma entidade Char após Monster colidir com a
+	 * entidade e ele não possuir vidas remanescentes.
+	 * 
+	 * @result Passa no teste se retornar True para a igualdade.
+	 */
+	@Test
+	public void removeCharIfZeroTriesTest() {
+		/** Criacao das entidades. */
+		Entity entity1 = createEntity(1, 1, 0, 0, Type.MONSTER);
+		Entity entity2 = createEntity(1, 0, 0, 0, Type.CHAR);
+
+		/** Cria evento de colisao entre as entidades Monster e Char. */
+		CollisionEvent collEvent = new CollisionEvent(entity1.getEntityId(),
+				entity2.getEntityId());
+
+		/** Adiciona o evento de colisão na lista de Eventos. */
+		entityManager.addEvent(collEvent);
+
+		/** Roda o sistema. */
+		system.update();
+
+		/**
+		 * Coleta as tentativas de vida da entidade que sofrerá dano, no caso a
+		 * entidade CHAR.
+		 */
+		AvailableTries entLifes = (AvailableTries) entityManager.getComponent(
+				AvailableTries.class, collEvent.getTargetId());
+
+		/**
+		 * Verifica se foi retirado tentativa de vida da entidade após a
+		 * explosão.
+		 */
+		assertEquals(null, entLifes);
+	}
 
 	/**
 	 * Testa a destruicao de uma entidade Monster por uma Bomba.
@@ -204,11 +240,7 @@ public class LifeSystemTestCase {
 		 * porque a entidade foi destruída após a explosão da bomba, logo passou
 		 * no teste. Caso contrário será retornado falso e não passará no teste.
 		 */
-		if (entLifes == null) {
-			assertTrue(true);
-		} else {
-			assertTrue(false);
-		}
+		assertTrue (entLifes == null);
 
 	}
 
@@ -244,11 +276,7 @@ public class LifeSystemTestCase {
 		 * Verifica se a entidade foi recriada na célula inicial do grid e
 		 * asserta true. Caso contrário não irá passar no teste.
 		 */
-		if (cX == 0 && cY == 0) {
-			assertTrue(true);
-		} else {
-			assertTrue(false);
-		}
+		assertTrue (cX == 0 && cY == 0);
 
 	}
 
@@ -257,11 +285,11 @@ public class LifeSystemTestCase {
 	 * 
 	 * @result
 	 */
-	@Ignore
 	@Test
 	public void gameOverIfHasNoMoreTriesTest() {
 
 	}
+
 
 	private Entity createEntity(int health, int avTries, int cellx, int celly,
 			Type t) {

@@ -115,6 +115,7 @@ public class LifeSystem extends BaseSystem {
 						if (countAvailableTries(destroyed)) {
 							recreateEntity(destroyed);
 						} else {
+							destroyEntity(destroyed);
 							createGameOverEvent(destroyed);
 						}
 					} else {
