@@ -16,6 +16,10 @@ public class AvailableTries extends Component {
 	/** Informa True ou False caso seja permitido retirar dano de uma entidade. */
 	private boolean canTakeLife;
 
+	public AvailableTries(){
+		
+	}
+	
 	/**
 	 * Construtor da classe.
 	 * 

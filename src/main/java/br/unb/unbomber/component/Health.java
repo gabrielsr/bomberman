@@ -18,6 +18,13 @@ public class Health extends Component {
 	 * monster ou character.
 	 */
 	private boolean canTakeDamaged;
+	
+	/** 
+	 * No arguments contructor. 
+	 */
+	public Health(){
+		
+	}
 
 	/**
 	 * Construtor da classe.

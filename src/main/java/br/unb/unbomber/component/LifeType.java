@@ -26,6 +26,13 @@ public class LifeType extends Component {
 
 	/** O tipo da entidade */
 	private Type type;
+	
+	/** 
+	 * No arguments contructor. 
+	 */
+	public LifeType(){
+		
+	}
 
 	/**
 	 * Construtor da classe.
