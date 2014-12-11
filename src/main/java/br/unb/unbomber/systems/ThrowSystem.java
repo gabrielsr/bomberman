@@ -6,7 +6,7 @@
  * @author Pedro Borges Pio
  * @author Kilmer Luiz Aleluia
  * @since 3/11/2014
- * @version 1.0
+ * @version 1.0.1
  */
 
 package br.unb.unbomber.systems;
@@ -39,7 +39,7 @@ public class ThrowSystem extends BaseSystem {
 	}
 
 	/**
-	 * @brief medotodo que verifica se o player possui o blue glove, esta em
+	 * @brief medotodo que verifica se o player possui o BOXINGGLOVEACQUIRED, esta em
 	 *        contado com uma bomba e apertou o botao de acao e realiza o
 	 *        movimento adequado
 	 */
@@ -67,14 +67,14 @@ public class ThrowSystem extends BaseSystem {
 			ActionCommandEvent actionCommand = (ActionCommandEvent) event;
 			/** < recebe o id da entidade atual */
 			int id = actionCommand.getEntityId();
-			// fizemos isso pois ainda nao foi implementado o power up
+			/**<instacia powerup  */
 			PowerUp powerup = (PowerUp)entityManager.getComponent(PowerUp.class, id);
 
 			/** < recebe o tipo do movimento realizado */
 			ActionType type = actionCommand.getType();
 
 			/**
-			 * < condicao que verifica se a blue glove esta ativo na entidade
+			 * < condicao que verifica se a BOXINGGLOVEACQUIRED esta ativo na entidade
 			 * verificada
 			 */
 			if ( powerup.getTypes().contains(PowerType.BOXINGGLOVEACQUIRED) ) {
@@ -153,6 +153,8 @@ public class ThrowSystem extends BaseSystem {
 										 */
 										if (moveType == MovementType.MOVE_UP) {
 											Coord.setCellY(y + TRHOW_CONSTAT);
+											String pudim = "coisa";
+											System.out.println(pudim);
 										}
 										if (moveType == MovementType.MOVE_DOWN) {
 											Coord.setCellY(y - TRHOW_CONSTAT);

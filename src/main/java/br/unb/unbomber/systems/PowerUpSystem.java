@@ -5,18 +5,17 @@ import java.util.List;
 import java.util.Random;
 
 import br.unb.unbomber.component.CellPlacement;
-import br.unb.unbomber.component.Draw;
 import br.unb.unbomber.component.LifeType;
 import br.unb.unbomber.component.LifeType.Type;
 import br.unb.unbomber.component.PowerUp;
 import br.unb.unbomber.component.PowerUp.PowerType;
 import br.unb.unbomber.core.BaseSystem;
-import br.unb.unbomber.core.Entity;
 import br.unb.unbomber.core.EntityManager;
 import br.unb.unbomber.core.Event;
-import br.unb.unbomber.event.AcquiredPowerUpEvent;
+import br.unb.unbomber.core.Entity;
 import br.unb.unbomber.event.CollisionEvent;
 import br.unb.unbomber.event.InAnExplosionEvent;
+import br.unb.unbomber.event.AcquiredPowerUpEvent;
 
 /**
  * Classe reponsável pelas regras e lógicas do Módulo Power Up.
@@ -144,7 +143,6 @@ public class PowerUpSystem extends BaseSystem {
 		/** Coletando o local do bloco que foi destruído. */
 		CellPlacement cellBlock = (CellPlacement) getEntityManager()
 				.getComponent(CellPlacement.class, explosion.getIdHit());
-		
 		/**
 		 * Atribuindo local de criação do Power up no mesmo local que o bloco
 		 * for destruído.
@@ -197,8 +195,6 @@ public class PowerUpSystem extends BaseSystem {
 			// Lançar alguma exceção.
 			break;
 		}
-		
-		Draw draw = new Draw(PowerType.REMOTECONTROL.name());
 
 		/** Criação da entidade de power up. */
 		Entity powerUp = getEntityManager().createEntity();
@@ -207,7 +203,6 @@ public class PowerUpSystem extends BaseSystem {
 		powerUp.addComponent(cellPlacement);
 		powerUp.addComponent(powerRand);
 		powerUp.addComponent(lifeType);
-		powerUp.addComponent(draw);
 
 		/** Atualiza a entidade power up com os componentes atribuídos. */
 		getEntityManager().update(powerUp);

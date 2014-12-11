@@ -38,6 +38,9 @@ public class MovedEntityEvent extends Event {
 	public int getSpeed() {
 		return this.speed;
 	}
+	public void setSpeed(int speed){
+		this.speed = speed;
+	}
 	// TODO velocidade da entitade.
 
 	// current position of an entity which moved in the last tick
