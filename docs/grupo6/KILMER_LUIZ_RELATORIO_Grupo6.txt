@@ -1,0 +1,159 @@
+Master Group - grupo 6:
+
+Igor Sodré - 13/0114553  
+Kilmer Luiz – 13/0119024 - Remetente 
+Pedro Borges - 13/0129348	
+
+OBS: todas as açoes do grupo são feitas em conjunto.
+
+
+Datas:
+	9(2h),10(2h),11(4h),12(2h),13(4h)
+
+Horas Trabalhadas:
+	14h
+
+Tipo tarefa:
+
+-Estudar
+-Revisar especificações
+-Projetar
+-Revisar projetos
+-Codificar módulo
+-Revisar código do módulo
+-Redigir casos de teste
+-Revisar casos de teste
+-Realizar os testes
+-Diagnosticar e corrigir os problemas encontrados
+
+Descrição da tarefa
+	Na quinta (9) e sexta (10) o grupo se reuniu no Skype para codificar e corrigir eventuais faltas do código. Pedimos ajuda para o Gabriel acerca de eventuais problemas relacionados à programação em Java, uma vez que nenhum dos 3 integrantes do grupo sabiam programar em java. 
+	No sábado(11), os integrantes do grupo foram à UnB para codificar, corrigir eventuais faltas e tirar dúvidas com o orientador Gabriel, a fim de esclarecer problemas sobre as relações entre os módulos e problemas acerca da programação em Java. 
+	No domingo (12), codificamos os testes.
+	Na segunda (13), codificamos os testes e entramos em contato com o grupo 7, com o qual dividimos o módulo Movement.
+	Assim como anteriormente, todas as atividades são sempre feitas em conjunto, ou seja, todos os integrantes fizeram todas as tarefas.
+	
+	OBS: tivemos um problema na parte de confirmar o movimento. Isso porque precisamos da confirmação da possibilidade deste movimento por intermédio do módulo Colision. Para tanto, precisamos do auxílio do professor ou orientador.
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Datas
+	30/09/2014 , 1/10/2014 e 2/10/2014
+
+Horas Trabalhadas no Total
+	7h.
+
+Tipo tarefa 
+	-Estudar;
+	-especificar módulos; 
+	-elaborar módulo lógico;
+	-projetar;
+	-revisar projetos;
+	-codificar módulo
+	-revisar código do módulo.
+
+
+Descrição da Tarefa 
+	No LINF, foi discutido sobre o trabalho entre o grupo, entre os outros grupos e algumas duvidas foram esclarecidas com o Gabriel (essa tarefa foi feita no dia 2/10 e no dia 30/09).
+	Sobre Alterações no código e novos módulos:O módulo "Movable" está no pacote: " br.unb.unbomber.component ". Esse módulo, a princípio, possui a variável speed. Como representa um componente, não está relacionada a todos as entidades (apenas àquelas que podem se mover). Os módulos "MovementMadeEvent", "MovementCommandEvent" e estão no pacote: "br.unb.unbomber.event" . Tais módulos são responsáveis, a princípio, pela captação da tecla pressionada pelo usuário (e respectivo tratamento) e movimentação da determinada entidade.
+
+
+OBS: o módulo "Moviment" ficou dividido entre os grupos 6 e 7. Dessa maneira, os objetivos também foram divididos. 
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+Datas: 27/10/2014, 28/10/2014, 29/10/2014
+
+-Revisar a geração de documentação doxygen
+-Executar findBugs e detectar e corrigir erros
+
+Dia 27/10/2014
+horas trabalhadas: 1h
+descrição da tarefa: Estudo do funcionamento do doxygen e find bugs.
+
+Dia 28/10/2014
+horas trabalhadas: 1h
+descrição da tarefa: Estudo do funcionamento do doxygen e do fing bugs e início da documentação
+
+Dia 29/10/2014
+horas trabalhadas: 1h
+descrição da tarefa: Documentação do código
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Datas: 3/11/2014, 6/11/2014, 16/11/2014, 17/11/2014, 18/11/2014
+
+planejamento do modulo throw system 
+
+-ESTUDAR FUNCIONAMENTO DO THROW(referencia "http://www.gamefaqs.com/boards/930069-bomberman-ultra/50090748" )
+
+-Revisar código segundo padrões de código e corrigir erros
+-Executar findBugs e detectar e corrigir erros
+-Revisar a geração de documentação doxygen
+
+
+-realizar o pull request do projeto
+
+
+
+Dia 3/11/2014
+horas trabalhadas: 5h
+tipo de tarefa: estudo da biblioteca LibGDX e tirar duvidas sobre o github
+descrição da tarefa: comparecimento na aulda do Gabriel para aprender o como
+funciona a biblioteca que será usada no projeto e ao mesmo tempo aproveitamos 
+a presença do Gabriel para tirar duvidas de como enviar o projeto pelo github.
+
+
+Dia 6/11/2014
+horas trabalhadas: 4h
+tipo de tarefa: descrição do modulo throw system, e estudo de como ele funciona.
+Descrição da tarefa:foi detalhado de forma relativamente precisa o que sera
+feito no modulo Throw system, e ao mesmo tempo foi estudado o funcionamento do
+trow system no jogo, para dessa forma sabermos como fazer o modulo.
+
+
+Dia 16/11/2014
+horas trabalhadas: 3h
+tipo de tarefa: estudo do módulo, codificação do módulo.
+
+
+Dia 17/11/2014
+horas trabalhadas: 1:30h
+tipo de tarefa: estudo do módulo, codificação do módulo.
+
+Dia 18/11/2014
+horas trabalhadas: 4h
+tipo de tarefa: estudo do módulo, codificação do módulo.
+
+
+
+
+todo o grupo trabalha ao mesmo tempo e faz todas as tarefas, portanto todos trabalhamos de forma
+equivalentes no trabalho.
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Datas: 8/12/2014, 9/12/2014, 10/12/2014
+
+Estudo, planejamento e codificação dos testes, revisão e correção dos módulos anteriores 
+
+Dia 8/12/2014
+horas trabalhadas: 2h
+tipo de tarefa e descrição: Estudo dos códigos a serem testados, documentação dos módulos antigos (revisão e execução de pendencias).
+
+
+Dia 9/12/2014
+horas trabalhadas: 8h
+tipo de tarefa e descrição: 10h da manhã, membros se encontraram com Gabriel para tirar duvidas encontradas no dia anterior. Estudo dos códigos antigos, depuração dos códigos antigos (Movement e Throw). Finalização do módulo Throw e elaboração dos testes do Throw* e elaboração parcial dos teste do PowerUp. 
+
+* Os testes do módulo Throw deveriam ter sido elaborados no sprint anterior, mas não foi possível visto que o componente necessário (PowerUp) ainda não havia sido implementado. A elaboração foi complementada pelo mesmo motivo. 
+
+
+Dia 10/12/2014
+horas trabalhadas: 10h
+tipo de tarefa e descrição: Refinamento dos módulos Movement e Throw. Finalização da elaboração dos testes do Throw, elaboração dos testes do PowerUp, tentativa da elaboração dos testes do Disease**.
+
+** Devido a alguns fatores (métodos 'private', falta de documentação acarretando num módulo confuso), não foi possível criar testes concisos. 
