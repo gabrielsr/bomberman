@@ -73,7 +73,7 @@ public class MovimentSystem extends BaseSystem {
 			/** < recebe a velocidade da entidade */
 			Movable speedable = (Movable) getEntityManager().getComponent(
 					Movable.class, id);
-			int speed = speedable.getSpeed();
+			float speed = speedable.getSpeed();
 
 			/** < recebe a posicao atual da entidade */
 			Coord = (CellPlacement) getEntityManager().getComponent(
@@ -92,20 +92,20 @@ public class MovimentSystem extends BaseSystem {
 			 * acordo com o mesmo
 			 */
 			if (actionCommand.getType() == MovementType.MOVE_UP) {
-				y = (Coord.getCellY() + speed);
+				y = (int) (Coord.getCellY() + speed);
 				movedEntity.setDirection(Direction.UP);
 
 			}
 			if (actionCommand.getType() == MovementType.MOVE_DOWN) {
-				y = (Coord.getCellY() - speed);
+				y = (int) (Coord.getCellY() - speed);
 				movedEntity.setDirection(Direction.DOWN);
 			}
 			if (actionCommand.getType() == MovementType.MOVE_RIGHT) {
-				x = (Coord.getCellX() + speed);
+				x = (int) (Coord.getCellX() + speed);
 				movedEntity.setDirection(Direction.RIGHT);
 			}
 			if (actionCommand.getType() == MovementType.MOVE_LEFT) {
-				x = (Coord.getCellX() - speed);
+				x = (int) (Coord.getCellX() - speed);
 				movedEntity.setDirection(Direction.LEFT);
 			}
 
