@@ -48,7 +48,7 @@ public class TimeSystem extends BaseSystem {
 				 * Add a Event when the the time is up
 				 */
 				if (timeEffect.isOver()) {
-					if(timedEffects != null){
+					if(timedEffects != null && timeEffect.getEvent() != null){
 						getEntityManager().addEvent(timeEffect.getEvent());
 					}
 					// add to a list of components to remove, as we can't remove
