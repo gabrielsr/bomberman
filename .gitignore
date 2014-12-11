@@ -5,6 +5,8 @@ Bomberman\ project/images/
 
 /build/
 /bin/
+/config/html/
+/config/latex/
 
 #Gradle stuff
 .gradle
