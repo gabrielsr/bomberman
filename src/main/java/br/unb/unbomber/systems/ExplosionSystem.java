@@ -92,9 +92,8 @@ public class ExplosionSystem extends BaseSystem {
 
 	public void createExplosion(CellPlacement expPlacement, int expRange) {
 
-		Entity explosionEntity = new Entity();
-		getEntityManager().addEntity(explosionEntity);
-
+		Entity explosionEntity = getEntityManager().createEntity();
+		
 		Explosion exp = new Explosion();
 		exp.setEntityId(explosionEntity.getEntityId());
 		exp.setExplosionRange(expRange);
@@ -119,6 +118,8 @@ public class ExplosionSystem extends BaseSystem {
 
 		exp.setPropagationDirection(Direction.RIGHT);
 		propagateExplosion(exp, expPlacement, expRange);
+		
+		getEntityManager().update(explosionEntity);
 
 	}
 

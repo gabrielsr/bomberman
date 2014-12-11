@@ -303,7 +303,7 @@ public class BombSystem2 extends BaseSystem {
         /* create an event for time over */
         TimeOverEvent triggeredBombEvent = new TimeOverEvent(); 
         triggeredBombEvent.setAction(TRIGGERED_BOMB_ACTION);
-         
+        
         /* create a timer component */
         Timer bombTimer = new Timer(90, triggeredBombEvent);
          
