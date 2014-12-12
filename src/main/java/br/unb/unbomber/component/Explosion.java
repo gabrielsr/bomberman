@@ -20,6 +20,7 @@ public class Explosion extends Component {
 	private float countdown; 			// How long does it last?
 	private float propagationCountdown; // How long does it take to propagate to the
 								// next square?
+	private int ownerId; // id of the char who put the bomb that created the explosion
 
 	public boolean isPassThrough() {
 		return isPassThrough;
@@ -56,5 +57,11 @@ public class Explosion extends Component {
 	}
 	public void setPropagationCountdown(float propagationCountdown) {
 		this.propagationCountdown = propagationCountdown;
+	}
+	public int getOwnerId() {
+		return ownerId;
+	}
+	public void setOwnerId(int ownerId) {
+		this.ownerId = ownerId;
 	}
 }
