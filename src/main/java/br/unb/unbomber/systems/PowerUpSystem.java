@@ -112,7 +112,7 @@ public class PowerUpSystem extends BaseSystem {
 	public boolean isBlockExplosion(InAnExplosionEvent explosion) {
 		LifeType typeId = (LifeType) getEntityManager().getComponent(
 				LifeType.class, explosion.getIdHit());
-		return (typeId.getType() == Type.SOFT_BLOCK);
+		return (typeId.getType() == Type.SOFT_BLOCK && typeId != null);
 	}
 
 	/**
@@ -127,7 +127,7 @@ public class PowerUpSystem extends BaseSystem {
 	public boolean isPowerUpExplosion(InAnExplosionEvent explosion) {
 		LifeType typeId = (LifeType) getEntityManager().getComponent(
 				LifeType.class, explosion.getIdHit());
-		return (typeId.getType() == Type.POWER_UP);
+		return (typeId.getType() == Type.POWER_UP && typeId != null);
 	}
 
 	/**
@@ -235,7 +235,9 @@ public class PowerUpSystem extends BaseSystem {
 		LifeType typeTargetId = (LifeType) getEntityManager().getComponent(
 				LifeType.class, collision.getTargetId());
 
-		return (typeSourceId.getType() == Type.CHAR && typeTargetId.getType() == Type.POWER_UP);
+		return (typeSourceId.getType() == Type.CHAR && 
+				typeTargetId.getType() == Type.POWER_UP &&
+				typeSourceId != null && typeTargetId != null);
 	}
 
 	/**
