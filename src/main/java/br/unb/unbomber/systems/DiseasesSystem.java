@@ -5,13 +5,12 @@ import java.util.Random;
 
 import br.unb.unbomber.component.CellPlacement;
 import br.unb.unbomber.component.DiseaseComponent;
-import br.unb.unbomber.component.Draw;
 import br.unb.unbomber.component.DiseaseComponent.DiseaseType;
+import br.unb.unbomber.component.Draw;
 import br.unb.unbomber.component.ExplosionBarrier;
 import br.unb.unbomber.component.ExplosionBarrier.ExplosionBarrierType;
 import br.unb.unbomber.component.LifeType;
 import br.unb.unbomber.component.LifeType.Type;
-import br.unb.unbomber.component.PowerUp.PowerType;
 import br.unb.unbomber.core.BaseSystem;
 import br.unb.unbomber.core.Entity;
 import br.unb.unbomber.core.EntityManager;
