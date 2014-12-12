@@ -56,18 +56,14 @@ public class PowerUpTestCase {
 	 *  */
 	@Test
 	public void isPowerUpExplosionTest(){
-		int BLOCK_ID = entityManager.getUniqueId(); /**< pega novos id para as entidades */
-		int entityId = entityManager.getUniqueId(); 
-		
 		LifeType newType = new LifeType(Type.POWER_UP); /**< instancia um novo lifetype */
-		newType.setType(Type.POWER_UP);
 		
-		Entity entity = new Entity(entityId); /**< instacia uma nova entidade */
+		Entity entity = entityManager.createEntity(); /**< instacia uma nova entidade */
 		entity.addComponent(newType); /**< adiciona a componente newtype para a entidade instacniada previamente */
-		entityManager.addEntity(entity); /**< adiciona a entidade para as entidades do entityManager */
+		entityManager.update(entity); /**< adiciona a entidade para as entidades do entityManager */
 		
 		InAnExplosionEvent explosion = new InAnExplosionEvent(); /**< instancia um novo inAnExplosionEvent */
-		explosion.setIdHit(entityId); /**< seta o idhit do explosion */
+		explosion.setIdHit(entity.getEntityId()); /**< seta o idhit do explosion */
 		entityManager.addEvent(explosion); /**< adiciona o evento explosion no entityManager */
 			
 		assertTrue(powerUpSystem.isPowerUpExplosion(explosion)); /**< realiza a acertiva */
@@ -75,18 +71,14 @@ public class PowerUpTestCase {
 	
 	@Test
 	public void isBlockExplosionTest(){
-		int BLOCK_ID = entityManager.getUniqueId(); /**< pega novos id para as entidades */
-		int entityId = entityManager.getUniqueId(); 
-		
 		LifeType newType = new LifeType(Type.SOFT_BLOCK); /**< instancia um novo lifetype */
-		newType.setType(Type.SOFT_BLOCK);
 		
-		Entity entity = new Entity(entityId); /**< instacia uma nova entidade */
+		Entity entity = entityManager.createEntity();; /**< instacia uma nova entidade */
 		entity.addComponent(newType); /**< adiciona a componente newtype para a entidade instacniada previamente */
-		entityManager.addEntity(entity); /**< adiciona a entidade para as entidades do entityManager */
+		entityManager.update(entity); /**< adiciona a entidade para as entidades do entityManager */
 		
 		InAnExplosionEvent explosion = new InAnExplosionEvent(); /**< instancia um novo inAnExplosionEvent */
-		explosion.setIdHit(entityId); /**< seta o idhit do explosion */
+		explosion.setIdHit(entity.getEntityId()); /**< seta o idhit do explosion */
 		entityManager.addEvent(explosion); /**< adiciona o evento explosion no entityManager */
 			
 		assertTrue(powerUpSystem.isBlockExplosion(explosion)); /**< realiza a acertiva */
@@ -94,37 +86,37 @@ public class PowerUpTestCase {
 	
 	@Test
 	public void checkCollisionTest(){
-		
-		int POWER_ID = entityManager.getUniqueId();
-		int CHAR_ID = entityManager.getUniqueId();
+
 		int x = 5;
 		int y = 5;
 		
-		LifeType life = new LifeType(Type.POWER_UP);
-		life.setType(Type.POWER_UP);
+		LifeType lifePower = new LifeType(Type.POWER_UP);
 		
 		LifeType lifeChar = new LifeType(Type.CHAR);
-		lifeChar.setType(Type.CHAR);
 		
-		Entity newEntityChar = new Entity(CHAR_ID);
+		Entity newEntityChar = entityManager.createEntity();
 		CellPlacement charPlacement = new CellPlacement();
 		charPlacement.setCellX(x);
 		charPlacement.setCellY(y);
 		
 		newEntityChar.addComponent(charPlacement);
-		newEntityChar.addComponent(life);
+		newEntityChar.addComponent(lifeChar);
 		
-		entityManager.addEntity(newEntityChar);
+		entityManager.update(newEntityChar);
 		
-		Entity newEntityPower = new Entity(POWER_ID);
+		Entity newEntityPower = entityManager.createEntity();
 		CellPlacement powerPlacement = new CellPlacement();
 		powerPlacement.setCellX(x);
 		powerPlacement.setCellY(y);
 
 		newEntityPower.addComponent(powerPlacement);
-		newEntityPower.addComponent(lifeChar);
+		newEntityPower.addComponent(lifePower);
 		
-		CollisionEvent collision = new CollisionEvent(CHAR_ID, POWER_ID);
+		entityManager.update(newEntityPower);
+		
+		CollisionEvent collision = new CollisionEvent(newEntityChar.getEntityId(), 
+				newEntityPower.getEntityId());
+		
 		entityManager.addEvent(collision);
 		
 		assertTrue(powerUpSystem.checkCollision(collision));
