@@ -53,5 +53,42 @@ public class KickSystemTestCase {
 		
 		assertEquals(((CellPlacement) anEntity.getComponents()).getCellX(), ((CellPlacement) anEntity.getComponents()).getCellX() + 4);
 	}
+	
+	@Test
+	public void testCheckIfBomb1()	{
+	
+		
+		kickSystem = new KickSystem();
+			
+		assertFalse(kickSystem.checkIfBomb(5));
+	}
+	
+	@Test
+	public void testCheckIfBomb2()	{
+		Explosive explosive = new Explosive();
+		explosive.setEntityId(10);
+		entityManager.addComponent(explosive);
+		assert(kickSystem.checkIfBomb(5));
+	}
+	
+	@Test
+	public void testCheckIfCanBombDrop1()	{
+		BombDropper dropper = new BombDropper();
+		assert(kickSystem.checkIfCanKickBombs(dropper));
+	}
+	
+	
+	@Test
+	public void testCheckIfCanKickBombs()	{
+		BombDropper bomber = new BombDropper();
+		bomber.setEntityId(42);
+		KickPowerUpEvent evento = new KickPowerUpEvent(42);
+		entityManager.addEvent(evento);
+		assert(kickSystem.checkIfCanKickBombs(bomber));
+	}
+	
+	
+	
+}
 
 }
