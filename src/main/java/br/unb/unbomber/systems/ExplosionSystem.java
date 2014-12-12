@@ -119,6 +119,7 @@ public class ExplosionSystem extends BaseSystem {
 		expPlacement.setEntityId(explosionEntity.getEntityId());
 
 		Timer expTimer = new Timer(16, null);
+		expTimer.setEntityId(explosionEntity.getEntityId());
 		
 		CellPlacement cellPlacement = new CellPlacement();
 		cellPlacement.setCellX(expPlacement.getCellX());
