@@ -13,13 +13,8 @@ package br.unb.unbomber.systems;
 
 import java.util.List;
 
-import br.unb.unbomber.core.Component;
-import br.unb.unbomber.core.Entity;
-import br.unb.unbomber.core.EntityManager;
-import br.unb.unbomber.core.Event;
-import br.unb.unbomber.component.Health;
-import br.unb.unbomber.component.Score;
 import br.unb.unbomber.component.Bounty;
+import br.unb.unbomber.component.Score;
 import br.unb.unbomber.core.BaseSystem;
 import br.unb.unbomber.core.EntityManager;
 import br.unb.unbomber.core.Event;
