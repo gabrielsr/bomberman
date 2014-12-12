@@ -84,7 +84,7 @@ public class MovimentSystem extends BaseSystem {
 			
 			MovedEntityEvent movedEntity = new MovedEntityEvent();
 			movedEntity.setSpeed(speed);
-			movedEntity.setId(id);
+			movedEntity.setMovedEntityId(id);
 			/**
 			 * < verifica o tipo de movimento e atualiza as coordenadas x e y de
 			 * acordo com o mesmo

@@ -17,13 +17,13 @@ public class MovedEntityEvent extends Event {
 	float speed;
 
 	// get the id of an entity which moved
-	public int getEntityId() {
+	public int getMovedEntityId() {
 		return this.entityId;
 	}
 
 	// set the id of an entity which moved
-	public void setId(int id) {
-
+	public void setMovedEntityId(int id) {
+		this.entityId = id;
 	}
 
 	// TODO direção do moovimento.

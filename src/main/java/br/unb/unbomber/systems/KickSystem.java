@@ -249,7 +249,7 @@ public class KickSystem extends BaseSystem {
 
         MovedEntityEvent kickStarted = new MovedEntityEvent();
 
-        kickStarted.setId(targetId);    //setting the entity that will be the target of the kick
+        kickStarted.setMovedEntityId(targetId);    //setting the entity that will be the target of the kick
         kickStarted.setDirection(direction);    //setting the direction of the kick
 
         getEntityManager().addEvent(kickStarted);   //updating the event to the entity manager
