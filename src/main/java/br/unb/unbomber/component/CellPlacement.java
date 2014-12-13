@@ -1,6 +1,7 @@
 package br.unb.unbomber.component;
 
 import br.unb.unbomber.core.Component;
+import br.unb.unbomber.gridphysics.Vector2D;
 
 public class CellPlacement extends Component{
 
@@ -22,6 +23,10 @@ public class CellPlacement extends Component{
 
 	public void setCellY(int cellY) {
 		this.cellY = cellY;
+	}
+	
+	public Vector2D<Float> centerPosition(){
+		return new Vector2D<>(cellX*1.0f + 0.5f, cellY+ 0.5f);
 	}
 	
 }

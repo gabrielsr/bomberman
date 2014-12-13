@@ -7,15 +7,24 @@
  *********************************************************************************************************************************/
 package br.unb.unbomber.event;
 
+import br.unb.unbomber.component.CellPlacement;
 import br.unb.unbomber.component.Direction;
 import br.unb.unbomber.core.Event;
+import br.unb.unbomber.gridphysics.Vector2D;
 
 //O grupo responsável pelo módulo de movimento precisa setar OwnerId com a id da entidade que se moveu no tick
 public class MovedEntityEvent extends Event {
-	int entityId;
-	Direction direction;
-	float speed;
 
+	private int entityId;
+
+	private Direction direction;
+	
+	private float speed;
+	
+	private CellPlacement destinationCell;
+
+	private Vector2D<Float> displacement;
+	
 	// get the id of an entity which moved
 	public int getMovedEntityId() {
 		return this.entityId;
@@ -26,7 +35,7 @@ public class MovedEntityEvent extends Event {
 		this.entityId = id;
 	}
 
-	// TODO direção do moovimento.
+	//
 	public Direction getDirection() {
 		return this.direction;
 	}
@@ -41,9 +50,23 @@ public class MovedEntityEvent extends Event {
 	public void setSpeed(float speed2){
 		this.speed = speed2;
 	}
-	// TODO velocidade da entitade.
 
-	// current position of an entity which moved in the last tick
-	// CellPlacement getCellPlacement()
+	// Position that the entity is trying to go
+
+	public CellPlacement getDestinationCell() {
+		return destinationCell;
+	}
+
+	public void setDestinationCell(CellPlacement destinationCell) {
+		this.destinationCell = destinationCell;
+	}
+
+	public Vector2D<Float> getDisplacement() {
+		return displacement;
+	}
+
+	public void setDisplacement(Vector2D<Float> displacement) {
+		this.displacement = displacement;
+	}
 
 }
