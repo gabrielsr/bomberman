@@ -1,11 +1,16 @@
 package br.unb.unbomber.core;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import br.unb.unbomber.component.CellPlacement;
+import br.unb.unbomber.component.Draw;
+import br.unb.unbomber.component.EntityBuilder;
+import br.unb.unbomber.component.Movable;
+import br.unb.unbomber.systems.query.Get;
 
 public class EntityManagerTestCase {
 
@@ -52,5 +57,24 @@ public class EntityManagerTestCase {
 		assertNull("Should be null", placement);
 	}
 	
+	@Test
+	public void builderAndSelectTest(){
+		Entity bomber1 = EntityBuilder.create(entityManager)
+				.withPosition(314, 273)
+				.withMovable(0.1f)
+				.build();
+		
+		CellPlacement cell = Get.from(bomber1).component(CellPlacement.class).now();
+
+		
+		assertEquals(314, cell.getCellX());
+		assertEquals(273, cell.getCellY());
+		
+		
+//		
+//			.select(CellPlacement.class)
+//			.from(bomber1);
+
+	}
 
 }

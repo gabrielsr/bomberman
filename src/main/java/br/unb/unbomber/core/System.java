@@ -6,7 +6,7 @@ package br.unb.unbomber.core;
  *
  * @author Gabriel Rodrigues <gabrielsr@gmail.com>
  */
-public interface System {
+public interface System extends Updatable{
 	
 	/* 
 	* System Life Cycle
