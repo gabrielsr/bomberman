@@ -10,9 +10,13 @@ public class ActionCommandEvent extends Event {
 		TRIGGERS_REMOTE_BOMB; //TODO duplicated
 	}
 	
-	private final ActionType type;
+	private ActionType type;
+
+	private int entityId;
 	
-	private final int entityId;
+	public ActionCommandEvent(){
+		
+	}
 	
 	public ActionCommandEvent(ActionType type, int entityId){
 		this.type = type;
@@ -23,8 +27,16 @@ public class ActionCommandEvent extends Event {
 		return type;
 	}
 	
+	public void setType(ActionType type) {
+		this.type = type;
+	}
+
 	public int getEntityId(){
 		return this.entityId;
 	}
 	
+	public void setEntityId(int entityId) {
+		this.entityId = entityId;
+	}
+
 }

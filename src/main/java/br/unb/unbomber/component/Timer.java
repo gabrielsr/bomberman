@@ -33,7 +33,7 @@ public class Timer extends Component {
 	 * Tick.
 	 */
 	public void tick() {
-		elapsedTime--;
+		--elapsedTime;
 	}
 	
 
@@ -43,7 +43,7 @@ public class Timer extends Component {
 	 * @return true, if is over
 	 */
 	public boolean isOver() {
-		return (elapsedTime <= 0);
+		return elapsedTime <= 0;
 	}
 	
 	/**
@@ -51,7 +51,7 @@ public class Timer extends Component {
 	 *
 	 * @return true, if is active
 	 */
-	public boolean isActive(){
+	public boolean isActive() {
 		return active;
 	}
 	
@@ -60,7 +60,7 @@ public class Timer extends Component {
 	 *
 	 * @param active the new active
 	 */
-	public void setActive(boolean active){
+	public void setActive(boolean active) {
 		this.active = active;
 	}
 	
@@ -77,8 +77,10 @@ public class Timer extends Component {
 	 * @see br.unb.unbomber.core.Component#setEntityId(int)
 	 */
 	@Override
-	public void setEntityId(int entityId){
+	public void setEntityId(int entityId) {
 		super.setEntityId(entityId);
-		this.event.setOwnerId(entityId);
+		if(this.event!=null){
+			this.event.setOwnerId(entityId);
+		}
 	}
 }

@@ -16,6 +16,7 @@ import java.util.Set;
 
 import br.unb.unbomber.component.BombDropper;
 import br.unb.unbomber.component.CellPlacement;
+import br.unb.unbomber.component.Draw;
 import br.unb.unbomber.component.Explosive;
 import br.unb.unbomber.component.Timer;
 import br.unb.unbomber.core.Component;
@@ -30,9 +31,12 @@ import br.unb.unbomber.event.InAnExplosionEvent;
 import br.unb.unbomber.event.TimeOverEvent;
 
 /**
- * 
- *
+ * @author <img src="https://avatars2.githubusercontent.com/u/8586137?v=2&s=30" width="30" height="30"/> <a href="https://github.com/JeffVFA" target="_blank">JeffVFA</a>
+ * @author <img src="https://avatars1.githubusercontent.com/u/4968411?v=2&s=30" width="30" height="30"/> <a href="https://github.com/zidenis" target="_blank"> zidenis </a>
+ * @author <img src="https://avatars2.githubusercontent.com/u/3778188?v=2&s=30" width="30" height="30"/> <a href="https://github.com/DRA2840" target="_blank"> DRA2840 </a>
+ * @author <img src="https://avatars2.githubusercontent.com/u/7716247?v=2&s=30" width="30" height="30"/> <a href="https://github.com/brenoxp2008" target="_blank"> brenoxp2008</a>
  */
+
 public class BombSystem extends BaseSystem {
 	/*
 	 * documented by @author JeffVFA //Define default Value of a bomb
@@ -103,9 +107,9 @@ public class BombSystem extends BaseSystem {
 					
 					// 3)
 					List<Component> components =  entityManager.getComponents(Explosive.class);
-					for(Component component: components){
+					for (Component component: components) {
 						Explosive explosive = (Explosive) component;
-						if(explosive.getOwnerId() == actionCommand.getEntityId()){
+						if (explosive.getOwnerId() == actionCommand.getEntityId()) {
 							createExplosionEvent(explosive.getEntityId());
 						}
 					}
@@ -146,7 +150,7 @@ public class BombSystem extends BaseSystem {
 				InAnExplosionEvent inAnExplosion = (InAnExplosionEvent) event;
 				
 				// 2)
-				if(!processedEvents.contains(inAnExplosion)){
+				if (!processedEvents.contains(inAnExplosion)) {
 					
 					// 3)
 					int entityInExplosionId = inAnExplosion.getIdHit();
@@ -188,7 +192,7 @@ public class BombSystem extends BaseSystem {
 		
 		// 3)
 		explosion.setEventId(entityManager.getUniqueId());
-		explosion.setOwnerId(bombID); 
+		explosion.setOwnerId(bombExplosive.getOwnerId()); //The Explosion owner is the bomb ownwer
 		explosion.setInitialPosition(bombPlacement); 
 		explosion.setExplosionRange(bombExplosive.getExplosionRange());
 		
@@ -220,11 +224,11 @@ public class BombSystem extends BaseSystem {
 			
 			Entity bomb = null;
 			
-			if (dropper.isCanRemoteTrigger()){
+			if (dropper.isCanRemoteTrigger()) {
 				
 				bomb = createRemoteBomb(dropper);
 				
-			}else{
+			} else {
 
 				bomb = createTimeBomb(dropper);
 				
@@ -264,7 +268,6 @@ public class BombSystem extends BaseSystem {
 		// create Event for time over
 		TimeOverEvent triggeredBombEvent = new TimeOverEvent();
 		triggeredBombEvent.setAction(TRIGGERED_BOMB_ACTION);
-
 		// create timer component
 		Timer bombTimer = new Timer(90, triggeredBombEvent);
 
@@ -276,7 +279,7 @@ public class BombSystem extends BaseSystem {
 	}
 	
 	//Method created to avoid code duplication
-	private Entity createGenericBomb(BombDropper dropper){
+	Entity createGenericBomb(BombDropper dropper){
 		/*
 		 * The Bomb Entity is made of this components Explosive Placement Timer
 		 * components
@@ -307,7 +310,7 @@ public class BombSystem extends BaseSystem {
 		// Add components
 		bomb.addComponent(bombExplosive);
 		bomb.addComponent(bombPlacement);
-
+		bomb.addComponent(new Draw("bomb"));
 		return bomb;
 	}
 

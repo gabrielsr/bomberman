@@ -14,16 +14,16 @@ import br.unb.unbomber.core.Event;
 public class MovedEntityEvent extends Event {
 	int entityId;
 	Direction direction;
-	int speed;
+	float speed;
 
 	// get the id of an entity which moved
-	public int getEntityId() {
+	public int getMovedEntityId() {
 		return this.entityId;
 	}
 
 	// set the id of an entity which moved
-	public void setId(int id) {
-
+	public void setMovedEntityId(int id) {
+		this.entityId = id;
 	}
 
 	// TODO direção do moovimento.
@@ -35,8 +35,11 @@ public class MovedEntityEvent extends Event {
 		this.direction = direction;
 	}
 
-	public int getSpeed() {
+	public float getSpeed() {
 		return this.speed;
+	}
+	public void setSpeed(float speed2){
+		this.speed = speed2;
 	}
 	// TODO velocidade da entitade.
 

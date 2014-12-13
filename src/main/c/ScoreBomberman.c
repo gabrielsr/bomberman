@@ -1,39 +1,58 @@
+/**
+* @file ScoreBomberman.c
+* @brief Este é o módulo de implementação dos módulos que tratam o score(pontuação) do jogo Bomberman, criado pelo Grupo 10 da turma de Programação Sistemática 2-2014, ministrada pela professora Genaína Nunes Rodrigues, na Universidade de Brasília. 
+*
+* @author Camila Imbuzeiro Camargo
+* @author Lucas Araújo Pena
+* @author Miguel Angelo Montagner Filho
+* @author Nicolas Machado Schumacher
+* @since 07/10/2014
+* @version 1.0
+*/
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "ScoreBomberman.h"
 
-#define SERVIDOR_SCORE
+#define SERVIDOR_SCORE /**< Esta definição serve para separar o programa servidor do programa cliente*/
 
-#define PLAYER_MAX 4
-#define SCORE_MONSTER_DEATH 100	/*pontuação referente ao assassinato de um monstro*/
-#define SCORE_EXP_SB 10			/*pontuação referente à explosão de um soft block*/
-#define SCORE_PICKUP_POWERUP 30	/*pontuação referente à obtenção de um power up*/
-#define SCORE_CHARACTER_DEATH 200/*pontuação referente ao assassinato de outro jogador*/
+#define PLAYER_MAX 4	/**< Definição do número máximo de jogadores*/
+#define SCORE_MONSTER_DEATH 100		/**< Pontuação referente ao assassinato de um monstro*/
+#define SCORE_EXP_SB 10				/**< Pontuação referente à explosão de um soft block*/
+#define SCORE_PICKUP_POWERUP 30		/**< Pontuação referente à obtenção de um power up*/
+#define SCORE_CHARACTER_DEATH 200	/**< Pontuação referente ao assassinato de outro jogador*/
 
-struct score {			/*Estrutura padrão do módulo*/
+struct score {			
 	int pontos [PLAYER_MAX];
-};
+}; /**< Estrutura STR_Score (interna ao módulo).*/
 
 struct tabela {		/*Estrutura criada para a função criaTabelaHighScore*/
 	char name[20];
 	int total;
-};
+}; /**< Estrutura STR_Tabela (interna ao módulo).*/
 
-struct recebe {		/*Estrutura que nós imaginamos que nós vamos receber == Event*/
-	int comando;
-	int player;
-	struct recebe* next;
-};
+struct recebe {		
+	int comando; /**< Inteiro que representa o tipo de ação que ocorreu no jogo. '0' representa a inicialização do jogo, '1' representa a morte de um monstro, '2' representa a explosão de um soft block, '3' representa a coleta de um power up, '4' representa a morte de um outro personagem e '5' representa a finalização do jogo.*/
+	int player; /**< Junto com o comando deve ser enviado o inteiro representante do jogador responsável pela ação. Em comandos em que não está envolvido um personagem (inicialização e finalização do jogo, por exemplo), qualquer valor de 'player' pode ser enviado, pois ele não será computado. */
+	struct recebe* next; /**< Ponteiro para o próximo elemento da lista*/
+}; /**< Estrutura LST_Event.*/
 
-struct nomes {	/*Estrutura de nomes criada para que o módulo possa receber o nome dos jogadores*/
-	int pl;
-	char nombre[20];
-	struct nomes* prox;
-};
+struct nomes {
+	int pl; /**< Inteiro que representa o número do jogador.*/
+	char nombre[20]; /**< String do nome associado ao jogador enviado.*/
+	struct nomes* prox; /**< Ponteiro para o próximo elemento da lista*/
+}; /**< Estrutura LST_Name.*/
 
-int MS_scoreModuleInterface (LST_Event* events) {	/*Esta função recebe uma lista de eventos do turno e chama outra função para montar e*/
-	int i = 0;								/*contabilizar a pontuação*/
+/**
+* @brief Esta função recebe uma lista de LST_Events (struct recebe) do turno do jogo e chama outra função (interna ao módulo) para montar e contabilizar a pontuação dos jogadores envolvidos. 
+*
+* @param events uma lista do tipo LST_Events que representa os eventos do turno.
+* @return retorna 0 se não houve problemas na execução (valores errados enviados, como comandos ou jogadores inexistentes) e 1 se tudo correu bem.
+*/
+int MS_scoreModuleInterface (LST_Event* events) {
+	int i = 0;
 	LST_Event* aux = events;
 	while (aux->next != NULL) {				/* Percorrendo a lista de eventos....*/
 		i += findEvent(aux->comando,aux->player);	
@@ -43,18 +62,33 @@ int MS_scoreModuleInterface (LST_Event* events) {	/*Esta função recebe uma lis
 }
 
 static STR_Tabela MS_paranomes[PLAYER_MAX];
+static int conferindo = 0;
 
-void MS_sendPlayerNameEvent (LST_Name* nomes) {	/*Esta função deve ser chamada pelo módulo de Events no início do jogo*/
-	LST_Name* aux = nomes;						/*Ela tem o propósito de armazenar na estrutura 'paranomes' o nome dos jogadores*/
-	int i;									/*para futura referência*/
-		while (aux->prox != NULL) {
+
+/**
+* @brief Função que tem o propósito de armazenar o nome dos jogadores para futura referência (criação da tabela de High Scores). Essa função deve ser chamada logo após a nomeação dos jogadores, antes da inicialização do jogo. Se esta função não for chamada, a função que cria a tabela de High Scores não terá uma referência na hora de relacionar um jogador com sua pontuação.
+*
+* @param nomes uma lista do tipo LST_Name (struct nomes) que traz consigo em cada célula o número e o nome de um jogador.
+* @return void
+*/
+void MS_sendPlayerNameEvent (LST_Name* nomes) {	
+	LST_Name* aux = nomes;						
+	int i;									
+		while (aux->prox != NULL) {	/*Percorrendo a lista...*/
 			i = (aux->pl)-1;
-			strcpy (aux->nombre, MS_paranomes[i].name);
+			strcpy (aux->nombre, MS_paranomes[i].name);	/*Armazenando nomes na variável interna global do módulo.*/
 			aux=aux->prox;
 		}		
+	conferindo = 1;
 }
 
-int findEvent (int comando, int jogador) {	/*está se considerando que o argumento dessa função será a struct recebida contendo os eventos por turno que serão contabilizados*/ 
+
+/**
+* @brief Função interna ao módulo. 
+* 
+* Função que processa os eventos enviados por outros módulos.
+*/
+static int findEvent (int comando, int jogador) {	
 	int i;
 	static STR_Score scores;
 		if (comando == 0) {	/*considerando que '0' representa a inicialização do jogo*/
@@ -86,15 +120,16 @@ int findEvent (int comando, int jogador) {	/*está se considerando que o argumen
 			if (jogador>0 && jogador<=PLAYER_MAX) { 
 				return scores.pontos[jogador-1];
 			}
-			else {
-				return 1;
-			}
 		}
 return 1;
 }
 
-
-void criaTabelaHighScore (STR_Score* scores) {	/*Essa função tem como função criar um arquivo contendo as pontuações*/
+/**
+* @brief Função interna ao módulo. 
+* 
+* Cria/Atualiza a tabela de High Scores do jogo após o fim de uma partida.
+*/
+static void criaTabelaHighScore (STR_Score* scores) {	/*Essa função tem como função criar um arquivo contendo as pontuações*/
 	STR_Tabela ths[PLAYER_MAX];	/*vetor auxiliar contendo a pontuação dos jogadores da partida em questão*/
 	int i,j,k;		/*inteiros auxiliares*/
 	char nada[20];	/*vetor de caractere auxiliar*/
@@ -102,6 +137,13 @@ void criaTabelaHighScore (STR_Score* scores) {	/*Essa função tem como função
 	FILE* fp;		
 	j=0;	
 	nada[0]='\0';
+	
+		if (conferindo == 0) {		/*Caso os outros módulos esqueçam de enviar o nome dos jogadores.*/
+			for (i=0;i<PLAYER_MAX;i++) {
+				strcpy("---", MS_paranomes[i].name);
+			}
+		}
+		
 		for (i=0;i<PLAYER_MAX;i++) {		/*Laço destinado a obter o nome (string) dos jogadores envolvidos na partida*/
 			strcpy(ths[i].name, MS_paranomes[i].name);
 			ths[i].total=scores->pontos[i];
@@ -142,14 +184,24 @@ void criaTabelaHighScore (STR_Score* scores) {	/*Essa função tem como função
 	fclose(fp);
 }
 
-void inicializaScore (STR_Score* scores) {	/*Função que inicializa o score de todos os jogadores como zero (0)*/
+/**
+* @brief Função interna ao módulo. 
+* 
+* Inicializa a estrutura interna do módulo para que a contabilização da pontuação possa começar do zero. 
+*/
+static void inicializaScore (STR_Score* scores) {	/*Função que inicializa o score de todos os jogadores como zero (0)*/
 	int i;
 		for(i=0;i<PLAYER_MAX;i++) {
 			scores->pontos[i]= 0;
 		}
 }
 
-int addScore (char action, int player, STR_Score* scores) {	/*Função que incrementa a pontuação de um jogador 'player' de acordo com a ação realizada*/
+/**
+* @brief Função interna ao módulo. 
+* 
+* Adiciona a pontuação de um jogador de acordo com os valores estabelecidos nas constantes.
+*/
+static int addScore (char action, int player, STR_Score* scores) {	/*Função que incrementa a pontuação de um jogador 'player' de acordo com a ação realizada*/
 	int i = player-1;	/*Não é necessária a preocupação com o índice do vetor. Se o cliente enviar '1' para representar o jogador 1, o ajuste é feito aqui, pois, a posição do jogador 1 no vetor da struct é no índice 0 (player-1)*/
 	
 	if ( action!='m' && action != 's' && action != 'p' && action != 'c') {
@@ -178,18 +230,28 @@ int addScore (char action, int player, STR_Score* scores) {	/*Função que incre
 	return 0;
 }
 
-int MS_getScore (int jogador) {		/*Função que retorna o score de um jogador 'player' escolhido*/
+/**
+* @brief Essa função tem como função retornar a pontuação de um jogador para outros módulos. 
+*
+* @param jogador o jogador da qual deseja-se obter a pontuação.
+* @return a função retorna 1 caso dê algum erro (jogador inexistente) e retorna um valor diferente de um caso tudo tenha corrido bem.
+*/
+int MS_getScore (int jogador) {
 	int comando = 6;
 	int player = jogador;
 	int i = findEvent(comando, player);
 		if (i==1) {
-			return 1;	/*Esse valor avisa para quem chamou a função que houve um problema na chamada*/
+			return 1;
 		}
 	return i;
 }
 
-void clearScore (STR_Score* scores) {	/*Zera a pontuação*/
+/**
+* @brief Função interna ao módulo. 
+* 
+* Reinicia a pontuação após o final de uma partida.
+*/
+static void clearScore (STR_Score* scores) {	/*Zera a pontuação*/
 	inicializaScore(scores);
 }
-
 

@@ -1,0 +1,13 @@
+Data | Horas Trabalhadas | Tipo Tarefa | Descrição da Tarefa
+
+Parte 1
+03/10/2014 | 1 HORA | Definir nova tarefa a ser realizada | Mudar a linguagem do Módulo Score (de C para Java)
+04/10/2014 | 2 HORAS | Estudar e redigir código | Aprender o básico do funcionamento da linguagem Java e iniciar a mudança de linguagens
+06/10/2014 | 2 HORAS | Redigir casos de teste | Escrever casos de testes para o módulo
+12/10/2014 | 4 HORAS | Corrigir módulo e fazer comentários no código | Depois dos testes, viu-se que havia um erro no módulo. Foi necessário tentar modificá-lo. Além disso, o código foi comentado com o padrão Doxygen.
+13/10/2014 | 1 HORA | Considerações finais | Análise de como concertar o buraco no código e inserção de comentários no código
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+TOTAL: 10 HORAS
+
+Obs.: a grande maioria das partes do trabalho foram feitas com todo o grupo presente, por isso, os relatórios estão iguais.

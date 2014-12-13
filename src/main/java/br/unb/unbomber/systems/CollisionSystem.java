@@ -59,7 +59,7 @@ public class CollisionSystem extends BaseSystem {
 																		refere-se ao source e o segundo ao target. */
 		// Receberá a dupla de id's das entidades que colidiram.
 		// int coll[] = new int[2];
-		int aux; /**< variavel auxiliar. */
+		int aux = 0; /**< variavel auxiliar. */
 
 		MovedEntityEvent movedEntityEvent; /**< variavel usada no for a seguir. */
 
@@ -77,7 +77,7 @@ public class CollisionSystem extends BaseSystem {
 			// cellPlacement1 não é necessário de verdade já que é possível
 			// obter (x,y) de MovedEntityEvent.
 			cellPlacement1 = (CellPlacement) getEntityManager().getComponent(
-					CellPlacement.class, movedEntityEvent.getEntityId());
+					CellPlacement.class, movedEntityEvent.getMovedEntityId());
 
 			// TODO testar se a colisão se dá entre softblock (bomba, powerup) e
 			// personagem.
@@ -94,7 +94,7 @@ public class CollisionSystem extends BaseSystem {
 				cellPlacement2 = (CellPlacement) component;
 
 				// Se os ids forem diferentes verifica se houve colisão.
-				if (movedEntityEvent.getEntityId() != cellPlacement2
+				if (movedEntityEvent.getMovedEntityId() != cellPlacement2
 						.getEntityId()) {
 					// se o if for verdadeiro significa que (x1,y1) = (x2,y2),
 					// i.e, houve colisão entre alguém que se
@@ -110,8 +110,8 @@ public class CollisionSystem extends BaseSystem {
 						// mais uma vez.
 						boolean test = false;
 						test = collisionMade(collMade,
-								movedEntityEvent.getEntityId(),
-								cellPlacement2.getEntityId());
+								movedEntityEvent.getMovedEntityId(),
+								cellPlacement2.getEntityId(), aux);
 						if (test == true) {
 							continue;
 						}
@@ -148,26 +148,26 @@ public class CollisionSystem extends BaseSystem {
 								// o primeiro argumento é quem colide e o
 								// segundo em que se colide.
 								makeCollisionEvent(
-										movedEntityEvent.getEntityId(),
-										tempMEntityE.getEntityId());
+										movedEntityEvent.getMovedEntityId(),
+										tempMEntityE.getMovedEntityId());
 								// adiciona a colisão ao array de controle de
 								// colisões.
-								aux = collMade.length;
+								//aux = collMade.length;
 								collMade[aux][0] = movedEntityEvent
-										.getEntityId();
-								collMade[aux][1] = tempMEntityE.getEntityId();
+										.getMovedEntityId();
+								collMade[aux][1] = tempMEntityE.getMovedEntityId();
 							} else {
 								// Se as velocidades forem iguais o casamento de
 								// coordenadas é impossível.
 								// Portando neste laço a entidade indicada por
 								// movedEntityEvent tem velocidade menor
 								// que a outra entidade.
-								makeCollisionEvent(tempMEntityE.getEntityId(),
-										movedEntityEvent.getEntityId());
-								aux = collMade.length;
-								collMade[aux][0] = tempMEntityE.getEntityId();
+								makeCollisionEvent(tempMEntityE.getMovedEntityId(),
+										movedEntityEvent.getMovedEntityId());
+								//aux = collMade.length;
+								collMade[aux][0] = tempMEntityE.getMovedEntityId();
 								collMade[aux][1] = movedEntityEvent
-										.getEntityId();
+										.getMovedEntityId();
 							}
 						else {
 							// Um de duas coisa aconteceram:
@@ -175,10 +175,10 @@ public class CollisionSystem extends BaseSystem {
 							// moveu e outra que ficou parada.
 							// 2)As duas entidades se moveram e suas direções
 							// são diferentes.
-							makeCollisionEvent(movedEntityEvent.getEntityId(),
+							makeCollisionEvent(movedEntityEvent.getMovedEntityId(),
 									cellPlacement2.getEntityId());
-							aux = collMade.length;
-							collMade[aux][0] = movedEntityEvent.getEntityId();
+							//aux = collMade.length;
+							collMade[aux][0] = movedEntityEvent.getMovedEntityId();
 							collMade[aux][1] = cellPlacement2.getEntityId();
 						}
 
@@ -228,7 +228,7 @@ public class CollisionSystem extends BaseSystem {
 		MovedEntityEvent mee;
 		for (Event evt : movedEntityList) {
 			mee = (MovedEntityEvent) evt;
-			if (mee.getEntityId() == id)
+			if (mee.getMovedEntityId() == id)
 				return mee;
 		}
 		return null;
@@ -241,8 +241,8 @@ public class CollisionSystem extends BaseSystem {
 	 * @param id2 id da entidade que sofreu a colisao.
 	 * @return True se id1 e id2 colidiram.
 	 */
-	private boolean collisionMade(int[][] collMade, int id1, int id2) {
-
+	private boolean collisionMade(int[][] collMade, int id1, int id2, int incremento) {
+		incremento += 1;
 		for (int[] aux : collMade) {
 			if ((aux[0] == id1 && aux[1] == id2)
 					|| (aux[1] == id1 && aux[0] == id2))

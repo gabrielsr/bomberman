@@ -1,9 +1,12 @@
 Bomberman project/sound/
+
 Bomberman project/bin/
 Bomberman\ project/images/
 
 /build/
 /bin/
+/config/html/
+/config/latex/
 
 #Gradle stuff
 .gradle
@@ -21,3 +24,6 @@ Bomberman\ project/images/
 # Windows
 Thumbs.ini
 Desktop.ini
+
+#Para evitar mudancas de ida e volta de I.C no readme
+README.adoc

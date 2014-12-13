@@ -4,8 +4,12 @@ import java.util.List;
 
 /**
  * Entity Manager keep the Entities, Components and Events of a running game.
+ * 
+ * Entity Manager is used for access the entities, componentes and events of
+ * the running game
+ * 
  *
- * @author grodrigues
+ * @author Gabriel Rodrigues <gabrielsr@gmail.com>
  */
 public interface EntityManager {
 

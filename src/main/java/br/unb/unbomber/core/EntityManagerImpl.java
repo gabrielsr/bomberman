@@ -4,11 +4,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import br.unb.unbomber.GameMatch;
 
 /**
  * A Simple implementation of a Entity Managar. 
  * 
- * @author grodrigues
+ * @author Gabriel Rodrigues <gabrielsr@gmail.com>
  *
  */
 public class EntityManagerImpl implements EntityManager {
@@ -21,6 +25,10 @@ public class EntityManagerImpl implements EntityManager {
 	
 	/** The instance. */
 	private static EntityManager instance;
+	
+	/** Logger. Register interesting events for debug purpose **/
+	private final static Logger LOGGER = Logger.getLogger(EntityManagerImpl.class.getName()); 
+	
 	
 	/**
 	 * First id number. 
@@ -85,6 +93,7 @@ public class EntityManagerImpl implements EntityManager {
 			}
 			addComponent(component);
 		}
+		LOGGER.log(Level.INFO, "updated entity: " + entity.getEntityId());
 	}
 	
 	/* (non-Javadoc)
@@ -93,6 +102,10 @@ public class EntityManagerImpl implements EntityManager {
 	@Override
 	public List<Event> getEvents(Class<?> type) {
 		List<Event> result = events.get(type);
+		if(result==null){
+			result = new ArrayList<Event>();
+			events.put(type, result);
+		}
 		return result;
 	}
 
@@ -101,7 +114,12 @@ public class EntityManagerImpl implements EntityManager {
 	 */
 	@Override
 	public List<Component> getComponents(Class<?> componentType) {
-		return this.components.get(componentType);
+		List<Component> result = components.get(componentType);
+		if(result==null){
+			result = new ArrayList<Component>();
+			components.put(componentType, result);
+		}
+		return result;
 	}
 
 	/* (non-Javadoc)
@@ -230,12 +248,14 @@ public class EntityManagerImpl implements EntityManager {
 			return;
 		}
 		
+		List<Component> componentsToRemoove = new ArrayList<Component>(); 
 		for(Component component: componentsOfType){
 			//remove if it has the expected entityId
 			if(component.getEntityId() == entityId){
-				componentsOfType.remove(component);
+				componentsToRemoove.add(component);
 			}
 		}
+		componentsOfType.removeAll(componentsToRemoove);
 	}
 
 	/* (non-Javadoc)

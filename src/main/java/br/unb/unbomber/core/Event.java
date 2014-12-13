@@ -6,7 +6,7 @@ package br.unb.unbomber.core;
  * An Event is a way of Systems exchange messages
  * without know it other.
  *
- * @author grodrigues
+ * @author Gabriel Rodrigues <gabrielsr@gmail.com>
  */
 public class Event {
 

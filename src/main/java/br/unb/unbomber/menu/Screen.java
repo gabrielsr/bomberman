@@ -2,7 +2,7 @@ package br.unb.unbomber.menu;
 
 /**
  * 
- * @author grodrigues
+ * @author Gabriel Rodrigues <gabrielsr@gmail.com>
  *
  */
 public class Screen {

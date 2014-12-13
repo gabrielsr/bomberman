@@ -1,0 +1,38 @@
+
+/*********************************************************************************************************************
+ *  >>>> Programação Sistemática
+ *  >>>> Turma "A" 
+ *  >>>> Alunos: Paulo Victor Farias, Yuri Alexsander e William Simião
+ *  >>>> Grupo 9 - Bomb / Kick 
+ *  >>>> UnB - Novembro/2014
+ *  >>>> Professora: Genaína Rodrigues
+ *
+ *
+ *  >>>> Objetivo: Gerar o módulo simulador Bomb e Kick
+ *
+ *			Contem o código alterado:
+ *					- BombSystem2.java
+ *					- BombSystemTestCase2.java
+ *					
+ *			LEIAME.txt - arquivo explicativo.
+ *			RELATORIO-PAULO.txt - relatório sobre as atividas desempenhadas pelo membro do grupo.
+ *			RELATORIO-WILLIAM.txt - relatório sobre as atividas desempenhadas pelo membro do grupo.
+ *			RELATORIO-YURI.txt - relatório sobre as atividas desempenhadas pelo membro do grupo.
+ *
+ *
+ *  Padrão: escrito em Java.
+ *         
+ *
+ *                        
+ * Foram feitos testes no sistema Linux Ubuntu(64 bits), sendo
+ * que a versão entregue não apresentou warnings ou errors do eclipse.
+ * 
+ *
+ *
+ * >>> Referência;
+ * 
+ * 	https://github.com/gabrielsr/bomberman/
+ *
+ * Acessado em 06/11/2014
+ *
+ ******************************************************************************/
