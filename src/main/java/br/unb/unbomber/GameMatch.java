@@ -84,13 +84,13 @@ public class GameMatch {
 	}
 		
 	public void update() {
-		for(System system:this.systems){
-			try{
-				system.update();
-			/** Log the system errors and continue*/
-			}catch(Exception e){
-				log("Not expected error in " + system.getClass().getName(), e);
-			}
+			for(System system:this.systems){
+				try{
+					system.update();
+				/** Log the system errors and continue*/
+				}catch(Exception e){
+					log("Not expected error in " + system.getClass().getName(), e);
+				}
 		}
 	}
 	
