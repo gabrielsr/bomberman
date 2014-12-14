@@ -50,18 +50,14 @@ public class MovementSystem2 extends BaseSystem {
 	public MovementSystem2(EntityManager model) {
 		super(model);
 	}
-	
-	//private EntityManager model;
-
-	private int originalX;
-	private int originalY;
 
 	@Override
 	public void start(){
 		 processedEvents = new ArrayList<>();
 		 pendingMovements = new ArrayList<>();
 	}
-	/** < inicia as acoes de movimeto do jogo */
+
+	
 	public void update() {
 		
 		handlePastMovementIntentions();
@@ -71,8 +67,6 @@ public class MovementSystem2 extends BaseSystem {
 	}
 	
 	private void handlePastMovementIntentions() {
-		EntityManager manager = getEntityManager();
-
 		List<Event> collisionEvents = getEntityManager().getEvents(
 				CollisionEvent.class);
 
@@ -93,7 +87,7 @@ public class MovementSystem2 extends BaseSystem {
 				}
 			}
 			if(!handled){
-				handleFreeMoviment(movement);l				
+				handleFreeMoviment(movement);	
 			}
 			
 		}
@@ -196,25 +190,5 @@ public class MovementSystem2 extends BaseSystem {
 			pendingMovements.add(movedEntity);
 
 		}
-	}
-	
-	/**
-	 * 
-	 * @param movable
-	 * @param placement
-	 */
-	void doMove(MovedEntityEvent move){
-		
-		CellPlacement originCell = (CellPlacement) getEntityManager().getComponent(CellPlacement.class, move.getEventId());
-		Movable movable = (Movable) getEntityManager().getComponent(Movable.class, move.getEventId());
-		
-		
-	}
-
-	
-	
-
-	
-
-
+	}	
 }

@@ -6,9 +6,6 @@ public class Vector2D<E extends Number>{
 	
 	private E y;
 	
-	private Vector2D(){
-	}
-	
 	public Vector2D(E x, E y){
 		this.x = x;
 		this.y = y;
@@ -45,6 +42,7 @@ public class Vector2D<E extends Number>{
 
 	}
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Vector2D<E> mult(float scalar){
 		if(this.getX() instanceof Float){
 			return new Vector2D( this.getX().floatValue() * scalar,
@@ -58,7 +56,7 @@ public class Vector2D<E extends Number>{
 	}
 	
 	
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public Vector2D<E> mult(Vector2D<E> vector){
 		if(vector.getX() instanceof Float){
 			return new Vector2D(vector.getX().floatValue() * this.getX().floatValue(),
