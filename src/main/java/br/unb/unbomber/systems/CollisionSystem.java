@@ -59,7 +59,7 @@ public class CollisionSystem extends BaseSystem {
 																		refere-se ao source e o segundo ao target. */
 		// Receberá a dupla de id's das entidades que colidiram.
 		// int coll[] = new int[2];
-		int aux; /**< variavel auxiliar. */
+		int aux = 0; /**< variavel auxiliar. */
 
 		MovedEntityEvent movedEntityEvent; /**< variavel usada no for a seguir. */
 
@@ -111,7 +111,7 @@ public class CollisionSystem extends BaseSystem {
 						boolean test = false;
 						test = collisionMade(collMade,
 								movedEntityEvent.getMovedEntityId(),
-								cellPlacement2.getEntityId());
+								cellPlacement2.getEntityId(), aux);
 						if (test == true) {
 							continue;
 						}
@@ -152,7 +152,7 @@ public class CollisionSystem extends BaseSystem {
 										tempMEntityE.getMovedEntityId());
 								// adiciona a colisão ao array de controle de
 								// colisões.
-								aux = collMade.length;
+								//aux = collMade.length;
 								collMade[aux][0] = movedEntityEvent
 										.getMovedEntityId();
 								collMade[aux][1] = tempMEntityE.getMovedEntityId();
@@ -164,7 +164,7 @@ public class CollisionSystem extends BaseSystem {
 								// que a outra entidade.
 								makeCollisionEvent(tempMEntityE.getMovedEntityId(),
 										movedEntityEvent.getMovedEntityId());
-								aux = collMade.length;
+								//aux = collMade.length;
 								collMade[aux][0] = tempMEntityE.getMovedEntityId();
 								collMade[aux][1] = movedEntityEvent
 										.getMovedEntityId();
@@ -177,7 +177,7 @@ public class CollisionSystem extends BaseSystem {
 							// são diferentes.
 							makeCollisionEvent(movedEntityEvent.getMovedEntityId(),
 									cellPlacement2.getEntityId());
-							aux = collMade.length;
+							//aux = collMade.length;
 							collMade[aux][0] = movedEntityEvent.getMovedEntityId();
 							collMade[aux][1] = cellPlacement2.getEntityId();
 						}
@@ -241,8 +241,8 @@ public class CollisionSystem extends BaseSystem {
 	 * @param id2 id da entidade que sofreu a colisao.
 	 * @return True se id1 e id2 colidiram.
 	 */
-	private boolean collisionMade(int[][] collMade, int id1, int id2) {
-
+	private boolean collisionMade(int[][] collMade, int id1, int id2, int incremento) {
+		incremento += 1;
 		for (int[] aux : collMade) {
 			if ((aux[0] == id1 && aux[1] == id2)
 					|| (aux[1] == id1 && aux[0] == id2))

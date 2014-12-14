@@ -116,7 +116,7 @@ public class MovimentSystem extends BaseSystem {
 			int colidiu = 0;
 
 			CollisionSystem collisionUpdate = new CollisionSystem(manager);
-			//collisionUpdate.update(); o colision system nao esta funcionando corretemente
+			collisionUpdate.update(); //o colision system nao esta funcionando corretemente
 
 			List<Event> collisionEvents = getEntityManager().getEvents(
 					CollisionEvent.class);
