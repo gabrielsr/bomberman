@@ -30,7 +30,9 @@ Repo:http://github.com/Giulialeixo/bomberman
 Repo:
 
 == Grupo 5
-Repo:
+Repo:http://github.com/Dayof/bomberman
+
+* Dayanne Fernandes - Dayof
 
 == Grupo 6
 Repo:http://github.com/igorsodre/bomberman

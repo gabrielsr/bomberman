@@ -50,7 +50,7 @@ public class MovementSystem2TestCase extends MovimentSystem {
 		/** There was an entity in a complete empty world 
 		 * with position 0,0
 		 * with velocity  of 0.1 cells / tick, right direction*/			
-		Entity forrest = EntityBuilder.create(entityManager)
+		final Entity forrest = EntityBuilder.create(entityManager)
 				.withPosition(0, 0)
 				.withMovable(0.1f)
 				.build();

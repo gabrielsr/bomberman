@@ -6,9 +6,6 @@ public class Vector2D<E extends Number>{
 	
 	private E y;
 	
-	private Vector2D(){
-	}
-	
 	public Vector2D(E x, E y){
 		this.x = x;
 		this.y = y;
