@@ -5,6 +5,7 @@ import java.util.List;
 
 import br.unb.unbomber.component.CellPlacement;
 import br.unb.unbomber.component.Direction;
+import br.unb.unbomber.component.Draw;
 import br.unb.unbomber.component.Explosion;
 import br.unb.unbomber.component.ExplosionBarrier;
 import br.unb.unbomber.component.ExplosionBarrier.ExplosionBarrierType;
@@ -85,7 +86,7 @@ public class ExplosionSystem extends BaseSystem {
 			/* checks if someone entered an explosion */
 			enteredExplosion();
 			
-			tickExplosions();
+			//tickExplosions();
 
 		}
 
@@ -108,17 +109,16 @@ public class ExplosionSystem extends BaseSystem {
 
 	public void createExplosion(CellPlacement expPlacement, int expRange, int ownerId) {
 
-		Entity explosionEntity = new Entity();
-		getEntityManager().addEntity(explosionEntity);
 
+		Entity explosionEntity = getEntityManager().createEntity();
+		
 		Explosion exp = new Explosion();
 		exp.setEntityId(explosionEntity.getEntityId());
 		exp.setExplosionRange(expRange);
 		exp.setOwnerId(ownerId);
 
-		expPlacement.setEntityId(explosionEntity.getEntityId());
-
 		Timer expTimer = new Timer(16, null);
+		expTimer.setEntityId(explosionEntity.getEntityId());
 		
 		CellPlacement cellPlacement = new CellPlacement();
 		cellPlacement.setCellX(expPlacement.getCellX());
@@ -140,6 +140,8 @@ public class ExplosionSystem extends BaseSystem {
 
 		exp.setPropagationDirection(Direction.RIGHT);
 		propagateExplosion(exp, expPlacement, expRange);
+		
+		getEntityManager().update(explosionEntity);
 
 	}
 
@@ -148,8 +150,7 @@ public class ExplosionSystem extends BaseSystem {
 
 		if (range != 0 && detectExplosionCollision(exp, cellPlacement)) {
 
-			Entity explosionEntity = new Entity();
-			getEntityManager().addEntity(explosionEntity);
+			Entity explosionEntity = getEntityManager().createEntity();
 
 			Explosion newExp = new Explosion();
 			newExp.setEntityId(explosionEntity.getEntityId());
@@ -178,7 +179,8 @@ public class ExplosionSystem extends BaseSystem {
 			explosionEntity.addComponent(exp);
 			explosionEntity.addComponent(newExpPlacement);
 			explosionEntity.addComponent(expTimer);
-
+			explosionEntity.addComponent(new Draw("explosion"));
+			getEntityManager().update(explosionEntity);
 			--range;
 			propagateExplosion(newExp, newExpPlacement, range);
 		}
@@ -232,8 +234,11 @@ public class ExplosionSystem extends BaseSystem {
 
 		ExplosionBarrier explosionBarrier = (ExplosionBarrier) getEntityManager()
 				.getComponent(ExplosionBarrier.class, entityId);
-
-		if (explosionBarrier.getType() == ExplosionBarrierType.BLOCKER) {
+		
+		/** Test null because not all components will have this component */
+		if( explosionBarrier== null){
+			return true;
+		}else if (explosionBarrier.getType() == ExplosionBarrierType.BLOCKER) {
 
 			return false;
 

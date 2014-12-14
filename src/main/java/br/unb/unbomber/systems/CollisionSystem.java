@@ -101,6 +101,10 @@ public class CollisionSystem extends BaseSystem {
 					// moveu e alguma outra entidade, podendo esta ter se movido
 					// ou não.
 					// Se ninguém se moveu não pode ter havido nenhuma colisão.
+					if(cellPlacement1 == null || cellPlacement2 == null){
+						continue;
+					}
+					
 					if ((cellPlacement1.getCellX() == cellPlacement2.getCellX())
 							&& (cellPlacement1.getCellY() == cellPlacement2
 									.getCellY())) {

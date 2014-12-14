@@ -12,8 +12,7 @@ import br.unb.unbomber.systems.BombSystem;
 import br.unb.unbomber.systems.CollisionSystem;
 import br.unb.unbomber.systems.ExplosionSystem;
 import br.unb.unbomber.systems.LifeSystem;
-import br.unb.unbomber.systems.MovimentSystem;
-import br.unb.unbomber.systems.PlayerControlSystem;
+import br.unb.unbomber.systems.MovementSystem2;
 import br.unb.unbomber.systems.TimeSystem;
 
 public class GameMatch {
@@ -46,7 +45,7 @@ public class GameMatch {
 		systems.add(new CollisionSystem(entityManager));
 		systems.add(new ExplosionSystem(entityManager));
 		systems.add(new LifeSystem(entityManager));
-		systems.add(new MovimentSystem(entityManager));
+		systems.add(new MovementSystem2(entityManager));
 	}
 	
 	
