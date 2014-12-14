@@ -79,19 +79,23 @@ public class MovementSystem2 extends BaseSystem {
 		//Movement made
 		for(MovedEntityEvent movement: pendingMovements){
 			
+			
+			boolean handled = false;
+			
 			//collisions that occurred
 			for (Event colEvent : collisionEvents) {
 				CollisionEvent collision = (CollisionEvent) colEvent;
-
-				/** <caso haja colisao muda valor da variavel colidiu */
+				
 				if (movement.getMovedEntityId() ==  collision.getSourceId()) {
-					handleCollision(movement, collision);
+					 handleCollision(movement, collision);
+					handled = true;
 					break;
 				}
-				
+			}
+			if(!handled){
+				handleFreeMoviment(movement);l				
 			}
 			
-			handleFreeMoviment(movement);
 		}
 		
 		pendingMovements.clear();
@@ -130,7 +134,10 @@ public class MovementSystem2 extends BaseSystem {
 	void changeComponent(int entityId, Component orig, Component dest) {
 		dest.setEntityId(entityId);
 		
-		getEntityManager().remove(orig);
+		if(orig!=null){
+			getEntityManager().remove(orig);
+		}
+		
 		getEntityManager().addComponent(dest);
 	}
 
