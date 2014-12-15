@@ -39,6 +39,15 @@ public class ThrowSystem extends BaseSystem {
 	}
 
 	/**
+	 * Construtor da Classe.
+	 * 
+	 * @param model
+	 */
+	public ThrowSystem(EntityManager model) {
+		super(model);
+
+	}
+	/**
 	 * @brief medotodo que verifica se o player possui o BOXINGGLOVEACQUIRED, esta em
 	 *        contado com uma bomba e apertou o botao de acao e realiza o
 	 *        movimento adequado

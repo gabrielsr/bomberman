@@ -13,7 +13,7 @@ import br.unb.unbomber.core.EntityManager;
 import br.unb.unbomber.core.EntityManagerImpl;
 import br.unb.unbomber.event.DestroyedEvent;
 
-@Ignore
+
 public class ScoreSystemTest {
 
 	

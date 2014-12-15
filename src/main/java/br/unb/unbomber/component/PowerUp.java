@@ -1,5 +1,6 @@
 package br.unb.unbomber.component;
 
+
 import br.unb.unbomber.core.Component;
 
 import java.util.List;
@@ -39,7 +40,7 @@ public class PowerUp extends Component {
 	}
 	
 	/** Lista de power ups que uma entidade possui. */
-	private List<PowerType> listPowerUp = new ArrayList<PowerType>();
+	private List<PowerType> types = new ArrayList<PowerType>();
 
 	/**
 	 * Construtor da classe.
@@ -50,6 +51,14 @@ public class PowerUp extends Component {
 	public PowerUp(PowerType powerType) {
 		setType(powerType);
 	}
+
+	/**
+	 * Construtor da classe.
+	 */
+	public PowerUp() {
+	}
+
+
 	
 	/**
 	 * Adiciona um tipo de Power Up para a entidade.
@@ -58,9 +67,8 @@ public class PowerUp extends Component {
 	 *            Tipo de Power Up.
 	 */
 	public void setType(PowerType powerType) {
-		this.listPowerUp.add(powerType);
+		this.types.add(powerType);
 	}
-
 
 	/**
 	 * Retorna a lista de tipos de power ups que uma entidade possui.
@@ -68,10 +76,9 @@ public class PowerUp extends Component {
 	 * @return listPowerUp Lista de power ups.
 	 */
 	public List<PowerType> getTypes() {
-		if (listPowerUp != null) {
-			return listPowerUp;
+		if (types != null) {
+			return types;
 		}
 		return null;
 	}
-
 }

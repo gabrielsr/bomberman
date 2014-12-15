@@ -176,7 +176,7 @@ public class BombSystemTestCase2 {
 		}
 		
 		//there shouldn't be an ExplosionStartedEvent in the first 89 turns
-		assertNull(entityManager.getEvents(ExplosionStartedEvent.class));
+		assertEquals(entityManager.getEvents(ExplosionStartedEvent.class).size(),0);
 		
 	} // end of waitTimeToExplodeTest
 	

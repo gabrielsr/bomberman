@@ -13,8 +13,10 @@ package br.unb.unbomber.systems;
  
 import java.util.List;
  
+
 import br.unb.unbomber.component.BombDropper;
 import br.unb.unbomber.component.CellPlacement;
+import br.unb.unbomber.component.Draw;
 import br.unb.unbomber.component.Explosive;
 import br.unb.unbomber.component.Timer;
 import br.unb.unbomber.core.BaseSystem;
@@ -319,6 +321,7 @@ public class BombSystem2 extends BaseSystem {
         bomb.addComponent(bombExplosive);
         bomb.addComponent(bombPlacement);
         bomb.addComponent(bombTimer);
+        bomb.addComponent(new Draw("bomb"));
 
         return bomb;
         

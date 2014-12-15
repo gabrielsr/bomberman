@@ -1,6 +1,7 @@
 package br.unb.unbomber.systems;
 
 import static junit.framework.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -70,7 +71,7 @@ public class ExplosionSystemTestCase {
 		entityManager.addComponent(hardBlockPlacement);
 
 		/* checking if function is right for hardBlock */
-		assertTrue(system.detectExplosionCollision(explosion,
+		assertFalse(system.detectExplosionCollision(explosion,
 				explosionPlacement));
 
 		/* removing the hard block from the grid */
@@ -96,7 +97,7 @@ public class ExplosionSystemTestCase {
 		entityManager.addComponent(softBlockPlacement);
 
 		/* checking if function is right for softBlock */
-		assertTrue(system.detectExplosionCollision(explosion, explosionPlacement));
+		assertFalse(system.detectExplosionCollision(explosion, explosionPlacement));
 
 		/* removing the softBlock from the grid */
 		entityManager.remove(softBlock);
