@@ -61,9 +61,9 @@ public class TargetFrameRateMatch extends GameMatch {
 		
 		testMatch.addSystem(printSystem);
 		
-		for(int i = 0; i<1000; i++){
-			testMatch.update();
-		}
+			for(int i = 0; i<1000; i++){
+				testMatch.update();
+			}
 	}
 
 	
