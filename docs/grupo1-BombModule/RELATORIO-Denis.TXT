@@ -47,13 +47,7 @@ Num Tarefa   | Tipo Tarefa 			| Descrição da Tarefa
  02 	     | Revisar documentação do Mod	| Adequar documentação do código quanto a Programming Practices (Chapter 10)
  03 	     | Revisar código do módulos	| Executar ferramenta de análise estática para revisão do código do módulo. 
 
-# Executado
-
-Data 	| Horas Trabalhadas	| Num Tarefa	| Descrição da Tarefa
----------------+----------------+---------------+--------------------------------------------------------------------------...
-
-
-## Sprint 3 (de 28/10 a 13/11)
+## Sprint 3
 
 # Planejado
 
@@ -65,8 +59,26 @@ Num Tarefa   | Tipo Tarefa 			| Descrição da Tarefa
 # Executado
 
 Data | Horas Trabalhadas	| Num Tarefa	| Descrição da Tarefa
----------------+----------------+---------------+--------------------------------------------------------------------------...
+----------------+---------------+---------------+--------------------------------------------------------------------------...
+19/11 (quarta) 	| ~3hrs		| 1		| Estudo da LibGDX, classes Stage, Actors, Screens, Scene2d, Buttons, etc
+20/11 (quinta)	| ~3hrs		| 2		| Criação de protótipo da tela de entrada do jogo (Main Menu) e outras modificações
+21/11 (sexta)	| ~3hrs		| 2		| Refactoring da MainScreen e acertos nas transições de telas.
 
+## Sprint 4
+
+# Planejado
+
+Num Tarefa   | Tipo Tarefa 			| Descrição da Tarefa
+-------------+----------------------------------+-------------------------------+----------------------------------...
+ 01	     | Evoluir GUI LibGDX		| Codificar novas telas e GUI do jogo
+
+# Executado
+
+Data | Horas Trabalhadas	| Num Tarefa	| Descrição da Tarefa
+----------------+---------------+---------------+--------------------------------------------------------------------------...
+11/12 (quinta) 	| ~4hrs		| 1		| Codificação das classes da tela de Highscore e outras modificações.
+12/12 (sexta)	| ~3hrs		| 1		| Codificação da tela de Settings e outras modificações.. 
+14/12 (domingo)	| ~4hrs		| 1		| Codificação da tela How to Play e outras modificações.
 
 ## Referências
 
