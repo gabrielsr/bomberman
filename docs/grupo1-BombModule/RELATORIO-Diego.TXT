@@ -68,7 +68,43 @@ Num Tarefa   | Tipo Tarefa                     | Descrição da Tarefa
  01          | Estudar                         | Est. libGDX
  02          | Codificar                       | Prototipar telas iniciais do jogo
  
+# Executado
+
+Data | Horas Trabalhadas    | Num Tarefa   | Comentários
+---------------+------------+--------------+-------------------------------------------------------------------------------------------------------------------------------------
+04/11 (terça)  | 2 horas    | 01           | LibGDX na prática
+14/11 (sexta)  | 2 horas    | 01           | LibGDX na prática
+19/11 (sexta)  | 6 horas    | 02           | Criando menu inicial (ajuda do Dênis no final)
+
+
+## Sprint 4
+# Planejado
+
+Num Tarefa   | Tipo Tarefa                     | Descrição da Tarefa
+-------------+---------------------------------+--------------------------------------------------------------------------
+ 01          | Reuniao de planejamento         | Verificar com o Gabriel, Dayanne e Vítor (do desenho industrial) como vai ser o desenvolvimento
+ 02          | Divisão de Tarefas              | Dividir as tarefas entre os membros do grupo (agora extendido)
+ 03          | Fazer a tela de Game Match      | Arrumar uma maneira de ordenar os componentes para a correta renderização
  
+# Executado
+
+Data | Horas Trabalhadas    | Num Tarefa   | Comentários
+---------------+------------+--------------+-------------------------------------------------------------------------------------------------------------------------------------
+28/11 (sexta)  | 1 hora     | 01           | Na sala de Estudos da Pós (CIC). Ficou definido que o Vitor passaria o layout do novo menu durante a semana seguinte
+09/12 (terça)  | 4 horas    | 03           | Dificuldades de resolver a tela de maneira O.O. e extensível. Marcamos uma reunião com o Gabriel para evoluir
+09/12 (terça)  | 2 horas    | 02           | Reunião com o Gabriel, onde ele ficou de criar um protótipo de tela de jogo
+10/12 (quarta) | 2 horas    | 03           | Tentando compreender como melhorar a tela de jogo, mas múltiplos bugs complicam tudo
+11/12 (quinta) | 4 horas    | 03           | Grupo de desenvolvimento no Linf (eu, Max, Dayanne da matéria e outros estudantes dispostos a colaborar). Cada máquina tinha problemas diferentes ao rodar o bomberman
+14/12 (domingo)| 3 horas    | 03           | Bugs e mais bugs, principalmente com importação do projeto e encontrar imagens (assets). Não consegui evoluir.
+
+# Sugestões:
+1) Fazer integrações parciais, demorou demais para se testar os módulos (na verdade, só foram testados na hora do "Vamos ver"
+2) Usar uma biblioteca mais estável. Vários problemas surgiram por causa disso.
+3) O uso do graddle com a biblioteca bomberman ainda em desenvolvimento na etapa final complicou, pois o gradle não encontrava métodos nas classes atualizadas
+
+
+
+
 
 
 ## Referências
