@@ -1,5 +1,8 @@
 package br.unb.unbomber.gridphysics;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Vector2D<E extends Number>{
 	
 	private E x;
@@ -65,8 +68,55 @@ public class Vector2D<E extends Number>{
 		throw new IllegalArgumentException("not implemented for this type");
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<Vector2D<E>> components(){
+		
+		List<Vector2D<E>> components = new ArrayList<>();
+		components.add(new Vector2D<E>(this.x, (E) getZero()));
+		components.add(new Vector2D<E>((E) getZero(), this.y));
+		
+		return components;
+	}
+	
+	
+	public Vector2D<Float> toFloatVector(){
+		return new Vector2D<Float>(this.x.floatValue(), this.y.floatValue());
+	}
+	
+	/**
+	 * Get a Generic Zero
+	 * @return
+	 */
+	private Number getZero(){
+		/** Is there a better way of get a generic 0? */
+		if(this.x instanceof Integer){
+			return 0;
+		}else if(this.x instanceof Float){
+			return 0f;
+		}else{
+			throw new IllegalStateException("trying to operate an unsuported number");
+		}
+	}
+	
 	public String toString(){
 		return "("+ this.x + "," + this.y + ")";
 	}
 	
+	/**
+	 * Compare if same position. 
+	 * Don't compare EntityId or Owner
+	 */
+	public boolean equals(Object o){
+		if(o==null || ! (o instanceof Vector2D<?>)){
+			return false;
+		}else {
+			Vector2D<?> c = (Vector2D<?>) o;
+			if(c.x != this.x || 
+					c.y != this.y){
+				return false;
+			}else{
+				return true;				
+			}
+		}
+	}
 }

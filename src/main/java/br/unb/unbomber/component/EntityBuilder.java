@@ -1,5 +1,6 @@
 package br.unb.unbomber.component;
 
+import br.unb.unbomber.component.MovementBarrier.MovementBarrierType;
 import br.unb.unbomber.core.Component;
 import br.unb.unbomber.core.Entity;
 import br.unb.unbomber.core.EntityManager;
@@ -39,7 +40,7 @@ public class EntityBuilder {
 		return new EntityBuilder(entityManager, beingBuild);
 	}
 	
-	public EntityBuilder include(Component component){
+	public EntityBuilder includeInProduct(Component component){
 		product.addComponent(component);
 		return this;
 	}
@@ -49,7 +50,7 @@ public class EntityBuilder {
 		CellPlacement cell = new CellPlacement();
 		cell.setCellX(cellX);
 		cell.setCellY(cellY);
-		return include(cell);		
+		return includeInProduct(cell);		
 	}
 	
 	public EntityBuilder withDropper(int permittedSimultaneousBombs, 
@@ -69,7 +70,7 @@ public class EntityBuilder {
 		bombDropper.setAreBombsPassThrough(areBombsPassThrough);
 		bombDropper.setAreBombsHardPassThrough(areBombsHardPassThrough);
 		
-		return include(bombDropper);		
+		return includeInProduct(bombDropper);		
 
 	}
 	
@@ -92,12 +93,16 @@ public class EntityBuilder {
 		Vector2D<Float> displacement = new Vector2D<>(dx,dy);
 		movable.setCellDisplacement(displacement);
 		
-		return include(movable);
+		return includeInProduct(movable);
 	}
-	
+	public EntityBuilder withMovementBarrier(MovementBarrierType type) {
+		MovementBarrier barrier = new MovementBarrier(type);
+		return includeInProduct(barrier);
+	}
 	public EntityBuilder withDraw(String type){
-		return include((new Draw(type)));
+		return includeInProduct((new Draw(type)));
 	}	
+	
 	
 	//your are welcome to create more ..
 	
@@ -107,4 +112,6 @@ public class EntityBuilder {
 		em.update(product);
 		return product;
 	}
+
+
 }

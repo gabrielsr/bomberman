@@ -18,6 +18,8 @@ import java.util.logging.Level;
 import br.unb.unbomber.component.CellPlacement;
 import br.unb.unbomber.component.Direction;
 import br.unb.unbomber.component.Movable;
+import br.unb.unbomber.component.MovementBarrier;
+import br.unb.unbomber.component.MovementBarrier.MovementBarrierType;
 import br.unb.unbomber.core.BaseSystem;
 import br.unb.unbomber.core.Component;
 import br.unb.unbomber.core.EntityManager;
@@ -98,9 +100,15 @@ public class MovementSystem2 extends BaseSystem {
 
 	private void handleCollision(MovedEntityEvent movement,
 			CollisionEvent collision) {
-		// TODO Auto-generated method stub
+		
+		
+		
+		
+		
+		
 		
 	}
+	
 	private void handleFreeMoviment(MovedEntityEvent movement) {
 		
 		/** Update cellPlacement */
@@ -112,6 +120,8 @@ public class MovementSystem2 extends BaseSystem {
 		changeComponent(entityId, oldCell, newCell);
 		
 		/** Update Cell Relative Position */
+		
+		
 		
 		Movable movable = (Movable) getEntityManager().getComponent(Movable.class, entityId);
 		Vector2D<Float> finalDisplacement = movable.getCellDisplacement()
@@ -152,43 +162,110 @@ public class MovementSystem2 extends BaseSystem {
 			/** Query Movable */
 
 			MovementCommandEvent command = (MovementCommandEvent) event;
-			int entityId = command.getEntityId();
-			Movable moved = (Movable) getEntityManager().getComponent(
-					Movable.class, entityId);
-			
-			CellPlacement originCell = (CellPlacement) getEntityManager().getComponent(
-					CellPlacement.class, entityId);
-			
-			/** Calculate the displacement and new cell*/
-			
-			Direction movementDirection = Direction.asDirection(command.getType());
-			
-			Vector2D<Float> displacement = MovementCalc.displacement(
-					movementDirection, moved.getSpeed());
-
-			/** This is a Vector with the final point */
-			displacement.add(moved.getCellDisplacement());
-	
-			
-			/** calculate the new cell */
-			CellPlacement finalPosition = MovementCalc.finalCellPlacement(originCell, displacement,moved.getCellDisplacement());
-
-			
-			/** fire an event so the collision system can check this movement */
-			
-			MovedEntityEvent movedEntity = new MovedEntityEvent();
-			movedEntity.setSpeed(moved.getSpeed());
-			movedEntity.setMovedEntityId(moved.getEntityId());
-			movedEntity.setDestinationCell(finalPosition);		
-			movedEntity.setDisplacement(displacement);
-			getEntityManager().addEvent(movedEntity);
-			
-			/** we're done with this command */
-			processedEvents.add(command);
-			
-			/** this movement is not done yet! We need to check for collisions it a future tick*/
-			pendingMovements.add(movedEntity);
+			handle(command);
 
 		}
-	}	
+	}
+	
+	public void handle(MovementCommandEvent command){
+		int entityId = command.getEntityId();
+		Movable moved = (Movable) getEntityManager().getComponent(
+				Movable.class, entityId);
+		
+		CellPlacement originCell = (CellPlacement) getEntityManager().getComponent(
+				CellPlacement.class, entityId);
+		
+		
+		/** Calculate the displacement and new cell*/
+		
+		Direction movementDirection = Direction.asDirection(command.getType());
+		
+		Vector2D<Float> displacement = MovementCalc.displacement(
+				movementDirection, moved.getSpeed());
+
+		Vector2D<Float> origPosition = moved.getCellDisplacement();
+				
+		/** This is a Vector with the final point */
+		Vector2D<Float> dest = displacement.add(moved.getCellDisplacement());
+
+		Vector2D<Integer> crossVector = MovementCalc.getCrossVector(origPosition, dest);
+
+		Vector2D<Integer> barriers = lookAhead(originCell.getIndex(), crossVector);
+		
+		if(barriers.equals(new Vector2D<Number>(0, 0))){
+			restrictUpdate(displacement, barriers, crossVector);
+		}
+
+		/** calculate the new cell */
+		CellPlacement finalPosition = MovementCalc.finalCellPlacement(originCell, displacement,moved.getCellDisplacement());
+
+		
+		/** fire an event so the collision system can check this movement */
+		
+		MovedEntityEvent movedEntity = new MovedEntityEvent();
+		movedEntity.setSpeed(moved.getSpeed());
+		movedEntity.setMovedEntityId(moved.getEntityId());
+		
+		movedEntity.setDestinationCell(finalPosition);		
+		movedEntity.setDisplacement(displacement);
+		getEntityManager().addEvent(movedEntity);
+		
+		/** we're done with this command */
+		processedEvents.add(command);
+		
+		/** this movement is not done yet! We need to check for collisions it a future tick*/
+		pendingMovements.add(movedEntity);
+	}
+	
+
+
+	/**
+	 * Return an Vector. 0 in a dimension mean that this dimention is free.
+	 * 1 mean it it blocked.
+	 * 
+	 * 
+	 * @param gridPosition
+	 * @param displacement
+	 * @return
+	 */
+	public Vector2D<Integer> lookAhead( Vector2D<Integer> gridPosition, Vector2D<Integer> displacement){
+				
+		/** in principle, the path is free, no restriction in x or y */
+		Vector2D<Integer> restrictions = new  Vector2D<Integer>(0,0);
+		
+		
+		for(Vector2D<Integer> displacementComponent:displacement.components()){
+			Vector2D<Integer> toLookCell = gridPosition.add(displacementComponent);
+			
+			//TODO create a index and turn it more efficient
+			for(Component compCellPlacement: getEntityManager().getComponents(CellPlacement.class)){
+				CellPlacement cell = (CellPlacement) compCellPlacement;
+				
+				//Compare the cell position
+				if(cell.getIndex().equals(toLookCell)){
+					MovementBarrier barrier = (MovementBarrier) getEntityManager()
+							.getComponent(MovementBarrier.class, cell.getEntityId());
+					if(barrier!=null 
+							&& barrier.getType() == MovementBarrierType.BLOCKER){
+						restrictions = restrictions.add(displacementComponent);
+						break;
+					}
+				}
+			}
+
+		}
+		return restrictions;
+	}
+	
+
+	
+	private void restrictUpdate(Vector2D<Float> displacement,
+			Vector2D<Integer> barriers, Vector2D<Integer> crossVector) {
+	
+		/** turn the displacement 0 in the direction with barrier */
+		displacement.add(
+				(displacement.mult(-1.0f).mult(barriers.toFloatVector())));
+		
+	}
+	
 }

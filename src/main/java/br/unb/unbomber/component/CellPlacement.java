@@ -29,4 +29,7 @@ public class CellPlacement extends Component{
 		return new Vector2D<>(cellX*1.0f + 0.5f, cellY+ 0.5f);
 	}
 	
+	public Vector2D<Integer> getIndex(){
+		return new Vector2D<>(cellX, cellY);
+	}
 }

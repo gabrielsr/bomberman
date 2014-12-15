@@ -8,7 +8,7 @@ apply plugin: 'maven-publish'
 
 
 group = "br.unb.cic"
-version = 0.03
+version = 0.04
 compileJava.options.encoding = 'UTF-8'
 
 repositories {

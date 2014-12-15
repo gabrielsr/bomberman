@@ -87,4 +87,36 @@ public class MovementCalc {
 	public static boolean isChangingCellInY(Vector2D<Float> displacement){
 		return displacement.getY() > 0.5f;
 	}
+	
+	/**
+	 * The result verctor will have 1 for a crossed center L-R or D-U. -1 R-L or U-D. 
+	 * If not crossed, it will have 0. 
+	 * @param orig
+	 * @param dest
+	 * @return
+	 */
+
+	public static Vector2D<Integer> getCrossVector(Vector2D<Float> orig, Vector2D<Float> dest) {
+		int crossX = 0;
+		if(orig.getX().floatValue()< 0f && dest.getX().floatValue()>0){
+			crossX=1;
+		}else if(orig.getX().floatValue()> 0f && dest.getX().floatValue()<0){
+			crossX=-1;
+		}
+		int crossY = 0;
+		if(orig.getY().floatValue()< 0f && dest.getY().floatValue()>0){
+			crossY=1;
+		}else if(orig.getY().floatValue()> 0f && dest.getY().floatValue()<0){
+			crossY=-1;
+		}
+		return new Vector2D<Integer>(crossX, crossY);
+	}
+
+
+	public static Vector2D<Integer> getCell(Vector2D<Integer> orig,
+			Vector2D<Integer> displ) {
+		return orig.add(displ);
+	}
+
+	
 }
