@@ -1,0 +1,16 @@
+Data    | Horas Trabalhadas | Tipo Tarefa               | Descrição da Tarefa
+08/12     4h                  Estudar                        Estudei a libgdx
+09/12     30min               Estudar                       Estudei o módulo movimento
+09/12     10min               Configurar ambiente           Configurei o gradle e o git pra receber os arquivos mais recentes
+09/12     3h                  Estudar                     Estudei um pouco da sintaxe do Java e os recursos do Eclipse.
+10/12     2h00min             Diagnosticar                  Procurei a causa dos problemas nullPointer e outOfBorder no módulo collision
+10/12     1h30min             Correção                      Corrigi as falta encontradas no código
+11/12     30min               Revisar código do módulo       Revisei o código mais uma vez.
+12/12     3h                  Estudar                   Estudei o código de renderização já implementado.
+12/12     3h                  Modificações              Realizei pequenas modificações em alguns módulo do pacote bomberman-libgdx
+13/12     3h                  Estudar                   Estudei o código já implementado para renderização
+13/12 e 14/10                 Tilt                      Não sei mais o que fazer. Deixei nas mãos do resto do grupo.     
+
+
+______________________________________________________________________________________________________________________________________
+
