@@ -7,9 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import br.unb.unbomber.component.CellPlacement;
-import br.unb.unbomber.component.Draw;
 import br.unb.unbomber.component.EntityBuilder;
-import br.unb.unbomber.component.Movable;
 import br.unb.unbomber.systems.query.Get;
 
 public class EntityManagerTestCase {

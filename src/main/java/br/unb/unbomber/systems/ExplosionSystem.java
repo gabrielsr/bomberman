@@ -86,7 +86,7 @@ public class ExplosionSystem extends BaseSystem {
 			/* checks if someone entered an explosion */
 			enteredExplosion();
 			
-			//tickExplosions();
+			tickExplosions();
 
 		}
 

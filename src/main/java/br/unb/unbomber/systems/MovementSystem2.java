@@ -50,18 +50,14 @@ public class MovementSystem2 extends BaseSystem {
 	public MovementSystem2(EntityManager model) {
 		super(model);
 	}
-	
-	//private EntityManager model;
-
-	private int originalX;
-	private int originalY;
 
 	@Override
 	public void start(){
 		 processedEvents = new ArrayList<>();
 		 pendingMovements = new ArrayList<>();
 	}
-	/** < inicia as acoes de movimeto do jogo */
+
+	
 	public void update() {
 		
 		handlePastMovementIntentions();
@@ -71,27 +67,29 @@ public class MovementSystem2 extends BaseSystem {
 	}
 	
 	private void handlePastMovementIntentions() {
-		EntityManager manager = getEntityManager();
-
 		List<Event> collisionEvents = getEntityManager().getEvents(
 				CollisionEvent.class);
 
 		//Movement made
 		for(MovedEntityEvent movement: pendingMovements){
 			
+			
+			boolean handled = false;
+			
 			//collisions that occurred
 			for (Event colEvent : collisionEvents) {
 				CollisionEvent collision = (CollisionEvent) colEvent;
-
-				/** <caso haja colisao muda valor da variavel colidiu */
+				
 				if (movement.getMovedEntityId() ==  collision.getSourceId()) {
-					handleCollision(movement, collision);
+					 handleCollision(movement, collision);
+					handled = true;
 					break;
 				}
-				
+			}
+			if(!handled){
+				handleFreeMoviment(movement);	
 			}
 			
-			handleFreeMoviment(movement);
 		}
 		
 		pendingMovements.clear();
@@ -130,7 +128,10 @@ public class MovementSystem2 extends BaseSystem {
 	void changeComponent(int entityId, Component orig, Component dest) {
 		dest.setEntityId(entityId);
 		
-		getEntityManager().remove(orig);
+		if(orig!=null){
+			getEntityManager().remove(orig);
+		}
+		
 		getEntityManager().addComponent(dest);
 	}
 
@@ -189,25 +190,5 @@ public class MovementSystem2 extends BaseSystem {
 			pendingMovements.add(movedEntity);
 
 		}
-	}
-	
-	/**
-	 * 
-	 * @param movable
-	 * @param placement
-	 */
-	void doMove(MovedEntityEvent move){
-		
-		CellPlacement originCell = (CellPlacement) getEntityManager().getComponent(CellPlacement.class, move.getEventId());
-		Movable movable = (Movable) getEntityManager().getComponent(Movable.class, move.getEventId());
-		
-		
-	}
-
-	
-	
-
-	
-
-
+	}	
 }

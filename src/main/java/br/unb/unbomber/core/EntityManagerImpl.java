@@ -7,8 +7,6 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import br.unb.unbomber.GameMatch;
-
 /**
  * A Simple implementation of a Entity Managar. 
  * 
