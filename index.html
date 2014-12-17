@@ -1,0 +1,176 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Bomberman by gabrielsr</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Bomberman</h1>
+        <p></p>
+
+        <p class="view"><a href="https://github.com/gabrielsr/bomberman">View the Project on GitHub <small>gabrielsr/bomberman</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/gabrielsr/bomberman/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/gabrielsr/bomberman/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/gabrielsr/bomberman">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a id="introdução" class="anchor" href="#introdu%C3%A7%C3%A3o" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introdução</h1>
+
+<p>image:<a href="https://travis-ci.org/gabrielsr/bomberman.svg?branch=master%5B%22Build">https://travis-ci.org/gabrielsr/bomberman.svg?branch=master["Build</a> Status", link="<a href="https://travis-ci.org/gabrielsr/bomberman">https://travis-ci.org/gabrielsr/bomberman</a>"]
+image:<a href="http://img.shields.io/coveralls/gabrielsr/bomberman/master.svg%5B%22Coverage">http://img.shields.io/coveralls/gabrielsr/bomberman/master.svg["Coverage</a> Status", link="<a href="https://coveralls.io/r/gabrielsr/bomberman?branch=master">https://coveralls.io/r/gabrielsr/bomberman?branch=master</a>"]</p>
+
+<p>Projeto em Desenvolvimento de um Bomberman clone utilizando programação modular, 
+desenvolvido como projeto da disciplina:</p>
+
+<p>Programação Sistemática</p>
+
+<p>Universidade de Brasília - UnB</p>
+
+<p>2/2014</p>
+
+<p>= Instruções para Montagem de Ambiente de Desenvolvimento</p>
+
+<p>== JDK8 o compilador e máquina virtual</p>
+
+<p>Instale o JDK8: 
+    <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">http://www.oracle.com/technetwork/java/javase/downloads/index.html</a></p>
+
+<p>== Eclipse (Luna) a IDE
+    <a href="http://eclipse.org/downloads/packages/eclipse-standard-44/lunar">http://eclipse.org/downloads/packages/eclipse-standard-44/lunar</a></p>
+
+<p>== Gradle a Ferramenta de Gerencia de Dependências e Build </p>
+
+<p>Gradle é um sitema de gerencia de dependência. Iremos utiliza-lo para obter a o JUnit 
+inicialmente depois iremos incrementar com outras bibliotecas.</p>
+
+<p>=== Gradle Eclipse plugin</p>
+
+<p>O plugin gradle do eclipse facilitar a montarmos o projeto, pois inclui as dependencias configurados no gradle diretamente na interface</p>
+
+<p>No Eclipse vá em  </p>
+
+<blockquote>
+<p>Help&gt;Marketplace </p>
+</blockquote>
+
+<p>Digite no campo search:
+ Gradle Integration</p>
+
+<p>Escolha  Gradle Integration for Eclipse (4.4) 3.6.0.RELEASE</p>
+
+<p>Confirme. Ao final da instalação reinicie o Eclipse.</p>
+
+<p>== Importanto o projeto no Eclipse</p>
+
+<p>Go to File -&gt; Import -&gt; Gradle -&gt; Gradle Project, navega até a pasta root deste projeto. Selecione [Build Model]</p>
+
+<p>OBS: a importação pode demorar vários minutos na primeira vez que for realiza pois será realizado download 
+das dependências do Gradle.</p>
+
+<p>Após a conclusão da importação você deverá visualizar o projeto assim: </p>
+
+<p>[[img-eclipse_pacotes]]
+.Visualização de Pacotes após importação bem sucedida no Eclipse
+image::/docs/img/eclipse_pacotes.png[]</p>
+
+<p>TIP: Caso o eclipse esteja exibindo o projeto diferente disso provavelmente aconteceu um erro na importação. 
+Tente novamente.</p>
+
+<p>=== Compilando no Eclipse</p>
+
+<p>O mais comum é trabalhar no Eclipse com compilação automática de código, o que quer dizer que a medida que você digita 
+novas linhas em classes já existentes ou cria novas classes o Eclipse automaticamente compila para você exibe os erros
+próximos as linhas em que ocorreram como sinais vermelhos. Ao posicionar o cursor próximo aos erros é exibido um
+detalhamento do problema.</p>
+
+<p>Para verificar se o Eclipse está configurado para realizar build automático vá ao menu <em>Project</em> -&gt; <em>Build Automatically</em>.</p>
+
+<p>=== Outros plugins</p>
+
+<p>=== Checkstyle Eclipse plugin</p>
+
+<p>No Eclipse vá em  </p>
+
+<blockquote>
+<p>Help&gt;Marketplace </p>
+</blockquote>
+
+<p>Digite no campo search:
+ Checkstyle</p>
+
+<p>Escolha  Checkstyle Plug-in 5.7.0
+Confirme. Ao final da instalação reinicie o Eclipse.</p>
+
+<p>Foi criado um uma regra customizada para atender nossas demandas atuais de limpeza de código,
+custom_checks_bomberman.xml, que se encontra no diretório raiz do projeto.</p>
+
+<p>Para usá-la no Eclipse, deve-se baixar o plugin do checkstyle (disponível na marketplace),
+ir em Eclipse &gt;&gt; Preferências &gt;&gt; Checkstyle &gt;&gt; New</p>
+
+<p>Na Tela que vai aparecer, dê um nome qualquer para esse conjunto de regras (sugiro o nome abaixo), 
+clique em import e selecione o arquivo custom_checks_bomberman.xml</p>
+
+<p>[[img-checkstyle_import]]
+.Tela de importação das regras customizadas
+image::/docs/img/checkstyle_import.png[]</p>
+
+<p>Ao voltar para a página de configuração do checkstyle, clique na regra customiada e em seguida em "Set as Default"</p>
+
+<p>=== Findbugs plugin</p>
+
+<p>No Eclipse vá em  </p>
+
+<blockquote>
+<p>Help&gt;Marketplace </p>
+</blockquote>
+
+<p>Digite no campo search:
+ Findbugs</p>
+
+<p>Escolha  Findbugs Eclipse Plugin 3.0.0
+Confirme. Ao final da instalação reinicie o Eclipse.</p>
+
+<p>== Integração Contínua &amp; Cobertura dos testes</p>
+
+<p>A cada push para o repositório, é feito um build completo do projeto, executando os testes e verificando se as 
+modificações inseriram alguma falta ou quebraram algum teste.</p>
+
+<p>Para verificar o status das últimas construções, entre no link: 
+    <a href="https://travis-ci.org/gabrielsr/bomberman/builds">https://travis-ci.org/gabrielsr/bomberman/builds</a></p>
+
+<p>Além disso, após o build é feita uma análise da cobertura dos testes, usando as ferramentas 
+<a href="http://cobertura.github.io/cobertura/%5BCobertura%5D">http://cobertura.github.io/cobertura/[Cobertura]</a> e <a href="http://www.eclemma.org/jacoco/%5BJacoco%5D">http://www.eclemma.org/jacoco/[Jacoco]</a>. 
+Para ver os resultados dos últimos testes, entre no link:
+    <a href="https://coveralls.io/r/gabrielsr/bomberman">https://coveralls.io/r/gabrielsr/bomberman</a></p>
+
+<p>= Referencias 
+== Padrões Utilizados</p>
+
+<ul>
+<li>Padrão Arquitetural: Entity Component System</li>
+</ul>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/gabrielsr">gabrielsr</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
