@@ -33,7 +33,8 @@ public class UpdateRunner {
 	}
 
 	public UpdateRunner times() {
-		for (; numberOfTimes >= 0; numberOfTimes--) {
+		
+		for (int i = 0; i < numberOfTimes; i++) {
 			run();
 		}
 		return this;

@@ -11,7 +11,16 @@ public class ExplosionBarrier extends Component {
 		
 	}
 
+	
 	private ExplosionBarrierType type;
+
+	public ExplosionBarrier(){
+		
+	}
+	
+	public ExplosionBarrier(ExplosionBarrierType type){
+		this.type = type;
+	}
 
 	public ExplosionBarrierType getType() {
 		return type;

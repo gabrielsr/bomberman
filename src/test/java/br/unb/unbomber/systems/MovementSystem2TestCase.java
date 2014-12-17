@@ -17,7 +17,7 @@ import br.unb.unbomber.event.MovementCommandEvent;
 import br.unb.unbomber.event.MovementCommandEvent.MovementType;
 import br.unb.unbomber.gridphysics.Vector2D;
 
-public class MovementSystem2TestCase extends MovimentSystem {
+public class MovementSystem2TestCase {
 	/** Gerenciador das entidades. */
 	EntityManager entityManager;
 
@@ -39,7 +39,7 @@ public class MovementSystem2TestCase extends MovimentSystem {
 
 
 	@Test
-	public void moveUp1CellAndCollideTest() {
+	public void unrestrictedMovementTest() {
 		/** OK, lets do some physics */
 		
 		
@@ -48,7 +48,7 @@ public class MovementSystem2TestCase extends MovimentSystem {
 		 * with velocity  of 0.1 cells / tick, right direction*/			
 		final Entity forrest = EntityBuilder.create(entityManager)
 				.withPosition(0, 0)
-				.withMovable(0.1f)
+				.withMovable(0.125f)
 				.build();
 
 		/** And it moved RIGHT for 150 turns */ 
@@ -71,11 +71,14 @@ public class MovementSystem2TestCase extends MovimentSystem {
 		//RUN forrest, RUN!!!
 		UpdateRunner
 				.update()
-				.forThis(movementSystem)
 				.forThis(doCreateGoRightCommand)
-				.repeat(150)
+				.forThis(movementSystem)
+				.repeat(160)
 				.times();
 	
+		/* execute the late command */
+		movementSystem.update();
+		
 		/** How far should it go? */
 
 		CellPlacement forrestPosition = (CellPlacement) entityManager
@@ -83,7 +86,7 @@ public class MovementSystem2TestCase extends MovimentSystem {
 		
 		/** where should it be? */
 		
-		assertEquals("Forrest position", 150*0.1f, forrestPosition.getCellX());
+		assertEquals("Forrest position", 20 , forrestPosition.getCellX());
 		/* verifica se o movimento feito foi realizado com sucesso */
 
 	}
@@ -104,7 +107,7 @@ public class MovementSystem2TestCase extends MovimentSystem {
 		
 		Vector2D<Integer> barrier = movementSystem.lookAhead(actualPosition, rightDisplacement);
 		
-		//assertEquals("Barrier", 1, barrier.getX());
+		assertEquals("Barrier", 1, barrier.getX().intValue());
 	}
 
 	@Test
@@ -158,4 +161,48 @@ public class MovementSystem2TestCase extends MovimentSystem {
 		assertEquals("Forrest position", 1, forrestPosition.getCellX());
 
 	}
+	
+	@Test
+	public void restrictUpdateLeftRightTest(){
+
+		/** 
+		 *  Orig is (0.4 , 0). Displacement (0.2, 0)
+		 *  If there is a block ahead the displacement should be 
+		 *  limited to 0.1 so the entity don't pass the center
+		 * */
+		
+		Vector2D<Float> origPosition = new Vector2D<Float>(-0.125f, 0.0f);
+		
+		Vector2D<Float> displacement = new Vector2D<Float>(0.3f, 0.0f);
+
+		Vector2D<Integer> barriers = new Vector2D<Integer>(1, 0);
+
+		Vector2D<Float> displacementResult = movementSystem.restrictUpdate(origPosition,
+				displacement, barriers);
+
+		assertEquals("Restricted displacement",  0.125f, displacementResult.getX());
+	}
+	
+	@Test
+	public void restrictUpDownTest(){
+
+		/** 
+		 *  Orig is (0.4 , 0). Displacement (0.2, 0)
+		 *  If there is a block ahead the displacement should be 
+		 *  limited to 0.1 so the entity don't pass the center
+		 * */
+		
+		Vector2D<Float> origPosition = new Vector2D<Float>(0.1f, 0.125f);
+		
+		Vector2D<Float> displacement = new Vector2D<Float>(0.2f, -0.25f);
+
+		Vector2D<Integer> barriers = new Vector2D<Integer>(0, 1);
+
+		Vector2D<Float> displacementResult = movementSystem.restrictUpdate(origPosition,
+				displacement, barriers);
+
+		assertEquals("Restricted displacement",  -0.125f, displacementResult.getY());
+		assertEquals("Unrestricted displacement",  0.2f, displacementResult.getX());
+	}
+
 }

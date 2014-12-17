@@ -32,4 +32,11 @@ public class CellPlacement extends Component{
 	public Vector2D<Integer> getIndex(){
 		return new Vector2D<>(cellX, cellY);
 	}
+	
+	public void setIndex(Vector2D<Integer> index){
+		this.cellX = index.getX();
+		this.cellY = index.getY();
+	}
+
+	
 }

@@ -1,5 +1,6 @@
 package br.unb.unbomber.component;
 
+import br.unb.unbomber.component.ExplosionBarrier.ExplosionBarrierType;
 import br.unb.unbomber.component.MovementBarrier.MovementBarrierType;
 import br.unb.unbomber.core.Component;
 import br.unb.unbomber.core.Entity;
@@ -91,14 +92,21 @@ public class EntityBuilder {
 		Movable movable = new Movable();
 		movable.setSpeed(speed);
 		Vector2D<Float> displacement = new Vector2D<>(dx,dy);
-		movable.setCellDisplacement(displacement);
+		movable.setCellPosition(displacement);
 		
 		return includeInProduct(movable);
 	}
+	
 	public EntityBuilder withMovementBarrier(MovementBarrierType type) {
 		MovementBarrier barrier = new MovementBarrier(type);
 		return includeInProduct(barrier);
 	}
+	
+	public EntityBuilder withExplosionBarrier(ExplosionBarrierType type) {
+		ExplosionBarrier barrier = new ExplosionBarrier(type);
+		return includeInProduct(barrier);
+	}
+	
 	public EntityBuilder withDraw(String type){
 		return includeInProduct((new Draw(type)));
 	}	

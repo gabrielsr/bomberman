@@ -21,7 +21,7 @@ public class MovedEntityEvent extends Event {
 	
 	private float speed;
 	
-	private CellPlacement destinationCell;
+	private Vector2D<Integer> destinationCell;
 
 	private Vector2D<Float> displacement;
 	
@@ -53,12 +53,12 @@ public class MovedEntityEvent extends Event {
 
 	// Position that the entity is trying to go
 
-	public CellPlacement getDestinationCell() {
+	public Vector2D<Integer> getDestinationCell() {
 		return destinationCell;
 	}
 
-	public void setDestinationCell(CellPlacement destinationCell) {
-		this.destinationCell = destinationCell;
+	public void setDestinationCell(Vector2D<Integer> index) {
+		this.destinationCell = index;
 	}
 
 	public Vector2D<Float> getDisplacement() {

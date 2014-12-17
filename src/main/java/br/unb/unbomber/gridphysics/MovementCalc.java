@@ -22,14 +22,14 @@ public class MovementCalc {
 	
 	
 	/**
-	 * Calculate the final Cell after a sum of displacements.
+	 * Calculate the final cell and the position inside this cell.
 	 * 
 	 * @param originCell
 	 * @param displacements
 	 * @return final cell
 	 */
 	@SafeVarargs
-	public static CellPlacement finalCellPlacement(CellPlacement originCell, Vector2D<Float>... displacements){
+	public static GridDisplacement gridDisplacement(Vector2D<Float>... displacements){
 		
 		Vector2D<Float> totalDisplacement = new Vector2D<>(0.0f, 0.0f);
 		
@@ -37,14 +37,23 @@ public class MovementCalc {
 			totalDisplacement = totalDisplacement.add(displacement);			
 		}
 		
-		int deltaCellx = (int) Math.floor(totalDisplacement.getX());
-		int deltaCelly = (int) Math.floor(totalDisplacement.getY());
+		/** Integer part */
+		Vector2D<Integer> cellIndexDisplacement = totalDisplacement.toInteger();
 		
-		CellPlacement destination = new CellPlacement();
-		destination.setCellX(originCell.getCellX() + deltaCellx);
-		destination.setCellY(originCell.getCellY() + deltaCelly);
+		Vector2D<Float> cellPositionDisplacment 
+			= totalDisplacement.sub(cellIndexDisplacement.toFloatVector());
 		
-		return destination;
+		/** divide by 0.5, the quotient is a cell advance */
+		Vector2D<Float>  cellLimits = new Vector2D<Float>(0.5f, 0.5f);
+		
+		Vector2D<Integer> quotient = cellPositionDisplacment.quotient(cellLimits);
+		Vector2D<Float> remainder = cellPositionDisplacment.remainder(cellLimits);
+		
+		cellIndexDisplacement = cellIndexDisplacement.add(quotient);
+		cellPositionDisplacment = remainder;
+
+		return new GridDisplacement(cellIndexDisplacement, 
+				cellPositionDisplacment);
 	}
 	
 	/**
@@ -76,42 +85,33 @@ public class MovementCalc {
 	}
 	
 	
-	public static boolean isCellChange(Vector2D<Float> displacement){
-		return isChangingCellInX(displacement) || isChangingCellInY(displacement) ;
-	}
-	
-	public static boolean isChangingCellInX(Vector2D<Float> displacement){
-		return displacement.getX() > 0.5f;
-	}
-	
-	public static boolean isChangingCellInY(Vector2D<Float> displacement){
-		return displacement.getY() > 0.5f;
-	}
-	
 	/**
-	 * The result verctor will have 1 for a crossed center L-R or D-U. -1 R-L or U-D. 
-	 * If not crossed, it will have 0. 
+	 * The result verctor will have 1 for a crossed center L-R or D-U. -1 R-L or
+	 * U-D. If not crossed, it will have 0.
+	 * 
 	 * @param orig
 	 * @param dest
 	 * @return
 	 */
 
-	public static Vector2D<Integer> getCrossVector(Vector2D<Float> orig, Vector2D<Float> dest) {
+	public static Vector2D<Integer> getCrossVector(Vector2D<Float> orig,
+			Vector2D<Float> dest) {
 		int crossX = 0;
-		if(orig.getX().floatValue()< 0f && dest.getX().floatValue()>0){
-			crossX=1;
-		}else if(orig.getX().floatValue()> 0f && dest.getX().floatValue()<0){
-			crossX=-1;
+		if (orig.getX().floatValue() < 0f && dest.getX().floatValue() >= 0) {
+			crossX = 1;
+		} else if (orig.getX().floatValue() >= 0f
+				&& dest.getX().floatValue() < 0) {
+			crossX = -1;
 		}
 		int crossY = 0;
-		if(orig.getY().floatValue()< 0f && dest.getY().floatValue()>0){
-			crossY=1;
-		}else if(orig.getY().floatValue()> 0f && dest.getY().floatValue()<0){
-			crossY=-1;
+		if (orig.getY().floatValue() < 0f && dest.getY().floatValue() >= 0) {
+			crossY = 1;
+		} else if (orig.getY().floatValue() >= 0f
+				&& dest.getY().floatValue() < 0) {
+			crossY = -1;
 		}
 		return new Vector2D<Integer>(crossX, crossY);
 	}
-
 
 	public static Vector2D<Integer> getCell(Vector2D<Integer> orig,
 			Vector2D<Integer> displ) {

@@ -24,9 +24,9 @@ import br.unb.unbomber.core.BaseSystem;
 import br.unb.unbomber.core.Component;
 import br.unb.unbomber.core.EntityManager;
 import br.unb.unbomber.core.Event;
-import br.unb.unbomber.event.CollisionEvent;
 import br.unb.unbomber.event.MovedEntityEvent;
 import br.unb.unbomber.event.MovementCommandEvent;
+import br.unb.unbomber.gridphysics.GridDisplacement;
 import br.unb.unbomber.gridphysics.MovementCalc;
 import br.unb.unbomber.gridphysics.Vector2D;
 
@@ -61,89 +61,25 @@ public class MovementSystem2 extends BaseSystem {
 
 	
 	public void update() {
-		
-		handlePastMovementIntentions();
-		
+
 		createMovementIntention();
-		
+
+		handleMovedEntityEvents();		
 	}
 	
-	private void handlePastMovementIntentions() {
-		List<Event> collisionEvents = getEntityManager().getEvents(
-				CollisionEvent.class);
-
-		//Movement made
-		for(MovedEntityEvent movement: pendingMovements){
-			
-			
-			boolean handled = false;
-			
-			//collisions that occurred
-			for (Event colEvent : collisionEvents) {
-				CollisionEvent collision = (CollisionEvent) colEvent;
-				
-				if (movement.getMovedEntityId() ==  collision.getSourceId()) {
-					 handleCollision(movement, collision);
-					handled = true;
-					break;
-				}
-			}
-			if(!handled){
-				handleFreeMoviment(movement);	
-			}
-			
-		}
+	private void handleMovedEntityEvents() {
+		// Movement made
 		
+		List<Event> pendingMovements = getEntityManager().getEvents(MovedEntityEvent.class);
+		
+		for (Event movement : pendingMovements) {
+			handle((MovedEntityEvent)movement);
+		}
+
 		pendingMovements.clear();
 
 	}
 
-	private void handleCollision(MovedEntityEvent movement,
-			CollisionEvent collision) {
-		
-		
-		
-		
-		
-		
-		
-	}
-	
-	private void handleFreeMoviment(MovedEntityEvent movement) {
-		
-		/** Update cellPlacement */
-		int entityId = movement.getMovedEntityId();
-	
-		CellPlacement oldCell = (CellPlacement) getEntityManager().getComponent(CellPlacement.class, entityId);		
-		CellPlacement newCell = (CellPlacement) movement.getDestinationCell();
-		
-		changeComponent(entityId, oldCell, newCell);
-		
-		/** Update Cell Relative Position */
-		
-		
-		
-		Movable movable = (Movable) getEntityManager().getComponent(Movable.class, entityId);
-		Vector2D<Float> finalDisplacement = movable.getCellDisplacement()
-				.add(movement.getDisplacement());
-		
-		finalDisplacement = MovementCalc.rebase(oldCell, newCell, finalDisplacement);
-		
-		movable.setCellDisplacement(finalDisplacement);
-		
-		LOGGER.log(Level.FINE, "entity moved to" + movable.getCellDisplacement());
-		
-	}
-	
-	void changeComponent(int entityId, Component orig, Component dest) {
-		dest.setEntityId(entityId);
-		
-		if(orig!=null){
-			getEntityManager().remove(orig);
-		}
-		
-		getEntityManager().addComponent(dest);
-	}
 
 	/**
 	 * Look for new Movement Commands and create their equivalent MovedEntityEvent.
@@ -175,6 +111,12 @@ public class MovementSystem2 extends BaseSystem {
 		CellPlacement originCell = (CellPlacement) getEntityManager().getComponent(
 				CellPlacement.class, entityId);
 		
+		if(originCell == null){
+			LOGGER.log(Level.SEVERE, "moving entity withou cellposiiont. It was removed?");
+			return; 
+		}
+		
+		Vector2D<Integer> originCellIndex = originCell.getIndex();
 		
 		/** Calculate the displacement and new cell*/
 		
@@ -183,31 +125,31 @@ public class MovementSystem2 extends BaseSystem {
 		Vector2D<Float> displacement = MovementCalc.displacement(
 				movementDirection, moved.getSpeed());
 
-		Vector2D<Float> origPosition = moved.getCellDisplacement();
+		Vector2D<Float> origPosition = moved.getCellPosition();
 				
 		/** This is a Vector with the final point */
-		Vector2D<Float> dest = displacement.add(moved.getCellDisplacement());
+		Vector2D<Float> dest = displacement.add(origPosition);
 
 		Vector2D<Integer> crossVector = MovementCalc.getCrossVector(origPosition, dest);
 
-		Vector2D<Integer> barriers = lookAhead(originCell.getIndex(), crossVector);
+		Vector2D<Integer> barriers = lookAhead(originCellIndex, crossVector);
 		
-		if(barriers.equals(new Vector2D<Number>(0, 0))){
-			restrictUpdate(displacement, barriers, crossVector);
-		}
+		displacement = restrictUpdate(origPosition, displacement, barriers);
 
-		/** calculate the new cell */
-		CellPlacement finalPosition = MovementCalc.finalCellPlacement(originCell, displacement,moved.getCellDisplacement());
-
+		//TODO handle grid wrapper. If an entity get to the a border should reenter in another
 		
-		/** fire an event so the collision system can check this movement */
+		/** calculate the displacement */
+		GridDisplacement gridDisplacement = MovementCalc.gridDisplacement(moved.getCellPosition(), displacement);
 		
+		Vector2D<Integer> destCellIndex = originCellIndex.add(gridDisplacement.getCells());
+		Vector2D<Float> destCellInternalPosition = gridDisplacement.getPosition();
+		
+		/** fire an event so the collision system can check this movement */		
 		MovedEntityEvent movedEntity = new MovedEntityEvent();
 		movedEntity.setSpeed(moved.getSpeed());
 		movedEntity.setMovedEntityId(moved.getEntityId());
-		
-		movedEntity.setDestinationCell(finalPosition);		
-		movedEntity.setDisplacement(displacement);
+		movedEntity.setDestinationCell(destCellIndex);		
+		movedEntity.setDisplacement(destCellInternalPosition);
 		getEntityManager().addEvent(movedEntity);
 		
 		/** we're done with this command */
@@ -217,8 +159,30 @@ public class MovementSystem2 extends BaseSystem {
 		pendingMovements.add(movedEntity);
 	}
 	
-
-
+	private void handle(MovedEntityEvent movement) {
+		
+		/** Update cellPlacement */
+		int entityId = movement.getMovedEntityId();
+	
+		/** Update Cell Relative Position */	
+		Movable movable = (Movable) getEntityManager().getComponent(Movable.class, entityId);
+		
+		updateEntity(entityId, movement.getDestinationCell(), movement.getDisplacement());
+		
+		LOGGER.log(Level.FINE, "entity moved to" + movable.getCellPosition());
+		
+	}
+	
+	void updateEntity(int entityId, Vector2D<Integer> cell, Vector2D<Float> cellPosition) {
+		
+		CellPlacement cellPlacement = (CellPlacement) getEntityManager().getComponent(CellPlacement.class, entityId);
+		cellPlacement.setIndex(cell);
+		
+		Movable movable = (Movable) getEntityManager().getComponent(Movable.class, entityId);
+		movable.setCellPosition(cellPosition);
+		
+	}
+	
 	/**
 	 * Return an Vector. 0 in a dimension mean that this dimention is free.
 	 * 1 mean it it blocked.
@@ -258,13 +222,32 @@ public class MovementSystem2 extends BaseSystem {
 	}
 	
 
-	
-	private void restrictUpdate(Vector2D<Float> displacement,
-			Vector2D<Integer> barriers, Vector2D<Integer> crossVector) {
-	
-		/** turn the displacement 0 in the direction with barrier */
-		displacement.add(
-				(displacement.mult(-1.0f).mult(barriers.toFloatVector())));
+	/**
+	 * Return a restricted displacement.
+	 * 
+	 *  0 = actual + restrictedDisplacement
+	 *  rDisplacement = (0 - actual) so the entity don't pass half a cell
+	 * towards a BLOCK.
+	 * 
+	 * @param actual
+	 * @param displacement
+	 * @param barriers
+	 * @return
+	 */
+	protected Vector2D<Float> restrictUpdate(Vector2D<Float> actual, Vector2D<Float> displacement,
+			Vector2D<Integer> barriers) {
+		
+		/* invert barriers, xor (1,1) */
+		Vector2D<Integer> invertedBarriers =  barriers.xor(new Vector2D<>(1,1));
+		
+		/* do restrict to actual complement */
+		Vector2D<Float> restrictedDisplacement = barriers.toFloatVector().mult(actual).mult(-1f);
+		
+		/* filter not restricted */
+		Vector2D<Float> notRestrictedDisplacement =  invertedBarriers.toFloatVector().mult(displacement);
+		
+		/* unify the restricted and not restricted */
+		return notRestrictedDisplacement.add(restrictedDisplacement);
 		
 	}
 	
