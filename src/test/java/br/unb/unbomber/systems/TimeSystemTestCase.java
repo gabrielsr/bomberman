@@ -1,5 +1,6 @@
 package br.unb.unbomber.systems;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -39,6 +40,25 @@ public class TimeSystemTestCase {
 		system = new TimeSystem(entityManager);
 	}
 
+	
+	@Test
+	public void testConstructor(){
+		system = new TimeSystem();
+		system.update();
+	}
+	
+	@Test
+	public void testNullEvent(){
+		Entity entity = entityManager.createEntity();
+		Timer timer = new Timer(1, null);
+		entity.addComponent(timer);
+		entityManager.update(entity);
+		
+		system.update();
+		
+		assertEquals(0, entityManager.getEvents(TimeOverEvent.class).size());
+	}
+	
 	/**
 	 * Count down to three test.
 	 */

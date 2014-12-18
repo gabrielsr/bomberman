@@ -40,26 +40,23 @@ public class TimeSystem extends BaseSystem {
 
 		// list of
 		List<Timer> toRemoveList = new ArrayList<Timer>();
-		if(timedEffects != null){
-			for (Component component : timedEffects) {
-				Timer timeEffect = (Timer) component;
-				timeEffect.tick();
-				/*
-				 * Add a Event when the the time is up
-				 */
-				if (timeEffect.isOver()) {
-					if(timedEffects != null && timeEffect.getEvent() != null){
-						getEntityManager().addEvent(timeEffect.getEvent());
-					}
-					// add to a list of components to remove, as we can't remove
-					// because we can't change a list when we are iterating in it.
-					toRemoveList.add(timeEffect);
-				}
+		for (Component component : timedEffects) {
+			Timer timeEffect = (Timer) component;
+			timeEffect.tick();
+			/*
+			 * Add a Event when the the time is up
+			 */
+			if (timeEffect.isOver() && timeEffect.getEvent() != null){
+					getEntityManager().addEvent(timeEffect.getEvent());
+					
+				// add to a list of components to remove, as we can't remove
+				// because we can't change a list when we are iterating in it.
+				toRemoveList.add(timeEffect);
 			}
+		}
 
-			for (Component component : toRemoveList) {
-				getEntityManager().remove(component);
-			}
+		for (Component component : toRemoveList) {
+			getEntityManager().remove(component);
 		}
 		
 
