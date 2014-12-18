@@ -94,6 +94,32 @@ public class EntityManagerImpl implements EntityManager {
 		LOGGER.log(Level.INFO, "updated entity: " + entity.getEntityId());
 	}
 	
+	
+	/* (non-Javadoc)
+	 * @see br.unb.unbomber.core.EntityManager#removeEntityById(int)
+	 */
+	@Override
+	public Entity getEntity(int entityId) {
+		Entity entity = new Entity(entityId);
+		for(Class<?> type:components.keySet()){
+			
+			List<Component> componentsOfType = this.components.get(type);
+			
+			//Should it throw an Exception??
+			if(componentsOfType==null){
+				continue;
+			}
+			
+			for(Component component: componentsOfType){
+				//remove if it has the expected entityId
+				if(component.getEntityId() == entityId){
+					entity.addComponent(component);
+				}
+			}
+		}
+		return entity;
+	}
+	
 	/* (non-Javadoc)
 	 * @see br.unb.unbomber.core.EntityManager#getEvents(java.lang.Class)
 	 */
@@ -229,6 +255,7 @@ public class EntityManagerImpl implements EntityManager {
 	 */
 	@Override
 	public void removeEntityById(int entityId) {
+		LOGGER.log(Level.INFO, "removing " + getEntity(entityId).toString());
 		for(Class<?> type:components.keySet()){
 			removeComponentByEntityId(type, entityId);
 		}

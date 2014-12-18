@@ -78,6 +78,13 @@ public interface EntityManager {
 	Component getComponent(Class<?> componentType, int entityId);
 
 	/**
+	 * Get entity by ID.
+	 * @param entityId
+	 * @return Entity
+	 */
+	Entity getEntity(int entityId);
+	
+	/**
 	 * Add a new event to the model.
 	 *
 	 * @param event the event

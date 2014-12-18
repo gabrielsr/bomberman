@@ -1,5 +1,6 @@
 package br.unb.unbomber.core;
 
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import br.unb.unbomber.GameMatch;
@@ -75,5 +76,12 @@ public abstract class BaseSystem implements System {
 	 */
 	@Override
 	public abstract void update();
+	
+	
+	/** Show Entity Content for debug purpose */
+	protected void dumpEntity(int entityId){
+		Entity entity = entityManager.getEntity(entityId);
+		
+	}
 
 }

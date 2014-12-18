@@ -26,7 +26,7 @@ public class CellPlacement extends Component{
 	}
 	
 	public Vector2D<Float> centerPosition(){
-		return new Vector2D<>(cellX*1.0f + 0.5f, cellY+ 0.5f);
+		return new Vector2D<>(cellX + 0.5f, cellY+ 0.5f);
 	}
 	
 	public Vector2D<Integer> getIndex(){
@@ -38,5 +38,8 @@ public class CellPlacement extends Component{
 		this.cellY = index.getY();
 	}
 
+	public String toString(){
+		return getIndex().toString();
+	}
 	
 }

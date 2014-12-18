@@ -84,7 +84,7 @@ public class EntityBuilder {
 	
 
 	public EntityBuilder withMovable(float speed){
-		return withMovable(speed, 0, 0);
+		return withMovable(speed, 0.5f, 0.5f);
 	}
 	
 	public EntityBuilder withMovable(float speed, float dx, float dy){

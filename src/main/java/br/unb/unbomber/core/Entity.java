@@ -99,5 +99,13 @@ public final class Entity {
 	public void setOwnerId(int ownerId) {
 		this.ownerId = ownerId;
 	}
+	
+	public String toString(){
+		StringBuilder sb = new StringBuilder();
+		for(Component c: this.components){
+			sb.append(c);
+		}
+		return sb.toString();
+	}
 
 }

@@ -7,8 +7,9 @@ apply plugin: 'checkstyle'
 apply plugin: 'maven-publish'
 
 
+project.name = bomberman
 group = "br.unb.cic"
-version = 0.04
+version = 0.05
 compileJava.options.encoding = 'UTF-8'
 
 repositories {

@@ -127,7 +127,7 @@ public class MovementSystem2TestCase {
 		
 		Entity forrest = EntityBuilder.create(entityManager)
 				.withPosition(0, 0)
-				.withMovable(0.1f)
+				.withMovable(0.125f)
 				.build();
 		
 		// like a system just to do right commands
@@ -161,19 +161,72 @@ public class MovementSystem2TestCase {
 		assertEquals("Forrest position", 1, forrestPosition.getCellX());
 
 	}
+
+
+	@Test
+	public void leftMovementConstraintTest(){
+		/**  In the middle of the road there was a stone,
+		 *  there was a stone in the middle of the road...
+		 * 
+		 *  entity with position 0,0
+		 * with velocity  of 0.1 cells / tick, right direction
+		 * 
+		 * A block at position 2,0 */
+		
+		EntityBuilder.create(entityManager)
+				.withPosition(2, 0)
+				.withMovementBarrier(MovementBarrierType.BLOCKER)
+				.build();
+		
+		Entity forrest = EntityBuilder.create(entityManager)
+				.withPosition(4, 0)
+				.withMovable(0.125f)
+				.build();
+		
+		// like a system just to do right commands
+		Updatable stepForrestToTheLeftCommandProducer = new Updatable() {
+			
+			@Override
+			public void update() {
+				final MovementCommandEvent actionCommand = new MovementCommandEvent(
+						MovementType.MOVE_LEFT, forrest.getEntityId());
+
+				entityManager.addEvent(actionCommand);
+				
+			}
+		};
+		
+		//RUN Forrest, RUN!!!
+		UpdateRunner
+				.update()
+				.forThis(movementSystem)
+				.forThis(stepForrestToTheLeftCommandProducer)
+				.repeat(150)
+				.times();
+		
+
+		/** How far should it go? */
+
+		CellPlacement forrestPosition = (CellPlacement) entityManager
+				.getComponent(CellPlacement.class, forrest.getEntityId());
+		
+		/** where should it be? */
+		assertEquals("Forrest position", 3, forrestPosition.getCellX());
+
+	}
 	
+
 	@Test
 	public void restrictUpdateLeftRightTest(){
 
 		/** 
-		 *  Orig is (0.4 , 0). Displacement (0.2, 0)
+		 *  Orig is (0.325 , 0). Displacement (0.25, 0)
 		 *  If there is a block ahead the displacement should be 
-		 *  limited to 0.1 so the entity don't pass the center
+		 *  limited to 0.125 so the entity don't pass the center
 		 * */
+		Vector2D<Float> origPosition = new Vector2D<Float>(0.5f - 0.125f, 0.0f);
 		
-		Vector2D<Float> origPosition = new Vector2D<Float>(-0.125f, 0.0f);
-		
-		Vector2D<Float> displacement = new Vector2D<Float>(0.3f, 0.0f);
+		Vector2D<Float> displacement = new Vector2D<Float>(0.25f, 0.0f);
 
 		Vector2D<Integer> barriers = new Vector2D<Integer>(1, 0);
 
@@ -192,11 +245,11 @@ public class MovementSystem2TestCase {
 		 *  limited to 0.1 so the entity don't pass the center
 		 * */
 		
-		Vector2D<Float> origPosition = new Vector2D<Float>(0.1f, 0.125f);
+		Vector2D<Float> origPosition = new Vector2D<Float>(0.5f, 0.625f);
 		
 		Vector2D<Float> displacement = new Vector2D<Float>(0.2f, -0.25f);
 
-		Vector2D<Integer> barriers = new Vector2D<Integer>(0, 1);
+		Vector2D<Integer> barriers = new Vector2D<Integer>(0, -1);
 
 		Vector2D<Float> displacementResult = movementSystem.restrictUpdate(origPosition,
 				displacement, barriers);

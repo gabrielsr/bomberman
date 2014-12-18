@@ -122,6 +122,11 @@ public class Vector2D<E extends Number> {
 		return new Vector2D<>( this.x.intValue(), this.y.intValue());
 	}
 
+	public Vector2D<Integer> floor() {
+		return new Vector2D<Integer>(  (int) Math.floor(this.x.doubleValue()),
+				(int) Math.floor(this.y.doubleValue()));
+	}
+
 	/**
 	 * Get a Generic Zero
 	 * 

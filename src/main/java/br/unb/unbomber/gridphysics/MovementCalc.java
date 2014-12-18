@@ -38,20 +38,11 @@ public class MovementCalc {
 		}
 		
 		/** Integer part */
-		Vector2D<Integer> cellIndexDisplacement = totalDisplacement.toInteger();
+		Vector2D<Integer> cellIndexDisplacement = totalDisplacement.floor();
 		
 		Vector2D<Float> cellPositionDisplacment 
 			= totalDisplacement.sub(cellIndexDisplacement.toFloatVector());
 		
-		/** divide by 0.5, the quotient is a cell advance */
-		Vector2D<Float>  cellLimits = new Vector2D<Float>(0.5f, 0.5f);
-		
-		Vector2D<Integer> quotient = cellPositionDisplacment.quotient(cellLimits);
-		Vector2D<Float> remainder = cellPositionDisplacment.remainder(cellLimits);
-		
-		cellIndexDisplacement = cellIndexDisplacement.add(quotient);
-		cellPositionDisplacment = remainder;
-
 		return new GridDisplacement(cellIndexDisplacement, 
 				cellPositionDisplacment);
 	}
@@ -93,21 +84,25 @@ public class MovementCalc {
 	 * @param dest
 	 * @return
 	 */
-
 	public static Vector2D<Integer> getCrossVector(Vector2D<Float> orig,
 			Vector2D<Float> dest) {
-		int crossX = 0;
-		if (orig.getX().floatValue() < 0f && dest.getX().floatValue() >= 0) {
+
+		final float CELL_MIDLE = 0.5f;
+
+		int crossX = 0, crossY = 0;
+
+		if (orig.getX().floatValue() <= CELL_MIDLE
+				&& dest.getX().floatValue() >= CELL_MIDLE) {
 			crossX = 1;
-		} else if (orig.getX().floatValue() >= 0f
-				&& dest.getX().floatValue() < 0) {
+		} else if (orig.getX().floatValue() >= CELL_MIDLE
+				&& dest.getX().floatValue() <= CELL_MIDLE) {
 			crossX = -1;
 		}
-		int crossY = 0;
-		if (orig.getY().floatValue() < 0f && dest.getY().floatValue() >= 0) {
+		if (orig.getY().floatValue() <= CELL_MIDLE
+				&& dest.getY().floatValue() >= CELL_MIDLE) {
 			crossY = 1;
-		} else if (orig.getY().floatValue() >= 0f
-				&& dest.getY().floatValue() < 0) {
+		} else if (orig.getY().floatValue() >= CELL_MIDLE
+				&& dest.getY().floatValue() <= CELL_MIDLE) {
 			crossY = -1;
 		}
 		return new Vector2D<Integer>(crossX, crossY);

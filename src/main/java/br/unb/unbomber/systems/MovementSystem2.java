@@ -128,7 +128,7 @@ public class MovementSystem2 extends BaseSystem {
 		Vector2D<Float> origPosition = moved.getCellPosition();
 				
 		/** This is a Vector with the final point */
-		Vector2D<Float> dest = displacement.add(origPosition);
+		Vector2D<Float> dest = origPosition.add(displacement);
 
 		Vector2D<Integer> crossVector = MovementCalc.getCrossVector(origPosition, dest);
 
@@ -226,7 +226,7 @@ public class MovementSystem2 extends BaseSystem {
 	 * Return a restricted displacement.
 	 * 
 	 *  0 = actual + restrictedDisplacement
-	 *  rDisplacement = (0 - actual) so the entity don't pass half a cell
+	 *  rDisplacement = (0.5 - actual) so the entity don't pass half a cell
 	 * towards a BLOCK.
 	 * 
 	 * @param actual
@@ -237,11 +237,15 @@ public class MovementSystem2 extends BaseSystem {
 	protected Vector2D<Float> restrictUpdate(Vector2D<Float> actual, Vector2D<Float> displacement,
 			Vector2D<Integer> barriers) {
 		
+		final Vector2D<Float> HALF_CELL = new Vector2D<Float>(0.5f, 0.5f);
 		/* invert barriers, xor (1,1) */
-		Vector2D<Integer> invertedBarriers =  barriers.xor(new Vector2D<>(1,1));
+		Vector2D<Integer> modBarriers =  barriers.xor(new Vector2D<>(0,0));
 		
+		/* invert barriers, xor (1,1) */
+		Vector2D<Integer> invertedBarriers =  modBarriers.xor(new Vector2D<>(1,1));
+
 		/* do restrict to actual complement */
-		Vector2D<Float> restrictedDisplacement = barriers.toFloatVector().mult(actual).mult(-1f);
+		Vector2D<Float> restrictedDisplacement = modBarriers.toFloatVector().mult(HALF_CELL.sub(actual));
 		
 		/* filter not restricted */
 		Vector2D<Float> notRestrictedDisplacement =  invertedBarriers.toFloatVector().mult(displacement);
