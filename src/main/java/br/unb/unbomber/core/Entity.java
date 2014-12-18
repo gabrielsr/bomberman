@@ -77,8 +77,12 @@ public final class Entity {
 	 */
 	@Deprecated
 	public void setEntityId(int entityId) {
-		// update components entityId
 		this.entityId = entityId;
+		if(this.components != null){
+			for(Component component : components){
+				component.setEntityId(this.entityId);
+			}
+		}
 	}
 
 	/**

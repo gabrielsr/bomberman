@@ -15,7 +15,7 @@ public class EntityTest {
 		Component cp = new Component();
 		Entity et = new Entity();
 
-		cp.setEntityId(10);
+		et.setEntityId(10);
 
 		et.addComponent(cp);
 		List<Component> lt = et.getComponents();
