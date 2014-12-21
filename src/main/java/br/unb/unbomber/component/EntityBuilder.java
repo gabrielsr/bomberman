@@ -1,11 +1,11 @@
 package br.unb.unbomber.component;
 
+import br.unb.entitysystem.Component;
+import br.unb.entitysystem.Entity;
+import br.unb.entitysystem.EntityManager;
+import br.unb.gridphysics.Vector2D;
 import br.unb.unbomber.component.ExplosionBarrier.ExplosionBarrierType;
 import br.unb.unbomber.component.MovementBarrier.MovementBarrierType;
-import br.unb.unbomber.core.Component;
-import br.unb.unbomber.core.Entity;
-import br.unb.unbomber.core.EntityManager;
-import br.unb.unbomber.gridphysics.Vector2D;
 
 /**
 * Build entities of the game.

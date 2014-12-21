@@ -14,16 +14,17 @@ package br.unb.unbomber.systems;
 import java.util.List;
  
 
+
+import br.unb.entitysystem.BaseSystem;
+import br.unb.entitysystem.Component;
+import br.unb.entitysystem.Entity;
+import br.unb.entitysystem.EntityManager;
+import br.unb.entitysystem.Event;
 import br.unb.unbomber.component.BombDropper;
 import br.unb.unbomber.component.CellPlacement;
 import br.unb.unbomber.component.Draw;
 import br.unb.unbomber.component.Explosive;
 import br.unb.unbomber.component.Timer;
-import br.unb.unbomber.core.BaseSystem;
-import br.unb.unbomber.core.Component;
-import br.unb.unbomber.core.Entity;
-import br.unb.unbomber.core.EntityManager;
-import br.unb.unbomber.core.Event;
 import br.unb.unbomber.event.ActionCommandEvent;
 import br.unb.unbomber.event.ActionCommandEvent.ActionType;
 import br.unb.unbomber.event.ExplosionStartedEvent;

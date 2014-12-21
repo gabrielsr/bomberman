@@ -1,7 +1,7 @@
 package br.unb.unbomber.event;
 
+import br.unb.entitysystem.Event;
 import br.unb.unbomber.component.PowerUp.PowerType;
-import br.unb.unbomber.core.Event;
 
 /**
  * Classe que indica quando uma entidade adquirir um Power Up.

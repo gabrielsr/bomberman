@@ -1,20 +1,19 @@
 package br.unb.unbomber.systems;
 
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.Ignore;
 
-import br.unb.unbomber.component.LifeType;
-import br.unb.unbomber.component.LifeType.Type;
+import br.unb.entitysystem.Entity;
+import br.unb.entitysystem.EntityManager;
+import br.unb.entitysystem.EntityManagerImpl;
+import br.unb.unbomber.component.AvailableTries;
 import br.unb.unbomber.component.CellPlacement;
 import br.unb.unbomber.component.Health;
-import br.unb.unbomber.component.AvailableTries;
-import br.unb.unbomber.core.Entity;
-import br.unb.unbomber.core.EntityManager;
-import br.unb.unbomber.core.EntityManagerImpl;
+import br.unb.unbomber.component.LifeType;
+import br.unb.unbomber.component.LifeType.Type;
 import br.unb.unbomber.event.CollisionEvent;
 import br.unb.unbomber.event.InAnExplosionEvent;
 

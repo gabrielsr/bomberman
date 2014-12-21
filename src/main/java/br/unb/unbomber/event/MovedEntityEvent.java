@@ -7,10 +7,9 @@
  *********************************************************************************************************************************/
 package br.unb.unbomber.event;
 
-import br.unb.unbomber.component.CellPlacement;
+import br.unb.entitysystem.Event;
+import br.unb.gridphysics.Vector2D;
 import br.unb.unbomber.component.Direction;
-import br.unb.unbomber.core.Event;
-import br.unb.unbomber.gridphysics.Vector2D;
 
 //O grupo responsável pelo módulo de movimento precisa setar OwnerId com a id da entidade que se moveu no tick
 public class MovedEntityEvent extends Event {

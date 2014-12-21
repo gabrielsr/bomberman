@@ -1,7 +1,7 @@
 package br.unb.unbomber.component;
 
-import br.unb.unbomber.core.Component;
-import br.unb.unbomber.gridphysics.Vector2D;
+import br.unb.entitysystem.Component;
+import br.unb.gridphysics.Vector2D;
 
 public class CellPlacement extends Component{
 

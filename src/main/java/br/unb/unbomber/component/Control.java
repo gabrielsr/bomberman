@@ -13,7 +13,7 @@ package br.unb.unbomber.component;
 
 import java.util.List;
 
-import br.unb.unbomber.core.Component;
+import br.unb.entitysystem.Component;
 
 public class Control extends Component{
 

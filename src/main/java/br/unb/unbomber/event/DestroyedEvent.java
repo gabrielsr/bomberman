@@ -1,6 +1,6 @@
 package br.unb.unbomber.event;
 
-import br.unb.unbomber.core.Event;
+import br.unb.entitysystem.Event;
 
 /**
  * Classe evento que indica a destruição de uma entidade.

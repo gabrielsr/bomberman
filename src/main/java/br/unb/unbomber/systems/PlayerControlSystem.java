@@ -1,6 +1,6 @@
 package br.unb.unbomber.systems;
 
-import br.unb.unbomber.core.BaseSystem;
+import br.unb.entitysystem.BaseSystem;
 
 public class PlayerControlSystem extends BaseSystem {
 

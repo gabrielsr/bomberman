@@ -1,24 +1,26 @@
 apply plugin: "java"
 apply plugin: "maven"
+apply plugin: 'eclipse'
 apply plugin: 'jacoco'
 apply plugin: 'cobertura'
 apply plugin: 'com.github.kt3k.coveralls'
 apply plugin: 'checkstyle'
 apply plugin: 'maven-publish'
 
-
-project.name = bomberman
-group = "br.unb.cic"
-version = 0.05
+group = "unb"
+version = 0.01
 compileJava.options.encoding = 'UTF-8'
 
 repositories {
     mavenCentral()
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+    maven { url "https://oss.sonatype.org/content/repositories/releases/" }
 }
 
 
 dependencies {
 	compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
+    compile "net.onedaybeard.artemis:artemis-odb:0.8.1"
     testCompile 'junit:junit:4.9'
 }
 

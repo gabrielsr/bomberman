@@ -12,33 +12,23 @@
 
 package br.unb.unbomber.systems;
 
-import static junit.framework.Assert.*;
-
-import java.util.List;
+import static junit.framework.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import com.sun.corba.se.spi.legacy.connection.GetEndPointInfoAgainException;
-
-import br.unb.unbomber.component.BombDropper;
+import br.unb.entitysystem.Entity;
+import br.unb.entitysystem.EntityManager;
+import br.unb.entitysystem.EntityManagerImpl;
 import br.unb.unbomber.component.CellPlacement;
 import br.unb.unbomber.component.Explosion;
-import br.unb.unbomber.component.Explosive;
 import br.unb.unbomber.component.Movable;
 import br.unb.unbomber.component.PowerUp;
 import br.unb.unbomber.component.PowerUp.PowerType;
-import br.unb.unbomber.core.Component;
-import br.unb.unbomber.core.Entity;
-import br.unb.unbomber.core.EntityManager;
-import br.unb.unbomber.core.EntityManagerImpl;
-import br.unb.unbomber.core.Event;
 import br.unb.unbomber.event.ActionCommandEvent;
-import br.unb.unbomber.event.InAnExplosionEvent;
-import br.unb.unbomber.event.MovementCommandEvent;
 import br.unb.unbomber.event.ActionCommandEvent.ActionType;
+import br.unb.unbomber.event.MovementCommandEvent;
 import br.unb.unbomber.event.MovementCommandEvent.MovementType;
-import br.unb.unbomber.event.ExplosionStartedEvent;
 
 public class ThrowSystemTestCase0 {
 

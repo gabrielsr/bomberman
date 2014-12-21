@@ -13,16 +13,16 @@ import static junit.framework.Assert.assertFalse;
 import java.util.List;
 
 import org.junit.Before;
-import org.junit.Test;
 import org.junit.Ignore;
+import org.junit.Test;
 
+import br.unb.entitysystem.Entity;
+import br.unb.entitysystem.EntityManager;
+import br.unb.entitysystem.EntityManagerImpl;
+import br.unb.entitysystem.Event;
 import br.unb.unbomber.component.CellPlacement;
 import br.unb.unbomber.component.Direction;
 import br.unb.unbomber.component.Movable;
-import br.unb.unbomber.core.Entity;
-import br.unb.unbomber.core.EntityManager;
-import br.unb.unbomber.core.EntityManagerImpl;
-import br.unb.unbomber.core.Event;
 import br.unb.unbomber.event.CollisionEvent;
 import br.unb.unbomber.event.MovedEntityEvent;
 

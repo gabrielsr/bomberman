@@ -15,20 +15,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 
+import br.unb.entitysystem.BaseSystem;
+import br.unb.entitysystem.Component;
+import br.unb.entitysystem.EntityManager;
+import br.unb.entitysystem.Event;
+import br.unb.gridphysics.GridDisplacement;
+import br.unb.gridphysics.MovementCalc;
+import br.unb.gridphysics.Vector2D;
 import br.unb.unbomber.component.CellPlacement;
 import br.unb.unbomber.component.Direction;
 import br.unb.unbomber.component.Movable;
 import br.unb.unbomber.component.MovementBarrier;
 import br.unb.unbomber.component.MovementBarrier.MovementBarrierType;
-import br.unb.unbomber.core.BaseSystem;
-import br.unb.unbomber.core.Component;
-import br.unb.unbomber.core.EntityManager;
-import br.unb.unbomber.core.Event;
 import br.unb.unbomber.event.MovedEntityEvent;
 import br.unb.unbomber.event.MovementCommandEvent;
-import br.unb.unbomber.gridphysics.GridDisplacement;
-import br.unb.unbomber.gridphysics.MovementCalc;
-import br.unb.unbomber.gridphysics.Vector2D;
 
 public class MovementSystem2 extends BaseSystem {
 

@@ -5,17 +5,17 @@ import static junit.framework.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
+import br.unb.entitysystem.Entity;
+import br.unb.entitysystem.EntityManager;
+import br.unb.entitysystem.EntityManagerImpl;
+import br.unb.entitysystem.Updatable;
+import br.unb.entitysystem.UpdateRunner;
+import br.unb.gridphysics.Vector2D;
 import br.unb.unbomber.component.CellPlacement;
 import br.unb.unbomber.component.EntityBuilder;
 import br.unb.unbomber.component.MovementBarrier.MovementBarrierType;
-import br.unb.unbomber.core.Entity;
-import br.unb.unbomber.core.EntityManager;
-import br.unb.unbomber.core.EntityManagerImpl;
-import br.unb.unbomber.core.Updatable;
-import br.unb.unbomber.core.UpdateRunner;
 import br.unb.unbomber.event.MovementCommandEvent;
 import br.unb.unbomber.event.MovementCommandEvent.MovementType;
-import br.unb.unbomber.gridphysics.Vector2D;
 
 public class MovementSystem2TestCase {
 	/** Gerenciador das entidades. */

@@ -19,13 +19,13 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import br.unb.entitysystem.Component;
+import br.unb.entitysystem.Entity;
+import br.unb.entitysystem.EntityManager;
+import br.unb.entitysystem.EntityManagerImpl;
 import br.unb.unbomber.systems.ExplosionSystem;
 import br.unb.unbomber.component.CellPlacement;
 import br.unb.unbomber.component.Explosion;
-import br.unb.unbomber.core.Component;
-import br.unb.unbomber.core.Entity;
-import br.unb.unbomber.core.EntityManager;
-import br.unb.unbomber.core.EntityManagerImpl;
 
 ////////////////////////////////////////////////
 /// Retirar comentários dos testes 3, 4 e 5
@@ -71,7 +71,7 @@ public class ExplosionSystemTestCaseG10 {
 	/** TESTE 3 */
 	/*  Teste do método createExplosion passando
 	 *  parâmetros válidos */
-//	@Test
+	@Test
 	public void testeCreateExplosionValidParam() {
 		
 		final int EXP_RANGE = 1;
@@ -154,7 +154,7 @@ public class ExplosionSystemTestCaseG10 {
 	 *  parâmetros válidos quando a explosão
 	 *  ocorre em uma quina do grid. Nesse caso
 	 *  na posição X = 0 e Y = 0 */
-//	@Test
+	@Test
 	public void testeCreateExplosionValidParam2() {
 		
 		final int EXP_RANGE = 2;
@@ -192,7 +192,7 @@ public class ExplosionSystemTestCaseG10 {
 	/** TESTE 5 */
 	/*  Teste do método createExplosion passando
 	 *  um parâmetro inválido de explosion range */
-//	@Test
+	@Test
 	public void testeCreateExplosionInvalidParam() {
 		
 		final int EXP_RANGE_NEGATIVE = -1;  //< Explosion Range negativo

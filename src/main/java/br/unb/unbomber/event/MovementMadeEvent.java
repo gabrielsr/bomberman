@@ -1,6 +1,6 @@
 package br.unb.unbomber.event;
 
-import br.unb.unbomber.core.Event;
+import br.unb.entitysystem.Event;
 
 public class MovementMadeEvent extends Event {
 	/* variaveis que guardam o novo posicionamento da entidade no grid */

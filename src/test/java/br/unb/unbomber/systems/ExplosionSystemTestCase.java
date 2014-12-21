@@ -1,19 +1,19 @@
 package br.unb.unbomber.systems;
 
 import static junit.framework.Assert.assertTrue;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import br.unb.entitysystem.Entity;
+import br.unb.entitysystem.EntityManager;
+import br.unb.entitysystem.EntitySystemImpl;
 import br.unb.unbomber.component.CellPlacement;
 import br.unb.unbomber.component.Direction;
 import br.unb.unbomber.component.Explosion;
 import br.unb.unbomber.component.ExplosionBarrier;
 import br.unb.unbomber.component.ExplosionBarrier.ExplosionBarrierType;
-import br.unb.unbomber.core.Entity;
-import br.unb.unbomber.core.EntityManager;
-import br.unb.unbomber.core.EntitySystemImpl;
 
 public class ExplosionSystemTestCase {
 

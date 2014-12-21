@@ -17,13 +17,13 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import br.unb.entitysystem.Component;
+import br.unb.entitysystem.Entity;
+import br.unb.entitysystem.EntityManager;
+import br.unb.entitysystem.EntityManagerImpl;
 import br.unb.unbomber.component.BombDropper;
 import br.unb.unbomber.component.CellPlacement;
 import br.unb.unbomber.component.Explosive;
-import br.unb.unbomber.core.Component;
-import br.unb.unbomber.core.Entity;
-import br.unb.unbomber.core.EntityManager;
-import br.unb.unbomber.core.EntityManagerImpl;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 import static junit.framework.Assert.assertNotNull;

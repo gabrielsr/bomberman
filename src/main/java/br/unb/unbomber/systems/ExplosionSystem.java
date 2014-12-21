@@ -3,6 +3,11 @@ package br.unb.unbomber.systems;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.unb.entitysystem.BaseSystem;
+import br.unb.entitysystem.Component;
+import br.unb.entitysystem.Entity;
+import br.unb.entitysystem.EntityManager;
+import br.unb.entitysystem.Event;
 import br.unb.unbomber.component.CellPlacement;
 import br.unb.unbomber.component.Direction;
 import br.unb.unbomber.component.Draw;
@@ -10,11 +15,6 @@ import br.unb.unbomber.component.Explosion;
 import br.unb.unbomber.component.ExplosionBarrier;
 import br.unb.unbomber.component.ExplosionBarrier.ExplosionBarrierType;
 import br.unb.unbomber.component.Timer;
-import br.unb.unbomber.core.BaseSystem;
-import br.unb.unbomber.core.Component;
-import br.unb.unbomber.core.Entity;
-import br.unb.unbomber.core.EntityManager;
-import br.unb.unbomber.core.Event;
 import br.unb.unbomber.event.ExplosionStartedEvent;
 import br.unb.unbomber.event.InAnExplosionEvent;
 

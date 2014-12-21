@@ -4,7 +4,7 @@
 
 package br.unb.unbomber.event;
 
-import br.unb.unbomber.core.Event;
+import br.unb.entitysystem.Event;
 
 public class MovementCommandEvent extends Event {
 

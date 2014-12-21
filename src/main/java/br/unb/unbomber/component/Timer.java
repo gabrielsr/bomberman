@@ -1,7 +1,7 @@
 package br.unb.unbomber.component;
 
-import br.unb.unbomber.core.Component;
-import br.unb.unbomber.core.Event;
+import br.unb.entitysystem.Component;
+import br.unb.entitysystem.Event;
 
 /**
  * The Timer Component.

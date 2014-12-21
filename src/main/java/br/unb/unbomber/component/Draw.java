@@ -1,6 +1,6 @@
 package br.unb.unbomber.component;
 
-import br.unb.unbomber.core.Component;
+import br.unb.entitysystem.Component;
 
 /**
  * Visual representation of an Entity.

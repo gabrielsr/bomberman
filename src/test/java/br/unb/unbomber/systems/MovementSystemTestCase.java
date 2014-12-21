@@ -7,12 +7,12 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import br.unb.entitysystem.Component;
+import br.unb.entitysystem.Entity;
+import br.unb.entitysystem.EntityManager;
+import br.unb.entitysystem.EntitySystemImpl;
 import br.unb.unbomber.component.CellPlacement;
 import br.unb.unbomber.component.Movable;
-import br.unb.unbomber.core.Component;
-import br.unb.unbomber.core.Entity;
-import br.unb.unbomber.core.EntityManager;
-import br.unb.unbomber.core.EntitySystemImpl;
 import br.unb.unbomber.event.MovementCommandEvent;
 import br.unb.unbomber.event.MovementCommandEvent.MovementType;
 

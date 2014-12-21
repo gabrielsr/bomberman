@@ -3,10 +3,10 @@ package br.unb.unbomber.systems;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.unb.entitysystem.BaseSystem;
+import br.unb.entitysystem.Component;
+import br.unb.entitysystem.EntityManager;
 import br.unb.unbomber.component.Timer;
-import br.unb.unbomber.core.BaseSystem;
-import br.unb.unbomber.core.Component;
-import br.unb.unbomber.core.EntityManager;
 
 /**
  * The Class TimeSystem.

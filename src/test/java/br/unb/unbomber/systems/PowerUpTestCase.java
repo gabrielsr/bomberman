@@ -12,29 +12,19 @@
 
 package br.unb.unbomber.systems;
 
-import static org.junit.Assert.*;
-
-import java.util.List;
-
-import javax.swing.text.StyledEditorKit.BoldAction;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import br.unb.entitysystem.Entity;
+import br.unb.entitysystem.EntityManager;
+import br.unb.entitysystem.EntityManagerImpl;
 import br.unb.unbomber.component.CellPlacement;
-import br.unb.unbomber.component.Explosive;
 import br.unb.unbomber.component.LifeType;
 import br.unb.unbomber.component.LifeType.Type;
-import br.unb.unbomber.component.Movable;
-import br.unb.unbomber.core.Component;
-import br.unb.unbomber.core.Entity;
-import br.unb.unbomber.core.EntityManager;
-import br.unb.unbomber.core.EntityManagerImpl;
-import br.unb.unbomber.core.EntitySystemImpl;
 import br.unb.unbomber.event.CollisionEvent;
 import br.unb.unbomber.event.InAnExplosionEvent;
-import br.unb.unbomber.event.MovementCommandEvent;
-import br.unb.unbomber.event.MovementCommandEvent.MovementType;
 
 public class PowerUpTestCase {
 	

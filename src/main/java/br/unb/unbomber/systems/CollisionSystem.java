@@ -9,11 +9,11 @@ package br.unb.unbomber.systems;
 
 import java.util.List;
 
+import br.unb.entitysystem.BaseSystem;
+import br.unb.entitysystem.Component;
+import br.unb.entitysystem.EntityManager;
+import br.unb.entitysystem.Event;
 import br.unb.unbomber.component.CellPlacement;
-import br.unb.unbomber.core.BaseSystem;
-import br.unb.unbomber.core.Component;
-import br.unb.unbomber.core.EntityManager;
-import br.unb.unbomber.core.Event;
 import br.unb.unbomber.event.CollisionEvent;
 import br.unb.unbomber.event.MovedEntityEvent;
 

@@ -1,14 +1,15 @@
 package br.unb.unbomber.systems;
 
 import static junit.framework.Assert.assertEquals;
+
 import org.junit.Before;
 import org.junit.Test;
 
+import br.unb.entitysystem.Entity;
+import br.unb.entitysystem.EntityManager;
+import br.unb.entitysystem.EntityManagerImpl;
 import br.unb.unbomber.component.BombDropper;
 import br.unb.unbomber.component.CellPlacement;
-import br.unb.unbomber.core.Entity;
-import br.unb.unbomber.core.EntityManager;
-import br.unb.unbomber.core.EntityManagerImpl;
 
 public class ThrowSystemTestCase {
 
