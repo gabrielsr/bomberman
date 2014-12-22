@@ -4,46 +4,41 @@
 
 package br.unb.unbomber.event;
 
-import br.unb.entitysystem.Event;
+import net.mostlyoriginal.api.event.common.Event;
+import br.unb.unbomber.component.Direction;
 
-public class MovementCommandEvent extends Event {
+import com.artemis.Entity;
 
-	//Definição dos tipos de ação capturados
-	public enum MovementType{
-		MOVE_UP,
-		MOVE_RIGHT,
-		MOVE_DOWN,
-		MOVE_LEFT;
-	}
+public class MovementCommandEvent  implements Event {
 
-	private final MovementType type;
+	private final Direction direction;
 	
-	private final int entityId;
+	private final Entity entity;
 	
 	/**
 	 * Method MovementCommandEvent recebe quem se moveu e armazena no evento.
 	 * @param type tipo do movimento (UP, LEFT, DOWN, RIGHT)
-	 * @param entityId qual entidade se moveu
+	 * @param entity qual entidade se moveu
 	 */
-	public MovementCommandEvent(MovementType type, int entityId){
-		this.type = type;
-		this.entityId = entityId;
+	public MovementCommandEvent(Direction type, Entity entity){
+		this.direction = type;
+		this.entity = entity;
 	}
 
 	/**
 	 * Method MovementType resgato o tipo do movimento no evento.
 	 * @return MovementType (UP, LEFT, DOWN, RIGHT)
 	 */
-	public MovementType getType() {
-		return type;
+	public Direction getDirection() {
+		return direction;
 	}
 	
 	/**
 	 * Method getEntityId resgata o ID da entidade que se moveu no evento
 	 * @return int (entityId)
 	 */
-	public int getEntityId(){
-		return this.entityId;
+	public Entity getEntity(){
+		return this.entity;
 	}
 	
 }

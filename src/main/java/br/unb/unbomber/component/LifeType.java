@@ -1,6 +1,6 @@
 package br.unb.unbomber.component;
 
-import br.unb.entitysystem.Component;
+import com.artemis.Component;
 
 /**
  * Classe reponsavel por atribuir um tipo a uma entidade.

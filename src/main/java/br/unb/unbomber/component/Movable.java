@@ -1,7 +1,8 @@
 package br.unb.unbomber.component;
 
-import br.unb.entitysystem.Component;
 import br.unb.gridphysics.Vector2D;
+
+import com.artemis.Component;
 
 public class Movable extends Component {
 	

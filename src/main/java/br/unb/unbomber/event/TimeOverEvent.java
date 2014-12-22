@@ -1,8 +1,8 @@
 package br.unb.unbomber.event;
 
-import br.unb.entitysystem.Event;
+import net.mostlyoriginal.api.event.common.Event;
 
-public class TimeOverEvent extends Event{
+public class TimeOverEvent implements Event {
 
 	
 	private String action;
@@ -11,8 +11,7 @@ public class TimeOverEvent extends Event{
 		
 	}
 	
-	public TimeOverEvent(int ownerId, String action){
-		setOwnerId(ownerId);
+	public TimeOverEvent(String action){
 		this.action = action;
 	}
 

@@ -2,8 +2,6 @@ package br.unb.unbomber.match;
 
 import java.util.Date;
 
-import br.unb.entitysystem.BaseSystem;
-
 public class TargetFrameRateMatch extends GameMatch {
 
 	long lastTickTimeInMillis;
@@ -22,8 +20,8 @@ public class TargetFrameRateMatch extends GameMatch {
 	}
 	
 	@Override
-	public void update() {
-		super.update();
+	public void update(float delta) {
+		super.update(delta);
 		waitTime();
 	}
 	
@@ -42,28 +40,6 @@ public class TargetFrameRateMatch extends GameMatch {
 	}
 	public static long now(){
 		return ((new Date()).getTime());
-	}
-	
-	/**
-	 * 1 sec turn, just for test
-	 * @param args
-	 */
-	public static void main(String[] args){
-		
-		GameMatch testMatch = new TargetFrameRateMatch(1);
-		
-		/** A Sysout System */
-		BaseSystem printSystem = new BaseSystem(){
-			public void update(){
-				System.out.println(now());
-			}
-		};
-		
-		testMatch.addSystem(printSystem);
-		
-			for(int i = 0; i<1000; i++){
-				testMatch.update();
-			}
 	}
 
 	

@@ -11,7 +11,7 @@
 
 package br.unb.unbomber.component;
 
-import br.unb.entitysystem.Component;
+import com.artemis.Component;
 
 public class Bounty extends Component{
 

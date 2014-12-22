@@ -7,8 +7,8 @@
 *********************************************************************************************************************************/
 package br.unb.unbomber.event;
 
-import br.unb.entitysystem.Event;
-public class CollisionEvent extends Event {
+import net.mostlyoriginal.api.event.common.Event;
+public class CollisionEvent  implements Event  {
 	private int sourceId;
 	private int targetId;
 	private boolean isTargetId;

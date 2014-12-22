@@ -1,9 +1,9 @@
 package br.unb.unbomber.event;
 
-import br.unb.entitysystem.Event;
+import net.mostlyoriginal.api.event.common.Event;
 import br.unb.unbomber.component.DiseaseComponent.DiseaseType;
 
-public class AquiredDiseaseEvent extends Event{
+public class AquiredDiseaseEvent implements Event {
 
 	private DiseaseType diseaseType;
 

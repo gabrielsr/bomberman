@@ -1,17 +1,17 @@
 package br.unb.unbomber.event;
 
-import br.unb.entitysystem.Event;
-import br.unb.unbomber.component.CellPlacement;
+import net.mostlyoriginal.api.event.common.Event;
+import br.unb.unbomber.component.Position;
 
-public class CreateDiseaseEvent extends Event{
+public class CreateDiseaseEvent  implements Event {
 
-	private CellPlacement placement;
+	private Position placement;
 
-	public CellPlacement getPlacement() {
+	public Position getPlacement() {
 		return placement;
 	}
 
-	public void setPlacement(CellPlacement placement) {
+	public void setPlacement(Position placement) {
 		this.placement = placement;
 	}
 }

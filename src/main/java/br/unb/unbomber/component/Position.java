@@ -1,9 +1,10 @@
 package br.unb.unbomber.component;
 
-import br.unb.entitysystem.Component;
 import br.unb.gridphysics.Vector2D;
 
-public class CellPlacement extends Component{
+import com.artemis.Component;
+
+public class Position extends Component{
 
 	private int cellX;
 	

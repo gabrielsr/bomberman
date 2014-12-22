@@ -1,6 +1,6 @@
 package br.unb.unbomber.event;
 
-import br.unb.entitysystem.Event;
+import net.mostlyoriginal.api.event.common.Event;
 
 /**
  * Classe evento que indica a destruição de uma entidade.
@@ -8,7 +8,7 @@ import br.unb.entitysystem.Event;
  * @version 0.3 19 Nov 2014
  * @author Grupo 5 - Dayanne <dayannefernandesc@gmail.com>
  */
-public class DestroyedEvent extends Event {
+public class DestroyedEvent  implements Event {
 	/** Entidade que gerou a destruição. */
 	private int sourceId;
 	/** Entidade que foi destruída. */

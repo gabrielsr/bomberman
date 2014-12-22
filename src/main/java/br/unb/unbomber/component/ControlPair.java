@@ -1,12 +1,11 @@
 package br.unb.unbomber.component;
 
-import br.unb.unbomber.event.MovementCommandEvent.MovementType;
 
 public class ControlPair {
 
 	private int key;
 	
-	private MovementType command;
+	private Direction command;
 
 	public int getKey() {
 		return key;
@@ -16,11 +15,11 @@ public class ControlPair {
 		this.key = key;
 	}
 
-	public MovementType getCommand() {
+	public Direction getCommand() {
 		return command;
 	}
 
-	public void setCommand(MovementType command) {
+	public void setCommand(Direction command) {
 		this.command = command;
 	}
 

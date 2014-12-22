@@ -19,8 +19,12 @@ repositories {
 
 
 dependencies {
-	compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
     compile "net.onedaybeard.artemis:artemis-odb:0.8.1"
+    compile "net.mostlyoriginal.artemis-odb:contrib-core:0.7.1" 
+    compile "net.mostlyoriginal.artemis-odb:contrib-eventbus:0.7.1" 
+
+	compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
+    
     testCompile 'junit:junit:4.9'
 }
 

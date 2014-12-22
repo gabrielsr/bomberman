@@ -1,6 +1,6 @@
 package br.unb.gridphysics;
 
-import br.unb.unbomber.component.CellPlacement;
+import br.unb.unbomber.component.Position;
 import br.unb.unbomber.component.Direction;
 
 public class MovementCalc {
@@ -57,7 +57,7 @@ public class MovementCalc {
 	 * @param displacement
 	 * @return
 	 */
-	public static Vector2D<Float> rebase(CellPlacement refA, CellPlacement refB, Vector2D<Float> displacement){
+	public static Vector2D<Float> rebase(Position refA, Position refB, Vector2D<Float> displacement){
 		
 		Vector2D<Float> oldOrigin = refA.centerPosition();
 		Vector2D<Float> newOrigin = refB.centerPosition();
@@ -71,7 +71,7 @@ public class MovementCalc {
 		return difference2;
 	}
 	
-	public Vector2D<Float> distance(CellPlacement a, CellPlacement b){
+	public Vector2D<Float> distance(Position a, Position b){
 		return new Vector2D<Float>((float)b.getCellX() - a.getCellX(), (float) b.getCellY() - a.getCellY());
 	}
 	

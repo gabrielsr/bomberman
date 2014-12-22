@@ -1,6 +1,6 @@
 package br.unb.unbomber.event;
 
-import br.unb.entitysystem.Event;
+import net.mostlyoriginal.api.event.common.Event;
 import br.unb.unbomber.component.PowerUp.PowerType;
 
 /**
@@ -9,7 +9,7 @@ import br.unb.unbomber.component.PowerUp.PowerType;
  * @version 0.1 20 Nov 2014
  * @author Grupo 5 - Dayanne <dayannefernandesc@gmail.com>
  */
-public class AcquiredPowerUpEvent extends Event {
+public class AcquiredPowerUpEvent implements Event {
 
 	/** Tipo do power up. */
 	private PowerType powerType;

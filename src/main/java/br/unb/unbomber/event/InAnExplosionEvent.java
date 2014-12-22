@@ -1,8 +1,8 @@
 package br.unb.unbomber.event;
 
-import br.unb.entitysystem.Event;
+import net.mostlyoriginal.api.event.common.Event;
 
-public class InAnExplosionEvent extends Event {
+public class InAnExplosionEvent  implements Event {
 	/* id of the entity that was hit by an explosion */
 	private int idHit;
 

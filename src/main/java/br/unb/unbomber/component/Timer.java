@@ -1,7 +1,8 @@
 package br.unb.unbomber.component;
 
-import br.unb.entitysystem.Component;
-import br.unb.entitysystem.Event;
+import net.mostlyoriginal.api.event.common.Event;
+
+import com.artemis.Component;
 
 /**
  * The Timer Component.
@@ -81,18 +82,5 @@ public class Timer extends Component {
 	 */
 	public long getElapsedTime() {
 		return elapsedTime;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see br.unb.unbomber.core.Component#setEntityId(int)
-	 */
-	@Override
-	public void setEntityId(int entityId) {
-		super.setEntityId(entityId);
-		if (this.event != null) {
-			this.event.setOwnerId(entityId);
-		}
 	}
 }

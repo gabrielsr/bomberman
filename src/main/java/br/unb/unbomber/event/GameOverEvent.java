@@ -1,6 +1,6 @@
 package br.unb.unbomber.event;
 
-import br.unb.entitysystem.Event;
+import net.mostlyoriginal.api.event.common.Event;
 
 /**
  * Classe evento que indica que uma entidade nao possui mais vida e tentativas
@@ -10,7 +10,7 @@ import br.unb.entitysystem.Event;
  * @author Grupo 5 - Dayanne <dayannefernandesc@gmail.com>
  */
 
-public class GameOverEvent extends Event {
+public class GameOverEvent  implements Event {
 	/** Id da entidade que nao possui mais vida e tentativas de vida. */
 	private int sourceId;
 

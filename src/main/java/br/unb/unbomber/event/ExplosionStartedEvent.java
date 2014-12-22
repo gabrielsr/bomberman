@@ -10,22 +10,22 @@
 
 package br.unb.unbomber.event;
 
-import br.unb.entitysystem.Event;
-import br.unb.unbomber.component.CellPlacement;
+import net.mostlyoriginal.api.event.common.Event;
+import br.unb.unbomber.component.Position;
 
-public class ExplosionStartedEvent extends Event{
+public class ExplosionStartedEvent  implements Event {
 
 	/* Initial position in the grid of the explosion */
-	private CellPlacement initialPosition;
+	private Position initialPosition;
 
 	/* Power of the explosion */
 	private int explosionRange;
 
-	public CellPlacement getInitialPosition() {
+	public Position getInitialPosition() {
 		return initialPosition;
 	}
 
-	public void setInitialPosition(CellPlacement initialPosition) {
+	public void setInitialPosition(Position initialPosition) {
 		this.initialPosition = initialPosition;
 	}
 

@@ -13,7 +13,7 @@ package br.unb.unbomber.component;
 
 import java.util.List;
 
-import br.unb.entitysystem.Component;
+import com.artemis.Component;
 
 public class Control extends Component{
 

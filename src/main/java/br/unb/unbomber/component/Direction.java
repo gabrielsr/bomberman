@@ -1,9 +1,11 @@
 package br.unb.unbomber.component;
 
-import br.unb.unbomber.event.MovementCommandEvent.MovementType;
 
 public enum Direction {
-	RIGHT(1, 0), DOWN(0, -1), LEFT(-1, 0), UP(0, 1);
+	RIGHT(1, 0), 
+	DOWN(0, -1), 
+	LEFT(-1, 0), 
+	UP(0, 1);
 
 	int x;
 	int y;
@@ -21,21 +23,4 @@ public enum Direction {
 		return this.y;
 	}
 
-	public static Direction asDirection(MovementType type) {
-
-		switch (type) {
-
-		case MOVE_RIGHT:
-			return RIGHT;
-		case MOVE_DOWN:
-			return DOWN;
-		case MOVE_LEFT:
-			return LEFT;
-		case MOVE_UP:
-			return UP;
-		default:
-			return null;
-		}
-
-	}
 }

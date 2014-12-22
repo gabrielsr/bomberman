@@ -1,8 +1,8 @@
 package br.unb.unbomber.event;
 
-import br.unb.entitysystem.Event;
+import net.mostlyoriginal.api.event.common.Event;
 
-public class ActionCommandEvent extends Event {
+public class ActionCommandEvent implements Event  {
 
 	public enum ActionType{
 		DROP_BOMB,

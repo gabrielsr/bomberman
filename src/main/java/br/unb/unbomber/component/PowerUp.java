@@ -1,10 +1,10 @@
 package br.unb.unbomber.component;
 
 
-import br.unb.entitysystem.Component;
-
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+
+import com.artemis.Component;
 
 /**
  * Classe reponsavel por atribuir os tipos de power ups que uma entidade possui.
