@@ -19,9 +19,6 @@ import com.artemis.utils.ImmutableBag;
 @Wire
 public class GridSystem extends EntitySystem {
 
-	
-	private static final int MAX_GRID_SIZE = 30;
-	
 	private Map<Vector2D<Integer>, List<Entity>> gridMap;
 	
 	protected ComponentMapper<Position> mPosition;
@@ -38,7 +35,6 @@ public class GridSystem extends EntitySystem {
 		if(dirty){
 			refreshMap(entities);
 		}
-		
 	}
 	
 	
