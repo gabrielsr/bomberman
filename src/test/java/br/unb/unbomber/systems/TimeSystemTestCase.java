@@ -1,42 +1,38 @@
 package br.unb.unbomber.systems;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
+import net.mostlyoriginal.api.event.common.EventManager;
+import net.mostlyoriginal.api.event.common.Subscribe;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import br.unb.entitysystem.Entity;
-import br.unb.entitysystem.EntityManager;
-import br.unb.entitysystem.EntityManagerImpl;
-import br.unb.unbomber.component.Timer;
 import br.unb.unbomber.event.TimeOverEvent;
+import br.unb.unbomber.misc.EntityBuilder2;
+
+import com.artemis.World;
+import com.artemis.systems.VoidEntitySystem;
 
 /**
  * The Class TimeSystemTestCase.
  */
 public class TimeSystemTestCase {
 	
-	/** The entity manager. */
-	EntityManager entityManager;
 	
-	/** The system. */
-	TimeSystem system;
+	World world;
 	
-	/**
-	 * Sets the up.
-	 *
-	 * @throws Exception the exception
-	 */
+	TimeSystem timerSystem;
+	
 	@Before
 	public void setUp() throws Exception {
+		timerSystem = new TimeSystem();
 		
-		//init a new system for each test case
-		EntityManagerImpl.init();
+		world = new World();
+		world.setSystem(timerSystem);
 		
-		entityManager = EntityManagerImpl.getInstance();
-		system = new TimeSystem(entityManager);
+		world.setManager(new EventManager());
+
+		//world.initialize();
 	}
 
 	/**
@@ -47,27 +43,59 @@ public class TimeSystemTestCase {
 
 		TimeOverEvent event = new TimeOverEvent();
 		
-		//Timer configured for 3 ticks
-		Entity entity = entityManager.createEntity();
-		Timer timer = new Timer(3, event);
-		entity.addComponent(timer);
-		entityManager.update(entity);
+		final CallCounter counter = new CallCounter(); 
+		
+		world.setSystem(new VoidEntitySystem() {
+			
+			@Override
+			protected void processSystem() {}
+			
+			//counter the number of events received
+			@Subscribe
+			void handle(TimeOverEvent e){
+				counter.call();
+			}
+			
+		});
+		
+		world.initialize();
+		
+		EntityBuilder2.create(world)
+			.withTimer(3, event)
+			.build();
 
-		// 2 ticks
-		system.update();
-		system.update();
-		
+		world.process();
+		world.process();
+			
 		//assert no TimeOverEvent was created yet
-		assertTrue(entityManager.getEvents(TimeOverEvent.class).isEmpty());
-		
+		assertEquals("number of times that the observer was called", 0, counter.getNumberOfCalls());
 		// the 3rd and final tick
-		system.update();
+		world.process();
 		
 		//assert the Time Over Event was created
-		assertFalse("System should create an Event", entityManager.getEvents(TimeOverEvent.class).isEmpty());
+		assertEquals("number of times that the observer was called", 1, counter.getNumberOfCalls());
 		
-		assertNull("System should remove the component after the timer is triggered",
-				entityManager.getComponent(Timer.class, entity.getEntityId()));
+		world.process();
+		world.process();
+		world.process();
+		world.process();
+		assertEquals("number of times that the observer was called", 1, counter.getNumberOfCalls());
+		
+		//assertNull("System should remove the component after the timer is triggered",
+			//	entityManager.getComponent(Timer.class, entity.getEntityId()));
 
+	}
+	
+	
+	public class CallCounter {
+		private int calls = 0;
+		
+		public void call(){
+			calls++;
+		}
+		
+		public int getNumberOfCalls(){
+			return calls;
+		}
 	}
 }

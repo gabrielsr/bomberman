@@ -1,5 +1,6 @@
 package br.unb.unbomber.misc;
 
+import net.mostlyoriginal.api.event.common.Event;
 import br.unb.gridphysics.Vector2D;
 import br.unb.unbomber.component.BombDropper;
 import br.unb.unbomber.component.Draw;
@@ -9,6 +10,7 @@ import br.unb.unbomber.component.Movable;
 import br.unb.unbomber.component.MovementBarrier;
 import br.unb.unbomber.component.MovementBarrier.MovementBarrierType;
 import br.unb.unbomber.component.Position;
+import br.unb.unbomber.component.Timer;
 
 import com.artemis.Component;
 import com.artemis.World;
@@ -35,6 +37,10 @@ public class EntityBuilder2 extends com.artemis.utils.EntityBuilder{
 		return new EntityBuilder2(world);
 	}
 	
+	public EntityBuilder2 includeInProduct(Component component){
+		return (EntityBuilder2) with(component);
+	}
+
 	public EntityBuilder2 withPosition(int cellX, int cellY){
 	
 		Position cell = new Position();
@@ -63,6 +69,8 @@ public class EntityBuilder2 extends com.artemis.utils.EntityBuilder{
 		return includeInProduct(bombDropper);		
 
 	}
+	
+
 	
 	public EntityBuilder2 withDropper(int permittedSimultaneousBombs, 
 			int explosionRange,
@@ -98,11 +106,13 @@ public class EntityBuilder2 extends com.artemis.utils.EntityBuilder{
 	
 	public EntityBuilder2 withDraw(String type){
 		return includeInProduct((new Draw(type)));
-	}	
-	
-	public EntityBuilder2 includeInProduct(Component component){
-		return (EntityBuilder2) with(component);
 	}
 	
+
+	public EntityBuilder2 withTimer(long elapsedTime, Event event) {
+		return includeInProduct((new Timer(elapsedTime, event)));
+	}
+	
+
 	//your are welcome to create more ..
 }
