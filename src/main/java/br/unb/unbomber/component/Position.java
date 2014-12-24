@@ -10,6 +10,15 @@ public class Position extends Component{
 	
 	private int cellY;
 
+	public Position(){
+		
+	}
+	
+	public Position(int x, int y) {
+		this.cellX = x;
+		this.cellY = y;
+	}
+
 	public int getCellX() {
 		return cellX;
 	}

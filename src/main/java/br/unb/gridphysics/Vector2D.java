@@ -164,4 +164,14 @@ public class Vector2D<E extends Number> {
 		}
 	}
 
+	/**
+	 * Hash code used by API Collections. 
+	 * Its knows to works with hashMap.
+	 * 
+	 *  return hash
+	 */
+	public int hashCode() {
+		return 2 * x.intValue() + 3 * y.intValue();
+	}
+
 }

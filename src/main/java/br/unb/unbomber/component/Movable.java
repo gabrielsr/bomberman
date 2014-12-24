@@ -10,12 +10,17 @@ public class Movable extends Component {
 	private Vector2D<Float> cellPosition;
 	
 	/* parametro que guarda a velocidade da entidade */
-	private float speed = 1/16;
+	private float speed = 0;
 	
 	public Movable(){
 		this.cellPosition = new Vector2D<>(0.5f, 0.5f); 
 	}
 	
+	public Movable(float speed) {
+		this.speed = speed;
+		this.cellPosition = new Vector2D<>(0.5f, 0.5f); 
+	}
+
 	/* metodo que retorna a volocidade da entidade */
 	public float getSpeed() {
 		return speed;
