@@ -10,7 +10,7 @@ import br.unb.entitysystem.Entity;
 import br.unb.entitysystem.EntityManager;
 import br.unb.entitysystem.EntityManagerImpl;
 import br.unb.unbomber.component.AvailableTries;
-import br.unb.unbomber.component.CellPlacement;
+import br.unb.unbomber.component.Position;
 import br.unb.unbomber.component.Health;
 import br.unb.unbomber.component.LifeType;
 import br.unb.unbomber.component.LifeType.Type;
@@ -266,8 +266,8 @@ public class LifeSystemTestCase {
 		system.update();
 
 		/** Coleta o local no grid da entidade que fora destruída. */
-		CellPlacement entCell = (CellPlacement) entityManager.getComponent(
-				CellPlacement.class, collEvent.getTargetId());
+		Position entCell = (Position) entityManager.getComponent(
+				Position.class, collEvent.getTargetId());
 		int cX = entCell.getCellX();
 		int cY = entCell.getCellY();
 
@@ -298,7 +298,7 @@ public class LifeSystemTestCase {
 		/** Atribui os componentes básicos da entidade. */
 		entity.addComponent(new Health(health, true));
 		entity.addComponent(new AvailableTries(avTries, true));
-		CellPlacement cellP = new CellPlacement();
+		Position cellP = new Position();
 		cellP.setCellX(cellx);
 		cellP.setCellY(celly);
 		entity.addComponent(cellP);

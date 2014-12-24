@@ -10,7 +10,7 @@ import br.unb.entitysystem.Entity;
 import br.unb.entitysystem.EntityManager;
 import br.unb.entitysystem.EntityManagerImpl;
 import br.unb.unbomber.component.BombDropper;
-import br.unb.unbomber.component.CellPlacement;
+import br.unb.unbomber.component.Position;
 import br.unb.unbomber.component.Explosion;
 import br.unb.unbomber.event.ActionCommandEvent;
 import br.unb.unbomber.event.ActionCommandEvent.ActionType;
@@ -91,7 +91,7 @@ public class BombExplosionTestCase {
 		bombDropper.setPermittedSimultaneousBombs(5);
 		
 		//Create Placement
-		CellPlacement placement = new CellPlacement();
+		Position placement = new Position();
 		placement.setCellX(0);
 		placement.setCellY(0);
 		
@@ -106,7 +106,7 @@ public class BombExplosionTestCase {
 	
 	private void pubBombOnGrid(int x, int y, BombDropper bombDropper) {
 		
-		CellPlacement placement = (CellPlacement) entityManager.getComponent(CellPlacement.class, bombDropper.getEntityId());
+		Position placement = (Position) entityManager.getComponent(Position.class, bombDropper.getEntityId());
 		
 		placement.setCellX(x);
 		placement.setCellY(y);

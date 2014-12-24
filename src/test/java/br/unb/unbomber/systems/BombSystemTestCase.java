@@ -23,7 +23,7 @@ import br.unb.entitysystem.EntityManager;
 import br.unb.entitysystem.EntityManagerImpl;
 import br.unb.entitysystem.Event;
 import br.unb.unbomber.component.BombDropper;
-import br.unb.unbomber.component.CellPlacement;
+import br.unb.unbomber.component.Position;
 import br.unb.unbomber.component.Explosive;
 import br.unb.unbomber.event.ActionCommandEvent;
 import br.unb.unbomber.event.InAnExplosionEvent;
@@ -126,7 +126,7 @@ public class BombSystemTestCase {
 		//get the position of the first explosive created: first get the explosive than get the associated position
 		List<Component> explosives = (List<Component>) entityManager.getComponents(Explosive.class);
 		Component explosive = explosives.get(0);
-		CellPlacement createBombPlacement = (CellPlacement) entityManager.getComponent(CellPlacement.class, explosive.getEntityId());
+		Position createBombPlacement = (Position) entityManager.getComponent(Position.class, explosive.getEntityId());
 		
 		//verify if its the correct value
 		assertEquals(CELL_X, createBombPlacement.getCellX());
@@ -346,7 +346,7 @@ public class BombSystemTestCase {
 	
 	private void pubBombOnGrid(int x, int y, BombDropper bombDropper) {
 		
-		CellPlacement placement = (CellPlacement) entityManager.getComponent(CellPlacement.class, bombDropper.getEntityId());
+		Position placement = (Position) entityManager.getComponent(Position.class, bombDropper.getEntityId());
 		
 		placement.setCellX(x);
 		placement.setCellY(y);
@@ -368,7 +368,7 @@ public class BombSystemTestCase {
 		bombDropper.setPermittedSimultaneousBombs(5);
 		
 		//Create Placement
-		CellPlacement placement = new CellPlacement();
+		Position placement = new Position();
 		placement.setCellX(0);
 		placement.setCellY(0);
 		

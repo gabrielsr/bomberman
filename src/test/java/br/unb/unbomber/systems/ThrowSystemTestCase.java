@@ -9,7 +9,7 @@ import br.unb.entitysystem.Entity;
 import br.unb.entitysystem.EntityManager;
 import br.unb.entitysystem.EntityManagerImpl;
 import br.unb.unbomber.component.BombDropper;
-import br.unb.unbomber.component.CellPlacement;
+import br.unb.unbomber.component.Position;
 
 public class ThrowSystemTestCase {
 
@@ -41,9 +41,9 @@ public class ThrowSystemTestCase {
 		
 		Entity anEntity = entityManager.createEntity(); 
 		anEntity.addComponent(new BombDropper());
-		anEntity.addComponent(new CellPlacement());
-		((CellPlacement) anEntity.getComponents()).setCellX(10);
-		((CellPlacement) anEntity.getComponents()).setCellY(15);
+		anEntity.addComponent(new Position());
+		((Position) anEntity.getComponents()).setCellX(10);
+		((Position) anEntity.getComponents()).setCellY(15);
 		entityManager.update(anEntity);
 		
 		throwSystem = new ThrowSystem();
@@ -61,7 +61,7 @@ public class ThrowSystemTestCase {
 		
 		throwSystem.update(); //jogou a bomba em qual direção;
 		
-		assertEquals(((CellPlacement) anEntity.getComponents()).getCellX(), ((CellPlacement) anEntity.getComponents()).getCellX() + 5);
+		assertEquals(((Position) anEntity.getComponents()).getCellX(), ((Position) anEntity.getComponents()).getCellX() + 5);
 	}
 	
 

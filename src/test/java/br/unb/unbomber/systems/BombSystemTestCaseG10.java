@@ -22,7 +22,7 @@ import br.unb.entitysystem.Entity;
 import br.unb.entitysystem.EntityManager;
 import br.unb.entitysystem.EntityManagerImpl;
 import br.unb.unbomber.component.BombDropper;
-import br.unb.unbomber.component.CellPlacement;
+import br.unb.unbomber.component.Position;
 import br.unb.unbomber.component.Explosive;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
@@ -72,7 +72,7 @@ public class BombSystemTestCaseG10 {
 		
 		Entity destroyer = entityManager.createEntity();
 		BombDropper dropper = new BombDropper();
-		CellPlacement dropperPlacement = new CellPlacement();
+		Position dropperPlacement = new Position();
 		
 		dropperPlacement.setCellX(1);
 		dropperPlacement.setCellY(1);
@@ -103,7 +103,7 @@ public class BombSystemTestCaseG10 {
 
 		final int MAX_NUM_BOMBS = 2;
 		
-		CellPlacement dropperPlacement = new CellPlacement();
+		Position dropperPlacement = new Position();
 		Entity destroyer = entityManager.createEntity();
 		BombDropper dropper = new BombDropper();
 		BombSystem bombSystem = new BombSystem();

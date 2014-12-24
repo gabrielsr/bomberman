@@ -14,21 +14,23 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import br.unb.entitysystem.BaseSystem;
-import br.unb.entitysystem.Component;
-import br.unb.entitysystem.Entity;
-import br.unb.entitysystem.EntityManager;
-import br.unb.entitysystem.Event;
+import net.mostlyoriginal.api.event.common.Event;
 import br.unb.unbomber.component.BombDropper;
-import br.unb.unbomber.component.CellPlacement;
 import br.unb.unbomber.component.Draw;
 import br.unb.unbomber.component.Explosive;
+import br.unb.unbomber.component.Position;
 import br.unb.unbomber.component.Timer;
 import br.unb.unbomber.event.ActionCommandEvent;
 import br.unb.unbomber.event.ActionCommandEvent.ActionType;
 import br.unb.unbomber.event.ExplosionStartedEvent;
 import br.unb.unbomber.event.InAnExplosionEvent;
 import br.unb.unbomber.event.TimeOverEvent;
+
+import com.artemis.Component;
+import com.artemis.Entity;
+import com.artemis.EntityManager;
+import com.artemis.EntitySystem;
+import com.artemis.utils.ImmutableBag;
 
 /**
  * @author <img src="https://avatars2.githubusercontent.com/u/8586137?v=2&s=30" width="30" height="30"/> <a href="https://github.com/JeffVFA" target="_blank">JeffVFA</a>
@@ -37,7 +39,7 @@ import br.unb.unbomber.event.TimeOverEvent;
  * @author <img src="https://avatars2.githubusercontent.com/u/7716247?v=2&s=30" width="30" height="30"/> <a href="https://github.com/brenoxp2008" target="_blank"> brenoxp2008</a>
  */
 
-public class BombSystem extends BaseSystem {
+public class BombSystem extends EntitySystem {
 	/*
 	 * documented by @author JeffVFA //Define default Value of a bomb
 	 */
@@ -46,6 +48,13 @@ public class BombSystem extends BaseSystem {
 	// Define a set of processed events
 	Set<Event> processedEvents = new HashSet<Event>(500);
 
+	@Override
+	protected void processEntities(ImmutableBag<Entity> entities) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
 	/**
 	 * bomb constructor
 	 */
@@ -182,8 +191,8 @@ public class BombSystem extends BaseSystem {
 		
 		// 1)
 		EntityManager entityManager = getEntityManager(); 
-		CellPlacement bombPlacement = (CellPlacement) entityManager
-				.getComponent(CellPlacement.class, bombID);
+		Position bombPlacement = (Position) entityManager
+				.getComponent(Position.class, bombID);
 		Explosive bombExplosive = (Explosive) entityManager.getComponent(
 				Explosive.class, bombID); 
 		
@@ -286,8 +295,8 @@ public class BombSystem extends BaseSystem {
 		 */
 
 		// find dropper placement
-		CellPlacement dropperPlacement = (CellPlacement) getEntityManager()
-				.getComponent(CellPlacement.class, dropper.getEntityId());
+		Position dropperPlacement = (Position) getEntityManager()
+				.getComponent(Position.class, dropper.getEntityId());
 
 		Entity bomb = getEntityManager().createEntity();
 
@@ -295,7 +304,7 @@ public class BombSystem extends BaseSystem {
 		bomb.setOwnerId(dropper.getEntityId());
 
 		// Create the placement component
-		CellPlacement bombPlacement = new CellPlacement();
+		Position bombPlacement = new Position();
 
 		// the Bomb should have the same placement of its dropper
 		bombPlacement.setCellX(dropperPlacement.getCellX());
@@ -313,5 +322,6 @@ public class BombSystem extends BaseSystem {
 		bomb.addComponent(new Draw("bomb"));
 		return bomb;
 	}
+
 
 }

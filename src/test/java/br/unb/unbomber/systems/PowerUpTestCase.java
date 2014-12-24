@@ -20,7 +20,7 @@ import org.junit.Test;
 import br.unb.entitysystem.Entity;
 import br.unb.entitysystem.EntityManager;
 import br.unb.entitysystem.EntityManagerImpl;
-import br.unb.unbomber.component.CellPlacement;
+import br.unb.unbomber.component.Position;
 import br.unb.unbomber.component.LifeType;
 import br.unb.unbomber.component.LifeType.Type;
 import br.unb.unbomber.event.CollisionEvent;
@@ -85,7 +85,7 @@ public class PowerUpTestCase {
 		LifeType lifeChar = new LifeType(Type.CHAR);
 		
 		Entity newEntityChar = entityManager.createEntity();
-		CellPlacement charPlacement = new CellPlacement();
+		Position charPlacement = new Position();
 		charPlacement.setCellX(x);
 		charPlacement.setCellY(y);
 		
@@ -95,7 +95,7 @@ public class PowerUpTestCase {
 		entityManager.update(newEntityChar);
 		
 		Entity newEntityPower = entityManager.createEntity();
-		CellPlacement powerPlacement = new CellPlacement();
+		Position powerPlacement = new Position();
 		powerPlacement.setCellX(x);
 		powerPlacement.setCellY(y);
 

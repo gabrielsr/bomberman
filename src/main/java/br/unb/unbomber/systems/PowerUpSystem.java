@@ -8,7 +8,7 @@ import br.unb.entitysystem.BaseSystem;
 import br.unb.entitysystem.Entity;
 import br.unb.entitysystem.EntityManager;
 import br.unb.entitysystem.Event;
-import br.unb.unbomber.component.CellPlacement;
+import br.unb.unbomber.component.Position;
 import br.unb.unbomber.component.LifeType;
 import br.unb.unbomber.component.LifeType.Type;
 import br.unb.unbomber.component.PowerUp;
@@ -139,10 +139,10 @@ public class PowerUpSystem extends BaseSystem {
 	private void createPowerUp(InAnExplosionEvent explosion) {
 		/** Criação dos componentes da entidade power up. */
 		LifeType lifeType = new LifeType(Type.POWER_UP);
-		CellPlacement cellPlacement = new CellPlacement();
+		Position cellPlacement = new Position();
 		/** Coletando o local do bloco que foi destruído. */
-		CellPlacement cellBlock = (CellPlacement) getEntityManager()
-				.getComponent(CellPlacement.class, explosion.getIdHit());
+		Position cellBlock = (Position) getEntityManager()
+				.getComponent(Position.class, explosion.getIdHit());
 		/**
 		 * Atribuindo local de criação do Power up no mesmo local que o bloco
 		 * for destruído.

@@ -8,7 +8,7 @@ import br.unb.entitysystem.Component;
 import br.unb.entitysystem.Entity;
 import br.unb.entitysystem.EntityManager;
 import br.unb.entitysystem.Event;
-import br.unb.unbomber.component.CellPlacement;
+import br.unb.unbomber.component.Position;
 import br.unb.unbomber.component.Direction;
 import br.unb.unbomber.component.Draw;
 import br.unb.unbomber.component.Explosion;
@@ -107,7 +107,7 @@ public class ExplosionSystem extends BaseSystem {
 		}
 	}
 
-	public void createExplosion(CellPlacement expPlacement, int expRange, int ownerId) {
+	public void createExplosion(Position expPlacement, int expRange, int ownerId) {
 
 
 		Entity explosionEntity = getEntityManager().createEntity();
@@ -120,7 +120,7 @@ public class ExplosionSystem extends BaseSystem {
 		Timer expTimer = new Timer(16, null);
 		expTimer.setEntityId(explosionEntity.getEntityId());
 		
-		CellPlacement cellPlacement = new CellPlacement();
+		Position cellPlacement = new Position();
 		cellPlacement.setCellX(expPlacement.getCellX());
 		cellPlacement.setCellY(expPlacement.getCellY());
 		cellPlacement.setEntityId(explosionEntity.getEntityId());
@@ -145,7 +145,7 @@ public class ExplosionSystem extends BaseSystem {
 
 	}
 
-	public void propagateExplosion(Explosion exp, CellPlacement cellPlacement,
+	public void propagateExplosion(Explosion exp, Position cellPlacement,
 			int range) {
 
 		if (range != 0 && detectExplosionCollision(exp, cellPlacement)) {
@@ -157,7 +157,7 @@ public class ExplosionSystem extends BaseSystem {
 			newExp.setExplosionRange(range);
 			newExp.setOwnerId(exp.getOwnerId());
 
-			CellPlacement newExpPlacement = new CellPlacement();
+			Position newExpPlacement = new Position();
 			newExpPlacement.setEntityId(explosionEntity.getEntityId());
 
 			if (exp.getPropagationDirection() == Direction.UP) {
@@ -190,25 +190,25 @@ public class ExplosionSystem extends BaseSystem {
 	private void enteredExplosion() {
 
 		List<Component> cellPlacements = getEntityManager().getComponents(
-				CellPlacement.class);
+				Position.class);
 
 		List<Component> explosions = getEntityManager().getComponents(
 				Explosion.class);
 
-		CellPlacement cellPlacement;
+		Position cellPlacement;
 
 		Explosion explosion;
 
-		CellPlacement explosionPlacement;
+		Position explosionPlacement;
 
 		for (Component componentExplosion : explosions) {
 
 			for (Component componentCellPlacement : cellPlacements) {
 
-				cellPlacement = (CellPlacement) componentCellPlacement;
+				cellPlacement = (Position) componentCellPlacement;
 				explosion = (Explosion) componentExplosion;
-				explosionPlacement = (CellPlacement) getEntityManager()
-						.getComponent(CellPlacement.class,
+				explosionPlacement = (Position) getEntityManager()
+						.getComponent(Position.class,
 								explosion.getEntityId());
 				if (explosionPlacement.getCellX() == cellPlacement.getCellX()
 						&& explosionPlacement.getCellY() == cellPlacement
@@ -263,10 +263,10 @@ public class ExplosionSystem extends BaseSystem {
 
 	/* returns true if the explosion should propagate and false otherwise */
 	public boolean detectExplosionCollision(Explosion explosion,
-			CellPlacement explosionPlacement) {
+			Position explosionPlacement) {
 
 		Direction direction = explosion.getPropagationDirection();
-		CellPlacement nextSpace = new CellPlacement();
+		Position nextSpace = new Position();
 		if (direction == Direction.LEFT) {
 
 			nextSpace.setCellY(explosionPlacement.getCellY());
@@ -290,13 +290,13 @@ public class ExplosionSystem extends BaseSystem {
 		}
 
 		List<Component> components = getEntityManager().getComponents(
-				CellPlacement.class);
+				Position.class);
 
-		CellPlacement cellPlacement;
+		Position cellPlacement;
 
 		for (Component component : components) {
 
-			cellPlacement = (CellPlacement) component;
+			cellPlacement = (Position) component;
 			if (nextSpace.getCellX() == cellPlacement.getCellX()
 					&& nextSpace.getCellY() == cellPlacement.getCellY()) {
 

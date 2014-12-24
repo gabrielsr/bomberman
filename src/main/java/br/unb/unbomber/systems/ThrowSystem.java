@@ -17,7 +17,7 @@ import br.unb.entitysystem.BaseSystem;
 import br.unb.entitysystem.Component;
 import br.unb.entitysystem.EntityManager;
 import br.unb.entitysystem.Event;
-import br.unb.unbomber.component.CellPlacement;
+import br.unb.unbomber.component.Position;
 import br.unb.unbomber.component.Explosion;
 import br.unb.unbomber.component.PowerUp;
 import br.unb.unbomber.component.PowerUp.PowerType;
@@ -25,7 +25,7 @@ import br.unb.unbomber.event.ActionCommandEvent;
 import br.unb.unbomber.event.ActionCommandEvent.ActionType;
 import br.unb.unbomber.event.CollisionEvent;
 import br.unb.unbomber.event.MovementCommandEvent;
-import br.unb.unbomber.event.MovementCommandEvent.MovementType;
+import br.unb.unbomber.event.MovementCommandEvent.Direction;
 
 public class ThrowSystem extends BaseSystem {
 
@@ -126,8 +126,8 @@ public class ThrowSystem extends BaseSystem {
 								 * < varivel que recebe uam componente do tipo
 								 * CellPlacement
 								 */
-								CellPlacement Coord = (CellPlacement) getEntityManager()
-										.getComponent(CellPlacement.class,
+								Position Coord = (Position) getEntityManager()
+										.getComponent(Position.class,
 												targetId);
 
 								/**
@@ -153,25 +153,25 @@ public class ThrowSystem extends BaseSystem {
 										 * < recebe o tipo de movimento
 										 * realizado
 										 */
-										MovementType moveType = move.getType();
+										Direction moveType = move.getDirection();
 
 										/**
 										 * < verifica qual foi a direcao do
 										 * movimento e faz o dslocamento da
 										 * bomba de acordo com ele
 										 */
-										if (moveType == MovementType.MOVE_UP) {
+										if (moveType == Direction.MOVE_UP) {
 											Coord.setCellY(y + TRHOW_CONSTAT);
 											String pudim = "coisa";
 											System.out.println(pudim);
 										}
-										if (moveType == MovementType.MOVE_DOWN) {
+										if (moveType == Direction.MOVE_DOWN) {
 											Coord.setCellY(y - TRHOW_CONSTAT);
 										}
-										if (moveType == MovementType.MOVE_RIGHT) {
+										if (moveType == Direction.MOVE_RIGHT) {
 											Coord.setCellX(x + TRHOW_CONSTAT);
 										}
-										if (moveType == MovementType.MOVE_LEFT) {
+										if (moveType == Direction.MOVE_LEFT) {
 											Coord.setCellX(x - TRHOW_CONSTAT);
 										}
 									}

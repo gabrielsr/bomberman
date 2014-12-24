@@ -20,7 +20,7 @@ import br.unb.entitysystem.Entity;
 import br.unb.entitysystem.EntityManager;
 import br.unb.entitysystem.EntityManagerImpl;
 import br.unb.entitysystem.Event;
-import br.unb.unbomber.component.CellPlacement;
+import br.unb.unbomber.component.Position;
 import br.unb.unbomber.component.Direction;
 import br.unb.unbomber.component.Movable;
 import br.unb.unbomber.event.CollisionEvent;
@@ -142,7 +142,7 @@ public class CollisionSystemTestCase {
 		// movable.setSpeed(velocidade);
 
 		
-		CellPlacement placement = new CellPlacement(); /**< Create um componet Placement */
+		Position placement = new Position(); /**< Create um componet Placement */
 		placement.setCellX(x); // Seta a posição
 		placement.setCellY(y);
 
@@ -172,7 +172,7 @@ public class CollisionSystemTestCase {
 
 		// 
 		
-		CellPlacement placement = new CellPlacement(); /**<  Cria um componet Placement. */
+		Position placement = new Position(); /**<  Cria um componet Placement. */
 		placement.setCellX(x);  // Seta a posição
 		placement.setCellY(y);
 

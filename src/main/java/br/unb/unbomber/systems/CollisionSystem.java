@@ -13,7 +13,7 @@ import br.unb.entitysystem.BaseSystem;
 import br.unb.entitysystem.Component;
 import br.unb.entitysystem.EntityManager;
 import br.unb.entitysystem.Event;
-import br.unb.unbomber.component.CellPlacement;
+import br.unb.unbomber.component.Position;
 import br.unb.unbomber.event.CollisionEvent;
 import br.unb.unbomber.event.MovedEntityEvent;
 
@@ -49,7 +49,7 @@ public class CollisionSystem extends BaseSystem {
 	public void testOfCollision() {
 		
 		List<Component> placeComponents = getEntityManager().getComponents(
-				CellPlacement.class); /**< lista que contem o posicionamento das entidades no ultimo tick. */
+				Position.class); /**< lista que contem o posicionamento das entidades no ultimo tick. */
 		
 		List<Event> movedEntityEvents = getEntityManager().getEvents(
 				MovedEntityEvent.class); /**< lista das entidades que se moveram no ultimo tick. */
@@ -67,7 +67,7 @@ public class CollisionSystem extends BaseSystem {
 		// pela existência de um evento
 		// do tipo MovedEntityEvents.
 		for (Event event : movedEntityEvents) {
-			CellPlacement cellPlacement1;
+			Position cellPlacement1;
 
 			// observe que movedEntityEvent não é uma lista.
 			movedEntityEvent = (MovedEntityEvent) event;
@@ -76,8 +76,8 @@ public class CollisionSystem extends BaseSystem {
 			// movedEntityEvent.
 			// cellPlacement1 não é necessário de verdade já que é possível
 			// obter (x,y) de MovedEntityEvent.
-			cellPlacement1 = (CellPlacement) getEntityManager().getComponent(
-					CellPlacement.class, movedEntityEvent.getMovedEntityId());
+			cellPlacement1 = (Position) getEntityManager().getComponent(
+					Position.class, movedEntityEvent.getMovedEntity());
 
 			// TODO testar se a colisão se dá entre softblock (bomba, powerup) e
 			// personagem.
@@ -90,11 +90,11 @@ public class CollisionSystem extends BaseSystem {
 				// Observe que placeComponents
 				// contém todas as entidades (hardblock, softblock, personagem,
 				// etc).
-				CellPlacement cellPlacement2;
-				cellPlacement2 = (CellPlacement) component;
+				Position cellPlacement2;
+				cellPlacement2 = (Position) component;
 
 				// Se os ids forem diferentes verifica se houve colisão.
-				if (movedEntityEvent.getMovedEntityId() != cellPlacement2
+				if (movedEntityEvent.getMovedEntity() != cellPlacement2
 						.getEntityId()) {
 					// se o if for verdadeiro significa que (x1,y1) = (x2,y2),
 					// i.e, houve colisão entre alguém que se
@@ -114,7 +114,7 @@ public class CollisionSystem extends BaseSystem {
 						// mais uma vez.
 						boolean test = false;
 						test = collisionMade(collMade,
-								movedEntityEvent.getMovedEntityId(),
+								movedEntityEvent.getMovedEntity(),
 								cellPlacement2.getEntityId(), aux);
 						if (test == true) {
 							continue;
@@ -152,26 +152,26 @@ public class CollisionSystem extends BaseSystem {
 								// o primeiro argumento é quem colide e o
 								// segundo em que se colide.
 								makeCollisionEvent(
-										movedEntityEvent.getMovedEntityId(),
-										tempMEntityE.getMovedEntityId());
+										movedEntityEvent.getMovedEntity(),
+										tempMEntityE.getMovedEntity());
 								// adiciona a colisão ao array de controle de
 								// colisões.
 								//aux = collMade.length;
 								collMade[aux][0] = movedEntityEvent
-										.getMovedEntityId();
-								collMade[aux][1] = tempMEntityE.getMovedEntityId();
+										.getMovedEntity();
+								collMade[aux][1] = tempMEntityE.getMovedEntity();
 							} else {
 								// Se as velocidades forem iguais o casamento de
 								// coordenadas é impossível.
 								// Portando neste laço a entidade indicada por
 								// movedEntityEvent tem velocidade menor
 								// que a outra entidade.
-								makeCollisionEvent(tempMEntityE.getMovedEntityId(),
-										movedEntityEvent.getMovedEntityId());
+								makeCollisionEvent(tempMEntityE.getMovedEntity(),
+										movedEntityEvent.getMovedEntity());
 								//aux = collMade.length;
-								collMade[aux][0] = tempMEntityE.getMovedEntityId();
+								collMade[aux][0] = tempMEntityE.getMovedEntity();
 								collMade[aux][1] = movedEntityEvent
-										.getMovedEntityId();
+										.getMovedEntity();
 							}
 						else {
 							// Um de duas coisa aconteceram:
@@ -179,10 +179,10 @@ public class CollisionSystem extends BaseSystem {
 							// moveu e outra que ficou parada.
 							// 2)As duas entidades se moveram e suas direções
 							// são diferentes.
-							makeCollisionEvent(movedEntityEvent.getMovedEntityId(),
+							makeCollisionEvent(movedEntityEvent.getMovedEntity(),
 									cellPlacement2.getEntityId());
 							//aux = collMade.length;
-							collMade[aux][0] = movedEntityEvent.getMovedEntityId();
+							collMade[aux][0] = movedEntityEvent.getMovedEntity();
 							collMade[aux][1] = cellPlacement2.getEntityId();
 						}
 
@@ -232,7 +232,7 @@ public class CollisionSystem extends BaseSystem {
 		MovedEntityEvent mee;
 		for (Event evt : movedEntityList) {
 			mee = (MovedEntityEvent) evt;
-			if (mee.getMovedEntityId() == id)
+			if (mee.getMovedEntity() == id)
 				return mee;
 		}
 		return null;

@@ -21,7 +21,7 @@ import br.unb.entitysystem.Entity;
 import br.unb.entitysystem.EntityManager;
 import br.unb.entitysystem.Event;
 import br.unb.unbomber.component.BombDropper;
-import br.unb.unbomber.component.CellPlacement;
+import br.unb.unbomber.component.Position;
 import br.unb.unbomber.component.Draw;
 import br.unb.unbomber.component.Explosive;
 import br.unb.unbomber.component.Timer;
@@ -123,7 +123,7 @@ public class BombSystem2 extends BaseSystem {
         			int bombID =  timeOver.getOwnerId(); 
         			
         			 /* getting the initial bomb position */
-    	            CellPlacement bombPlacement = (CellPlacement) entityManager.getComponent(CellPlacement.class, bombID);
+    	            Position bombPlacement = (Position) entityManager.getComponent(Position.class, bombID);
     	             
     	            /* getting the explosive component to obtain the bombPower */
     	            Explosive bombPower = (Explosive) entityManager.getComponent(Explosive.class, bombID);     
@@ -156,7 +156,7 @@ public class BombSystem2 extends BaseSystem {
 	            int idBomb = inAnExpEv.getIdHit();
 	             
 	            /* get the placement (component) of the bomb from the entity manager */
-	            CellPlacement bombPlacement = (CellPlacement) entityManager.getComponent(CellPlacement.class, idBomb);
+	            Position bombPlacement = (Position) entityManager.getComponent(Position.class, idBomb);
 	             
 	            /* get the explosive (component) of the bomb from the entity manager */
 	            Explosive bombExplosive = (Explosive) entityManager.getComponent(Explosive.class, idBomb);
@@ -247,7 +247,7 @@ public class BombSystem2 extends BaseSystem {
                     int bombID = bombInGame.getEntityId();
                      
                     /* get the initial bomb position */
-                    CellPlacement bombPlacement = (CellPlacement) getEntityManager().getComponent(CellPlacement.class,
+                    Position bombPlacement = (Position) getEntityManager().getComponent(Position.class,
                                                                                                   bombID);
                      
                     /* get the explosive component to obtain the bombPower */
@@ -281,7 +281,7 @@ public class BombSystem2 extends BaseSystem {
     	EntityManager entityManager = getEntityManager();
     	
         /* find dropper placement */
-        CellPlacement dropperPlacement = (CellPlacement) getEntityManager().getComponent(CellPlacement.class,
+        Position dropperPlacement = (Position) getEntityManager().getComponent(Position.class,
                 																		dropper.getEntityId());
          
         Entity bomb = entityManager.createEntity();
@@ -290,7 +290,7 @@ public class BombSystem2 extends BaseSystem {
         bomb.setOwnerId(dropper.getEntityId());
  
         /* create the placement component */
-        CellPlacement bombPlacement = new CellPlacement();
+        Position bombPlacement = new Position();
          
         /* the bomb has the same placement of its dropper */
         bombPlacement.setCellX(dropperPlacement.getCellX());

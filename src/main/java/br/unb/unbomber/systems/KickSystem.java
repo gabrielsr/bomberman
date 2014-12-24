@@ -26,7 +26,7 @@ import br.unb.unbomber.event.ActionCommandEvent;
 import br.unb.unbomber.event.CollisionEvent;
 import br.unb.unbomber.event.MovedEntityEvent;
 import br.unb.unbomber.event.MovementCommandEvent;
-import br.unb.unbomber.event.MovementCommandEvent.MovementType;
+import br.unb.unbomber.event.MovementCommandEvent.Direction;
 
 /**
  * Extending the BaseSystem.
@@ -213,19 +213,19 @@ public class KickSystem extends BaseSystem {
                 /* if the entityId is the same as the dropper, get the direction */
                 if (entityId == sourceId){
                     
-                    if (currentMovementEvent.getType() == MovementType.MOVE_UP) {
+                    if (currentMovementEvent.getDirection() == Direction.MOVE_UP) {
                         dropperDirection = Direction.UP;
                     }
                     
-                    if (currentMovementEvent.getType() == MovementType.MOVE_DOWN) {
+                    if (currentMovementEvent.getDirection() == Direction.MOVE_DOWN) {
                         dropperDirection = Direction.DOWN;
                     }
                     
-                    if (currentMovementEvent.getType() == MovementType.MOVE_RIGHT) {
+                    if (currentMovementEvent.getDirection() == Direction.MOVE_RIGHT) {
                         dropperDirection = Direction.RIGHT;
                     }
                     
-                    if (currentMovementEvent.getType() == MovementType.MOVE_LEFT) {
+                    if (currentMovementEvent.getDirection() == Direction.MOVE_LEFT) {
                         dropperDirection = Direction.LEFT;
                     }
                         
@@ -249,7 +249,7 @@ public class KickSystem extends BaseSystem {
 
         MovedEntityEvent kickStarted = new MovedEntityEvent();
 
-        kickStarted.setMovedEntityId(targetId);    //setting the entity that will be the target of the kick
+        kickStarted.setMovedEntity(targetId);    //setting the entity that will be the target of the kick
         kickStarted.setDirection(direction);    //setting the direction of the kick
 
         getEntityManager().addEvent(kickStarted);   //updating the event to the entity manager

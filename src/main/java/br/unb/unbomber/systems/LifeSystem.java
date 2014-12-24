@@ -7,7 +7,7 @@ import br.unb.entitysystem.BaseSystem;
 import br.unb.entitysystem.EntityManager;
 import br.unb.entitysystem.Event;
 import br.unb.unbomber.component.AvailableTries;
-import br.unb.unbomber.component.CellPlacement;
+import br.unb.unbomber.component.Position;
 import br.unb.unbomber.component.Health;
 import br.unb.unbomber.component.LifeType;
 import br.unb.unbomber.component.LifeType.Type;
@@ -368,8 +368,8 @@ public class LifeSystem extends BaseSystem {
 		int avTries;
 
 		/** Atribuição da entidade destruída a celula inicial. */
-		CellPlacement placement = (CellPlacement) getEntityManager()
-				.getComponent(CellPlacement.class, destroyed.getTargetId());
+		Position placement = (Position) getEntityManager()
+				.getComponent(Position.class, destroyed.getTargetId());
 		placement.setCellX(0);
 		placement.setCellY(0);
 

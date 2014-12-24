@@ -20,7 +20,7 @@ import org.junit.Test;
 import br.unb.entitysystem.Entity;
 import br.unb.entitysystem.EntityManager;
 import br.unb.entitysystem.EntityManagerImpl;
-import br.unb.unbomber.component.CellPlacement;
+import br.unb.unbomber.component.Position;
 import br.unb.unbomber.event.CollisionEvent;
 import br.unb.unbomber.event.CreateDiseaseEvent;
 
@@ -51,12 +51,12 @@ public class DiseasesSystemTestCase {
 		int DISEASE_ID = entityManager.getUniqueId();
 
 		/** < adiciona o placement da disease */
-		CellPlacement diseasePlacement = new CellPlacement();
+		Position diseasePlacement = new Position();
 		diseasePlacement.setCellX(x);
 		diseasePlacement.setCellY(y);
 
 		/** < adiciona o plcement da entidade */
-		CellPlacement charPlacement = new CellPlacement();
+		Position charPlacement = new Position();
 		charPlacement.setCellX(x);
 		charPlacement.setCellY(y);
 

@@ -10,8 +10,8 @@ import br.unb.entitysystem.Entity;
 import br.unb.entitysystem.EntityManager;
 import br.unb.entitysystem.EntityManagerImpl;
 import br.unb.entitysystem.query.Get;
-import br.unb.unbomber.component.CellPlacement;
-import br.unb.unbomber.component.EntityBuilder;
+import br.unb.unbomber.component.Position;
+import br.unb.unbomber.misc.EntityBuilder;
 
 public class EntityManagerTestCase {
 
@@ -27,7 +27,7 @@ public class EntityManagerTestCase {
 		Entity anEntity = entityManager.createEntity();
 
 		// Create Placement
-		CellPlacement placement = new CellPlacement();
+		Position placement = new Position();
 		placement.setCellX(42);
 		placement.setCellY(44);
 
@@ -41,8 +41,8 @@ public class EntityManagerTestCase {
 	@Test
 	public void lookUpComponentTest() {
 
-		CellPlacement placement = (CellPlacement) entityManager.getComponent(
-				CellPlacement.class, insertedEtityId);
+		Position placement = (Position) entityManager.getComponent(
+				Position.class, insertedEtityId);
 		
 		assertEquals(42, placement.getCellX());
 	}
@@ -52,8 +52,8 @@ public class EntityManagerTestCase {
 
 		entityManager.removeEntityById(insertedEtityId);
 		
-		CellPlacement placement = (CellPlacement) entityManager.getComponent(
-				CellPlacement.class, insertedEtityId);
+		Position placement = (Position) entityManager.getComponent(
+				Position.class, insertedEtityId);
 		
 		assertNull("Should be null", placement);
 	}
@@ -65,7 +65,7 @@ public class EntityManagerTestCase {
 				.withMovable(0.1f)
 				.build();
 		
-		CellPlacement cell = Get.from(bomber1).component(CellPlacement.class).now();
+		Position cell = Get.from(bomber1).component(Position.class).now();
 
 		
 		assertEquals(314, cell.getCellX());

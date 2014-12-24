@@ -7,7 +7,7 @@ import br.unb.entitysystem.BaseSystem;
 import br.unb.entitysystem.Entity;
 import br.unb.entitysystem.EntityManager;
 import br.unb.entitysystem.Event;
-import br.unb.unbomber.component.CellPlacement;
+import br.unb.unbomber.component.Position;
 import br.unb.unbomber.component.DiseaseComponent;
 import br.unb.unbomber.component.DiseaseComponent.DiseaseType;
 import br.unb.unbomber.component.Draw;
@@ -102,7 +102,7 @@ public class DiseasesSystem extends BaseSystem {
 
 	}
 
-	private void createDisease(CellPlacement cellPlacement) {
+	private void createDisease(Position cellPlacement) {
 
 		/* Creating ExplosionBarrierComponent */
 		ExplosionBarrier explosionBarrier = new ExplosionBarrier();

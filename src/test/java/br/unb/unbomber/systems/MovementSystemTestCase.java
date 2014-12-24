@@ -119,6 +119,7 @@ public class MovementSystemTestCase {
 		
 		MovementSystem movementSystem = world.getSystem(MovementSystem.class);
 		
+		/** call to create a map in GridSystem */
 		world.process();
 		
 		/** look */
