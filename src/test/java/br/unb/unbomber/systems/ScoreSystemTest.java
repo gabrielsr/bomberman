@@ -34,7 +34,6 @@ public class ScoreSystemTest {
 		
 		scsystem.update();
 		
-		assertTrue(true);
 	}
 	
 	@Test 

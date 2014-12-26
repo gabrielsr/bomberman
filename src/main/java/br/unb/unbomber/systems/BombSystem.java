@@ -63,7 +63,7 @@ public class BombSystem extends BaseSystem {
 	}
 
 
-	
+
 	/**
 	 * Method for the updating of all bombs.
 	 * This method is called every turn. It checks if there is any 
@@ -81,62 +81,58 @@ public class BombSystem extends BaseSystem {
 		 * 4) add event to processed list
 		 * 
 		 */
-		
+
 		// Events of the type Action Command (drops bomb & triggers remote bomb)
 		// 1)
 		List<Event> actionEvents = entityManager
 				.getEvents(ActionCommandEvent.class);
-		if (actionEvents != null) {
-			for (Event event : actionEvents) {
-				ActionCommandEvent actionCommand = (ActionCommandEvent) event;
-				
+		for (Event event : actionEvents) {
+			ActionCommandEvent actionCommand = (ActionCommandEvent) event;
+
+			// 2) 
+			if ((actionCommand.getType() == ActionType.DROP_BOMB)
+					&& (!processedEvents.contains(actionCommand))) {
+
+				// 3)
+				BombDropper dropper = (BombDropper) entityManager.getComponent(BombDropper.class, actionCommand.getEntityId());
+				verifyAndDropBomb(dropper);
+
+				// 4)
+				processedEvents.add(actionCommand);
+
 				// 2) 
-				if ((actionCommand.getType() == ActionType.DROP_BOMB)
-						&& (!processedEvents.contains(actionCommand))) {
-					
-					// 3)
-					BombDropper dropper = (BombDropper) entityManager.getComponent(BombDropper.class, actionCommand.getEntityId());
-					verifyAndDropBomb(dropper);
-					
-					// 4)
-					processedEvents.add(actionCommand);
-					
-				// 2) 
-				}else if ((actionCommand.getType() == ActionType.TRIGGERS_REMOTE_BOMB)
-						&& (!processedEvents.contains(actionCommand))) {
-					
-					// 3)
-					List<Component> components =  entityManager.getComponents(Explosive.class);
-					for (Component component: components) {
-						Explosive explosive = (Explosive) component;
-						if (explosive.getOwnerId() == actionCommand.getEntityId()) {
-							createExplosionEvent(explosive.getEntityId());
-						}
+			}else if ((actionCommand.getType() == ActionType.TRIGGERS_REMOTE_BOMB)
+					&& (!processedEvents.contains(actionCommand))) {
+
+				// 3)
+				List<Component> components =  entityManager.getComponents(Explosive.class);
+				for (Component component: components) {
+					Explosive explosive = (Explosive) component;
+					if (explosive.getOwnerId() == actionCommand.getEntityId()) {
+						createExplosionEvent(explosive.getEntityId());
 					}
-					
-					// 4)
-					processedEvents.add(actionCommand);
 				}
+
+				// 4)
+				processedEvents.add(actionCommand);
 			}
 		}
 
 		// Events of the type Time Out (Triggers bomb)
 		// 1)
 		List<Event> timerOvers = entityManager.getEvents(TimeOverEvent.class);
-		if (timerOvers != null) {
-			for (Event event : timerOvers) {
-				TimeOverEvent timeOver = (TimeOverEvent) event;
+		for (Event event : timerOvers) {
+			TimeOverEvent timeOver = (TimeOverEvent) event;
 
-				// 2)
-				if ((timeOver.getAction().equals(TRIGGERED_BOMB_ACTION))
-						&& (!processedEvents.contains(timeOver))) {
+			// 2)
+			if ((timeOver.getAction().equals(TRIGGERED_BOMB_ACTION))
+					&& (!processedEvents.contains(timeOver))) {
 
-					// 3)
-					createExplosionEvent(timeOver.getOwnerId());
-					
-					// 4)
-					processedEvents.add(timeOver);
-				}
+				// 3)
+				createExplosionEvent(timeOver.getOwnerId());
+
+				// 4)
+				processedEvents.add(timeOver);
 			}
 		}
 
@@ -145,23 +141,21 @@ public class BombSystem extends BaseSystem {
 		// 1)
 		List<Event> inExplosionEvents = entityManager
 				.getEvents(InAnExplosionEvent.class);
-		if (inExplosionEvents != null) {
-			for (Event event : inExplosionEvents) {
-				InAnExplosionEvent inAnExplosion = (InAnExplosionEvent) event;
-				
-				// 2)
-				if (!processedEvents.contains(inAnExplosion)) {
-					
-					// 3)
-					int entityInExplosionId = inAnExplosion.getIdHit();
-					Explosive bombExplosive = (Explosive) entityManager.getComponent(Explosive.class, entityInExplosionId);
+		for (Event event : inExplosionEvents) {
+			InAnExplosionEvent inAnExplosion = (InAnExplosionEvent) event;
 
-					if (bombExplosive != null) {
-						createExplosionEvent(entityInExplosionId);
-					}
-					// 4)
-					processedEvents.add(inAnExplosion);
+			// 2)
+			if (!processedEvents.contains(inAnExplosion)) {
+
+				// 3)
+				int entityInExplosionId = inAnExplosion.getIdHit();
+				Explosive bombExplosive = (Explosive) entityManager.getComponent(Explosive.class, entityInExplosionId);
+
+				if (bombExplosive != null) {
+					createExplosionEvent(entityInExplosionId);
 				}
+				// 4)
+				processedEvents.add(inAnExplosion);
 			}
 		}
 	}
@@ -179,23 +173,23 @@ public class BombSystem extends BaseSystem {
 		 * 3) Set explosion atributes
 		 * 4) Adds explosion event to Entity Manager
 		 */
-		
+
 		// 1)
 		EntityManager entityManager = getEntityManager(); 
 		CellPlacement bombPlacement = (CellPlacement) entityManager
 				.getComponent(CellPlacement.class, bombID);
 		Explosive bombExplosive = (Explosive) entityManager.getComponent(
 				Explosive.class, bombID); 
-		
+
 		// 2)
 		ExplosionStartedEvent explosion = new ExplosionStartedEvent(); 
-		
+
 		// 3)
 		explosion.setEventId(entityManager.getUniqueId());
 		explosion.setOwnerId(bombExplosive.getOwnerId()); //The Explosion owner is the bomb ownwer
 		explosion.setInitialPosition(bombPlacement); 
 		explosion.setExplosionRange(bombExplosive.getExplosionRange());
-		
+
 		// 4)
 		entityManager.addEvent(explosion);
 	}
@@ -215,23 +209,23 @@ public class BombSystem extends BaseSystem {
 				Explosive explosive = (Explosive) component;
 				if (explosive.getOwnerId() == dropper.getEntityId()) {
 
-						bombCounter++;
+					bombCounter++;
 
 				}
 			}
 		}
 		if (bombCounter < dropper.getPermittedSimultaneousBombs()) {
-			
+
 			Entity bomb = null;
-			
+
 			if (dropper.isCanRemoteTrigger()) {
-				
+
 				bomb = createRemoteBomb(dropper);
-				
+
 			} else {
 
 				bomb = createTimeBomb(dropper);
-				
+
 			}
 			getEntityManager().update(bomb);
 		}
@@ -277,7 +271,7 @@ public class BombSystem extends BaseSystem {
 		return bomb;
 
 	}
-	
+
 	//Method created to avoid code duplication
 	Entity createGenericBomb(BombDropper dropper){
 		/*

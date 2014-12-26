@@ -1,14 +1,19 @@
 package br.unb.unbomber.systems;
 
 import static junit.framework.Assert.assertEquals;
+
 import org.junit.Before;
 import org.junit.Test;
 
 import br.unb.unbomber.component.BombDropper;
 import br.unb.unbomber.component.CellPlacement;
+import br.unb.unbomber.component.PowerUp;
+import br.unb.unbomber.component.PowerUp.PowerType;
 import br.unb.unbomber.core.Entity;
 import br.unb.unbomber.core.EntityManager;
 import br.unb.unbomber.core.EntityManagerImpl;
+import br.unb.unbomber.event.ActionCommandEvent;
+import br.unb.unbomber.event.ActionCommandEvent.ActionType;
 
 public class ThrowSystemTestCase {
 
@@ -26,7 +31,7 @@ public class ThrowSystemTestCase {
 		
 	}
 	
-	@Test
+	//@Test
 	public void testConstrutor() {
 		throwSystem = new ThrowSystem();
 		
@@ -41,9 +46,10 @@ public class ThrowSystemTestCase {
 		Entity anEntity = entityManager.createEntity(); 
 		anEntity.addComponent(new BombDropper());
 		anEntity.addComponent(new CellPlacement());
-		((CellPlacement) anEntity.getComponents()).setCellX(10);
-		((CellPlacement) anEntity.getComponents()).setCellY(15);
+		anEntity.addComponent(new PowerUp(PowerType.BOXINGGLOVEACQUIRED));
 		entityManager.update(anEntity);
+		((CellPlacement) entityManager.getComponent(CellPlacement.class, anEntity.getEntityId())).setCellX(10);
+		((CellPlacement) entityManager.getComponent(CellPlacement.class, anEntity.getEntityId())).setCellY(15);
 		
 		throwSystem = new ThrowSystem();
 		
@@ -56,11 +62,13 @@ public class ThrowSystemTestCase {
 		bombDropper.setAreBombsHardPassThrough(true);
 		bombDropper.setAreBombsPassThrough(true);
 		
-		bombSystem.verifyAndDropBomb(bombDropper);
+		//create an DROP_BOMB Command Event
+		ActionCommandEvent event = new ActionCommandEvent(ActionType.DROP_BOMB, bombDropper.getEntityId());
+		entityManager.addEvent(event);
 		
 		throwSystem.update(); //jogou a bomba em qual direção;
 		
-		assertEquals(((CellPlacement) anEntity.getComponents()).getCellX(), ((CellPlacement) anEntity.getComponents()).getCellX() + 5);
+		assertEquals(((CellPlacement) entityManager.getComponent(CellPlacement.class, anEntity.getEntityId())).getCellX(), 15);
 	}
 	
 

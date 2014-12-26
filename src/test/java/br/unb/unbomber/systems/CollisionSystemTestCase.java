@@ -14,7 +14,6 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.Ignore;
 
 import br.unb.unbomber.component.CellPlacement;
 import br.unb.unbomber.component.Direction;
@@ -26,7 +25,6 @@ import br.unb.unbomber.core.Event;
 import br.unb.unbomber.event.CollisionEvent;
 import br.unb.unbomber.event.MovedEntityEvent;
 
-@Ignore
 public class CollisionSystemTestCase {
 
 	EntityManager entityManager;

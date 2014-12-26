@@ -46,7 +46,6 @@ public class ScoreSystem extends BaseSystem {
 		EntityManager entityManager = getEntityManager();
 		/*Percorrendo a lista de eventos para encontrar um evento de destruição*/
 		List<Event> destroyedEvent = entityManager.getEvents(DestroyedEvent.class);
-		if (destroyedEvent != null) {
 			for (Event event : destroyedEvent) {
 				DestroyedEvent destroyed = (DestroyedEvent) event;	
 				/*Ao encontrar o evento correto, vemos qual é a pontuação que a entidade destruída dá para quem a destruiu (bounty)*/
@@ -54,7 +53,6 @@ public class ScoreSystem extends BaseSystem {
 				Score entScore = (Score) getEntityManager().getComponent(Score.class, destroyed.getSourceId());
 				entScore.addScore(defuntopoints.getBounty());
 			}
-		}
 	}
 }
 
