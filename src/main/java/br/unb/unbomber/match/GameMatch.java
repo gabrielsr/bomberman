@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 
 import net.mostlyoriginal.api.event.common.EventManager;
 import br.unb.unbomber.systems.MovementSystem;
+import br.unb.unbomber.systems.TimeSystem;
 
 import com.artemis.EntitySystem;
 import com.artemis.World;
@@ -24,6 +25,7 @@ public class GameMatch {
 		
 		world = new World();
 		world.setSystem(new MovementSystem());
+		world.setSystem(new TimeSystem());
 	}
 	
 	/**

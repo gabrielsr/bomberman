@@ -1,5 +1,7 @@
 package br.unb.unbomber.misc;
 
+import java.util.List;
+
 import net.mostlyoriginal.api.event.common.Event;
 import br.unb.gridphysics.Vector2D;
 import br.unb.unbomber.component.BombDropper;
@@ -41,6 +43,13 @@ public class EntityBuilder2 extends com.artemis.utils.EntityBuilder{
 		return (EntityBuilder2) with(component);
 	}
 
+	public EntityBuilder2 with(List<Component> components){
+		for(Component component: components){
+			with(component);
+		}
+		return this;
+	}
+	
 	public EntityBuilder2 withPosition(int cellX, int cellY){
 	
 		Position cell = new Position();

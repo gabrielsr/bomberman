@@ -59,13 +59,11 @@ public class MovementSystem extends EntitySystem {
 	
 	public MovementSystem(Aspect aspect) {
 		super(aspect);
-		// TODO Auto-generated constructor stub
 	}
 
 	public MovementSystem() {
 		super(Aspect.getAspectForAll(Position.class, Movable.class));
 	}
-
 
 
 	@Override
