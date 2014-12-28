@@ -5,8 +5,6 @@ import java.util.List;
 
 import net.mostlyoriginal.api.event.common.Event;
 
-import com.artemis.Entity;
-
 /**
  * Spec of a Stage. 
  * 
@@ -35,7 +33,7 @@ public class StageSpec {
 	
 	
 	/** Entities of the stage. Like Characters, Monsters */
-	private List<Entity> entities;
+	private List<EntitySpec> entities;
 
 	/** Initial Events */
 	private List<Event> events;
@@ -64,18 +62,21 @@ public class StageSpec {
 		this.mapRepresentation = mapRepresentation;
 	}
 
-	public List<Entity> getEntities() {
+	public List<EntitySpec> getEntities() {
 		if(entities == null){
-			this.entities = new ArrayList<Entity>();
+			this.entities = new ArrayList<EntitySpec>();
 		}
 		return entities;
 	}
 
-	public void setEntities(List<Entity> entities) {
+	public void setEntities(List<EntitySpec> entities) {
 		this.entities = entities;
 	}
 
 	public List<Event> getEvents() {
+		if(events == null){
+			this.events = new ArrayList<Event>();
+		}
 		return events;
 	}
 
@@ -83,4 +84,9 @@ public class StageSpec {
 		this.events = events;
 	}
 
+	
+
 }
+
+
+
