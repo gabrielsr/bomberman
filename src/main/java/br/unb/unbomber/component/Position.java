@@ -6,9 +6,14 @@ import com.artemis.Component;
 
 public class Position extends Component{
 
+	private static float CELL_MIDDLE = 0.5f;
+	
 	private int cellX;
 	
 	private int cellY;
+
+	/** An entity start at the middle of a cell */
+	private Vector2D<Float> cellPosition = new Vector2D<Float>(CELL_MIDDLE, CELL_MIDDLE);
 
 	public Position(){
 		
@@ -35,8 +40,18 @@ public class Position extends Component{
 		this.cellY = cellY;
 	}
 	
+	
+	public Vector2D<Float> getCellPosition() {
+		return cellPosition ;
+	}
+
+	public void setCellPosition(Vector2D<Float> cellDisplacement) {
+		this.cellPosition = cellDisplacement;
+	}
+	
+	
 	public Vector2D<Float> centerPosition(){
-		return new Vector2D<>(cellX + 0.5f, cellY+ 0.5f);
+		return getIndex().toFloatVector().add(this.cellPosition);
 	}
 	
 	public Vector2D<Integer> getIndex(){

@@ -30,15 +30,7 @@ public class Movable extends Component {
 	public void setSpeed(float speed) {
 		this.speed = speed;
 	}
-	
-	public Vector2D<Float> getCellPosition() {
-		return cellPosition;
-	}
 
-	public void setCellPosition(Vector2D<Float> cellDisplacement) {
-		this.cellPosition = cellDisplacement;
-	}
-	
 	public String toString(){
 		return "{ cellPosition:" + this.cellPosition + "\n" +
 					"speed:" + this.speed + "}";

@@ -58,6 +58,15 @@ public class EntityBuilder2 extends com.artemis.utils.EntityBuilder{
 		return includeInProduct(cell);		
 	}
 	
+	public EntityBuilder2 withPosition(int cellX, int cellY, float dx, float dy){
+		
+		Position cell = new Position();
+		cell.setCellX(cellX);
+		cell.setCellY(cellY);
+		cell.setCellPosition(new Vector2D<Float>(dx, dy));
+		return includeInProduct(cell);		
+	}
+	
 	public EntityBuilder2 withDropper(int permittedSimultaneousBombs, 
 				int explosionRange,
 				boolean canRemoteTrigger,
@@ -88,18 +97,10 @@ public class EntityBuilder2 extends com.artemis.utils.EntityBuilder{
 				false,false,false,false);
 	}
 	
-
 	public EntityBuilder2 withMovable(float speed){
-		return withMovable(speed, 0.5f, 0.5f);
-	}
-	
-	public EntityBuilder2 withMovable(float speed, float dx, float dy){
 		
 		Movable movable = new Movable();
-		movable.setSpeed(speed);
-		Vector2D<Float> displacement = new Vector2D<>(dx,dy);
-		movable.setCellPosition(displacement);
-		
+		movable.setSpeed(speed);		
 		return includeInProduct(movable);
 	}
 	

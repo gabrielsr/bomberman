@@ -82,10 +82,10 @@ public class MovementSystem extends EntitySystem {
 	public void handle(MovementCommandEvent command){
 	
 		Movable moved = movableMapper.get(command.getEntity());	
-		Position originCell = positionMapper.get(command.getEntity());
+		Position position = positionMapper.get(command.getEntity());
 
 		
-		Vector2D<Integer> originCellIndex = originCell.getIndex();
+		Vector2D<Integer> originCellIndex = position.getIndex();
 		
 		/** Calculate the displacement and new cell*/
 		
@@ -94,7 +94,7 @@ public class MovementSystem extends EntitySystem {
 		Vector2D<Float> displacement = MovementCalc.displacement(
 				movementDirection, moved.getSpeed());
 
-		Vector2D<Float> origPosition = moved.getCellPosition();
+		Vector2D<Float> origPosition = position.getCellPosition();
 				
 		/** This is a Vector with the final point */
 		Vector2D<Float> dest = origPosition.add(displacement);
@@ -108,7 +108,7 @@ public class MovementSystem extends EntitySystem {
 		//TODO handle grid wrapper. If an entity get to the a border should reenter in another
 		
 		/** calculate the displacement */
-		GridDisplacement gridDisplacement = MovementCalc.gridDisplacement(moved.getCellPosition(), displacement);
+		GridDisplacement gridDisplacement = MovementCalc.gridDisplacement(position.getCellPosition(), displacement);
 		
 		Vector2D<Integer> destCellIndex = originCellIndex.add(gridDisplacement.getCells());
 		Vector2D<Float> destCellInternalPosition = gridDisplacement.getPosition();
@@ -124,24 +124,15 @@ public class MovementSystem extends EntitySystem {
 	
 	@Subscribe
 	private void handle(MovedEntityEvent movement) {
-		
-		/** Update Cell Relative Position */	
-		Movable movable = movableMapper.get(movement.getMovedEntity());
-		
-		updateEntity(movement.getMovedEntity(), movement.getDestinationCell(), movement.getDisplacement());
-		
-		LOGGER.log(Level.DEBUG, "entity moved to" + movable.getCellPosition());
-		
+		updateEntity(movement.getMovedEntity(), 
+				movement.getDestinationCell(), movement.getDisplacement());
 	}
 	
 	void updateEntity(Entity entity, Vector2D<Integer> cell, Vector2D<Float> cellPosition) {
 		
-		Position postion = positionMapper.get(entity);
-		postion.setIndex(cell);
-		
-		Movable movable = movableMapper.get(entity);
-		movable.setCellPosition(cellPosition);
-		
+		Position position = positionMapper.get(entity);
+		position.setIndex(cell);
+		position.setCellPosition(cellPosition);		
 	}
 	
 	/**
