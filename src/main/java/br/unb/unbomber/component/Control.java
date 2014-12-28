@@ -11,31 +11,24 @@
 
 package br.unb.unbomber.component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.artemis.Component;
 
 public class Control extends Component{
-
-	private List<ControlPair> movement;
 	
-	private List<ControlPair> action;
+	private List<ControlPair> actions;
 
-	public List<ControlPair> getMovement() {
-		return movement;
+	public List<ControlPair> getActions() {
+		if(actions == null){
+			actions = new ArrayList<>();
+		}
+		return actions;
 	}
 
-	public void setMovement(List<ControlPair> movement) {
-		this.movement = movement;
+	public void setActions(List<ControlPair> actions) {
+		this.actions = actions;
 	}
-
-	public List<ControlPair> getAction() {
-		return action;
-	}
-
-	public void setAction(List<ControlPair> action) {
-		this.action = action;
-	}
-	
 	
 }
