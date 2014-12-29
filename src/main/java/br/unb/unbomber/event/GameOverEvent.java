@@ -1,5 +1,7 @@
 package br.unb.unbomber.event;
 
+import java.util.UUID;
+
 import net.mostlyoriginal.api.event.common.Event;
 
 import com.artemis.Entity;
@@ -14,7 +16,7 @@ import com.artemis.Entity;
 
 public class GameOverEvent  implements Event {
 	/** Id da entidade que nao possui mais vida e tentativas de vida. */
-	private Entity source;
+	private UUID sourceUuid;
 
 	/**
 	 * Construtor da classe.
@@ -22,7 +24,7 @@ public class GameOverEvent  implements Event {
 	 * @param hUD
 	 *            Id da entidade que nao possui mais vida e tentativas de vida.
 	 */
-	public GameOverEvent(Entity hUD) {
+	public GameOverEvent(UUID hUD) {
 		setSource(hUD);
 	}
 
@@ -33,8 +35,8 @@ public class GameOverEvent  implements Event {
 	 * @return sourceId Id da entidade que nao possui mais vida e tentativas de
 	 *         vida.
 	 */
-	public Entity getSource() {
-		return source;
+	public UUID getSource() {
+		return sourceUuid;
 	}
 
 	/**
@@ -44,8 +46,8 @@ public class GameOverEvent  implements Event {
 	 * @param sourceId
 	 *            Id da entidade que nao possui mais vida e tentativas de vida.
 	 */
-	public void setSource(Entity source) {
-		this.source = source;
+	public void setSource(UUID source) {
+		this.sourceUuid = source;
 	}
 
 }

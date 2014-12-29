@@ -7,11 +7,11 @@
  *********************************************************************************************************************************/
 package br.unb.unbomber.event;
 
+import java.util.UUID;
+
 import net.mostlyoriginal.api.event.common.Event;
 import br.unb.gridphysics.Vector2D;
 import br.unb.unbomber.component.Direction;
-
-import com.artemis.Entity;
 
 /**
  * Event fired when a entity was moved
@@ -20,7 +20,7 @@ import com.artemis.Entity;
  */
 public class MovedEntityEvent  implements Event {
 
-	private Entity entity;
+	private UUID movedEntityUUID;
 
 	private Direction direction;
 	
@@ -31,13 +31,13 @@ public class MovedEntityEvent  implements Event {
 	private Vector2D<Float> displacement;
 	
 	// get the id of an entity which moved
-	public Entity getMovedEntity() {
-		return this.entity;
+	public UUID getMovedEntityUUID() {
+		return this.movedEntityUUID;
 	}
 
 	// set the id of an entity which moved
-	public void setMovedEntity(Entity entity) {
-		this.entity = entity;
+	public void setMovedEntityUUID(UUID movedEntityUUID) {
+		this.movedEntityUUID = movedEntityUUID;
 	}
 
 	//

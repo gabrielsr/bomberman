@@ -5,7 +5,9 @@ import java.util.logging.Logger;
 
 import net.mostlyoriginal.api.event.common.EventManager;
 import br.unb.unbomber.systems.BombSystem;
+import br.unb.unbomber.systems.CollisionSystem;
 import br.unb.unbomber.systems.ExplosionSystem;
+import br.unb.unbomber.systems.LifeSystem;
 import br.unb.unbomber.systems.MovementSystem;
 import br.unb.unbomber.systems.TimeSystem;
 
@@ -32,6 +34,8 @@ public class GameMatch {
 		world.setSystem(new MovementSystem());
 		world.setSystem(new BombSystem());
 		world.setSystem(new ExplosionSystem());
+		world.setSystem(new CollisionSystem());
+		world.setSystem(new LifeSystem());
 		
 	}
 	

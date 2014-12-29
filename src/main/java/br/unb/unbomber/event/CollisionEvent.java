@@ -7,31 +7,38 @@
 *********************************************************************************************************************************/
 package br.unb.unbomber.event;
 
+import java.util.UUID;
+
 import net.mostlyoriginal.api.event.common.Event;
 public class CollisionEvent  implements Event  {
-	private int sourceId;
-	private int targetId;
+	private UUID sourceId;
+	private UUID targetId;
 	private boolean isTargetId;
 	
-	public CollisionEvent(int sourceId, int targetId){
+	public CollisionEvent(){
+		
+	}
+	
+	public CollisionEvent(UUID sourceId, UUID targetId){
 		setSourceId( sourceId );
 		setTargetId( targetId );
 	}
+	
 	//get the id of an entity which collided
-	public int getSourceId(){
+	public UUID getSourceId(){
 		return sourceId;
 	}
 	
 	//set the id of an entity which collided
-	public void setSourceId(int sourceId){
+	public void setSourceId(UUID sourceId){
 		this.sourceId = sourceId;
 	}
 	
-	public int getTargetId(){
+	public UUID getTargetId(){
 		return targetId;
 	}
 	
-	public void setTargetId(int targetId){
+	public void setTargetId(UUID targetId){
 		this.targetId = targetId;
 	}
 	

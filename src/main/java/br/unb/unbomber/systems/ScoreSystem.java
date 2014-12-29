@@ -11,50 +11,49 @@
 
 package br.unb.unbomber.systems;
 
-import java.util.List;
-
-import br.unb.entitysystem.BaseSystem;
-import br.unb.entitysystem.EntityManager;
-import br.unb.entitysystem.Event;
+import net.mostlyoriginal.api.event.common.Subscribe;
 import br.unb.unbomber.component.Bounty;
 import br.unb.unbomber.component.Score;
 import br.unb.unbomber.event.DestroyedEvent;
 
-public class ScoreSystem extends BaseSystem {
+import com.artemis.ComponentMapper;
+import com.artemis.Entity;
+import com.artemis.annotations.Wire;
+import com.artemis.managers.UuidEntityManager;
+import com.artemis.systems.VoidEntitySystem;
 
-	/**
-	 * @brief Construtor score
-	 */
-	public ScoreSystem() {
-		super();
-	}
+@Wire
+public class ScoreSystem extends VoidEntitySystem {
+
+	ComponentMapper<Bounty> cmBounty;
+	
+	ComponentMapper<Score> cmScore;
+	
+	UuidEntityManager uuidManager;
 	
 	/**
-	 * @brief Construtor score
-	 * @param model uma instância de EntityManager
+	 * @brief Método que realiza a função principal do módulo, atualizando a
+	 *        pontuação dos jogadores de acordo com os eventos de um turno.
 	 */
-	public ScoreSystem(EntityManager model) {
-		super(model);
+	@Subscribe
+	public void handle(DestroyedEvent destroyed) {
+
+		Entity target = uuidManager.getEntity(destroyed.getTargetId());
+		Entity source = uuidManager.getEntity(destroyed.getSourceId());
+		/*
+		 * Ao encontrar o evento correto, vemos qual é a pontuação que a
+		 * entidade destruída dá para quem a destruiu (bounty)
+		 */
+		Bounty defuntopoints = cmBounty.get(target);
+		Score entScore = cmScore.get(source);
+		entScore.addScore(defuntopoints.getBounty());
 	}
-	
-	/**
-	 * @brief Método que realiza a função principal do módulo, atualizando a pontuação dos jogadores de acordo com os eventos de um turno.
-	 */
+
+
 	@Override
-	public void update() {
+	protected void processSystem() {
+		// TODO Auto-generated method stub
 		
-		EntityManager entityManager = getEntityManager();
-		/*Percorrendo a lista de eventos para encontrar um evento de destruição*/
-		List<Event> destroyedEvent = entityManager.getEvents(DestroyedEvent.class);
-		if (destroyedEvent != null) {
-			for (Event event : destroyedEvent) {
-				DestroyedEvent destroyed = (DestroyedEvent) event;	
-				/*Ao encontrar o evento correto, vemos qual é a pontuação que a entidade destruída dá para quem a destruiu (bounty)*/
-				Bounty defuntopoints = (Bounty) getEntityManager().getComponent(Bounty.class, destroyed.getTargetId());
-				Score entScore = (Score) getEntityManager().getComponent(Score.class, destroyed.getSourceId());
-				entScore.addScore(defuntopoints.getBounty());
-			}
-		}
 	}
 }
 

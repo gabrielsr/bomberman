@@ -1,5 +1,7 @@
 package br.unb.unbomber.event;
 
+import java.util.UUID;
+
 import net.mostlyoriginal.api.event.common.Event;
 
 /**
@@ -10,9 +12,9 @@ import net.mostlyoriginal.api.event.common.Event;
  */
 public class DestroyedEvent  implements Event {
 	/** Entidade que gerou a destruição. */
-	private int sourceId;
+	private UUID sourceId;
 	/** Entidade que foi destruída. */
-	private int targetId;
+	private UUID targetId;
 
 	/**
 	 * Construtor da classe.
@@ -22,7 +24,7 @@ public class DestroyedEvent  implements Event {
 	 * @param targetId
 	 *            Entidade que foi destruída.
 	 */
-	public DestroyedEvent(int sourceId, int targetId) {
+	public DestroyedEvent(UUID sourceId, UUID targetId) {
 		setSourceId(sourceId);
 		setTargetId(targetId);
 	}
@@ -32,7 +34,7 @@ public class DestroyedEvent  implements Event {
 	 * 
 	 * @return sourceId Entidade que gerou a destruição.
 	 */
-	public int getSourceId() {
+	public UUID getSourceId() {
 		return sourceId;
 	}
 
@@ -42,7 +44,7 @@ public class DestroyedEvent  implements Event {
 	 * @param sourceId
 	 *            Entidade que gerou a destruição.
 	 */
-	public void setSourceId(int sourceId) {
+	public void setSourceId(UUID sourceId) {
 		this.sourceId = sourceId;
 	}
 
@@ -51,7 +53,7 @@ public class DestroyedEvent  implements Event {
 	 * 
 	 * @return targetId Entidade que foi destruída.
 	 */
-	public int getTargetId() {
+	public UUID getTargetId() {
 		return targetId;
 	}
 
@@ -61,7 +63,7 @@ public class DestroyedEvent  implements Event {
 	 * @param targetId
 	 *            Entidade que foi destruída.
 	 */
-	public void setTargetId(int targetId) {
+	public void setTargetId(UUID targetId) {
 		this.targetId = targetId;
 	}
 
