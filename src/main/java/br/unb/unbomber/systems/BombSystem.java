@@ -116,7 +116,12 @@ public class BombSystem extends VoidEntitySystem {
 		// should explode as well)
 		UUID entityInExplosionId = inAnExplosion.getIdHit();
 		
-		Entity hitEntity = uuidEm.getEntity(inAnExplosion.getIdHit());
+		Entity hitEntity = uuidEm.getEntity(entityInExplosionId);
+		
+		//probably already handled
+		if(hitEntity==null){
+			return;
+		}
 		
 		/** if the hit entity is an explosive, create an explosion */
 		Explosive explosive = cmExplosive.getSafe(hitEntity);
@@ -141,8 +146,7 @@ public class BombSystem extends VoidEntitySystem {
 		 */
 		
 		// 1)		
-		Entity bombEntity = world.getManager(UuidEntityManager.class)
-				.getEntity(bombID);
+		Entity bombEntity = uuidEm.getEntity(bombID);
 		Position bombPlacement = cmPosition.get(bombEntity);
 		Explosive bombExplosive = cmExplosive.get(bombEntity); 
 		
@@ -155,6 +159,8 @@ public class BombSystem extends VoidEntitySystem {
 		explosion.setExplosionRange(bombExplosive.getExplosionRange());
 		
 		// 4)
+		bombEntity.deleteFromWorld();
+		
 		em.dispatch(explosion);
 	}
 

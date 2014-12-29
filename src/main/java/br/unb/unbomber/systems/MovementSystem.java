@@ -16,7 +16,6 @@ import java.util.List;
 import net.mostlyoriginal.api.event.common.EventManager;
 import net.mostlyoriginal.api.event.common.Subscribe;
 
-import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import br.unb.gridphysics.GridDisplacement;
@@ -113,19 +112,16 @@ public class MovementSystem extends EntitySystem {
 		Vector2D<Integer> destCellIndex = originCellIndex.add(gridDisplacement.getCells());
 		Vector2D<Float> destCellInternalPosition = gridDisplacement.getPosition();
 		
+		updateEntity(command.getEntity(), 
+				destCellIndex, destCellInternalPosition);
+		
 		/** fire an event so the collision system can check this movement */		
 		MovedEntityEvent movedEntity = new MovedEntityEvent();
 		movedEntity.setSpeed(moved.getSpeed());
-		movedEntity.setMovedEntity(command.getEntity());
+		movedEntity.setMovedEntityUUID(command.getEntity().getUuid());
 		movedEntity.setDestinationCell(destCellIndex);		
 		movedEntity.setDisplacement(destCellInternalPosition);
 		em.dispatch(movedEntity);
-	}
-	
-	@Subscribe
-	private void handle(MovedEntityEvent movement) {
-		updateEntity(movement.getMovedEntity(), 
-				movement.getDestinationCell(), movement.getDisplacement());
 	}
 	
 	void updateEntity(Entity entity, Vector2D<Integer> cell, Vector2D<Float> cellPosition) {
@@ -154,7 +150,6 @@ public class MovementSystem extends EntitySystem {
 		for(Vector2D<Integer> displacementComponent:displacement.components()){
 			Vector2D<Integer> toLookCell = gridPosition.add(displacementComponent);
 			
-			//TODO create a index and turn it more efficient
 			
 			List<Entity> entitiesAtCell = gridSystem.getInPosition(toLookCell);
 			

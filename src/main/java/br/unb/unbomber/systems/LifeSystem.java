@@ -373,12 +373,12 @@ public class LifeSystem extends VoidEntitySystem {
 	public boolean isDamageExplosion(InAnExplosionEvent explosion) {
 
 		/** Id e tipo da entidade que está na explosão. */
-		Entity source = uuidManager.getEntity(explosion.getIdHit());
+		Entity hitEntity = uuidManager.getEntity(explosion.getIdHit());
 
 		LifeType entType = null;
 
 		/** Procura o tipo da entidade pela a Id da mesma. */
-		entType = cmLifeType.get(source);
+		entType = cmLifeType.getSafe(hitEntity);
 		/**
 		 * Retorna boolean true se caso for definido o tipo da entidade, e a
 		 * função auxiliar de validação de danos entre colisões retornar a

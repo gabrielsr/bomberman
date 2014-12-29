@@ -65,7 +65,7 @@ public class ExplosionSystem extends EntitySystem {
 		Explosion exp = cmExplosion.get(explosionEntity);
 		
 		/** finish of propagation */
-		if(exp.isShouldPropagate() && exp.getExplosionRange() == 0 ){
+		if(!exp.isShouldPropagate() || exp.getExplosionRange() <= 0 ){
 			return;
 		}
 		
@@ -91,7 +91,6 @@ public class ExplosionSystem extends EntitySystem {
 		}
 		
 		exp.setShouldPropagate(false);
-		
 	}
 
 	private void tryPropagateTo(Vector2D<Integer> cellIndex, int expRange,
@@ -126,7 +125,7 @@ public class ExplosionSystem extends EntitySystem {
 			ExplosionBarrier explosionBarrier = cmExplosionBarrier.getSafe(entity);
 						
 			/** Test null because not all components will have this component */
-			if( explosionBarrier== null){
+ 			if( explosionBarrier== null){
 				continue;
 			}else if (explosionBarrier.getType() == ExplosionBarrierType.BLOCKER) {
 				canPropagate = false;
@@ -201,9 +200,8 @@ public class ExplosionSystem extends EntitySystem {
 	
 	protected void dispathInAExplosion(UUID hit, UUID cause){
 		InAnExplosionEvent inAnExplosionEvent = new InAnExplosionEvent();
-		inAnExplosionEvent.setExplosionCause(hit);
-		inAnExplosionEvent.setIdHit(cause);
-		
+		inAnExplosionEvent.setIdHit(hit);
+		inAnExplosionEvent.setExplosionCause(cause);
 		em.dispatch(inAnExplosionEvent);
 	}
 
