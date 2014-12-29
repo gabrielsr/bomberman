@@ -43,10 +43,16 @@ public class GridSystem extends EntitySystem {
 	}
 	
 	public List<Entity> getInPosition(Vector2D<Integer> index){
-		if(gridMap==null){
-			return null;
+		if(gridMap == null){
+			throw new IllegalStateException("map not initialized");
 		}
-		return gridMap.get(index);
+
+		List<Entity> result = gridMap.get(index);
+		
+		if(result==null){
+			result = new ArrayList<Entity>();
+		}
+		return result;
 	}
 	
 	

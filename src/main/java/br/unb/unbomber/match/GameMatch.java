@@ -4,11 +4,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import net.mostlyoriginal.api.event.common.EventManager;
+import br.unb.unbomber.systems.BombSystem;
+import br.unb.unbomber.systems.ExplosionSystem;
 import br.unb.unbomber.systems.MovementSystem;
 import br.unb.unbomber.systems.TimeSystem;
 
 import com.artemis.EntitySystem;
 import com.artemis.World;
+import com.artemis.managers.GroupManager;
+import com.artemis.managers.UuidEntityManager;
 
 public class GameMatch {
 	
@@ -24,8 +28,11 @@ public class GameMatch {
 	public GameMatch() {
 		
 		world = new World();
-		world.setSystem(new MovementSystem());
 		world.setSystem(new TimeSystem());
+		world.setSystem(new MovementSystem());
+		world.setSystem(new BombSystem());
+		world.setSystem(new ExplosionSystem());
+		
 	}
 	
 	/**
@@ -43,8 +50,9 @@ public class GameMatch {
 	public void start() {
 		
 		world.setManager(new EventManager());
-		
-		world.initialize();		
+		world.setManager(new UuidEntityManager());
+		world.setManager(new GroupManager());
+		world.initialize();
 	}
 		
 	public void update(float delta) {

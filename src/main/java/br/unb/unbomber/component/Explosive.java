@@ -7,28 +7,31 @@
 
 package br.unb.unbomber.component;
 
+import java.util.UUID;
+
 import com.artemis.Component;
 
 
 public class Explosive extends Component {
 
-	private int ownerId;
+	private UUID creatorUUID;
 	
 	private int explosionRange;
+	
 	/** 
 	 * Getter for the OwnerID 
 	 * @return ownerID one integer, represents who owns the bomb
 	 */
-	public int getOwnerId() {
-		return ownerId;
+	public UUID getCreatorUUID() {
+		return creatorUUID;
 	}
 	
 	/** 
 	 * Setter for the OwnerID 
 	 * @param ownerID one integer who will be the value of the ownerID
 	 */
-	public void setOwnerId(int ownerId) {
-		this.ownerId = ownerId;
+	public void setOwnerId(UUID creatorUUID) {
+		this.creatorUUID = creatorUUID;
 	}
 	/** 
 	 * Getter for the ExplosionRange 

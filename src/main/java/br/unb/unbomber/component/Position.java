@@ -23,6 +23,10 @@ public class Position extends Component{
 		this.cellX = x;
 		this.cellY = y;
 	}
+	
+	public Position(Vector2D<Integer> cellIndex) {
+		setIndex(cellIndex);
+	}
 
 	public int getCellX() {
 		return cellX;

@@ -1,6 +1,6 @@
 package br.unb.unbomber.event;
 
-import com.artemis.Entity;
+import java.util.UUID;
 
 import net.mostlyoriginal.api.event.common.Event;
 
@@ -14,15 +14,15 @@ public class ActionCommandEvent implements Event  {
 	
 	private ActionType type;
 
-	private Entity entity;
+	private UUID entityUUID;
 	
 	public ActionCommandEvent(){
 		
 	}
 	
-	public ActionCommandEvent(ActionType type, Entity entity){
+	public ActionCommandEvent(ActionType type, UUID entityUUID){
 		this.type = type;
-		this.entity = entity;
+		this.entityUUID = entityUUID;
 	}
 
 	public ActionType getType() {
@@ -33,12 +33,12 @@ public class ActionCommandEvent implements Event  {
 		this.type = type;
 	}
 
-	public Entity getEntity(){
-		return this.entity;
+	public UUID getEntityUUID(){
+		return this.entityUUID;
 	}
 	
-	public void setEntity(Entity entity) {
-		this.entity = entity;
+	public void setEntityUUID(UUID entityUUID) {
+		this.entityUUID = entityUUID;
 	}
 
 }

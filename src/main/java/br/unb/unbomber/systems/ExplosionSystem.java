@@ -1,312 +1,211 @@
 package br.unb.unbomber.systems;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
-import br.unb.entitysystem.BaseSystem;
-import br.unb.entitysystem.Component;
-import br.unb.entitysystem.Entity;
-import br.unb.entitysystem.EntityManager;
-import br.unb.entitysystem.Event;
-import br.unb.unbomber.component.Position;
+import net.mostlyoriginal.api.event.common.EventManager;
+import net.mostlyoriginal.api.event.common.Subscribe;
+import br.unb.gridphysics.Vector2D;
 import br.unb.unbomber.component.Direction;
-import br.unb.unbomber.component.Draw;
 import br.unb.unbomber.component.Explosion;
 import br.unb.unbomber.component.ExplosionBarrier;
 import br.unb.unbomber.component.ExplosionBarrier.ExplosionBarrierType;
+import br.unb.unbomber.component.Position;
 import br.unb.unbomber.component.Timer;
 import br.unb.unbomber.event.ExplosionStartedEvent;
 import br.unb.unbomber.event.InAnExplosionEvent;
+import br.unb.unbomber.event.TimeOverEvent;
+import br.unb.unbomber.misc.EntityBuilder2;
 
-public class ExplosionSystem extends BaseSystem {
+import com.artemis.Aspect;
+import com.artemis.ComponentMapper;
+import com.artemis.Entity;
+import com.artemis.EntitySystem;
+import com.artemis.annotations.Wire;
+import com.artemis.managers.UuidEntityManager;
+import com.artemis.utils.ImmutableBag;
 
-	/* List of already treated events */
+@Wire
+public class ExplosionSystem extends EntitySystem {
 
-	List<ExplosionStartedEvent> treatedEvents;
 
+	ComponentMapper<Explosion> cmExplosion;
+	
+	ComponentMapper<Position> cmPosition;
+	
+	ComponentMapper<ExplosionBarrier> cmExplosionBarrier;
+	
+	GridSystem gridSystem;
+	
+	EventManager em;
+	
+	public static final String EXPIRED_EXPLOSION = "expired_explosion";
+	
 	public ExplosionSystem() {
-		super();
-	}
-
-	public ExplosionSystem(EntityManager entityManager) {
-
-		super(entityManager);
-
+		super(Aspect.getAspectForAll(Explosion.class,Position.class));
 	}
 
 	@Override
-	public void start() {
-
-		treatedEvents = new ArrayList<ExplosionStartedEvent>();
-		super.start();
-
-	}
-
-	@Override
-	public void update() {
-
-		/* flag to see if an event was already treated */
-		int flag;
-
-		/* Get all ExplosionStartedEvents from EntityManager */
-
-		List<Event> events = getEntityManager().getEvents(
-				ExplosionStartedEvent.class);
-
-		/* treat all non treated events */
-		for (Event event : events) {
-
-			/*
-			 * check if this event was already treated
-			 */
-
-			flag = 0;
-			for (int i = 0; i < treatedEvents.size(); i++) {
-
-				if (treatedEvents.get(i).getEventId() == event.getEventId()) {
-
-					flag = 1;
-					break;
-
-				}
-			}
-
-			/* if event was not treated */
-			if (flag == 0) {
-
-				/* typecasting to use the specific event */
-				ExplosionStartedEvent explosionStartedEvent = (ExplosionStartedEvent) event;
-				/* creating explosion */
-				createExplosion(explosionStartedEvent.getInitialPosition(),
-						explosionStartedEvent.getExplosionRange(), explosionStartedEvent.getOwnerId());
-				/* put the treated event on the treatedEvents list */
-				treatedEvents.add(explosionStartedEvent);
-			}
-
-			/* checks if someone entered an explosion */
-			enteredExplosion();
-			
-			tickExplosions();
-
+	public void processEntities(ImmutableBag<Entity> entities) {
+		
+		for (Entity entity : entities) {
+			propagateAnExplosion(entity);
+			checkEntitiesInExplosion(entity);
 		}
+	}
+	
 
+	/**
+	 * Handle an explosion propagation
+	 * 
+	 * Propagate.
+	 * @param explosionEntity
+	 */
+	private void propagateAnExplosion(Entity explosionEntity) {
+		Explosion exp = cmExplosion.get(explosionEntity);
+		
+		/** finish of propagation */
+		if(exp.isShouldPropagate() && exp.getExplosionRange() == 0 ){
+			return;
+		}
+		
+		int newRange = exp.getExplosionRange() - 1;
+		
+		Position position = cmPosition.get(explosionEntity);
+		Vector2D<Integer> cellIndex = position.getIndex();
+		
+		
+		if(exp.isCenterOfExplosion()){
+			/* the center propagate in the four directions */
+			for(Direction direction: Direction.values()){
+				Vector2D<Integer> destination = cellIndex.add(direction.asVector());
+				
+				tryPropagateTo(destination, 
+						newRange, exp.getOwnerId(), false, direction);
+					
+			}
+		}else{
+			/* propagate in a specific directions */			
+			tryPropagateTo(cellIndex.add(exp.getPropagationDirection().asVector()), 
+					newRange, exp.getOwnerId(), false, exp.getPropagationDirection());
+		}
+		
+		exp.setShouldPropagate(false);
+		
+	}
+
+	private void tryPropagateTo(Vector2D<Integer> cellIndex, int expRange,
+			UUID explosionCauseUUID, boolean isCenter, Direction direction) {
+		
+		boolean canPropagate = checkIfCanPropagateTo(cellIndex, explosionCauseUUID);
+		
+		if(canPropagate){
+			createExplosion(cellIndex, expRange, explosionCauseUUID, isCenter, direction);
+		}
+		
+	}
+	
+	/**
+	 * Check if can propagate an create an hit a STOPPER if there is one. 
+	 * 
+	 * @param cellIndex
+	 * @param explosionCause
+	 * @return
+	 */
+	private boolean checkIfCanPropagateTo(Vector2D<Integer> cellIndex, UUID explosionCauseUUID){
+		boolean canPropagate = true;
+		
+		/** get all entities in destination */
+		List<Entity> entities = gridSystem.getInPosition(cellIndex);
+		
+		/**
+		* TODO the result of this loop is sensible to the order of entities
+		* 	returned by gridSystem. Its a bug when there is more than a entity in a cell
+		* */
+		for(Entity entity:entities){
+			ExplosionBarrier explosionBarrier = cmExplosionBarrier.getSafe(entity);
+						
+			/** Test null because not all components will have this component */
+			if( explosionBarrier== null){
+				continue;
+			}else if (explosionBarrier.getType() == ExplosionBarrierType.BLOCKER) {
+				canPropagate = false;
+				break;
+			} else if (explosionBarrier.getType() == ExplosionBarrierType.STOPPER) {
+				
+				//put the stopper at the explosion but don't propagate
+				dispathInAExplosion(entity.getUuid(), explosionCauseUUID);
+				canPropagate = false;
+				break;
+			}
+		}
+		return canPropagate;
+	}
+
+	@Subscribe
+	public void handle(ExplosionStartedEvent explosionStartedEvent){
+		/* creating explosion */
+		createExplosion(explosionStartedEvent.getInitialPosition(),
+				explosionStartedEvent.getExplosionRange(), explosionStartedEvent.getCreatorUUID(), true, null);
+	}
+	
+	@Subscribe
+	public void handle(TimeOverEvent<UUID> timeOverEvent){
+		if(EXPIRED_EXPLOSION.equals(timeOverEvent.getAction())){
+			UUID entityUUID = timeOverEvent.getPayload();
+			Entity entity = world.getManager(UuidEntityManager.class).getEntity(entityUUID);
+			entity.deleteFromWorld();
+		}
 	}
 
 	/**
 	 * Makes the time pass for the explosion and removes explosion if elapsed time is over
 	 */
-	private void tickExplosions() {
-		List<Component> explosions = getEntityManager().getComponents(Explosion.class);
-		for (Component component : explosions) {
-			Explosion explosion = (Explosion) component;
-			Timer timer = (Timer) getEntityManager().getComponent(Timer.class, explosion.getEntityId());
-			timer.tick();
-			if(timer.isOver()){
-				getEntityManager().removeEntityById(timer.getEntityId());
-			}
-		}
-	}
-
-	public void createExplosion(Position expPlacement, int expRange, int ownerId) {
-
-
-		Entity explosionEntity = getEntityManager().createEntity();
+	public void createExplosion(Vector2D<Integer> cellIndex, int expRange, 
+			UUID ownerId, boolean isCenter, Direction direction) {
 		
 		Explosion exp = new Explosion();
-		exp.setEntityId(explosionEntity.getEntityId());
 		exp.setExplosionRange(expRange);
 		exp.setOwnerId(ownerId);
+		exp.setCenterOfExplosion(isCenter);
+		exp.setPropagationDirection(direction);
 
-		Timer expTimer = new Timer(16, null);
-		expTimer.setEntityId(explosionEntity.getEntityId());
+
+		Entity explosionEntity = EntityBuilder2.create(world)
+			.withDraw("explosion")
+			.with(new Position(cellIndex))
+			.with(exp)			
+			.build();
+
+		//create a timer and a event of the explosion expiration
+		TimeOverEvent<UUID> toe = new TimeOverEvent<>(EXPIRED_EXPLOSION, explosionEntity.getUuid());		
+		Timer expTimer = new Timer(16, toe);
+
+		explosionEntity.edit().add(expTimer);
+	}
+	
+	/**
+	 *  checks if someone entered an explosion 
+	 **/
+	protected void checkEntitiesInExplosion(Entity explosionEntity) {
 		
-		Position cellPlacement = new Position();
-		cellPlacement.setCellX(expPlacement.getCellX());
-		cellPlacement.setCellY(expPlacement.getCellY());
-		cellPlacement.setEntityId(explosionEntity.getEntityId());
-
-		explosionEntity.addComponent(exp);
-		explosionEntity.addComponent(cellPlacement);
-		explosionEntity.addComponent(expTimer);
-
-		exp.setPropagationDirection(Direction.UP);
-		propagateExplosion(exp, expPlacement, expRange);
-
-		exp.setPropagationDirection(Direction.DOWN);
-		propagateExplosion(exp, expPlacement, expRange);
-
-		exp.setPropagationDirection(Direction.LEFT);
-		propagateExplosion(exp, expPlacement, expRange);
-
-		exp.setPropagationDirection(Direction.RIGHT);
-		propagateExplosion(exp, expPlacement, expRange);
+		Position cellOfExplosion = cmPosition.get(explosionEntity);
+		Explosion explosion = cmExplosion.get(explosionEntity);
 		
-		getEntityManager().update(explosionEntity);
-
-	}
-
-	public void propagateExplosion(Explosion exp, Position cellPlacement,
-			int range) {
-
-		if (range != 0 && detectExplosionCollision(exp, cellPlacement)) {
-
-			Entity explosionEntity = getEntityManager().createEntity();
-
-			Explosion newExp = new Explosion();
-			newExp.setEntityId(explosionEntity.getEntityId());
-			newExp.setExplosionRange(range);
-			newExp.setOwnerId(exp.getOwnerId());
-
-			Position newExpPlacement = new Position();
-			newExpPlacement.setEntityId(explosionEntity.getEntityId());
-
-			if (exp.getPropagationDirection() == Direction.UP) {
-				newExpPlacement.setCellX(cellPlacement.getCellX());
-				newExpPlacement.setCellY(cellPlacement.getCellY() + 1);
-			} else if (exp.getPropagationDirection() == Direction.DOWN) {
-				newExpPlacement.setCellX(cellPlacement.getCellX());
-				newExpPlacement.setCellY(cellPlacement.getCellY() - 1);
-			} else if (exp.getPropagationDirection() == Direction.LEFT) {
-				newExpPlacement.setCellX(cellPlacement.getCellX() - 1);
-				newExpPlacement.setCellY(cellPlacement.getCellY());
-			} else {
-				newExpPlacement.setCellX(cellPlacement.getCellX() + 1);
-				newExpPlacement.setCellY(cellPlacement.getCellY());
-			}
-
-			Timer expTimer = new Timer(16, null);
-
-			explosionEntity.addComponent(exp);
-			explosionEntity.addComponent(newExpPlacement);
-			explosionEntity.addComponent(expTimer);
-			explosionEntity.addComponent(new Draw("explosion"));
-			getEntityManager().update(explosionEntity);
-			--range;
-			propagateExplosion(newExp, newExpPlacement, range);
+		List<Entity> inExplosionEntities = gridSystem.getInPosition(cellOfExplosion.getIndex());
+		for(Entity inExplosionEntity:inExplosionEntities){
+			dispathInAExplosion(inExplosionEntity.getUuid(), 
+					explosion.getOwnerId());
 		}
 	}
-
-	/* checks if someone entered an explosion */
-	private void enteredExplosion() {
-
-		List<Component> cellPlacements = getEntityManager().getComponents(
-				Position.class);
-
-		List<Component> explosions = getEntityManager().getComponents(
-				Explosion.class);
-
-		Position cellPlacement;
-
-		Explosion explosion;
-
-		Position explosionPlacement;
-
-		for (Component componentExplosion : explosions) {
-
-			for (Component componentCellPlacement : cellPlacements) {
-
-				cellPlacement = (Position) componentCellPlacement;
-				explosion = (Explosion) componentExplosion;
-				explosionPlacement = (Position) getEntityManager()
-						.getComponent(Position.class,
-								explosion.getEntityId());
-				if (explosionPlacement.getCellX() == cellPlacement.getCellX()
-						&& explosionPlacement.getCellY() == cellPlacement
-								.getCellY()) {
-
-					InAnExplosionEvent inAnExplosionEvent = new InAnExplosionEvent();
-					inAnExplosionEvent.setOwnerId(explosion.getEntityId());
-					inAnExplosionEvent.setIdHit(cellPlacement.getEntityId());
-					getEntityManager().addEvent(inAnExplosionEvent);
-
-				}
-			}
-		}
-
-	}
-
-	/*
-	 * creates InAnExplosion event when an powerUp, character, monster, bomb or
-	 * softBlock collides with the explosion. Returns true if the explosion
-	 * should propagate and false otherwise
-	 */
-	public boolean processExplosionCollision(int entityId, Explosion explosion) {
-
-		ExplosionBarrier explosionBarrier = (ExplosionBarrier) getEntityManager()
-				.getComponent(ExplosionBarrier.class, entityId);
+	
+	protected void dispathInAExplosion(UUID hit, UUID cause){
+		InAnExplosionEvent inAnExplosionEvent = new InAnExplosionEvent();
+		inAnExplosionEvent.setExplosionCause(hit);
+		inAnExplosionEvent.setIdHit(cause);
 		
-		/** Test null because not all components will have this component */
-		if( explosionBarrier== null){
-			return true;
-		}else if (explosionBarrier.getType() == ExplosionBarrierType.BLOCKER) {
-
-			return false;
-
-		} else if (explosionBarrier.getType() == ExplosionBarrierType.STOPPER) {
-
-			InAnExplosionEvent inAnExplosionEvent = new InAnExplosionEvent();
-			inAnExplosionEvent.setIdHit(entityId);
-			inAnExplosionEvent.setOwnerId(explosion.getOwnerId());
-			getEntityManager().addEvent(inAnExplosionEvent);
-			return false;
-
-		} else {
-
-			InAnExplosionEvent inAnExplosionEvent = new InAnExplosionEvent();
-			inAnExplosionEvent.setIdHit(entityId);
-			inAnExplosionEvent.setOwnerId(explosion.getEntityId());
-			getEntityManager().addEvent(inAnExplosionEvent);
-			return true;
-
-		}
+		em.dispatch(inAnExplosionEvent);
 	}
 
-	/* returns true if the explosion should propagate and false otherwise */
-	public boolean detectExplosionCollision(Explosion explosion,
-			Position explosionPlacement) {
-
-		Direction direction = explosion.getPropagationDirection();
-		Position nextSpace = new Position();
-		if (direction == Direction.LEFT) {
-
-			nextSpace.setCellY(explosionPlacement.getCellY());
-			nextSpace.setCellX(explosionPlacement.getCellX() - 1);
-
-		} else if (direction == Direction.RIGHT) {
-
-			nextSpace.setCellY(explosionPlacement.getCellY());
-			nextSpace.setCellX(explosionPlacement.getCellX() + 1);
-
-		} else if (direction == Direction.UP) {
-
-			nextSpace.setCellY(explosionPlacement.getCellY() + 1);
-			nextSpace.setCellX(explosionPlacement.getCellX());
-
-		} else {
-
-			nextSpace.setCellY(explosionPlacement.getCellY() - 1);
-			nextSpace.setCellX(explosionPlacement.getCellX());
-
-		}
-
-		List<Component> components = getEntityManager().getComponents(
-				Position.class);
-
-		Position cellPlacement;
-
-		for (Component component : components) {
-
-			cellPlacement = (Position) component;
-			if (nextSpace.getCellX() == cellPlacement.getCellX()
-					&& nextSpace.getCellY() == cellPlacement.getCellY()) {
-
-				return processExplosionCollision(component.getEntityId(),
-						explosion);
-
-			}
-		}
-
-		return true;
-	}
 
 }
