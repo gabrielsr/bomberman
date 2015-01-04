@@ -85,7 +85,7 @@ public class BombSystem extends VoidEntitySystem {
 	 */
 	@Subscribe
 	public void handle(ActionCommandEvent actionCommand){
-		Entity dropperEntity = world.getManager(UuidEntityManager.class).getEntity(actionCommand.getEntityUUID());
+		Entity dropperEntity = world.getManager(UuidEntityManager.class).getEntity(actionCommand.getEntityUuid());
 		
 		if (actionCommand.getType() == ActionType.DROP_BOMB) {
 			

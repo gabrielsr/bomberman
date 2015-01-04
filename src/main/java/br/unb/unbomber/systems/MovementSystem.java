@@ -34,6 +34,7 @@ import com.artemis.ComponentMapper;
 import com.artemis.Entity;
 import com.artemis.EntitySystem;
 import com.artemis.annotations.Wire;
+import com.artemis.managers.UuidEntityManager;
 import com.artemis.utils.ImmutableBag;
 
 @Wire
@@ -48,6 +49,8 @@ public class MovementSystem extends EntitySystem {
 	ComponentMapper<Movable> movableMapper;
 	
 	ComponentMapper<MovementBarrier> barrierMapper;
+	
+	UuidEntityManager uuidEm;
 	
 	
 	/** used to dispatch events */
@@ -80,8 +83,10 @@ public class MovementSystem extends EntitySystem {
 	@Subscribe
 	public void handle(MovementCommandEvent command){
 	
-		Movable moved = movableMapper.get(command.getEntity());	
-		Position position = positionMapper.get(command.getEntity());
+		Entity entity = uuidEm.getEntity(command.getEntityUuid());
+		
+		Movable moved = movableMapper.get(entity);	
+		Position position = positionMapper.get(entity);
 
 		
 		Vector2D<Integer> originCellIndex = position.getIndex();
@@ -112,13 +117,13 @@ public class MovementSystem extends EntitySystem {
 		Vector2D<Integer> destCellIndex = originCellIndex.add(gridDisplacement.getCells());
 		Vector2D<Float> destCellInternalPosition = gridDisplacement.getPosition();
 		
-		updateEntity(command.getEntity(), 
+		updateEntity(entity, 
 				destCellIndex, destCellInternalPosition);
 		
 		/** fire an event so the collision system can check this movement */		
 		MovedEntityEvent movedEntity = new MovedEntityEvent();
 		movedEntity.setSpeed(moved.getSpeed());
-		movedEntity.setMovedEntityUUID(command.getEntity().getUuid());
+		movedEntity.setMovedEntityUUID(command.getEntityUuid());
 		movedEntity.setDestinationCell(destCellIndex);		
 		movedEntity.setDisplacement(destCellInternalPosition);
 		em.dispatch(movedEntity);

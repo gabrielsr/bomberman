@@ -2,9 +2,7 @@ package br.unb.unbomber.event;
 
 import java.util.UUID;
 
-import net.mostlyoriginal.api.event.common.Event;
-
-public class ActionCommandEvent implements Event  {
+public class ActionCommandEvent extends CommandEvent  {
 
 	public enum ActionType{
 		DROP_BOMB,
@@ -14,15 +12,13 @@ public class ActionCommandEvent implements Event  {
 	
 	private ActionType type;
 
-	private UUID entityUUID;
-	
 	public ActionCommandEvent(){
 		
 	}
 	
 	public ActionCommandEvent(ActionType type, UUID entityUUID){
 		this.type = type;
-		this.entityUUID = entityUUID;
+		this.entityUuid = entityUUID;
 	}
 
 	public ActionType getType() {
@@ -31,14 +27,6 @@ public class ActionCommandEvent implements Event  {
 	
 	public void setType(ActionType type) {
 		this.type = type;
-	}
-
-	public UUID getEntityUUID(){
-		return this.entityUUID;
-	}
-	
-	public void setEntityUUID(UUID entityUUID) {
-		this.entityUUID = entityUUID;
 	}
 
 }

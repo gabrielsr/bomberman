@@ -4,25 +4,22 @@
 
 package br.unb.unbomber.event;
 
-import net.mostlyoriginal.api.event.common.Event;
+import java.util.UUID;
+
 import br.unb.unbomber.component.Direction;
 
-import com.artemis.Entity;
-
-public class MovementCommandEvent  implements Event {
+public class MovementCommandEvent  extends CommandEvent {
 
 	private final Direction direction;
-	
-	private final Entity entity;
 	
 	/**
 	 * Method MovementCommandEvent recebe quem se moveu e armazena no evento.
 	 * @param type tipo do movimento (UP, LEFT, DOWN, RIGHT)
-	 * @param entity qual entidade se moveu
+	 * @param entityUuid qual entidade se moveu
 	 */
-	public MovementCommandEvent(Direction type, Entity entity){
+	public MovementCommandEvent(Direction type, UUID entityUuid){
 		this.direction = type;
-		this.entity = entity;
+		this.entityUuid = entityUuid;
 	}
 
 	/**
@@ -32,13 +29,6 @@ public class MovementCommandEvent  implements Event {
 	public Direction getDirection() {
 		return direction;
 	}
-	
-	/**
-	 * Method getEntityId resgata o ID da entidade que se moveu no evento
-	 * @return int (entityId)
-	 */
-	public Entity getEntity(){
-		return this.entity;
-	}
+
 	
 }
