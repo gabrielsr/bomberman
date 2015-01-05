@@ -4,8 +4,6 @@ import java.util.UUID;
 
 import net.mostlyoriginal.api.event.common.Event;
 
-import com.artemis.Entity;
-
 /**
  * Classe evento que indica que uma entidade nao possui mais vida e tentativas
  * de vida.

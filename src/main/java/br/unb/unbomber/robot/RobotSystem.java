@@ -70,8 +70,7 @@ public class RobotSystem extends EntitySystem {
 			commands = executor.invokeAll(peers);
 			executor.awaitTermination(millisWait, TimeUnit.MILLISECONDS);
 		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			throw new IllegalStateException(e1);
 		}
 		
 		// process robots commands
@@ -82,8 +81,7 @@ public class RobotSystem extends EntitySystem {
 						em.dispatch(command);
 					}
 				} catch (InterruptedException | ExecutionException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					throw new IllegalStateException(e);
 				}
 			}else{
 				System.out.println("Computation not concluded!");
