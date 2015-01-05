@@ -156,7 +156,7 @@ public class Vector2D<E extends Number> {
 			return false;
 		} else {
 			Vector2D<?> c = (Vector2D<?>) o;
-			if (c.x != this.x || c.y != this.y) {
+			if (!c.x.equals(this.x) || !c.y.equals(this.y)) {
 				return false;
 			} else {
 				return true;

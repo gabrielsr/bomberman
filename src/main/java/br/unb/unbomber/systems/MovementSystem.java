@@ -28,6 +28,7 @@ import br.unb.unbomber.component.MovementBarrier.MovementBarrierType;
 import br.unb.unbomber.component.Position;
 import br.unb.unbomber.event.MovedEntityEvent;
 import br.unb.unbomber.event.MovementCommandEvent;
+import br.unb.unbomber.robot.events.HitWallEvent;
 
 import com.artemis.Aspect;
 import com.artemis.ComponentMapper;
@@ -107,8 +108,15 @@ public class MovementSystem extends EntitySystem {
 
 		Vector2D<Integer> barriers = lookAhead(originCellIndex, crossVector);
 		
-		displacement = restrictUpdate(origPosition, displacement, barriers);
+		Vector2D<Float> restrictedDisplacement = restrictUpdate(origPosition, displacement, barriers);
 
+		if(!restrictedDisplacement.equals(displacement)){
+			HitWallEvent e = new HitWallEvent();
+			e.setEntityUuid(entity.getUuid());
+			em.dispatch(e);
+			
+			displacement = restrictedDisplacement;
+		}
 		//TODO handle grid wrapper. If an entity get to the a border should reenter in another
 		
 		/** calculate the displacement */
