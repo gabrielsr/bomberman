@@ -3,13 +3,12 @@ package br.unb.unbomber.match;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import jdk.nashorn.internal.ir.Block;
 import net.mostlyoriginal.api.event.common.EventManager;
+import br.unb.unbomber.robot.RobotSystem;
 import br.unb.unbomber.systems.BlockSystem;
 import br.unb.unbomber.systems.BombSystem;
 import br.unb.unbomber.systems.CollisionSystem;
 import br.unb.unbomber.systems.ExplosionSystem;
-import br.unb.unbomber.systems.LifeSystem;
 import br.unb.unbomber.systems.MovementSystem;
 import br.unb.unbomber.systems.TimeSystem;
 
@@ -37,6 +36,7 @@ public class GameMatch {
 		world.setSystem(new BombSystem());
 		world.setSystem(new ExplosionSystem());
 		world.setSystem(new CollisionSystem());
+		world.setSystem(new RobotSystem());
 		//world.setSystem(new LifeSystem());
 		world.setSystem(new BlockSystem());
 		
