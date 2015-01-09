@@ -1,13 +1,9 @@
 package br.unb.unbomber.systems;
 
-import java.util.List;
 import java.util.Random;
 
-import br.unb.entitysystem.BaseSystem;
-import br.unb.entitysystem.Entity;
-import br.unb.entitysystem.EntityManager;
-import br.unb.entitysystem.Event;
-import br.unb.unbomber.component.Position;
+import net.mostlyoriginal.api.event.common.EventManager;
+import net.mostlyoriginal.api.event.common.Subscribe;
 import br.unb.unbomber.component.DiseaseComponent;
 import br.unb.unbomber.component.DiseaseComponent.DiseaseType;
 import br.unb.unbomber.component.Draw;
@@ -15,92 +11,94 @@ import br.unb.unbomber.component.ExplosionBarrier;
 import br.unb.unbomber.component.ExplosionBarrier.ExplosionBarrierType;
 import br.unb.unbomber.component.LifeType;
 import br.unb.unbomber.component.LifeType.Type;
+import br.unb.unbomber.component.Position;
 import br.unb.unbomber.event.AquiredDiseaseEvent;
 import br.unb.unbomber.event.CollisionEvent;
 import br.unb.unbomber.event.CreateDiseaseEvent;
 import br.unb.unbomber.event.InAnExplosionEvent;
+import br.unb.unbomber.misc.EntityBuilder2;
 
-public class DiseasesSystem extends BaseSystem {
+import com.artemis.ComponentMapper;
+import com.artemis.Entity;
+import com.artemis.annotations.Wire;
+import com.artemis.managers.UuidEntityManager;
+import com.artemis.systems.VoidEntitySystem;
 
-	public DiseasesSystem() {
-		super();
-	}
 
-	public DiseasesSystem(EntityManager entityManager) {
-		super(entityManager);
-	}
+@Wire
+public class DiseasesSystem extends VoidEntitySystem {
+
+	
+	EventManager em;
+	
+	ComponentMapper<LifeType> cmLifeType;
+	ComponentMapper<DiseaseComponent> cmDiseaseComponent;
+	
+	UuidEntityManager uuidManager;
 
 	@Override
-	public void update() {
-
-		/* Creating the diseases */
-		List<Event> events = getEntityManager().getEvents(
-				CreateDiseaseEvent.class);
-		for (Event event : events) {
-			/* Typecasting to use properly the event */
-			CreateDiseaseEvent createDiseaseEvent = (CreateDiseaseEvent) event;
-			/* Treating the event */
-			createDisease(createDiseaseEvent.getPlacement());
-			/* Deleting the event */
-			getEntityManager().remove(event);
-		}
-
-		/* Checking if someone got any disease in the field */
-		events = getEntityManager().getEvents(CollisionEvent.class);
-		for (Event event : events) {
-			/* Typecasting to use properly the event */
-			CollisionEvent collisionEvent = (CollisionEvent) event;
-			/* Checking if it was a collision char - disease */
-			LifeType sourceLifeType = (LifeType) getEntityManager()
-					.getComponent(LifeType.class,
-							collisionEvent.getSourceId());
-			LifeType targetLifeType = (LifeType) getEntityManager()
-					.getComponent(LifeType.class,
-							collisionEvent.getTargetId());
-			if (sourceLifeType.getType() == Type.CHAR
-					&& targetLifeType.getType() == Type.DISEASE) {
-				
-				/* Getting the DiseaseComponent */
-				DiseaseComponent diseaseComponent = (DiseaseComponent) getEntityManager()
-						.getComponent(DiseaseComponent.class,
-								collisionEvent.getTargetId());
-				DiseaseType disease = diseaseComponent.getDiseaseType();
-				/* Creating an event according to the disease */
-				AquiredDiseaseEvent aquiredDiseaseEvent = new AquiredDiseaseEvent();
-				aquiredDiseaseEvent.setOwnerId(collisionEvent.getSourceId());
-				if (disease == DiseaseType.DIARRHEA) {
-					aquiredDiseaseEvent.setDiseaseType(DiseaseType.DIARRHEA);
-				} else if (disease == DiseaseType.CONSTIPATION) {
-					aquiredDiseaseEvent.setDiseaseType(DiseaseType.CONSTIPATION);
-				} else if (disease == DiseaseType.LOWPOWER) {
-					aquiredDiseaseEvent.setDiseaseType(DiseaseType.LOWPOWER);
-				} else if (disease == DiseaseType.RAPIDPACE) {
-					aquiredDiseaseEvent.setDiseaseType(DiseaseType.RAPIDPACE);
-				} else if (disease == DiseaseType.SLOWPACE) {
-					aquiredDiseaseEvent.setDiseaseType(DiseaseType.SLOWPACE);
-				}
-				getEntityManager().addEvent(aquiredDiseaseEvent);
-				getEntityManager().removeEntityById(collisionEvent.getSourceId());
-			}
-		}
-
-		/* Checking if any disease in the field should be destroyed by explosion */
-		events = getEntityManager().getEvents(InAnExplosionEvent.class);
-		for (Event event : events) {
-			/* Typecasting to use properly the event */
-			InAnExplosionEvent inAnExplosionEvent = (InAnExplosionEvent) event;
-			/* Checking if the entity is a disease */
-			if (getEntityManager().getComponent(DiseaseComponent.class,
-					inAnExplosionEvent.getIdHit()) != null) {
-				/* Destroying the disease */
-				getEntityManager().removeEntityById(
-						inAnExplosionEvent.getIdHit());
-				/* Deleting the event */
-				getEntityManager().remove(event);
-			}
-		}
-
+	protected void processSystem() {
+		// TODO Auto-generated method stub
+		
 	}
+	
+	@Subscribe
+	public void handle(CreateDiseaseEvent createDiseaseEvent) {
+		createDisease(createDiseaseEvent.getPlacement());
+	}
+
+	/**
+	 *  Checking if someone got any disease in the field.
+	 */
+	@Subscribe
+	public void handle(CollisionEvent collisionEvent) {
+		/* Checking if it was a collision char - disease */
+		
+		Entity source = uuidManager.getEntity(collisionEvent.getSourceId());
+		LifeType sourceLifeType = cmLifeType.getSafe(source);
+		
+		Entity target = uuidManager.getEntity(collisionEvent.getTargetId());
+		
+		/* Getting the DiseaseComponent */
+		DiseaseComponent diseaseComponent = cmDiseaseComponent.get(target);
+		
+		if (sourceLifeType.getType() == Type.CHAR
+				&& diseaseComponent!=null ) {
+			
+			DiseaseType disease = diseaseComponent.getDiseaseType();
+			/* Creating an event according to the disease */
+			AquiredDiseaseEvent aquiredDiseaseEvent = new AquiredDiseaseEvent();
+			aquiredDiseaseEvent.setOwnerEntityId(collisionEvent.getSourceId());
+			
+			if (disease == DiseaseType.DIARRHEA) {
+				aquiredDiseaseEvent.setDiseaseType(DiseaseType.DIARRHEA);
+			} else if (disease == DiseaseType.CONSTIPATION) {
+				aquiredDiseaseEvent.setDiseaseType(DiseaseType.CONSTIPATION);
+			} else if (disease == DiseaseType.LOWPOWER) {
+				aquiredDiseaseEvent.setDiseaseType(DiseaseType.LOWPOWER);
+			} else if (disease == DiseaseType.RAPIDPACE) {
+				aquiredDiseaseEvent.setDiseaseType(DiseaseType.RAPIDPACE);
+			} else if (disease == DiseaseType.SLOWPACE) {
+				aquiredDiseaseEvent.setDiseaseType(DiseaseType.SLOWPACE);
+			}
+			
+			em.dispatch(aquiredDiseaseEvent);
+			
+			target.deleteFromWorld();
+		}
+	}
+	
+	
+	@Subscribe
+	public void handle(InAnExplosionEvent inAnExplosionEvent) {
+		/* Checking if any disease in the field should be destroyed by explosion */
+		Entity hit = uuidManager.getEntity(inAnExplosionEvent.getIdHit());
+		if(cmDiseaseComponent.getSafe(hit)!=null){
+			/* Destroying the disease */
+			hit.deleteFromWorld();
+		}
+	}
+	
 
 	private void createDisease(Position cellPlacement) {
 
@@ -127,13 +125,13 @@ public class DiseasesSystem extends BaseSystem {
 		Draw draw = new Draw(Type.DISEASE.name());
 		
 		/* Creating the entity */
-		Entity disease = getEntityManager().createEntity();
-		disease.addComponent(cellPlacement);
-		disease.addComponent(explosionBarrier);
-		disease.addComponent(diseaseComponent);
-		disease.addComponent(lifeType);
-		disease.addComponent(draw);
-		getEntityManager().update(disease);
+		EntityBuilder2.create(world)	
+			.with(cellPlacement)
+			.with(explosionBarrier)
+			.with(diseaseComponent)
+			.with(lifeType)
+			.with(draw)
+			.build();
 	}
 
 	private int getRandomNumber() {
@@ -142,5 +140,7 @@ public class DiseasesSystem extends BaseSystem {
 		int max = 5;
 		return random.nextInt(max - min + 1) + min;
 	}
+
+
 
 }
