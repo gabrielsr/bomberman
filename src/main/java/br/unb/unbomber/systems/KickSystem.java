@@ -30,13 +30,6 @@ import com.artemis.annotations.Wire;
 import com.artemis.managers.UuidEntityManager;
 import com.artemis.systems.VoidEntitySystem;
 
-/**
- * Kicks bombs around.
- * 
- * @author Paulo,
- * @author Gabriel Rodigues
- *
- */
 @Wire
 public class KickSystem extends VoidEntitySystem {
     
@@ -67,52 +60,26 @@ public class KickSystem extends VoidEntitySystem {
 	@Override
 	protected void processSystem() { }
     
-	@Subscribe
-	private void handle(HitWallEvent hitWallEvent) {
-		Entity entity = uuidEm.getEntity(hitWallEvent.getEntityUuid());
-		entity.edit().remove(Velocity.class);
-	}
-
 	/**
      * This method is for keeping track of the status of each bombDropper who
      * tries to kick a bomb.
      */
-   @Subscribe
-   public void handle(CollisionEvent currentCollision){
-    	Entity source = uuidEm.getEntity(currentCollision.getSourceId());
-    	Entity target = uuidEm.getEntity(currentCollision.getTargetId());
-        
-        /* gets the dropper from entity manager */
-        BombDropper dropper = cmBombDropper.getSafe( source);
-        
-        /* boolean variable to check if it's a collision between a bombDroper and a bomb */
-        boolean collisionBetweenBombAndDropper = false; 
-        
-        /* if the dropper was found with the sourceId, we will check to see if it is a collision with a bomb */
-        if (dropper != null){
-            
-            /* will return true if the targetId matches with a bomb */
-            collisionBetweenBombAndDropper = (cmExplosive.getSafe(target) != null); 
-        
-        }
-        
-        /* it is a collision between bomb and dropper */
-        if (collisionBetweenBombAndDropper == true){
-            
-                /* if the dropper can kick bombs we will check the movement events to check its direction */
-                /* and kick the bomb */
-                boolean dropperCanKickBombs = checkIfCanKickBombs (source);
-                
-                if (dropperCanKickBombs == true){
-                    
-                    /* the dropper can kick bombs, we will get the direction  */
-                    Direction dropperDirection =  getDropperDirection (source);
-                    
-                    /* kick the target bomb with that direction */
-                    kickBomb(target, dropperDirection);
-                }
-        }
-    }
+	@Subscribe
+	public void handle(CollisionEvent currentCollision) {
+		Entity source = uuidEm.getEntity(currentCollision.getSourceId());
+		Entity target = uuidEm.getEntity(currentCollision.getTargetId());
+
+		/* if an entity that can kick collided with a bomb */
+		if (checkIfCanKickBombs(source)
+				&& (cmExplosive.getSafe(target) != null)) {
+
+			/* the dropper can kick bombs, we will get the direction */
+			Direction dropperDirection = getDropperDirection(source);
+
+			/* kick the target bomb with that direction */
+			kickBomb(target, dropperDirection);
+		}
+	}
     
     /**
      * Checks if the dropper has the kick powerup
@@ -125,7 +92,8 @@ public class KickSystem extends VoidEntitySystem {
 		PowerUp powerup = cmPowerUp.get(source);
 		
 		/* testa se o kick está ativo */
-		if (powerup.getTypes().contains(PowerType.KICKACQUIRED) ) {
+		if (powerup!= null 
+				&& powerup.getTypes().contains(PowerType.KICKACQUIRED) ) {
 			return true;
 		}        
        return false;
@@ -133,8 +101,7 @@ public class KickSystem extends VoidEntitySystem {
     
     
     /**
-     * We will check every MovementCommandEvent, if it was made by the source of the collision
-     * return the direction.
+     * The facing direction of the kicker
      * @param source
      * @return Direction
      */
@@ -145,8 +112,7 @@ public class KickSystem extends VoidEntitySystem {
     
     
     /**
-     * Creates a new MovedEntityEvent to kick the bomb (targetId) towards a direction.
-     * The speed doesn't influence on the kick of the bomb.
+     * Creates a new Velocity component to a kicked (targetId) towards a direction.
      * @param targetId, direction
      */
     private void kickBomb (final Entity target, final Direction direction) {
@@ -157,4 +123,11 @@ public class KickSystem extends VoidEntitySystem {
     	velocity.setMovement(velo);
     	target.edit().add(velocity);
     }
+    
+	@Subscribe
+	private void handle(HitWallEvent hitWallEvent) {
+		Entity entity = uuidEm.getEntity(hitWallEvent.getEntityUuid());
+		//stop the moving entity
+		entity.edit().remove(Velocity.class); 
+	}
 }
