@@ -1,7 +1,7 @@
 package br.unb.unbomber.robot;
 
 import br.unb.unbomber.component.Direction;
-import br.unb.unbomber.robot.events.HitWallEvent;
+import br.unb.unbomber.event.HitWallEvent;
 
 public class SimpleMoverRobot extends Robot {
 

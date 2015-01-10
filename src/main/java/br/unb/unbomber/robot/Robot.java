@@ -4,8 +4,8 @@ import java.util.UUID;
 
 import br.unb.unbomber.component.Direction;
 import br.unb.unbomber.event.CommandEvent;
+import br.unb.unbomber.event.HitWallEvent;
 import br.unb.unbomber.event.MovementCommandEvent;
-import br.unb.unbomber.robot.events.HitWallEvent;
 
 
 public class Robot extends BaseRobot {

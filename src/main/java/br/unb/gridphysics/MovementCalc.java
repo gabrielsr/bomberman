@@ -43,8 +43,27 @@ public class MovementCalc {
 		Vector2D<Float> cellPositionDisplacment 
 			= totalDisplacement.sub(cellIndexDisplacement.toFloatVector());
 		
+		Direction faceDirection;
+		
+		/** Face Direction */
+		if(totalDisplacement.getX() + totalDisplacement.getY() == 0){
+			faceDirection = null;
+		}else if(Math.abs(totalDisplacement.getX()) > Math.abs(totalDisplacement.getY()) ){
+			if(totalDisplacement.getX() > 0){
+				faceDirection = Direction.RIGHT;
+			}else{
+				faceDirection = Direction.LEFT;
+			}
+		}else{
+			if(totalDisplacement.getY() > 0){
+				faceDirection = Direction.UP;
+			}else{
+				faceDirection = Direction.DOWN;
+			}
+		}
+		
 		return new GridDisplacement(cellIndexDisplacement, 
-				cellPositionDisplacment);
+				cellPositionDisplacment, faceDirection);
 	}
 	
 	/**

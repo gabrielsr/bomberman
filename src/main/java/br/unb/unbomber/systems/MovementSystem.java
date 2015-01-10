@@ -26,9 +26,10 @@ import br.unb.unbomber.component.Movable;
 import br.unb.unbomber.component.MovementBarrier;
 import br.unb.unbomber.component.MovementBarrier.MovementBarrierType;
 import br.unb.unbomber.component.Position;
+import br.unb.unbomber.component.Velocity;
+import br.unb.unbomber.event.HitWallEvent;
 import br.unb.unbomber.event.MovedEntityEvent;
 import br.unb.unbomber.event.MovementCommandEvent;
-import br.unb.unbomber.robot.events.HitWallEvent;
 
 import com.artemis.Aspect;
 import com.artemis.ComponentMapper;
@@ -45,9 +46,11 @@ public class MovementSystem extends EntitySystem {
 	GridSystem gridSystem;
 
 	/** used to access components */
-	ComponentMapper<Position> positionMapper;
+	ComponentMapper<Position> cmPosition;
 
-	ComponentMapper<Movable> movableMapper;
+	ComponentMapper<Movable> cmMovable;
+	
+	ComponentMapper<Velocity> cmVelocity;
 
 	ComponentMapper<MovementBarrier> barrierMapper;
 
@@ -63,13 +66,20 @@ public class MovementSystem extends EntitySystem {
 	}
 
 	public MovementSystem() {
-		super(Aspect.getAspectForAll(Position.class, Movable.class));
+		super(Aspect.getAspectForAll(Velocity.class));
 	}
 
 	@Override
 	protected void processEntities(ImmutableBag<Entity> entities) {
-		// TODO Auto-generated method stub
+		for(Entity entity : entities){
+			moveWithVelocity(entity);
+		}
 
+	}
+
+	private void moveWithVelocity(Entity entity) {
+		Velocity velocity = cmVelocity.get(entity);
+		moveEntityByDisplacement(entity, velocity.getMovement());
 	}
 
 	/**
@@ -82,10 +92,8 @@ public class MovementSystem extends EntitySystem {
 
 		Entity entity = uuidEm.getEntity(command.getEntityUuid());
 
-		Movable moved = movableMapper.get(entity);
-		Position position = positionMapper.get(entity);
+		Movable moved = cmMovable.get(entity);
 
-		Vector2D<Integer> originCellIndex = position.getIndex();
 
 		/** Calculate the displacement and new cell */
 
@@ -93,6 +101,16 @@ public class MovementSystem extends EntitySystem {
 
 		Vector2D<Float> displacement = MovementCalc.displacement(
 				movementDirection, moved.getSpeed());
+		
+		moveEntityByDisplacement(entity, displacement);
+
+	}
+	
+	public void moveEntityByDisplacement(Entity entity, Vector2D<Float> displacement){
+		
+		Position position = cmPosition.get(entity);
+
+		Vector2D<Integer> originCellIndex = position.getIndex();
 
 		Vector2D<Float> origPosition = position.getCellPosition();
 
@@ -119,28 +137,43 @@ public class MovementSystem extends EntitySystem {
 		displacement = limiteDisplacementAlongAxe(restrictedDisplacement,
 				position.getCellPosition());
 
-		// TODO handle grid wrapper. If an entity get to the a border should
+		updateAndDispatchEvent(entity, displacement);
+	}
+
+	public void updateAndDispatchEvent(Entity entity, Vector2D<Float> displacement){
+		
+		
+		Position position = cmPosition.get(entity);
+		Vector2D<Integer> originCellIndex = position.getIndex();
+		
+		// TODO handle grid wrapper. If an entity get through a border should
 		// reenter in another
 
 		/** calculate the displacement */
 		GridDisplacement gridDisplacement = MovementCalc.gridDisplacement(
 				position.getCellPosition(), displacement);
 
+		
 		Vector2D<Integer> destCellIndex = originCellIndex.add(gridDisplacement
 				.getCells());
 		Vector2D<Float> destCellInternalPosition = gridDisplacement
 				.getPosition();
 
-		updateEntity(entity, destCellIndex, destCellInternalPosition);
+		updateEntity(entity, destCellIndex, destCellInternalPosition, gridDisplacement.getFaceDirection());
 
 		/** fire an event so the collision system can check this movement */
 		MovedEntityEvent movedEntity = new MovedEntityEvent();
-		movedEntity.setSpeed(moved.getSpeed());
-		movedEntity.setMovedEntityUUID(command.getEntityUuid());
+		
+		Movable moved = cmMovable.getSafe(entity);
+		if(moved != null){
+			movedEntity.setSpeed(moved.getSpeed());
+		}
+		movedEntity.setMovedEntityUUID(entity.getUuid());
 		movedEntity.setDestinationCell(destCellIndex);
 		movedEntity.setDisplacement(destCellInternalPosition);
 		em.dispatch(movedEntity);
 	}
+	
 
 	/**
 	 * Avoid a position outside an unitary circle with center in the middle of
@@ -179,7 +212,6 @@ public class MovementSystem extends EntitySystem {
 
 		}
 		
-		
 		//first walk in the perpendicular axe towards cell center
 		posPerpendAxe = absLess(originPerpendAxe, distanceToWalk);
 		float dispPerpendAxe = posPerpendAxe - originPerpendAxe;
@@ -194,6 +226,21 @@ public class MovementSystem extends EntitySystem {
 			return new Vector2D<Float>(dispTargetAxe, dispPerpendAxe);			
 		}
 	}
+	
+
+	void updateEntity(Entity entity, Vector2D<Integer> cell,
+			Vector2D<Float> cellPosition, Direction faceDirection) {
+
+		Position position = cmPosition.get(entity);
+		position.setIndex(cell);
+		position.setCellPosition(cellPosition);		
+		
+		Movable movable = cmMovable.getSafe(entity);
+		if(faceDirection != null && movable != null){
+			movable.setFaceDirection(faceDirection);
+		}
+	}
+
 
 	static float absLess(float a, float b) {
 		if (b < 0) {
@@ -232,14 +279,6 @@ public class MovementSystem extends EntitySystem {
 		}else{
 			return absLess(value, delta);
 		}
-	}
-
-	void updateEntity(Entity entity, Vector2D<Integer> cell,
-			Vector2D<Float> cellPosition) {
-
-		Position position = positionMapper.get(entity);
-		position.setIndex(cell);
-		position.setCellPosition(cellPosition);
 	}
 
 	/**

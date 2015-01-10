@@ -7,7 +7,7 @@ import java.util.UUID;
 import net.mostlyoriginal.api.event.common.Event;
 import br.unb.unbomber.component.Direction;
 import br.unb.unbomber.event.CommandEvent;
-import br.unb.unbomber.robot.events.HitWallEvent;
+import br.unb.unbomber.event.HitWallEvent;
 
 
 

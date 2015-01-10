@@ -1,4 +1,4 @@
-package br.unb.unbomber.robot.events;
+package br.unb.unbomber.event;
 
 import java.util.UUID;
 

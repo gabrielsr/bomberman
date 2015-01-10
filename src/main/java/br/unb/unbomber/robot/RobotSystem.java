@@ -15,7 +15,7 @@ import net.mostlyoriginal.api.event.common.Event;
 import net.mostlyoriginal.api.event.common.EventManager;
 import net.mostlyoriginal.api.event.common.Subscribe;
 import br.unb.unbomber.event.CommandEvent;
-import br.unb.unbomber.robot.events.HitWallEvent;
+import br.unb.unbomber.event.HitWallEvent;
 
 import com.artemis.Aspect;
 import com.artemis.ComponentMapper;

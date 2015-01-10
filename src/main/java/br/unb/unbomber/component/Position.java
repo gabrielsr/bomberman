@@ -70,5 +70,4 @@ public class Position extends Component{
 	public String toString(){
 		return getIndex().toString();
 	}
-	
 }
