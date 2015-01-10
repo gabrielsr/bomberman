@@ -16,6 +16,7 @@ public class ControlPair {
 		COMMAND_LEFT(CommandType.MOVEMENT, Direction.LEFT),
 		COMMAND_RIGHT(CommandType.MOVEMENT, Direction.RIGHT),
 		COMMAND_DROP(CommandType.ACTION, ActionType.DROP_BOMB),
+		COMMAND_THROW(CommandType.ACTION, ActionType.THROW),
 		COMMAND_REMOTE(CommandType.ACTION, ActionType.EXPLODE_REMOTE_BOMB),
 		COMMAND_REMOTE2(CommandType.ACTION, ActionType.TRIGGERS_REMOTE_BOMB);
 		

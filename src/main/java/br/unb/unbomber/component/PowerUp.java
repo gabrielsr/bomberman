@@ -81,4 +81,9 @@ public class PowerUp extends Component {
 		}
 		return null;
 	}
+	
+	public boolean hasType(PowerType type){
+		return getTypes().contains(type);
+	}
+
 }

@@ -11,176 +11,176 @@
 
 package br.unb.unbomber.systems;
 
-import java.util.List;
-
-import br.unb.entitysystem.BaseSystem;
-import br.unb.entitysystem.Component;
-import br.unb.entitysystem.EntityManager;
-import br.unb.entitysystem.Event;
+import net.mostlyoriginal.api.event.common.EventManager;
+import net.mostlyoriginal.api.event.common.Subscribe;
+import br.unb.gridphysics.Vector2D;
+import br.unb.unbomber.component.Ballistic;
+import br.unb.unbomber.component.Direction;
+import br.unb.unbomber.component.Movable;
+import br.unb.unbomber.component.MovementBarrier;
 import br.unb.unbomber.component.Position;
-import br.unb.unbomber.component.Explosion;
 import br.unb.unbomber.component.PowerUp;
+import br.unb.unbomber.component.Timer;
 import br.unb.unbomber.component.PowerUp.PowerType;
+import br.unb.unbomber.component.Velocity;
 import br.unb.unbomber.event.ActionCommandEvent;
+import br.unb.unbomber.event.BallisticMovementCompleted;
 import br.unb.unbomber.event.ActionCommandEvent.ActionType;
-import br.unb.unbomber.event.CollisionEvent;
-import br.unb.unbomber.event.MovementCommandEvent;
-import br.unb.unbomber.event.MovementCommandEvent.Direction;
 
-public class ThrowSystem extends BaseSystem {
+import com.artemis.Aspect;
+import com.artemis.ComponentMapper;
+import com.artemis.Entity;
+import com.artemis.EntitySystem;
+import com.artemis.annotations.Wire;
+import com.artemis.managers.UuidEntityManager;
+import com.artemis.utils.ImmutableBag;
 
-	private int TRHOW_CONSTAT = 5;
+@Wire
+public class ThrowSystem extends EntitySystem {
 
-	/**
-	 * @brief Construtor Throw
-	 */
+	private static final int TRHOW_DISTANCE = 3;
+	private static final int THROW_MOVEMENT_DURATION = 12;
+	
+	/** will be injected */
+	GridSystem gridSystem;
+
+	/** used to access components */
+	ComponentMapper<Position> cmPosition;
+
+	ComponentMapper<Movable> cmMovable;
+	
+	ComponentMapper<Velocity> cmVelocity;
+
+	ComponentMapper<MovementBarrier> barrierMapper;
+
+	private ComponentMapper<Ballistic> cmBallistic;
+	private ComponentMapper<PowerUp> cmPowerUp;
+	
+	UuidEntityManager uuidEm;
+
+	/** used to dispatch events */
+	EventManager em;
+
+
 	public ThrowSystem() {
-		super();
+		super(Aspect.getAspectForAll(Ballistic.class));
 	}
 
-	/**
-	 * Construtor da Classe.
-	 * 
-	 * @param model
-	 */
-	public ThrowSystem(EntityManager model) {
-		super(model);
-
-	}
-	/**
-	 * @brief medotodo que verifica se o player possui o BOXINGGLOVEACQUIRED, esta em
-	 *        contado com uma bomba e apertou o botao de acao e realiza o
-	 *        movimento adequado
-	 */
 	@Override
-	public void update() {
-		/** < criando uma instancia do entityManager */
-		EntityManager entityManager = getEntityManager();
-		/** < cria lista de eventos do tipo actionCommandEvents */
-		List<Event> actionCommandEvents = getEntityManager().getEvents(
-				ActionCommandEvent.class);
-		/** < cria lista de eventos do tipo CollisionEvent */
-		List<Event> collisionEvents = getEntityManager().getEvents(
-				CollisionEvent.class);
-		/** < cria lista de eventos do tipo MovementCommandEvent */
-		List<Event> movementCommand = getEntityManager().getEvents(
-				MovementCommandEvent.class);
+	protected void processEntities(ImmutableBag<Entity> entities) {
+		for(Entity entity : entities){
+			
+		}
+		
+	}
+	
+	/**
+	 * Take an object to throw
+	 * @param command
+	 */
+	@Subscribe
+	public void handle(ActionCommandEvent command) {
 
-		/**
-		 * < laco de repeticao que utiliza os ids dos eventos do tipo action
-		 * commadCommandEvent para poder realizar os movimentos das bombas
-		 */
-		for (Event event : actionCommandEvents) {
+		Entity source = uuidEm.getEntity(command.getEntityUuid());
+		Position position = cmPosition.get(source);
+		Movable movable = cmMovable.get(source);
+		PowerUp inventory = cmPowerUp.get(source);
 
-			/** < retira um evento da lista */
-			ActionCommandEvent actionCommand = (ActionCommandEvent) event;
-			/** < recebe o id da entidade atual */
-			int id = actionCommand.getEntityId();
-			/**<instacia powerup  */
-			PowerUp powerup = (PowerUp)entityManager.getComponent(PowerUp.class, id);
+		//validate if can throw
+		if(!ActionType.THROW.equals(command.getType())
+				|| inventory ==null || !inventory.hasType(PowerType.BOXINGGLOVEACQUIRED) 
+				|| movable == null || position == null){
+			return;
+		}
+		//try at the same cell
 
-			/** < recebe o tipo do movimento realizado */
-			ActionType type = actionCommand.getType();
+		Vector2D<Integer> targetOrigin = position.getIndex();
 
-			/**
-			 * < condicao que verifica se a BOXINGGLOVEACQUIRED esta ativo na entidade
-			 * verificada
-			 */
-			if ( powerup.getTypes().contains(PowerType.BOXINGGLOVEACQUIRED) ) {
+		Entity target = takeAt(source, targetOrigin);
+
+		if(target == null){
+			//nothing to take
+			return;
+		}
+		
+		throwEntity(target, targetOrigin, movable.getFaceDirection());
 				
-				/**
-				 * < condicao que verifica se o movimento realizado eh de jogar
-				 * a bomba
-				 */
-				if (type == ActionType.DROP_BOMB) {
-					/**
-					 * < laco de repeticao que filtra os eventos de colisao para
-					 * encotrar as colisoes com bobmas
-					 */
-					for (Event colEvent : collisionEvents) {
-						/** < variavel que recebe a colisao */
-						CollisionEvent collision = (CollisionEvent) colEvent;
-						/** < variavel que recebe o id de quem gerou a colisao */
-						int sourceId = collision.getSourceId();
-						/**
-						 * < condicao que verifica se o id de quem gerou a
-						 * colisao eh a mesma entidade tratada pelo evento de
-						 * acao
-						 */
-						if (sourceId == id) {
-							/** < recebe o id de quem sofreu a colisao */
-							int targetId = collision.getTargetId();
-							/**
-							 * < variavel que recebe uma componente do tipo
-							 * explosion
-							 */
-							Component explosion = entityManager.getComponent(
-									Explosion.class, targetId);
-							/**
-							 * < verifica se quem sofreu a colisao possui a
-							 * component explosion (isso sigifica que o traget
-							 * eh uma bomba
-							 */
-							if (explosion != null) {
-								/**
-								 * < varivel que recebe uam componente do tipo
-								 * CellPlacement
-								 */
-								Position Coord = (Position) getEntityManager()
-										.getComponent(Position.class,
-												targetId);
+	}
 
-								/**
-								 * < variaveis que guardam a coordenada atual da
-								 * bomba
-								 */
-								int x = Coord.getCellX();
-								int y = Coord.getCellY();
-
-								/**
-								 * < laco de repeticao que verifica a direcao do
-								 * movimento feito
-								 */
-								for (Event placement : movementCommand) {
-									MovementCommandEvent move = (MovementCommandEvent) placement;
-									/**
-									 * < verifica se o movimento realizado
-									 * pertence a entidade tratada no laco
-									 * superior
-									 */
-									if (move.getEntityId() == sourceId) {
-										/**
-										 * < recebe o tipo de movimento
-										 * realizado
-										 */
-										Direction moveType = move.getDirection();
-
-										/**
-										 * < verifica qual foi a direcao do
-										 * movimento e faz o dslocamento da
-										 * bomba de acordo com ele
-										 */
-										if (moveType == Direction.MOVE_UP) {
-											Coord.setCellY(y + TRHOW_CONSTAT);
-											String pudim = "coisa";
-											System.out.println(pudim);
-										}
-										if (moveType == Direction.MOVE_DOWN) {
-											Coord.setCellY(y - TRHOW_CONSTAT);
-										}
-										if (moveType == Direction.MOVE_RIGHT) {
-											Coord.setCellX(x + TRHOW_CONSTAT);
-										}
-										if (moveType == Direction.MOVE_LEFT) {
-											Coord.setCellX(x - TRHOW_CONSTAT);
-										}
-									}
-								}
-							}
-						}
-					}
-				}
+	private Entity takeAt(Entity exclude, Vector2D<Integer> position) {
+		for(Entity entity: gridSystem.getInPosition(position)){
+			if(entity.getUuid().equals(exclude.getUuid())){
+				continue;
+			}else{
+				return entity;
 			}
 		}
+		return null;
 	}
+	
+	/**
+	 * Throw an entity taken
+	 * 
+	 * @param entity	 
+	 * @param origen
+	 * @param direction
+	 */
+	private void throwEntity(Entity entity, Vector2D<Integer> orig, Direction direction) {
+		
+		Vector2D<Integer> displ = (direction.asVector().mult(TRHOW_DISTANCE))
+				.toInteger();
+		throwEntity(entity, orig, displ);
+	}
+	
+	/**
+	 * Throw an entity taken
+	 * 
+	 * @param entity	 
+	 * @param origen
+	 * @param displ
+	 */
+	private void throwEntity(Entity entity, Vector2D<Integer> orig, Vector2D<Integer> displ) {
+		
+		BallisticMovementCompleted completEvent = new BallisticMovementCompleted();
+		completEvent.setTarget(entity.getUuid());
+		Timer timer = new Timer(THROW_MOVEMENT_DURATION, completEvent);
+
+		Ballistic ballisctic = new Ballistic(orig, displ);
+		
+		entity.edit()
+			.add(ballisctic)
+			.add(timer)
+			.remove(Position.class);
+	}
+
+	/**
+	 * Take an object to throw
+	 * @param command
+	 */
+	@Subscribe
+	public void handle(BallisticMovementCompleted event) {
+		Entity entity = uuidEm.getEntity(event.getTarget());
+		Ballistic ballistic = cmBallistic.get(entity);
+	
+		Vector2D<Integer> targetPoisition = ballistic.getOrig().add(ballistic.getDispl());
+		
+		//re throw entity
+		if(checkIfItKicked(targetPoisition)){
+			throwEntity(entity, targetPoisition, ballistic.getDispl());
+		}else{
+			finishBallisticMovement(entity, targetPoisition);
+		}
+	}
+
+	private void finishBallisticMovement(Entity entity, Vector2D<Integer> targetPoisition) {
+		entity.edit()
+			.remove(Ballistic.class)
+			.add(new Position(targetPoisition));
+	}
+
+	private boolean checkIfItKicked(Vector2D<Integer> targetPoisition) {
+		
+		return false;
+	}
+
 }

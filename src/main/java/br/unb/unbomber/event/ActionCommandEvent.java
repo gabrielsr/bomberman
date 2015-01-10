@@ -7,7 +7,8 @@ public class ActionCommandEvent extends CommandEvent  {
 	public enum ActionType{
 		DROP_BOMB,
 		EXPLODE_REMOTE_BOMB,
-		TRIGGERS_REMOTE_BOMB; //TODO duplicated
+		TRIGGERS_REMOTE_BOMB,
+		THROW; //TODO duplicated
 	}
 	
 	private ActionType type;

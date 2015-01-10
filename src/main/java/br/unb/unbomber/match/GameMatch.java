@@ -11,6 +11,7 @@ import br.unb.unbomber.systems.CollisionSystem;
 import br.unb.unbomber.systems.ExplosionSystem;
 import br.unb.unbomber.systems.KickSystem;
 import br.unb.unbomber.systems.MovementSystem;
+import br.unb.unbomber.systems.ThrowSystem;
 import br.unb.unbomber.systems.TimeSystem;
 
 import com.artemis.EntitySystem;
@@ -41,6 +42,7 @@ public class GameMatch {
 		//world.setSystem(new LifeSystem());
 		world.setSystem(new BlockSystem());
 		world.setSystem(new KickSystem());
+		world.setSystem(new ThrowSystem());
 		
 	}
 	
