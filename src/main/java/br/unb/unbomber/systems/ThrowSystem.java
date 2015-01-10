@@ -82,9 +82,9 @@ public class ThrowSystem extends EntitySystem {
 	public void handle(ActionCommandEvent command) {
 
 		Entity source = uuidEm.getEntity(command.getEntityUuid());
-		Position position = cmPosition.get(source);
-		Movable movable = cmMovable.get(source);
-		PowerUp inventory = cmPowerUp.get(source);
+		Position position = cmPosition.getSafe(source);
+		Movable movable = cmMovable.getSafe(source);
+		PowerUp inventory = cmPowerUp.getSafe(source);
 
 		//validate if can throw
 		if(!ActionType.THROW.equals(command.getType())

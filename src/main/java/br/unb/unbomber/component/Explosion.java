@@ -68,7 +68,7 @@ public class Explosion extends Component {
 	public void setPropagationCountdown(float propagationCountdown) {
 		this.propagationCountdown = propagationCountdown;
 	}
-	public UUID getOwnerId() {
+	public UUID getOwnerUuid() {
 		return ownerId;
 	}
 	public void setOwnerId(UUID ownerId) {

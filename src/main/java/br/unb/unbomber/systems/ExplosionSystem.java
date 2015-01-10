@@ -81,13 +81,13 @@ public class ExplosionSystem extends EntitySystem {
 				Vector2D<Integer> destination = cellIndex.add(direction.asVector());
 				
 				tryPropagateTo(destination, 
-						newRange, exp.getOwnerId(), false, direction);
+						newRange, exp.getOwnerUuid(), false, direction);
 					
 			}
 		}else{
 			/* propagate in a specific directions */			
 			tryPropagateTo(cellIndex.add(exp.getPropagationDirection().asVector()), 
-					newRange, exp.getOwnerId(), false, exp.getPropagationDirection());
+					newRange, exp.getOwnerUuid(), false, exp.getPropagationDirection());
 		}
 		
 		exp.setShouldPropagate(false);
@@ -194,7 +194,7 @@ public class ExplosionSystem extends EntitySystem {
 		List<Entity> inExplosionEntities = gridSystem.getInPosition(cellOfExplosion.getIndex());
 		for(Entity inExplosionEntity:inExplosionEntities){
 			dispathInAExplosion(inExplosionEntity.getUuid(), 
-					explosion.getOwnerId());
+					explosion.getOwnerUuid());
 		}
 	}
 	

@@ -60,7 +60,7 @@ public class DiseasesSystem extends VoidEntitySystem {
 		Entity target = uuidManager.getEntity(collisionEvent.getTargetId());
 		
 		/* Getting the DiseaseComponent */
-		DiseaseComponent diseaseComponent = cmDiseaseComponent.get(target);
+		DiseaseComponent diseaseComponent = cmDiseaseComponent.getSafe(target);
 		
 		if (sourceLifeType.getType() == Type.CHAR
 				&& diseaseComponent!=null ) {

@@ -89,7 +89,7 @@ public class KickSystem extends VoidEntitySystem {
     private boolean checkIfCanKickBombs(Entity source){
 		
 		/* instacia powerup  */
-		PowerUp powerup = cmPowerUp.get(source);
+		PowerUp powerup = cmPowerUp.getSafe(source);
 		
 		/* testa se o kick está ativo */
 		if (powerup!= null 
