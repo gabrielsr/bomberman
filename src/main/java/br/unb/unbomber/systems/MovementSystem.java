@@ -15,9 +15,6 @@ import java.util.List;
 
 import net.mostlyoriginal.api.event.common.EventManager;
 import net.mostlyoriginal.api.event.common.Subscribe;
-
-import org.apache.log4j.Logger;
-
 import br.unb.gridphysics.GridDisplacement;
 import br.unb.gridphysics.MovementCalc;
 import br.unb.gridphysics.Vector2D;
@@ -58,8 +55,6 @@ public class MovementSystem extends EntitySystem {
 
 	/** used to dispatch events */
 	EventManager em;
-
-	protected Logger LOGGER = Logger.getLogger("br.unb.unbomber.systems");
 
 	public MovementSystem(Aspect aspect) {
 		super(aspect);

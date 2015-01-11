@@ -6,7 +6,7 @@
  * 
  * Code Rally
  * 
- * © Copyright IBM Corporation 2012.
+ * (R) Copyright IBM Corporation 2012.
  * 
  * U.S. Government Users Restricted Rights:  Use, duplication or disclosure
  * restricted by GSA ADP Schedule Contract with IBM Corp. 
@@ -81,7 +81,7 @@ public class LoadExternalClass<E> {
 			"\n"																				+
 			"Code Rally\n"																		+
 			"\n"																				+
-			"© Copyright IBM Corporation 2012.\n"												+
+			"(R) Copyright IBM Corporation 2012.\n"												+
 			"\n"																				+
 			"U.S. Government Users Restricted Rights:  Use, duplication or disclosure"			+
 			"restricted by GSA ADP Schedule Contract with IBM Corp."							+
