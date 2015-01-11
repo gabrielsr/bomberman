@@ -1,6 +1,6 @@
 
-image:https://travis-ci.org/ecsb/ecsbomberman.svg?branch=master["Build Status", link="https://travis-ci.org/gabrielsr/bomberman"]
-image:http://img.shields.io/coveralls/ecsb/ecsbomberman/master.svg["Coverage Status", link="https://coveralls.io/r/gabrielsr/bomberman?branch=master"]
+image:https://travis-ci.org/ecsb/ecsbomberman.svg?branch=master["Build Status", link="https://travis-ci.org/ecsb/ecsbomberman"]
+image:http://img.shields.io/coveralls/ecsb/ecsbomberman/master.svg["Coverage Status", link="https://coveralls.io/r/ecsb/ecsbomberman?branch=master"]
 
 Intro 
 =====
