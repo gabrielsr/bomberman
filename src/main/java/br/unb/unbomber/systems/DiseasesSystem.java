@@ -54,7 +54,6 @@ public class DiseasesSystem extends VoidEntitySystem {
 	public void handle(CollisionEvent collisionEvent) {
 		/* Checking if it was a collision char - disease */
 		
-<<<<<<< HEAD
 		Entity source = uuidManager.getEntity(collisionEvent.getSourceUuid());
 		LifeType sourceLifeType = cmLifeType.getSafe(source);
 		
@@ -62,15 +61,6 @@ public class DiseasesSystem extends VoidEntitySystem {
 		
 		/* Getting the DiseaseComponent */
 		DiseaseComponent diseaseComponent = cmDiseaseComponent.getSafe(target);
-=======
-		Entity source = uuidManager.getEntity(collisionEvent.getSourceId());
-		LifeType sourceLifeType = cmLifeType.getSafe(source);
-		
-		Entity target = uuidManager.getEntity(collisionEvent.getTargetId());
-		
-		/* Getting the DiseaseComponent */
-		DiseaseComponent diseaseComponent = cmDiseaseComponent.get(target);
->>>>>>> 12fdebc24ca5e74e7e6a73fc1e5d1a35757855fd
 		
 		if (sourceLifeType.getType() == Type.CHAR
 				&& diseaseComponent!=null ) {
@@ -78,11 +68,7 @@ public class DiseasesSystem extends VoidEntitySystem {
 			DiseaseType disease = diseaseComponent.getDiseaseType();
 			/* Creating an event according to the disease */
 			AquiredDiseaseEvent aquiredDiseaseEvent = new AquiredDiseaseEvent();
-<<<<<<< HEAD
 			aquiredDiseaseEvent.setOwnerEntityId(collisionEvent.getSourceUuid());
-=======
-			aquiredDiseaseEvent.setOwnerEntityId(collisionEvent.getSourceId());
->>>>>>> 12fdebc24ca5e74e7e6a73fc1e5d1a35757855fd
 			
 			if (disease == DiseaseType.DIARRHEA) {
 				aquiredDiseaseEvent.setDiseaseType(DiseaseType.DIARRHEA);
@@ -106,11 +92,7 @@ public class DiseasesSystem extends VoidEntitySystem {
 	@Subscribe
 	public void handle(InAnExplosionEvent inAnExplosionEvent) {
 		/* Checking if any disease in the field should be destroyed by explosion */
-<<<<<<< HEAD
 		Entity hit = uuidManager.getEntity(inAnExplosionEvent.getHitUuid());
-=======
-		Entity hit = uuidManager.getEntity(inAnExplosionEvent.getIdHit());
->>>>>>> 12fdebc24ca5e74e7e6a73fc1e5d1a35757855fd
 		if(cmDiseaseComponent.getSafe(hit)!=null){
 			/* Destroying the disease */
 			hit.deleteFromWorld();
@@ -145,10 +127,6 @@ public class DiseasesSystem extends VoidEntitySystem {
 			.with(cellPlacement)
 			.with(explosionBarrier)
 			.with(diseaseComponent)
-<<<<<<< HEAD
-=======
-			.with(lifeType)
->>>>>>> 12fdebc24ca5e74e7e6a73fc1e5d1a35757855fd
 			.with(draw)
 			.build();
 	}
