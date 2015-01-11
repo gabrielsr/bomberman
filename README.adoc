@@ -2,6 +2,7 @@
 image:https://travis-ci.org/ecsb/ecsbomberman.svg?branch=master["Build Status", link="https://travis-ci.org/ecsb/ecsbomberman"]
 image:http://img.shields.io/coveralls/ecsb/ecsbomberman/master.svg["Coverage Status", link="https://coveralls.io/r/ecsb/ecsbomberman?branch=master"]
 image::https://api.bintray.com/packages/ecsb/ecsbomberman/ecsbomberman/images/download.svg[link="https://bintray.com/ecsb/ecsbomberman/ecsbomberman/_latestVersion"]
+
 Intro 
 =====
 
