@@ -10,6 +10,7 @@ import br.unb.unbomber.systems.BombSystem;
 import br.unb.unbomber.systems.CollisionSystem;
 import br.unb.unbomber.systems.ExplosionSystem;
 import br.unb.unbomber.systems.KickSystem;
+import br.unb.unbomber.systems.LifeSystem;
 import br.unb.unbomber.systems.MovementSystem;
 import br.unb.unbomber.systems.PowerUpSystem;
 import br.unb.unbomber.systems.ThrowSystem;
@@ -40,12 +41,11 @@ public class GameMatch {
 		world.setSystem(new ExplosionSystem());
 		world.setSystem(new CollisionSystem());
 		world.setSystem(new RobotSystem());
-		//world.setSystem(new LifeSystem());
+		world.setSystem(new LifeSystem());
 		world.setSystem(new PowerUpSystem());		
 		world.setSystem(new BlockSystem());
 		world.setSystem(new KickSystem());
 		world.setSystem(new ThrowSystem());
-		
 	}
 	
 	/**
