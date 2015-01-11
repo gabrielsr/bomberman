@@ -6,17 +6,16 @@ import net.mostlyoriginal.api.event.common.Event;
 
 public class InAnExplosionEvent  implements Event {
 	/* id of the entity that was hit by an explosion */
-	private UUID idHit;
+	private UUID hitUuid;
 
 	private UUID explosionCause;
 	
-	
-	public UUID getIdHit() {
-		return idHit;
+	public UUID getHitUuid() {
+		return hitUuid;
 	}
 
-	public void setIdHit(UUID idHit) {
-		this.idHit = idHit;
+	public void setHitUuid(UUID hitUuid) {
+		this.hitUuid = hitUuid;
 	}
 
 	public UUID getExplosionCause() {

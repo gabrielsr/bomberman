@@ -18,8 +18,8 @@ import br.unb.unbomber.component.BombDropper;
 import br.unb.unbomber.component.Direction;
 import br.unb.unbomber.component.Explosive;
 import br.unb.unbomber.component.Movable;
-import br.unb.unbomber.component.PowerUp;
 import br.unb.unbomber.component.PowerUp.PowerType;
+import br.unb.unbomber.component.PowerUpInventory;
 import br.unb.unbomber.component.Velocity;
 import br.unb.unbomber.event.CollisionEvent;
 import br.unb.unbomber.event.HitWallEvent;
@@ -38,7 +38,7 @@ public class KickSystem extends VoidEntitySystem {
 	
 	ComponentMapper<Explosive> cmExplosive;
 	
-	ComponentMapper<PowerUp> cmPowerUp;
+	ComponentMapper<PowerUpInventory> cmPowerUpInventory;
 	
 	ComponentMapper<Velocity> cmInertia;
 	
@@ -66,8 +66,8 @@ public class KickSystem extends VoidEntitySystem {
      */
 	@Subscribe
 	public void handle(CollisionEvent currentCollision) {
-		Entity source = uuidEm.getEntity(currentCollision.getSourceId());
-		Entity target = uuidEm.getEntity(currentCollision.getTargetId());
+		Entity source = uuidEm.getEntity(currentCollision.getSourceUuid());
+		Entity target = uuidEm.getEntity(currentCollision.getTargetUuid());
 
 		/* if an entity that can kick collided with a bomb */
 		if (checkIfCanKickBombs(source)
@@ -89,11 +89,11 @@ public class KickSystem extends VoidEntitySystem {
     private boolean checkIfCanKickBombs(Entity source){
 		
 		/* instacia powerup  */
-		PowerUp powerup = cmPowerUp.getSafe(source);
+    	PowerUpInventory inventory = cmPowerUpInventory.getSafe(source);
 		
 		/* testa se o kick está ativo */
-		if (powerup!= null 
-				&& powerup.getTypes().contains(PowerType.KICKACQUIRED) ) {
+		if (inventory!= null 
+				&& inventory.hasType(PowerType.KICKACQUIRED) ) {
 			return true;
 		}        
        return false;

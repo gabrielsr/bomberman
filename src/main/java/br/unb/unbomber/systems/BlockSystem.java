@@ -21,7 +21,7 @@ public class BlockSystem extends VoidEntitySystem {
 	@Subscribe
 	public void handle(InAnExplosionEvent event) {
 		
-		Entity target = uuidManager.getEntity(event.getIdHit());
+		Entity target = uuidManager.getEntity(event.getHitUuid());
 		
 		ExplosionBarrier barrier = cmExplosionBarrier.getSafe(target);
 		

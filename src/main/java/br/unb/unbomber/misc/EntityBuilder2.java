@@ -50,6 +50,11 @@ public class EntityBuilder2 extends com.artemis.utils.EntityBuilder{
 		return this;
 	}
 	
+	public EntityBuilder2 withPosition(Vector2D<Integer> index) {
+		Position cell = new Position(index);
+		return includeInProduct(cell);	
+	}
+	
 	public EntityBuilder2 withPosition(int cellX, int cellY){
 	
 		Position cell = new Position();
@@ -122,6 +127,7 @@ public class EntityBuilder2 extends com.artemis.utils.EntityBuilder{
 	public EntityBuilder2 withTimer(long elapsedTime, Event event) {
 		return includeInProduct((new Timer(elapsedTime, event)));
 	}
+
 	
 
 	//your are welcome to create more ..

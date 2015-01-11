@@ -9,18 +9,19 @@ import br.unb.unbomber.component.PowerUp.PowerType;
  * @version 0.1 20 Nov 2014
  * @author Grupo 5 - Dayanne <dayannefernandesc@gmail.com>
  */
-public class AcquiredPowerUpEvent implements Event {
+public class CollectedPowerUpEvent implements Event {
 
 	/** Tipo do power up. */
 	private PowerType powerType;
 
+	
 	/**
 	 * Construtor da classe.
 	 * 
 	 * @param powerType
 	 *            Tipo do power up.
 	 */
-	public AcquiredPowerUpEvent(PowerType powerType) {
+	public CollectedPowerUpEvent(PowerType powerType) {
 		setPowerUpType(powerType);
 	}
 

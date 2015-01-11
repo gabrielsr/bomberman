@@ -5,7 +5,7 @@ import com.artemis.Component;
 /**
  * Classe reponsavel por atribuir um tipo a uma entidade.
  * 
- * Tipos: Char, Monster, Bomb, Hard Block, Soft Block, Power Up e Disease.
+ * Tipos: Char, Monster
  * 
  * @version 0.2 19 Nov 2014
  * @author Grupo 5 - Dayanne <dayannefernandesc@gmail.com>
@@ -17,11 +17,6 @@ public class LifeType extends Component {
 		
 		CHAR, 		/** Entidade do tipo Character */
 		MONSTER,  	/** Entidade do tipo Monster */
-		BOMB, 		/** Entidade do tipo Bomba */
-		HARD_BLOCK,	/** Entidade do tipo Hard Block */
-		SOFT_BLOCK,	/** Entidade do tipo Soft Block */
-		POWER_UP,	/** Entidade do tipo Power Up */
-		DISEASE;	/** Entidade do tipo Disease */
 	}
 
 	/** O tipo da entidade */

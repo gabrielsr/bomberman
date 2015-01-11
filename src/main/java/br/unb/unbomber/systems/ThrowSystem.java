@@ -19,13 +19,13 @@ import br.unb.unbomber.component.Direction;
 import br.unb.unbomber.component.Movable;
 import br.unb.unbomber.component.MovementBarrier;
 import br.unb.unbomber.component.Position;
-import br.unb.unbomber.component.PowerUp;
-import br.unb.unbomber.component.Timer;
 import br.unb.unbomber.component.PowerUp.PowerType;
+import br.unb.unbomber.component.PowerUpInventory;
+import br.unb.unbomber.component.Timer;
 import br.unb.unbomber.component.Velocity;
 import br.unb.unbomber.event.ActionCommandEvent;
-import br.unb.unbomber.event.BallisticMovementCompleted;
 import br.unb.unbomber.event.ActionCommandEvent.ActionType;
+import br.unb.unbomber.event.BallisticMovementCompleted;
 
 import com.artemis.Aspect;
 import com.artemis.ComponentMapper;
@@ -54,7 +54,7 @@ public class ThrowSystem extends EntitySystem {
 	ComponentMapper<MovementBarrier> barrierMapper;
 
 	private ComponentMapper<Ballistic> cmBallistic;
-	private ComponentMapper<PowerUp> cmPowerUp;
+	private ComponentMapper<PowerUpInventory> cmPowerUpInventory;
 	
 	UuidEntityManager uuidEm;
 
@@ -84,7 +84,7 @@ public class ThrowSystem extends EntitySystem {
 		Entity source = uuidEm.getEntity(command.getEntityUuid());
 		Position position = cmPosition.getSafe(source);
 		Movable movable = cmMovable.getSafe(source);
-		PowerUp inventory = cmPowerUp.getSafe(source);
+		PowerUpInventory inventory = cmPowerUpInventory.getSafe(source);
 
 		//validate if can throw
 		if(!ActionType.THROW.equals(command.getType())

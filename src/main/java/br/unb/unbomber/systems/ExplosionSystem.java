@@ -198,10 +198,10 @@ public class ExplosionSystem extends EntitySystem {
 		}
 	}
 	
-	protected void dispathInAExplosion(UUID hit, UUID cause){
+	protected void dispathInAExplosion(UUID hitUuid, UUID causeUuid){
 		InAnExplosionEvent inAnExplosionEvent = new InAnExplosionEvent();
-		inAnExplosionEvent.setIdHit(hit);
-		inAnExplosionEvent.setExplosionCause(cause);
+		inAnExplosionEvent.setHitUuid(hitUuid);
+		inAnExplosionEvent.setExplosionCause(causeUuid);
 		em.dispatch(inAnExplosionEvent);
 	}
 

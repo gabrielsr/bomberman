@@ -11,44 +11,36 @@ import java.util.UUID;
 
 import net.mostlyoriginal.api.event.common.Event;
 public class CollisionEvent  implements Event  {
-	private UUID sourceId;
-	private UUID targetId;
-	private boolean isTargetId;
+
+	private UUID sourceUuid;
+	
+	private UUID targetUuid;
 	
 	public CollisionEvent(){
 		
 	}
 	
 	public CollisionEvent(UUID sourceId, UUID targetId){
-		setSourceId( sourceId );
-		setTargetId( targetId );
+		setSourceUuid( sourceId );
+		setTargetUuid( targetId );
 	}
 	
 	//get the id of an entity which collided
-	public UUID getSourceId(){
-		return sourceId;
+	public UUID getSourceUuid(){
+		return sourceUuid;
 	}
 	
 	//set the id of an entity which collided
-	public void setSourceId(UUID sourceId){
-		this.sourceId = sourceId;
+	public void setSourceUuid(UUID sourceUuid){
+		this.sourceUuid = sourceUuid;
 	}
 	
-	public UUID getTargetId(){
-		return targetId;
+	public UUID getTargetUuid(){
+		return targetUuid;
 	}
 	
-	public void setTargetId(UUID targetId){
-		this.targetId = targetId;
+	public void setTargetUuid(UUID targetId){
+		this.targetUuid = targetId;
 	}
-	
-	public boolean getIsTargetId(){
-		return isTargetId;
-	}
-	
-	public void setIsTargetId(boolean isTargetId){
-		this.isTargetId = isTargetId;
-	}
-	
 
 }

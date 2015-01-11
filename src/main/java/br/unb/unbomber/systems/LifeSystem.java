@@ -133,8 +133,8 @@ public class LifeSystem extends VoidEntitySystem {
 		LifeType entType2 = null;
 
 		/** Coleta as identidades dos agentes do evento de colisão. */
-		sourceId = collision.getSourceId();
-		targetId = collision.getTargetId();
+		sourceId = collision.getSourceUuid();
+		targetId = collision.getTargetUuid();
 
 		/** Procura o tipo da entidade pela a Id da mesma. */
 		entType1 = cmLifeType.getSafe(uuidManager.getEntity(sourceId));
@@ -161,8 +161,8 @@ public class LifeSystem extends VoidEntitySystem {
 	private void takeDamaged(CollisionEvent collision) {
 		/** Vida da entidade que sofreu a colisão. */
 		int lifeEntity;
-		Entity source = uuidManager.getEntity(collision.getSourceId());
-		Entity target = uuidManager.getEntity(collision.getTargetId());
+		Entity source = uuidManager.getEntity(collision.getSourceUuid());
+		Entity target = uuidManager.getEntity(collision.getTargetUuid());
 		Health targetHealth;
 
 		/** Coleta os tipos das entidades da colisão. */
@@ -239,9 +239,8 @@ public class LifeSystem extends VoidEntitySystem {
 		if (entTypes.length == 2) {
 			return ((entTypes[0].getType() == Type.MONSTER && entTypes[1]
 					.getType() == Type.CHAR)
-					|| (entTypes[0].getType() == Type.BOMB && entTypes[1]
-							.getType() == Type.MONSTER) || (entTypes[0]
-					.getType() == Type.CHAR && entTypes[1].getType() == Type.MONSTER));
+					|| (entTypes[0].getType() == Type.CHAR && entTypes[1].getType() == Type.MONSTER)
+					);
 
 		} else if (entTypes.length == 1) {
 			return (entTypes[0].getType() == Type.MONSTER || entTypes[0]
@@ -373,7 +372,7 @@ public class LifeSystem extends VoidEntitySystem {
 	public boolean isDamageExplosion(InAnExplosionEvent explosion) {
 
 		/** Id e tipo da entidade que está na explosão. */
-		Entity hitEntity = uuidManager.getEntity(explosion.getIdHit());
+		Entity hitEntity = uuidManager.getEntity(explosion.getHitUuid());
 
 		LifeType entType = null;
 
@@ -421,7 +420,7 @@ public class LifeSystem extends VoidEntitySystem {
 	 */
 	private void takeDamagedExplosion(InAnExplosionEvent explosion) {
 		int lifeEntity;
-		Entity hit = uuidManager.getEntity(explosion.getIdHit());
+		Entity hit = uuidManager.getEntity(explosion.getHitUuid());
 		
 		Health targetCollisionLife = cmHealth.get(hit);
 

@@ -114,7 +114,7 @@ public class BombSystem extends VoidEntitySystem {
 	public void handle(InAnExplosionEvent inAnExplosion){
 		// Event of the type InAnExplosionEvent (Bombs in the range of exploding bombs 
 		// should explode as well)
-		UUID entityInExplosionId = inAnExplosion.getIdHit();
+		UUID entityInExplosionId = inAnExplosion.getHitUuid();
 		
 		Entity hitEntity = uuidEm.getEntity(entityInExplosionId);
 		

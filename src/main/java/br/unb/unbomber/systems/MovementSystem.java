@@ -307,7 +307,7 @@ public class MovementSystem extends EntitySystem {
 				continue;
 			} else {
 				for (Entity e : entitiesAtCell) {
-					MovementBarrier barrier = barrierMapper.get(e);
+					MovementBarrier barrier = barrierMapper.getSafe(e);
 
 					if (barrier != null
 							&& barrier.getType() == MovementBarrierType.BLOCKER) {

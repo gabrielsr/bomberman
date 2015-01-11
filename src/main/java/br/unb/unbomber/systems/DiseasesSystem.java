@@ -54,10 +54,10 @@ public class DiseasesSystem extends VoidEntitySystem {
 	public void handle(CollisionEvent collisionEvent) {
 		/* Checking if it was a collision char - disease */
 		
-		Entity source = uuidManager.getEntity(collisionEvent.getSourceId());
+		Entity source = uuidManager.getEntity(collisionEvent.getSourceUuid());
 		LifeType sourceLifeType = cmLifeType.getSafe(source);
 		
-		Entity target = uuidManager.getEntity(collisionEvent.getTargetId());
+		Entity target = uuidManager.getEntity(collisionEvent.getTargetUuid());
 		
 		/* Getting the DiseaseComponent */
 		DiseaseComponent diseaseComponent = cmDiseaseComponent.getSafe(target);
@@ -68,7 +68,7 @@ public class DiseasesSystem extends VoidEntitySystem {
 			DiseaseType disease = diseaseComponent.getDiseaseType();
 			/* Creating an event according to the disease */
 			AquiredDiseaseEvent aquiredDiseaseEvent = new AquiredDiseaseEvent();
-			aquiredDiseaseEvent.setOwnerEntityId(collisionEvent.getSourceId());
+			aquiredDiseaseEvent.setOwnerEntityId(collisionEvent.getSourceUuid());
 			
 			if (disease == DiseaseType.DIARRHEA) {
 				aquiredDiseaseEvent.setDiseaseType(DiseaseType.DIARRHEA);
@@ -92,7 +92,7 @@ public class DiseasesSystem extends VoidEntitySystem {
 	@Subscribe
 	public void handle(InAnExplosionEvent inAnExplosionEvent) {
 		/* Checking if any disease in the field should be destroyed by explosion */
-		Entity hit = uuidManager.getEntity(inAnExplosionEvent.getIdHit());
+		Entity hit = uuidManager.getEntity(inAnExplosionEvent.getHitUuid());
 		if(cmDiseaseComponent.getSafe(hit)!=null){
 			/* Destroying the disease */
 			hit.deleteFromWorld();
@@ -119,17 +119,14 @@ public class DiseasesSystem extends VoidEntitySystem {
 		} else if (randomNumber == 5) {
 			diseaseComponent.setDiseaseType(DiseaseType.SLOWPACE);
 		}
-		/* Creating LifeType component*/
-		LifeType lifeType = new LifeType(Type.DISEASE);
 
-		Draw draw = new Draw(Type.DISEASE.name());
+		Draw draw = new Draw("desease");
 		
 		/* Creating the entity */
 		EntityBuilder2.create(world)	
 			.with(cellPlacement)
 			.with(explosionBarrier)
 			.with(diseaseComponent)
-			.with(lifeType)
 			.with(draw)
 			.build();
 	}
