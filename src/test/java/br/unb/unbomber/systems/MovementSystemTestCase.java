@@ -65,7 +65,7 @@ public class MovementSystemTestCase {
 			@Override
 			protected void processSystem() {
 				final MovementCommandEvent actionCommand = new MovementCommandEvent(
-						Direction.RIGHT, forest);
+						Direction.RIGHT, forest.getUuid());
 				em.dispatch(actionCommand);
 
 			}
@@ -148,7 +148,7 @@ public class MovementSystemTestCase {
 			@Override
 			protected void processSystem() {
 				final MovementCommandEvent actionCommand = new MovementCommandEvent(
-						Direction.RIGHT, forest);
+						Direction.RIGHT, forest.getUuid());
 				em.dispatch(actionCommand);
 
 			}
@@ -206,7 +206,7 @@ public class MovementSystemTestCase {
 			@Override
 			protected void processSystem() {
 				final MovementCommandEvent actionCommand = new MovementCommandEvent(
-						Direction.LEFT, forest);
+						Direction.LEFT, forest.getUuid());
 				em.dispatch(actionCommand);
 
 			}
@@ -260,12 +260,13 @@ public class MovementSystemTestCase {
 
 		world.initialize();
 		
-		Vector2D<Float> displacementResult = movementSystem.restrictUpdate(origPosition,
+		Vector2D<Float> displacementResult = movementSystem.restrictDisplacementTowardABlockedCell(origPosition,
 				displacement, barriers);
 
 		assertEquals("Restricted displacement",  0.125f, displacementResult.getX());
 	}
-	
+
+
 	@Test
 	public void restrictUpDownTest(){
 
@@ -281,7 +282,7 @@ public class MovementSystemTestCase {
 
 		Vector2D<Integer> barriers = new Vector2D<Integer>(0, -1);
 
-		Vector2D<Float> displacementResult = movementSystem.restrictUpdate(origPosition,
+		Vector2D<Float> displacementResult = movementSystem.restrictDisplacementTowardABlockedCell(origPosition,
 				displacement, barriers);
 
 		assertEquals("Restricted displacement",  -0.125f, displacementResult.getY());
@@ -304,7 +305,7 @@ public class MovementSystemTestCase {
 		@Override
 		protected void processSystem() {
 			final MovementCommandEvent actionCommand = new MovementCommandEvent(
-					Direction.RIGHT, toMove);
+					Direction.RIGHT, toMove.getUuid());
 
 			/* adiciona o evento criado anteriormente a lista de eventos */
 			em.dispatch(actionCommand);

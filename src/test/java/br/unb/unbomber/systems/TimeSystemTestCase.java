@@ -18,7 +18,6 @@ import com.artemis.systems.VoidEntitySystem;
  */
 public class TimeSystemTestCase {
 	
-	
 	World world;
 	
 	TimeSystem timerSystem;
@@ -31,8 +30,6 @@ public class TimeSystemTestCase {
 		world.setSystem(timerSystem);
 		
 		world.setManager(new EventManager());
-
-		//world.initialize();
 	}
 
 	/**
