@@ -3,7 +3,7 @@ image:https://travis-ci.org/ecsb/ecsbomberman.svg?branch=master["Build Status", 
 image:http://img.shields.io/coveralls/ecsb/ecsbomberman/master.svg["Coverage Status", link="https://coveralls.io/r/gabrielsr/bomberman?branch=master"]
 
 Intro 
-===========
+=====
 
 Bomberman clone using Entity-Component-System architecture, Artemis Framework (odb fork) and artemis-odb:contrib-eventbus. 
 We intend to develop a hight quality and feature complete bomberman clone for the final user 
