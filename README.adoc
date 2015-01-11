@@ -1,19 +1,22 @@
-Introdução
-==========
 
-image:https://travis-ci.org/gabrielsr/bomberman.svg?branch=master["Build Status", link="https://travis-ci.org/gabrielsr/bomberman"]
-image:http://img.shields.io/coveralls/gabrielsr/bomberman/master.svg["Coverage Status", link="https://coveralls.io/r/gabrielsr/bomberman?branch=master"]
+image:https://travis-ci.org/ecsb/ecsbomberman.svg?branch=master["Build Status", link="https://travis-ci.org/ecsb/ecsbomberman"]
+image:http://img.shields.io/coveralls/ecsb/ecsbomberman/master.svg["Coverage Status", link="https://coveralls.io/r/ecsb/ecsbomberman?branch=master"]
+
+Intro 
+=====
+
+Bomberman clone using Entity-Component-System architecture, Artemis Framework (odb fork) and artemis-odb:contrib-eventbus. 
+We intend to develop a hight quality and feature complete bomberman clone for the final user 
+and a good example of modular programming for developers as well a base core for others 
+bomberman-alike games.
 
 
-Projeto em Desenvolvimento de um Bomberman clone utilizando programação modular, 
-desenvolvido como projeto da disciplina:
+It's a fork of gabrielsr/bomberman project developed at University of Brasília as part of the Sistematic Program course.
 
-Programação Sistemática
+It's the implementation of bomberman system. We also develop ecsbomberman-libgdx to graphically render the game. To play the game you
+need the two parts.
 
-Universidade de Brasília - UnB
-
-2/2014
-
+Contributors are wellcome. 
 
 
 = Instruções para Montagem de Ambiente de Desenvolvimento
