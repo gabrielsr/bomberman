@@ -75,7 +75,7 @@ public class LifeSystemTestCase {
 
 		/** Coleta a vida da entidade que sofrerá dano. */
 		Health entHealth = (Health) entityManager.getComponent(Health.class,
-				collEvent.getTargetId());
+				collEvent.getTargetUuid());
 
 		/** Verifica se não foi retirado vida da entidade após a colisão. */
 		assertEquals(2, entHealth.getLifeEntity());
@@ -104,7 +104,7 @@ public class LifeSystemTestCase {
 
 		/** Coleta a vida da entidade que sofrerá dano, no caso a ent CHAR. */
 		Health entHealth = (Health) entityManager.getComponent(Health.class,
-				collEvent.getSourceId());
+				collEvent.getSourceUuid());
 
 		/** Verifica se não foi retirado vida da entidade após a colisão. */
 		assertEquals(1, entHealth.getLifeEntity());
@@ -149,7 +149,7 @@ public class LifeSystemTestCase {
 		 * entidade CHAR.
 		 */
 		AvailableTries entLifes = (AvailableTries) entityManager.getComponent(
-				AvailableTries.class, collEvent.getTargetId());
+				AvailableTries.class, collEvent.getTargetUuid());
 
 		/**
 		 * Verifica se foi retirado tentativa de vida da entidade após a
@@ -185,7 +185,7 @@ public class LifeSystemTestCase {
 		 * entidade CHAR.
 		 */
 		AvailableTries entLifes = (AvailableTries) entityManager.getComponent(
-				AvailableTries.class, collEvent.getTargetId());
+				AvailableTries.class, collEvent.getTargetUuid());
 
 		/**
 		 * Verifica se foi retirado tentativa de vida da entidade após a
@@ -215,7 +215,7 @@ public class LifeSystemTestCase {
 		/** Cria um evento de explosão da bomba com o monstro. */
 		InAnExplosionEvent explosion = new InAnExplosionEvent();
 		explosion.setOwnerId(entity1.getEntityId());
-		explosion.setIdHit(entity3.getEntityId());
+		explosion.setHitUuid(entity3.getEntityId());
 
 		/** Adiciona o evento de explosão na lista de Eventos. */
 		entityManager.addEvent(explosion);
@@ -232,7 +232,7 @@ public class LifeSystemTestCase {
 		 * entidade MONSTER.
 		 */
 		AvailableTries entLifes = (AvailableTries) entityManager.getComponent(
-				AvailableTries.class, explosion.getIdHit());
+				AvailableTries.class, explosion.getHitUuid());
 
 		/**
 		 * Se o componente de tentativas de vida do MONSTER retornar null é
@@ -267,7 +267,7 @@ public class LifeSystemTestCase {
 
 		/** Coleta o local no grid da entidade que fora destruída. */
 		Position entCell = (Position) entityManager.getComponent(
-				Position.class, collEvent.getTargetId());
+				Position.class, collEvent.getTargetUuid());
 		int cX = entCell.getCellX();
 		int cY = entCell.getCellY();
 

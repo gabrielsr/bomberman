@@ -91,7 +91,7 @@ public class BombSystemTestCaseG10 {
 		/** Assert (foi criado 1 explosivo?)*/
 		assertTrue( explosives.size() == 1 );
 		/** Assert (o owner de dropper e de bomb é o mesmo?)*/
-		assertEquals( dropper.getEntityId(), bomb.getOwnerId() );
+		assertEquals( dropper.getEntityId(), bomb.getCreatorUUID() );
 	}
 	
 	/** TESTE 4 */

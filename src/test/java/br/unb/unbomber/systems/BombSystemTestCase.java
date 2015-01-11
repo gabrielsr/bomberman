@@ -10,25 +10,30 @@
 
 package br.unb.unbomber.systems;
 
-import static junit.framework.Assert.*;
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertNotSame;
+import static junit.framework.Assert.assertTrue;
 
 import java.util.List;
+
+import net.mostlyoriginal.api.event.common.Event;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import br.unb.entitysystem.Component;
-import br.unb.entitysystem.Entity;
-import br.unb.entitysystem.EntityManager;
-import br.unb.entitysystem.EntityManagerImpl;
-import br.unb.entitysystem.Event;
 import br.unb.unbomber.component.BombDropper;
-import br.unb.unbomber.component.Position;
 import br.unb.unbomber.component.Explosive;
+import br.unb.unbomber.component.Position;
 import br.unb.unbomber.event.ActionCommandEvent;
-import br.unb.unbomber.event.InAnExplosionEvent;
 import br.unb.unbomber.event.ActionCommandEvent.ActionType;
 import br.unb.unbomber.event.ExplosionStartedEvent;
+import br.unb.unbomber.event.InAnExplosionEvent;
+
+import com.artemis.Component;
+import com.artemis.Entity;
+import com.artemis.EntityManager;
 
 public class BombSystemTestCase {
 	
@@ -235,7 +240,7 @@ public class BombSystemTestCase {
 		
 		//send a event telling that this bomb have to explode 
 		InAnExplosionEvent inAnExplosionEvent = new InAnExplosionEvent();
-		inAnExplosionEvent.setIdHit(explosives.get(0).getEntityId());
+		inAnExplosionEvent.setHitUuid(explosives.get(0).getEntityId());
 		entityManager.addEvent(inAnExplosionEvent);
 		
 		//update bombSystem to check the events. After that, the BombSystem have  

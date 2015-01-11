@@ -100,7 +100,7 @@ public class CollisionSystemTestCase {
 
 		for (Event event : collisionEvents) {
 			CollisionEvent collisionEvent = (CollisionEvent) event;
-			assertEquals(entityA.getEntityId(), collisionEvent.getSourceId());
+			assertEquals(entityA.getEntityId(), collisionEvent.getSourceUuid());
 		}
 	}
 
@@ -120,7 +120,7 @@ public class CollisionSystemTestCase {
 
 		for (Event event : collisionEvents) {
 			CollisionEvent collisionEvent = (CollisionEvent) event;
-			assertFalse(entityA.getEntityId() == collisionEvent.getSourceId());
+			assertFalse(entityA.getEntityId() == collisionEvent.getSourceUuid());
 		}
 
 	}

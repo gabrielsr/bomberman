@@ -53,7 +53,7 @@ public class PowerUpTestCase {
 		entityManager.update(entity); /**< adiciona a entidade para as entidades do entityManager */
 		
 		InAnExplosionEvent explosion = new InAnExplosionEvent(); /**< instancia um novo inAnExplosionEvent */
-		explosion.setIdHit(entity.getEntityId()); /**< seta o idhit do explosion */
+		explosion.setHitUuid(entity.getEntityId()); /**< seta o idhit do explosion */
 		entityManager.addEvent(explosion); /**< adiciona o evento explosion no entityManager */
 			
 		assertTrue(powerUpSystem.isPowerUpExplosion(explosion)); /**< realiza a acertiva */
@@ -68,10 +68,10 @@ public class PowerUpTestCase {
 		entityManager.update(entity); /**< adiciona a entidade para as entidades do entityManager */
 		
 		InAnExplosionEvent explosion = new InAnExplosionEvent(); /**< instancia um novo inAnExplosionEvent */
-		explosion.setIdHit(entity.getEntityId()); /**< seta o idhit do explosion */
+		explosion.setHitUuid(entity.getEntityId()); /**< seta o idhit do explosion */
 		entityManager.addEvent(explosion); /**< adiciona o evento explosion no entityManager */
 			
-		assertTrue(powerUpSystem.isBlockExplosion(explosion)); /**< realiza a acertiva */
+		assertTrue(powerUpSystem.isPowerUpFontExplosion(explosion)); /**< realiza a acertiva */
 	}
 	
 	@Test
