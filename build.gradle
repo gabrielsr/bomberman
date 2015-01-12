@@ -7,8 +7,8 @@ apply plugin: 'com.github.kt3k.coveralls'
 apply plugin: 'checkstyle'
 apply plugin: 'maven-publish'
 
-group = "unb"
-version = 0.01
+group = "ecsb"
+version = 0.05
 compileJava.options.encoding = 'UTF-8'
 
 repositories {
@@ -63,7 +63,7 @@ publishing {
                 username "gabrielsr"
                 password "23297bf212d35f849e9bd0227b8945bd7a7288e8"
             }
-            url "https://api.bintray.com/maven/gabrielsr/bomberman/bomberman"
+            url "https://api.bintray.com/maven/ecsb/ecsbomberman/ecsbomberman"
         }
     }
 }

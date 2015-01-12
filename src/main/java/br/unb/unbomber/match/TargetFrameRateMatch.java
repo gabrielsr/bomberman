@@ -15,7 +15,7 @@ public class TargetFrameRateMatch extends GameMatch {
 	}
 	public TargetFrameRateMatch(){
 		super();
-		int rate = 30;
+		int rate = 60;
 		targetEnlapseMillis = 1000/rate;
 	}
 	

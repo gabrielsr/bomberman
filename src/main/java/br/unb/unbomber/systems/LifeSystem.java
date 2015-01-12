@@ -11,7 +11,6 @@ import br.unb.unbomber.component.LifeType.Type;
 import br.unb.unbomber.component.Position;
 import br.unb.unbomber.event.CollisionEvent;
 import br.unb.unbomber.event.DestroyedEvent;
-import br.unb.unbomber.event.GameOverEvent;
 import br.unb.unbomber.event.InAnExplosionEvent;
 
 import com.artemis.ComponentMapper;
@@ -19,6 +18,8 @@ import com.artemis.Entity;
 import com.artemis.annotations.Wire;
 import com.artemis.managers.UuidEntityManager;
 import com.artemis.systems.VoidEntitySystem;
+
+import ecs.common.match.GameOverEvent;
 
 /**
  * Classe reponsável pelas regras e lógicas do Módulo Life.

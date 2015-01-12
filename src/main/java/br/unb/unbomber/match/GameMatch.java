@@ -21,11 +21,21 @@ import com.artemis.World;
 import com.artemis.managers.GroupManager;
 import com.artemis.managers.UuidEntityManager;
 
-public class GameMatch {
+import ecs.common.match.Match;
+
+public class GameMatch implements Match {
 	
-	World world;
+	protected World world;
 	
 	private final static Logger LOGGER = Logger.getLogger(GameMatch.class.getName()); 
+	
+	public enum State {
+		RUNNING,
+		FINISHING,
+		FINISHED
+	}
+	
+	public State state = State.RUNNING;
 	
 	
 	/**

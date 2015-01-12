@@ -1,4 +1,4 @@
-package br.unb.unbomber.event;
+package ecs.common.match;
 
 import java.util.UUID;
 
