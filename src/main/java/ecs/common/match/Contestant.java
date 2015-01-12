@@ -7,7 +7,8 @@ public class Contestant extends Component {
 	private String contestantId;
 	
 	/** type of contestant (computer, person) */
-	private String type;
+	private String type = "COM";
+	
 	/** id of visual elements like sprites */
 	private String visualTheme;
 	
