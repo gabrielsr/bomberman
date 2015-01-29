@@ -20,6 +20,7 @@ import com.artemis.ComponentMapper;
 import com.artemis.Entity;
 import com.artemis.World;
 import com.artemis.annotations.Wire;
+import com.artemis.managers.UuidEntityManager;
 import com.artemis.systems.VoidEntitySystem;
 import com.artemis.utils.EntityBuilder;
 
@@ -43,6 +44,7 @@ public class MovementSystemTestCase {
 		world.setSystem(movementSystem);
 		
 		world.setManager(new EventManager());
+		world.setManager(new UuidEntityManager());
 		
 		/** 
 		 * do not call world.initialize();
