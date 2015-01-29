@@ -167,7 +167,7 @@ public class LifeSystem extends VoidEntitySystem {
 		Health targetHealth;
 
 		/** Coleta os tipos das entidades da colisão. */
-		LifeType targetType = cmLifeType.getSafe(source);
+		LifeType targetType = cmLifeType.getSafe(target);
 
 		if (targetType.getType() == Type.MONSTER) {
 			Entity temp = source;
