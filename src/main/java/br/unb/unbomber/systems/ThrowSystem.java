@@ -11,6 +11,9 @@
 
 package br.unb.unbomber.systems;
 
+
+import java.util.List;
+
 import net.mostlyoriginal.api.event.common.EventManager;
 import net.mostlyoriginal.api.event.common.Subscribe;
 import br.unb.gridphysics.Vector2D;
@@ -30,6 +33,7 @@ import br.unb.unbomber.event.BallisticMovementCompleted;
 import com.artemis.Aspect;
 import com.artemis.ComponentMapper;
 import com.artemis.Entity;
+import com.artemis.EntityEdit;
 import com.artemis.EntitySystem;
 import com.artemis.annotations.Wire;
 import com.artemis.managers.UuidEntityManager;
@@ -57,6 +61,8 @@ public class ThrowSystem extends EntitySystem {
 	private ComponentMapper<PowerUpInventory> cmPowerUpInventory;
 	
 	UuidEntityManager uuidEm;
+	
+	Direction faceDir;
 
 	/** used to dispatch events */
 	EventManager em;
@@ -103,6 +109,8 @@ public class ThrowSystem extends EntitySystem {
 			return;
 		}
 		
+		faceDir = movable.getFaceDirection();
+		
 		throwEntity(target, targetOrigin, movable.getFaceDirection());
 				
 	}
@@ -147,10 +155,15 @@ public class ThrowSystem extends EntitySystem {
 
 		Ballistic ballisctic = new Ballistic(orig, displ);
 		
-		entity.edit()
+		EntityEdit edit = entity.edit();
+		edit = edit.add(ballisctic);
+		edit = edit.add(timer);
+		edit.remove(Position.class);
+		
+		/*entity.edit()
 			.add(ballisctic)
 			.add(timer)
-			.remove(Position.class);
+			.remove(Position.class);*/
 	}
 
 	/**
@@ -162,14 +175,37 @@ public class ThrowSystem extends EntitySystem {
 		Entity entity = uuidEm.getEntity(event.getTarget());
 		Ballistic ballistic = cmBallistic.get(entity);
 	
+		
+		Direction upDirection = Direction.UP;
+		Direction downDirection = Direction.DOWN;
+		Direction leftDirection = Direction.LEFT;
+		Direction rightDirection = Direction.RIGHT;
+		
+		
 		Vector2D<Integer> targetPoisition = ballistic.getOrig().add(ballistic.getDispl());
 		
 		//re throw entity
-		if(checkIfItKicked(targetPoisition)){
-			throwEntity(entity, targetPoisition, ballistic.getDispl());
-		}else{
-			finishBallisticMovement(entity, targetPoisition);
+		while(checkIfItKicked(targetPoisition)){
+			if(faceDir.name() == upDirection.name()){
+				targetPoisition.setY(targetPoisition.getY()+1);
+			}
+			else if (faceDir.name() == downDirection.name()){
+				targetPoisition.setY(targetPoisition.getY()-1);
+			}
+			else if (faceDir.name() == leftDirection.name()){
+				targetPoisition.setX(targetPoisition.getX()-1);
+			}
+			else if (faceDir.name() == rightDirection.name()){
+				targetPoisition.setX(targetPoisition.getX()+1);
+			}
+			entity.edit().remove(Position.class);
+			//targetPoisition.
+			//throwEntity(entity, targetPoisition, ballistic.getDispl());
+			//finishBallisticMovement(entity, targetPoisition);
 		}
+		
+		finishBallisticMovement(entity, targetPoisition);
+
 	}
 
 	private void finishBallisticMovement(Entity entity, Vector2D<Integer> targetPoisition) {
@@ -178,9 +214,15 @@ public class ThrowSystem extends EntitySystem {
 			.add(new Position(targetPoisition));
 	}
 
-	private boolean checkIfItKicked(Vector2D<Integer> targetPoisition) {
+	private boolean checkIfItKicked(Vector2D<Integer> targetPosition) {
+
+		List<Entity> componnetsOfBlock = gridSystem.getInPosition(targetPosition);
+		if (componnetsOfBlock.size() == 0) {
+			return false;
+		} else {
+			return true;
+		}
 		
-		return false;
 	}
 
 }
