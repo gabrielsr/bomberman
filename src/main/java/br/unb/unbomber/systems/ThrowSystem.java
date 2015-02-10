@@ -13,6 +13,7 @@ package br.unb.unbomber.systems;
 
 
 import java.util.List;
+import java.util.UUID;
 
 import net.mostlyoriginal.api.event.common.EventManager;
 import net.mostlyoriginal.api.event.common.Subscribe;
@@ -29,6 +30,7 @@ import br.unb.unbomber.component.Velocity;
 import br.unb.unbomber.event.ActionCommandEvent;
 import br.unb.unbomber.event.ActionCommandEvent.ActionType;
 import br.unb.unbomber.event.BallisticMovementCompleted;
+import br.unb.unbomber.event.TimeOverEvent;
 
 import com.artemis.Aspect;
 import com.artemis.ComponentMapper;
@@ -62,6 +64,7 @@ public class ThrowSystem extends EntitySystem {
 	
 	UuidEntityManager uuidEm;
 	
+	/** Stores the direction of the character*/
 	Direction faceDir;
 
 	/** used to dispatch events */
@@ -115,6 +118,7 @@ public class ThrowSystem extends EntitySystem {
 				
 	}
 
+	/** */
 	private Entity takeAt(Entity exclude, Vector2D<Integer> position) {
 		for(Entity entity: gridSystem.getInPosition(position)){
 			if(entity.getUuid().equals(exclude.getUuid())){
@@ -144,7 +148,7 @@ public class ThrowSystem extends EntitySystem {
 	 * Throw an entity taken
 	 * 
 	 * @param entity	 
-	 * @param origen
+	 * @param origin
 	 * @param displ
 	 */
 	private void throwEntity(Entity entity, Vector2D<Integer> orig, Vector2D<Integer> displ) {
@@ -155,15 +159,15 @@ public class ThrowSystem extends EntitySystem {
 
 		Ballistic ballisctic = new Ballistic(orig, displ);
 		
-		EntityEdit edit = entity.edit();
+		/*EntityEdit edit = entity.edit();
 		edit = edit.add(ballisctic);
 		edit = edit.add(timer);
-		edit.remove(Position.class);
+		edit.remove(Position.class);*/
 		
-		/*entity.edit()
+		entity.edit()
 			.add(ballisctic)
 			.add(timer)
-			.remove(Position.class);*/
+			.remove(Position.class);
 	}
 
 	/**
@@ -181,7 +185,7 @@ public class ThrowSystem extends EntitySystem {
 		Direction leftDirection = Direction.LEFT;
 		Direction rightDirection = Direction.RIGHT;
 		
-		
+		//it happens before still
 		Vector2D<Integer> targetPoisition = ballistic.getOrig().add(ballistic.getDispl());
 		
 		//re throw entity
@@ -198,7 +202,7 @@ public class ThrowSystem extends EntitySystem {
 			else if (faceDir.name() == rightDirection.name()){
 				targetPoisition.setX(targetPoisition.getX()+1);
 			}
-			entity.edit().remove(Position.class);
+			//entity.edit().remove(Position.class);
 			//targetPoisition.
 			//throwEntity(entity, targetPoisition, ballistic.getDispl());
 			//finishBallisticMovement(entity, targetPoisition);
@@ -207,13 +211,36 @@ public class ThrowSystem extends EntitySystem {
 		finishBallisticMovement(entity, targetPoisition);
 
 	}
-
+	
+	
+	/** 
+	 * Finishes the throwing movement
+	 * 
+	 * @param entity 
+	 * @param targetPoisition
+	 * */
 	private void finishBallisticMovement(Entity entity, Vector2D<Integer> targetPoisition) {
+		//this happens after...
+		
+		
+		TimeOverEvent<UUID> triggeredBombEvent
+		= new TimeOverEvent<UUID>("BOMB_TRIGGERED", entity.getUuid()); //got from BombSystem
+		// create a new timer component to change events
+		Timer bombTimer = new Timer(90, triggeredBombEvent);
+		
+		//I need to change somehow the event to a timeOverEvent so the bomb can explode!
 		entity.edit()
 			.remove(Ballistic.class)
-			.add(new Position(targetPoisition));
+			.remove(Timer.class)
+			.add(new Position(targetPoisition))
+			.add(bombTimer);
 	}
 
+	/**
+	 * Checks if the bomb was thrown in a cell with another entity in it already.
+	 * 
+	 * @param targetPosition
+	 * */
 	private boolean checkIfItKicked(Vector2D<Integer> targetPosition) {
 
 		List<Entity> componnetsOfBlock = gridSystem.getInPosition(targetPosition);

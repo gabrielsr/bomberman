@@ -2,6 +2,7 @@ package br.unb.unbomber.systems;
 
 import net.mostlyoriginal.api.event.common.EventManager;
 import br.unb.unbomber.component.Timer;
+import br.unb.unbomber.event.BallisticMovementCompleted;
 
 import com.artemis.Aspect;
 import com.artemis.ComponentMapper;
@@ -39,6 +40,8 @@ public class TimeSystem extends EntitySystem {
 		/** Dispatch event and remove timer when the the time is up */
 		if (timer.isOver()) {
 			if (timer.getEvent() != null) {
+				if(timer.getEvent().getClass() == (new BallisticMovementCompleted()).getClass())
+					em.dispatch(timer.getEvent());
 				em.dispatch(timer.getEvent());
 			}
 			entity.edit().remove(timer);
