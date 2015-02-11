@@ -2,44 +2,55 @@ package br.unb.unbomber.systems;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import junit.framework.Assert;
+import net.mostlyoriginal.api.event.common.EventManager;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import br.unb.entitysystem.Entity;
-import br.unb.entitysystem.EntityManager;
-import br.unb.entitysystem.EntityManagerImpl;
 import br.unb.unbomber.component.AvailableTries;
-import br.unb.unbomber.component.Position;
+import br.unb.unbomber.component.BombDropper;
 import br.unb.unbomber.component.Health;
 import br.unb.unbomber.component.LifeType;
 import br.unb.unbomber.component.LifeType.Type;
+import br.unb.unbomber.component.PowerUp.PowerType;
+import br.unb.unbomber.component.Position;
+import br.unb.unbomber.component.PowerUp;
 import br.unb.unbomber.event.CollisionEvent;
-import br.unb.unbomber.event.InAnExplosionEvent;
+
+import com.artemis.Entity;
+import com.artemis.World;
+import com.artemis.annotations.Wire;
+import com.artemis.managers.UuidEntityManager;
+import com.artemis.systems.VoidEntitySystem;
+import com.artemis.utils.EntityBuilder;
+
+
 
 /**
  * Classe de testes do LifeSystem do Módulo Life.
  * 
- * @version 0.3 19 Nov 2014
- * @author Grupo 5 - Dayanne <dayannefernandesc@gmail.com>
+ * 
+ * @author Breno Xavier - brenoxp2008
  */
 public class LifeSystemTestCase {
-
-	/** Gerenciador das entidades. */
-	EntityManager entityManager;
-
-	/** Sistema de controle do Modulo Life. */
-	LifeSystem system;
-
+	
+	LifeSystem lifeSystem;
+	
+	World world;
+	
 	@Before
 	public void setUp() throws Exception {
-
-		/** Inicia um sistema para cada caso de teste. */
-		EntityManagerImpl.init();
-		entityManager = EntityManagerImpl.getInstance();
-		system = new LifeSystem(entityManager);
+		lifeSystem = new LifeSystem();
+		
+		world = new World();
+		world.setSystem(lifeSystem);
+		
+		world.setManager(new EventManager());
+		world.setManager(new UuidEntityManager());
+		
 	}
-
+	
 	/**
 	 * Testa update do system de modo geral.
 	 * 
@@ -47,10 +58,11 @@ public class LifeSystemTestCase {
 	 */
 	@Test
 	public void testUpdate() {
-		system.update();
+		lifeSystem.process();
 		assertTrue(true);
 	}
-
+	
+	
 	/**
 	 * Testa uma colisao que nao deveria ocorrer dano.
 	 * 
@@ -58,29 +70,39 @@ public class LifeSystemTestCase {
 	 */
 	@Test
 	public void noDecrementHealthTest() {
-
+		world.initialize();
+		
+		Health health = new Health();
+		health.setCanTakeDamaged(true);
+		health.setLifeEntity(1);
+		
 		/** Criacao das entidades. */
-		Entity entity1 = createEntity(2, 3, 0, 0, Type.CHAR);
-		Entity entity2 = createEntity(2, 3, 0, 0, Type.CHAR);
-
-		/** Cria evento de colisao entre as entidades Char e Char. */
-		CollisionEvent collEvent = new CollisionEvent(entity1.getEntityId(),
-				entity2.getEntityId());
-
-		/** Adiciona o evento de colisão na lista de Eventos. */
-		entityManager.addEvent(collEvent);
-
-		/** Roda o sistema. */
-		system.update();
-
-		/** Coleta a vida da entidade que sofrerá dano. */
-		Health entHealth = (Health) entityManager.getComponent(Health.class,
-				collEvent.getTargetUuid());
-
-		/** Verifica se não foi retirado vida da entidade após a colisão. */
-		assertEquals(2, entHealth.getLifeEntity());
+		Entity entity1 = new EntityBuilder(world).with(new Position(0, 0),
+				new BombDropper(), health, new LifeType(Type.CHAR)).build();
+		
+		Entity entity2 = new EntityBuilder(world).with(new Position(0, 0),
+				new BombDropper(), new LifeType(Type.CHAR)).build();
+		
+		//Cria evento de colisão
+		world.setSystem(new VoidEntitySystem() {
+			
+			@Wire
+			EventManager em;
+			
+			@Override
+			protected void processSystem() {
+				final CollisionEvent actionCommand = new CollisionEvent(entity1.getUuid(), entity2.getUuid());
+				
+				em.dispatch(actionCommand);
+			}
+		});
+		
+		world.process();
+		
+		//Compara os lifes, antes e depois da colisão
+		assertEquals(1, entity1.getComponent(Health.class).getLifeEntity());
 	}
-
+	
 	/**
 	 * Testa uma colisao que deveria ocorrer dano.
 	 *
@@ -88,29 +110,40 @@ public class LifeSystemTestCase {
 	 */
 	@Test
 	public void decrementHealthTest() {
+		world.initialize();
+		
+		//Cria lifes para serem colocados nas entidades
+		Health health1 = new Health();
+		health1.setCanTakeDamaged(true);
+		health1.setLifeEntity(2);
+		
 		/** Criacao das entidades. */
-		Entity entity1 = createEntity(2, 3, 0, 0, Type.CHAR);
-		Entity entity2 = createEntity(2, 3, 0, 0, Type.MONSTER);
-
-		/** Cria evento de colisao entre as entidades Char e Monster. */
-		CollisionEvent collEvent = new CollisionEvent(entity1.getEntityId(),
-				entity2.getEntityId());
-
-		/** Adiciona o evento de colisão na lista de Eventos. */
-		entityManager.addEvent(collEvent);
-
-		/** Roda o sistema. */
-		system.update();
-
-		/** Coleta a vida da entidade que sofrerá dano, no caso a ent CHAR. */
-		Health entHealth = (Health) entityManager.getComponent(Health.class,
-				collEvent.getSourceUuid());
-
-		/** Verifica se não foi retirado vida da entidade após a colisão. */
-		assertEquals(1, entHealth.getLifeEntity());
-
+		Entity entity1 = new EntityBuilder(world).with(new Position(0, 0),
+				new BombDropper(), health1, new LifeType(Type.CHAR)).build();
+		
+		Entity entity2 = new EntityBuilder(world).with(new Position(0, 0),
+				new BombDropper(), new LifeType(Type.MONSTER)).build();
+		
+		//Cria evento de colisão
+		world.setSystem(new VoidEntitySystem() {
+			
+			@Wire
+			EventManager em;
+			
+			@Override
+			protected void processSystem() {
+				final CollisionEvent actionCommand = new CollisionEvent(entity1.getUuid(), entity2.getUuid());
+				
+				em.dispatch(actionCommand);
+			}
+		});
+		
+		world.process();
+		
+		//Verifica se life foi decrementado depois da colisão.
+		assertEquals(1, health1.getLifeEntity());
 	}
-
+	
 	/**
 	 * Testa se quando ocorrer a colisao de Char e Power Up de incremento de
 	 * vida entao esta entidade tem sua vida incrementada.
@@ -119,9 +152,41 @@ public class LifeSystemTestCase {
 	 */
 	@Test
 	public void increaseHealthTest() {
-
+		world.initialize();
+		
+		//Cria lifes para serem colocados nas entidades
+		Health health = new Health();
+		health.setCanTakeDamaged(true);
+		health.setLifeEntity(2);
+		
+		/** Criacao da entidade. */
+		Entity entity = new EntityBuilder(world).with(new Position(0, 0),
+				new BombDropper(), health, new LifeType(Type.CHAR)).build();
+		
+		/** Criacao do PowerUp HEALTHUP. */
+		Entity life = new EntityBuilder(world).with(new Position(0, 0),
+				new PowerUp(PowerType.HEALTHUP)).build();
+		
+		//Cria evento de colisão
+		world.setSystem(new VoidEntitySystem() {
+			
+			@Wire
+			EventManager em;
+			
+			@Override
+			protected void processSystem() {
+				final CollisionEvent actionCommand = new CollisionEvent(entity.getUuid(), life.getUuid());
+				
+				em.dispatch(actionCommand);
+			}
+		});
+		
+		world.process();
+		
+		//Verifica se life foi incrementado depois da colisão.
+		assertEquals(3, health.getLifeEntity());
 	}
-
+	
 	/**
 	 * Testa a destruicao de uma entidade Char após Monster colidir com a
 	 * entidade.
@@ -130,185 +195,103 @@ public class LifeSystemTestCase {
 	 */
 	@Test
 	public void destroyCharIfHealthZeroTest() {
+		
+		world.initialize();
+		
+		//Cria lifes para serem colocados nas entidades
+		Health health1 = new Health();
+		health1.setCanTakeDamaged(true);
+		health1.setLifeEntity(1);
+
 		/** Criacao das entidades. */
-		Entity entity1 = createEntity(1, 1, 0, 0, Type.MONSTER);
-		Entity entity2 = createEntity(1, 3, 0, 0, Type.CHAR);
+		Entity entity1 = new EntityBuilder(world).with(new Position(0, 0),
+				new BombDropper(), health1, new LifeType(Type.CHAR), new AvailableTries(0,true)).build();
+		
+		Entity entity2 = new EntityBuilder(world).with(new Position(0, 0),
+				new BombDropper(), new LifeType(Type.MONSTER)).build();
 
 		/** Cria evento de colisao entre as entidades Monster e Char. */
-		CollisionEvent collEvent = new CollisionEvent(entity1.getEntityId(),
-				entity2.getEntityId());
-
-		/** Adiciona o evento de colisão na lista de Eventos. */
-		entityManager.addEvent(collEvent);
+		world.setSystem(new VoidEntitySystem() {
+			
+			@Wire
+			EventManager em;
+			
+			@Override
+			protected void processSystem() {
+				final CollisionEvent actionCommand = new CollisionEvent(entity1.getUuid(), entity2.getUuid());
+				
+				em.dispatch(actionCommand);
+			}
+		});
 
 		/** Roda o sistema. */
-		system.update();
-
-		/**
-		 * Coleta as tentativas de vida da entidade que sofrerá dano, no caso a
-		 * entidade CHAR.
-		 */
-		AvailableTries entLifes = (AvailableTries) entityManager.getComponent(
-				AvailableTries.class, collEvent.getTargetUuid());
-
-		/**
-		 * Verifica se foi retirado tentativa de vida da entidade após a
-		 * explosão.
-		 */
-		assertEquals(2, entLifes.getLifeTries());
+		world.process();
+		
+		Assert.assertEquals(0, health1.getLifeEntity());
+		
 	}
 	
 	/**
-	 * Testa a remoção de uma entidade Char após Monster colidir com a
-	 * entidade e ele não possuir vidas remanescentes.
-	 * 
-	 * @result Passa no teste se retornar True para a igualdade.
-	 */
-	@Test
-	public void removeCharIfZeroTriesTest() {
-		/** Criacao das entidades. */
-		Entity entity1 = createEntity(1, 1, 0, 0, Type.MONSTER);
-		Entity entity2 = createEntity(1, 0, 0, 0, Type.CHAR);
-
-		/** Cria evento de colisao entre as entidades Monster e Char. */
-		CollisionEvent collEvent = new CollisionEvent(entity1.getEntityId(),
-				entity2.getEntityId());
-
-		/** Adiciona o evento de colisão na lista de Eventos. */
-		entityManager.addEvent(collEvent);
-
-		/** Roda o sistema. */
-		system.update();
-
-		/**
-		 * Coleta as tentativas de vida da entidade que sofrerá dano, no caso a
-		 * entidade CHAR.
-		 */
-		AvailableTries entLifes = (AvailableTries) entityManager.getComponent(
-				AvailableTries.class, collEvent.getTargetUuid());
-
-		/**
-		 * Verifica se foi retirado tentativa de vida da entidade após a
-		 * explosão.
-		 */
-		assertEquals(null, entLifes);
-	}
-
-	/**
-	 * Testa a destruicao de uma entidade Monster por uma Bomba.
-	 * 
-	 * @result Passa no teste se retornar True.
-	 */
-	@Test
-	public void destroyMonsterIfHealthZeroTest() {
-		/** Criacao das entidades. */
-		Entity entity1 = createEntity(1, 3, 0, 0, Type.CHAR);
-		Entity entity2 = entityManager.createEntity();
-		Entity entity3 = createEntity(1, 3, 0, 0, Type.MONSTER);
-
-		/** Inicia o componente de atribuição de tipo da entidade Bomba. */
-		entity2.addComponent(new LifeType(Type.BOMB));
-
-		/** Atualiza a entidade com o componente atribuído. */
-		entityManager.update(entity2);
-
-		/** Cria um evento de explosão da bomba com o monstro. */
-		InAnExplosionEvent explosion = new InAnExplosionEvent();
-		explosion.setOwnerId(entity1.getEntityId());
-		explosion.setHitUuid(entity3.getEntityId());
-
-		/** Adiciona o evento de explosão na lista de Eventos. */
-		entityManager.addEvent(explosion);
-
-		/**
-		 * Roda o sistema duas vezes para primeiro gerar o evento de destruição
-		 * e depois tratá-lo.
-		 */
-		system.update();
-		system.update();
-
-		/**
-		 * Coleta as tentativas de vida da entidade que sofrerá dano, no caso a
-		 * entidade MONSTER.
-		 */
-		AvailableTries entLifes = (AvailableTries) entityManager.getComponent(
-				AvailableTries.class, explosion.getHitUuid());
-
-		/**
-		 * Se o componente de tentativas de vida do MONSTER retornar null é
-		 * porque a entidade foi destruída após a explosão da bomba, logo passou
-		 * no teste. Caso contrário será retornado falso e não passará no teste.
-		 */
-		assertTrue (entLifes == null);
-
-	}
-
-	/**
 	 * Testa se quando uma entidade Char, apos perder uma vida e possuir vidas
-	 * restantes, e recriado na celula inicial e com invecibilidade.
+	 * restantes continua ativa
 	 * 
 	 * @result Passa no teste se retornar True.
 	 */
 	@Test
 	public void recreateIfHasMoreTriesTest() {
+		world.initialize();
+		
+		Health health = new Health();
+		health.setLifeEntity(1);
+		health.setCanTakeDamaged(true);
+		
 		/** Criacao das entidades. */
-		Entity entity1 = createEntity(1, 1, 0, 0, Type.MONSTER);
-		Entity entity2 = createEntity(1, 3, 10, 15, Type.CHAR);
+		Entity entity1 = new EntityBuilder(world).with(new Position(0, 0),
+				new BombDropper(), health, new LifeType(Type.CHAR), new AvailableTries(1,true)).build();
+		
+		Entity entity2 = new EntityBuilder(world).with(new Position(0, 0),
+				new BombDropper(), new LifeType(Type.MONSTER)).build();
 
 		/** Cria evento de colisao entre as entidades Monster e Char. */
-		CollisionEvent collEvent = new CollisionEvent(entity1.getEntityId(),
-				entity2.getEntityId());
-
-		/** Adiciona o evento de colisão na lista de Eventos. */
-		entityManager.addEvent(collEvent);
+		world.setSystem(new VoidEntitySystem() {
+			
+			@Wire
+			EventManager em;
+			
+			@Override
+			protected void processSystem() {
+				final CollisionEvent actionCommand = new CollisionEvent(entity1.getUuid(), entity2.getUuid());
+				
+				em.dispatch(actionCommand);
+			}
+		});
 
 		/** Roda o sistema. */
-		system.update();
+		world.process();
+		
+		/** Verifica se a entidade ainda está ativa já que inicialmente tinha uma tentativa. */
+		Assert.assertTrue(entity1.isActive());
+		
+		
+		/** Cria evento de colisao entre as entidades Monster e Char. */
+		world.setSystem(new VoidEntitySystem() {
+			
+			@Wire
+			EventManager em;
+			
+			@Override
+			protected void processSystem() {
+				final CollisionEvent actionCommand = new CollisionEvent(entity1.getUuid(), entity2.getUuid());
+				
+				em.dispatch(actionCommand);
+			}
+		});
 
-		/** Coleta o local no grid da entidade que fora destruída. */
-		Position entCell = (Position) entityManager.getComponent(
-				Position.class, collEvent.getTargetUuid());
-		int cX = entCell.getCellX();
-		int cY = entCell.getCellY();
-
-		/**
-		 * Verifica se a entidade foi recriada na célula inicial do grid e
-		 * asserta true. Caso contrário não irá passar no teste.
-		 */
-		assertTrue (cX == 0 && cY == 0);
-
+		/** Roda o sistema. */
+		world.process();
+		
+		/** Verifica se a entidade está desativada já que a sua tentativa já foi ativada. */
+		Assert.assertFalse(entity1.isActive());
 	}
 
-	/**
-	 * Testa se o jogo acaba caso um Char nao possuir mais vidas.
-	 * 
-	 * @result
-	 */
-	@Test
-	public void gameOverIfHasNoMoreTriesTest() {
-
-	}
-
-
-	private Entity createEntity(int health, int avTries, int cellx, int celly,
-			Type t) {
-		/** Criacao da entidade. */
-		Entity entity = entityManager.createEntity();
-
-		/** Atribui os componentes básicos da entidade. */
-		entity.addComponent(new Health(health, true));
-		entity.addComponent(new AvailableTries(avTries, true));
-		Position cellP = new Position();
-		cellP.setCellX(cellx);
-		cellP.setCellY(celly);
-		entity.addComponent(cellP);
-
-		/** Inicia os componentes de atribuição de tipos da entidade. */
-		entity.addComponent(new LifeType(t));
-
-		/** Atualiza a entidade com os componentes atribuídos. */
-		entityManager.update(entity);
-
-		return entity;
-	}
 }
