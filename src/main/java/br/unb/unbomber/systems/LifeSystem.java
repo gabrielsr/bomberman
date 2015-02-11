@@ -9,6 +9,8 @@ import br.unb.unbomber.component.Health;
 import br.unb.unbomber.component.LifeType;
 import br.unb.unbomber.component.LifeType.Type;
 import br.unb.unbomber.component.Position;
+import br.unb.unbomber.component.PowerUp;
+import br.unb.unbomber.component.PowerUp.PowerType;
 import br.unb.unbomber.event.CollisionEvent;
 import br.unb.unbomber.event.DestroyedEvent;
 import br.unb.unbomber.event.InAnExplosionEvent;
@@ -59,6 +61,10 @@ public class LifeSystem extends VoidEntitySystem {
 			 */
 			if (isLifeDamage(collision)) {
 				takeDamaged(collision);
+			}
+			
+			if (isHealthUpCollision(collision)){
+				increaseHealth(collision);
 			}
 	}
 
@@ -175,7 +181,7 @@ public class LifeSystem extends VoidEntitySystem {
 			target = temp;
 		}
 		
-		targetHealth = cmHealth.getSafe(source);
+		targetHealth = cmHealth.getSafe(target);
 
 		/**
 		 * @if Confere a possibilidade de retirar vida da entidade.
@@ -464,6 +470,72 @@ public class LifeSystem extends VoidEntitySystem {
 
 		}
 	}
+	
+	/**
+	 * Método que confere se alguma cas entidades que colidiram é um PowerUp do
+	 * tipo HEALTHUP.
+	 * 
+	 * @param collision
+	 *            Evento que contem a Id da entidade que colidiu e a Id da
+	 *            entidade que sofreu a colisão.
+	 * @return boolean Retorna true se uma das entidades for do tipo HEALTHUP,
+	 * 			  retorna falso caso contrário.
+	 */
+	private boolean isHealthUpCollision(CollisionEvent collision) {
+		Entity source = uuidManager.getEntity(collision.getSourceUuid());
+		Entity target = uuidManager.getEntity(collision.getTargetUuid());
+		
+		PowerUp powerUp;
+		
+		/** Verifica se o source da colisão é diferente de null, se sim verifica se o seu
+		 * PowerType é igual a HEALTHUP
+		 * */
+		powerUp = source.getComponent(PowerUp.class);
+		if (powerUp != null) {
+			if (powerUp.getType() == PowerType.HEALTHUP)
+				return true;
+		} 
+		
+		/** Verifica se o target da colisão é diferente de null, se sim verifica se o seu
+		 * PowerType é igual a HEALTHUP
+		 * */
+		powerUp = target.getComponent(PowerUp.class);
+		if (powerUp != null) {
+			if (powerUp.getType() == PowerType.HEALTHUP)
+				return true;
+		} 
+		
+		return false;
+	}
+	
+	/**
+	 * Método que aumenta vida da entidade que colidiu com um PowerUp HEALTHUP
+	 * 
+	 * @param collision
+	 *            Evento de colisão das entidades.
+	 */
+	private void increaseHealth(CollisionEvent collision) {
+		Health health = null;
+		
+		/** Carrega o LifeType do target e verifica se ele é null, se sim carrega o 
+		 * LifeType do source
+		 */
+		Entity target = uuidManager.getEntity(collision.getTargetUuid());
+		LifeType lifeType = target.getComponent(LifeType.class);
+		
+		if (lifeType == null) {
+			target = uuidManager.getEntity(collision.getSourceUuid());
+		}
+		
+		lifeType = target.getComponent(LifeType.class);
+		
+		/** Incrementa health da entidade que tiver o compnente Health e for do tipo CHAR*/
+		if (lifeType.getType() == LifeType.Type.CHAR) { 
+			health = target.getComponent(Health.class);
+			health.setLifeEntity(health.getLifeEntity() + 1);
+		}
+	}
+		
 
 	@Override
 	protected void processSystem() {
