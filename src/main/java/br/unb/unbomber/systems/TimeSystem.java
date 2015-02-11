@@ -41,7 +41,7 @@ public class TimeSystem extends EntitySystem {
 		if (timer.isOver()) {
 			if (timer.getEvent() != null) {
 				if(timer.getEvent().getClass() == (new BallisticMovementCompleted()).getClass())
-					em.dispatch(timer.getEvent());
+					em.dispatch(timer.getEvent()); //first executes the event of finishing the ballistic movement
 				em.dispatch(timer.getEvent());
 			}
 			entity.edit().remove(timer);

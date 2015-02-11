@@ -1,9 +1,12 @@
 package br.unb.unbomber.systems;
 
 import static junit.framework.Assert.assertEquals;
+import net.mostlyoriginal.api.event.common.EventManager;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import com.artemis.World;
 
 import br.unb.entitysystem.Entity;
 import br.unb.entitysystem.EntityManager;
@@ -17,14 +20,22 @@ public class ThrowSystemTestCase {
 	BombSystem bombSystem;
 	ThrowSystem throwSystem;
 	TimeSystem timeSystem;
+	World world;
 	
 	@Before
 	public void setUp() throws Exception {
+		/*
 		EntityManagerImpl.init();
 		entityManager = EntityManagerImpl.getInstance();
 		bombSystem = new BombSystem(entityManager);
 		timeSystem = new TimeSystem(entityManager);
+		*/
 		
+		world = new World();
+		world.setSystem(throwSystem);
+		world.setSystem(timeSystem);
+		world.setSystem(bombSystem);
+		world.setManager(new EventManager());
 	}
 	
 	@Test
@@ -60,6 +71,8 @@ public class ThrowSystemTestCase {
 		bombSystem.verifyAndDropBomb(bombDropper);
 		
 		throwSystem.update(); //jogou a bomba em qual direção;
+		
+		world.initialize();
 		
 		assertEquals(((Position) anEntity.getComponents()).getCellX(), ((Position) anEntity.getComponents()).getCellX() + 5);
 	}

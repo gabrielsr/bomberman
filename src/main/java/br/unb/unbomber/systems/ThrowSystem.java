@@ -185,7 +185,6 @@ public class ThrowSystem extends EntitySystem {
 		Direction leftDirection = Direction.LEFT;
 		Direction rightDirection = Direction.RIGHT;
 		
-		//it happens before still
 		Vector2D<Integer> targetPoisition = ballistic.getOrig().add(ballistic.getDispl());
 		
 		//re throw entity
@@ -220,7 +219,6 @@ public class ThrowSystem extends EntitySystem {
 	 * @param targetPoisition
 	 * */
 	private void finishBallisticMovement(Entity entity, Vector2D<Integer> targetPoisition) {
-		//this happens after...
 		
 		
 		TimeOverEvent<UUID> triggeredBombEvent
@@ -228,7 +226,7 @@ public class ThrowSystem extends EntitySystem {
 		// create a new timer component to change events
 		Timer bombTimer = new Timer(90, triggeredBombEvent);
 		
-		//I need to change somehow the event to a timeOverEvent so the bomb can explode!
+
 		entity.edit()
 			.remove(Ballistic.class)
 			.remove(Timer.class)
