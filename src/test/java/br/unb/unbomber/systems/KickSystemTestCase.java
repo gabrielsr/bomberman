@@ -3,152 +3,229 @@ package br.unb.unbomber.systems;
 import static junit.framework.Assert.assertEquals;
 import static org.junit.Assert.*;
 
+import java.nio.file.attribute.PosixFilePermission;
 import java.util.List;
+
+import junit.framework.Assert;
+import net.mostlyoriginal.api.event.common.EventManager;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import com.artemis.Entity;
+import com.artemis.World;
+import com.artemis.annotations.Wire;
+import com.artemis.managers.UuidEntityManager;
+import com.artemis.systems.VoidEntitySystem;
+import com.artemis.utils.EntityBuilder;
+
 import br.unb.unbomber.component.BombDropper;
-import br.unb.unbomber.component.CellPlacement;
+import br.unb.unbomber.component.Direction;
+import br.unb.unbomber.component.Explosive;
+import br.unb.unbomber.component.LifeType;
+import br.unb.unbomber.component.Movable;
+import br.unb.unbomber.component.Position;
 import br.unb.unbomber.component.PowerUp;
+import br.unb.unbomber.component.Velocity;
+import br.unb.unbomber.component.LifeType.Type;
 import br.unb.unbomber.component.PowerUp.PowerType;
-import br.unb.unbomber.core.Entity;
-import br.unb.unbomber.core.EntityManager;
-import br.unb.unbomber.core.EntityManagerImpl;
-import br.unb.unbomber.core.Event;
+import br.unb.unbomber.component.PowerUpInventory;
 import br.unb.unbomber.event.ActionCommandEvent;
 import br.unb.unbomber.event.ActionCommandEvent.ActionType;
+import br.unb.unbomber.event.CollisionEvent;
 import br.unb.unbomber.event.MovedEntityEvent;
 import br.unb.unbomber.event.MovementCommandEvent;
-import br.unb.unbomber.event.MovementCommandEvent.MovementType;
+
+/**
+ * Classe de testes do KickSystem do Kick.
+ * 
+ * 
+ * @author Hichemm Khalyd 
+ */
 
 public class KickSystemTestCase {
 
-	EntityManager entityManager;
+	/*EntityManager entityManager;*/
+	
+	World world;
+	
 	BombSystem bombSystem;
 	KickSystem kickSystem;
 	CollisionSystem collisionSystem;
 	
 	
+	
+	/**
+	 * Método para setar configurações iniciais de ambiente
+	 * 
+	 */
+	
 	@Before
 	public void setUp() throws Exception {
-		EntityManagerImpl.init();
-		entityManager = EntityManagerImpl.getInstance();
-		bombSystem = new BombSystem(entityManager);	
+		/*EntityManagerImpl.init();
+		entityManager = EntityManagerImpl.getInstance();*/
+		
+		kickSystem = new KickSystem();
+		
+		world = new World();
+		world.setSystem(kickSystem);
+		
+		world.setManager(new EventManager());
+		world.setManager(new UuidEntityManager());
 	}
+	
+	/**
+	 * Teste do construtor
+	 * 
+	 * @result Passa no teste se o valor retornado e TRUE.
+	 */
 	
 	@Test
 	public void testConstructor() {
-		kickSystem = new KickSystem();
-		
-		kickSystem.update();
+		kickSystem.process();
 		
 		assert(true);
 	}
 	
+	
+	/**
+	 * Teste que verifica se uma entidade que está em condições esperadas para chutar 
+	 * uma bomba, uma vez qque haja uma coilasão, a bomba realmente sofrerá os efeitos
+	 * 
+	 * @result se a velocidade da bomba for diferente de 0 o teste passa
+	 */
+	
 	@Test
-	public void kickBombTestAndStopCase() {
+	public void testCheckIfCanKickBombs(){
 		
-		/* creating a dropper entity */
-		Entity anEntity = createDropperEntity();
-		BombDropper bombDropper = (BombDropper) entityManager.getComponent(BombDropper.class, anEntity.getEntityId());
+		world.initialize();
 		
-		kickSystem = new KickSystem();
-		bombSystem = new BombSystem(entityManager);
+		PowerUpInventory pup = new PowerUpInventory();
+		pup.addType(PowerType.KICKACQUIRED);
 		
-		entityManager.update(anEntity);
+		Movable mv = new Movable();
+		mv.setFaceDirection(Direction.RIGHT);
 		
-		bombSystem.verifyAndDropBomb(bombDropper);
+		/** Criacao das entidades. */
+        final Entity kicker = new EntityBuilder(world).with(new Position(0, 0),
+                new BombDropper(),pup,mv ).build();
+        
+        final Entity bomb = new EntityBuilder(world).with(new Position(1, 0),
+                new Explosive()).build();
+        
+        world.setSystem(new VoidEntitySystem() {
+            
+            @Wire
+            EventManager em;
+             
+            @Override
+            protected void processSystem() {
+                final CollisionEvent actionCommand = new CollisionEvent(kicker.getUuid(), bomb.getUuid());
+                 
+                em.dispatch(actionCommand);
+            }
+        });
+        
+        
+       world.process();
+        
+        Assert.assertNotNull(bomb.getComponent(Velocity.class));
+        Assert.assertTrue(bomb.getComponent(Velocity.class).getMovement().getX() != 0 );
+        Assert.assertTrue(bomb.getComponent(Velocity.class).getMovement().getY() == 0 );
+
 		
-		kickSystem.update(); // ?? 
-		
-		CellPlacement dropperPlacement = (CellPlacement) entityManager.getComponent(CellPlacement.class, 
-																					bombDropper.getEntityId());
-		
-		assertEquals(dropperPlacement.getCellX(), dropperPlacement.getCellX() + 4); // +4 ??
 	}
 	
 	/**
-	 * Checks if a KickStartedEvent was created when there is a collision between a bomb and a dropper.
+	 * Teste que verifica se uma entidade que não está em condições esperadas para chutar 
+	 * uma bomba, uma vez qque haja uma coilasão, a bomba não sofrerá os efeitos
+	 * 
+	 * @result se a bomba não tiver componente de velocidade o teste passará
 	 */
 	@Test
-	public void kickTest(){
+	public void testCheckIfCanNotKickBombs(){
 		
-		kickSystem = new KickSystem();
-		bombSystem = new BombSystem();
-		collisionSystem = new CollisionSystem();
+		world.initialize();
 		
-		/* creating a dropper entity */
-		Entity anEntity = createDropperEntity();
-		BombDropper bombDropper = (BombDropper) entityManager.getComponent(BombDropper.class, anEntity.getEntityId());
+		PowerUpInventory pup = new PowerUpInventory();
+		pup.addType(PowerType.BOMBUP);
 		
-		/* creating a bomb on the next cell */
-		createBombOnGrid(1, 0, bombDropper);
+		Movable mv = new Movable();
+		mv.setFaceDirection(Direction.RIGHT);
 		
-		/* fake powerup */
-		PowerUp powerUp = new PowerUp(PowerType.KICKACQUIRED);
-		anEntity.addComponent(powerUp);
-		
-		/* now we will move the dropper in order to create a collision */
-		moveDropperEntity(bombDropper);
-		
-		kickSystem.update();
-		bombSystem.update();
-		collisionSystem.update();
-		
-		CellPlacement newDropperPlacement = (CellPlacement) entityManager.getComponent(CellPlacement.class, 
-																					   bombDropper.getEntityId());
-		
-		/* checks if the dropper moved to the cell where the bomb previously was */
-		assertEquals(newDropperPlacement.getCellX(), 1);
-		assertEquals(newDropperPlacement.getCellY(), 0);
-		
-		/* checks if a moved entity event was created */
-		List<Event> movedEntityEvents = entityManager.getEvents(MovedEntityEvent.class);
-		assertNotNull(movedEntityEvents);
-		
+		/** Criacao das entidades. */
+        final Entity kicker = new EntityBuilder(world).with(new Position(0, 0),
+                new BombDropper(),pup,mv ).build();
+        
+        final Entity bomb = new EntityBuilder(world).with(new Position(1, 0),
+                new Explosive()).build();
+        
+        world.setSystem(new VoidEntitySystem() {
+            
+            @Wire
+            EventManager em;
+             
+            @Override
+            protected void processSystem() {
+                final CollisionEvent actionCommand = new CollisionEvent(kicker.getUuid(), bomb.getUuid());
+                 
+                em.dispatch(actionCommand);
+            }
+        });
+        
+        
+       world.process();
+       
+        Assert.assertNull(bomb.getComponent(Velocity.class));
+ 	
 	}
 	
-	private  void moveDropperEntity(BombDropper dropper){
-		
-		/* creating a MovementCommandEvent for the current dropper to the cell where the bomb is */
-		MovementCommandEvent event = new MovementCommandEvent(MovementType.MOVE_RIGHT, dropper.getEntityId());
-		entityManager.addEvent(event);
-		
-	}
 	
-	private Entity createDropperEntity(){
+	/**
+	 * Teste que verifica quando uma entidade que está em condições esperadas para chutar 
+	 * uma bomba, uma vez qque haja uma coilasão, a bomba realmente sofrerá os efeitos 
+	 * na direção compativel com a face direction
+	 * 
+	 * @result se a velocidade da bomba for diferente de 0 no eixo esperado o teste passará
+	 */
+	@Test
+	public void testBombDirection(){
 		
-		Entity anEntity = entityManager.createEntity();
+		world.initialize();
 		
-		//Create Dropper
-		BombDropper bombDropper = new BombDropper();
+		PowerUpInventory pup = new PowerUpInventory();
+		pup.addType(PowerType.KICKACQUIRED);
 		
-		//Create Placement
-		CellPlacement placement = new CellPlacement();
-		placement.setCellX(0);
-		placement.setCellY(0);
+		Movable mv = new Movable();
+		mv.setFaceDirection(Direction.UP);
 		
-		//Add components
-		anEntity.addComponent(bombDropper);
-		anEntity.addComponent(placement);
-		
-		entityManager.update(anEntity);
-		
-		return anEntity;
+		/** Criacao das entidades. */
+        final Entity kicker = new EntityBuilder(world).with(new Position(0, 0),
+                new BombDropper(),pup,mv ).build();
+        
+        final Entity bomb = new EntityBuilder(world).with(new Position(1, 0),
+                new Explosive()).build();
+        
+        world.setSystem(new VoidEntitySystem() {
+            
+            @Wire
+            EventManager em;
+             
+            @Override
+            protected void processSystem() {
+                final CollisionEvent actionCommand = new CollisionEvent(kicker.getUuid(), bomb.getUuid());
+                 
+                em.dispatch(actionCommand);
+            }
+        });
+        
+        
+       world.process();
+        
+        Assert.assertNotNull(bomb.getComponent(Velocity.class));
+        Assert.assertTrue(bomb.getComponent(Velocity.class).getMovement().getY() > 
+        	bomb.getComponent(Velocity.class).getMovement().getX());
+
 	}
-	
-	private void createBombOnGrid (int x, int y, BombDropper bombDropper){
 		
-		CellPlacement placement = (CellPlacement) entityManager.getComponent(CellPlacement.class, bombDropper.getEntityId());
-		
-		placement.setCellX(x);
-		placement.setCellY(y);
-		
-		//create an DROP_BOMB Command Event
-		ActionCommandEvent event = new ActionCommandEvent(ActionType.DROP_BOMB, bombDropper.getEntityId());
-		entityManager.addEvent(event);
-		
-		bombSystem.update();
-	}
 }
