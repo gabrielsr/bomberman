@@ -1,6 +1,6 @@
-package br.unb.unbomber.gridphysics;
+package br.unb.gridphysics;
 
-import br.unb.unbomber.component.CellPlacement;
+import br.unb.unbomber.component.Position;
 import br.unb.unbomber.component.Direction;
 
 public class MovementCalc {
@@ -28,32 +28,43 @@ public class MovementCalc {
 	 * @param displacements
 	 * @return final cell
 	 */
-	@SafeVarargs
-	public static GridDisplacement gridDisplacement(Vector2D<Float>... displacements){
+	public static GridDisplacement gridDisplacement(Vector2D<Float> origin,Vector2D<Float> displacement){
 		
 		Vector2D<Float> totalDisplacement = new Vector2D<>(0.0f, 0.0f);
 		
-		for(Vector2D<Float> displacement:displacements){
-			totalDisplacement = totalDisplacement.add(displacement);			
-		}
+	
+		totalDisplacement = origin.add(displacement);			
 		
 		/** Integer part */
-		Vector2D<Integer> cellIndexDisplacement = totalDisplacement.toInteger();
+		Vector2D<Integer> cellIndexDisplacement = totalDisplacement.floor();
 		
 		Vector2D<Float> cellPositionDisplacment 
 			= totalDisplacement.sub(cellIndexDisplacement.toFloatVector());
 		
-		/** divide by 0.5, the quotient is a cell advance */
-		Vector2D<Float>  cellLimits = new Vector2D<Float>(0.5f, 0.5f);
+		Direction faceDirection;
 		
-		Vector2D<Integer> quotient = cellPositionDisplacment.quotient(cellLimits);
-		Vector2D<Float> remainder = cellPositionDisplacment.remainder(cellLimits);
+		float teste  =Math.abs(displacement.getX());
+		float teste2 =Math.abs(displacement.getY());
 		
-		cellIndexDisplacement = cellIndexDisplacement.add(quotient);
-		cellPositionDisplacment = remainder;
-
+		/** Face Direction */
+		if(displacement.getX() + displacement.getY() == 0){
+			faceDirection = null;
+		}else if(teste > teste2 ){
+			if(displacement.getX() > 0){
+				faceDirection = Direction.RIGHT;
+			}else{
+				faceDirection = Direction.LEFT;
+			}
+		}else{
+			if(displacement.getY() > 0){
+				faceDirection = Direction.UP;
+			}else{
+				faceDirection = Direction.DOWN;
+			}
+		}
+		
 		return new GridDisplacement(cellIndexDisplacement, 
-				cellPositionDisplacment);
+				cellPositionDisplacment, faceDirection);
 	}
 	
 	/**
@@ -66,7 +77,7 @@ public class MovementCalc {
 	 * @param displacement
 	 * @return
 	 */
-	public static Vector2D<Float> rebase(CellPlacement refA, CellPlacement refB, Vector2D<Float> displacement){
+	public static Vector2D<Float> rebase(Position refA, Position refB, Vector2D<Float> displacement){
 		
 		Vector2D<Float> oldOrigin = refA.centerPosition();
 		Vector2D<Float> newOrigin = refB.centerPosition();
@@ -80,7 +91,7 @@ public class MovementCalc {
 		return difference2;
 	}
 	
-	public Vector2D<Float> distance(CellPlacement a, CellPlacement b){
+	public Vector2D<Float> distance(Position a, Position b){
 		return new Vector2D<Float>((float)b.getCellX() - a.getCellX(), (float) b.getCellY() - a.getCellY());
 	}
 	
@@ -93,21 +104,25 @@ public class MovementCalc {
 	 * @param dest
 	 * @return
 	 */
-
 	public static Vector2D<Integer> getCrossVector(Vector2D<Float> orig,
 			Vector2D<Float> dest) {
-		int crossX = 0;
-		if (orig.getX().floatValue() < 0f && dest.getX().floatValue() >= 0) {
+
+		final float CELL_MIDLE = 0.5f;
+
+		int crossX = 0, crossY = 0;
+
+		if (orig.getX().floatValue() <= CELL_MIDLE
+				&& dest.getX().floatValue() >= CELL_MIDLE) {
 			crossX = 1;
-		} else if (orig.getX().floatValue() >= 0f
-				&& dest.getX().floatValue() < 0) {
+		} else if (orig.getX().floatValue() >= CELL_MIDLE
+				&& dest.getX().floatValue() <= CELL_MIDLE) {
 			crossX = -1;
 		}
-		int crossY = 0;
-		if (orig.getY().floatValue() < 0f && dest.getY().floatValue() >= 0) {
+		if (orig.getY().floatValue() <= CELL_MIDLE
+				&& dest.getY().floatValue() >= CELL_MIDLE) {
 			crossY = 1;
-		} else if (orig.getY().floatValue() >= 0f
-				&& dest.getY().floatValue() < 0) {
+		} else if (orig.getY().floatValue() >= CELL_MIDLE
+				&& dest.getY().floatValue() <= CELL_MIDLE) {
 			crossY = -1;
 		}
 		return new Vector2D<Integer>(crossX, crossY);
