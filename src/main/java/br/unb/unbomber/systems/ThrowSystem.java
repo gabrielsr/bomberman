@@ -69,6 +69,9 @@ public class ThrowSystem extends EntitySystem {
 
 	/** used to dispatch events */
 	EventManager em;
+	
+	/** Stores the timer to let the bomb explode after thrown */
+	Timer bombTimer;
 
 
 	public ThrowSystem() {
@@ -113,6 +116,7 @@ public class ThrowSystem extends EntitySystem {
 		}
 		
 		faceDir = movable.getFaceDirection();
+		bombTimer = target.getComponent(Timer.class);
 		
 		throwEntity(target, targetOrigin, movable.getFaceDirection());
 				
@@ -180,25 +184,20 @@ public class ThrowSystem extends EntitySystem {
 		Ballistic ballistic = cmBallistic.get(entity);
 	
 		
-		Direction upDirection = Direction.UP;
-		Direction downDirection = Direction.DOWN;
-		Direction leftDirection = Direction.LEFT;
-		Direction rightDirection = Direction.RIGHT;
-		
 		Vector2D<Integer> targetPoisition = ballistic.getOrig().add(ballistic.getDispl());
 		
 		//re throw entity
 		while(checkIfItKicked(targetPoisition)){
-			if(faceDir.name() == upDirection.name()){
+			if(faceDir == Direction.UP){
 				targetPoisition.setY(targetPoisition.getY()+1);
 			}
-			else if (faceDir.name() == downDirection.name()){
+			else if (faceDir == Direction.DOWN){
 				targetPoisition.setY(targetPoisition.getY()-1);
 			}
-			else if (faceDir.name() == leftDirection.name()){
+			else if (faceDir == Direction.LEFT){
 				targetPoisition.setX(targetPoisition.getX()-1);
 			}
-			else if (faceDir.name() == rightDirection.name()){
+			else if (faceDir == Direction.RIGHT){
 				targetPoisition.setX(targetPoisition.getX()+1);
 			}
 			//entity.edit().remove(Position.class);
@@ -221,17 +220,17 @@ public class ThrowSystem extends EntitySystem {
 	private void finishBallisticMovement(Entity entity, Vector2D<Integer> targetPoisition) {
 		
 		
-		TimeOverEvent<UUID> triggeredBombEvent
-		= new TimeOverEvent<UUID>("BOMB_TRIGGERED", entity.getUuid()); //got from BombSystem
+		//TimeOverEvent<UUID> triggeredBombEvent
+		//= new TimeOverEvent<UUID>("BOMB_TRIGGERED", entity.getUuid()); //got from BombSystem
 		// create a new timer component to change events
-		Timer bombTimer = new Timer(90, triggeredBombEvent);
+		//Timer bombTimer = new Timer(90, triggeredBombEvent);
 		
 
 		entity.edit()
 			.remove(Ballistic.class)
 			.remove(Timer.class)
 			.add(new Position(targetPoisition))
-			.add(bombTimer);
+			.add(bombTimer); //Although it is added here, it is not called a second time - so it doesn't explode...
 	}
 
 	/**
