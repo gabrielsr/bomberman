@@ -78,6 +78,15 @@ public class Timer extends Component {
 	public Event getEvent() {
 		return event;
 	}
+	
+	/**
+	 * Sets a new event for the timer.
+	 * 
+	 * @param the new event
+	 * */
+	public void setEvent(Event event){
+		this.event = event;
+	}
 
 	/**
 	 * Gets the elapsed time.
