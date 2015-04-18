@@ -1,68 +1,51 @@
 package br.unb.unbomber.systems;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import net.mostlyoriginal.api.event.common.EventManager;
 import br.unb.unbomber.component.Timer;
-import br.unb.unbomber.core.BaseSystem;
-import br.unb.unbomber.core.Component;
-import br.unb.unbomber.core.EntityManager;
+import br.unb.unbomber.event.BallisticMovementCompleted;
+
+import com.artemis.Aspect;
+import com.artemis.ComponentMapper;
+import com.artemis.Entity;
+import com.artemis.EntitySystem;
+import com.artemis.annotations.Wire;
+import com.artemis.utils.ImmutableBag;
 
 /**
  * The Class TimeSystem.
  */
-public class TimeSystem extends BaseSystem {
+@Wire
+public class TimeSystem extends EntitySystem {
 
-	/**
-	 * Instantiates a new time system.
-	 */
+	/** used to dispatch events */
+	private EventManager em;
+
+	private ComponentMapper<Timer> mTimer;
+
 	public TimeSystem() {
-		super();
+		super(Aspect.getAspectForAll(Timer.class));
 	}
 
-	/**
-	 * Instantiates a new time system.
-	 *
-	 * @param model the model
-	 */
-	public TimeSystem(EntityManager model) {
-		super(model);
-
-	}
-
-	/* (non-Javadoc)
-	 * @see br.unb.unbomber.core.BaseSystem#update()
-	 */
 	@Override
-	public final void update() {
-		List<Component> timedEffects = getEntityManager().getComponents(
-				Timer.class);
-
-		// list of
-		List<Timer> toRemoveList = new ArrayList<Timer>();
-		if(timedEffects != null){
-			for (Component component : timedEffects) {
-				Timer timeEffect = (Timer) component;
-				timeEffect.tick();
-				/*
-				 * Add a Event when the the time is up
-				 */
-				if (timeEffect.isOver()) {
-					if(timedEffects != null && timeEffect.getEvent() != null){
-						getEntityManager().addEvent(timeEffect.getEvent());
-					}
-					// add to a list of components to remove, as we can't remove
-					// because we can't change a list when we are iterating in it.
-					toRemoveList.add(timeEffect);
-				}
-			}
-
-			for (Component component : toRemoveList) {
-				getEntityManager().remove(component);
-			}
+	protected void processEntities(ImmutableBag<Entity> entities) {
+		for (Entity entity : entities) {
+			process(entity);
 		}
-		
+	}
 
+	public void process(Entity entity) {
+		Timer timer = mTimer.get(entity);
+		timer.tick();
+		
+		/** Dispatch event and remove timer when the the time is up */
+		if (timer.isOver()) {
+			if (timer.getEvent() != null) {
+				//if(timer.getEvent().getClass() == (new BallisticMovementCompleted()).getClass())
+					//em.dispatch(timer.getEvent()); //first executes the event of finishing the ballistic movement
+				em.dispatch(timer.getEvent());
+			}
+			entity.edit().remove(timer);
+		}
 	}
 
 }

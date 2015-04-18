@@ -1,10 +1,7 @@
 package br.unb.unbomber.component;
 
 
-import br.unb.unbomber.core.Component;
-
-import java.util.List;
-import java.util.ArrayList;
+import com.artemis.Component;
 
 /**
  * Classe reponsavel por atribuir os tipos de power ups que uma entidade possui.
@@ -40,7 +37,7 @@ public class PowerUp extends Component {
 	}
 	
 	/** Lista de power ups que uma entidade possui. */
-	private List<PowerType> types = new ArrayList<PowerType>();
+	private PowerType type;
 
 	/**
 	 * Construtor da classe.
@@ -49,7 +46,7 @@ public class PowerUp extends Component {
 	 *            Tipo da entidade
 	 */
 	public PowerUp(PowerType powerType) {
-		setType(powerType);
+		this.type = powerType;
 	}
 
 	/**
@@ -59,26 +56,17 @@ public class PowerUp extends Component {
 	}
 
 
-	
 	/**
-	 * Adiciona um tipo de Power Up para a entidade.
+	 * Retorna power up type
 	 * 
-	 * @param event
-	 *            Tipo de Power Up.
+	 * @return type of power ups.
 	 */
-	public void setType(PowerType powerType) {
-		this.types.add(powerType);
+	public PowerType getType() {
+		return this.type;
+	}
+	
+	public void setType(PowerType type){
+		this.type = type;
 	}
 
-	/**
-	 * Retorna a lista de tipos de power ups que uma entidade possui.
-	 * 
-	 * @return listPowerUp Lista de power ups.
-	 */
-	public List<PowerType> getTypes() {
-		if (types != null) {
-			return types;
-		}
-		return null;
-	}
 }

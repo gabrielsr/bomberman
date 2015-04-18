@@ -1,7 +1,8 @@
 package br.unb.unbomber.component;
 
-import br.unb.unbomber.core.Component;
-import br.unb.unbomber.core.Event;
+import net.mostlyoriginal.api.event.common.Event;
+
+import com.artemis.Component;
 
 /**
  * The Timer Component.
@@ -10,6 +11,9 @@ public class Timer extends Component {
 
 	/** The elapsed time. */
 	private long elapsedTime;
+	
+	/** The total time. */
+	private long totalTime;
 
 	/** The active. */
 	private boolean active = true;
@@ -26,6 +30,7 @@ public class Timer extends Component {
 	 *            the event
 	 */
 	public Timer(long elapsedTime, Event event) {
+		this.totalTime = elapsedTime;
 		this.elapsedTime = elapsedTime;
 		this.event = event;
 	}
@@ -73,6 +78,15 @@ public class Timer extends Component {
 	public Event getEvent() {
 		return event;
 	}
+	
+	/**
+	 * Sets a new event for the timer.
+	 * 
+	 * @param the new event
+	 * */
+	public void setEvent(Event event){
+		this.event = event;
+	}
 
 	/**
 	 * Gets the elapsed time.
@@ -82,17 +96,15 @@ public class Timer extends Component {
 	public long getElapsedTime() {
 		return elapsedTime;
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see br.unb.unbomber.core.Component#setEntityId(int)
+	
+	/**
+	 * Gets the elapsed time.
+	 *
+	 * @return elapsedTime Time elapsed since the constructor was init.
 	 */
-	@Override
-	public void setEntityId(int entityId) {
-		super.setEntityId(entityId);
-		if (this.event != null) {
-			this.event.setOwnerId(entityId);
-		}
+	public float getProgress() {
+		return (float) (totalTime - elapsedTime) /((float) totalTime);
 	}
+	
+	
 }

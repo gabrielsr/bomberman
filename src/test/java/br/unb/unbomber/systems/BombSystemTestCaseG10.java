@@ -17,13 +17,13 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import br.unb.entitysystem.Component;
+import br.unb.entitysystem.Entity;
+import br.unb.entitysystem.EntityManager;
+import br.unb.entitysystem.EntityManagerImpl;
 import br.unb.unbomber.component.BombDropper;
-import br.unb.unbomber.component.CellPlacement;
+import br.unb.unbomber.component.Position;
 import br.unb.unbomber.component.Explosive;
-import br.unb.unbomber.core.Component;
-import br.unb.unbomber.core.Entity;
-import br.unb.unbomber.core.EntityManager;
-import br.unb.unbomber.core.EntityManagerImpl;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 import static junit.framework.Assert.assertNotNull;
@@ -72,7 +72,7 @@ public class BombSystemTestCaseG10 {
 		
 		Entity destroyer = entityManager.createEntity();
 		BombDropper dropper = new BombDropper();
-		CellPlacement dropperPlacement = new CellPlacement();
+		Position dropperPlacement = new Position();
 		
 		dropperPlacement.setCellX(1);
 		dropperPlacement.setCellY(1);
@@ -91,7 +91,7 @@ public class BombSystemTestCaseG10 {
 		/** Assert (foi criado 1 explosivo?)*/
 		assertTrue( explosives.size() == 1 );
 		/** Assert (o owner de dropper e de bomb é o mesmo?)*/
-		assertEquals( dropper.getEntityId(), bomb.getOwnerId() );
+		assertEquals( dropper.getEntityId(), bomb.getCreatorUUID() );
 	}
 	
 	/** TESTE 4 */
@@ -103,7 +103,7 @@ public class BombSystemTestCaseG10 {
 
 		final int MAX_NUM_BOMBS = 2;
 		
-		CellPlacement dropperPlacement = new CellPlacement();
+		Position dropperPlacement = new Position();
 		Entity destroyer = entityManager.createEntity();
 		BombDropper dropper = new BombDropper();
 		BombSystem bombSystem = new BombSystem();

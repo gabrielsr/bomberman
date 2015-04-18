@@ -4,14 +4,14 @@
 
 package br.unb.unbomber.event;
 
-import br.unb.unbomber.component.CellPlacement;
-import br.unb.unbomber.core.Event;
+import net.mostlyoriginal.api.event.common.Event;
+import br.unb.unbomber.component.Position;
 
-public class MovementExecutionEvent extends Event {
+public class MovementExecutionEvent  implements Event {
 	
-	private final CellPlacement initialCell;
+	private final Position initialCell;
 	
-	private final CellPlacement finalCell;
+	private final Position finalCell;
 	
 	private final int entityId;
 
@@ -22,8 +22,8 @@ public class MovementExecutionEvent extends Event {
 	 * @param finalCell posição final da entidade
 	 * @param entityId id da entidade
 	 */
-	public MovementExecutionEvent(CellPlacement initialCell,
-			CellPlacement finalCell, int entityId) {
+	public MovementExecutionEvent(Position initialCell,
+			Position finalCell, int entityId) {
 		super();
 		this.initialCell = initialCell;
 		this.finalCell = finalCell;
@@ -35,7 +35,7 @@ public class MovementExecutionEvent extends Event {
 	 * no evento.
 	 * @return initialCell
 	 */
-	public CellPlacement getInitialCell() {
+	public Position getInitialCell() {
 		return initialCell;
 	}
 
@@ -44,7 +44,7 @@ public class MovementExecutionEvent extends Event {
 	 * no evento.
 	 * @return finalCell
 	 */
-	public CellPlacement getFinalCell() {
+	public Position getFinalCell() {
 		return finalCell;
 	}
 

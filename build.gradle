@@ -1,23 +1,30 @@
 apply plugin: "java"
 apply plugin: "maven"
+apply plugin: 'eclipse'
 apply plugin: 'jacoco'
 apply plugin: 'cobertura'
 apply plugin: 'com.github.kt3k.coveralls'
 apply plugin: 'checkstyle'
 apply plugin: 'maven-publish'
 
-
-group = "br.unb.cic"
-version = 0.04
+group = "ecsb"
+version = 0.07
 compileJava.options.encoding = 'UTF-8'
 
 repositories {
     mavenCentral()
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+    maven { url "https://oss.sonatype.org/content/repositories/releases/" }
 }
 
 
 dependencies {
+    compile "net.onedaybeard.artemis:artemis-odb:0.8.1"
+    compile "net.mostlyoriginal.artemis-odb:contrib-core:0.7.1" 
+    compile "net.mostlyoriginal.artemis-odb:contrib-eventbus:0.7.1" 
+
 	compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
+    
     testCompile 'junit:junit:4.9'
 }
 
@@ -56,7 +63,7 @@ publishing {
                 username "gabrielsr"
                 password "23297bf212d35f849e9bd0227b8945bd7a7288e8"
             }
-            url "https://api.bintray.com/maven/gabrielsr/bomberman/bomberman"
+            url "https://api.bintray.com/maven/ecsb/ecsbomberman/ecsbomberman"
         }
     }
 }

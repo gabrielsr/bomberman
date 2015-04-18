@@ -1,8 +1,8 @@
 package br.unb.unbomber.event;
 
-import br.unb.unbomber.core.Event;
+import net.mostlyoriginal.api.event.common.Event;
 
-public class MovementMadeEvent extends Event {
+public class MovementMadeEvent  implements Event {
 	/* variaveis que guardam o novo posicionamento da entidade no grid */
 	private int NewCellX;
 	private int NewCellY;

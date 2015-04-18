@@ -4,46 +4,31 @@
 
 package br.unb.unbomber.event;
 
-import br.unb.unbomber.core.Event;
+import java.util.UUID;
 
-public class MovementCommandEvent extends Event {
+import br.unb.unbomber.component.Direction;
 
-	//Definição dos tipos de ação capturados
-	public enum MovementType{
-		MOVE_UP,
-		MOVE_RIGHT,
-		MOVE_DOWN,
-		MOVE_LEFT;
-	}
+public class MovementCommandEvent  extends CommandEvent {
 
-	private final MovementType type;
-	
-	private final int entityId;
+	private final Direction direction;
 	
 	/**
 	 * Method MovementCommandEvent recebe quem se moveu e armazena no evento.
 	 * @param type tipo do movimento (UP, LEFT, DOWN, RIGHT)
-	 * @param entityId qual entidade se moveu
+	 * @param entityUuid qual entidade se moveu
 	 */
-	public MovementCommandEvent(MovementType type, int entityId){
-		this.type = type;
-		this.entityId = entityId;
+	public MovementCommandEvent(Direction type, UUID entityUuid){
+		this.direction = type;
+		this.entityUuid = entityUuid;
 	}
 
 	/**
 	 * Method MovementType resgato o tipo do movimento no evento.
 	 * @return MovementType (UP, LEFT, DOWN, RIGHT)
 	 */
-	public MovementType getType() {
-		return type;
+	public Direction getDirection() {
+		return direction;
 	}
-	
-	/**
-	 * Method getEntityId resgata o ID da entidade que se moveu no evento
-	 * @return int (entityId)
-	 */
-	public int getEntityId(){
-		return this.entityId;
-	}
+
 	
 }

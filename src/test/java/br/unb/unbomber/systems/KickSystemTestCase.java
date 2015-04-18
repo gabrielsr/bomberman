@@ -8,19 +8,19 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import br.unb.entitysystem.Entity;
+import br.unb.entitysystem.EntityManager;
+import br.unb.entitysystem.EntityManagerImpl;
+import br.unb.entitysystem.Event;
 import br.unb.unbomber.component.BombDropper;
-import br.unb.unbomber.component.CellPlacement;
+import br.unb.unbomber.component.Position;
 import br.unb.unbomber.component.PowerUp;
 import br.unb.unbomber.component.PowerUp.PowerType;
-import br.unb.unbomber.core.Entity;
-import br.unb.unbomber.core.EntityManager;
-import br.unb.unbomber.core.EntityManagerImpl;
-import br.unb.unbomber.core.Event;
 import br.unb.unbomber.event.ActionCommandEvent;
 import br.unb.unbomber.event.ActionCommandEvent.ActionType;
 import br.unb.unbomber.event.MovedEntityEvent;
 import br.unb.unbomber.event.MovementCommandEvent;
-import br.unb.unbomber.event.MovementCommandEvent.MovementType;
+import br.unb.unbomber.event.MovementCommandEvent.Direction;
 
 public class KickSystemTestCase {
 
@@ -62,7 +62,7 @@ public class KickSystemTestCase {
 		
 		kickSystem.update(); // ?? 
 		
-		CellPlacement dropperPlacement = (CellPlacement) entityManager.getComponent(CellPlacement.class, 
+		Position dropperPlacement = (Position) entityManager.getComponent(Position.class, 
 																					bombDropper.getEntityId());
 		
 		assertEquals(dropperPlacement.getCellX(), dropperPlacement.getCellX() + 4); // +4 ??
@@ -96,7 +96,7 @@ public class KickSystemTestCase {
 		bombSystem.update();
 		collisionSystem.update();
 		
-		CellPlacement newDropperPlacement = (CellPlacement) entityManager.getComponent(CellPlacement.class, 
+		Position newDropperPlacement = (Position) entityManager.getComponent(Position.class, 
 																					   bombDropper.getEntityId());
 		
 		/* checks if the dropper moved to the cell where the bomb previously was */
@@ -112,7 +112,7 @@ public class KickSystemTestCase {
 	private  void moveDropperEntity(BombDropper dropper){
 		
 		/* creating a MovementCommandEvent for the current dropper to the cell where the bomb is */
-		MovementCommandEvent event = new MovementCommandEvent(MovementType.MOVE_RIGHT, dropper.getEntityId());
+		MovementCommandEvent event = new MovementCommandEvent(Direction.MOVE_RIGHT, dropper.getEntityId());
 		entityManager.addEvent(event);
 		
 	}
@@ -125,7 +125,7 @@ public class KickSystemTestCase {
 		BombDropper bombDropper = new BombDropper();
 		
 		//Create Placement
-		CellPlacement placement = new CellPlacement();
+		Position placement = new Position();
 		placement.setCellX(0);
 		placement.setCellY(0);
 		
@@ -140,7 +140,7 @@ public class KickSystemTestCase {
 	
 	private void createBombOnGrid (int x, int y, BombDropper bombDropper){
 		
-		CellPlacement placement = (CellPlacement) entityManager.getComponent(CellPlacement.class, bombDropper.getEntityId());
+		Position placement = (Position) entityManager.getComponent(Position.class, bombDropper.getEntityId());
 		
 		placement.setCellX(x);
 		placement.setCellY(y);

@@ -1,20 +1,29 @@
 package br.unb.unbomber.component;
 
-import br.unb.unbomber.core.Component;
-import br.unb.unbomber.gridphysics.Vector2D;
+import br.unb.gridphysics.Vector2D;
+
+import com.artemis.Component;
 
 public class Movable extends Component {
 	
-	/** The diplacement between entity center point and cell center point */
+	/** The displacement between entity center point and cell center point */
 	private Vector2D<Float> cellPosition;
 	
-	/* parametro que guarda a velocidade da entidade */
-	private float speed = 1/16;
+	/** the max speed that the entity can move */
+	private float speed = 0;
+	
+	/** the direction that the entity is facing */
+	private Direction faceDirection = Direction.UP;
 	
 	public Movable(){
-		this.cellPosition = new Vector2D<>(0.0f, 0.0f); 
+		this.cellPosition = new Vector2D<>(0.5f, 0.5f); 
 	}
 	
+	public Movable(float speed) {
+		this.speed = speed;
+		this.cellPosition = new Vector2D<>(0.5f, 0.5f); 
+	}
+
 	/* metodo que retorna a volocidade da entidade */
 	public float getSpeed() {
 		return speed;
@@ -24,19 +33,19 @@ public class Movable extends Component {
 	public void setSpeed(float speed) {
 		this.speed = speed;
 	}
-	
-	public Vector2D<Float> getCellPosition() {
-		return cellPosition;
+
+	public Direction getFaceDirection() {
+		return faceDirection;
 	}
 
-	public void setCellPosition(Vector2D<Float> cellDisplacement) {
-		this.cellPosition = cellDisplacement;
+	public void setFaceDirection(Direction faceDirection) {
+		this.faceDirection = faceDirection;
 	}
-	
+
 	public String toString(){
 		return "{ cellPosition:" + this.cellPosition + "\n" +
-					"speed:" + this.speed + "}";
-				
+					"speed:" + this.speed +"\n"+ 
+					"direction:"+ this.faceDirection + "}";
 	}
 
 }

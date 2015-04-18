@@ -7,41 +7,40 @@
 *********************************************************************************************************************************/
 package br.unb.unbomber.event;
 
-import br.unb.unbomber.core.Event;
-public class CollisionEvent extends Event {
-	private int sourceId;
-	private int targetId;
-	private boolean isTargetId;
+import java.util.UUID;
+
+import net.mostlyoriginal.api.event.common.Event;
+public class CollisionEvent  implements Event  {
+
+	private UUID sourceUuid;
 	
-	public CollisionEvent(int sourceId, int targetId){
-		setSourceId( sourceId );
-		setTargetId( targetId );
+	private UUID targetUuid;
+	
+	public CollisionEvent(){
+		
 	}
+	
+	public CollisionEvent(UUID sourceId, UUID targetId){
+		setSourceUuid( sourceId );
+		setTargetUuid( targetId );
+	}
+	
 	//get the id of an entity which collided
-	public int getSourceId(){
-		return sourceId;
+	public UUID getSourceUuid(){
+		return sourceUuid;
 	}
 	
 	//set the id of an entity which collided
-	public void setSourceId(int sourceId){
-		this.sourceId = sourceId;
+	public void setSourceUuid(UUID sourceUuid){
+		this.sourceUuid = sourceUuid;
 	}
 	
-	public int getTargetId(){
-		return targetId;
+	public UUID getTargetUuid(){
+		return targetUuid;
 	}
 	
-	public void setTargetId(int targetId){
-		this.targetId = targetId;
+	public void setTargetUuid(UUID targetId){
+		this.targetUuid = targetId;
 	}
-	
-	public boolean getIsTargetId(){
-		return isTargetId;
-	}
-	
-	public void setIsTargetId(boolean isTargetId){
-		this.isTargetId = isTargetId;
-	}
-	
 
 }

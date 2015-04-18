@@ -1,6 +1,6 @@
 package br.unb.unbomber.event;
 
-import br.unb.unbomber.core.Event;
+import net.mostlyoriginal.api.event.common.Event;
 
 
 /**
@@ -11,7 +11,7 @@ import br.unb.unbomber.core.Event;
  */
 
 
-public class KickPowerUpEvent extends Event {
+public class KickPowerUpEvent  implements Event {
 	
 	int sourceId;
 	

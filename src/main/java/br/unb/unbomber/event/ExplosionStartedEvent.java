@@ -10,24 +10,21 @@
 
 package br.unb.unbomber.event;
 
-import br.unb.unbomber.component.CellPlacement;
-import br.unb.unbomber.core.Event;
+import java.util.UUID;
 
-public class ExplosionStartedEvent extends Event{
+import net.mostlyoriginal.api.event.common.Event;
+import br.unb.gridphysics.Vector2D;
+
+public class ExplosionStartedEvent  implements Event {
 
 	/* Initial position in the grid of the explosion */
-	private CellPlacement initialPosition;
+	private Vector2D<Integer> initialPosition;
 
+	private UUID creatorUUID;
+	
 	/* Power of the explosion */
 	private int explosionRange;
 
-	public CellPlacement getInitialPosition() {
-		return initialPosition;
-	}
-
-	public void setInitialPosition(CellPlacement initialPosition) {
-		this.initialPosition = initialPosition;
-	}
 
 	public int getExplosionRange() {
 		return explosionRange;
@@ -35,6 +32,22 @@ public class ExplosionStartedEvent extends Event{
 
 	public void setExplosionRange(int explosionRange) {
 		this.explosionRange = explosionRange;
+	}
+
+	public UUID getCreatorUUID() {
+		return creatorUUID;
+	}
+
+	public void setCreatorUUID(UUID creatorUUID) {
+		this.creatorUUID = creatorUUID;
+	}
+
+	public Vector2D<Integer> getInitialPosition() {
+		return initialPosition;
+	}
+
+	public void setInitialPosition(Vector2D<Integer> initialPosition) {
+		this.initialPosition = initialPosition;
 	}
 
 }

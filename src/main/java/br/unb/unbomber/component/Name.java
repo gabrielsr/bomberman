@@ -10,7 +10,7 @@
 */
 package br.unb.unbomber.component;
 
-import br.unb.unbomber.core.Component;
+import com.artemis.Component;
 
 public class Name extends Component{
 

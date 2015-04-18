@@ -10,25 +10,30 @@
 
 package br.unb.unbomber.systems;
 
-import static junit.framework.Assert.*;
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertNotSame;
+import static junit.framework.Assert.assertTrue;
 
 import java.util.List;
+
+import net.mostlyoriginal.api.event.common.Event;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import br.unb.unbomber.component.BombDropper;
-import br.unb.unbomber.component.CellPlacement;
 import br.unb.unbomber.component.Explosive;
-import br.unb.unbomber.core.Component;
-import br.unb.unbomber.core.Entity;
-import br.unb.unbomber.core.EntityManager;
-import br.unb.unbomber.core.EntityManagerImpl;
-import br.unb.unbomber.core.Event;
+import br.unb.unbomber.component.Position;
 import br.unb.unbomber.event.ActionCommandEvent;
-import br.unb.unbomber.event.InAnExplosionEvent;
 import br.unb.unbomber.event.ActionCommandEvent.ActionType;
 import br.unb.unbomber.event.ExplosionStartedEvent;
+import br.unb.unbomber.event.InAnExplosionEvent;
+
+import com.artemis.Component;
+import com.artemis.Entity;
+import com.artemis.EntityManager;
 
 public class BombSystemTestCase {
 	
@@ -126,7 +131,7 @@ public class BombSystemTestCase {
 		//get the position of the first explosive created: first get the explosive than get the associated position
 		List<Component> explosives = (List<Component>) entityManager.getComponents(Explosive.class);
 		Component explosive = explosives.get(0);
-		CellPlacement createBombPlacement = (CellPlacement) entityManager.getComponent(CellPlacement.class, explosive.getEntityId());
+		Position createBombPlacement = (Position) entityManager.getComponent(Position.class, explosive.getEntityId());
 		
 		//verify if its the correct value
 		assertEquals(CELL_X, createBombPlacement.getCellX());
@@ -235,7 +240,7 @@ public class BombSystemTestCase {
 		
 		//send a event telling that this bomb have to explode 
 		InAnExplosionEvent inAnExplosionEvent = new InAnExplosionEvent();
-		inAnExplosionEvent.setIdHit(explosives.get(0).getEntityId());
+		inAnExplosionEvent.setHitUuid(explosives.get(0).getEntityId());
 		entityManager.addEvent(inAnExplosionEvent);
 		
 		//update bombSystem to check the events. After that, the BombSystem have  
@@ -346,7 +351,7 @@ public class BombSystemTestCase {
 	
 	private void pubBombOnGrid(int x, int y, BombDropper bombDropper) {
 		
-		CellPlacement placement = (CellPlacement) entityManager.getComponent(CellPlacement.class, bombDropper.getEntityId());
+		Position placement = (Position) entityManager.getComponent(Position.class, bombDropper.getEntityId());
 		
 		placement.setCellX(x);
 		placement.setCellY(y);
@@ -368,7 +373,7 @@ public class BombSystemTestCase {
 		bombDropper.setPermittedSimultaneousBombs(5);
 		
 		//Create Placement
-		CellPlacement placement = new CellPlacement();
+		Position placement = new Position();
 		placement.setCellX(0);
 		placement.setCellY(0);
 		

@@ -12,35 +12,17 @@
 
 package br.unb.unbomber.systems;
 
-import static junit.framework.Assert.*;
-
-import java.util.List;
+import static junit.framework.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import com.sun.corba.se.spi.legacy.connection.GetEndPointInfoAgainException;
-
-import br.unb.unbomber.component.BombDropper;
-import br.unb.unbomber.component.CellPlacement;
-import br.unb.unbomber.component.Explosion;
-import br.unb.unbomber.component.Explosive;
-import br.unb.unbomber.component.Movable;
-import br.unb.unbomber.component.PowerUp;
-import br.unb.unbomber.component.PowerUp.PowerType;
-import br.unb.unbomber.core.Component;
-import br.unb.unbomber.core.Entity;
-import br.unb.unbomber.core.EntityManager;
-import br.unb.unbomber.core.EntityManagerImpl;
-import br.unb.unbomber.core.Event;
-import br.unb.unbomber.event.ActionCommandEvent;
+import br.unb.entitysystem.Entity;
+import br.unb.entitysystem.EntityManager;
+import br.unb.entitysystem.EntityManagerImpl;
+import br.unb.unbomber.component.Position;
 import br.unb.unbomber.event.CollisionEvent;
 import br.unb.unbomber.event.CreateDiseaseEvent;
-import br.unb.unbomber.event.InAnExplosionEvent;
-import br.unb.unbomber.event.MovementCommandEvent;
-import br.unb.unbomber.event.ActionCommandEvent.ActionType;
-import br.unb.unbomber.event.MovementCommandEvent.MovementType;
-import br.unb.unbomber.event.ExplosionStartedEvent;
 
 public class DiseasesSystemTestCase {
 
@@ -69,12 +51,12 @@ public class DiseasesSystemTestCase {
 		int DISEASE_ID = entityManager.getUniqueId();
 
 		/** < adiciona o placement da disease */
-		CellPlacement diseasePlacement = new CellPlacement();
+		Position diseasePlacement = new Position();
 		diseasePlacement.setCellX(x);
 		diseasePlacement.setCellY(y);
 
 		/** < adiciona o plcement da entidade */
-		CellPlacement charPlacement = new CellPlacement();
+		Position charPlacement = new Position();
 		charPlacement.setCellX(x);
 		charPlacement.setCellY(y);
 

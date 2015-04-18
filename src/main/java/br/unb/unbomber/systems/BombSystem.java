@@ -10,25 +10,30 @@
 
 package br.unb.unbomber.systems;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.UUID;
 
+import net.mostlyoriginal.api.event.common.EventManager;
+import net.mostlyoriginal.api.event.common.Subscribe;
 import br.unb.unbomber.component.BombDropper;
-import br.unb.unbomber.component.CellPlacement;
-import br.unb.unbomber.component.Draw;
 import br.unb.unbomber.component.Explosive;
+import br.unb.unbomber.component.FIFORemoteControl;
+import br.unb.unbomber.component.Position;
 import br.unb.unbomber.component.Timer;
-import br.unb.unbomber.core.Component;
-import br.unb.unbomber.core.BaseSystem;
-import br.unb.unbomber.core.Entity;
-import br.unb.unbomber.core.EntityManager;
-import br.unb.unbomber.core.Event;
+import br.unb.unbomber.component.MovementBarrier.MovementBarrierType;
 import br.unb.unbomber.event.ActionCommandEvent;
 import br.unb.unbomber.event.ActionCommandEvent.ActionType;
 import br.unb.unbomber.event.ExplosionStartedEvent;
 import br.unb.unbomber.event.InAnExplosionEvent;
 import br.unb.unbomber.event.TimeOverEvent;
+import br.unb.unbomber.misc.EntityBuilder2;
+
+import com.artemis.ComponentMapper;
+import com.artemis.Entity;
+import com.artemis.annotations.Wire;
+import com.artemis.managers.GroupManager;
+import com.artemis.managers.UuidEntityManager;
+import com.artemis.systems.VoidEntitySystem;
+import com.artemis.utils.ImmutableBag;
 
 /**
  * @author <img src="https://avatars2.githubusercontent.com/u/8586137?v=2&s=30" width="30" height="30"/> <a href="https://github.com/JeffVFA" target="_blank">JeffVFA</a>
@@ -37,132 +42,91 @@ import br.unb.unbomber.event.TimeOverEvent;
  * @author <img src="https://avatars2.githubusercontent.com/u/7716247?v=2&s=30" width="30" height="30"/> <a href="https://github.com/brenoxp2008" target="_blank"> brenoxp2008</a>
  */
 
-public class BombSystem extends BaseSystem {
+@Wire
+public class BombSystem extends VoidEntitySystem {
 	/*
 	 * documented by @author JeffVFA //Define default Value of a bomb
 	 */
 	private final String TRIGGERED_BOMB_ACTION = "BOMB_TRIGGERED";
+	
+	ComponentMapper<BombDropper> cmBombDropper;
 
-	// Define a set of processed events
-	Set<Event> processedEvents = new HashSet<Event>(500);
-
-	/**
-	 * bomb constructor
-	 */
-	public BombSystem() {
-		super();
+	ComponentMapper<Position> cmPosition;
+	
+	ComponentMapper<Explosive> cmExplosive;
+	
+	ComponentMapper<FIFORemoteControl> emFIFORemoteControl;
+	
+	UuidEntityManager uuidEm;
+	
+	EventManager em;
+	
+	@Override
+	protected void processSystem() {
 	}
 
 	/**
-	 * bomb constructor
+	 * Handle Events of the type Time Out (Triggers bomb).
 	 * 
-	 * @param model one instance of the EntityManager
+	 * @param actionCommand
 	 */
-	public BombSystem(EntityManager model) {
-		super(model);
+	@Subscribe
+	public void handle(TimeOverEvent<UUID> timeOver){
+		if (timeOver.getAction().equals(TRIGGERED_BOMB_ACTION)) {
+			createExplosionEvent(timeOver.getPayload());
+		}
 	}
-
 
 	
 	/**
-	 * Method for the updating of all bombs.
-	 * This method is called every turn. It checks if there is any 
-	 * {@link Event} related to this module and process them.
+	 * Handle Events of the type Action Command (drops bomb & triggers remote bomb).
+	 * 
+	 * @param actionCommand
 	 */
-	public void update() {
-		// one instance of the EntityManage
-		EntityManager entityManager = getEntityManager();
-
-		/*
-		 * For each different type of Event, do:
-		 * 1) iterate over all events of that type
-		 * 2) Verify if this event interests me and if it wasn't already processed
-		 * 3) process the event
-		 * 4) add event to processed list
-		 * 
-		 */
+	@Subscribe
+	public void handle(ActionCommandEvent actionCommand){
+		Entity dropperEntity = world.getManager(UuidEntityManager.class).getEntity(actionCommand.getEntityUuid());
 		
-		// Events of the type Action Command (drops bomb & triggers remote bomb)
-		// 1)
-		List<Event> actionEvents = entityManager
-				.getEvents(ActionCommandEvent.class);
-		if (actionEvents != null) {
-			for (Event event : actionEvents) {
-				ActionCommandEvent actionCommand = (ActionCommandEvent) event;
-				
-				// 2) 
-				if ((actionCommand.getType() == ActionType.DROP_BOMB)
-						&& (!processedEvents.contains(actionCommand))) {
-					
-					// 3)
-					BombDropper dropper = (BombDropper) entityManager.getComponent(BombDropper.class, actionCommand.getEntityId());
-					verifyAndDropBomb(dropper);
-					
-					// 4)
-					processedEvents.add(actionCommand);
-					
-				// 2) 
-				}else if ((actionCommand.getType() == ActionType.TRIGGERS_REMOTE_BOMB)
-						&& (!processedEvents.contains(actionCommand))) {
-					
-					// 3)
-					List<Component> components =  entityManager.getComponents(Explosive.class);
-					for (Component component: components) {
-						Explosive explosive = (Explosive) component;
-						if (explosive.getOwnerId() == actionCommand.getEntityId()) {
-							createExplosionEvent(explosive.getEntityId());
-						}
-					}
-					
-					// 4)
-					processedEvents.add(actionCommand);
-				}
-			}
+		if (actionCommand.getType() == ActionType.DROP_BOMB) {
+			
+			verifyAndDropBomb(dropperEntity);
+			
+		}else if (actionCommand.getType() == ActionType.TRIGGERS_REMOTE_BOMB) {
+			trigRemoteBomb(dropperEntity);
 		}
+	}
+	
+	public void trigRemoteBomb(Entity dropperEntity ){
 
-		// Events of the type Time Out (Triggers bomb)
-		// 1)
-		List<Event> timerOvers = entityManager.getEvents(TimeOverEvent.class);
-		if (timerOvers != null) {
-			for (Event event : timerOvers) {
-				TimeOverEvent timeOver = (TimeOverEvent) event;
-
-				// 2)
-				if ((timeOver.getAction().equals(TRIGGERED_BOMB_ACTION))
-						&& (!processedEvents.contains(timeOver))) {
-
-					// 3)
-					createExplosionEvent(timeOver.getOwnerId());
-					
-					// 4)
-					processedEvents.add(timeOver);
-				}
-			}
+		FIFORemoteControl remoteControl = emFIFORemoteControl.getSafe(dropperEntity);
+		if(remoteControl!=null){
+			UUID toTrigBombUUID = remoteControl.next();
+			createExplosionEvent(toTrigBombUUID);
 		}
+	}
 
+	/**
+	 * Handle Events of the type Action Command (drops bomb & triggers remote bomb).
+	 * 
+	 * @param actionCommand
+	 */
+	@Subscribe
+	public void handle(InAnExplosionEvent inAnExplosion){
 		// Event of the type InAnExplosionEvent (Bombs in the range of exploding bombs 
 		// should explode as well)
-		// 1)
-		List<Event> inExplosionEvents = entityManager
-				.getEvents(InAnExplosionEvent.class);
-		if (inExplosionEvents != null) {
-			for (Event event : inExplosionEvents) {
-				InAnExplosionEvent inAnExplosion = (InAnExplosionEvent) event;
-				
-				// 2)
-				if (!processedEvents.contains(inAnExplosion)) {
-					
-					// 3)
-					int entityInExplosionId = inAnExplosion.getIdHit();
-					Explosive bombExplosive = (Explosive) entityManager.getComponent(Explosive.class, entityInExplosionId);
-
-					if (bombExplosive != null) {
-						createExplosionEvent(entityInExplosionId);
-					}
-					// 4)
-					processedEvents.add(inAnExplosion);
-				}
-			}
+		UUID entityInExplosionId = inAnExplosion.getHitUuid();
+		
+		Entity hitEntity = uuidEm.getEntity(entityInExplosionId);
+		
+		//probably already handled
+		if(hitEntity==null){
+			return;
+		}
+		
+		/** if the hit entity is an explosive, create an explosion */
+		Explosive explosive = cmExplosive.getSafe(hitEntity);
+		if (explosive != null) {
+			createExplosionEvent(entityInExplosionId);
 		}
 	}
 
@@ -171,82 +135,65 @@ public class BombSystem extends BaseSystem {
 	 * 
 	 * @param bombID id of the event
 	 */
-	private void createExplosionEvent(int bombID) {
+	private void createExplosionEvent(UUID bombID) {
+
 
 		/*
-		 * 1) Gets the  placement and the explosive from Entity Manager
+		 * 1) Gets the  placement and the explosive
 		 * 2) Starts a new explosion
 		 * 3) Set explosion atributes
-		 * 4) Adds explosion event to Entity Manager
+		 * 4) Adds explosion event to Event Manager
 		 */
 		
-		// 1)
-		EntityManager entityManager = getEntityManager(); 
-		CellPlacement bombPlacement = (CellPlacement) entityManager
-				.getComponent(CellPlacement.class, bombID);
-		Explosive bombExplosive = (Explosive) entityManager.getComponent(
-				Explosive.class, bombID); 
+		// 1)		
+		Entity bombEntity = uuidEm.getEntity(bombID);
+		Position bombPlacement = cmPosition.get(bombEntity);
+		Explosive bombExplosive = cmExplosive.get(bombEntity); 
 		
 		// 2)
 		ExplosionStartedEvent explosion = new ExplosionStartedEvent(); 
 		
 		// 3)
-		explosion.setEventId(entityManager.getUniqueId());
-		explosion.setOwnerId(bombExplosive.getOwnerId()); //The Explosion owner is the bomb ownwer
-		explosion.setInitialPosition(bombPlacement); 
+		explosion.setCreatorUUID(bombExplosive.getCreatorUUID()); //The Explosion owner is the bomb ownwer
+		explosion.setInitialPosition(bombPlacement.getIndex()); 
 		explosion.setExplosionRange(bombExplosive.getExplosionRange());
 		
 		// 4)
-		entityManager.addEvent(explosion);
+		bombEntity.deleteFromWorld();
+		
+		em.dispatch(explosion);
 	}
 
 	/**
 	 * Drop a bomb if dropper didn't reach the limit
-	 * @param dropper {@link BombDropper} that wants to drop a bomb
+	 * @param dropperEntity {@link BombDropper} that wants to drop a bomb
 	 */
-	public final void verifyAndDropBomb(BombDropper dropper) {
-
-		// Counting the number of active bombs owner by the same dropper entity.
-		List<Component> explosives = getEntityManager().getComponents(
-				Explosive.class);
-		int bombCounter = 0;
-		if (explosives != null) {
-			for (Component component : explosives) {
-				Explosive explosive = (Explosive) component;
-				if (explosive.getOwnerId() == dropper.getEntityId()) {
-
-						bombCounter++;
-
-				}
-			}
-		}
-		if (bombCounter < dropper.getPermittedSimultaneousBombs()) {
+	public final void verifyAndDropBomb(Entity dropperEntity) {		
+		BombDropper dropperComponent = cmBombDropper.get(dropperEntity);
+		
+		if (canDropMoreBombs(dropperComponent, dropperEntity.getUuid())) {	
 			
-			Entity bomb = null;
-			
-			if (dropper.isCanRemoteTrigger()) {
-				
-				bomb = createRemoteBomb(dropper);
-				
-			} else {
-
-				bomb = createTimeBomb(dropper);
-				
-			}
-			getEntityManager().update(bomb);
+			dropBomb(dropperEntity, dropperComponent);
 		}
-
 	}
 
-	private Entity createRemoteBomb(BombDropper dropper) {
-		/*
-		 * The Bomb Entity is made of this components Explosive Placement Timer
-		 * components
-		 */
+	public void dropBomb(Entity dropperEntity, BombDropper dropperComponent){
+		// find dropper placement
 
+		if (dropperComponent.isCanRemoteTrigger()) {
+			createRemoteBomb(dropperEntity);
+		}else{
+			createTimeBomb(dropperEntity);
+		}
+	}
+			
+	private Entity createRemoteBomb(Entity dropper) {
+	
 		Entity bomb = createGenericBomb(dropper);
-
-		//TODO What else does a Remotely controled bomb needs?
+		
+		//include it in the remote control queue
+		FIFORemoteControl remoteControl = emFIFORemoteControl.getSafe(dropper);
+		remoteControl.include(bomb.getUuid());
 
 		return bomb;
 	}
@@ -257,7 +204,7 @@ public class BombSystem extends BaseSystem {
 	 * @param dropper {@link BombDropper} that will drop a bomb
 	 * @return new Bomb
 	 */
-	private Entity createTimeBomb(final BombDropper dropper) {
+	private Entity createTimeBomb(final Entity dropper) {
 		/*
 		 * The Bomb Entity is made of this components Explosive Placement Timer
 		 * components
@@ -266,37 +213,29 @@ public class BombSystem extends BaseSystem {
 		Entity bomb = createGenericBomb(dropper);
 
 		// create Event for time over
-		TimeOverEvent triggeredBombEvent = new TimeOverEvent();
-		triggeredBombEvent.setAction(TRIGGERED_BOMB_ACTION);
+		TimeOverEvent<UUID> triggeredBombEvent
+			= new TimeOverEvent<UUID>(TRIGGERED_BOMB_ACTION, bomb.getUuid());
 		// create timer component
 		Timer bombTimer = new Timer(90, triggeredBombEvent);
 
 		// Add component
-		bomb.addComponent(bombTimer);
-
+		bomb.edit().add(bombTimer);		
 		return bomb;
-
 	}
 	
 	//Method created to avoid code duplication
-	Entity createGenericBomb(BombDropper dropper){
+	Entity createGenericBomb(Entity dropperEntity){
 		/*
 		 * The Bomb Entity is made of this components Explosive Placement Timer
 		 * components
 		 */
 
-		// find dropper placement
-		CellPlacement dropperPlacement = (CellPlacement) getEntityManager()
-				.getComponent(CellPlacement.class, dropper.getEntityId());
-
-		Entity bomb = getEntityManager().createEntity();
-
-		// The bomb is owned by its dropper
-		bomb.setOwnerId(dropper.getEntityId());
-
+		Position dropperPlacement = cmPosition.get(dropperEntity);
+		BombDropper dropperComponent = cmBombDropper.get(dropperEntity);
+		UUID creatorUUID = dropperEntity.getUuid();
+		
 		// Create the placement component
-		CellPlacement bombPlacement = new CellPlacement();
-
+		Position bombPlacement = new Position();
 		// the Bomb should have the same placement of its dropper
 		bombPlacement.setCellX(dropperPlacement.getCellX());
 		bombPlacement.setCellY(dropperPlacement.getCellY());
@@ -304,14 +243,45 @@ public class BombSystem extends BaseSystem {
 		// create explosive component
 		Explosive bombExplosive = new Explosive();
 		// the Bomb should have the same power of its dropper
-		bombExplosive.setExplosionRange(dropper.getExplosionRange());
-		bombExplosive.setOwnerId(dropper.getEntityId());
+		bombExplosive.setExplosionRange(dropperComponent.getExplosionRange());
+		bombExplosive.setOwnerId(creatorUUID);
+			
+		Entity bomb = EntityBuilder2.create(world)
+			.withDraw("bomb")
+			.withMovementBarrier(MovementBarrierType.BLOCKER)
+			.with(bombPlacement)
+			.with(bombExplosive)
+			.build();
 
-		// Add components
-		bomb.addComponent(bombExplosive);
-		bomb.addComponent(bombPlacement);
-		bomb.addComponent(new Draw("bomb"));
+		//TAG the bomb with the Dropper UUID
+		world.getManager(GroupManager.class).add(bomb,
+				dropperEntity.getUuid().toString());
+		
 		return bomb;
 	}
+	
+	/**
+	 * Check it the entity can drop more bombs.
+	 * 
+	 * Count the number of active bombs owner by the same dropper entity.
+	 * 
+	 * @param dropperEntity
+	 * @return can drop
+	 */
+	public boolean canDropMoreBombs(BombDropper dropperComponent, UUID dropperUUID){
 
+		// Counting the number of active bombs owner by the same dropper entity.
+
+		int permittedSimultaneousBombs = dropperComponent.getPermittedSimultaneousBombs();
+		
+		ImmutableBag<Entity> inWorldBombs = world.getManager(GroupManager.class).getEntities(
+				dropperUUID.toString());
+		
+		//TODO check if already there is a bomb at the same place.
+		if(inWorldBombs.size() < permittedSimultaneousBombs){
+			return true;
+		}else{
+			return false;
+		}
+	}
 }

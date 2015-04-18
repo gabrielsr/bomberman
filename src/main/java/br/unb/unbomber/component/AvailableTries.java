@@ -1,6 +1,6 @@
 package br.unb.unbomber.component;
 
-import br.unb.unbomber.core.Component;
+import com.artemis.Component;
 
 /**
  * Classe para verificar quantas vidas uma entidade possui.

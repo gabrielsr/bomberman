@@ -12,33 +12,23 @@
 
 package br.unb.unbomber.systems;
 
-import static junit.framework.Assert.*;
-
-import java.util.List;
+import static junit.framework.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import com.sun.corba.se.spi.legacy.connection.GetEndPointInfoAgainException;
-
-import br.unb.unbomber.component.BombDropper;
-import br.unb.unbomber.component.CellPlacement;
+import br.unb.entitysystem.Entity;
+import br.unb.entitysystem.EntityManager;
+import br.unb.entitysystem.EntityManagerImpl;
+import br.unb.unbomber.component.Position;
 import br.unb.unbomber.component.Explosion;
-import br.unb.unbomber.component.Explosive;
 import br.unb.unbomber.component.Movable;
 import br.unb.unbomber.component.PowerUp;
 import br.unb.unbomber.component.PowerUp.PowerType;
-import br.unb.unbomber.core.Component;
-import br.unb.unbomber.core.Entity;
-import br.unb.unbomber.core.EntityManager;
-import br.unb.unbomber.core.EntityManagerImpl;
-import br.unb.unbomber.core.Event;
 import br.unb.unbomber.event.ActionCommandEvent;
-import br.unb.unbomber.event.InAnExplosionEvent;
-import br.unb.unbomber.event.MovementCommandEvent;
 import br.unb.unbomber.event.ActionCommandEvent.ActionType;
-import br.unb.unbomber.event.MovementCommandEvent.MovementType;
-import br.unb.unbomber.event.ExplosionStartedEvent;
+import br.unb.unbomber.event.MovementCommandEvent;
+import br.unb.unbomber.event.MovementCommandEvent.Direction;
 
 public class ThrowSystemTestCase0 {
 
@@ -83,14 +73,14 @@ public class ThrowSystemTestCase0 {
 		 * < instancia um novo CellPlacement e seta novas posicoes validas para
 		 * o caracter
 		 */
-		CellPlacement charPlacement = new CellPlacement();
+		Position charPlacement = new Position();
 		charPlacement.setEntityId(ENTITY_ID_CHAR);
 		charPlacement.setCellX(x);
 		charPlacement.setCellY(y);
 		/**
 		 * < instacia um novo CellPlacement e seta posicoes validas para a bomba
 		 */
-		CellPlacement bombPlacement = new CellPlacement();
+		Position bombPlacement = new Position();
 		bombPlacement.setEntityId(ENTITY_ID_BOMB);
 		bombPlacement.setCellX(x);
 		bombPlacement.setCellY(y + 3);
@@ -114,7 +104,7 @@ public class ThrowSystemTestCase0 {
 
 		/** < seta o tipo de movimento realizado como MOVE_UP */
 		final MovementCommandEvent movementCommand = new MovementCommandEvent(
-				MovementType.MOVE_UP, charMovable.getEntityId());
+				Direction.MOVE_UP, charMovable.getEntityId());
 		/** < forca a a realizacao do comando de acao */
 		final ActionCommandEvent commandEvent = new ActionCommandEvent(
 				ActionType.DROP_BOMB, ENTITY_ID_CHAR);
@@ -129,8 +119,8 @@ public class ThrowSystemTestCase0 {
 		/** < eecuta o throwsystem */
 
 		/** < recebe a localizacao da bomba apos a execucao do throwsystem */
-		final CellPlacement newBombPlacement = (CellPlacement) entityManager
-				.getComponent(CellPlacement.class, ENTITY_ID_BOMB);
+		final Position newBombPlacement = (Position) entityManager
+				.getComponent(Position.class, ENTITY_ID_BOMB);
 
 		/** < realiza a assertiva */
 		assertEquals(y + 3, newBombPlacement.getCellY());// y +3 + 5

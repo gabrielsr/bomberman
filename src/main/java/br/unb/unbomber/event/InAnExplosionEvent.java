@@ -1,17 +1,29 @@
 package br.unb.unbomber.event;
 
-import br.unb.unbomber.core.Event;
+import java.util.UUID;
 
-public class InAnExplosionEvent extends Event {
+import net.mostlyoriginal.api.event.common.Event;
+
+public class InAnExplosionEvent  implements Event {
 	/* id of the entity that was hit by an explosion */
-	private int idHit;
+	private UUID hitUuid;
 
-	public int getIdHit() {
-		return idHit;
+	private UUID explosionCause;
+	
+	public UUID getHitUuid() {
+		return hitUuid;
 	}
 
-	public void setIdHit(int idHit) {
-		this.idHit = idHit;
+	public void setHitUuid(UUID hitUuid) {
+		this.hitUuid = hitUuid;
+	}
+
+	public UUID getExplosionCause() {
+		return explosionCause;
+	}
+
+	public void setExplosionCause(UUID explosionCause) {
+		this.explosionCause = explosionCause;
 	}
 
 }

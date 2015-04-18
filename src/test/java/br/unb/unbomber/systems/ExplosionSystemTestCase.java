@@ -1,19 +1,19 @@
 package br.unb.unbomber.systems;
 
 import static junit.framework.Assert.assertTrue;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import br.unb.unbomber.component.CellPlacement;
+import br.unb.entitysystem.Entity;
+import br.unb.entitysystem.EntityManager;
+import br.unb.entitysystem.EntitySystemImpl;
+import br.unb.unbomber.component.Position;
 import br.unb.unbomber.component.Direction;
 import br.unb.unbomber.component.Explosion;
 import br.unb.unbomber.component.ExplosionBarrier;
 import br.unb.unbomber.component.ExplosionBarrier.ExplosionBarrierType;
-import br.unb.unbomber.core.Entity;
-import br.unb.unbomber.core.EntityManager;
-import br.unb.unbomber.core.EntitySystemImpl;
 
 public class ExplosionSystemTestCase {
 
@@ -44,7 +44,7 @@ public class ExplosionSystemTestCase {
 		explosion.setPropagationDirection(Direction.UP);
 		entityManager.addComponent(explosion);
 
-		CellPlacement explosionPlacement = new CellPlacement();
+		Position explosionPlacement = new Position();
 		explosionPlacement.setEntityId(explosionEntity.getEntityId());
 		explosionPlacement.setCellX(5);
 		explosionPlacement.setCellY(5);
@@ -64,7 +64,7 @@ public class ExplosionSystemTestCase {
 		explosionBarrier.setType(ExplosionBarrierType.BLOCKER);
 		entityManager.addComponent(explosionBarrier);
 
-		CellPlacement hardBlockPlacement = new CellPlacement();
+		Position hardBlockPlacement = new Position();
 		hardBlockPlacement.setEntityId(hardBlock.getEntityId());
 		hardBlockPlacement.setCellX(explosionPlacement.getCellX());
 		hardBlockPlacement.setCellY(explosionPlacement.getCellY() + 1);
@@ -90,7 +90,7 @@ public class ExplosionSystemTestCase {
 		explosionBarrier.setType(ExplosionBarrierType.STOPPER);
 		entityManager.addComponent(explosionBarrier);
 
-		CellPlacement softBlockPlacement = new CellPlacement();
+		Position softBlockPlacement = new Position();
 		softBlockPlacement.setEntityId(softBlock.getEntityId());
 		softBlockPlacement.setCellX(explosionPlacement.getCellX());
 		softBlockPlacement.setCellY(explosionPlacement.getCellY() + 1);
@@ -115,7 +115,7 @@ public class ExplosionSystemTestCase {
 		explosionBarrier.setType(ExplosionBarrierType.PASS_THROUGH);
 		entityManager.addComponent(explosionBarrier);
 
-		CellPlacement characterPlacement = new CellPlacement();
+		Position characterPlacement = new Position();
 		characterPlacement.setEntityId(character.getEntityId());
 		characterPlacement.setCellX(explosionPlacement.getCellX());
 		characterPlacement.setCellY(explosionPlacement.getCellY() + 1);

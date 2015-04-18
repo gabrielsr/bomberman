@@ -1,245 +1,318 @@
 package br.unb.unbomber.systems;
 
 import static junit.framework.Assert.assertEquals;
-
-import java.util.List;
+import net.mostlyoriginal.api.event.common.EventManager;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import br.unb.unbomber.component.CellPlacement;
+import br.unb.gridphysics.Vector2D;
+import br.unb.unbomber.component.Direction;
 import br.unb.unbomber.component.Movable;
-import br.unb.unbomber.core.Component;
-import br.unb.unbomber.core.Entity;
-import br.unb.unbomber.core.EntityManager;
-import br.unb.unbomber.core.EntitySystemImpl;
+import br.unb.unbomber.component.MovementBarrier;
+import br.unb.unbomber.component.MovementBarrier.MovementBarrierType;
+import br.unb.unbomber.component.Position;
 import br.unb.unbomber.event.MovementCommandEvent;
-import br.unb.unbomber.event.MovementCommandEvent.MovementType;
+import br.unb.unbomber.misc.EntityBuilder2;
+import br.unb.unbomber.misc.UpdateRunner;
 
-@SuppressWarnings("deprecation")
-public class MovementSystemTestCase extends MovimentSystem {
+import com.artemis.ComponentMapper;
+import com.artemis.Entity;
+import com.artemis.World;
+import com.artemis.annotations.Wire;
+import com.artemis.managers.UuidEntityManager;
+import com.artemis.systems.VoidEntitySystem;
+import com.artemis.utils.EntityBuilder;
 
-	EntityManager entityManager;
-	MovimentSystem system;
+public class MovementSystemTestCase {
+	
+	World world;
+	
+	GridSystem gridSystem;
 
+	MovementSystem movementSystem;
+	
+	Entity forest;
+	
 	@Before
 	public void setUp() throws Exception {
-		/* inicializa um novo sistema pra cada teste */
-		EntitySystemImpl.init();
-		entityManager = EntitySystemImpl.getInstance();
-		system = new MovimentSystem();
+		gridSystem = new GridSystem();
+		movementSystem = new MovementSystem();
+		
+		world = new World();
+		world.setSystem(gridSystem);
+		world.setSystem(movementSystem);
+		
+		world.setManager(new EventManager());
+		world.setManager(new UuidEntityManager());
+		
+		/** 
+		 * do not call world.initialize();
+		 *  it will be called by each test 
+		 *  after finish the world preparation
+		 */
+	}
+
+
+	@Test
+	public void unrestrictedMovementTest() {
+
+
+		// a system that create movement commands
+		world.setSystem(new VoidEntitySystem() {
+
+			@Wire
+			EventManager em;
+
+			@Override
+			protected void processSystem() {
+				final MovementCommandEvent actionCommand = new MovementCommandEvent(
+						Direction.RIGHT, forest.getUuid());
+				em.dispatch(actionCommand);
+
+			}
+		});
+		
+		world.initialize();
+		
+
+		/** 
+		 * There is Forest in a complete empty world 
+		 * with position 0,0
+		 * with speed of 1/8 cells / tick 
+		 */
+
+		forest = new EntityBuilder(world)
+			.with(new Position(0, 0), new Movable(0.125f))
+			.build();
+		
+		//run Forest, RUN!!!
+
+		UpdateRunner
+			.update()
+			.forThis(world)
+			.repeat(160)
+			.times();
+	
+
+		/** How far went it? */
+
+		ComponentMapper<Position> cmPosition = world.getMapper(Position.class);
+		Position forrestPosition = cmPosition.get(forest);
+
+		assertEquals("Forrest position", 20 , forrestPosition.getCellX());
+	}
+	
+
+
+	@Test
+	public void lookAheadRightAndThereIsABlockTest() {
+	
+		Vector2D<Integer> actualPosition = new Vector2D<Integer>(0, 4);
+		Vector2D<Integer> rightDisplacement = new Vector2D<Integer>(1, 0);
+		
+		world.initialize();
+		
+		/** create block */
+		new EntityBuilder(world)
+		 .with(new Position(1,4), 
+				 new MovementBarrier(MovementBarrierType.BLOCKER))
+		 .build();
+		
+		MovementSystem movementSystem = world.getSystem(MovementSystem.class);
+		
+		/** call to create a map in GridSystem */
+		world.process();
+		
+		/** look */
+		Vector2D<Integer> barrier = movementSystem.lookAhead(actualPosition, rightDisplacement);
+		
+		assertEquals("Barrier", 1, barrier.getX().intValue());
 	}
 
 	@Test
-	public void moveUpTest() {
-		final Entity anEntity = new Entity();
-		/* recebe o atual posicionamento da entidade */
-		CellPlacement originalPlacement = new CellPlacement();
+	public void rightMovementConstraintTest(){
+		/**  In the middle of the road there was a stone,
+		 *  there was a stone in the middle of the road...
+		 * 
+		 *  entity with position 0,0
+		 * with velocity  of 0.1 cells / tick, right direction
+		 * 
+		 * A block at position 2,0 */
 
-		final int CELL_X = 5;
-		final int CELL_Y = 5;
-		final int SPEED = 3;
 
-		/* atribui um posicionamento valido para a entidade */
-		originalPlacement.setCellX(CELL_X);
-		originalPlacement.setCellY(CELL_Y);
+		// a system that create movement commands
+		world.setSystem(new VoidEntitySystem() {
 
-		/* atribui uma velocidade valida para entidade */
-		final Movable movable = new Movable();
-		movable.setSpeed(SPEED);
+			@Wire
+			EventManager em;
 
-		/* adicona os componentes de posicionamento e mobilidade para a entidade */
-		anEntity.addComponent(movable);
-		anEntity.addComponent(originalPlacement);
+			@Override
+			protected void processSystem() {
+				final MovementCommandEvent actionCommand = new MovementCommandEvent(
+						Direction.RIGHT, forest.getUuid());
+				em.dispatch(actionCommand);
 
-		/* insere a entidade definida anteriormente no jogo */
-		entityManager.addEntity(anEntity);
+			}
+		});
+		
+		world.initialize();
+		
+		new EntityBuilder(world)
+		 .with(new Position(2,0), 
+				 new MovementBarrier(MovementBarrierType.BLOCKER))
+		 .build();
+		
+		forest = new EntityBuilder(world)
+				.with(new Position(0,0), 
+					  new Movable(0.125f))
+				.build();
+		
+		//RUN Forrest, RUN!!!
+		UpdateRunner
+				.update()
+				.forThis(world)
+				.repeat(160)
+				.times();
+		
 
-		/* cria um evento valido de movimento do tipo MovementType.Mouve_UP */
-		final MovementCommandEvent actionCommand = new MovementCommandEvent(
-				MovementType.MOVE_UP, movable.getEntityId());
+		/** How far should it go? */
 
-		/* adiciona o evento criado anteriormente a lista de eventos */
-		entityManager.addEvent(actionCommand);
+		ComponentMapper<Position> cmPosition = world.getMapper(Position.class);
+		Position forrestPosition = cmPosition.get(forest);
 
-		/* roda as atualizacoes feitas */
-		system.update();
-
-		/* cria uma lista de componentes do tipo Movable */
-		final List<Component> moves = (List<Component>) entityManager
-				.getComponents(Movable.class);
-
-		final MovementCommandEvent event = new MovementCommandEvent(
-				MovementType.MOVE_UP, actionCommand.getEntityId());
-		entityManager.addEvent(event);
-
-		final Component move = moves.get(0);
-		final CellPlacement createEntityPlacement = (CellPlacement) entityManager
-				.getComponent(CellPlacement.class, move.getEntityId());
-
-		/* verifica se o movimento feito foi realizado com sucesso */
-		assertEquals(CELL_X, createEntityPlacement.getCellX());
-		assertEquals(CELL_Y + SPEED, createEntityPlacement.getCellY());
+		
+		/** where should it be? */
+		assertEquals("Forrest position", 1 , forrestPosition.getCellX());
 
 	}
+
 
 	@Test
-	public void MoveDownTest() {
-		Entity anEntity = new Entity();
-		/* recebe o atual posicionamento da entidade */
-		CellPlacement originalPlacement = new CellPlacement();
+	public void leftMovementConstraintTest(){
+		/**  In the middle of the road there was a stone,
+		 *  there was a stone in the middle of the road...
+		 * 
+		 *  entity with position 0,0
+		 * with velocity  of 0.1 cells / tick, right direction
+		 * 
+		 * A block at position 2,0 */
+		
 
-		int CELL_X = 5;
-		int CELL_Y = 5;
-		int SPEED = 3;
+		// a system that create movement commands
+		world.setSystem(new VoidEntitySystem() {
 
-		/* atribui um posicionamento valido para a entidade */
-		originalPlacement.setCellX(CELL_X);
-		originalPlacement.setCellY(CELL_Y);
+			@Wire
+			EventManager em;
 
-		/* atribui uma velocidade valida para entidade */
-		Movable movable = new Movable();
-		movable.setSpeed(SPEED);
+			@Override
+			protected void processSystem() {
+				final MovementCommandEvent actionCommand = new MovementCommandEvent(
+						Direction.LEFT, forest.getUuid());
+				em.dispatch(actionCommand);
 
-		/* adicona os componentes de posicionamento e mobilidade para a entidade */
-		anEntity.addComponent(movable);
-		anEntity.addComponent(originalPlacement);
+			}
+		});
+		
+		world.initialize();
+		
+		EntityBuilder2.create(world)
+				.withPosition(2, 0)
+				.withMovementBarrier(MovementBarrierType.BLOCKER)
+				.build();
+		
+		forest = EntityBuilder2.create(world)
+				.withPosition(4, 0)
+				.withMovable(0.125f)
+				.build();
+		
+		
+		//RUN Forrest, RUN!!!
+		UpdateRunner
+				.update()
+				.forThis(world)
+				.repeat(160)
+				.times();
+		
 
-		/* insere a entidade definida anteriormente no jogo */
-		entityManager.addEntity(anEntity);
+		/** How far should it go? */
 
-		/* cria um evento valido de movimento do tipo MovementType.Mouve_DOWN */
-		MovementCommandEvent actionCommand = new MovementCommandEvent(
-				MovementType.MOVE_DOWN, movable.getEntityId());
-
-		/* adiciona o evento criado anteriormente a lista de eventos */
-		entityManager.addEvent(actionCommand);
-
-		/* roda as atualizacoes feitas */
-		system.update();
-
-		/* cria uma lista de componentes do tipo Movable */
-		List<Component> moves = (List<Component>) entityManager
-				.getComponents(Movable.class);
-
-		MovementCommandEvent event = new MovementCommandEvent(
-				MovementType.MOVE_DOWN, actionCommand.getEntityId());
-		entityManager.addEvent(event);
-
-		Component move = moves.get(0);
-		CellPlacement createEntityPlacement = (CellPlacement) entityManager
-				.getComponent(CellPlacement.class, move.getEntityId());
-
-		/* verifica se o movimento feito foi realizado com sucesso */
-		assertEquals(CELL_X, createEntityPlacement.getCellX());
-		assertEquals(CELL_Y - SPEED, createEntityPlacement.getCellY());
+		ComponentMapper<Position> cmPosition = world.getMapper(Position.class);
+		Position forrestPosition = cmPosition.get(forest);
+		
+		/** where should it be? */
+		assertEquals("Forrest position", 3, forrestPosition.getCellX());
 
 	}
+	
 
 	@Test
-	public void MoveRightTest() {
-		Entity anEntity = new Entity();
-		/* recebe o atual posicionamento da entidade */
-		CellPlacement originalPlacement = new CellPlacement();
+	public void restrictUpdateLeftRightTest(){
 
-		int CELL_X = 5;
-		int CELL_Y = 5;
-		int SPEED = 3;
+		/** 
+		 *  Orig is (0.325 , 0). Displacement (0.25, 0)
+		 *  If there is a block ahead the displacement should be 
+		 *  limited to 0.125 so the entity don't pass the center
+		 * */
+		Vector2D<Float> origPosition = new Vector2D<Float>(0.5f - 0.125f, 0.0f);
+		
+		Vector2D<Float> displacement = new Vector2D<Float>(0.25f, 0.0f);
 
-		/* atribui um posicionamento valido para a entidade */
-		originalPlacement.setCellX(CELL_X);
-		originalPlacement.setCellY(CELL_Y);
+		Vector2D<Integer> barriers = new Vector2D<Integer>(1, 0);
 
-		/* atribui uma velocidade valida para entidade */
-		Movable movable = new Movable();
-		movable.setSpeed(SPEED);
+		world.initialize();
+		
+		Vector2D<Float> displacementResult = movementSystem.restrictDisplacementTowardABlockedCell(origPosition,
+				displacement, barriers);
 
-		/* adicona os componentes de posicionamento e mobilidade para a entidade */
-		anEntity.addComponent(movable);
-		anEntity.addComponent(originalPlacement);
-
-		/* insere a entidade definida anteriormente no jogo */
-		entityManager.addEntity(anEntity);
-
-		/* cria um evento valido de movimento do tipo MovementType.Mouve_RIGTH */
-		MovementCommandEvent actionCommand = new MovementCommandEvent(
-				MovementType.MOVE_RIGHT, movable.getEntityId());
-
-		/* adiciona o evento criado anteriormente a lista de eventos */
-		entityManager.addEvent(actionCommand);
-
-		/* roda as atualizacoes feitas */
-		system.update();
-
-		/* cria uma lista de componentes do tipo Movable */
-		List<Component> moves = (List<Component>) entityManager
-				.getComponents(Movable.class);
-
-		MovementCommandEvent event = new MovementCommandEvent(
-				MovementType.MOVE_DOWN, actionCommand.getEntityId());
-		entityManager.addEvent(event);
-
-		Component move = moves.get(0);
-		CellPlacement createEntityPlacement = (CellPlacement) entityManager
-				.getComponent(CellPlacement.class, move.getEntityId());
-
-		/* verifica se o movimento feito foi realizado com sucesso */
-		assertEquals(CELL_X + SPEED, createEntityPlacement.getCellX());
-		assertEquals(CELL_Y, createEntityPlacement.getCellY());
-
+		assertEquals("Restricted displacement",  0.125f, displacementResult.getX());
 	}
+
 
 	@Test
-	public void MoveLeftTest() {
-		Entity anEntity = new Entity();
-		/* recebe o atual posicionamento da entidade */
-		CellPlacement originalPlacement = new CellPlacement();
+	public void restrictUpDownTest(){
 
-		int CELL_X = 5;
-		int CELL_Y = 5;
-		int SPEED = 3;
+		/** 
+		 *  Orig is (0.4 , 0). Displacement (0.2, 0)
+		 *  If there is a block ahead the displacement should be 
+		 *  limited to 0.1 so the entity don't pass the center
+		 * */
+		
+		Vector2D<Float> origPosition = new Vector2D<Float>(0.5f, 0.625f);
+		
+		Vector2D<Float> displacement = new Vector2D<Float>(0.2f, -0.25f);
 
-		/* atribui um posicionamento valido para a entidade */
-		originalPlacement.setCellX(CELL_X);
-		originalPlacement.setCellY(CELL_Y);
+		Vector2D<Integer> barriers = new Vector2D<Integer>(0, -1);
 
-		/* atribui uma velocidade valida para entidade */
-		Movable movable = new Movable();
-		movable.setSpeed(SPEED);
+		Vector2D<Float> displacementResult = movementSystem.restrictDisplacementTowardABlockedCell(origPosition,
+				displacement, barriers);
 
-		/* adicona os componentes de posicionamento e mobilidade para a entidade */
-		anEntity.addComponent(movable);
-		anEntity.addComponent(originalPlacement);
-
-		/* insere a entidade definida anteriormente no jogo */
-		entityManager.addEntity(anEntity);
-
-		/* cria um evento valido de movimento do tipo MovementType.Mouve_LEFT */
-		MovementCommandEvent actionCommand = new MovementCommandEvent(
-				MovementType.MOVE_LEFT, movable.getEntityId());
-
-		/* adiciona o evento criado anteriormente a lista de eventos */
-		entityManager.addEvent(actionCommand);
-
-		/* roda as atualizacoes feitas */
-		system.update();
-
-		/* cria uma lista de componentes do tipo Movable */
-		List<Component> moves = (List<Component>) entityManager
-				.getComponents(Movable.class);
-
-		MovementCommandEvent event = new MovementCommandEvent(
-				MovementType.MOVE_DOWN, actionCommand.getEntityId());
-		entityManager.addEvent(event);
-
-		Component move = moves.get(0);
-		CellPlacement createEntityPlacement = (CellPlacement) entityManager
-				.getComponent(CellPlacement.class, move.getEntityId());
-
-		/* verifica se o movimento feito foi realizado com sucesso */
-		assertEquals(CELL_X - SPEED, createEntityPlacement.getCellX());
-		assertEquals(CELL_Y, createEntityPlacement.getCellY());
-
+		assertEquals("Restricted displacement",  -0.125f, displacementResult.getY());
+		assertEquals("Unrestricted displacement",  0.2f, displacementResult.getX());
 	}
 
+
+	/** And it moved RIGHT for 150 turns */ 		
+	class DoCreateGoRightCommand extends VoidEntitySystem {
+		
+		Entity toMove;
+		
+		public DoCreateGoRightCommand(Entity toMove){
+			this.toMove = toMove;
+		}
+		
+		@Wire
+		EventManager em;
+	
+		@Override
+		protected void processSystem() {
+			final MovementCommandEvent actionCommand = new MovementCommandEvent(
+					Direction.RIGHT, toMove.getUuid());
+
+			/* adiciona o evento criado anteriormente a lista de eventos */
+			em.dispatch(actionCommand);
+			
+		}
+	};
+	
 }

@@ -7,15 +7,20 @@
  *********************************************************************************************************************************/
 package br.unb.unbomber.event;
 
-import br.unb.unbomber.component.CellPlacement;
+import java.util.UUID;
+
+import net.mostlyoriginal.api.event.common.Event;
+import br.unb.gridphysics.Vector2D;
 import br.unb.unbomber.component.Direction;
-import br.unb.unbomber.core.Event;
-import br.unb.unbomber.gridphysics.Vector2D;
 
-//O grupo responsável pelo módulo de movimento precisa setar OwnerId com a id da entidade que se moveu no tick
-public class MovedEntityEvent extends Event {
+/**
+ * Event fired when a entity was moved
+ * @author grodrigues
+ *
+ */
+public class MovedEntityEvent  implements Event {
 
-	private int entityId;
+	private UUID movedEntityUUID;
 
 	private Direction direction;
 	
@@ -26,13 +31,13 @@ public class MovedEntityEvent extends Event {
 	private Vector2D<Float> displacement;
 	
 	// get the id of an entity which moved
-	public int getMovedEntityId() {
-		return this.entityId;
+	public UUID getMovedEntityUUID() {
+		return this.movedEntityUUID;
 	}
 
 	// set the id of an entity which moved
-	public void setMovedEntityId(int id) {
-		this.entityId = id;
+	public void setMovedEntityUUID(UUID movedEntityUUID) {
+		this.movedEntityUUID = movedEntityUUID;
 	}
 
 	//

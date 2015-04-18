@@ -12,29 +12,19 @@
 
 package br.unb.unbomber.systems;
 
-import static org.junit.Assert.*;
-
-import java.util.List;
-
-import javax.swing.text.StyledEditorKit.BoldAction;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import br.unb.unbomber.component.CellPlacement;
-import br.unb.unbomber.component.Explosive;
+import br.unb.entitysystem.Entity;
+import br.unb.entitysystem.EntityManager;
+import br.unb.entitysystem.EntityManagerImpl;
+import br.unb.unbomber.component.Position;
 import br.unb.unbomber.component.LifeType;
 import br.unb.unbomber.component.LifeType.Type;
-import br.unb.unbomber.component.Movable;
-import br.unb.unbomber.core.Component;
-import br.unb.unbomber.core.Entity;
-import br.unb.unbomber.core.EntityManager;
-import br.unb.unbomber.core.EntityManagerImpl;
-import br.unb.unbomber.core.EntitySystemImpl;
 import br.unb.unbomber.event.CollisionEvent;
 import br.unb.unbomber.event.InAnExplosionEvent;
-import br.unb.unbomber.event.MovementCommandEvent;
-import br.unb.unbomber.event.MovementCommandEvent.MovementType;
 
 public class PowerUpTestCase {
 	
@@ -63,7 +53,7 @@ public class PowerUpTestCase {
 		entityManager.update(entity); /**< adiciona a entidade para as entidades do entityManager */
 		
 		InAnExplosionEvent explosion = new InAnExplosionEvent(); /**< instancia um novo inAnExplosionEvent */
-		explosion.setIdHit(entity.getEntityId()); /**< seta o idhit do explosion */
+		explosion.setHitUuid(entity.getEntityId()); /**< seta o idhit do explosion */
 		entityManager.addEvent(explosion); /**< adiciona o evento explosion no entityManager */
 			
 		assertTrue(powerUpSystem.isPowerUpExplosion(explosion)); /**< realiza a acertiva */
@@ -78,10 +68,10 @@ public class PowerUpTestCase {
 		entityManager.update(entity); /**< adiciona a entidade para as entidades do entityManager */
 		
 		InAnExplosionEvent explosion = new InAnExplosionEvent(); /**< instancia um novo inAnExplosionEvent */
-		explosion.setIdHit(entity.getEntityId()); /**< seta o idhit do explosion */
+		explosion.setHitUuid(entity.getEntityId()); /**< seta o idhit do explosion */
 		entityManager.addEvent(explosion); /**< adiciona o evento explosion no entityManager */
 			
-		assertTrue(powerUpSystem.isBlockExplosion(explosion)); /**< realiza a acertiva */
+		assertTrue(powerUpSystem.isPowerUpFontExplosion(explosion)); /**< realiza a acertiva */
 	}
 	
 	@Test
@@ -95,7 +85,7 @@ public class PowerUpTestCase {
 		LifeType lifeChar = new LifeType(Type.CHAR);
 		
 		Entity newEntityChar = entityManager.createEntity();
-		CellPlacement charPlacement = new CellPlacement();
+		Position charPlacement = new Position();
 		charPlacement.setCellX(x);
 		charPlacement.setCellY(y);
 		
@@ -105,7 +95,7 @@ public class PowerUpTestCase {
 		entityManager.update(newEntityChar);
 		
 		Entity newEntityPower = entityManager.createEntity();
-		CellPlacement powerPlacement = new CellPlacement();
+		Position powerPlacement = new Position();
 		powerPlacement.setCellX(x);
 		powerPlacement.setCellY(y);
 

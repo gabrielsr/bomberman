@@ -1,26 +1,25 @@
 package br.unb.unbomber.event;
 
-import br.unb.unbomber.core.Event;
+import java.util.UUID;
 
-public class ActionCommandEvent extends Event {
+public class ActionCommandEvent extends CommandEvent  {
 
 	public enum ActionType{
 		DROP_BOMB,
 		EXPLODE_REMOTE_BOMB,
-		TRIGGERS_REMOTE_BOMB; //TODO duplicated
+		TRIGGERS_REMOTE_BOMB,
+		THROW; //TODO duplicated
 	}
 	
 	private ActionType type;
 
-	private int entityId;
-	
 	public ActionCommandEvent(){
 		
 	}
 	
-	public ActionCommandEvent(ActionType type, int entityId){
+	public ActionCommandEvent(ActionType type, UUID entityUUID){
 		this.type = type;
-		this.entityId = entityId;
+		this.entityUuid = entityUUID;
 	}
 
 	public ActionType getType() {
@@ -29,14 +28,6 @@ public class ActionCommandEvent extends Event {
 	
 	public void setType(ActionType type) {
 		this.type = type;
-	}
-
-	public int getEntityId(){
-		return this.entityId;
-	}
-	
-	public void setEntityId(int entityId) {
-		this.entityId = entityId;
 	}
 
 }

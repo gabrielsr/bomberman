@@ -19,13 +19,13 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import br.unb.entitysystem.Component;
+import br.unb.entitysystem.Entity;
+import br.unb.entitysystem.EntityManager;
+import br.unb.entitysystem.EntityManagerImpl;
 import br.unb.unbomber.systems.ExplosionSystem;
-import br.unb.unbomber.component.CellPlacement;
+import br.unb.unbomber.component.Position;
 import br.unb.unbomber.component.Explosion;
-import br.unb.unbomber.core.Component;
-import br.unb.unbomber.core.Entity;
-import br.unb.unbomber.core.EntityManager;
-import br.unb.unbomber.core.EntityManagerImpl;
 
 ////////////////////////////////////////////////
 /// Retirar comentários dos testes 3, 4 e 5
@@ -71,7 +71,7 @@ public class ExplosionSystemTestCaseG10 {
 	/** TESTE 3 */
 	/*  Teste do método createExplosion passando
 	 *  parâmetros válidos */
-//	@Test
+	@Test
 	public void testeCreateExplosionValidParam() {
 		
 		final int EXP_RANGE = 1;
@@ -80,7 +80,7 @@ public class ExplosionSystemTestCaseG10 {
 		
 		Entity expEntity = entityManager.createEntity();
 		
-		CellPlacement expPlacement = new CellPlacement();
+		Position expPlacement = new Position();
 		expPlacement.setCellX(CELL_X);
 		expPlacement.setCellY(CELL_Y);
 		entityManager.addComponent(expPlacement);
@@ -92,7 +92,7 @@ public class ExplosionSystemTestCaseG10 {
 			e.printStackTrace();
 		}
 		
-		List<Component> placements = (List<Component>) entityManager.getComponents(CellPlacement.class);
+		List<Component> placements = (List<Component>) entityManager.getComponents(Position.class);
 		List<Component> explosions = (List<Component>) entityManager.getComponents(Explosion.class);
 		
 		/** Assert (verifica a quantidade de explosões criadas) */
@@ -109,12 +109,12 @@ public class ExplosionSystemTestCaseG10 {
 		/// são atribuidas a variáveis do tipo CellPlacement para
 		/// acessar cada posição da célula e avaliar se elas foram
 		/// criadas corretamente
-		CellPlacement cp0 = (CellPlacement) placements.get(0);	//< Célua que armazena expPlacement 
-		CellPlacement cp1 = (CellPlacement) placements.get(1);	//< As demais células foram criadas por
-		CellPlacement cp2 = (CellPlacement) placements.get(2);	//  createExplosion().
-		CellPlacement cp3 = (CellPlacement) placements.get(3);
-		CellPlacement cp4 = (CellPlacement) placements.get(4);
-		CellPlacement cp5 = (CellPlacement) placements.get(5);
+		Position cp0 = (Position) placements.get(0);	//< Célua que armazena expPlacement 
+		Position cp1 = (Position) placements.get(1);	//< As demais células foram criadas por
+		Position cp2 = (Position) placements.get(2);	//  createExplosion().
+		Position cp3 = (Position) placements.get(3);
+		Position cp4 = (Position) placements.get(4);
+		Position cp5 = (Position) placements.get(5);
 		
 		/* O método createExplosion() tem uma sequência de verificação, sendo
 		 * que a primeira célula de explosão criada neste método é posicionada 
@@ -154,7 +154,7 @@ public class ExplosionSystemTestCaseG10 {
 	 *  parâmetros válidos quando a explosão
 	 *  ocorre em uma quina do grid. Nesse caso
 	 *  na posição X = 0 e Y = 0 */
-//	@Test
+	@Test
 	public void testeCreateExplosionValidParam2() {
 		
 		final int EXP_RANGE = 2;
@@ -163,7 +163,7 @@ public class ExplosionSystemTestCaseG10 {
 		
 		Entity expEntity = entityManager.createEntity();
 
-		CellPlacement expPlacement = new CellPlacement();
+		Position expPlacement = new Position();
 		expPlacement.setCellX(CELL_X);
 		expPlacement.setCellY(CELL_Y);
 		entityManager.addComponent(expPlacement);
@@ -176,7 +176,7 @@ public class ExplosionSystemTestCaseG10 {
 		}
 		
 		List<Component> explosions = (List<Component>) entityManager.getComponents(Explosion.class);
-		List<Component> placements = (List<Component>) entityManager.getComponents(CellPlacement.class);
+		List<Component> placements = (List<Component>) entityManager.getComponents(Position.class);
 		
 		/** Assert (verifica a quantidade de explosões criadas) */
 		/*  Ocorrem 2 explosões para a direita, 2 para baixo
@@ -192,7 +192,7 @@ public class ExplosionSystemTestCaseG10 {
 	/** TESTE 5 */
 	/*  Teste do método createExplosion passando
 	 *  um parâmetro inválido de explosion range */
-//	@Test
+	@Test
 	public void testeCreateExplosionInvalidParam() {
 		
 		final int EXP_RANGE_NEGATIVE = -1;  //< Explosion Range negativo
@@ -201,7 +201,7 @@ public class ExplosionSystemTestCaseG10 {
 		
 		Entity expEntity = entityManager.createEntity();
 
-		CellPlacement expPlacement = new CellPlacement();
+		Position expPlacement = new Position();
 		expPlacement.setCellX(CELL_X);
 		expPlacement.setCellY(CELL_Y);
 		entityManager.addComponent(expPlacement);
